@@ -1,0 +1,48 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "connected-react-router": "^6.3.2",
+    "enzyme": "^3.9.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "history": "^4.9.0",
+    "node-sass": "^4.11.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.5",
+    "react-datepicker": "^2.2.0",
+    "react-dom": "^16.8.5",
+    "react-input-mask": "^2.0.4",
+    "react-redux": "^6.0.1",
+    "react-router": "^5.0.0",
+    "react-scripts": "2.1.8",
+    "react-select": "^2.4.2",
+    "react-test-renderer": "^16.8.5",
+    "redux": "^4.0.1",
+    "redux-form": "^5.4.0",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^1.0.2",
+    "sinon": "^7.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "lint": "yarn eslint ./src",
+    "fix": "yarn eslint ./src --fix",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
