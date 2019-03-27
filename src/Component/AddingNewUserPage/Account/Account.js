@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import styles from './Account.scss'
 import CloseIcon from '../../../img/icon/CloseIcon'
 import UserAvatar from '../../../img/icon/UserAvatar'
+import initialState from "../../../reducers/taskReducer";
 
 
 const cx = classNames.bind(styles)
@@ -11,6 +12,7 @@ const cx = classNames.bind(styles)
 
 class Account extends Component {
   render() {
+    const { accountPassword, repeatPassword } = this.props
     return (
       <Fragment>
         <div className={cx('windowNewUser__question')}>
@@ -24,9 +26,9 @@ class Account extends Component {
             <span>User name</span>
             <input type="text" className={cx('register__userName')}/>
             <span>Password</span>
-            <input type="text" className={cx('register__password')} value="12356"/>
+            <input type="text" className={cx('register__password')} value={accountPassword}/>
             <span>Repeat Password</span>
-            <input type="text" className={cx('register__repeatPassword')} value="12323414"/>
+            <input type="text" className={cx('register__repeatPassword')} value={repeatPassword}/>
             <button type="submit">Forward</button>
           </div>
         </div>
@@ -37,7 +39,10 @@ class Account extends Component {
 
 Account.propTypes = {}
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+  accountPassword: state.initialState.accountPassword,
+  repeatPassword: state.initialState.repeatPassword,
+})
 
 export default connect(
   mapStateToProps,

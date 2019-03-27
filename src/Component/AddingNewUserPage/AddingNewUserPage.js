@@ -1,19 +1,23 @@
 import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import styles from './AddingNewUser.scss'
-import Account from './Account/Account'
-import Profile from "./Profile/Profile";
+import Contacts from "./Contacts/Contacts";
+import Capabilities from "./Capabilities/Capabilities";
+import Account from "./Account/Account";
+import initialState from "../../reducers/taskReducer";
 
 
 const cx = classNames.bind(styles)
 
 
-class AddingNewUser extends Component {
+class AddingNewUserPage extends Component {
   render() {
+    const { namePage } = this.props
     return (
       <Fragment>
-        <h2 className={cx('newUserH')}>Adding new user</h2>
+        <h2 className={cx('newUserH')}>{namePage}</h2>
         <div className={cx('windowNewUser')}>
           <div className={cx('windowNewUser__tabs')}>
             <div className={cx('windowNewUser__tab active')}>
@@ -29,20 +33,24 @@ class AddingNewUser extends Component {
               <h2>4. Capabilities</h2>
             </div>
           </div>
-          {/*<Account/>*/}
-          <Profile/>
+          <Account/>
+          {/*<Profile/>*/}
+          {/*<Contacts/>*/}
+          {/*<Capabilities/>*/}
         </div >
       </Fragment>
     )
   }
 }
 
-AddingNewUser.propTypes = {
+AddingNewUserPage.propTypes = {
+  namePage: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = state => ({
+  namePage: state.initialState.namePage,
 })
 
 export default connect(
   mapStateToProps,
-)(AddingNewUser)
+)(AddingNewUserPage)

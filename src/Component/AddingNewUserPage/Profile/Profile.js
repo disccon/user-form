@@ -23,15 +23,35 @@ class Profile extends Component {
             <span>*</span>
           </div>
           <input type="text" className={cx('profile__lastName')} value="Morozov" />
-
           <div className={cx('wrapperSpan wrapperSpanDate')}>
             <span>Birth date</span>
             <span>*</span>
           </div>
           <input type="text" className={cx('profile__birthDate')} />
         </div>
-
-        <div className={cx('profile__sideRight')}></div>
+        <div className={cx('profile__sideRight')}>
+          <div className={cx('wrapperSpan')}>
+            <span>Email</span>
+            <span>*</span>
+          </div>
+          <input type="text" className={cx('profile__email')}/>
+          <div className={cx('wrapperSpan')}>
+            <span>Address</span>
+            <span>*</span>
+          </div>
+          <input type="text" className={cx('profile__address')}/>
+          <span>Gender</span>
+          <div className={cx('wrapperGender')}>
+            <input type="radio" name="Gender" value="Male" checked/>
+            <label htmlFor="radioGender">Male</label>
+            <input type="radio" name="Gender" value="Male"/>
+            <label htmlFor="contactChoice1">Email</label>
+          </div>
+          <div className={cx('wrapperButton')}>
+            <button className={cx('profile__back')}>Back</button>
+            <button className={cx('profile__forward')}>Forward</button>
+          </div>
+        </div>
       </div >
 
     )

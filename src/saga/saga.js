@@ -7,7 +7,7 @@ import { push } from 'connected-react-router'
 import {
   CHANGE_NAME_TEXT_FIELD__SUCCESS,
   CHANGE_NAME_TEXT_FIELD__FAILURE,
-} from '../Component/Actions'
+} from '../Actions'
 
 
 

@@ -1,0 +1,77 @@
+.contacts{
+  width: 100%;
+  height: 541px;
+  display: flex;
+  padding: 65px 100px 64px 100px;
+  background: #fbfcff;
+  color: #657C9A;
+  .contacts__sideLeft, .contacts__sideRight{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 300px;
+    .wrapperSpan{
+      width: 100%;
+      display: flex;
+      span{
+        display: block;
+      }
+    }
+    .wrapperSpan span:first-child {
+      margin-right: auto;
+    }
+    .contacts__company, .contacts__githuubLink, .contacts__facebookLink, .contacts__mainLanguage, .contacts__Fax, .contacts__phone1, .contacts__phone2{
+      margin-top: 4px;
+      margin-bottom: 24px;
+      width: 100%;
+      height: 40px;
+      padding-right: 10px;
+      padding-left: 10px;
+      background: #FFF;
+      border: 1px solid #C1CFE0;
+      font-weight: 500;
+      color: #9BB0CB;
+    }
+
+  }
+  .contacts__sideLeft{
+    margin-right: auto;
+    .contacts__company, .contacts__githuubLink, .contacts__facebookLink{
+      color: #9BB0CB;
+    }
+    .contacts__mainLanguage{
+      color: #000;
+    }
+  }
+  .contacts__sideRight{
+   .contacts__addPhone{
+     display: flex;
+     align-items: center;
+     background: transparent;
+     color: #657C9A;
+     .contacts__addICon{
+       margin-right: 8px;
+       width: 15px;
+       height: 15px;
+     }
+   }
+    .wrapperButton{
+      width: 100%;
+      display: flex;
+      margin-top: auto;
+      .profile__back, .profile__forward{
+        width: 100px;
+        height: 40px;
+        font-weight: 500;
+        color: #FFF;
+      }
+      .profile__back{
+        margin-right: auto;
+        background: #C1CFE0;
+      }
+      .profile__forward{
+        background: #5E97F3;
+      }
+    }
+  }
+}

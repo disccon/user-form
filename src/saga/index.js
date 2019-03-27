@@ -5,7 +5,7 @@ import {
 
 import {
   CHANGE_NAME_TEXT_FIELD,
-} from '../Component/Actions'
+} from '../Actions'
 
 
 export default function* rootSaga() {

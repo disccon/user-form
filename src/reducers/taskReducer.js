@@ -2,7 +2,7 @@ import initialState from '../stubs/initialState'
 import {
   CHANGE_NAME_TEXT_FIELD__SUCCESS,
   CHANGE_NAME_TEXT_FIELD__FAILURE,
-} from '../Component/Actions'
+} from '../Actions'
 
 export default function taskReducer(state = initialState, action) {
   switch (action.type) {
