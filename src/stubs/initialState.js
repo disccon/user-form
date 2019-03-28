@@ -5,6 +5,7 @@ let initialState =  {
   namePage: 'Adding new user',
   accountPassword: '12356',
   repeatPassword: '12323414',
+  userName: ''
 }
 
 
