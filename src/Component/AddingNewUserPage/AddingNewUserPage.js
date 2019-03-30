@@ -7,6 +7,7 @@ import Contacts from "./Contacts/Contacts";
 import Capabilities from "./Capabilities/Capabilities";
 import Account from "./Account/Account";
 import initialState from "../../reducers/taskReducer";
+import Profile from "./Profile/Profile";
 
 
 const cx = classNames.bind(styles)
@@ -44,11 +45,9 @@ class AddingNewUserPage extends Component {
 }
 
 AddingNewUserPage.propTypes = {
-  namePage: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = state => ({
-  namePage: state.initialState.namePage,
 })
 
 export default connect(
