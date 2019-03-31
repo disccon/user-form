@@ -23,11 +23,10 @@
   }
   .accountComponent__close{
     background: transparent;
-    .closeIcon{
+    .accountComponent__closeIcon{
       width: 15px;
       height: 15px;
-      color: red;
-      fill: #ffb600;
+      filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(2deg) brightness(100%) contrast(100%)
     }
   }
 }
@@ -43,34 +42,38 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    .accountComponent__userAvatar {
-      width: 171px;
-      height: 171px;
+    .accountComponent__inputFile{
+      display: none;
     }
-    .accountComponent__addAvatarButton{
-      margin-top: 15px;
-      background: transparent;
-      font-weight: 500;
-      color: #9BB0CB;
-      .accountComponent__AddICon{
+    .accountComponent__userAvatarSVG, .accountComponent__userAvatarIMG{
+      cursor: pointer;
+      height: 172px;
+    }
+    .accountComponent__userAvatarIMG {
+      width: 172px;
+      border-radius: 50%;
+      border: 3px solid #5E97F3;
+    }
+    .accountComponent__labelSpan {
+      margin-top: 10px;
+      .accountComponent__AddICon {
         margin-bottom: -3px;
         margin-right: 5px;
         width: 15px;
         height: 15px;
         color: #9BB0CB;
       }
-
-
+      .accountComponent__addAvatarSpan {
+        font-weight: 500;
+        color: #9BB0CB;
+      }
     }
-    .userBigAvatar {
-      width: 171px;
-      height: 171px;
-      border: 3px solid #5E97F3;
-      border-radius: 50%;
+    p{
+      margin-top: 5px;
+      font-size: 9px;
+      color: #EB5757;
     }
-
   }
-
   .register__userData {
     display: flex;
     flex-direction: column;

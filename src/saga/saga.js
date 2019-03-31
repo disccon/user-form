@@ -5,21 +5,26 @@ import { push } from 'connected-react-router'
 
 
 import {
-  CHANGE_NAME_TEXT_FIELD__SUCCESS,
-  CHANGE_NAME_TEXT_FIELD__FAILURE,
+  FORWARD_ACCOUNT__SUCCESS,
+  FORWARD_ACCOUNT__FAILURE,
 } from '../Actions'
 
 
 
-export function* changeNameTextFieldSaga(action) {
+export function* forwardAccountSaga(action) {
+  const {
+    userName, password, repeatPassword, userAvatarIMGUrl,
+  } = action.payload
   try {
+    yield put(push('/Profile'))
     yield put({
-      type: CHANGE_NAME_TEXT_FIELD__SUCCESS,
-      payload: { textFieldName: action.payload.textFieldName },
+      type: FORWARD_ACCOUNT__SUCCESS,
+      payload: {
+        userName, password, repeatPassword, userAvatarIMGUrl, },
     })
   } catch (error) {
     yield put({
-      type: CHANGE_NAME_TEXT_FIELD__FAILURE,
+      type: FORWARD_ACCOUNT__FAILURE,
       error,
     })
   }

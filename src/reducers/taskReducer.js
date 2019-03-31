@@ -1,19 +1,24 @@
 import initialState from '../stubs/initialState'
 import {
-  CHANGE_NAME_TEXT_FIELD__SUCCESS,
-  CHANGE_NAME_TEXT_FIELD__FAILURE,
+  FORWARD_ACCOUNT__SUCCESS,
+  FORWARD_ACCOUNT__FAILURE,
 } from '../Actions'
 
 export default function taskReducer(state = initialState, action) {
   switch (action.type) {
-    case CHANGE_NAME_TEXT_FIELD__SUCCESS: {
+    case FORWARD_ACCOUNT__SUCCESS: {
       return {
         ...state,
-        textFieldName: action.payload.textFieldName,
+        newUser: {
+          userName: action.payload.userName,
+          password: action.payload.userName,
+          repeatPassword: action.payload.repeatPassword,
+          userAvatarIMGUrl: action.payload.userAvatarIMGUrl,
+        },
         error: undefined,
       }
     }
-    case CHANGE_NAME_TEXT_FIELD__FAILURE: {
+    case FORWARD_ACCOUNT__FAILURE: {
       return {
         ...state,
         error: action.error,

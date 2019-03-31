@@ -1,15 +1,16 @@
 import { takeLatest, all } from 'redux-saga/effects'
 import {
-  changeNameTextFieldSaga,
+  forwardAccountSaga,
 } from './saga'
 
 import {
-  CHANGE_NAME_TEXT_FIELD,
+
+  FORWARD_ACCOUNT,
 } from '../Actions'
 
 
 export default function* rootSaga() {
   yield all([
-    takeLatest(CHANGE_NAME_TEXT_FIELD, changeNameTextFieldSaga),
+    takeLatest(FORWARD_ACCOUNT, forwardAccountSaga),
   ])
 }

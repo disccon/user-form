@@ -3,11 +3,13 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import styles from './AddingNewUser.scss'
+import Account from './Account/Account'
 import Contacts from "./Contacts/Contacts";
 import Capabilities from "./Capabilities/Capabilities";
-import Account from "./Account/Account";
+
 import initialState from "../../reducers/taskReducer";
 import Profile from "./Profile/Profile";
+import { Redirect, Route, Switch } from "react-router";
 
 
 const cx = classNames.bind(styles)
@@ -15,7 +17,7 @@ const cx = classNames.bind(styles)
 
 class AddingNewUserPage extends Component {
   render() {
-    const { namePage } = this.props
+    const { namePage, match } = this.props
     return (
       <Fragment>
         <h2 className={cx('newUserH')}>{namePage}</h2>
@@ -34,7 +36,11 @@ class AddingNewUserPage extends Component {
               <h2>4. Capabilities</h2>
             </div>
           </div>
-          <Account/>
+          <Switch>
+            <Route exact path={match.path} component={Account} />
+            <Route exact path='/Profile' component={Profile}/>
+            <Redirect to='/NodFound' />
+          </Switch>
           {/*<Profile/>*/}
           {/*<Contacts/>*/}
           {/*<Capabilities/>*/}
