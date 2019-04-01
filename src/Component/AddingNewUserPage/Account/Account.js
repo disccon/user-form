@@ -42,11 +42,10 @@ export const renderFieldInput = ({ label, input, type, meta: { touched, error } 
       <h4>{label}</h4>
       <div>
         <input {...input} type={type}/>
-        {touched && error && <p className={cx('register__error')}>{error}</p>}
+        {touched && error && <p>{error}</p>}
       </div>
     </label>
   )
-
 
 
 
@@ -70,7 +69,6 @@ class Account extends Component {
     }
     reader.readAsDataURL(file)
   }
-
   onSubmit = values => {
     const { userAvatarIMGUrl } = this.state;
     const { forwardAccount } = this.props;
@@ -81,7 +79,6 @@ class Account extends Component {
     } else {
       forwardAccount(values.userName,values.password, values.repeatPassword, userAvatarIMGUrl)
     }
-
   }
   render() {
     const { handleSubmit } = this.props
@@ -136,40 +133,39 @@ Account.propTypes = {
   }),
 }
 
-const validate = values => {
-  const errors = {}
-  if (!values.errorPP) {
-    errors.errorPP = 'Upload a picture'
-  }
-  if (!values.userName) {
-    errors.userName = 'Missing User Name'
-  }
-  if (!values.userName) {
-    errors.userName = 'Missing User Name'
-  }
-  if (!values.password) {
-    errors.password = 'Missing Password'
-  }
-  if (!values.repeatPassword) {
-    errors.repeatPassword = 'Missing Repeat Password'
-  }
-  if (values.password !== values.repeatPassword)
-    errors.repeatPassword = "Passwords doesn't match";
-  if (values.userName) {
-    if (values.userName.length < 4) {
-      errors.userName = 'Username must be more than 4 letters'
-    }
-  }
-  if (values.password) {
-    if (values.password.length < 4) {
-      errors.password = 'Password must be more than 4 letters'
-    }
-  }
-  return errors;
-}
 
 Account = reduxForm({
-  validate,
+  validate: values => {
+    const errors = {}
+    if (!values.errorPP) {
+      errors.errorPP = 'Upload a picture'
+    }
+    if (!values.userName) {
+      errors.userName = 'Missing User Name'
+    }
+    if (!values.userName) {
+      errors.userName = 'Missing User Name'
+    }
+    if (!values.password) {
+      errors.password = 'Missing Password'
+    }
+    if (!values.repeatPassword) {
+      errors.repeatPassword = 'Missing Repeat Password'
+    }
+    if (values.password !== values.repeatPassword)
+      errors.repeatPassword = "Passwords doesn't match";
+    if (values.userName) {
+      if (values.userName.length <= 3) {
+        errors.userName = 'Username must be more than 3 letters'
+      }
+    }
+    if (values.password) {
+      if (values.password.length <= 3) {
+        errors.password = 'Password must be more than 3 letters'
+      }
+    }
+    return errors;
+  },
   form: 'Account',
 })(Account)
 
@@ -180,9 +176,7 @@ const mapStateToProps = state => {
   const { userName, password, repeatPassword } = state.initialState.newUser
   return {
     initialValues: {
-      userName,
-      password,
-      repeatPassword,
+      userName, password, repeatPassword,
     }
   }
 }

@@ -1,20 +1,18 @@
-export const CHANGE_NAME_TEXT_FIELD = 'CHANGE_NAME_TEXT_FIELD'
-export const CHANGE_NAME_TEXT_FIELD__SUCCESS = 'CHANGE_NAME_TEXT_FIELD__SUCCESS'
-export const CHANGE_NAME_TEXT_FIELD__FAILURE = 'CHANGE_NAME_TEXT_FIELD__FAILURE'
-
-
 export const FORWARD_ACCOUNT = 'FORWARD_ACCOUNT'
 export const FORWARD_ACCOUNT__SUCCESS = 'FORWARD_ACCOUNT__SUCCESS'
 export const FORWARD_ACCOUNT__FAILURE = 'FORWARD_ACCOUNT__FAILURE'
 
-export const changeTextFieldAddingNewUser = ({ target }) => (
-  console.log('1111', target.value),
-    {
-      type: CHANGE_NAME_TEXT_FIELD,
-      payload: {
-        textFieldName: target.value,
-      },
-    })
+export const SAVE_BIRTH_DATE = 'SAVE_BIRTH_DATE'
+export const SAVE_BIRTH_DATE__SUCCESS = 'SAVE_BIRTH_DATE__SUCCESS'
+export const SAVE_BIRTH_DATE__FAILURE = 'SAVE_BIRTH_DATE__FAILURE'
+
+export const SAVE_GENDER_INPUT = 'SAVE_GENDER_INPUT'
+export const SAVE_GENDER_INPUT__SUCCESS = 'SAVE_GENDER_INPUT__SUCCESS'
+export const SAVE_GENDER_INPUT__FAILURE = 'SAVE_GENDER_INPUT__FAILURE'
+
+
+
+
 
 
 export const forwardAccount = (userName, password, repeatPassword, userAvatarIMGUrl) => (
@@ -22,5 +20,21 @@ export const forwardAccount = (userName, password, repeatPassword, userAvatarIMG
     type: FORWARD_ACCOUNT,
     payload: {
       userName, password, repeatPassword, userAvatarIMGUrl,
+    },
+  })
+
+export const saveBirthDate = birthDate => (
+  {
+    type: SAVE_BIRTH_DATE,
+    payload: {
+      birthDate
+    },
+  })
+
+export const saveGenderInput = gender => (
+  {
+    type: SAVE_GENDER_INPUT,
+    payload: {
+      gender
     },
   })

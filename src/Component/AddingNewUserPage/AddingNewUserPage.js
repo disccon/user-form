@@ -7,7 +7,7 @@ import Account from './Account/Account'
 import Contacts from "./Contacts/Contacts";
 import Capabilities from "./Capabilities/Capabilities";
 
-import initialState from "../../reducers/taskReducer";
+import initialState from "../../reducers/userSaveReducer";
 import Profile from "./Profile/Profile";
 import { Redirect, Route, Switch } from "react-router";
 
@@ -17,10 +17,9 @@ const cx = classNames.bind(styles)
 
 class AddingNewUserPage extends Component {
   render() {
-    const { namePage, match } = this.props
     return (
       <Fragment>
-        <h2 className={cx('newUserH')}>{namePage}</h2>
+        <h2 className={cx('newUserH')}>Adding new user</h2>
         <div className={cx('windowNewUser')}>
           <div className={cx('windowNewUser__tabs')}>
             <div className={cx('windowNewUser__tab active')}>
@@ -37,8 +36,9 @@ class AddingNewUserPage extends Component {
             </div>
           </div>
           <Switch>
-            <Route exact path={match.path} component={Account} />
-            <Route exact path='/Profile' component={Profile}/>
+            <Route exact path='/' component={Profile}/>
+            {/*<Route exact path='/' component={Account} />*/}
+            {/*<Route exact path='/Profile' component={Profile}/>*/}
             <Redirect to='/NodFound' />
           </Switch>
           {/*<Profile/>*/}

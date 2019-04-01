@@ -90,7 +90,7 @@
       height: 40px;
       h4 {
         position: absolute;
-        margin-top: -23px;
+        top: -23px;
       }
       input {
         margin-top: 0;
@@ -103,7 +103,7 @@
         font-weight: 500;
         color: #000;
       }
-      .register__error{
+      p{
         display: block;
         margin-top: 3px;
         margin-left: 10px;
