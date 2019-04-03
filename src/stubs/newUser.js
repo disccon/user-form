@@ -15,11 +15,12 @@ let newUser =  {
     company: '',
     githubLink: '',
     facebookLink: '',
+    selectValue: null,
     fax: '',
     phoneN1: '',
     phoneN2: '',
     phoneN3: '',
-    quantityPhone: 2,
+    quantityPhoneField: 2,
 
 }
 

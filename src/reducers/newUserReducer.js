@@ -15,6 +15,17 @@ import {
   FORWARD_BACK_PROFILE__FORWARD,
   FORWARD_BACK_PROFILE__BACK,
   FORWARD_BACK_PROFILE__FAILURE,
+
+  FORWARD_BACK_CONTACTS__FORWARD,
+  FORWARD_BACK_CONTACTS__BACK,
+  FORWARD_BACK_CONTACTS__FAILURE,
+
+  DELETE_ADD_FIELD_PHONE__ADD,
+  DELETE_ADD_FIELD_PHONE__DELETE,
+  DELETE_ADD_FIELD_PHONE__FAILURE,
+
+  SAVE_SELECT_LANGUAGE__SUCCESS,
+  SAVE_SELECT_LANGUAGE__FAILURE,
 } from '../Actions'
 
 export default function newUserReducer(state = newUser, action) {
@@ -100,6 +111,80 @@ export default function newUserReducer(state = newUser, action) {
       }
     }
     case FORWARD_BACK_PROFILE__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+
+    case FORWARD_BACK_CONTACTS__FORWARD: {
+      return {
+        ...state,
+        forwardBack: action.payload.forwardBack,
+        company: action.payload.company,
+        githubLink: action.payload.githubLink,
+        facebookLink: action.payload.facebookLink,
+        fax: action.payload.fax,
+        phoneN1: action.payload.phoneN1,
+        phoneN2: action.payload.phoneN2,
+        phoneN3: action.payload.phoneN3,
+        error: undefined,
+      }
+    }
+    case FORWARD_BACK_CONTACTS__BACK: {
+      return {
+        ...state,
+        forwardBack: action.payload.forwardBack,
+        company: action.payload.company,
+        githubLink: action.payload.githubLink,
+        facebookLink: action.payload.facebookLink,
+        fax: action.payload.fax,
+        phoneN1: action.payload.phoneN1,
+        phoneN2: action.payload.phoneN2,
+        phoneN3: action.payload.phoneN3,
+        error: undefined,
+      }
+    }
+
+    case FORWARD_BACK_CONTACTS__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+    case DELETE_ADD_FIELD_PHONE__DELETE: {
+      return {
+        ...state,
+        quantityPhoneField: action.payload.quantityPhoneField,
+        error: undefined,
+      }
+    }
+    case DELETE_ADD_FIELD_PHONE__ADD: {
+      return {
+        ...state,
+        quantityPhoneField: action.payload.quantityPhoneField,
+        error: undefined,
+      }
+    }
+
+    case DELETE_ADD_FIELD_PHONE__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+    case SAVE_SELECT_LANGUAGE__SUCCESS: {
+      return {
+        ...state,
+        selectValue: action.payload.selectValue,
+        error: undefined,
+      }
+    }
+
+    case SAVE_SELECT_LANGUAGE__FAILURE: {
       return {
         ...state,
         error: action.error,

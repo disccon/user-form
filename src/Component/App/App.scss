@@ -11,46 +11,4 @@ body{
   margin-left: auto;
   margin-right: auto;
   width: 1440px;
-  header {
-    display: flex;
-    align-items: flex-start;
-    width: 100%;
-    height: 60px;
-    background: radial-gradient(720.00px at 50% 68.33%, #4E86E4 0%, #2F68C8 100%);
-    box-shadow: 0px 1px 5px #C1CEDE;
-    .logoA {
-      margin-top: 21px;
-      margin-left: 235px;
-      margin-right: auto;
-      .logoIcon {
-        width: 102px;
-        height: 16px;
-      }
-    }
-    .addUserA {
-      margin-top: 20px;
-      margin-left: auto;
-      margin-right: 59px;
-      color: #E7F0FF;
-      span{
-        margin-top: 2px;
-        margin-left: 9px;
-        font-weight: 500;
-      }
-      .addUsersIcon {
-        width: 17px;
-        height: 17px;
-      }
-    }
-    .loginA{
-      color: #FFF;
-      opacity: 0.5;
-      margin-right: 235px;
-      margin-top: 19px;
-      span{
-        margin-top: 4px;
-        margin-left: 11px;
-      }
-    }
-  }
 }

@@ -2,15 +2,16 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import styles from './Contacts.scss'
-import AddICon from '../../../img/icon/AddICon'
-import { Field, formValueSelector, reduxForm } from "redux-form";
+import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
+import { Field, formValueSelector, reduxForm } from 'redux-form'
 import InputMask from 'react-input-mask';
 
 import Select from 'react-select'
+import { forwardBackContacts, deleteAddFieldPhone, saveSelectLanguage } from '../../../Actions'
 
 const cx = classNames.bind(styles)
 
-const renderFieldInput = ({ label, input, type, meta: { touched, error }, className, span, placeholder,  mask}) => {
+const renderFieldInput = ({ label, input, type, meta: { touched, error }, className, span, placeholder, mask }) => {
   const inputRender = mask ? <InputMask {...input} mask={mask} placeholder={placeholder}/>
     : <input {...input} type={type} className={className} placeholder={placeholder}/>
   return (<label className={cx('profile__label')}>
@@ -20,13 +21,51 @@ const renderFieldInput = ({ label, input, type, meta: { touched, error }, classN
     {touched && error && <p>{error}</p>}
   </label>)
 }
+
+const renderFieldPhone = ({ label, input, type, meta: { touched, error }, span, placeholder,deleteFieldPhone}) => {
+  return (<div className={cx('profile__labelPhone')}>
+    {span && <span onClick={deleteFieldPhone}></span>}
+    <label>
+      <h4>{label}</h4>
+      <InputMask {...input} type={type} mask='+7 (999) 999-99-99' placeholder={placeholder}/>
+      {touched && error && <p>{error}</p>}
+    </label>
+  </div>)
+  // const inputRender = mask ? <InputMask {...input} mask={mask} placeholder={placeholder}/>
+  //   : <input {...input} type={type} className={className} placeholder={placeholder}/>
+  // return (<label className={cx('profile__label')}>
+  //   <h4>{label}</h4>
+  //   {span && <span>*</span>}
+  //   <input {...input} type={type} className={className} placeholder={placeholder} />
+  //   {touched && error && <p>{error}</p>}
+  // </label>)
+}
+
 const options = [
-  { value: 'englishUSA', label: 'English, USA' },
-  { value: 'englishUK', label: 'English, UK' },
-  { value: 'englishUK2', label: 'English, UK 2' },
-  { value: 'englishUK3', label: 'English, UK 3' },
-  { value: 'englishUK4', label: 'English, UK 4' },
-  { value: 'englishUK5', label: 'English, UK 5' },
+  { value: 'en', label: 'English, EN' },
+  { value: 'fr', label: 'French, FR' },
+  { value: 'es', label: 'Spanish, ES' },
+  { value: 'ar', label: 'Arabic, AR' },
+  { value: 'cmn', label: 'Mandarin, CMN' },
+  { value: 'ru', label: 'Russian, RU' },
+  { value: 'pt', label: 'Portuguese, PT' },
+  { value: 'de', label: 'German, DE' },
+  { value: 'ja', label: 'Japanese, JA' },
+  { value: 'hi', label: 'Hindi, HI' },
+  { value: 'ms', label: 'Malay, MS' },
+  { value: 'fa', label: 'Persian, FA' },
+  { value: 'sw', label: 'Swahili, SW' },
+  { value: 'ta', label: 'Tamil, TA' },
+  { value: 'it', label: 'Italian, IT' },
+  { value: 'nl', label: 'Dutch, NL' },
+  { value: 'bn', label: 'Bengali, BN' },
+  { value: 'tr', label: 'Turkish, TR' },
+  { value: 'vi', label: 'Vietnamese, VI' },
+  { value: 'pl', label: 'Polish, PL' },
+  { value: 'jv', label: 'Javanese, JV' },
+  { value: 'pa', label: 'Punjabi, PA' },
+  { value: 'th', label: 'Thai, TH' },
+  { value: 'ko', label: 'Korean, KO' },
 ]
 const colourStyles = {
   control: styles => ({
@@ -84,10 +123,50 @@ const colourStyles = {
 };
 
 class Contacts extends Component {
+  backContacts = () => {
+    const { companyForm, githubLinkForm, facebookLinkForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form, forwardBackContacts} = this.props;
+    forwardBackContacts('back', companyForm, githubLinkForm, facebookLinkForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form, )
+  }
+  onSubmit = values => {
+    const { forwardBackContacts, } = this.props;
+    console.log(values)
+    forwardBackContacts('forward', values.company, values.githubLink, values.facebookLink, values.fax, values.phoneN1, values.phoneN2, values.phoneN3)
+  }
+  deleteFieldPhone = () => {
+    const { deleteAddFieldPhone } = this.props
+    deleteAddFieldPhone('delete')
+  }
+  addFieldPhone = () => {
+    const { deleteAddFieldPhone } = this.props
+    deleteAddFieldPhone('add')
+  }
+  saveSelectLanguage = selectValue => {
+    const { saveSelectLanguage } = this.props
+    saveSelectLanguage(selectValue)
+  }
   render() {
+    const { quantityPhoneField, selectValue, handleSubmit } = this.props
+    const phoneFieldN1 = quantityPhoneField >= 2 ?
+      <Field component={renderFieldPhone} type="text" placeholder='+7 (066) 888-88-88'
+             label='Phone #1' name="phoneN1" span={true} deleteFieldPhone={this.deleteFieldPhone}/> :
+      <Field component={renderFieldPhone} type="text" placeholder='+7 (066) 888-88-88'
+             label='Phone #1' name="phoneN1" deleteFieldPhone={this.deleteFieldPhone}/>
+    const phoneFieldN2 = quantityPhoneField >= 2 ?
+      <Field component={renderFieldPhone} type="text"
+            label='Phone #2' name="phoneN2" span={true} deleteFieldPhone={this.deleteFieldPhone}/>
+            : null
+    const phoneFieldN3 = quantityPhoneField === 3 ?
+      <Field component={renderFieldPhone} type="text"
+          label='Phone #3' name="phoneN3" span={true} deleteFieldPhone={this.deleteFieldPhone}/>
+          : null
+    const addPhoneField = quantityPhoneField < 3 ?
+      <button type='button' className={cx('contacts__addPhoneField')} onClick={this.addFieldPhone}>
+       <AddIcon className={cx('contacts__addIcon')}/>
+      <span>add phone number</span>
+    </button> : null
     return (
       <Fragment>
-        <div className={cx('contacts')}>
+        <form className={cx('contacts')} onSubmit={handleSubmit(this.onSubmit)}>
           <div className={cx('contacts__sideLeft')}>
             <Field component={renderFieldInput} type="text"
                    label='Company' name="company"/>
@@ -97,31 +176,28 @@ class Contacts extends Component {
                    label='Facebook link' name="facebookLink" placeholder='www.facebook.com/hdfk_142_23lelf/'
                    span='*'/>
             <Select
+              value={selectValue}
               options={options}
               styles={colourStyles}
+              onChange={this.saveSelectLanguage}
               className={cx('contacts__select')}
             />
           </div>
           <div className={cx('contacts__sideRight')}>
             <Field component={renderFieldInput} type="text"
-                   label='Fax' name="fax"
+                   label='Fax' name="fax" mask='+7 (999) 999-99-99'
                    span='*'/>
-            <Field component={renderFieldInput} type="text"
-                   label='Phone #1' name="phoneN1"
-                   placeholder='+38 (066) 888 88 88' mask='+38 (999) 999 99 99'/>
-            <Field component={renderFieldInput} type="text"
-                   label='Phone #2' name="phoneN2" mask='+38 (999) 999 99 99'/>
-            <button type='button' className={cx('contacts__addPhone')}>
-              <AddICon className={cx('contacts__addICon')}/>
-              add phone number
-            </button>
+            {phoneFieldN1}
+            {phoneFieldN2}
+            {phoneFieldN3}
+            {addPhoneField}
             <div className={cx('contacts__addPhone')}></div>
             <div className={cx('wrapperButton')}>
-              <button className={cx('profile__back')}>Back</button>
-              <button className={cx('profile__forward')}>Forward</button>
+              <button type='button' onClick={this.backContacts} className={cx('profile__back')}>Back</button>
+              <button type='submit' className={cx('profile__forward')}>Forward</button>
             </div>
           </div>
-        </div>
+        </form>
       </Fragment>
     )
   }
@@ -134,25 +210,39 @@ Contacts = reduxForm({
   validate: values => {
     const errors = {};
 
-    if (!values.firstName) {
-      errors.firstName = 'Missing First name'
-    } else if (values.firstName.length <= 2) {
-      errors.firstName = 'Must be 3 characters or more'
-    }
-    if (!values.lastName) {
-      errors.lastName = 'Missing Last name'
-    } else if (values.lastName.length <= 2) {
-      errors.lastName = 'Must be 3 characters or more'
+    // company, githubLink, facebookLink, fax, phoneN1, phoneN2, phoneN3,
+
+    if (!values.company) {
+      errors.company = 'Missing Company'
+    } else if (values.company.length <= 2) {
+      errors.company = 'Must be 3 characters or more'
     }
 
-    if (!values.address) {
-      errors.address = 'Missing Address'
+    if (!values.githubLink) {
+      errors.githubLink = 'Missing Github Link'
+    } else if (values.githubLink.length <= 5) {
+      errors.githubLink = 'Must be 4 characters or more'
     }
-    if (!values.email) {
-      errors.email = 'Missing Email'
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-      errors.email = 'Invalid email address'
+
+    if (!values.facebookLink) {
+      errors.facebookLink = 'Missing Facebook Link'
+    } else if (values.facebookLink.length <= 5) {
+      errors.facebookLink = 'Must be 4 characters or more'
     }
+
+    if (!values.fax) {
+      errors.fax = 'Missing Facebook Fax'
+    } else if (values.fax.length <= 5) {
+      errors.fax = 'Must be 4 characters or more'
+    }
+
+    if (!values.phoneN1) {
+      errors.phoneN1 = 'Missing Phone Number'
+    } else if (values.phoneN1.length <= 5) {
+      errors.phoneN1 = 'Must be 4 characters or more'
+    }
+
+
 
     //'Sorry, you must be at least 18 years old'
     //'You do not meet the minimum age requirement!' возраст
@@ -162,19 +252,28 @@ Contacts = reduxForm({
 
     return errors;
   },
-  form: 'Profile',
+  form: 'Contacts',
 })(Contacts)
 
 const mapStateToProps = state => {
-  const { company, githubLink, facebookLink, fax, phoneN1, phoneN2, phoneN3, quantityPhone } = state.newUser
+  const selector = formValueSelector('Contacts')
+  const companyForm = selector(state, 'company')
+  const githubLinkForm = selector(state, 'githubLinkForm')
+  const facebookLinkForm = selector(state, 'facebookLink')
+  const faxForm = selector(state, 'fax')
+  const phoneN1Form = selector(state, 'phoneN1')
+  const phoneN2Form = selector(state, 'phoneN2')
+  const phoneN3Form = selector(state, 'phoneN3')
+  const { company, githubLink, facebookLink, fax, phoneN1, phoneN2, phoneN3, quantityPhoneField, selectValue } = state.newUser
   return {
     initialValues: {
       company, githubLink, facebookLink, fax, phoneN1, phoneN2, phoneN3,
     },
-    quantityPhone
+    quantityPhoneField, companyForm, githubLinkForm, facebookLinkForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form, selectValue
   }
 }
 
 export default connect(
   mapStateToProps,
+  { forwardBackContacts, deleteAddFieldPhone, saveSelectLanguage  }
 )(Contacts)

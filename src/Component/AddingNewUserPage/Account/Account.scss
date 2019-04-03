@@ -89,6 +89,15 @@
       position: relative;
       margin-bottom: 45px;
       height: 40px;
+      .accountComponent__visibilityIcon{
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 15px;
+        height: 10px;
+
+
+      }
       h4 {
         position: absolute;
         top: -23px;

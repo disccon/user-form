@@ -2,8 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import styles from './UserNamePage.scss'
-import EditIcon from "../../img/icon/EditIcon";
-
+import { ReactComponent as EditIcon } from '../../img/icon/edit.svg'
 
 const cx = classNames.bind(styles)
 

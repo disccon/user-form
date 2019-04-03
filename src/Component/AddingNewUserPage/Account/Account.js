@@ -3,83 +3,88 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import styles from './Account.scss'
-import { ReactComponent as CloseIcon } from '../../../img/icon/closeIcon.svg'
+import { ReactComponent as CloseIcon } from '../../../img/icon/close.svg'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
+import { ReactComponent as VisibilityIcon } from '../../../img/icon/visibility.svg'
+import { ReactComponent as VisibilityOffIcon } from '../../../img/icon/visibilityOff.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import { forwardAccount, saveUserSRCAvatarIMG } from '../../../Actions'
-import { reduxForm, Field, formValueSelector } from 'redux-form';
-
+import { reduxForm, Field } from 'redux-form';
 
 const cx = classNames.bind(styles)
 
-//   <Field component={renderFieldP} type='file'
-// name='errorPP'/>
-// const renderFieldP = ({ input, type, meta: { touched, error } }) => (
-//   <Fragment>
-//     <label>
-//       {userAvatarIMG}
-//       <input {...input} type={type} className={cx('accountComponent__inputFile')} accept="image/*,image/jpeg"
-//              onChange={this.addImageUserAvatar}/>
-//     </label>
-//     <label className={cx('accountComponent__labelSpan')}>
-//       <AddIcon className={cx('accountComponent__AddICon')} alt="addAvatar"/>
-//       <span className={cx('accountComponent__addAvatarSpan')}>add avatar</span>
-//       <input {...input} type={type} className={cx('accountComponent__inputFile')} accept="image/*,image/jpeg"
-//              onChange={this.addImageUserAvatar}/>
-//       {touched && error && <p>{error}</p> }
-//     </label>
-//   </Fragment>
-// )
 
-
-export const renderFieldInput = ({ label, input, type, meta: { touched, error } }) => (
-  <label>
-    <h4>{label}</h4>
-    <div>
-      <input {...input} type={type}/>
-      {touched && error && <p>{error}</p>}
-    </div>
-  </label>
-)
+export const renderFieldInput = ({ label, input, type, meta: { touched, error }, isVisibility, changeTypePassword}) => {
+  const visibilityIcon = type === 'text' ? <VisibilityIcon className={cx('accountComponent__visibilityIcon')} onClick={changeTypePassword}/> :
+    <VisibilityOffIcon className={cx('accountComponent__visibilityIcon')} onClick={changeTypePassword}/>
+  return (<label>
+      <h4>{label}</h4>
+      {isVisibility && visibilityIcon}
+      <div>
+        <input {...input} type={type}/>
+        {touched && error && <p>{error}</p>}
+      </div>
+    </label>
+  )
+}
 
 
 class Account extends Component {
   state = {
     file: '',
-    isUserAvatar: false,
+    avatarIMGError: null,
+    typeFieldPassword: 'text'
   }
   addImageUserAvatar = event => {
     event.preventDefault();
     const { saveUserSRCAvatarIMG } = this.props
     let reader = new FileReader()
     let file = event.target.files[0]
-    reader.onloadend = () => {
+    const fileSize = file.size / 1024 / 1024
+    if (fileSize < 1) {
+      reader.onloadend = () => {
+        this.setState({
+          file: file,
+          avatarIMGError: false,
+        })
+        saveUserSRCAvatarIMG(reader.result)
+      }
+      reader.readAsDataURL(file)
+    } else {
       this.setState({
-        file: file,
-        isUserAvatar: false,
+        avatarIMGError: 'File should not exceed 1 mb',
       })
-      saveUserSRCAvatarIMG(reader.result)
     }
-    reader.readAsDataURL(file)
   }
   onSubmit = values => {
-    const { forwardAccount, userSRCAvatarIMG } = this.props;
+    const { forwardAccount, userSRCAvatarIMG } = this.props
     if (!userSRCAvatarIMG) {
       this.setState({
-        isUserAvatar: true,
+        avatarIMGError: 'Upload a picture',
       })
     } else {
       forwardAccount(values.userName, values.password, values.repeatPassword)
     }
   }
-
+  changeTypePassword = () => {
+    const { typeFieldPassword } = this.state
+    if(typeFieldPassword === 'text'){
+      this.setState({
+        typeFieldPassword: 'password',
+      })
+    } else {
+      this.setState({
+        typeFieldPassword: 'text',
+      })
+    }
+  }
   render() {
     const { handleSubmit, userSRCAvatarIMG } = this.props
-    const { isUserAvatar } = this.state
+    const { avatarIMGError, typeFieldPassword } = this.state
     const userAvatarIMG = userSRCAvatarIMG ?
       <img className={cx('accountComponent__userAvatarIMG')} src={userSRCAvatarIMG}/> :
       <UserAvatarIcon className={cx('accountComponent__userAvatarSVG')} alt='userAvatar'/>
-    const UserAvatar = isUserAvatar ? <p className={cx('accountComponent__avatarError')}>Upload a picture</p> : null
+    const UserAvatar = avatarIMGError ? <p className={cx('accountComponent__avatarError')}>{avatarIMGError}</p> : null
     return (
       <Fragment>
         <div className={cx('accountComponent__question')}>
@@ -106,10 +111,10 @@ class Account extends Component {
           <div className={cx('register__userData')}>
             <Field component={renderFieldInput} type="text"
                    label='User name' name="userName"/>
-            <Field component={renderFieldInput} type="text"
-                   label='Password' name="password"/>
-            <Field component={renderFieldInput} type="text"
-                   label='Repeat Password' name="repeatPassword"/>
+            <Field component={renderFieldInput} type={typeFieldPassword} isVisibility={true}
+                   label='Password' name="password" changeTypePassword={this.changeTypePassword}/>
+            <Field component={renderFieldInput} type={typeFieldPassword} isVisibility={true}
+                   label='Repeat Password' name="repeatPassword" changeTypePassword={this.changeTypePassword}/>
             <button type="submit">Forward</button>
           </div>
         </form>

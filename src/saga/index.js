@@ -5,6 +5,9 @@ import {
   saveBirthDateSaga,
   saveGenderInputSaga,
   forwardBackProfileSaga,
+  forwardBackContactsSaga,
+  deleteAddFieldPhoneSaga,
+  saveSelectLanguageSaga,
 } from './saga'
 
 import {
@@ -13,6 +16,9 @@ import {
   SAVE_BIRTH_DATE,
   SAVE_GENDER_INPUT,
   FORWARD_BACK_PROFILE,
+  FORWARD_BACK_CONTACTS,
+  DELETE_ADD_FIELD_PHONE,
+  SAVE_SELECT_LANGUAGE,
 } from '../Actions'
 
 
@@ -23,5 +29,9 @@ export default function* rootSaga() {
     takeLatest(SAVE_BIRTH_DATE, saveBirthDateSaga),
     takeLatest(SAVE_GENDER_INPUT, saveGenderInputSaga),
     takeLatest(FORWARD_BACK_PROFILE, forwardBackProfileSaga),
+    takeLatest(FORWARD_BACK_CONTACTS, forwardBackContactsSaga),
+    takeLatest(DELETE_ADD_FIELD_PHONE, deleteAddFieldPhoneSaga),
+    takeLatest(SAVE_SELECT_LANGUAGE, saveSelectLanguageSaga),
+
   ])
 }

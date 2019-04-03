@@ -22,6 +22,9 @@ const renderFieldInput = ({ label, input, type, meta: { touched, error }, classN
 
 
 class Profile extends Component {
+  state = {
+    ageError: false,
+  }
   changeBirthDate = value => {
     const { saveBirthDate } = this.props
     saveBirthDate(value)
@@ -31,15 +34,34 @@ class Profile extends Component {
     saveGenderInput(event.target.value)
   }
   onSubmit = values => {
-    const { forwardBackProfile } = this.props;
-    forwardBackProfile('forward', values.firstName, values.lastName, values.email, values.address)
+    const { birthDate } = this.props
+    if(birthDate !== null){
+      let age = new Date().getFullYear() - birthDate.getFullYear()
+       if(age < 18){
+         this.setState({
+          ageError: 'Sorry, you must be at least 18 years old'
+        })
+      } else {
+         this.setState({
+           ageError: false
+         })
+         const { forwardBackProfile } = this.props;
+         forwardBackProfile('forward', values.firstName, values.lastName, values.email, values.address)
+       }
+    } else {
+      this.setState({
+        ageError: 'Missing Birth Date'
+      })
+    }
   }
   backProfile = () => {
+
     const { firstNameForm, lastNameForm, emailForm, addressForm, forwardBackProfile } = this.props;
     forwardBackProfile('back', firstNameForm, lastNameForm, emailForm, addressForm)
   }
   render() {
     const { birthDate, gender, handleSubmit } = this.props
+    const { ageError } = this.state
     return (
       <div className={cx('profile')}>
         <form className={cx('profile__form')} onSubmit={handleSubmit(this.onSubmit)}>
@@ -59,6 +81,7 @@ class Profile extends Component {
                           onChange={this.changeBirthDate}
                           value={birthDate}
                           calendarClassName='profile__react-calendar'/>
+              {ageError && <p className={cx('birthDate__error')}>{ageError}</p>}
             </div>
           </div>
           <div className={cx('profile__sideRight')}>
@@ -120,13 +143,6 @@ Profile = reduxForm({
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
       errors.email = 'Invalid email address'
     }
-
-    //'Sorry, you must be at least 18 years old'
-    //'You do not meet the minimum age requirement!' возраст
-    //Must be at least
-    //'Must be a number'
-    //'Invalid phone number, must be 10 digits' «Неверный номер телефона, должен быть 10 цифр»
-
     return errors;
   },
   form: 'Profile',

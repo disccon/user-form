@@ -1,5 +1,3 @@
-
-
 export const SAVE_USER_SRC_AVATAR_IMG = 'SAVE_USER_SRC_AVATAR_IMG'
 export const SAVE_USER_SRC_AVATAR_IMG__SUCCESS = 'SAVE_USER_SRC_AVATAR_IMG__SUCCESS'
 export const SAVE_USER_SRC_AVATAR_IMG__FAILURE = 'SAVE_USER_SRC_AVATAR_IMG__FAILURE'
@@ -23,6 +21,22 @@ export const FORWARD_BACK_PROFILE__BACK = 'FORWARD_BACK_PROFILE__BACK'
 export const FORWARD_BACK_PROFILE__FAILURE = 'FORWARD_BACK_PROFILE__FAILURE'
 
 
+export const FORWARD_BACK_CONTACTS = 'FORWARD_BACK_CONTACTS'
+export const FORWARD_BACK_CONTACTS__FORWARD = 'FORWARD_BACK_CONTACTS__FORWARD'
+export const FORWARD_BACK_CONTACTS__BACK = 'FORWARD_BACK_CONTACTS__BACK'
+export const FORWARD_BACK_CONTACTS__FAILURE = 'FORWARD_BACK_CONTACTS__FAILURE'
+
+export const DELETE_ADD_FIELD_PHONE = 'DELETE_ADD_FIELD_PHONE_PHONE'
+export const DELETE_ADD_FIELD_PHONE__ADD = 'DELETE_ADD_FIELD_PHONE__ADD'
+export const DELETE_ADD_FIELD_PHONE__DELETE = 'DELETE_ADD_FIELD_PHONE__DELETE'
+export const DELETE_ADD_FIELD_PHONE__FAILURE = 'DELETE_ADD_FIELD_PHONE__FAILURE'
+
+
+
+
+export const SAVE_SELECT_LANGUAGE = 'SAVE_SELECT_LANGUAGE'
+export const SAVE_SELECT_LANGUAGE__SUCCESS = 'SAVE_SELECT_LANGUAGE__SUCCESS'
+export const SAVE_SELECT_LANGUAGE__FAILURE = 'SAVE_SELECT_LANGUAGE__FAILURE'
 
 
 export const saveUserSRCAvatarIMG = userSRCAvatarIMG => (
@@ -31,7 +45,7 @@ export const saveUserSRCAvatarIMG = userSRCAvatarIMG => (
     payload: {
       userSRCAvatarIMG,
     },
-})
+  })
 
 
 export const forwardAccount = (userName, password, repeatPassword) => (
@@ -66,3 +80,24 @@ export const forwardBackProfile = (forwardBack, firstName, lastName, email, addr
     },
   })
 
+
+export const forwardBackContacts = (forwardBack, company, githubLink, facebookLink, fax, phoneN1, phoneN2, phoneN3) => (
+  {
+    type: FORWARD_BACK_CONTACTS,
+    payload: {
+      forwardBack, company, githubLink, facebookLink, fax, phoneN1, phoneN2, phoneN3,
+    },
+  })
+
+export const deleteAddFieldPhone = deleteAddField => (
+  { type: DELETE_ADD_FIELD_PHONE,
+    payload: {
+      deleteAddField,
+    },})
+
+
+export const saveSelectLanguage = selectValue => (
+  { type: SAVE_SELECT_LANGUAGE,
+    payload: {
+      selectValue,
+    },})

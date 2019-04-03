@@ -4,12 +4,10 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import styles from './AddingNewUser.scss'
 import Account from './Account/Account'
-import Contacts from "./Contacts/Contacts";
-import Capabilities from "./Capabilities/Capabilities";
-
-import initialState from "../../reducers/newUserReducer";
-import Profile from "./Profile/Profile";
-import { Redirect, Route, Switch } from "react-router";
+import Contacts from './Contacts/Contacts'
+import Capabilities from './Capabilities/Capabilities'
+import Profile from './Profile/Profile'
+import { Redirect, Route, Switch } from 'react-router'
 
 
 const cx = classNames.bind(styles)
@@ -41,15 +39,12 @@ class AddingNewUserPage extends Component {
             </div>
           </div>
           <Switch>
-            {/*<Route exact path='/' component={Profile}/>*/}
             <Route exact path='/' component={Account} />
             <Route exact path='/Profile' component={Profile}/>
             <Route exact path='/Contacts' component={Contacts}/>
+            <Route exact path='/Contacts' component={Capabilities}/>
             <Redirect to='/NodFound' />
           </Switch>
-          {/*<Profile/>*/}
-          {/*<Contacts/>*/}
-          {/*<Capabilities/>*/}
         </div >
       </Fragment>
     )
