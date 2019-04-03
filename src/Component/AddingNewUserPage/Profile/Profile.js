@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import styles from './Profile.scss'
-import { reduxForm, Field } from 'redux-form';
-import { saveBirthDate, saveGenderInput } from "../../../Actions";
+import { reduxForm, Field, formValueSelector } from 'redux-form'
+import { saveBirthDate, saveGenderInput, forwardBackProfile } from '../../../Actions'
 import DatePicker from 'react-date-picker';
 // import DatePicker from 'react-date-picker/dist/entry.nostyle'
 import { ReactComponent as CalendarIcon } from '../../../img/icon/calendar.svg'
@@ -21,7 +21,6 @@ const renderFieldInput = ({ label, input, type, meta: { touched, error }, classN
 )
 
 
-// firstName, lastName, birthDate, email, address, gender
 class Profile extends Component {
   changeBirthDate = value => {
     const { saveBirthDate } = this.props
@@ -31,11 +30,19 @@ class Profile extends Component {
     const { saveGenderInput } = this.props
     saveGenderInput(event.target.value)
   }
+  onSubmit = values => {
+    const { forwardBackProfile } = this.props;
+    forwardBackProfile('forward', values.firstName, values.lastName, values.email, values.address)
+  }
+  backProfile = () => {
+    const { firstNameForm, lastNameForm, emailForm, addressForm, forwardBackProfile } = this.props;
+    forwardBackProfile('back', firstNameForm, lastNameForm, emailForm, addressForm)
+  }
   render() {
-    const { birthDate, gender } = this.props
+    const { birthDate, gender, handleSubmit } = this.props
     return (
       <div className={cx('profile')}>
-        <form className={cx('profile__form')}>
+        <form className={cx('profile__form')} onSubmit={handleSubmit(this.onSubmit)}>
           <div className={cx('profile__sideLeft')}>
             <Field component={renderFieldInput} type="text"
                    label='First name' name="firstName"/>
@@ -47,11 +54,10 @@ class Profile extends Component {
               <DatePicker clearIcon='' calendarIcon={<CalendarIcon/>}
                           className={cx('profile__datePicker')}
                           name='birthDate'
-                          isOpen='false'
+                          isOpen={true}
                           locale='en'
                           onChange={this.changeBirthDate}
                           value={birthDate}
-                // format='y-MM-dd'
                           calendarClassName='profile__react-calendar'/>
             </div>
           </div>
@@ -76,22 +82,11 @@ class Profile extends Component {
               />
                 <span>Female</span>
               </label>
-
-
-              {/*<label className="radio">*/}
-                {/*<input type="radio" name="gender2"/>*/}
-                {/*<div className="radio__text">А я переключаю радиокнопку</div>*/}
-              {/*</label>*/}
-              {/*<label className="radio">*/}
-                {/*<input type="radio" name="gender2"/>*/}
-                {/*<div className="radio__text">А я переключаю радиокнопку</div>*/}
-              {/*</label>*/}
-
             </div>
-            {/*<div className={cx('wrapperButton')}>*/}
-              {/*<button className={cx('profile__back')}>Back</button>*/}
-              {/*<button className={cx('profile__forward')}>Forward</button>*/}
-            {/*</div>*/}
+            <div className={cx('wrapperButton')}>
+              <button type='button' onClick={this.backProfile} className={cx('profile__back')}>Back</button>
+              <button type='submit' className={cx('profile__forward')}>Forward</button>
+            </div>
           </div>
         </form>
       </div>
@@ -106,49 +101,56 @@ Profile = reduxForm({
   validate: values => {
     const errors = {};
 
-    if (values.firstName) {
-      if (values.firstName.length <= 2) {
-        errors.firstName = 'Username must be more than 2 letters'
-      }
+    if (!values.firstName) {
+      errors.firstName = 'Missing First name'
+    } else if (values.firstName.length <= 2) {
+      errors.firstName = 'Must be 3 characters or more'
     }
-    if (values.lastName) {
-      if (values.lastName.length <= 2) {
-        errors.lastName = 'Username must be more than 2 letters'
-      }
+    if (!values.lastName) {
+      errors.lastName = 'Missing Last name'
+    } else if (values.lastName.length <= 2) {
+      errors.lastName = 'Must be 3 characters or more'
+    }
+
+    if (!values.address) {
+      errors.address = 'Missing Address'
     }
     if (!values.email) {
-      errors.email = 'Required'
+      errors.email = 'Missing Email'
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
       errors.email = 'Invalid email address'
     }
-    if (values.address) {
-      if (values.address.length <= 4) {
-        errors.address = 'Username must be more than 4 letters'
-      }
-    }
+
+    //'Sorry, you must be at least 18 years old'
+    //'You do not meet the minimum age requirement!' возраст
+    //Must be at least
+    //'Must be a number'
+    //'Invalid phone number, must be 10 digits' «Неверный номер телефона, должен быть 10 цифр»
+
     return errors;
   },
   form: 'Profile',
 })(Profile)
 
-//const selector = formValueSelector('Account')
-//const haspassword = selector(state, 'password')
-
 
 const mapStateToProps = state => {
-  const { firstName, lastName, email, address, gender, birthDate, } = state.initialState.newUser
+  const selector = formValueSelector('Profile')
+  const firstNameForm = selector(state, 'firstName')
+  const lastNameForm = selector(state, 'lastName')
+  const emailForm = selector(state, 'email')
+  const addressForm = selector(state, 'address')
+  const { firstName, lastName, email, address, gender, birthDate, } = state.newUser
   return {
     initialValues: {
       firstName, lastName, email, address,
     },
-    birthDate,
-    gender,
+    birthDate, gender, firstNameForm, lastNameForm, emailForm, addressForm,
   }
 }
 
 export default Profile = connect(
   mapStateToProps,
-  { saveBirthDate, saveGenderInput }
+  { saveBirthDate, saveGenderInput, forwardBackProfile  }
 )(Profile)
 
 

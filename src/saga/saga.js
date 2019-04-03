@@ -5,6 +5,9 @@ import { push } from 'connected-react-router'
 
 
 import {
+  SAVE_USER_SRC_AVATAR_IMG__SUCCESS,
+  SAVE_USER_SRC_AVATAR_IMG__FAILURE,
+
   FORWARD_ACCOUNT__SUCCESS,
   FORWARD_ACCOUNT__FAILURE,
 
@@ -13,19 +16,42 @@ import {
 
   SAVE_GENDER_INPUT__SUCCESS,
   SAVE_GENDER_INPUT__FAILURE,
+
+  FORWARD_BACK_PROFILE__FORWARD,
+  FORWARD_BACK_PROFILE__BACK,
+  FORWARD_BACK_PROFILE__FAILURE,
 } from '../Actions'
+
+
+export function* saveUserSRCAvatarIMGSaga(action) {
+  const { userSRCAvatarIMG } = action.payload
+  try {
+    yield put({
+      type: SAVE_USER_SRC_AVATAR_IMG__SUCCESS,
+      payload: {
+        userSRCAvatarIMG,
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: SAVE_USER_SRC_AVATAR_IMG__FAILURE,
+      error,
+    })
+  }
+}
+
 
 
 export function* forwardAccountSaga(action) {
   const {
-    userName, password, repeatPassword, userAvatarIMGUrl,
+    userName, password, repeatPassword,
   } = action.payload
   try {
     yield put(push('/Profile'))
     yield put({
       type: FORWARD_ACCOUNT__SUCCESS,
       payload: {
-        userName, password, repeatPassword, userAvatarIMGUrl,
+        userName, password, repeatPassword,
       },
     })
   } catch (error) {
@@ -54,7 +80,6 @@ export function* saveBirthDateSaga(action) {
 }
 
 
-
 export function* saveGenderInputSaga(action) {
   const { gender, } = action.payload
   try {
@@ -71,3 +96,29 @@ export function* saveGenderInputSaga(action) {
     })
   }
 }
+
+export function* forwardBackProfileSaga(action) {
+  const { forwardBack, firstName, lastName, email, address, } = action.payload
+  try {
+    let actionType
+    if (forwardBack === 'back') {
+      actionType = FORWARD_BACK_PROFILE__BACK
+      yield put(push('/'))
+    } else if (forwardBack === 'forward') {
+      actionType = FORWARD_BACK_PROFILE__FORWARD
+      yield put(push('/Contacts'))
+    }
+    yield put({
+      type: actionType,
+      payload: {
+        firstName, lastName, email, address,
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: FORWARD_BACK_PROFILE__FAILURE,
+      error,
+    })
+  }
+}
+

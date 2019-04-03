@@ -6,11 +6,8 @@ import styles from './Account.scss'
 import { ReactComponent as CloseIcon } from '../../../img/icon/closeIcon.svg'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
-import { forwardAccount } from '../../../Actions'
-
+import { forwardAccount, saveUserSRCAvatarIMG } from '../../../Actions'
 import { reduxForm, Field, formValueSelector } from 'redux-form';
-
-
 
 
 const cx = classNames.bind(styles)
@@ -35,56 +32,52 @@ const cx = classNames.bind(styles)
 // )
 
 
-
-
 export const renderFieldInput = ({ label, input, type, meta: { touched, error } }) => (
   <label>
-      <h4>{label}</h4>
-      <div>
-        <input {...input} type={type}/>
-        {touched && error && <p>{error}</p>}
-      </div>
-    </label>
-  )
-
-
+    <h4>{label}</h4>
+    <div>
+      <input {...input} type={type}/>
+      {touched && error && <p>{error}</p>}
+    </div>
+  </label>
+)
 
 
 class Account extends Component {
   state = {
     file: '',
-    userAvatarIMGUrl: '',
     isUserAvatar: false,
   }
   addImageUserAvatar = event => {
     event.preventDefault();
+    const { saveUserSRCAvatarIMG } = this.props
     let reader = new FileReader()
     let file = event.target.files[0]
     reader.onloadend = () => {
       this.setState({
         file: file,
-        userAvatarIMGUrl: reader.result,
         isUserAvatar: false,
       })
+      saveUserSRCAvatarIMG(reader.result)
     }
     reader.readAsDataURL(file)
   }
   onSubmit = values => {
-    const { userAvatarIMGUrl } = this.state;
-    const { forwardAccount } = this.props;
-    if(!userAvatarIMGUrl) {
+    const { forwardAccount, userSRCAvatarIMG } = this.props;
+    if (!userSRCAvatarIMG) {
       this.setState({
         isUserAvatar: true,
       })
     } else {
-      forwardAccount(values.userName,values.password, values.repeatPassword, userAvatarIMGUrl)
+      forwardAccount(values.userName, values.password, values.repeatPassword)
     }
   }
+
   render() {
-    const { handleSubmit } = this.props
-    const { userAvatarIMGUrl, isUserAvatar } = this.state
-    const userAvatarIMG = userAvatarIMGUrl ?
-      <img className={cx('accountComponent__userAvatarIMG')} src={userAvatarIMGUrl}/> :
+    const { handleSubmit, userSRCAvatarIMG } = this.props
+    const { isUserAvatar } = this.state
+    const userAvatarIMG = userSRCAvatarIMG ?
+      <img className={cx('accountComponent__userAvatarIMG')} src={userSRCAvatarIMG}/> :
       <UserAvatarIcon className={cx('accountComponent__userAvatarSVG')} alt='userAvatar'/>
     const UserAvatar = isUserAvatar ? <p className={cx('accountComponent__avatarError')}>Upload a picture</p> : null
     return (
@@ -125,65 +118,60 @@ class Account extends Component {
   }
 }
 
-Account.propTypes = {
-  initialValues: PropTypes.shape({
-    userName: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    repeatPassword: PropTypes.string.isRequired,
-  }),
-}
+// Account.propTypes = {
+//   initialValues: PropTypes.shape({
+//     userName: PropTypes.string.isRequired,
+//     password: PropTypes.string.isRequired,
+//     repeatPassword: PropTypes.string.isRequired,
+//   })
+// }
 
 
 Account = reduxForm({
   validate: values => {
     const errors = {}
-    if (!values.errorPP) {
-      errors.errorPP = 'Upload a picture'
-    }
+
     if (!values.userName) {
       errors.userName = 'Missing User Name'
+    } else if (values.userName.length <= 3) {
+      errors.userName = 'Must be 4 characters or more'
     }
-    if (!values.userName) {
-      errors.userName = 'Missing User Name'
-    }
+
     if (!values.password) {
       errors.password = 'Missing Password'
+    } else if (values.password.length <= 3) {
+      errors.password = 'Must be 4 characters or more'
     }
+
     if (!values.repeatPassword) {
       errors.repeatPassword = 'Missing Repeat Password'
     }
     if (values.password !== values.repeatPassword)
       errors.repeatPassword = "Passwords doesn't match";
-    if (values.userName) {
-      if (values.userName.length <= 3) {
-        errors.userName = 'Username must be more than 3 letters'
-      }
-    }
-    if (values.password) {
-      if (values.password.length <= 3) {
-        errors.password = 'Password must be more than 3 letters'
-      }
-    }
+
     return errors;
   },
   form: 'Account',
 })(Account)
 
-//const selector = formValueSelector('Account')
-//const haspassword = selector(state, 'password')
+// const selector = formValueSelector('Account')
+// const haspassword = selector(state, 'password')
+
 
 const mapStateToProps = state => {
-  const { userName, password, repeatPassword } = state.initialState.newUser
+
+  const { userName, password, repeatPassword, userSRCAvatarIMG } = state.newUser
   return {
     initialValues: {
       userName, password, repeatPassword,
-    }
+    },
+    userSRCAvatarIMG,
   }
 }
 
 export default Account = connect(
   mapStateToProps,
-  { forwardAccount }
+  { forwardAccount, saveUserSRCAvatarIMG }
 )(Account)
 
 
