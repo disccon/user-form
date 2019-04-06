@@ -42,7 +42,7 @@ class AddingNewUserPage extends Component {
             <Route exact path='/' component={Account} />
             <Route exact path='/Profile' component={Profile}/>
             <Route exact path='/Contacts' component={Contacts}/>
-            <Route exact path='/Contacts' component={Capabilities}/>
+            <Route exact path='/Capabilities' component={Capabilities}/>
             <Redirect to='/NodFound' />
           </Switch>
         </div >

@@ -104,7 +104,7 @@ class Account extends Component {
               <AddIcon className={cx('accountComponent__AddICon')} alt="addAvatar"/>
               <span className={cx('accountComponent__addAvatarSpan')}>add avatar</span>
               <input type="file" className={cx('accountComponent__inputFile')} accept="image/*,image/jpeg"
-                     onChange={this.addImageUserAvatar}/>
+                     onChange={this.addImageUserAvatar} />
             </label>
             {UserAvatar}
           </div>

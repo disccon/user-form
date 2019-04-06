@@ -29,6 +29,19 @@ class Profile extends Component {
     const { saveBirthDate } = this.props
     saveBirthDate(value)
   }
+  componentDidUpdate(){
+    const {  birthDate } = this.props
+    if (this.state.ageError !== false) {
+      if (birthDate !== null) {
+        let age = new Date().getFullYear() - birthDate.getFullYear()
+        if (age > 18) {
+          this.setState({
+            ageError: false
+          })
+        }
+      }
+    }
+  }
   changeRadioInput = event => {
     const { saveGenderInput } = this.props
     saveGenderInput(event.target.value)
@@ -42,9 +55,6 @@ class Profile extends Component {
           ageError: 'Sorry, you must be at least 18 years old'
         })
       } else {
-         this.setState({
-           ageError: false
-         })
          const { forwardBackProfile } = this.props;
          forwardBackProfile('forward', values.firstName, values.lastName, values.email, values.address)
        }
@@ -55,9 +65,27 @@ class Profile extends Component {
     }
   }
   backProfile = () => {
-
     const { firstNameForm, lastNameForm, emailForm, addressForm, forwardBackProfile } = this.props;
     forwardBackProfile('back', firstNameForm, lastNameForm, emailForm, addressForm)
+  }
+  onBlurDatePicker = () => {
+    const { birthDate } = this.props
+    if(birthDate !== null){
+      let age = new Date().getFullYear() - birthDate.getFullYear()
+      if(age < 18){
+        this.setState({
+          ageError: 'Sorry, you must be at least 18 years old'
+        })
+      } else {
+        this.setState({
+          ageError: false
+        })
+      }
+    } else {
+      this.setState({
+        ageError: 'Missing Birth Date'
+      })
+    }
   }
   render() {
     const { birthDate, gender, handleSubmit } = this.props
@@ -73,7 +101,7 @@ class Profile extends Component {
             <div className={cx('profile__birthDate')}>
               <h4>Birth date</h4>
               <span className={cx('profile__birthDateSpan')}>*</span>
-              <DatePicker clearIcon='' calendarIcon={<CalendarIcon/>}
+              <DatePicker clearIcon='' calendarIcon={<CalendarIcon/>} onBlur={this.onBlurDatePicker}
                           className={cx('profile__datePicker')}
                           name='birthDate'
                           isOpen={true}

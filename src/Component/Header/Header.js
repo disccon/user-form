@@ -7,6 +7,7 @@ import { ReactComponent as LogoIcon } from '../../img/icon/logo.svg'
 import { ReactComponent as AddUserIcon } from '../../img/icon/addUser.svg'
 import { ReactComponent as LoginIcon } from '../../img/icon/login.svg'
 import AddingNewUserPage from '../AddingNewUserPage/AddingNewUserPage'
+import ListUsersPage from "../ListUsersPage/ListUsersPage";
 
 const cx = classNames.bind(styles)
 
@@ -20,7 +21,8 @@ class Header extends Component {
             <a className={cx('loginA')}><LoginIcon className={cx('loginIcon')} alt='loginIcon'/><span>List of users</span></a>
           </header>
           <Switch>
-            <Route path='/' component={AddingNewUserPage} />
+            <Route exact path='/' component={AddingNewUserPage} />
+            <Route exact path='/ListUsers' component={ListUsersPage} />
             <Redirect to='/NodFound' />
           </Switch>
         </Fragment>

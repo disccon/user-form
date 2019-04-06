@@ -14,7 +14,7 @@ const cx = classNames.bind(styles)
 const renderFieldInput = ({ label, input, type, meta: { touched, error }, className, span, placeholder, mask }) => {
   const inputRender = mask ? <InputMask {...input} mask={mask} placeholder={placeholder}/>
     : <input {...input} type={type} className={className} placeholder={placeholder}/>
-  return (<label className={cx('profile__label')}>
+  return (<label className={cx('contacts__label')}>
     <h4>{label}</h4>
     {span && <span>*</span>}
     {inputRender}
@@ -22,8 +22,8 @@ const renderFieldInput = ({ label, input, type, meta: { touched, error }, classN
   </label>)
 }
 
-const renderFieldPhone = ({ label, input, type, meta: { touched, error }, span, placeholder,deleteFieldPhone}) => {
-  return (<div className={cx('profile__labelPhone')}>
+const renderFieldPhone = ({ label, input, type, meta: { touched, error }, span, placeholder, deleteFieldPhone }) => {
+  return (<div className={cx('contacts__labelPhone')}>
     {span && <span onClick={deleteFieldPhone}></span>}
     <label>
       <h4>{label}</h4>
@@ -31,14 +31,6 @@ const renderFieldPhone = ({ label, input, type, meta: { touched, error }, span, 
       {touched && error && <p>{error}</p>}
     </label>
   </div>)
-  // const inputRender = mask ? <InputMask {...input} mask={mask} placeholder={placeholder}/>
-  //   : <input {...input} type={type} className={className} placeholder={placeholder}/>
-  // return (<label className={cx('profile__label')}>
-  //   <h4>{label}</h4>
-  //   {span && <span>*</span>}
-  //   <input {...input} type={type} className={className} placeholder={placeholder} />
-  //   {touched && error && <p>{error}</p>}
-  // </label>)
 }
 
 const options = [
@@ -93,6 +85,10 @@ const colourStyles = {
     ...styles,
     height: '172px',
   }),
+  menu: styles => ({
+    ...styles,
+    borderRadius: '0px',
+  }),
   input: styles => ({
     ...styles,
     fontFamily: 'Roboto, sans-serif',
@@ -111,7 +107,7 @@ const colourStyles = {
     fontStyle: 'normal',
     color: '#657C9A',
   }),
-  singleValue: (styles, { data }) => ({
+  singleValue: styles => ({
     ...styles,
     fontFamily: 'Roboto, sans-serif',
     fontWeight: 500,
@@ -123,14 +119,32 @@ const colourStyles = {
 };
 
 class Contacts extends Component {
+  state = {
+    languageError: false,
+  }
+
+  componentDidUpdate() {
+    const { selectLanguage } = this.props
+    if (this.state.languageError !== false && selectLanguage !== null) {
+      this.setState({
+        languageError: false
+      })
+    }
+  }
+
   backContacts = () => {
-    const { companyForm, githubLinkForm, facebookLinkForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form, forwardBackContacts} = this.props;
-    forwardBackContacts('back', companyForm, githubLinkForm, facebookLinkForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form, )
+    const { companyForm, githubLinkForm, facebookLinkForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form, forwardBackContacts } = this.props;
+    forwardBackContacts('back', companyForm, githubLinkForm, facebookLinkForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form,)
   }
   onSubmit = values => {
-    const { forwardBackContacts, } = this.props;
-    console.log(values)
-    forwardBackContacts('forward', values.company, values.githubLink, values.facebookLink, values.fax, values.phoneN1, values.phoneN2, values.phoneN3)
+    const { forwardBackContacts, selectLanguage } = this.props;
+    if (!selectLanguage) {
+      this.setState({
+        languageError: 'Missing Main language'
+      })
+    } else {
+      forwardBackContacts('forward', values.company, values.githubLink, values.facebookLink, values.fax, values.phoneN1, values.phoneN2, values.phoneN3)
+    }
   }
   deleteFieldPhone = () => {
     const { deleteAddFieldPhone } = this.props
@@ -140,12 +154,22 @@ class Contacts extends Component {
     const { deleteAddFieldPhone } = this.props
     deleteAddFieldPhone('add')
   }
-  saveSelectLanguage = selectValue => {
+  saveSelectLanguage = selectLanguage => {
     const { saveSelectLanguage } = this.props
-    saveSelectLanguage(selectValue)
+    saveSelectLanguage(selectLanguage)
   }
+  onBlurLanguage = () => {
+    const { selectLanguage } = this.props
+    if (!selectLanguage) {
+      this.setState({
+        languageError: 'Missing Main language'
+      })
+    }
+  }
+
   render() {
-    const { quantityPhoneField, selectValue, handleSubmit } = this.props
+    const { languageError } = this.state
+    const { quantityPhoneField, selectLanguage, handleSubmit } = this.props
     const phoneFieldN1 = quantityPhoneField >= 2 ?
       <Field component={renderFieldPhone} type="text" placeholder='+7 (066) 888-88-88'
              label='Phone #1' name="phoneN1" span={true} deleteFieldPhone={this.deleteFieldPhone}/> :
@@ -153,17 +177,17 @@ class Contacts extends Component {
              label='Phone #1' name="phoneN1" deleteFieldPhone={this.deleteFieldPhone}/>
     const phoneFieldN2 = quantityPhoneField >= 2 ?
       <Field component={renderFieldPhone} type="text"
-            label='Phone #2' name="phoneN2" span={true} deleteFieldPhone={this.deleteFieldPhone}/>
-            : null
+             label='Phone #2' name="phoneN2" span={true} deleteFieldPhone={this.deleteFieldPhone}/>
+      : null
     const phoneFieldN3 = quantityPhoneField === 3 ?
       <Field component={renderFieldPhone} type="text"
-          label='Phone #3' name="phoneN3" span={true} deleteFieldPhone={this.deleteFieldPhone}/>
-          : null
+             label='Phone #3' name="phoneN3" span={true} deleteFieldPhone={this.deleteFieldPhone}/>
+      : null
     const addPhoneField = quantityPhoneField < 3 ?
       <button type='button' className={cx('contacts__addPhoneField')} onClick={this.addFieldPhone}>
-       <AddIcon className={cx('contacts__addIcon')}/>
-      <span>add phone number</span>
-    </button> : null
+        <AddIcon className={cx('contacts__addIcon')}/>
+        <span>add phone number</span>
+      </button> : null
     return (
       <Fragment>
         <form className={cx('contacts')} onSubmit={handleSubmit(this.onSubmit)}>
@@ -175,13 +199,17 @@ class Contacts extends Component {
             <Field component={renderFieldInput} type="text"
                    label='Facebook link' name="facebookLink" placeholder='www.facebook.com/hdfk_142_23lelf/'
                    span='*'/>
-            <Select
-              value={selectValue}
-              options={options}
-              styles={colourStyles}
-              onChange={this.saveSelectLanguage}
-              className={cx('contacts__select')}
-            />
+            <label className={cx('contacts__mainLanguage')}>
+              <h4>Main language</h4>
+              <Select
+                onBlur={this.onBlurLanguage}
+                value={selectLanguage}
+                options={options}
+                styles={colourStyles}
+                onChange={this.saveSelectLanguage}
+              />
+              {languageError && <p className={cx('mainLanguage__error')}>{languageError}</p>}
+            </label>
           </div>
           <div className={cx('contacts__sideRight')}>
             <Field component={renderFieldInput} type="text"
@@ -193,8 +221,8 @@ class Contacts extends Component {
             {addPhoneField}
             <div className={cx('contacts__addPhone')}></div>
             <div className={cx('wrapperButton')}>
-              <button type='button' onClick={this.backContacts} className={cx('profile__back')}>Back</button>
-              <button type='submit' className={cx('profile__forward')}>Forward</button>
+              <button type='button' onClick={this.backContacts} className={cx('contacts__back')}>Back</button>
+              <button type='submit' className={cx('contacts__forward')}>Forward</button>
             </div>
           </div>
         </form>
@@ -209,8 +237,6 @@ Contacts.propTypes = {}
 Contacts = reduxForm({
   validate: values => {
     const errors = {};
-
-    // company, githubLink, facebookLink, fax, phoneN1, phoneN2, phoneN3,
 
     if (!values.company) {
       errors.company = 'Missing Company'
@@ -232,23 +258,29 @@ Contacts = reduxForm({
 
     if (!values.fax) {
       errors.fax = 'Missing Facebook Fax'
-    } else if (values.fax.length <= 5) {
-      errors.fax = 'Must be 4 characters or more'
+    } else if (values.fax.charAt(17) >= 0) {
+    } else {
+      errors.fax = 'Must be 10 digits'
     }
 
     if (!values.phoneN1) {
       errors.phoneN1 = 'Missing Phone Number'
-    } else if (values.phoneN1.length <= 5) {
-      errors.phoneN1 = 'Must be 4 characters or more'
+    } else if (values.phoneN1.charAt(17) >= 0) {
+    } else {
+      errors.phoneN1 = 'Must be 10 digits'
     }
-
-
-
-    //'Sorry, you must be at least 18 years old'
-    //'You do not meet the minimum age requirement!' возраст
-    //Must be at least
-    //'Must be a number'
-    //'Invalid phone number, must be 10 digits' «Неверный номер телефона, должен быть 10 цифр»
+    if (!values.phoneN2) {
+      errors.phoneN2 = 'Missing Phone Number'
+    } else if (values.phoneN2.charAt(17) >= 0) {
+    } else {
+      errors.phoneN2 = 'Must be 10 digits'
+    }
+    if (!values.phoneN3) {
+      errors.phoneN3 = 'Missing Phone Number'
+    } else if (values.phoneN3.charAt(17) >= 0) {
+    } else {
+      errors.phoneN3 = 'Must be 10 digits'
+    }
 
     return errors;
   },
@@ -264,16 +296,24 @@ const mapStateToProps = state => {
   const phoneN1Form = selector(state, 'phoneN1')
   const phoneN2Form = selector(state, 'phoneN2')
   const phoneN3Form = selector(state, 'phoneN3')
-  const { company, githubLink, facebookLink, fax, phoneN1, phoneN2, phoneN3, quantityPhoneField, selectValue } = state.newUser
+  const { company, githubLink, facebookLink, fax, phoneN1, phoneN2, phoneN3, quantityPhoneField, selectLanguage } = state.newUser
   return {
     initialValues: {
       company, githubLink, facebookLink, fax, phoneN1, phoneN2, phoneN3,
     },
-    quantityPhoneField, companyForm, githubLinkForm, facebookLinkForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form, selectValue
+    quantityPhoneField,
+    companyForm,
+    githubLinkForm,
+    facebookLinkForm,
+    faxForm,
+    phoneN1Form,
+    phoneN2Form,
+    phoneN3Form,
+    selectLanguage
   }
 }
 
 export default connect(
   mapStateToProps,
-  { forwardBackContacts, deleteAddFieldPhone, saveSelectLanguage  }
+  { forwardBackContacts, deleteAddFieldPhone, saveSelectLanguage }
 )(Contacts)

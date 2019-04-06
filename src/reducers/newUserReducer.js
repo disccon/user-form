@@ -26,6 +26,30 @@ import {
 
   SAVE_SELECT_LANGUAGE__SUCCESS,
   SAVE_SELECT_LANGUAGE__FAILURE,
+
+  SAVE_SELECT_SKILLS__SUCCESS,
+  SAVE_SELECT_SKILLS__FAILURE,
+
+  SAVE_TEXTAREA_FIELD__SUCCESS,
+  SAVE_TEXTAREA_FIELD__FAILURE,
+
+  SAVE_CHECKBOX_ART__SUCCESS,
+  SAVE_CHECKBOX_ART__FAILURE,
+
+  SAVE_CHECKBOX_SPORT__SUCCESS,
+  SAVE_CHECKBOX_SPORT__FAILURE,
+
+  SAVE_CHECKBOX_JUSTWANT__SUCCESS,
+  SAVE_CHECKBOX_JUSTWANT__FAILURE,
+
+  SAVE_CHECKBOX_FEMALE__SUCCESS,
+  SAVE_CHECKBOX_FEMALE__FAILURE,
+
+  SAVE_CHECKBOX_GUITAR__SUCCESS,
+  SAVE_CHECKBOX_GUITAR__FAILURE,
+
+  SAVE_CHECKBOX_WTF__SUCCESS,
+  SAVE_CHECKBOX_WTF__FAILURE,
 } from '../Actions'
 
 export default function newUserReducer(state = newUser, action) {
@@ -179,7 +203,7 @@ export default function newUserReducer(state = newUser, action) {
     case SAVE_SELECT_LANGUAGE__SUCCESS: {
       return {
         ...state,
-        selectValue: action.payload.selectValue,
+        selectLanguage: action.payload.selectLanguage,
         error: undefined,
       }
     }
@@ -190,6 +214,133 @@ export default function newUserReducer(state = newUser, action) {
         error: action.error,
       }
     }
+
+    case SAVE_SELECT_SKILLS__SUCCESS: {
+      return {
+        ...state,
+        selectSkills: action.payload.selectSkills,
+        error: undefined,
+      }
+    }
+
+    case SAVE_SELECT_SKILLS__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+    case SAVE_TEXTAREA_FIELD__SUCCESS: {
+      return {
+        ...state,
+        textareaField: action.payload.textareaField,
+        error: undefined,
+      }
+    }
+
+    case SAVE_TEXTAREA_FIELD__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+
+
+
+
+    case SAVE_CHECKBOX_ART__SUCCESS: {
+      return {
+        ...state,
+        checkboxArt: action.payload.checkboxArt,
+        error: undefined,
+      }
+    }
+    case SAVE_CHECKBOX_ART__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+    case SAVE_CHECKBOX_SPORT__SUCCESS: {
+      return {
+        ...state,
+        checkboxSport: action.payload.checkboxSport,
+        error: undefined,
+      }
+    }
+
+    case SAVE_CHECKBOX_SPORT__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+    case SAVE_CHECKBOX_JUSTWANT__SUCCESS: {
+      return {
+        ...state,
+        checkboxJustWant: action.payload.checkboxJustWant,
+        error: undefined,
+      }
+    }
+    case SAVE_CHECKBOX_JUSTWANT__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+    case SAVE_CHECKBOX_FEMALE__SUCCESS: {
+      return {
+        ...state,
+        checkboxFemale: action.payload.checkboxFemale,
+        error: undefined,
+      }
+    }
+    case SAVE_CHECKBOX_FEMALE__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+    case SAVE_CHECKBOX_GUITAR__SUCCESS: {
+      return {
+        ...state,
+        checkboxGuitar: action.payload.checkboxGuitar,
+        error: undefined,
+      }
+    }
+    case SAVE_CHECKBOX_GUITAR__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+    case SAVE_CHECKBOX_WTF__SUCCESS: {
+      return {
+        ...state,
+        checkboxWtf: action.payload.checkboxWtf,
+        error: undefined,
+      }
+    }
+
+    case SAVE_CHECKBOX_WTF__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+
+
+
+
+
+
 
 
 

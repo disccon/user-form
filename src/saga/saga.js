@@ -31,7 +31,35 @@ import {
 
   SAVE_SELECT_LANGUAGE__SUCCESS,
   SAVE_SELECT_LANGUAGE__FAILURE,
+
+  SAVE_SELECT_SKILLS__SUCCESS,
+  SAVE_SELECT_SKILLS__FAILURE,
+
+  SAVE_TEXTAREA_FIELD__SUCCESS,
+  SAVE_TEXTAREA_FIELD__FAILURE,
+
+
+  SAVE_CHECKBOX_ART__SUCCESS,
+  SAVE_CHECKBOX_ART__FAILURE,
+
+  SAVE_CHECKBOX_SPORT__SUCCESS,
+  SAVE_CHECKBOX_SPORT__FAILURE,
+
+  SAVE_CHECKBOX_JUSTWANT__SUCCESS,
+  SAVE_CHECKBOX_JUSTWANT__FAILURE,
+
+  SAVE_CHECKBOX_FEMALE__SUCCESS,
+  SAVE_CHECKBOX_FEMALE__FAILURE,
+
+  SAVE_CHECKBOX_GUITAR__SUCCESS,
+  SAVE_CHECKBOX_GUITAR__FAILURE,
+
+  SAVE_CHECKBOX_WTF__SUCCESS,
+  SAVE_CHECKBOX_WTF__FAILURE,
+
 } from '../Actions'
+
+
 
 
 export function* saveUserSRCAvatarIMGSaga(action) {
@@ -187,12 +215,12 @@ export function* deleteAddFieldPhoneSaga(action) {
 }
 
 export function* saveSelectLanguageSaga(action) {
-  const { selectValue } = action.payload
+  const { selectLanguage } = action.payload
   try {
     yield put({
         type: SAVE_SELECT_LANGUAGE__SUCCESS,
         payload: {
-          selectValue
+          selectLanguage
         },
       })
 
@@ -203,3 +231,179 @@ export function* saveSelectLanguageSaga(action) {
     })
   }
 }
+
+export function* saveSelectSkillsSaga(action) {
+  const { selectSkills } = action.payload
+  try {
+    yield put({
+      type: SAVE_SELECT_SKILLS__SUCCESS,
+      payload: {
+        selectSkills
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: SAVE_SELECT_SKILLS__FAILURE,
+      error,
+    })
+  }
+}
+
+export function* saveTextareaFieldSaga(action) {
+  const { textareaField } = action.payload
+  try {
+    yield put({
+      type: SAVE_TEXTAREA_FIELD__SUCCESS,
+      payload: {
+        textareaField
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: SAVE_TEXTAREA_FIELD__FAILURE,
+      error,
+    })
+  }
+}
+
+
+
+
+export function* saveCheckboxArtSaga(action) {
+  const { value } = action.payload
+  const checkboxArtState = yield select(state => state.newUser.checkboxArt)
+  const checkboxArt = checkboxArtState ? false : value
+  try {
+    yield put({
+      type: SAVE_CHECKBOX_ART__SUCCESS,
+      payload: {
+        checkboxArt
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: SAVE_CHECKBOX_ART__FAILURE,
+      error,
+    })
+  }
+}
+
+
+
+export function* saveCheckboxSportSaga(action) {
+  const { value } = action.payload
+  const checkboxSportState = yield select(state => state.newUser.checkboxSport)
+  const checkboxSport = checkboxSportState ? false : value
+  try {
+    yield put({
+      type: SAVE_CHECKBOX_SPORT__SUCCESS,
+      payload: {
+        checkboxSport
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: SAVE_CHECKBOX_SPORT__FAILURE,
+      error,
+    })
+  }
+}
+
+export function* saveCheckboxJustWantSaga(action) {
+  const { value } = action.payload
+  const checkboxJustWantState = yield select(state => state.newUser.checkboxJustWant)
+  const checkboxJustWant = checkboxJustWantState ? false : value
+  try {
+    yield put({
+      type: SAVE_CHECKBOX_JUSTWANT__SUCCESS,
+      payload: {
+        checkboxJustWant
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: SAVE_CHECKBOX_JUSTWANT__FAILURE,
+      error,
+    })
+  }
+}
+
+
+export function* saveCheckboxFemaleSaga(action) {
+  const { value } = action.payload
+  const checkboxFemaleState = yield select(state => state.newUser.checkboxFemale)
+  const checkboxFemale = checkboxFemaleState ? false : value
+  try {
+    yield put({
+      type: SAVE_CHECKBOX_FEMALE__SUCCESS,
+      payload: {
+        checkboxFemale
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: SAVE_CHECKBOX_FEMALE__FAILURE,
+      error,
+    })
+  }
+}
+
+
+export function* saveCheckboxGuitarSaga(action) {
+  const { value } = action.payload
+  const checkboxGuitarState = yield select(state => state.newUser.checkboxGuitar)
+  const checkboxGuitar = checkboxGuitarState ? false : value
+  try {
+    yield put({
+      type: SAVE_CHECKBOX_GUITAR__SUCCESS,
+      payload: {
+        checkboxGuitar
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: SAVE_CHECKBOX_GUITAR__FAILURE,
+      error,
+    })
+  }
+}
+
+
+export function* saveCheckboxWtfSaga(action) {
+  const { value } = action.payload
+  const checkboxWtfState = yield select(state => state.newUser.checkboxWtf)
+  const checkboxWtf = checkboxWtfState ? false : value
+  try {
+    yield put({
+      type: SAVE_CHECKBOX_WTF__SUCCESS,
+      payload: {
+        checkboxWtf
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: SAVE_CHECKBOX_WTF__FAILURE,
+      error,
+    })
+  }
+}
+
+export function* forwardCapabilitiesSaga(action) {
+  const { value } = action.payload
+  const checkboxWtfState = yield select(state => state.newUser)
+  const checkboxWtf = checkboxWtfState ? false : value
+  try {
+    yield put({
+      type: SAVE_CHECKBOX_WTF__SUCCESS,
+      payload: {
+        checkboxWtf
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: SAVE_CHECKBOX_WTF__FAILURE,
+      error,
+    })
+  }
+}
+
