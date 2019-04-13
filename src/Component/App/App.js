@@ -7,7 +7,6 @@ import NodFound from '../NodFound/NodFound'
 import classNames from 'classnames'
 import styles from './App.scss'
 import Header from '../Header/Header'
-import { openDB, deleteDB, wrap, unwrap } from 'idb'
 
 const cx = classNames.bind(styles)
 

@@ -5,6 +5,9 @@ header {
   height: 60px;
   background: radial-gradient(720.00px at 50% 68.33%, #4E86E4 0%, #2F68C8 100%);
   box-shadow: 0px 1px 5px #C1CEDE;
+  .logoA, .addUserA, .loginA {
+    cursor: pointer;
+  }
   .logoA {
     margin-top: 21px;
     margin-left: 235px;

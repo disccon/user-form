@@ -1,12 +1,11 @@
-//h2 {
-//  margin-top: 56px;
-//  font-weight: bold;
-//  font-size: 35px;
-//  text-align: center;
-//  color: #475666;
-//}
-
-table {
+.ListUsersH2 {
+  margin-top: 56px;
+  font-weight: bold;
+  font-size: 35px;
+  text-align: center;
+  color: #475666;
+}
+.ListUsersTable {
   margin-top: 28px;
   margin-right: auto;
   margin-left: auto;
@@ -32,7 +31,6 @@ table {
       th:nth-child(3){
         width: 270px;
       }
-
     }
   }
   tbody {
@@ -45,7 +43,7 @@ table {
     tr {
       height: 93px;
       td {
-        .wrapperUserName {
+        .wrapperUser {
           height: 93px;
           display: flex;
           align-items: center;
@@ -60,7 +58,6 @@ table {
             margin-top: 7px;
             display: flex;
             flex-direction: column;
-
             h4{
               font-weight: 500;
             }
@@ -68,9 +65,29 @@ table {
               font-size: 9px;
             }
           }
+          button{
+            width: 15px;
+            height: 15px;
+            background: transparent;
+            .closeIcon{
+              cursor: pointer;
+              width: 15px;
+              height: 15px;
+            }
+            .editIcon{
+              cursor: pointer;
+              width: 15px;
+              height: 15px;
+            }
+          }
+          .button_editIcon{
+            margin-left: 44px;
+          }
+          .button_closeIcon{
+            margin-left: 22px;
+          }
         }
       }
-
       td:first-child{
         padding-left: 14px;
       }

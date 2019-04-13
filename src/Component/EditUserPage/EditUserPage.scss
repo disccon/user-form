@@ -45,10 +45,17 @@
           margin-right: 8px;
           font-weight: 500;
         }
-        .accountDataWrapper__editIcon{
+        button{
           margin-top: 1px;
           width: 15px;
           height: 15px;
+          background: transparent;
+          .accountDataWrapper__editIcon{
+            margin-top: 1px;
+            width: 15px;
+            height: 15px;
+            filter: invert(30%) sepia(33%) saturate(323%) hue-rotate(170deg) brightness(96%) contrast(90%);
+          }
         }
       }
       .accountDataWrapper__sectionInfo{

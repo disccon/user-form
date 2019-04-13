@@ -176,7 +176,8 @@ class Capabilities extends Component {
     saveCheckboxWtf(target.value)
   }
   backCapabilities = () => {
-    this.props.history.push('/Contacts')
+    const { history } = this.props
+    history.push('/Contacts')
   }
   // forwardCapabilities = () => {
   //

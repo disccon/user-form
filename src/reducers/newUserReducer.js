@@ -1,4 +1,4 @@
-import newUser from '../stubs/newUser'
+import { newUser } from '../stubs/newUser'
 import {
   SAVE_USER_SRC_AVATAR_IMG__SUCCESS,
   SAVE_USER_SRC_AVATAR_IMG__FAILURE,
