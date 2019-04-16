@@ -5,9 +5,9 @@ import styles from './Contacts.scss'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import { Field, formValueSelector, reduxForm } from 'redux-form'
 import InputMask from 'react-input-mask';
-
 import Select from 'react-select'
-import { forwardBackContacts, deleteAddFieldPhone, saveSelectLanguage } from '../../../Actions'
+import { forwardBackContacts, deleteAddFieldPhone } from '../../../Actions'
+
 
 const cx = classNames.bind(styles)
 
@@ -22,16 +22,32 @@ const renderFieldInput = ({ label, input, type, meta: { touched, error }, classN
   </label>)
 }
 
-const renderFieldPhone = ({ label, input, type, meta: { touched, error }, span, placeholder, deleteFieldPhone }) => {
-  return (<div className={cx('contacts__labelPhone')}>
+const renderFieldPhone = ({ label, input, type, meta: { touched, error }, span, placeholder, deleteFieldPhone }) => (
+    <div className={cx('contacts__labelPhone')}>
     {span && <span onClick={deleteFieldPhone}></span>}
     <label>
       <h4>{label}</h4>
       <InputMask {...input} type={type} mask='+7 (999) 999-99-99' placeholder={placeholder}/>
       {touched && error && <p>{error}</p>}
     </label>
-  </div>)
-}
+  </div>
+)
+
+
+const renderFieldSelect = ({ label, input,  meta: { touched, error }}) => (
+  <label className={cx('contacts__mainLanguage')}>
+    <h4>{label}</h4>
+    <Select
+        {...input}
+        onBlur={() => input.onBlur()}
+        onChange={input.onChange}
+        value={input.value}
+        options={options}
+        styles={colourStyles}
+    />
+    {touched && error && <p className={cx('mainLanguage__error')}>{error}</p>}
+  </label>
+)
 
 const options = [
   { value: 'en', label: 'English, EN' },
@@ -119,32 +135,13 @@ const colourStyles = {
 };
 
 class Contacts extends Component {
-  state = {
-    languageError: false,
-  }
-
-  componentDidUpdate() {
-    const { selectLanguage } = this.props
-    if (this.state.languageError !== false && selectLanguage !== null) {
-      this.setState({
-        languageError: false
-      })
-    }
-  }
-
   backContacts = () => {
     const { companyForm, githubLinkForm, facebookLinkForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form, forwardBackContacts } = this.props;
     forwardBackContacts('back', companyForm, githubLinkForm, facebookLinkForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form,)
   }
   onSubmit = values => {
-    const { forwardBackContacts, selectLanguage } = this.props;
-    if (!selectLanguage) {
-      this.setState({
-        languageError: 'Missing Main language'
-      })
-    } else {
-      forwardBackContacts('forward', values.company, values.githubLink, values.facebookLink, values.fax, values.phoneN1, values.phoneN2, values.phoneN3)
-    }
+    const { forwardBackContacts } = this.props;
+    forwardBackContacts('forward', values.company, values.githubLink, values.facebookLink, values.fax, values.phoneN1, values.phoneN2, values.phoneN3)
   }
   deleteFieldPhone = () => {
     const { deleteAddFieldPhone } = this.props
@@ -154,22 +151,8 @@ class Contacts extends Component {
     const { deleteAddFieldPhone } = this.props
     deleteAddFieldPhone('add')
   }
-  saveSelectLanguage = selectLanguage => {
-    const { saveSelectLanguage } = this.props
-    saveSelectLanguage(selectLanguage)
-  }
-  onBlurLanguage = () => {
-    const { selectLanguage } = this.props
-    if (!selectLanguage) {
-      this.setState({
-        languageError: 'Missing Main language'
-      })
-    }
-  }
-
   render() {
-    const { languageError } = this.state
-    const { quantityPhoneField, selectLanguage, handleSubmit } = this.props
+    const { quantityPhoneField, handleSubmit } = this.props
     const phoneFieldN1 = quantityPhoneField >= 2 ?
       <Field component={renderFieldPhone} type="text" placeholder='+7 (066) 888-88-88'
              label='Phone #1' name="phoneN1" span={true} deleteFieldPhone={this.deleteFieldPhone}/> :
@@ -199,17 +182,7 @@ class Contacts extends Component {
             <Field component={renderFieldInput} type="text"
                    label='Facebook link' name="facebookLink" placeholder='www.facebook.com/hdfk_142_23lelf/'
                    span='*'/>
-            <label className={cx('contacts__mainLanguage')}>
-              <h4>Main language</h4>
-              <Select
-                onBlur={this.onBlurLanguage}
-                value={selectLanguage}
-                options={options}
-                styles={colourStyles}
-                onChange={this.saveSelectLanguage}
-              />
-              {languageError && <p className={cx('mainLanguage__error')}>{languageError}</p>}
-            </label>
+            <Field component={renderFieldSelect} name='selectLanguage' label='Main language'/>
           </div>
           <div className={cx('contacts__sideRight')}>
             <Field component={renderFieldInput} type="text"
@@ -237,6 +210,11 @@ Contacts.propTypes = {}
 Contacts = reduxForm({
   validate: values => {
     const errors = {};
+
+    if (!values.selectLanguage) {
+      errors.selectLanguage = 'Missing Main language'
+    }
+
 
     if (!values.company) {
       errors.company = 'Missing Company'
@@ -315,5 +293,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { forwardBackContacts, deleteAddFieldPhone, saveSelectLanguage }
+  { forwardBackContacts, deleteAddFieldPhone }
 )(Contacts)

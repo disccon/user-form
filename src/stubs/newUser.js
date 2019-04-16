@@ -23,11 +23,11 @@ export let newUser = {
   quantityPhoneField: 2,
 
   selectSkills: '',
-  textareaField: false,
-  checkboxArt: false,
-  checkboxSport: false,
-  checkboxJustWant: false,
-  checkboxFemale: false,
-  checkboxGuitar: false,
-  checkboxWtf: false,
+  textareaField: '',
+  checkboxArt: '',
+  checkboxSport: '',
+  checkboxJustWant: '',
+  checkboxFemale: '',
+  checkboxGuitar: '',
+  checkboxWtf: '',
 }

@@ -6,7 +6,7 @@ import styles from './Header.scss'
 import { ReactComponent as LogoIcon } from '../../img/icon/logo.svg'
 import { ReactComponent as AddUserIcon } from '../../img/icon/addUser.svg'
 import { ReactComponent as LoginIcon } from '../../img/icon/login.svg'
-import AddingNewUserPage from '../AddingNewUserPage/AddingNewUserPage'
+import {AddingNewUserPage} from '../AddingNewUserPage/AddingNewUserPage'
 import ListUsersPage from '../ListUsersPage/ListUsersPage'
 import EditUserPage from '../EditUserPage/EditUserPage'
 

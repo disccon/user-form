@@ -10,9 +10,6 @@ import {
   FORWARD_ACCOUNT__SUCCESS,
   FORWARD_ACCOUNT__FAILURE,
 
-  SAVE_BIRTH_DATE__SUCCESS,
-  SAVE_BIRTH_DATE__FAILURE,
-
   FORWARD_BACK_PROFILE__FORWARD,
   FORWARD_BACK_PROFILE__BACK,
   FORWARD_BACK_PROFILE__FAILURE,
@@ -25,32 +22,9 @@ import {
   DELETE_ADD_FIELD_PHONE__DELETE,
   DELETE_ADD_FIELD_PHONE__FAILURE,
 
-  SAVE_SELECT_LANGUAGE__SUCCESS,
-  SAVE_SELECT_LANGUAGE__FAILURE,
-
-  SAVE_SELECT_SKILLS__SUCCESS,
-  SAVE_SELECT_SKILLS__FAILURE,
-
-  SAVE_TEXTAREA_FIELD__SUCCESS,
-  SAVE_TEXTAREA_FIELD__FAILURE,
-
-  SAVE_CHECKBOX_ART__SUCCESS,
-  SAVE_CHECKBOX_ART__FAILURE,
-
-  SAVE_CHECKBOX_SPORT__SUCCESS,
-  SAVE_CHECKBOX_SPORT__FAILURE,
-
-  SAVE_CHECKBOX_JUSTWANT__SUCCESS,
-  SAVE_CHECKBOX_JUSTWANT__FAILURE,
-
-  SAVE_CHECKBOX_FEMALE__SUCCESS,
-  SAVE_CHECKBOX_FEMALE__FAILURE,
-
-  SAVE_CHECKBOX_GUITAR__SUCCESS,
-  SAVE_CHECKBOX_GUITAR__FAILURE,
-
-  SAVE_CHECKBOX_WTF__SUCCESS,
-  SAVE_CHECKBOX_WTF__FAILURE,
+  FORWARD_BACK_CAPABILITIES__FORWARD,
+  FORWARD_BACK_CAPABILITIES__BACK,
+  FORWARD_BACK_CAPABILITIES__FAILURE,
 } from '../Actions'
 
 
@@ -78,8 +52,6 @@ export default function newUserReducer(state = newUser, action) {
         error: action.error,
       }
     }
-
-
 
 
     case SAVE_USER_SRC_AVATAR_IMG__SUCCESS: {
@@ -113,28 +85,16 @@ export default function newUserReducer(state = newUser, action) {
       }
     }
 
-    case SAVE_BIRTH_DATE__SUCCESS: {
-      return {
-        ...state,
-        birthDate: action.payload.birthDate,
-        error: undefined,
-      }
-    }
-    case SAVE_BIRTH_DATE__FAILURE: {
-      return {
-        ...state,
-        error: action.error,
-      }
-    }
-
 
     case FORWARD_BACK_PROFILE__BACK: {
       return {
         ...state,
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
+        birthDate: action.payload.birthDate,
         email: action.payload.email,
         address: action.payload.address,
+        gender: action.payload.gender,
         error: undefined,
       }
     }
@@ -143,8 +103,10 @@ export default function newUserReducer(state = newUser, action) {
         ...state,
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
+        birthDate: action.payload.birthDate,
         email: action.payload.email,
         address: action.payload.address,
+        gender: action.payload.gender,
         error: undefined,
       }
     }
@@ -214,147 +176,41 @@ export default function newUserReducer(state = newUser, action) {
       }
     }
 
-    case SAVE_SELECT_LANGUAGE__SUCCESS: {
-      return {
-        ...state,
-        selectLanguage: action.payload.selectLanguage,
-        error: undefined,
-      }
-    }
-
-    case SAVE_SELECT_LANGUAGE__FAILURE: {
-      return {
-        ...state,
-        error: action.error,
-      }
-    }
-
-    case SAVE_SELECT_SKILLS__SUCCESS: {
+    case FORWARD_BACK_CAPABILITIES__FORWARD: {
       return {
         ...state,
         selectSkills: action.payload.selectSkills,
-        error: undefined,
-      }
-    }
-
-    case SAVE_SELECT_SKILLS__FAILURE: {
-      return {
-        ...state,
-        error: action.error,
-      }
-    }
-
-    case SAVE_TEXTAREA_FIELD__SUCCESS: {
-      return {
-        ...state,
-        textareaField: action.payload.textareaField,
-        error: undefined,
-      }
-    }
-
-    case SAVE_TEXTAREA_FIELD__FAILURE: {
-      return {
-        ...state,
-        error: action.error,
-      }
-    }
-
-
-
-
-
-    case SAVE_CHECKBOX_ART__SUCCESS: {
-      return {
-        ...state,
+        textareaField:  action.payload.textareaField,
         checkboxArt: action.payload.checkboxArt,
-        error: undefined,
-      }
-    }
-    case SAVE_CHECKBOX_ART__FAILURE: {
-      return {
-        ...state,
-        error: action.error,
-      }
-    }
-
-    case SAVE_CHECKBOX_SPORT__SUCCESS: {
-      return {
-        ...state,
         checkboxSport: action.payload.checkboxSport,
-        error: undefined,
-      }
-    }
-
-    case SAVE_CHECKBOX_SPORT__FAILURE: {
-      return {
-        ...state,
-        error: action.error,
-      }
-    }
-
-    case SAVE_CHECKBOX_JUSTWANT__SUCCESS: {
-      return {
-        ...state,
         checkboxJustWant: action.payload.checkboxJustWant,
-        error: undefined,
-      }
-    }
-    case SAVE_CHECKBOX_JUSTWANT__FAILURE: {
-      return {
-        ...state,
-        error: action.error,
-      }
-    }
-
-    case SAVE_CHECKBOX_FEMALE__SUCCESS: {
-      return {
-        ...state,
         checkboxFemale: action.payload.checkboxFemale,
-        error: undefined,
-      }
-    }
-    case SAVE_CHECKBOX_FEMALE__FAILURE: {
-      return {
-        ...state,
-        error: action.error,
-      }
-    }
-
-    case SAVE_CHECKBOX_GUITAR__SUCCESS: {
-      return {
-        ...state,
         checkboxGuitar: action.payload.checkboxGuitar,
+        checkboxWtf: action.payload.checkboxWtf,
         error: undefined,
       }
     }
-    case SAVE_CHECKBOX_GUITAR__FAILURE: {
+    case FORWARD_BACK_CAPABILITIES__BACK: {
       return {
         ...state,
-        error: action.error,
-      }
-    }
-
-    case SAVE_CHECKBOX_WTF__SUCCESS: {
-      return {
-        ...state,
+        selectSkills: action.payload.selectSkills,
+        textareaField:  action.payload.textareaField,
+        checkboxArt: action.payload.checkboxArt,
+        checkboxSport: action.payload.checkboxSport,
+        checkboxJustWant: action.payload.checkboxJustWant,
+        checkboxFemale: action.payload.checkboxFemale,
+        checkboxGuitar: action.payload.checkboxGuitar,
         checkboxWtf: action.payload.checkboxWtf,
         error: undefined,
       }
     }
 
-    case SAVE_CHECKBOX_WTF__FAILURE: {
+    case FORWARD_BACK_CAPABILITIES__FAILURE: {
       return {
         ...state,
         error: action.error,
       }
     }
-
-
-
-
-
-
-
 
 
 

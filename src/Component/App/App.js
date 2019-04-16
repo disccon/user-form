@@ -76,7 +76,7 @@ class App extends Component {
         const {history} = this.props
         return (
             <ConnectedRouter history={history}>
-                <div className={cx('container')} onClick={this.onUnload}>
+                <div className={cx('container')}>
                     <Switch>
                         <Route path='/NodFound' component={NodFound}/>
                         <Route path='/' component={Header}/>

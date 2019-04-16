@@ -15,12 +15,6 @@ import {
   FORWARD_ACCOUNT__SUCCESS,
   FORWARD_ACCOUNT__FAILURE,
 
-  SAVE_BIRTH_DATE__SUCCESS,
-  SAVE_BIRTH_DATE__FAILURE,
-
-  SAVE_GENDER_INPUT__SUCCESS,
-  SAVE_GENDER_INPUT__FAILURE,
-
   FORWARD_BACK_PROFILE__FORWARD,
   FORWARD_BACK_PROFILE__BACK,
   FORWARD_BACK_PROFILE__FAILURE,
@@ -33,34 +27,9 @@ import {
   DELETE_ADD_FIELD_PHONE__DELETE,
   DELETE_ADD_FIELD_PHONE__FAILURE,
 
-  SAVE_SELECT_LANGUAGE__SUCCESS,
-  SAVE_SELECT_LANGUAGE__FAILURE,
-
-  SAVE_SELECT_SKILLS__SUCCESS,
-  SAVE_SELECT_SKILLS__FAILURE,
-
-  SAVE_TEXTAREA_FIELD__SUCCESS,
-  SAVE_TEXTAREA_FIELD__FAILURE,
-
-
-  SAVE_CHECKBOX_ART__SUCCESS,
-  SAVE_CHECKBOX_ART__FAILURE,
-
-  SAVE_CHECKBOX_SPORT__SUCCESS,
-  SAVE_CHECKBOX_SPORT__FAILURE,
-
-  SAVE_CHECKBOX_JUSTWANT__SUCCESS,
-  SAVE_CHECKBOX_JUSTWANT__FAILURE,
-
-  SAVE_CHECKBOX_FEMALE__SUCCESS,
-  SAVE_CHECKBOX_FEMALE__FAILURE,
-
-  SAVE_CHECKBOX_GUITAR__SUCCESS,
-  SAVE_CHECKBOX_GUITAR__FAILURE,
-
-  SAVE_CHECKBOX_WTF__SUCCESS,
-  SAVE_CHECKBOX_WTF__FAILURE,
-
+  FORWARD_BACK_CAPABILITIES__FORWARD,
+  FORWARD_BACK_CAPABILITIES__BACK,
+  FORWARD_BACK_CAPABILITIES__FAILURE,
 } from '../Actions'
 
 export function* continueUserSaga(action) {
@@ -127,26 +96,10 @@ export function* forwardAccountSaga(action) {
   }
 }
 
-export function* saveBirthDateSaga(action) {
-  const { birthDate, } = action.payload
-  try {
-    yield put({
-      type: SAVE_BIRTH_DATE__SUCCESS,
-      payload: {
-        birthDate,
-      },
-    })
-  } catch (error) {
-    yield put({
-      type: SAVE_BIRTH_DATE__FAILURE,
-      error,
-    })
-  }
-}
 
 
 export function* forwardBackProfileSaga(action) {
-  const { forwardBack, firstName, lastName, email, address, } = action.payload
+  const { forwardBack, firstName, lastName, birthDate, email, address, gender } = action.payload
   try {
     let actionType
     if (forwardBack === 'back') {
@@ -159,7 +112,7 @@ export function* forwardBackProfileSaga(action) {
     yield put({
       type: actionType,
       payload: {
-        firstName, lastName, email, address,
+        firstName, lastName, birthDate, email, address, gender,
       },
     })
   } catch (error) {
@@ -223,194 +176,29 @@ export function* deleteAddFieldPhoneSaga(action) {
   }
 }
 
-export function* saveSelectLanguageSaga(action) {
-  const { selectLanguage } = action.payload
-  try {
-    yield put({
-        type: SAVE_SELECT_LANGUAGE__SUCCESS,
-        payload: {
-          selectLanguage
-        },
-      })
 
-  } catch (error) {
-    yield put({
-      type: SAVE_SELECT_LANGUAGE__FAILURE,
-      error,
-    })
-  }
-}
-
-export function* saveSelectSkillsSaga(action) {
-  const { selectSkills } = action.payload
+export function* forwardBackCapabilitiesSaga(action) {
+  const { forwardBack, selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
+    checkboxFemale, checkboxGuitar, checkboxWtf } = action.payload
   try {
+    let actionType
+    if (forwardBack === 'forward') {
+      actionType = FORWARD_BACK_CAPABILITIES__FORWARD
+      yield put(push('/ListUsers'))
+    } else if (forwardBack === 'back') {
+      actionType = FORWARD_BACK_CAPABILITIES__BACK
+      yield put(push('/Contacts'))
+    }
     yield put({
-      type: SAVE_SELECT_SKILLS__SUCCESS,
+      type: actionType,
       payload: {
-        selectSkills
+        selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
+        checkboxFemale, checkboxGuitar, checkboxWtf,
       },
     })
   } catch (error) {
     yield put({
-      type: SAVE_SELECT_SKILLS__FAILURE,
-      error,
-    })
-  }
-}
-
-export function* saveTextareaFieldSaga(action) {
-  const { textareaField } = action.payload
-  try {
-    yield put({
-      type: SAVE_TEXTAREA_FIELD__SUCCESS,
-      payload: {
-        textareaField
-      },
-    })
-  } catch (error) {
-    yield put({
-      type: SAVE_TEXTAREA_FIELD__FAILURE,
-      error,
-    })
-  }
-}
-
-
-
-
-export function* saveCheckboxArtSaga(action) {
-  const { value } = action.payload
-  const checkboxArtState = yield select(state => state.newUser.checkboxArt)
-  const checkboxArt = checkboxArtState ? false : value
-  try {
-    yield put({
-      type: SAVE_CHECKBOX_ART__SUCCESS,
-      payload: {
-        checkboxArt
-      },
-    })
-  } catch (error) {
-    yield put({
-      type: SAVE_CHECKBOX_ART__FAILURE,
-      error,
-    })
-  }
-}
-
-
-
-export function* saveCheckboxSportSaga(action) {
-  const { value } = action.payload
-  const checkboxSportState = yield select(state => state.newUser.checkboxSport)
-  const checkboxSport = checkboxSportState ? false : value
-  try {
-    yield put({
-      type: SAVE_CHECKBOX_SPORT__SUCCESS,
-      payload: {
-        checkboxSport
-      },
-    })
-  } catch (error) {
-    yield put({
-      type: SAVE_CHECKBOX_SPORT__FAILURE,
-      error,
-    })
-  }
-}
-
-export function* saveCheckboxJustWantSaga(action) {
-  const { value } = action.payload
-  const checkboxJustWantState = yield select(state => state.newUser.checkboxJustWant)
-  const checkboxJustWant = checkboxJustWantState ? false : value
-  try {
-    yield put({
-      type: SAVE_CHECKBOX_JUSTWANT__SUCCESS,
-      payload: {
-        checkboxJustWant
-      },
-    })
-  } catch (error) {
-    yield put({
-      type: SAVE_CHECKBOX_JUSTWANT__FAILURE,
-      error,
-    })
-  }
-}
-
-
-export function* saveCheckboxFemaleSaga(action) {
-  const { value } = action.payload
-  const checkboxFemaleState = yield select(state => state.newUser.checkboxFemale)
-  const checkboxFemale = checkboxFemaleState ? false : value
-  try {
-    yield put({
-      type: SAVE_CHECKBOX_FEMALE__SUCCESS,
-      payload: {
-        checkboxFemale
-      },
-    })
-  } catch (error) {
-    yield put({
-      type: SAVE_CHECKBOX_FEMALE__FAILURE,
-      error,
-    })
-  }
-}
-
-
-export function* saveCheckboxGuitarSaga(action) {
-  const { value } = action.payload
-  const checkboxGuitarState = yield select(state => state.newUser.checkboxGuitar)
-  const checkboxGuitar = checkboxGuitarState ? false : value
-  try {
-    yield put({
-      type: SAVE_CHECKBOX_GUITAR__SUCCESS,
-      payload: {
-        checkboxGuitar
-      },
-    })
-  } catch (error) {
-    yield put({
-      type: SAVE_CHECKBOX_GUITAR__FAILURE,
-      error,
-    })
-  }
-}
-
-
-export function* saveCheckboxWtfSaga(action) {
-  const { value } = action.payload
-  const checkboxWtfState = yield select(state => state.newUser.checkboxWtf)
-  const checkboxWtf = checkboxWtfState ? false : value
-  try {
-    yield put({
-      type: SAVE_CHECKBOX_WTF__SUCCESS,
-      payload: {
-        checkboxWtf
-      },
-    })
-  } catch (error) {
-    yield put({
-      type: SAVE_CHECKBOX_WTF__FAILURE,
-      error,
-    })
-  }
-}
-
-export function* forwardCapabilitiesSaga(action) {
-  const { value } = action.payload
-  const checkboxWtfState = yield select(state => state.newUser)
-  const checkboxWtf = checkboxWtfState ? false : value
-  try {
-    yield put({
-      type: SAVE_CHECKBOX_WTF__SUCCESS,
-      payload: {
-        checkboxWtf
-      },
-    })
-  } catch (error) {
-    yield put({
-      type: SAVE_CHECKBOX_WTF__FAILURE,
+      type: FORWARD_BACK_CONTACTS__FAILURE,
       error,
     })
   }

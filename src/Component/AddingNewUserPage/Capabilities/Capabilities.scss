@@ -16,9 +16,7 @@
   }
   .capabilities__sideLeft {
     margin-right: auto;
-
-    label:first-of-type {
-      margin-bottom: 150px;
+    label{
       position: relative;
       h4 {
         margin-bottom: 4px;
@@ -27,18 +25,16 @@
         position: absolute;
         bottom: -15px;
         left: 10px;
-        //margin-top: 3px;
-        //margin-left: 10px;
         font-size: 9px;
         color: #EB5757;
       }
     }
+    label:first-of-type {
+      margin-bottom: 150px;
+    }
     label:last-of-type {
       .capabilities__informationSpan {
         margin-top: 16px;
-      }
-      h4 {
-        margin-bottom: 4px;
       }
       textarea {
         margin-top: 4px;

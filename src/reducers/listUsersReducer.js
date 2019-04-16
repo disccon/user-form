@@ -7,13 +7,13 @@ import {
 
 export default function listUsersReducer(state = listUsers, action) {
   switch(action.type) {
-    case SAVE_USER_SRC_AVATAR_IMG__SUCCESS: {
-      return {
-        ...state,
-        userSRCAvatarIMG: action.payload.userSRCAvatarIMG,
-        error: undefined,
-      }
-    }
+    // case SAVE_USER_SRC_AVATAR_IMG__SUCCESS: {
+    //   return {
+    //     ...state,
+    //     userSRCAvatarIMG: action.payload.userSRCAvatarIMG,
+    //     error: undefined,
+    //   }
+    // }
 
 
 

@@ -1,6 +1,4 @@
 import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import classNames from 'classnames'
 import styles from './AddingNewUser.scss'
 import Account from './Account/Account'
@@ -12,8 +10,7 @@ import { Redirect, Route, Switch } from 'react-router'
 
 const cx = classNames.bind(styles)
 
-
-class AddingNewUserPage extends Component {
+export class AddingNewUserPage extends Component {
   render() {
     const { pathname } = this.props.location
     const classAccount = pathname === '/' ? 'active' : null
@@ -51,13 +48,3 @@ class AddingNewUserPage extends Component {
   }
 }
 
-AddingNewUserPage.propTypes = {
-}
-
-const mapStateToProps = state => ({
-
-})
-
-export default connect(
-  mapStateToProps,
-)(AddingNewUserPage)
