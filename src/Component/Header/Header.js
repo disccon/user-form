@@ -13,7 +13,7 @@ import EditUserPage from '../EditUserPage/EditUserPage'
 
 const cx = classNames.bind(styles)
 
-class Header extends Component {
+export class Header extends Component {
   forwardAccount  = () => {
     const { history } = this.props
     const { pathname } = this.props.history.location
@@ -54,11 +54,3 @@ class Header extends Component {
     )
   }
 }
-
-Header.propTypes = {}
-
-const mapStateToProps = state => ({})
-
-export default connect(
-  mapStateToProps,
-)(Header)

@@ -145,7 +145,7 @@ Profile = reduxForm({
         } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
             errors.email = 'Invalid email address'
         }  else {
-            userEmailList.filter(function(userName) {
+            userEmailList.filter(userName =>{
                 if(values.email === userName){
                     errors.email = 'already have this email in the database'
                 }
@@ -167,9 +167,8 @@ const mapStateToProps = state => {
     const birthDateForm = selector(state, 'birthDate')
     const {firstName, lastName, email, address, gender, birthDate, id} = state.newUser
     const { listUsers } = state
-    const userEmailList = listUsers.users.map(function(user) {
+    const userEmailList = listUsers.users.map(user => {
         if(user.id === id){
-            return
         } else {
             return user.email
         }

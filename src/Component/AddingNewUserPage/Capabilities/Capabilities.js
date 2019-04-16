@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import classNames from 'classnames'
 import styles from './Capabilities.scss'
 import Select from 'react-select'
-import {forwardBackCapabilities} from '../../../Actions'
+import {backCapabilities, forwardCapabilities} from '../../../Actions'
 import {Field, formValueSelector, reduxForm} from 'redux-form'
 import PropTypes from "prop-types";
 
@@ -158,16 +158,16 @@ const colourStyles = {
 
 class Capabilities extends Component {
     onSubmit = values => {
-        const {forwardBackCapabilities} = this.props;
-        forwardBackCapabilities('forward', values.selectSkills, values.textareaField, values.checkboxArt, values.checkboxSport, values.checkboxJustWant,
+        const {forwardCapabilities} = this.props;
+        forwardCapabilities(values.selectSkills, values.textareaField, values.checkboxArt, values.checkboxSport, values.checkboxJustWant,
             values.checkboxFemale, values.checkboxGuitar, values.checkboxWtf)
     }
     backCapabilities = () => {
         const {
-            forwardBackCapabilities, selectSkillsForm, textareaFieldForm, checkboxArtForm, checkboxSportForm, checkboxJustWantForm, checkboxFemaleForm,
+            backCapabilities, selectSkillsForm, textareaFieldForm, checkboxArtForm, checkboxSportForm, checkboxJustWantForm, checkboxFemaleForm,
             checkboxGuitarForm, checkboxWtfForm,
         } = this.props;
-        forwardBackCapabilities('back', selectSkillsForm, textareaFieldForm, checkboxArtForm, checkboxSportForm, checkboxJustWantForm, checkboxFemaleForm,
+        backCapabilities(selectSkillsForm, textareaFieldForm, checkboxArtForm, checkboxSportForm, checkboxJustWantForm, checkboxFemaleForm,
             checkboxGuitarForm, checkboxWtfForm,)
     }
     render() {
@@ -274,5 +274,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    {forwardBackCapabilities}
+    {backCapabilities, forwardCapabilities}
 )(Capabilities)

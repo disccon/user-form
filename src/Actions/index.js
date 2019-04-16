@@ -28,10 +28,14 @@ export const DELETE_ADD_FIELD_PHONE__DELETE = 'DELETE_ADD_FIELD_PHONE__DELETE'
 export const DELETE_ADD_FIELD_PHONE__FAILURE = 'DELETE_ADD_FIELD_PHONE__FAILURE'
 
 
-export const FORWARD_BACK_CAPABILITIES = 'FORWARD_CAPABILITIES'
-export const FORWARD_BACK_CAPABILITIES__FORWARD = 'FORWARD_CAPABILITIES__FORWARD'
-export const FORWARD_BACK_CAPABILITIES__BACK = 'FORWARD_CAPABILITIES__BACK'
-export const FORWARD_BACK_CAPABILITIES__FAILURE = 'FORWARD_CAPABILITIES__FAILURE'
+export const BACK_CAPABILITIES = 'BACK_CAPABILITIES'
+export const BACK_CAPABILITIES__SUCCESS = 'BACK_CAPABILITIES__SUCCESS'
+export const BACK_CAPABILITIES__FAILURE = 'BACK_CAPABILITIES__FAILURE'
+
+export const FORWARD_CAPABILITIES = 'FORWARD_CAPABILITIES'
+export const FORWARD_CAPABILITIES__ADD_NEW_USER = 'FORWARD_BACK_CAPABILITIES__FORWARD__ADD_NEW_USER'
+export const FORWARD_CAPABILITIES__EDIT_USER = 'FORWARD_BACK_CAPABILITIES__FORWARD__EDIT_USER'
+export const FORWARD_CAPABILITIES__FAILURE = 'FORWARD_CAPABILITIES__FAILURE'
 
 
 export const EDIT_USER = 'EDIT_USER'
@@ -88,13 +92,22 @@ export const deleteAddFieldPhone = deleteAddField => (
 
 
 
-export const forwardBackCapabilities = (forwardBack, selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
-    checkboxFemale, checkboxGuitar, checkboxWtf) => (
-  { type: FORWARD_BACK_CAPABILITIES,
-    payload: {
-        forwardBack, selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
-        checkboxFemale, checkboxGuitar, checkboxWtf
-    },})
+export const backCapabilities = (selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
+                                 checkboxFemale, checkboxGuitar, checkboxWtf) => (
+    { type: BACK_CAPABILITIES,
+        payload: {
+            selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
+            checkboxFemale, checkboxGuitar, checkboxWtf
+        },})
+
+export const forwardCapabilities = (selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
+                                 checkboxFemale, checkboxGuitar, checkboxWtf) => (
+    { type: FORWARD_CAPABILITIES,
+        payload: {
+            selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
+            checkboxFemale, checkboxGuitar, checkboxWtf
+        },})
+
 
 
 

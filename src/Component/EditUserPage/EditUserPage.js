@@ -9,6 +9,19 @@ const cx = classNames.bind(styles)
 
 
 class EditUserPage extends Component {
+  editUser = page => () => {
+    const { history } = this.props
+    if(page === 'Account'){
+      history.push('/')
+    } else if (page === 'Profile'){
+      history.push('Profile')
+    } else if (page === 'Contacts'){
+      history.push('Contacts')
+    } else if (page === 'Capabilities'){
+      history.push('Capabilities')
+    }
+  }
+
   render() {
     const { userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax,
       facebookLink, phoneN1, phoneN2, phoneN3, selectSkills, checkboxArt, checkboxSport, checkboxJustWant,
@@ -24,7 +37,7 @@ class EditUserPage extends Component {
               <div className={cx('accountDataWrapper__section')}>
                 <h4>Account</h4>
                 <button>
-                  <EditIcon className={cx('accountDataWrapper__editIcon')} />
+                  <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Account')}/>
                 </button>
               </div>
               <div className={cx('accountDataWrapper__sectionInfo')}>
@@ -43,7 +56,7 @@ class EditUserPage extends Component {
               <div className={cx('accountDataWrapper__section')}>
                 <h4>Personal</h4>
                 <button>
-                  <EditIcon className={cx('accountDataWrapper__editIcon')}/>
+                  <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Profile')}/>
                 </button>
               </div>
               <div className={cx('accountDataWrapper__sectionInfo')}>
@@ -73,7 +86,7 @@ class EditUserPage extends Component {
               <div className={cx('accountDataWrapper__section')}>
                 <h4>Contacts</h4>
                 <button>
-                  <EditIcon className={cx('accountDataWrapper__editIcon')}/>
+                  <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Contacts')}/>
                 </button>
               </div>
               <div className={cx('accountDataWrapper__sectionInfo')}>
@@ -106,7 +119,7 @@ class EditUserPage extends Component {
             <div className={cx('accountDataWrapper__block')}>
               <div className={cx('accountDataWrapper__section')}>
                 <h4>Capabilities</h4>
-                <EditIcon className={cx('accountDataWrapper__editIcon')}/>
+                <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Capabilities')}/>
               </div>
               <div className={cx('accountDataWrapper__sectionInfo')}>
                 <div className={cx('accountDataWrapper__wrapper')}>

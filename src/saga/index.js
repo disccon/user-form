@@ -6,7 +6,8 @@ import {
   forwardBackProfileSaga,
   forwardBackContactsSaga,
   deleteAddFieldPhoneSaga,
-  forwardBackCapabilitiesSaga,
+  backCapabilitiesSaga,
+  forwardCapabilitiesSaga,
   editUserSaga,
 } from './saga'
 
@@ -19,7 +20,8 @@ import {
   FORWARD_BACK_PROFILE,
   FORWARD_BACK_CONTACTS,
   DELETE_ADD_FIELD_PHONE,
-  FORWARD_BACK_CAPABILITIES,
+  BACK_CAPABILITIES,
+  FORWARD_CAPABILITIES,
   EDIT_USER,
 } from '../Actions'
 
@@ -32,7 +34,8 @@ export default function* rootSaga() {
     takeLatest(FORWARD_BACK_PROFILE, forwardBackProfileSaga),
     takeLatest(FORWARD_BACK_CONTACTS, forwardBackContactsSaga),
     takeLatest(DELETE_ADD_FIELD_PHONE, deleteAddFieldPhoneSaga),
-    takeLatest(FORWARD_BACK_CAPABILITIES, forwardBackCapabilitiesSaga),
+    takeLatest(BACK_CAPABILITIES, backCapabilitiesSaga),
+    takeLatest(FORWARD_CAPABILITIES, forwardCapabilitiesSaga),
     takeLatest(EDIT_USER, editUserSaga),
   ])
 }
