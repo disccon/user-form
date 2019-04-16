@@ -112,7 +112,7 @@ class EditUserPage extends Component {
                 <div className={cx('accountDataWrapper__wrapper')}>
                   <h4>Skills:</h4>
                   <h5>{selectSkills.map(user => (
-                    `${user}, `
+                    `${user.value},  `
                   ))}</h5>
                 </div>
                 <div className={cx('accountDataWrapper__wrapper')}>
@@ -180,32 +180,34 @@ EditUserPage.propTypes = {
     PropTypes.string,
     PropTypes.bool,
   ]),
-
 }
 
 
-const mapStateToProps = state => ({
-  userName: state.listUsers[0].userName,
-  userSRCAvatarIMG: state.listUsers[0].userSRCAvatarIMG,
-  firstName: state.listUsers[0].firstName,
-  lastName: state.listUsers[0].lastName,
-  birthDate: state.listUsers[0].birthDate,
-  email: state.listUsers[0].email,
-  address: state.listUsers[0].address,
-  company: state.listUsers[0].company,
-  fax: state.listUsers[0].fax,
-  facebookLink: state.listUsers[0].facebookLink,
-  phoneN1: state.listUsers[0].phoneN1,
-  phoneN2: state.listUsers[0].phoneN2,
-  phoneN3: state.listUsers[0].phoneN3,
-  selectSkills: state.listUsers[0].selectSkills,
-  checkboxArt: state.listUsers[0].checkboxArt,
-  checkboxSport: state.listUsers[0].checkboxSport,
-  checkboxJustWant: state.listUsers[0].checkboxJustWant,
-  checkboxFemale: state.listUsers[0].checkboxFemale,
-  checkboxGuitar: state.listUsers[0].checkboxGuitar,
-  checkboxWtf: state.listUsers[0].checkboxWtf,
-})
+const mapStateToProps = state => {
+    const { userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax, facebookLink, phoneN1, phoneN2, phoneN3,
+      selectSkills, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale, checkboxGuitar, checkboxWtf } = state.newUser
+    return{
+  userName: userName,
+  userSRCAvatarIMG: userSRCAvatarIMG,
+  firstName: firstName,
+  lastName: lastName,
+  birthDate: birthDate,
+  email: email,
+  address: address,
+  company: company,
+  fax: fax,
+  facebookLink: facebookLink,
+  phoneN1: phoneN1,
+  phoneN2: phoneN2,
+  phoneN3: phoneN3,
+  selectSkills: selectSkills,
+  checkboxArt: checkboxArt,
+  checkboxSport: checkboxSport,
+  checkboxJustWant: checkboxJustWant,
+  checkboxFemale: checkboxFemale,
+  checkboxGuitar: checkboxGuitar,
+  checkboxWtf: checkboxWtf,
+}}
 
 export default connect(
   mapStateToProps,

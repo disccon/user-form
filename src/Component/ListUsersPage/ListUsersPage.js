@@ -5,13 +5,18 @@ import styles from './ListUsersPage.scss'
 
 import { ReactComponent as CloseIcon } from '../../img/icon/close.svg'
 import { ReactComponent as EditIcon } from '../../img/icon/edit.svg'
+import {editUser} from '../../Actions'
 
 const cx = classNames.bind(styles)
 
 
 class ListUsersPage extends Component {
+  editUser = user => () => {
+    const { editUser } = this.props
+    editUser(user)
+  }
   render() {
-    const { listUsers } = this.props
+    const { users } = this.props
     return (
       <Fragment>
         <h2 className={cx('ListUsersH2')}>List of users</h2>
@@ -26,7 +31,7 @@ class ListUsersPage extends Component {
           </thead>
           <tbody>
           <tr></tr>
-          {listUsers.map(user => (
+          {users.map(user => (
             <tr key={user.id}>
               <td>
                 <div className={cx('wrapperUser')}>
@@ -45,7 +50,7 @@ class ListUsersPage extends Component {
               </td>
               <td>
                 <div className={cx('wrapperUser')}>3 month ago
-                  <button className={cx('button_editIcon')}>
+                  <button className={cx('button_editIcon')} onClick={this.editUser(user)}>
                     <EditIcon className={cx('editIcon')}/>
                   </button>
                   <button className={cx('button_closeIcon')}>
@@ -65,9 +70,10 @@ class ListUsersPage extends Component {
 ListUsersPage.propTypes = {}
 
 const mapStateToProps = state => ({
-  listUsers: state.listUsers,
+  users: state.listUsers.users,
 })
 
 export default connect(
   mapStateToProps,
+    {editUser}
 )(ListUsersPage)

@@ -1,5 +1,4 @@
 export let newUser = {
-  id: 0,
   isQuestion: true,
   userName: '',
   password: '',
@@ -15,7 +14,7 @@ export let newUser = {
   company: '',
   githubLink: '',
   facebookLink: '',
-  selectLanguage: null,
+  selectLanguage: '',
   fax: '',
   phoneN1: '',
   phoneN2: '',

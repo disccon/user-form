@@ -30,6 +30,9 @@ import {
   FORWARD_BACK_CAPABILITIES__FORWARD,
   FORWARD_BACK_CAPABILITIES__BACK,
   FORWARD_BACK_CAPABILITIES__FAILURE,
+
+  EDIT_USER__SUCCESS,
+  EDIT_USER__FAILURE,
 } from '../Actions'
 
 export function* continueUserSaga(action) {
@@ -124,7 +127,7 @@ export function* forwardBackProfileSaga(action) {
 }
 
 export function* forwardBackContactsSaga(action) {
-  const { forwardBack, company, githubLink, facebookLink, fax, phoneN1, phoneN2, phoneN3, } = action.payload
+  const { forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneN1, phoneN2, phoneN3, } = action.payload
   try {
     let actionType
     if (forwardBack === 'back') {
@@ -137,7 +140,7 @@ export function* forwardBackContactsSaga(action) {
     yield put({
       type: actionType,
       payload: {
-        forwardBack, company, githubLink, facebookLink, fax, phoneN1, phoneN2, phoneN3,
+        forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneN1, phoneN2, phoneN3,
       },
     })
   } catch (error) {
@@ -180,27 +183,55 @@ export function* deleteAddFieldPhoneSaga(action) {
 export function* forwardBackCapabilitiesSaga(action) {
   const { forwardBack, selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
     checkboxFemale, checkboxGuitar, checkboxWtf } = action.payload
+  const newUser = yield select(state => state.newUser)
+  const listUsers = yield select(state => state.listUsers)
   try {
-    let actionType
     if (forwardBack === 'forward') {
-      actionType = FORWARD_BACK_CAPABILITIES__FORWARD
       yield put(push('/ListUsers'))
+      yield put({
+        type: FORWARD_BACK_CAPABILITIES__FORWARD,
+        payload: {
+          ...newUser,
+          id: listUsers.users[listUsers.users.length -1].id + 1,
+          selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
+          checkboxFemale, checkboxGuitar, checkboxWtf,
+        },
+      })
     } else if (forwardBack === 'back') {
-      actionType = FORWARD_BACK_CAPABILITIES__BACK
       yield put(push('/Contacts'))
+          yield put({
+            type: FORWARD_BACK_CAPABILITIES__BACK,
+            payload: {
+              selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
+              checkboxFemale, checkboxGuitar, checkboxWtf,
+            },
+          })
     }
-    yield put({
-      type: actionType,
-      payload: {
-        selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
-        checkboxFemale, checkboxGuitar, checkboxWtf,
-      },
-    })
   } catch (error) {
     yield put({
-      type: FORWARD_BACK_CONTACTS__FAILURE,
+      type: FORWARD_BACK_CAPABILITIES__FAILURE,
       error,
     })
   }
 }
 
+
+
+export function* editUserSaga(action) {
+  const { user } = action.payload
+  try {
+      yield put(push('/EditUser'))
+      yield put({
+        type: EDIT_USER__SUCCESS,
+        payload: {...user,
+          isQuestion: false,
+        }
+        ,
+      })
+  } catch (error) {
+    yield put({
+      type: EDIT_USER__FAILURE,
+      error,
+    })
+  }
+}

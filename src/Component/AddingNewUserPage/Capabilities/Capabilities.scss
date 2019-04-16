@@ -60,6 +60,7 @@
     }
     label{
       display: contents;
+      position: relative;
       span{
         display: block;
         color: #657C9A;
@@ -80,6 +81,11 @@
       input:checked + span:before {
         background: #4E86E4;
         border: 3px solid #C1CFE0;
+      }
+      P{
+        margin-left: 27px;
+        font-size: 9px;
+        color: #EB5757;
       }
     }
     .capabilities__wrapperButton{

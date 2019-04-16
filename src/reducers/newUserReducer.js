@@ -24,7 +24,7 @@ import {
 
   FORWARD_BACK_CAPABILITIES__FORWARD,
   FORWARD_BACK_CAPABILITIES__BACK,
-  FORWARD_BACK_CAPABILITIES__FAILURE,
+  FORWARD_BACK_CAPABILITIES__FAILURE, EDIT_USER__SUCCESS, EDIT_USER__FAILURE,
 } from '../Actions'
 
 
@@ -73,7 +73,7 @@ export default function newUserReducer(state = newUser, action) {
       return {
         ...state,
         userName: action.payload.userName,
-        password: action.payload.userName,
+        password: action.payload.password,
         repeatPassword: action.payload.repeatPassword,
         error: undefined,
       }
@@ -125,6 +125,7 @@ export default function newUserReducer(state = newUser, action) {
         company: action.payload.company,
         githubLink: action.payload.githubLink,
         facebookLink: action.payload.facebookLink,
+        selectLanguage: action.payload.selectLanguage,
         fax: action.payload.fax,
         phoneN1: action.payload.phoneN1,
         phoneN2: action.payload.phoneN2,
@@ -139,6 +140,7 @@ export default function newUserReducer(state = newUser, action) {
         company: action.payload.company,
         githubLink: action.payload.githubLink,
         facebookLink: action.payload.facebookLink,
+        selectLanguage: action.payload.selectLanguage,
         fax: action.payload.fax,
         phoneN1: action.payload.phoneN1,
         phoneN2: action.payload.phoneN2,
@@ -206,6 +208,21 @@ export default function newUserReducer(state = newUser, action) {
     }
 
     case FORWARD_BACK_CAPABILITIES__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+
+    case EDIT_USER__SUCCESS: {
+      return {
+        ...action.payload,
+        error: undefined,
+      }
+    }
+
+    case EDIT_USER__FAILURE: {
       return {
         ...state,
         error: action.error,

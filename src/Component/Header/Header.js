@@ -33,7 +33,7 @@ class Header extends Component {
       <Fragment>
         <header>
           <div className={cx('logoA')}>
-            <LogoIcon className={cx('logoIcon')} alt='logoIcon'/>
+            <LogoIcon className={cx('logoIcon')} alt='logoIcon' onClick={this.forwardAccount}/>
           </div>
           <div className={cx('addUserA')} onClick={this.forwardAccount}>
             <AddUserIcon className={cx('addUserIcon')} alt='addUserIcon'/>

@@ -7,6 +7,7 @@ import { Field, formValueSelector, reduxForm } from 'redux-form'
 import InputMask from 'react-input-mask';
 import Select from 'react-select'
 import { forwardBackContacts, deleteAddFieldPhone } from '../../../Actions'
+import PropTypes from "prop-types";
 
 
 const cx = classNames.bind(styles)
@@ -136,12 +137,12 @@ const colourStyles = {
 
 class Contacts extends Component {
   backContacts = () => {
-    const { companyForm, githubLinkForm, facebookLinkForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form, forwardBackContacts } = this.props;
-    forwardBackContacts('back', companyForm, githubLinkForm, facebookLinkForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form,)
+    const { companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form, forwardBackContacts } = this.props;
+    forwardBackContacts('back', companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form,)
   }
   onSubmit = values => {
     const { forwardBackContacts } = this.props;
-    forwardBackContacts('forward', values.company, values.githubLink, values.facebookLink, values.fax, values.phoneN1, values.phoneN2, values.phoneN3)
+    forwardBackContacts('forward', values.company, values.githubLink, values.facebookLink, values.selectLanguage, values.fax, values.phoneN1, values.phoneN2, values.phoneN3)
   }
   deleteFieldPhone = () => {
     const { deleteAddFieldPhone } = this.props
@@ -204,7 +205,17 @@ class Contacts extends Component {
   }
 }
 
-Contacts.propTypes = {}
+Contacts.propTypes = {
+  company: PropTypes.string,
+  githubLink: PropTypes.string,
+  facebookLink: PropTypes.string,
+  selectLanguage: PropTypes.string,
+  fax: PropTypes.string,
+  phoneN1: PropTypes.string,
+  phoneN2: PropTypes.string,
+  phoneN3: PropTypes.string,
+  quantityPhoneField: PropTypes.number,
+}
 
 
 Contacts = reduxForm({
@@ -268,21 +279,23 @@ Contacts = reduxForm({
 const mapStateToProps = state => {
   const selector = formValueSelector('Contacts')
   const companyForm = selector(state, 'company')
-  const githubLinkForm = selector(state, 'githubLinkForm')
+  const githubLinkForm = selector(state, 'githubLink')
   const facebookLinkForm = selector(state, 'facebookLink')
+  const selectLanguageForm = selector(state, 'selectLanguage')
   const faxForm = selector(state, 'fax')
   const phoneN1Form = selector(state, 'phoneN1')
   const phoneN2Form = selector(state, 'phoneN2')
   const phoneN3Form = selector(state, 'phoneN3')
-  const { company, githubLink, facebookLink, fax, phoneN1, phoneN2, phoneN3, quantityPhoneField, selectLanguage } = state.newUser
+  const { company, githubLink, facebookLink, selectLanguage, fax, phoneN1, phoneN2, phoneN3, quantityPhoneField, } = state.newUser
   return {
     initialValues: {
-      company, githubLink, facebookLink, fax, phoneN1, phoneN2, phoneN3,
+      company, githubLink, facebookLink, selectLanguage,fax, phoneN1, phoneN2, phoneN3,
     },
     quantityPhoneField,
     companyForm,
     githubLinkForm,
     facebookLinkForm,
+    selectLanguageForm,
     faxForm,
     phoneN1Form,
     phoneN2Form,

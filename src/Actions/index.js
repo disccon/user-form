@@ -34,6 +34,10 @@ export const FORWARD_BACK_CAPABILITIES__BACK = 'FORWARD_CAPABILITIES__BACK'
 export const FORWARD_BACK_CAPABILITIES__FAILURE = 'FORWARD_CAPABILITIES__FAILURE'
 
 
+export const EDIT_USER = 'EDIT_USER'
+export const EDIT_USER__SUCCESS = 'EDIT_USER__SUCCESS'
+export const EDIT_USER__FAILURE = 'EDIT_USER__FAILURE'
+
 export const continueUser = isContinue => (
     {
         type: CONTINUE_USER,
@@ -68,11 +72,11 @@ export const forwardBackProfile = (forwardBack, firstName, lastName, birthDate, 
     },
   })
 
-export const forwardBackContacts = (forwardBack, company, githubLink, facebookLink, fax, phoneN1, phoneN2, phoneN3) => (
+export const forwardBackContacts = (forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneN1, phoneN2, phoneN3) => (
   {
     type: FORWARD_BACK_CONTACTS,
     payload: {
-      forwardBack, company, githubLink, facebookLink, fax, phoneN1, phoneN2, phoneN3,
+      forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneN1, phoneN2, phoneN3,
     },
   })
 
@@ -91,3 +95,11 @@ export const forwardBackCapabilities = (forwardBack, selectSkills, textareaField
         forwardBack, selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
         checkboxFemale, checkboxGuitar, checkboxWtf
     },})
+
+
+
+export const editUser = user => (
+    { type: EDIT_USER,
+        payload: {
+           user
+        },})

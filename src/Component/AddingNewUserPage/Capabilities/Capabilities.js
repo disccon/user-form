@@ -5,6 +5,7 @@ import styles from './Capabilities.scss'
 import Select from 'react-select'
 import {forwardBackCapabilities} from '../../../Actions'
 import {Field, formValueSelector, reduxForm} from 'redux-form'
+import PropTypes from "prop-types";
 
 
 const cx = classNames.bind(styles)
@@ -48,9 +49,9 @@ const renderFieldCheckbox = ({type, input, meta: {touched, error}, span}) => {
     return (
         <label>
             <input {...input} type={type}
-                   onChange={() => input.onChange(changeValue)}
-            />
+                   onChange={() => input.onChange(changeValue)} />
             <span>{span}</span>
+            {touched && error && <p>{error}</p>}
         </label>
     )
 }
@@ -161,7 +162,7 @@ class Capabilities extends Component {
         forwardBackCapabilities('forward', values.selectSkills, values.textareaField, values.checkboxArt, values.checkboxSport, values.checkboxJustWant,
             values.checkboxFemale, values.checkboxGuitar, values.checkboxWtf)
     }
-    forwardCapabilities = () => {
+    backCapabilities = () => {
         const {
             forwardBackCapabilities, selectSkillsForm, textareaFieldForm, checkboxArtForm, checkboxSportForm, checkboxJustWantForm, checkboxFemaleForm,
             checkboxGuitarForm, checkboxWtfForm,
@@ -169,7 +170,6 @@ class Capabilities extends Component {
         forwardBackCapabilities('back', selectSkillsForm, textareaFieldForm, checkboxArtForm, checkboxSportForm, checkboxJustWantForm, checkboxFemaleForm,
             checkboxGuitarForm, checkboxWtfForm,)
     }
-
     render() {
         const {handleSubmit} = this.props
         return (
@@ -192,11 +192,10 @@ class Capabilities extends Component {
                     <Field component={renderFieldCheckbox} type='checkbox' name="checkboxWtf"
                            span='WTF is “hobbies”???'/>
                     <div className={cx('capabilities__wrapperButton')}>
-                        <button type="button" className={cx('capabilities__back')}
+                        <button type='button' className={cx('capabilities__back')}
                                 onClick={this.backCapabilities}>Back
                         </button>
-                        <button type="button" className={cx('capabilities__finish')}
-                                onClick={this.forwardCapabilities}>Finish
+                        <button type='submit' className={cx('capabilities__finish')}>Finish
                         </button>
                     </div>
                 </div>
@@ -205,13 +204,21 @@ class Capabilities extends Component {
     }
 }
 
-Capabilities.propTypes = {}
+Capabilities.propTypes = {
+    selectSkills: PropTypes.string,
+    textareaField: PropTypes.string,
+    checkboxArt: PropTypes.string,
+    checkboxSport: PropTypes.string,
+    checkboxJustWant: PropTypes.string,
+    checkboxFemale: PropTypes.string,
+    checkboxGuitar: PropTypes.string,
+    checkboxWtf: PropTypes.string,
+}
 
 
 Capabilities = reduxForm({
     validate: values => {
         const errors = {}
-        // console.log(values)
 
         if (!values.selectSkills) {
             errors.selectSkills = 'Missing Skills'
@@ -221,7 +228,9 @@ Capabilities = reduxForm({
         if (!values.textareaField) {
             errors.textareaField = 'Missing Additional Information'
         }
-
+        if (!values.checkboxArt && !values.checkboxSport && !values.checkboxJustWant && !values.checkboxFemale && !values.checkboxGuitar && !values.checkboxWtf) {
+            errors.checkboxWtf = 'Missing My Hobbies'
+        }
 
         return errors;
     },
@@ -230,17 +239,15 @@ Capabilities = reduxForm({
 
 
 const mapStateToProps = state => {
-    const selector = formValueSelector('Contacts')
+    const selector = formValueSelector('Capabilities')
     const selectSkillsForm = selector(state, 'selectSkills')
     const textareaFieldForm = selector(state, 'textareaField')
     const checkboxArtForm = selector(state, 'checkboxArt')
     const checkboxSportForm = selector(state, 'checkboxSport')
-
     const checkboxJustWantForm = selector(state, 'checkboxJustWant')
     const checkboxFemaleForm = selector(state, 'checkboxFemale')
     const checkboxGuitarForm = selector(state, 'checkboxGuitar')
     const checkboxWtfForm = selector(state, 'checkboxWtf')
-
     const {selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale, checkboxGuitar, checkboxWtf,} = state.newUser
     return {
         initialValues: {

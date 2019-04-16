@@ -109,14 +109,13 @@ Profile.propTypes = {
         PropTypes.string,
         PropTypes.object,
     ])
-
 }
 
 
 Profile = reduxForm({
-    validate: values => {
+    validate: (values, props)=> {
         const errors = {}
-
+        const { userEmailList } = props
         if (!values.birthDate) {
             errors.birthDate = 'Missing Birth Date'
         } else if ((new Date().getFullYear() - values.birthDate.getFullYear()) < 18) {
@@ -145,6 +144,12 @@ Profile = reduxForm({
             errors.email = 'Missing Email'
         } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
             errors.email = 'Invalid email address'
+        }  else {
+            userEmailList.filter(function(userName) {
+                if(values.email === userName){
+                    errors.email = 'already have this email in the database'
+                }
+            })
         }
         return errors;
     },
@@ -160,12 +165,20 @@ const mapStateToProps = state => {
     const addressForm = selector(state, 'address')
     const maleGender = selector(state, 'gender')
     const birthDateForm = selector(state, 'birthDate')
-    const {firstName, lastName, email, address, gender, birthDate,} = state.newUser
+    const {firstName, lastName, email, address, gender, birthDate, id} = state.newUser
+    const { listUsers } = state
+    const userEmailList = listUsers.users.map(function(user) {
+        if(user.id === id){
+            return
+        } else {
+            return user.email
+        }
+    })
     return {
         initialValues: {
             firstName, lastName, birthDate, email, address, gender,
         },
-        firstNameForm, lastNameForm, birthDateForm, emailForm, addressForm, maleGender,
+        firstNameForm, lastNameForm, birthDateForm, emailForm, addressForm, maleGender, userEmailList
     }
 }
 

@@ -172,10 +172,14 @@ Account.propTypes = {
 
 
 const mapStateToProps = state => {
-  const { userName, password, repeatPassword, userSRCAvatarIMG, isQuestion } = state.newUser
+  const { userName, password, repeatPassword, userSRCAvatarIMG, isQuestion, id } = state.newUser
   const { listUsers } = state
-  const userNameList = listUsers.map(function(user) {
-    return user.userName;
+  const userNameList = listUsers.users.map(function(user) {
+    if(user.id === id){
+      return
+    } else {
+      return user.userName
+    }
   })
 
   return {
