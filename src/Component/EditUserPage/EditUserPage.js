@@ -11,33 +11,35 @@ const cx = classNames.bind(styles)
 class EditUserPage extends Component {
   editUser = page => () => {
     const { history } = this.props
-    if(page === 'Account'){
+    if (page === 'Account') {
       history.push('/')
-    } else if (page === 'Profile'){
+    } else if (page === 'Profile') {
       history.push('Profile')
-    } else if (page === 'Contacts'){
+    } else if (page === 'Contacts') {
       history.push('Contacts')
-    } else if (page === 'Capabilities'){
+    } else if (page === 'Capabilities') {
       history.push('Capabilities')
     }
   }
 
   render() {
-    const { userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax,
+    const {
+      userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax,
       facebookLink, phoneN1, phoneN2, phoneN3, selectSkills, checkboxArt, checkboxSport, checkboxJustWant,
-      checkboxFemale, checkboxGuitar, checkboxWtf, } = this.props
+      checkboxFemale, checkboxGuitar, checkboxWtf,
+    } = this.props
     return (
       <Fragment>
         <h2 className={cx('UserNamePageHeadline')}>User Name</h2>
         <h3 className={cx('UserNamePageH3')}><a>Users List</a></h3>
         <div className={cx('UserNamePageContainer')}>
-          <img src={userSRCAvatarIMG} className={cx('UserNamePageContainer__avatar')}/>
+          <img src={userSRCAvatarIMG} className={cx('UserNamePageContainer__avatar')} />
           <div className={cx('accountDataWrapper')}>
             <div className={cx('accountDataWrapper__block')}>
               <div className={cx('accountDataWrapper__section')}>
                 <h4>Account</h4>
                 <button>
-                  <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Account')}/>
+                  <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Account')} />
                 </button>
               </div>
               <div className={cx('accountDataWrapper__sectionInfo')}>
@@ -56,7 +58,7 @@ class EditUserPage extends Component {
               <div className={cx('accountDataWrapper__section')}>
                 <h4>Personal</h4>
                 <button>
-                  <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Profile')}/>
+                  <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Profile')} />
                 </button>
               </div>
               <div className={cx('accountDataWrapper__sectionInfo')}>
@@ -86,7 +88,7 @@ class EditUserPage extends Component {
               <div className={cx('accountDataWrapper__section')}>
                 <h4>Contacts</h4>
                 <button>
-                  <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Contacts')}/>
+                  <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Contacts')} />
                 </button>
               </div>
               <div className={cx('accountDataWrapper__sectionInfo')}>
@@ -106,27 +108,33 @@ class EditUserPage extends Component {
                   <h4>Phone #1:</h4>
                   <h5>{phoneN1}</h5>
                 </div>
-                {phoneN2 && <div className={cx('accountDataWrapper__wrapper')}>
+                {phoneN2 && (
+                <div className={cx('accountDataWrapper__wrapper')}>
                   <h4>Phone #2:</h4>
                   <h5>{phoneN2}</h5>
-                </div> }
-                {phoneN3 && <div className={cx('accountDataWrapper__wrapper')}>
+                </div>
+                ) }
+                {phoneN3 && (
+                <div className={cx('accountDataWrapper__wrapper')}>
                   <h4>Phone #3:</h4>
                   <h5>{phoneN3}</h5>
-                </div> }
+                </div>
+                ) }
               </div>
             </div>
             <div className={cx('accountDataWrapper__block')}>
               <div className={cx('accountDataWrapper__section')}>
                 <h4>Capabilities</h4>
-                <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Capabilities')}/>
+                <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Capabilities')} />
               </div>
               <div className={cx('accountDataWrapper__sectionInfo')}>
                 <div className={cx('accountDataWrapper__wrapper')}>
                   <h4>Skills:</h4>
-                  <h5>{selectSkills.map(user => (
-                    `${user.value},  `
-                  ))}</h5>
+                  <h5>
+                    {selectSkills.map(user => (
+                      `${user.value},  `
+                    ))}
+                  </h5>
                 </div>
                 <div className={cx('accountDataWrapper__wrapper')}>
                   <h4>Hobies:</h4>
@@ -197,30 +205,33 @@ EditUserPage.propTypes = {
 
 
 const mapStateToProps = state => {
-    const { userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax, facebookLink, phoneN1, phoneN2, phoneN3,
-      selectSkills, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale, checkboxGuitar, checkboxWtf } = state.newUser
-    return{
-  userName: userName,
-  userSRCAvatarIMG: userSRCAvatarIMG,
-  firstName: firstName,
-  lastName: lastName,
-  birthDate: birthDate,
-  email: email,
-  address: address,
-  company: company,
-  fax: fax,
-  facebookLink: facebookLink,
-  phoneN1: phoneN1,
-  phoneN2: phoneN2,
-  phoneN3: phoneN3,
-  selectSkills: selectSkills,
-  checkboxArt: checkboxArt,
-  checkboxSport: checkboxSport,
-  checkboxJustWant: checkboxJustWant,
-  checkboxFemale: checkboxFemale,
-  checkboxGuitar: checkboxGuitar,
-  checkboxWtf: checkboxWtf,
-}}
+  const {
+    userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax, facebookLink, phoneN1, phoneN2, phoneN3,
+    selectSkills, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale, checkboxGuitar, checkboxWtf,
+  } = state.newUser
+  return {
+    userName,
+    userSRCAvatarIMG,
+    firstName,
+    lastName,
+    birthDate,
+    email,
+    address,
+    company,
+    fax,
+    facebookLink,
+    phoneN1,
+    phoneN2,
+    phoneN3,
+    selectSkills,
+    checkboxArt,
+    checkboxSport,
+    checkboxJustWant,
+    checkboxFemale,
+    checkboxGuitar,
+    checkboxWtf,
+  }
+}
 
 export default connect(
   mapStateToProps,

@@ -42,13 +42,22 @@ export const EDIT_USER = 'EDIT_USER'
 export const EDIT_USER__SUCCESS = 'EDIT_USER__SUCCESS'
 export const EDIT_USER__FAILURE = 'EDIT_USER__FAILURE'
 
+export const DELETE_USER = 'DELETE_USER'
+export const DELETE_USER__SUCCESS = 'DELETE_USER__SUCCESS'
+export const DELETE_USER__FAILURE = 'DELETE_USER__FAILURE'
+
+export const CREATE_USER = 'CREATE_USER'
+export const CREATE_USER__SUCCESS = 'CREATE_USER__SUCCESS'
+export const CREATE_USER__FAILURE = 'CREATE_USER__FAILURE'
+
+
 export const continueUser = isContinue => (
-    {
-        type: CONTINUE_USER,
-        payload: {
-            isContinue,
-        },
-    })
+  {
+    type: CONTINUE_USER,
+    payload: {
+      isContinue,
+    },
+  })
 
 export const saveUserSRCAvatarIMG = userSRCAvatarIMG => (
   {
@@ -67,12 +76,11 @@ export const forwardAccount = (userName, password, repeatPassword) => (
   })
 
 
-
 export const forwardBackProfile = (forwardBack, firstName, lastName, birthDate, email, address, gender) => (
   {
     type: FORWARD_BACK_PROFILE,
     payload: {
-      forwardBack, firstName, lastName, birthDate, email, address, gender
+      forwardBack, firstName, lastName, birthDate, email, address, gender,
     },
   })
 
@@ -85,34 +93,63 @@ export const forwardBackContacts = (forwardBack, company, githubLink, facebookLi
   })
 
 export const deleteAddFieldPhone = deleteAddField => (
-  { type: DELETE_ADD_FIELD_PHONE,
+  {
+    type: DELETE_ADD_FIELD_PHONE,
     payload: {
       deleteAddField,
-    },})
-
+    },
+  })
 
 
 export const backCapabilities = (selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
-                                 checkboxFemale, checkboxGuitar, checkboxWtf) => (
-    { type: BACK_CAPABILITIES,
-        payload: {
-            selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
-            checkboxFemale, checkboxGuitar, checkboxWtf
-        },})
+  checkboxFemale, checkboxGuitar, checkboxWtf) => (
+  {
+    type: BACK_CAPABILITIES,
+    payload: {
+      selectSkills,
+      textareaField,
+      checkboxArt,
+      checkboxSport,
+      checkboxJustWant,
+      checkboxFemale,
+      checkboxGuitar,
+      checkboxWtf,
+    },
+  })
 
 export const forwardCapabilities = (selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
-                                 checkboxFemale, checkboxGuitar, checkboxWtf) => (
-    { type: FORWARD_CAPABILITIES,
-        payload: {
-            selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
-            checkboxFemale, checkboxGuitar, checkboxWtf
-        },})
-
-
+  checkboxFemale, checkboxGuitar, checkboxWtf) => (
+  {
+    type: FORWARD_CAPABILITIES,
+    payload: {
+      selectSkills,
+      textareaField,
+      checkboxArt,
+      checkboxSport,
+      checkboxJustWant,
+      checkboxFemale,
+      checkboxGuitar,
+      checkboxWtf,
+    },
+  })
 
 
 export const editUser = user => (
-    { type: EDIT_USER,
-        payload: {
-           user
-        },})
+  {
+    type: EDIT_USER,
+    payload: {
+      user,
+    },
+  })
+
+
+export const deleteUser = id => (
+  {
+    type: DELETE_USER,
+    payload: {
+      id,
+    },
+  })
+
+export const createUser = () => (
+  { type: CREATE_USER })

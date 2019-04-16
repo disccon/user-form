@@ -72,8 +72,6 @@ render(
 // };
 
 
-
-
 // let indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB
 //
 // let open = indexedDB.open('db-name', 1)

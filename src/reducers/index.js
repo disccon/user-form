@@ -1,9 +1,8 @@
 import { combineReducers } from 'redux'
 import { connectRouter } from 'connected-react-router'
+import { reducer as reduxFormReducer } from 'redux-form'
 import newUser from './newUserReducer'
 import listUsers from './listUsersReducer'
-import { reducer as reduxFormReducer } from 'redux-form'
-
 
 
 export default history => combineReducers({

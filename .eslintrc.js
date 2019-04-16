@@ -18,7 +18,7 @@ module.exports = {
     'import/prefer-default-export': 0,
     'react/jsx-key': 2,
     'no-nested-ternary': 'off',
-    'react/no-unused-prop-types': 2,
+    'react/no-unused-prop-types': 1,
     'react/jsx-uses-vars': 'error',
     'react/jsx-uses-react': 'error',
     'class-methods-use-this': ['error', { 'exceptMethods': ['render', 'componentDidMount'] }],

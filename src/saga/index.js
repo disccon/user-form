@@ -9,8 +9,9 @@ import {
   backCapabilitiesSaga,
   forwardCapabilitiesSaga,
   editUserSaga,
+  deleteUserSaga,
+  createUserSaga,
 } from './saga'
-
 
 
 import {
@@ -23,6 +24,8 @@ import {
   BACK_CAPABILITIES,
   FORWARD_CAPABILITIES,
   EDIT_USER,
+  DELETE_USER,
+  CREATE_USER,
 } from '../Actions'
 
 
@@ -37,5 +40,7 @@ export default function* rootSaga() {
     takeLatest(BACK_CAPABILITIES, backCapabilitiesSaga),
     takeLatest(FORWARD_CAPABILITIES, forwardCapabilitiesSaga),
     takeLatest(EDIT_USER, editUserSaga),
+    takeLatest(DELETE_USER, deleteUserSaga),
+    takeLatest(CREATE_USER, createUserSaga),
   ])
 }

@@ -1,50 +1,56 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import styles from './Contacts.scss'
-import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import { Field, formValueSelector, reduxForm } from 'redux-form'
-import InputMask from 'react-input-mask';
+import InputMask from 'react-input-mask'
 import Select from 'react-select'
+import PropTypes from 'prop-types'
 import { forwardBackContacts, deleteAddFieldPhone } from '../../../Actions'
-import PropTypes from "prop-types";
+import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
+import styles from './Contacts.scss'
 
 
 const cx = classNames.bind(styles)
 
-const renderFieldInput = ({ label, input, type, meta: { touched, error }, className, span, placeholder, mask }) => {
-  const inputRender = mask ? <InputMask {...input} mask={mask} placeholder={placeholder}/>
-    : <input {...input} type={type} className={className} placeholder={placeholder}/>
-  return (<label className={cx('contacts__label')}>
-    <h4>{label}</h4>
-    {span && <span>*</span>}
-    {inputRender}
-    {touched && error && <p>{error}</p>}
-  </label>)
+const renderFieldInput = ({
+  label, input, type, meta: { touched, error }, className, span, placeholder, mask,
+}) => {
+  const inputRender = mask ? <InputMask {...input} mask={mask} placeholder={placeholder} />
+    : <input {...input} type={type} className={className} placeholder={placeholder} />
+  return (
+    <label className={cx('contacts__label')}>
+      <h4>{label}</h4>
+      {span && <span>*</span>}
+      {inputRender}
+      {touched && error && <p>{error}</p>}
+    </label>
+  )
 }
 
-const renderFieldPhone = ({ label, input, type, meta: { touched, error }, span, placeholder, deleteFieldPhone }) => (
-    <div className={cx('contacts__labelPhone')}>
-    {span && <span onClick={deleteFieldPhone}></span>}
+const renderFieldPhone = ({
+  label, input, type, meta: { touched, error }, span, placeholder, deleteFieldPhone,
+}) => (
+  <div className={cx('contacts__labelPhone')}>
+    {span && <span onClick={deleteFieldPhone} />}
     <label>
       <h4>{label}</h4>
-      <InputMask {...input} type={type} mask='+7 (999) 999-99-99' placeholder={placeholder}/>
+      <InputMask {...input} type={type} mask='+7 (999) 999-99-99' placeholder={placeholder} />
       {touched && error && <p>{error}</p>}
     </label>
   </div>
 )
 
 
-const renderFieldSelect = ({ label, input,  meta: { touched, error }}) => (
+const renderFieldSelect = ({ label, input, meta: { touched, error } }) => (
   <label className={cx('contacts__mainLanguage')}>
     <h4>{label}</h4>
     <Select
-        {...input}
-        onBlur={() => input.onBlur()}
-        onChange={input.onChange}
-        value={input.value}
-        options={options}
-        styles={colourStyles}
+      {...input}
+      onBlur={() => input.onBlur()}
+      onChange={input.onChange}
+      value={input.value}
+      options={options}
+      styles={colourStyles}
     />
     {touched && error && <p className={cx('mainLanguage__error')}>{error}</p>}
   </label>
@@ -133,67 +139,126 @@ const colourStyles = {
     fontStyle: 'normal',
     color: '#000000',
   }),
-};
+}
 
 class Contacts extends Component {
   backContacts = () => {
-    const { companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form, forwardBackContacts } = this.props;
-    forwardBackContacts('back', companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form,)
+    const {
+      companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form, forwardBackContacts,
+    } = this.props
+    forwardBackContacts('back', companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form)
   }
+
   onSubmit = values => {
-    const { forwardBackContacts } = this.props;
+    const { forwardBackContacts } = this.props
     forwardBackContacts('forward', values.company, values.githubLink, values.facebookLink, values.selectLanguage, values.fax, values.phoneN1, values.phoneN2, values.phoneN3)
   }
+
   deleteFieldPhone = () => {
     const { deleteAddFieldPhone } = this.props
     deleteAddFieldPhone('delete')
   }
+
   addFieldPhone = () => {
     const { deleteAddFieldPhone } = this.props
     deleteAddFieldPhone('add')
   }
+
   render() {
     const { quantityPhoneField, handleSubmit } = this.props
-    const phoneFieldN1 = quantityPhoneField >= 2 ?
-      <Field component={renderFieldPhone} type="text" placeholder='+7 (066) 888-88-88'
-             label='Phone #1' name="phoneN1" span={true} deleteFieldPhone={this.deleteFieldPhone}/> :
-      <Field component={renderFieldPhone} type="text" placeholder='+7 (066) 888-88-88'
-             label='Phone #1' name="phoneN1" deleteFieldPhone={this.deleteFieldPhone}/>
-    const phoneFieldN2 = quantityPhoneField >= 2 ?
-      <Field component={renderFieldPhone} type="text"
-             label='Phone #2' name="phoneN2" span={true} deleteFieldPhone={this.deleteFieldPhone}/>
+    const phoneFieldN1 = quantityPhoneField >= 2
+      ? (
+        <Field
+          component={renderFieldPhone}
+          type='text'
+          placeholder='+7 (066) 888-88-88'
+          label='Phone #1'
+          name='phoneN1'
+          span
+          deleteFieldPhone={this.deleteFieldPhone}
+        />
+      )
+      : (
+        <Field
+          component={renderFieldPhone}
+          type='text'
+          placeholder='+7 (066) 888-88-88'
+          label='Phone #1'
+          name='phoneN1'
+          deleteFieldPhone={this.deleteFieldPhone}
+        />
+      )
+    const phoneFieldN2 = quantityPhoneField >= 2
+      ? (
+        <Field
+          component={renderFieldPhone}
+          type='text'
+          label='Phone #2'
+          name='phoneN2'
+          span
+          deleteFieldPhone={this.deleteFieldPhone}
+        />
+      )
       : null
-    const phoneFieldN3 = quantityPhoneField === 3 ?
-      <Field component={renderFieldPhone} type="text"
-             label='Phone #3' name="phoneN3" span={true} deleteFieldPhone={this.deleteFieldPhone}/>
+    const phoneFieldN3 = quantityPhoneField === 3
+      ? (
+        <Field
+          component={renderFieldPhone}
+          type='text'
+          label='Phone #3'
+          name='phoneN3'
+          span
+          deleteFieldPhone={this.deleteFieldPhone}
+        />
+      )
       : null
-    const addPhoneField = quantityPhoneField < 3 ?
-      <button type='button' className={cx('contacts__addPhoneField')} onClick={this.addFieldPhone}>
-        <AddIcon className={cx('contacts__addIcon')}/>
-        <span>add phone number</span>
-      </button> : null
+    const addPhoneField = quantityPhoneField < 3
+      ? (
+        <button type='button' className={cx('contacts__addPhoneField')} onClick={this.addFieldPhone}>
+          <AddIcon className={cx('contacts__addIcon')} />
+          <span>add phone number</span>
+        </button>
+      ) : null
     return (
       <Fragment>
         <form className={cx('contacts')} onSubmit={handleSubmit(this.onSubmit)}>
           <div className={cx('contacts__sideLeft')}>
-            <Field component={renderFieldInput} type="text"
-                   label='Company' name="company"/>
-            <Field component={renderFieldInput} type="text"
-                   label='Github link' name="githubLink"/>
-            <Field component={renderFieldInput} type="text"
-                   label='Facebook link' name="facebookLink" placeholder='www.facebook.com/hdfk_142_23lelf/'
-                   span='*'/>
-            <Field component={renderFieldSelect} name='selectLanguage' label='Main language'/>
+            <Field
+              component={renderFieldInput}
+              type='text'
+              label='Company'
+              name='company'
+            />
+            <Field
+              component={renderFieldInput}
+              type='text'
+              label='Github link'
+              name='githubLink'
+            />
+            <Field
+              component={renderFieldInput}
+              type='text'
+              label='Facebook link'
+              name='facebookLink'
+              placeholder='www.facebook.com/hdfk_142_23lelf/'
+              span='*'
+            />
+            <Field component={renderFieldSelect} name='selectLanguage' label='Main language' />
           </div>
           <div className={cx('contacts__sideRight')}>
-            <Field component={renderFieldInput} type="text"
-                   label='Fax' name="fax" mask='+7 (999) 999-99-99'
-                   span='*'/>
+            <Field
+              component={renderFieldInput}
+              type='text'
+              label='Fax'
+              name='fax'
+              mask='+7 (999) 999-99-99'
+              span='*'
+            />
             {phoneFieldN1}
             {phoneFieldN2}
             {phoneFieldN3}
             {addPhoneField}
-            <div className={cx('contacts__addPhone')}></div>
+            <div className={cx('contacts__addPhone')} />
             <div className={cx('wrapperButton')}>
               <button type='button' onClick={this.backContacts} className={cx('contacts__back')}>Back</button>
               <button type='submit' className={cx('contacts__forward')}>Forward</button>
@@ -220,7 +285,7 @@ Contacts.propTypes = {
 
 Contacts = reduxForm({
   validate: values => {
-    const errors = {};
+    const errors = {}
 
     if (!values.selectLanguage) {
       errors.selectLanguage = 'Missing Main language'
@@ -271,7 +336,7 @@ Contacts = reduxForm({
       errors.phoneN3 = 'Must be 10 digits'
     }
 
-    return errors;
+    return errors
   },
   form: 'Contacts',
 })(Contacts)
@@ -286,10 +351,12 @@ const mapStateToProps = state => {
   const phoneN1Form = selector(state, 'phoneN1')
   const phoneN2Form = selector(state, 'phoneN2')
   const phoneN3Form = selector(state, 'phoneN3')
-  const { company, githubLink, facebookLink, selectLanguage, fax, phoneN1, phoneN2, phoneN3, quantityPhoneField, } = state.newUser
+  const {
+    company, githubLink, facebookLink, selectLanguage, fax, phoneN1, phoneN2, phoneN3, quantityPhoneField,
+  } = state.newUser
   return {
     initialValues: {
-      company, githubLink, facebookLink, selectLanguage,fax, phoneN1, phoneN2, phoneN3,
+      company, githubLink, facebookLink, selectLanguage, fax, phoneN1, phoneN2, phoneN3,
     },
     quantityPhoneField,
     companyForm,
@@ -300,11 +367,11 @@ const mapStateToProps = state => {
     phoneN1Form,
     phoneN2Form,
     phoneN3Form,
-    selectLanguage
+    selectLanguage,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { forwardBackContacts, deleteAddFieldPhone }
+  { forwardBackContacts, deleteAddFieldPhone },
 )(Contacts)
