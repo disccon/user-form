@@ -1,200 +1,210 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, {Component, Fragment} from 'react'
+import {connect} from 'react-redux'
 import classNames from 'classnames'
 import styles from './Profile.scss'
-import { reduxForm, Field, formValueSelector } from 'redux-form'
-import { saveBirthDate, saveGenderInput, forwardBackProfile } from '../../../Actions'
+import {reduxForm, Field, formValueSelector} from 'redux-form'
+import {saveBirthDate, forwardBackProfile} from '../../../Actions'
 import DatePicker from 'react-date-picker';
 // import DatePicker from 'react-date-picker/dist/entry.nostyle'
-import { ReactComponent as CalendarIcon } from '../../../img/icon/calendar.svg'
+import {ReactComponent as CalendarIcon} from '../../../img/icon/calendar.svg'
 
 
 const cx = classNames.bind(styles)
 
-const renderFieldInput = ({ label, input, type, meta: { touched, error }, className }) => (
-  <label className={cx('profile__label')}>
-    <h4>{label}</h4>
-    <span>*</span>
-    <input {...input} type={type} className={className}/>
-    {touched && error && <p>{error}</p>}
-  </label>
+const renderFieldInput = ({label, input, type, meta: {touched, error}, className}) => (
+    <label className={cx('profile__label')}>
+        <h4>{label}</h4>
+        <span>*</span>
+        <input {...input} type={type} className={className}/>
+        {touched && error && <p>{error}</p>}
+    </label>
+)
+
+const renderFieldRadio = ({label, input, type, name, meta: {touched, error},}) => (
+    <Fragment>
+        <label >
+            <input {...input} type={type} name={name}
+                  />
+            <span>{label}</span>
+        </label>
+        {input.value === 'female' && touched && error && <p>{error}</p>}
+    </Fragment>
 )
 
 
+
+
 class Profile extends Component {
-  state = {
-    ageError: false,
-  }
-  changeBirthDate = value => {
-    const { saveBirthDate } = this.props
-    saveBirthDate(value)
-  }
-  componentDidUpdate(){
-    const {  birthDate } = this.props
-    if (this.state.ageError !== false) {
-      if (birthDate !== null) {
-        let age = new Date().getFullYear() - birthDate.getFullYear()
-        if (age > 18) {
-          this.setState({
-            ageError: false
-          })
+    state = {
+        ageError: false,
+    }
+    changeBirthDate = value => {
+        const {saveBirthDate} = this.props
+        saveBirthDate(value)
+    }
+
+    componentDidUpdate() {
+        const {birthDate} = this.props
+        if (this.state.ageError !== false) {
+            if (birthDate !== null) {
+                let age = new Date().getFullYear() - birthDate.getFullYear()
+                if (age > 18) {
+                    this.setState({
+                        ageError: false
+                    })
+                }
+            }
         }
-      }
     }
-  }
-  changeRadioInput = event => {
-    const { saveGenderInput } = this.props
-    saveGenderInput(event.target.value)
-  }
-  onSubmit = values => {
-    const { birthDate } = this.props
-    if(birthDate !== null){
-      let age = new Date().getFullYear() - birthDate.getFullYear()
-       if(age < 18){
-         this.setState({
-          ageError: 'Sorry, you must be at least 18 years old'
-        })
-      } else {
-         const { forwardBackProfile } = this.props;
-         forwardBackProfile('forward', values.firstName, values.lastName, values.email, values.address)
-       }
-    } else {
-      this.setState({
-        ageError: 'Missing Birth Date'
-      })
+
+    onSubmit = values => {
+        const {birthDate} = this.props
+        if (birthDate !== null) {
+            let age = new Date().getFullYear() - birthDate.getFullYear()
+            if (age < 18) {
+                this.setState({
+                    ageError: 'Sorry, you must be at least 18 years old'
+                })
+            } else {
+                const {forwardBackProfile} = this.props;
+                forwardBackProfile('forward', values.firstName, values.lastName, values.email, values.address)
+            }
+        } else {
+            this.setState({
+                ageError: 'Missing Birth Date'
+            })
+        }
     }
-  }
-  backProfile = () => {
-    const { firstNameForm, lastNameForm, emailForm, addressForm, forwardBackProfile } = this.props;
-    forwardBackProfile('back', firstNameForm, lastNameForm, emailForm, addressForm)
-  }
-  onBlurDatePicker = () => {
-    const { birthDate } = this.props
-    if(birthDate !== null){
-      let age = new Date().getFullYear() - birthDate.getFullYear()
-      if(age < 18){
-        this.setState({
-          ageError: 'Sorry, you must be at least 18 years old'
-        })
-      } else {
-        this.setState({
-          ageError: false
-        })
-      }
-    } else {
-      this.setState({
-        ageError: 'Missing Birth Date'
-      })
+
+
+    backProfile = () => {
+        const {firstNameForm, lastNameForm, emailForm, addressForm, forwardBackProfile, maleForm, femaleForm} = this.props;
+        forwardBackProfile('back', firstNameForm, lastNameForm, emailForm, addressForm, maleForm, femaleForm)
     }
-  }
-  render() {
-    const { birthDate, gender, handleSubmit } = this.props
-    const { ageError } = this.state
-    return (
-      <div className={cx('profile')}>
-        <form className={cx('profile__form')} onSubmit={handleSubmit(this.onSubmit)}>
-          <div className={cx('profile__sideLeft')}>
-            <Field component={renderFieldInput} type="text"
-                   label='First name' name="firstName"/>
-            <Field component={renderFieldInput} type="text"
-                   label='Last name' name="lastName"/>
-            <div className={cx('profile__birthDate')}>
-              <h4>Birth date</h4>
-              <span className={cx('profile__birthDateSpan')}>*</span>
-              <DatePicker clearIcon='' calendarIcon={<CalendarIcon/>} onBlur={this.onBlurDatePicker}
-                          className={cx('profile__datePicker')}
-                          name='birthDate'
-                          isOpen={true}
-                          locale='en'
-                          onChange={this.changeBirthDate}
-                          value={birthDate}
-                          calendarClassName='profile__react-calendar'/>
-              {ageError && <p className={cx('birthDate__error')}>{ageError}</p>}
+    onBlurDatePicker = () => {
+        const {birthDate} = this.props
+        if (birthDate !== null) {
+            let age = new Date().getFullYear() - birthDate.getFullYear()
+            if (age < 18) {
+                this.setState({
+                    ageError: 'Sorry, you must be at least 18 years old'
+                })
+            } else {
+                this.setState({
+                    ageError: false
+                })
+            }
+        } else {
+            this.setState({
+                ageError: 'Missing Birth Date'
+            })
+        }
+    }
+
+    render() {
+        const {birthDate, handleSubmit} = this.props
+        const {ageError} = this.state
+        return (
+            <div className={cx('profile')}>
+                <form className={cx('profile__form')} onSubmit={handleSubmit(this.onSubmit)}>
+                    <div className={cx('profile__sideLeft')}>
+                        <Field component={renderFieldInput} type="text"
+                               label='First name' name="firstName"/>
+                        <Field component={renderFieldInput} type="text"
+                               label='Last name' name="lastName"/>
+                        <div className={cx('profile__birthDate')}>
+                            <h4>Birth date</h4>
+                            <span className={cx('profile__birthDateSpan')}>*</span>
+                            <DatePicker clearIcon='' calendarIcon={<CalendarIcon/>} onBlur={this.onBlurDatePicker}
+                                        className={cx('profile__datePicker')}
+                                        name='birthDate'
+                                        isOpen={true}
+                                        locale='en'
+                                        onChange={this.changeBirthDate}
+                                        value={birthDate}
+                                        calendarClassName='profile__react-calendar'/>
+                            {ageError && <p className={cx('birthDate__error')}>{ageError}</p>}
+                        </div>
+                    </div>
+                    <div className={cx('profile__sideRight')}>
+                        <Field component={renderFieldInput} type="text"
+                               label='Email' name="email"/>
+                        <Field component={renderFieldInput} type="text"
+                               label='Address' name="address"/>
+                        <h5>Gender</h5>
+                        <div className={cx('wrapperGender')}>
+                            <Field component={renderFieldRadio} type="radio"
+                                   label='Male' name="gender" value='male'/>
+                            <Field component={renderFieldRadio} type="radio"
+                                   label='Female' name="gender" value='female'/>
+                        </div>
+                        <div className={cx('wrapperButton')}>
+                            <button type='button' onClick={this.backProfile} className={cx('profile__back')}>Back
+                            </button>
+                            <button type='submit' className={cx('profile__forward')}>Forward</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-          </div>
-          <div className={cx('profile__sideRight')}>
-            <Field component={renderFieldInput} type="text"
-                   label='Email' name="email"/>
-            <Field component={renderFieldInput} type="text"
-                   label='Address' name="address"/>
-            <h5>Gender</h5>
-            <div className={cx('wrapperGender')}>
-              <label>
-                <input type="radio" name="gender" value='Male'
-                       checked={gender === 'Male'}
-                       onChange={this.changeRadioInput}
-                />
-                <span>Male</span>
-              </label>
-              <label>
-              <input type="radio" name="gender" value='Female'
-                     checked={gender === 'Female'}
-                     onChange={this.changeRadioInput}
-              />
-                <span>Female</span>
-              </label>
-            </div>
-            <div className={cx('wrapperButton')}>
-              <button type='button' onClick={this.backProfile} className={cx('profile__back')}>Back</button>
-              <button type='submit' className={cx('profile__forward')}>Forward</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    )
-  }
+        )
+    }
 }
 
 Profile.propTypes = {}
 
 
 Profile = reduxForm({
-  validate: values => {
-    const errors = {};
+    validate: values => {
+        const errors = {}
+        console.log(values)
+        if (!values.gender) {
+            errors.gender = 'Missing Gender'
+        }
 
-    if (!values.firstName) {
-      errors.firstName = 'Missing First name'
-    } else if (values.firstName.length <= 2) {
-      errors.firstName = 'Must be 3 characters or more'
-    }
-    if (!values.lastName) {
-      errors.lastName = 'Missing Last name'
-    } else if (values.lastName.length <= 2) {
-      errors.lastName = 'Must be 3 characters or more'
-    }
+        if (!values.firstName) {
+            errors.firstName = 'Missing First name'
+        } else if (values.firstName.length <= 2) {
+            errors.firstName = 'Must be 3 characters or more'
+        }
+        if (!values.lastName) {
+            errors.lastName = 'Missing Last name'
+        } else if (values.lastName.length <= 2) {
+            errors.lastName = 'Must be 3 characters or more'
+        }
 
-    if (!values.address) {
-      errors.address = 'Missing Address'
-    }
-    if (!values.email) {
-      errors.email = 'Missing Email'
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-      errors.email = 'Invalid email address'
-    }
-    return errors;
-  },
-  form: 'Profile',
+        if (!values.address) {
+            errors.address = 'Missing Address'
+        }
+        if (!values.email) {
+            errors.email = 'Missing Email'
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+            errors.email = 'Invalid email address'
+        }
+        return errors;
+    },
+    form: 'Profile',
 })(Profile)
 
 
 const mapStateToProps = state => {
-  const selector = formValueSelector('Profile')
-  const firstNameForm = selector(state, 'firstName')
-  const lastNameForm = selector(state, 'lastName')
-  const emailForm = selector(state, 'email')
-  const addressForm = selector(state, 'address')
-  const { firstName, lastName, email, address, gender, birthDate, } = state.newUser
-  return {
-    initialValues: {
-      firstName, lastName, email, address,
-    },
-    birthDate, gender, firstNameForm, lastNameForm, emailForm, addressForm,
-  }
+    const selector = formValueSelector('Profile')
+    const firstNameForm = selector(state, 'firstName')
+    const lastNameForm = selector(state, 'lastName')
+    const emailForm = selector(state, 'email')
+    const addressForm = selector(state, 'address')
+    const maleGender = selector(state, 'gender')
+    const {firstName, lastName, email, address, gender, birthDate,} = state.newUser
+    return {
+        initialValues: {
+            firstName, lastName, email, address, gender,
+        },
+        birthDate, firstNameForm, lastNameForm, emailForm, addressForm, maleGender,
+    }
 }
 
 export default Profile = connect(
-  mapStateToProps,
-  { saveBirthDate, saveGenderInput, forwardBackProfile  }
+    mapStateToProps,
+    {saveBirthDate, forwardBackProfile}
 )(Profile)
 
 

@@ -1,5 +1,9 @@
 import { newUser } from '../stubs/newUser'
 import {
+  CONTINUE_USER__CONTINUE,
+  CONTINUE_USER__CLOSE,
+  CONTINUE_USER__FAILURE,
+
   SAVE_USER_SRC_AVATAR_IMG__SUCCESS,
   SAVE_USER_SRC_AVATAR_IMG__FAILURE,
 
@@ -8,9 +12,6 @@ import {
 
   SAVE_BIRTH_DATE__SUCCESS,
   SAVE_BIRTH_DATE__FAILURE,
-
-  SAVE_GENDER_INPUT__SUCCESS,
-  SAVE_GENDER_INPUT__FAILURE,
 
   FORWARD_BACK_PROFILE__FORWARD,
   FORWARD_BACK_PROFILE__BACK,
@@ -52,8 +53,35 @@ import {
   SAVE_CHECKBOX_WTF__FAILURE,
 } from '../Actions'
 
+
+
 export default function newUserReducer(state = newUser, action) {
   switch(action.type) {
+
+    case CONTINUE_USER__CONTINUE: {
+      return {
+        ...state,
+
+        error: undefined,
+      }
+    }
+    case CONTINUE_USER__CLOSE: {
+      return {
+        ...state,
+        isQuestion: action.payload.isQuestion,
+        error: undefined,
+      }
+    }
+    case CONTINUE_USER__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+
+
+
     case SAVE_USER_SRC_AVATAR_IMG__SUCCESS: {
       return {
         ...state,
@@ -99,20 +127,6 @@ export default function newUserReducer(state = newUser, action) {
       }
     }
 
-
-    case SAVE_GENDER_INPUT__SUCCESS: {
-      return {
-        ...state,
-        gender: action.payload.gender,
-        error: undefined,
-      }
-    }
-    case SAVE_GENDER_INPUT__FAILURE: {
-      return {
-        ...state,
-        error: action.error,
-      }
-    }
 
     case FORWARD_BACK_PROFILE__BACK: {
       return {

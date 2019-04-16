@@ -5,6 +5,34 @@ import AvatarIMG4 from '../img/Ellipse(4).png'
 import AvatarIMG5 from '../img/Ellipse(5).png'
 import AvatarIMG6 from '../img/Ellipse(6).png'
 import AvatarIMG7 from '../img/Ellipse(7).png'
+import {dbName} from "../Component/App/App";
+
+
+
+// let indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB
+// export let listUsers
+//
+// if (!indexedDB) {
+//   window.alert("Ваш браузер не поддерживат стабильную версию IndexedDB. Такие-то функции будут недоступны")
+// } else {
+//   let stateRedux = indexedDB.open(dbName, 1)
+//
+//   stateRedux.onerror = function (event) {
+//     // Handle errors.
+//     console.log('stateRedux.onerror')
+//   }
+//
+//   stateRedux.onupgradeneeded = function (event) {
+//     let db = event.target.result
+//     let objectStore2 = db.createObjectStore("listUsers", {keyPath: "id"});
+//     let objectStore1 = db.createObjectStore("newUser1", {keyPath: "id"});
+//     for (let i in listUsers) {
+//       objectStore2.add(listUsers[i]);
+//     }
+//     objectStore1.add(newUser)
+//
+//   }
+
 
 
 

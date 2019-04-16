@@ -1,9 +1,9 @@
 import { takeLatest, all } from 'redux-saga/effects'
 import {
+  continueUserSaga,
   saveUserSRCAvatarIMGSaga,
   forwardAccountSaga,
   saveBirthDateSaga,
-  saveGenderInputSaga,
   forwardBackProfileSaga,
   forwardBackContactsSaga,
   deleteAddFieldPhoneSaga,
@@ -23,10 +23,10 @@ import {
 
 
 import {
+  CONTINUE_USER,
   SAVE_USER_SRC_AVATAR_IMG,
   FORWARD_ACCOUNT,
   SAVE_BIRTH_DATE,
-  SAVE_GENDER_INPUT,
   FORWARD_BACK_PROFILE,
   FORWARD_BACK_CONTACTS,
   DELETE_ADD_FIELD_PHONE,
@@ -46,10 +46,10 @@ import {
 
 export default function* rootSaga() {
   yield all([
+    takeLatest(CONTINUE_USER, continueUserSaga),
     takeLatest(SAVE_USER_SRC_AVATAR_IMG, saveUserSRCAvatarIMGSaga),
     takeLatest(FORWARD_ACCOUNT, forwardAccountSaga),
     takeLatest(SAVE_BIRTH_DATE, saveBirthDateSaga),
-    takeLatest(SAVE_GENDER_INPUT, saveGenderInputSaga),
     takeLatest(FORWARD_BACK_PROFILE, forwardBackProfileSaga),
     takeLatest(FORWARD_BACK_CONTACTS, forwardBackContactsSaga),
     takeLatest(DELETE_ADD_FIELD_PHONE, deleteAddFieldPhoneSaga),

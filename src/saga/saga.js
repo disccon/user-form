@@ -5,6 +5,10 @@ import { push } from 'connected-react-router'
 
 
 import {
+  CONTINUE_USER__CONTINUE,
+  CONTINUE_USER__CLOSE,
+  CONTINUE_USER__FAILURE,
+
   SAVE_USER_SRC_AVATAR_IMG__SUCCESS,
   SAVE_USER_SRC_AVATAR_IMG__FAILURE,
 
@@ -59,7 +63,29 @@ import {
 
 } from '../Actions'
 
+export function* continueUserSaga(action) {
+  const { isContinue } = action.payload
+  try {
+    if(isContinue){
+      yield put({
+        type: CONTINUE_USER__CONTINUE,
+      })
+    } else {
+      yield put({
+        type: CONTINUE_USER__CLOSE,
+        payload: {
+          isQuestion: false,
+        },
+      })
+    }
 
+  } catch (error) {
+    yield put({
+      type: CONTINUE_USER__FAILURE,
+      error,
+    })
+  }
+}
 
 
 export function* saveUserSRCAvatarIMGSaga(action) {
@@ -118,23 +144,6 @@ export function* saveBirthDateSaga(action) {
   }
 }
 
-
-export function* saveGenderInputSaga(action) {
-  const { gender, } = action.payload
-  try {
-    yield put({
-      type: SAVE_GENDER_INPUT__SUCCESS,
-      payload: {
-        gender,
-      },
-    })
-  } catch (error) {
-    yield put({
-      type: SAVE_GENDER_INPUT__FAILURE,
-      error,
-    })
-  }
-}
 
 export function* forwardBackProfileSaga(action) {
   const { forwardBack, firstName, lastName, email, address, } = action.payload

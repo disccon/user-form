@@ -1,34 +1,40 @@
-.profile{
+.profile {
   width: 100%;
   height: 541px;
   display: flex;
   padding: 65px 100px;
   background: #fbfcff;
   color: #657C9A;
+
   .profile__form {
     width: 100%;
     display: flex;
+
     .profile__sideLeft, .profile__sideRight {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       width: 300px;
     }
+
     .profile__label {
       position: relative;
       width: 300px;
       margin-bottom: 45px;
       height: 40px;
+
       h4 {
         position: absolute;
         top: -23px;
       }
+
       span {
         position: absolute;
         top: -17px;
         right: 0;
       }
-      input{
+
+      input {
         margin-top: 0;
         width: 100%;
         height: 40px;
@@ -39,6 +45,7 @@
         font-weight: 500;
         color: #000;
       }
+
       p {
         display: block;
         margin-top: 3px;
@@ -47,29 +54,35 @@
         color: #EB5757;
       }
     }
+
     .profile__sideLeft {
       margin-right: auto;
+
       .profile__label:first-child {
         margin-top: 23px;
       }
 
       .profile__birthDate {
         position: relative;
+
         h4 {
           position: absolute;
           top: -23px;
         }
-        .birthDate__error{
+
+        .birthDate__error {
           margin-top: 3px;
           margin-left: 10px;
           font-size: 9px;
           color: #EB5757;
         }
+
         .profile__birthDateSpan {
           position: absolute;
           top: -17px;
           right: 0;
         }
+
         .profile__datePicker {
           .react-date-picker__wrapper {
             padding-right: 5px;
@@ -79,6 +92,7 @@
             background: #FFFFFF;
             border: 1px solid #E7F0FF;
             color: #657C9A;
+
             .react-date-picker__inputGroup {
               input {
                 font-family: 'Roboto', sans-serif;
@@ -90,6 +104,7 @@
               }
             }
           }
+
           .react-date-picker__calendar {
             width: 192px;
             margin-top: 9px;
@@ -168,11 +183,12 @@
       .profile__label:first-child {
         margin-top: 23px;
       }
-      .wrapperGender{
+      .wrapperGender {
+        position: relative;
         margin-top: 12px;
         display: flex;
-        label{
-          span{
+        label {
+          span {
             font-weight: 500;
             color: #000;
             margin-left: 26px;
@@ -194,25 +210,37 @@
             border: 3px solid #C1CFE0;
           }
         }
-        label:nth-child(2){
+        p {
+          position: absolute;
+          top: 24px;
+          margin-top: 3px;
+          margin-left: 10px;
+          font-size: 9px;
+          color: #EB5757;
+        }
+        label:nth-child(2) {
           margin-left: 43px;
         }
       }
-      .wrapperButton{
+
+      .wrapperButton {
         margin-top: auto;
         width: 100%;
         display: flex;
-        .profile__back, .profile__forward{
+
+        .profile__back, .profile__forward {
           width: 100px;
           height: 40px;
           font-weight: 500;
           text-align: center;
           color: #FFF;
         }
-        .profile__back{
+
+        .profile__back {
           background: #C1CFE0;
         }
-        .profile__forward{
+
+        .profile__forward {
           margin-left: auto;
           background: #5E97F3;
         }

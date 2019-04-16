@@ -1,14 +1,16 @@
-export let newUser =  {
+export let newUser = {
+  id: 0,
+  isQuestion: true,
   userName: '',
-  password: '12356',
-  repeatPassword: '12323414',
+  password: '',
+  repeatPassword: '',
   userSRCAvatarIMG: '',
   firstName: '',
-  lastName: 'Morozov',
+  lastName: '',
   birthDate: null,
   email: '',
   address: '',
-  gender: 'Male',
+  gender: '',
 
   company: '',
   githubLink: '',
@@ -21,11 +23,11 @@ export let newUser =  {
   quantityPhoneField: 2,
 
   selectSkills: '',
-  textareaField: 'Guitar, guitar and guitar again. I’m fall in love with it.',
-  checkboxArt: 'Art',
+  textareaField: false,
+  checkboxArt: false,
   checkboxSport: false,
   checkboxJustWant: false,
-  checkboxFemale: 'I’m a female... I’m doing nothing. Every day.',
+  checkboxFemale: false,
   checkboxGuitar: false,
   checkboxWtf: false,
 }

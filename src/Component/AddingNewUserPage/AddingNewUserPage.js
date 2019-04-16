@@ -55,6 +55,7 @@ AddingNewUserPage.propTypes = {
 }
 
 const mapStateToProps = state => ({
+
 })
 
 export default connect(
