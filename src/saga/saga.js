@@ -45,12 +45,18 @@ import {
 } from '../Actions'
 import { newUser } from '../stubs/newUser'
 
+
+
+
 export function* continueUserSaga(action) {
-  const { isContinue } = action.payload
+  const { isContinue, newUserDB } = action.payload
   try {
     if (isContinue) {
       yield put({
         type: CONTINUE_USER__CONTINUE,
+        payload: {
+          newUserDB,
+        },
       })
     } else {
       yield put({

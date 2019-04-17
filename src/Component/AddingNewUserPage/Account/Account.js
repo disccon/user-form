@@ -2,13 +2,14 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { reduxForm, Field } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 import styles from './Account.scss'
 import { ReactComponent as CloseIcon } from '../../../img/icon/close.svg'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import { forwardAccount, saveUserSRCAvatarIMG, continueUser } from '../../../Actions'
 import { renderFieldInputAccount } from './renderFieldInputAccount'
+import db from "../../../db";
 
 const cx = classNames.bind(styles)
 
@@ -21,7 +22,11 @@ class Account extends Component {
 
     continueUser = isContinue => () => {
       const { continueUser } = this.props
-      continueUser(isContinue)
+      db.table('newUserDB')
+        .toArray()
+        .then((newUserDB) => {
+          continueUser(isContinue, ...newUserDB)
+        })
     }
 
     addImageUserAvatar = event => {
@@ -88,7 +93,7 @@ class Account extends Component {
                 className={cx('accountComponent__continue')}
                 onClick={this.continueUser(true)}
               >
-Continue
+              Continue
               </button>
               <button
                 type='button'
@@ -193,7 +198,7 @@ Account = reduxForm({
 
 
 Account.propTypes = {
-  userSRCAvatarIMG: PropTypes.array,
+  userSRCAvatarIMG: PropTypes.string,
   isQuestion: PropTypes.bool.isRequired,
   continueUser: PropTypes.func.isRequired,
   saveUserSRCAvatarIMG: PropTypes.func.isRequired,
@@ -214,7 +219,7 @@ const mapStateToProps = state => {
     }
   })
   return {
-    initialValues: {
+    values: {
       userName, password, repeatPassword,
     },
     userSRCAvatarIMG,

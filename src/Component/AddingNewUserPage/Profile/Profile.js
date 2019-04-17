@@ -83,7 +83,7 @@ class Profile extends Component {
               </div>
               <div className={cx('wrapperButton')}>
                 <button type='button' onClick={this.backProfile} className={cx('profile__back')}>
-Back
+              Back
                 </button>
                 <button type='submit' className={cx('profile__forward')}>Forward</button>
               </div>

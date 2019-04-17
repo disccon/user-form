@@ -37,8 +37,8 @@ export default function newUserReducer(state = newUser, action) {
   switch (action.type) {
     case CONTINUE_USER__CONTINUE: {
       return {
-        ...state,
-
+        ...action.payload.newUserDB,
+        isQuestion: false,
         error: undefined,
       }
     }

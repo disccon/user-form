@@ -51,13 +51,14 @@ export const CREATE_USER__SUCCESS = 'CREATE_USER__SUCCESS'
 export const CREATE_USER__FAILURE = 'CREATE_USER__FAILURE'
 
 
-export const continueUser = isContinue => (
-  {
+export const continueUser = (isContinue, newUserDB ) => {
+  return {
     type: CONTINUE_USER,
     payload: {
-      isContinue,
+      isContinue, newUserDB
     },
-  })
+  }
+}
 
 export const saveUserSRCAvatarIMG = userSRCAvatarIMG => (
   {
