@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { Route, Switch, Redirect } from 'react-router'
 import classNames from 'classnames'
 import styles from './Header.scss'
@@ -16,7 +16,7 @@ const cx = classNames.bind(styles)
 export class Header extends Component {
   forwardAccount = () => {
     const { history } = this.props
-    const { pathname } = this.props.history.location
+    const { pathname } = history.location
     if (pathname !== '/' && pathname !== '/Profile' && pathname !== '/Contacts' && pathname !== '/Capabilities') {
       history.push('/')
     }
@@ -24,7 +24,7 @@ export class Header extends Component {
 
   forwardListUsers = () => {
     const { history } = this.props
-    const { pathname } = this.props.history.location
+    const { pathname } = history.location
     if (pathname !== '/ListUsers') {
       history.push('/ListUsers')
     }
@@ -55,4 +55,8 @@ export class Header extends Component {
       </Fragment>
     )
   }
+}
+
+Header.propTypes = {
+  history: PropTypes.object.isRequired,
 }

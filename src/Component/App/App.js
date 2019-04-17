@@ -91,6 +91,7 @@ class App extends Component {
 App.propTypes = {
   newUser: PropTypes.object.isRequired,
   listUsers: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({

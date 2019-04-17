@@ -1,65 +1,15 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { reduxForm, Field, formValueSelector } from 'redux-form'
-import DatePicker from 'react-date-picker'
-import PropTypes from 'prop-types'
 import styles from './Profile.scss'
 import { forwardBackProfile } from '../../../Actions'
-// import DatePicker from 'react-date-picker/dist/entry.nostyle'
-import { ReactComponent as CalendarIcon } from '../../../img/icon/calendar.svg'
-
+import { renderFieldInputProfile } from './renderFieldInputProfile'
+import { renderFieldRadioProfile } from './renderFieldRadioProfile'
+import { renderDateTimePickerProfile } from './renderDateTimePickerProfile'
 
 const cx = classNames.bind(styles)
-
-const renderFieldInput = ({
-  label, input, type, meta: { touched, error }, className,
-}) => (
-  <label className={cx('profile__label')}>
-    <h4>{label}</h4>
-    <span>*</span>
-    <input {...input} type={type} className={className} />
-    {touched && error && <p>{error}</p>}
-  </label>
-)
-
-const renderFieldRadio = ({
-  label, input, type, name, meta: { touched, error },
-}) => (
-  <Fragment>
-    <label>
-      <input
-        {...input}
-        type={type}
-        name={name}
-      />
-      <span>{label}</span>
-    </label>
-    {input.value === 'female' && touched && error && <p>{error}</p>}
-  </Fragment>
-)
-
-const renderDateTimePicker = ({ input, meta: { touched, error } }) => (
-  <Fragment>
-    <div className={cx('profile__birthDate')}>
-      <h4>Birth date</h4>
-      <span className={cx('profile__birthDateSpan')}>*</span>
-      <DatePicker
-        clearIcon=''
-        calendarIcon={<CalendarIcon />}
-        className={cx('profile__datePicker')}
-        isOpen
-        locale='en'
-        {...input}
-        onBlur={() => input.onBlur()}
-        onChange={input.onChange}
-        value={input.value}
-        calendarClassName='profile__react-calendar'
-      />
-      {touched && error && <p className={cx('birthDate__error')}>{error}</p>}
-    </div>
-  </Fragment>
-)
 
 
 class Profile extends Component {
@@ -82,47 +32,53 @@ class Profile extends Component {
           <form className={cx('profile__form')} onSubmit={handleSubmit(this.onSubmit)}>
             <div className={cx('profile__sideLeft')}>
               <Field
-                component={renderFieldInput}
+                component={renderFieldInputProfile}
                 type='text'
                 label='First name'
                 name='firstName'
+                idField='fieldFirstName'
               />
               <Field
-                component={renderFieldInput}
+                component={renderFieldInputProfile}
                 type='text'
                 label='Last name'
                 name='lastName'
+                idField='fieldLastName'
               />
-              <Field name='birthDate' component={renderDateTimePicker} />
+              <Field name='birthDate' component={renderDateTimePickerProfile} />
             </div>
             <div className={cx('profile__sideRight')}>
               <Field
-                component={renderFieldInput}
+                component={renderFieldInputProfile}
                 type='text'
                 label='Email'
                 name='email'
+                idField='fieldEmail'
               />
               <Field
-                component={renderFieldInput}
+                component={renderFieldInputProfile}
                 type='text'
                 label='Address'
                 name='address'
+                idField='fieldAddress'
               />
               <h5>Gender</h5>
               <div className={cx('wrapperGender')}>
                 <Field
-                  component={renderFieldRadio}
+                  component={renderFieldRadioProfile}
                   type='radio'
                   label='Male'
                   name='gender'
                   value='male'
+                  idField='fieldGender'
                 />
                 <Field
-                  component={renderFieldRadio}
+                  component={renderFieldRadioProfile}
                   type='radio'
                   label='Female'
                   name='gender'
                   value='female'
+                  idField='fieldGender'
                 />
               </div>
               <div className={cx('wrapperButton')}>
@@ -139,15 +95,15 @@ Back
 }
 
 Profile.propTypes = {
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  email: PropTypes.string,
-  address: PropTypes.string,
-  gender: PropTypes.string,
-  birthDate: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ]),
+  firstNameForm: PropTypes.string,
+  lastNameForm: PropTypes.string,
+  birthDateForm: PropTypes.string,
+  emailForm: PropTypes.string,
+  addressForm: PropTypes.string,
+  maleGender: PropTypes.string,
+  userEmailList: PropTypes.array,
+  forwardBackProfile: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 }
 
 

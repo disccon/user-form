@@ -8,7 +8,7 @@ import { ReactComponent as CloseIcon } from '../../../img/icon/close.svg'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import { forwardAccount, saveUserSRCAvatarIMG, continueUser } from '../../../Actions'
-import { renderFieldInput } from './renderFieldInput'
+import { renderFieldInputAccount } from './renderFieldInputAccount'
 
 const cx = classNames.bind(styles)
 
@@ -126,14 +126,14 @@ Continue
             </div>
             <div className={cx('register__userData')}>
               <Field
-                component={renderFieldInput}
+                component={renderFieldInputAccount}
                 type='text'
                 label='User name'
                 name='userName'
                 idInput='userName'
               />
               <Field
-                component={renderFieldInput}
+                component={renderFieldInputAccount}
                 type={typeFieldPassword}
                 isVisibility
                 label='Password'
@@ -142,7 +142,7 @@ Continue
                 idInput='password'
               />
               <Field
-                component={renderFieldInput}
+                component={renderFieldInputAccount}
                 type={typeFieldPassword}
                 isVisibility
                 label='Repeat Password'

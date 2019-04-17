@@ -1,157 +1,32 @@
 import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Field, formValueSelector, reduxForm } from 'redux-form'
-import InputMask from 'react-input-mask'
-import Select from 'react-select'
-import PropTypes from 'prop-types'
+import styles from './Contacts.scss'
 import { forwardBackContacts, deleteAddFieldPhone } from '../../../Actions'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
-import styles from './Contacts.scss'
-
+import { renderFieldPhoneContacts } from './renderFieldPhoneContacts'
+import { renderFieldInputContacts } from './renderFieldInputContacts'
+import { renderFieldSelectContacts } from './renderFieldSelectContacts'
 
 const cx = classNames.bind(styles)
 
-const renderFieldInput = ({
-  label, input, type, meta: { touched, error }, className, span, placeholder, mask,
-}) => {
-  const inputRender = mask ? <InputMask {...input} mask={mask} placeholder={placeholder} />
-    : <input {...input} type={type} className={className} placeholder={placeholder} />
-  return (
-    <label className={cx('contacts__label')}>
-      <h4>{label}</h4>
-      {span && <span>*</span>}
-      {inputRender}
-      {touched && error && <p>{error}</p>}
-    </label>
-  )
-}
-
-const renderFieldPhone = ({
-  label, input, type, meta: { touched, error }, span, placeholder, deleteFieldPhone,
-}) => (
-  <div className={cx('contacts__labelPhone')}>
-    {span && <span onClick={deleteFieldPhone} />}
-    <label>
-      <h4>{label}</h4>
-      <InputMask {...input} type={type} mask='+7 (999) 999-99-99' placeholder={placeholder} />
-      {touched && error && <p>{error}</p>}
-    </label>
-  </div>
-)
-
-
-const renderFieldSelect = ({ label, input, meta: { touched, error } }) => (
-  <label className={cx('contacts__mainLanguage')}>
-    <h4>{label}</h4>
-    <Select
-      {...input}
-      onBlur={() => input.onBlur()}
-      onChange={input.onChange}
-      value={input.value}
-      options={options}
-      styles={colourStyles}
-    />
-    {touched && error && <p className={cx('mainLanguage__error')}>{error}</p>}
-  </label>
-)
-
-const options = [
-  { value: 'en', label: 'English, EN' },
-  { value: 'fr', label: 'French, FR' },
-  { value: 'es', label: 'Spanish, ES' },
-  { value: 'ar', label: 'Arabic, AR' },
-  { value: 'cmn', label: 'Mandarin, CMN' },
-  { value: 'ru', label: 'Russian, RU' },
-  { value: 'pt', label: 'Portuguese, PT' },
-  { value: 'de', label: 'German, DE' },
-  { value: 'ja', label: 'Japanese, JA' },
-  { value: 'hi', label: 'Hindi, HI' },
-  { value: 'ms', label: 'Malay, MS' },
-  { value: 'fa', label: 'Persian, FA' },
-  { value: 'sw', label: 'Swahili, SW' },
-  { value: 'ta', label: 'Tamil, TA' },
-  { value: 'it', label: 'Italian, IT' },
-  { value: 'nl', label: 'Dutch, NL' },
-  { value: 'bn', label: 'Bengali, BN' },
-  { value: 'tr', label: 'Turkish, TR' },
-  { value: 'vi', label: 'Vietnamese, VI' },
-  { value: 'pl', label: 'Polish, PL' },
-  { value: 'jv', label: 'Javanese, JV' },
-  { value: 'pa', label: 'Punjabi, PA' },
-  { value: 'th', label: 'Thai, TH' },
-  { value: 'ko', label: 'Korean, KO' },
-]
-const colourStyles = {
-  control: styles => ({
-    ...styles,
-    width: '300px',
-    height: '40px',
-    backgroundColor: 'white',
-    border: '1px solid #C1CFE0',
-    borderRadius: '0px',
-  }),
-  indicatorsContainer: styles => ({
-    ...styles,
-    opacity: 0,
-  }),
-  container: styles => ({
-    ...styles,
-    color: '#657C9A',
-    fontFamily: 'Roboto, sans-serif',
-    fontWeight: 400,
-    fontSize: '14px',
-    lineHeight: 'normal',
-    fontStyle: 'normal',
-  }),
-  menuList: styles => ({
-    ...styles,
-    height: '172px',
-  }),
-  menu: styles => ({
-    ...styles,
-    borderRadius: '0px',
-  }),
-  input: styles => ({
-    ...styles,
-    fontFamily: 'Roboto, sans-serif',
-    fontWeight: 500,
-    fontSize: '14px',
-    lineHeight: 'normal',
-    fontStyle: 'normal',
-    color: '#000000',
-  }),
-  placeholder: styles => ({
-    ...styles,
-    fontFamily: 'Roboto, sans-serif',
-    fontWeight: 400,
-    fontSize: '14px',
-    lineHeight: 'normal',
-    fontStyle: 'normal',
-    color: '#657C9A',
-  }),
-  singleValue: styles => ({
-    ...styles,
-    fontFamily: 'Roboto, sans-serif',
-    fontWeight: 500,
-    fontSize: '14px',
-    lineHeight: 'normal',
-    fontStyle: 'normal',
-    color: '#000000',
-  }),
-}
 
 class Contacts extends Component {
   backContacts = () => {
     const {
-      companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form, forwardBackContacts,
+      companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form,
+      forwardBackContacts,
     } = this.props
-    forwardBackContacts('back', companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneN1Form, phoneN2Form, phoneN3Form)
+    forwardBackContacts('back', companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneN1Form,
+      phoneN2Form, phoneN3Form)
   }
 
   onSubmit = values => {
     const { forwardBackContacts } = this.props
-    forwardBackContacts('forward', values.company, values.githubLink, values.facebookLink, values.selectLanguage, values.fax, values.phoneN1, values.phoneN2, values.phoneN3)
+    forwardBackContacts('forward', values.company, values.githubLink, values.facebookLink, values.selectLanguage, values.fax,
+      values.phoneN1, values.phoneN2, values.phoneN3)
   }
 
   deleteFieldPhone = () => {
@@ -169,46 +44,50 @@ class Contacts extends Component {
     const phoneFieldN1 = quantityPhoneField >= 2
       ? (
         <Field
-          component={renderFieldPhone}
+          component={renderFieldPhoneContacts}
           type='text'
           placeholder='+7 (066) 888-88-88'
           label='Phone #1'
           name='phoneN1'
           span
           deleteFieldPhone={this.deleteFieldPhone}
+          idField='filedPhoneN1'
         />
       )
       : (
         <Field
-          component={renderFieldPhone}
+          component={renderFieldPhoneContacts}
           type='text'
           placeholder='+7 (066) 888-88-88'
           label='Phone #1'
           name='phoneN1'
           deleteFieldPhone={this.deleteFieldPhone}
+          idField='filedPhoneN1'
         />
       )
     const phoneFieldN2 = quantityPhoneField >= 2
       ? (
         <Field
-          component={renderFieldPhone}
+          component={renderFieldPhoneContacts}
           type='text'
           label='Phone #2'
           name='phoneN2'
           span
           deleteFieldPhone={this.deleteFieldPhone}
+          idField='filedPhoneN2'
         />
       )
       : null
     const phoneFieldN3 = quantityPhoneField === 3
       ? (
         <Field
-          component={renderFieldPhone}
+          component={renderFieldPhoneContacts}
           type='text'
           label='Phone #3'
           name='phoneN3'
           span
           deleteFieldPhone={this.deleteFieldPhone}
+          idField='filedPhoneN3'
         />
       )
       : null
@@ -224,35 +103,39 @@ class Contacts extends Component {
         <form className={cx('contacts')} onSubmit={handleSubmit(this.onSubmit)}>
           <div className={cx('contacts__sideLeft')}>
             <Field
-              component={renderFieldInput}
+              component={renderFieldInputContacts}
               type='text'
               label='Company'
               name='company'
+              idField='fieldCompany'
             />
             <Field
-              component={renderFieldInput}
+              component={renderFieldInputContacts}
               type='text'
               label='Github link'
               name='githubLink'
+              idField='fieldGithubLink'
             />
             <Field
-              component={renderFieldInput}
+              component={renderFieldInputContacts}
               type='text'
               label='Facebook link'
               name='facebookLink'
               placeholder='www.facebook.com/hdfk_142_23lelf/'
               span='*'
+              idField='fieldFacebookLink'
             />
-            <Field component={renderFieldSelect} name='selectLanguage' label='Main language' />
+            <Field component={renderFieldSelectContacts} name='selectLanguage' label='Main language' idField='fieldSelectLanguage' />
           </div>
           <div className={cx('contacts__sideRight')}>
             <Field
-              component={renderFieldInput}
+              component={renderFieldInputContacts}
               type='text'
               label='Fax'
               name='fax'
               mask='+7 (999) 999-99-99'
               span='*'
+              idField='fieldFax'
             />
             {phoneFieldN1}
             {phoneFieldN2}
@@ -271,15 +154,18 @@ class Contacts extends Component {
 }
 
 Contacts.propTypes = {
-  company: PropTypes.string,
-  githubLink: PropTypes.string,
-  facebookLink: PropTypes.string,
-  selectLanguage: PropTypes.string,
-  fax: PropTypes.string,
-  phoneN1: PropTypes.string,
-  phoneN2: PropTypes.string,
-  phoneN3: PropTypes.string,
-  quantityPhoneField: PropTypes.number,
+  quantityPhoneField: PropTypes.string,
+  companyForm: PropTypes.string,
+  githubLinkForm: PropTypes.string,
+  facebookLinkForm: PropTypes.string,
+  selectLanguageForm: PropTypes.string,
+  faxForm: PropTypes.string,
+  phoneN1Form: PropTypes.string,
+  phoneN2Form: PropTypes.string,
+  phoneN3Form: PropTypes.string,
+  forwardBackContacts: PropTypes.func.isRequired,
+  deleteAddFieldPhone: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 }
 
 
@@ -290,7 +176,6 @@ Contacts = reduxForm({
     if (!values.selectLanguage) {
       errors.selectLanguage = 'Missing Main language'
     }
-
 
     if (!values.company) {
       errors.company = 'Missing Company'
@@ -313,26 +198,22 @@ Contacts = reduxForm({
     if (!values.fax) {
       errors.fax = 'Missing Facebook Fax'
     } else if (values.fax.charAt(17) >= 0) {
-    } else {
       errors.fax = 'Must be 10 digits'
     }
 
     if (!values.phoneN1) {
       errors.phoneN1 = 'Missing Phone Number'
     } else if (values.phoneN1.charAt(17) >= 0) {
-    } else {
       errors.phoneN1 = 'Must be 10 digits'
     }
     if (!values.phoneN2) {
       errors.phoneN2 = 'Missing Phone Number'
     } else if (values.phoneN2.charAt(17) >= 0) {
-    } else {
       errors.phoneN2 = 'Must be 10 digits'
     }
     if (!values.phoneN3) {
       errors.phoneN3 = 'Missing Phone Number'
     } else if (values.phoneN3.charAt(17) >= 0) {
-    } else {
       errors.phoneN3 = 'Must be 10 digits'
     }
 
@@ -367,7 +248,6 @@ const mapStateToProps = state => {
     phoneN1Form,
     phoneN2Form,
     phoneN3Form,
-    selectLanguage,
   }
 }
 

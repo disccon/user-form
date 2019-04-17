@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import styles from './ListUsersPage.scss'
@@ -46,7 +47,7 @@ class ListUsersPage extends Component {
                 <tr key={user.id}>
                   <td>
                     <div className={cx('wrapperUser')}>
-                      <img src={user.userSRCAvatarIMG} />
+                      <img src={user.userSRCAvatarIMG} alt='userSRCAvatarIMG' />
                       <div>
                         <h4>{user.userName}</h4>
                         <span>username</span>
@@ -62,10 +63,10 @@ class ListUsersPage extends Component {
                   <td>
                     <div className={cx('wrapperUser')}>
 3 month ago
-                      <button className={cx('button_editIcon')} onClick={this.editUser(user)}>
+                      <button type='button' className={cx('button_editIcon')} onClick={this.editUser(user)}>
                         <EditIcon className={cx('editIcon')} />
                       </button>
-                      <button className={cx('button_closeIcon')}>
+                      <button type='button' className={cx('button_closeIcon')}>
                         <CloseIcon className={cx('closeIcon')} onClick={this.deleteUser(user.id)} />
                       </button>
                     </div>
@@ -80,7 +81,7 @@ class ListUsersPage extends Component {
                       <h2 className={cx('noUsersH2')}>
 No users here :(
                       </h2>
-                      <button className={cx('createUserButton')} onClick={this.createUser}>Create new user</button>
+                      <button type='button' className={cx('createUserButton')} onClick={this.createUser}>Create new user</button>
                     </Fragment>
                     )
 
@@ -90,7 +91,12 @@ No users here :(
     }
 }
 
-ListUsersPage.propTypes = {}
+ListUsersPage.propTypes = {
+  users: PropTypes.array.isRequired,
+  editUser: PropTypes.func.isRequired,
+  deleteUser: PropTypes.func.isRequired,
+  createUser: PropTypes.func.isRequired,
+}
 
 const mapStateToProps = state => ({
   users: state.listUsers.users,

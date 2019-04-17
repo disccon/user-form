@@ -31,14 +31,14 @@ class EditUserPage extends Component {
     return (
       <Fragment>
         <h2 className={cx('UserNamePageHeadline')}>User Name</h2>
-        <h3 className={cx('UserNamePageH3')}><a>Users List</a></h3>
+        <h3 className={cx('UserNamePageH3')}>Users List</h3>
         <div className={cx('UserNamePageContainer')}>
-          <img src={userSRCAvatarIMG} className={cx('UserNamePageContainer__avatar')} />
+          <img src={userSRCAvatarIMG} className={cx('UserNamePageContainer__avatar')} alt='userSRCAvatarIMG' />
           <div className={cx('accountDataWrapper')}>
             <div className={cx('accountDataWrapper__block')}>
               <div className={cx('accountDataWrapper__section')}>
                 <h4>Account</h4>
-                <button>
+                <button type='button'>
                   <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Account')} />
                 </button>
               </div>
@@ -57,7 +57,7 @@ class EditUserPage extends Component {
             <div className={cx('accountDataWrapper__block')}>
               <div className={cx('accountDataWrapper__section')}>
                 <h4>Personal</h4>
-                <button>
+                <button type='button'>
                   <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Profile')} />
                 </button>
               </div>
@@ -87,7 +87,7 @@ class EditUserPage extends Component {
             <div className={cx('accountDataWrapper__block')}>
               <div className={cx('accountDataWrapper__section')}>
                 <h4>Contacts</h4>
-                <button>
+                <button type='button'>
                   <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Contacts')} />
                 </button>
               </div>
@@ -201,6 +201,8 @@ EditUserPage.propTypes = {
     PropTypes.string,
     PropTypes.bool,
   ]),
+  history: PropTypes.object.isRequired,
+  userSRCAvatarIMG: PropTypes.object,
 }
 
 

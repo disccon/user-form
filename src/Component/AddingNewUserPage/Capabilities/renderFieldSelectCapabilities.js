@@ -102,7 +102,9 @@ const colourStyles = {
 }
 
 
-export const renderFieldSelect = ({ label, input, meta: { touched, error }, idInput}) => (
+export const renderFieldSelectCapabilities = ({
+  label, input, meta: { touched, error }, idInput,
+}) => (
   <label htmlFor={idInput}>
     <h4>{label}</h4>
     <Select
@@ -120,7 +122,7 @@ export const renderFieldSelect = ({ label, input, meta: { touched, error }, idIn
 )
 
 
-renderFieldSelect.propTypes = {
+renderFieldSelectCapabilities.propTypes = {
   idInput: PropTypes.string,
   label: PropTypes.string,
   input: PropTypes.object.isRequired,
