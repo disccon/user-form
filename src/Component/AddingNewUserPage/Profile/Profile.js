@@ -70,7 +70,7 @@ class Profile extends Component {
                   label='Male'
                   name='gender'
                   value='male'
-                  idField='fieldGender'
+                  idField='fieldMale'
                 />
                 <Field
                   component={renderFieldRadioProfile}
@@ -78,7 +78,7 @@ class Profile extends Component {
                   label='Female'
                   name='gender'
                   value='female'
-                  idField='fieldGender'
+                  idField='fieldFemale'
                 />
               </div>
               <div className={cx('wrapperButton')}>

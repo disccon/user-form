@@ -26,13 +26,8 @@ class ListUsersPage extends Component {
       deleteUser(idListUser)
     }
 
-    createUser = () => {
-      const { createUser } = this.props
-      createUser()
-    }
-
     render() {
-      const { users } = this.props
+      const { users, createUser } = this.props
       return (
         <Fragment>
           <h2 className={cx('ListUsersH2')}>List of users</h2>
@@ -85,7 +80,7 @@ class ListUsersPage extends Component {
                       <h2 className={cx('noUsersH2')}>
                         No users here :(
                       </h2>
-                      <button type='button' className={cx('createUserButton')} onClick={this.createUser}>Create new user</button>
+                      <button type='button' className={cx('createUserButton')} onClick={createUser}>Create new user</button>
                     </Fragment>
                     )
                 }

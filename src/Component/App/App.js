@@ -8,7 +8,7 @@ import classNames from 'classnames'
 import { getFormNames, getFormValues } from 'redux-form'
 import NodFound from '../NodFound/NodFound'
 import styles from './App.scss'
-import { Header } from '../Header/Header'
+import Header from '../Header/Header'
 import db from '../../db'
 import { userListerNewState, continueUser } from '../../Actions'
 
@@ -84,7 +84,7 @@ App.propTypes = {
   activeValue: PropTypes.object,
   userListerNewState: PropTypes.func.isRequired,
   pathname: PropTypes.string.isRequired,
-  continueUser: PropTypes.object.isRequired,
+  continueUser: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => {

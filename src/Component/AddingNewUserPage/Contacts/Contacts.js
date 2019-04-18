@@ -154,11 +154,14 @@ class Contacts extends Component {
 }
 
 Contacts.propTypes = {
-  quantityPhoneField: PropTypes.string,
+  quantityPhoneField: PropTypes.number,
   companyForm: PropTypes.string,
   githubLinkForm: PropTypes.string,
   facebookLinkForm: PropTypes.string,
-  selectLanguageForm: PropTypes.string,
+  selectLanguageForm: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
   faxForm: PropTypes.string,
   phoneN1Form: PropTypes.string,
   phoneN2Form: PropTypes.string,
@@ -197,24 +200,25 @@ Contacts = reduxForm({
 
     if (!values.fax) {
       errors.fax = 'Missing Facebook Fax'
-    } else if (values.fax.charAt(17) >= 0) {
-      errors.fax = 'Must be 10 digits'
+    } else {
+      errors.fax = values.fax.charAt(17) >= 0 ? null : 'Must be 10 digits'
     }
 
     if (!values.phoneN1) {
       errors.phoneN1 = 'Missing Phone Number'
-    } else if (values.phoneN1.charAt(17) >= 0) {
-      errors.phoneN1 = 'Must be 10 digits'
+    } else {
+      errors.phoneN1 = values.phoneN1.charAt(17) >= 0 ? null : 'Must be 10 digits'
     }
+
     if (!values.phoneN2) {
       errors.phoneN2 = 'Missing Phone Number'
-    } else if (values.phoneN2.charAt(17) >= 0) {
-      errors.phoneN2 = 'Must be 10 digits'
+    } else {
+      errors.phoneN2 = values.phoneN2.charAt(17) >= 0 ? null : 'Must be 10 digits'
     }
     if (!values.phoneN3) {
       errors.phoneN3 = 'Missing Phone Number'
-    } else if (values.phoneN3.charAt(17) >= 0) {
-      errors.phoneN3 = 'Must be 10 digits'
+    } else {
+      errors.phoneN3 = values.phoneN3.charAt(17) >= 0 ? null : 'Must be 10 digits'
     }
 
     return errors

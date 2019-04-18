@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { Route, Switch, Redirect } from 'react-router'
 import classNames from 'classnames'
 import styles from './Header.scss'
@@ -9,19 +10,12 @@ import { ReactComponent as LoginIcon } from '../../img/icon/login.svg'
 import { AddingNewUserPage } from '../AddingNewUserPage/AddingNewUserPage'
 import ListUsersPage from '../ListUsersPage/ListUsersPage'
 import EditUserPage from '../EditUserPage/EditUserPage'
+import { createUser } from '../../Actions'
 
 
 const cx = classNames.bind(styles)
 
-export class Header extends Component {
-  forwardAccount = () => {
-    const { history } = this.props
-    const { pathname } = history.location
-    if (pathname !== '/' && pathname !== '/Profile' && pathname !== '/Contacts' && pathname !== '/Capabilities') {
-      history.push('/')
-    }
-  }
-
+class Header extends Component {
   forwardListUsers = () => {
     const { history } = this.props
     const { pathname } = history.location
@@ -31,13 +25,14 @@ export class Header extends Component {
   }
 
   render() {
+    const { createUser } = this.props
     return (
       <Fragment>
         <header>
           <div className={cx('logoA')}>
-            <LogoIcon className={cx('logoIcon')} alt='logoIcon' onClick={this.forwardAccount} />
+            <LogoIcon className={cx('logoIcon')} alt='logoIcon' />
           </div>
-          <div className={cx('addUserA')} onClick={this.forwardAccount}>
+          <div className={cx('addUserA')} onClick={createUser} >
             <AddUserIcon className={cx('addUserIcon')} alt='addUserIcon' />
             <span>Add new user</span>
           </div>
@@ -59,4 +54,10 @@ export class Header extends Component {
 
 Header.propTypes = {
   history: PropTypes.object.isRequired,
+  createUser: PropTypes.func.isRequired,
 }
+
+export default connect(
+  null,
+  { createUser },
+)(Header)

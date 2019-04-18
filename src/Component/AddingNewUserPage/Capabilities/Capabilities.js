@@ -94,14 +94,35 @@ class Capabilities extends Component {
 }
 
 Capabilities.propTypes = {
-  selectSkillsForm: PropTypes.string,
+  selectSkillsForm: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+  ]),
   textareaFieldForm: PropTypes.string,
-  checkboxArtForm: PropTypes.string,
-  checkboxSportForm: PropTypes.string,
-  checkboxJustWantForm: PropTypes.string,
-  checkboxFemaleForm: PropTypes.string,
-  checkboxGuitarForm: PropTypes.string,
-  checkboxWtfForm: PropTypes.string,
+  checkboxArtForm: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
+  checkboxSportForm: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
+  checkboxJustWantForm: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
+  checkboxFemaleForm: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
+  checkboxGuitarForm: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
+  checkboxWtfForm: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
   backCapabilities: PropTypes.func.isRequired,
   forwardCapabilities: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,

@@ -173,7 +173,7 @@ Account = reduxForm({
     } else if (values.userName.length <= 3) {
       errors.userName = 'Must be 4 characters or more'
     } else {
-      userNameList.filter(userName => {
+      userNameList.forEach(userName => {
         if (values.userName === userName) {
           errors.userName = 'already have this user in the database'
         }
@@ -199,12 +199,15 @@ Account = reduxForm({
 
 
 Account.propTypes = {
-  userSRCAvatarIMG: PropTypes.array,
+  userSRCAvatarIMG: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+  ]),
   isQuestion: PropTypes.bool.isRequired,
   continueUser: PropTypes.func.isRequired,
   saveUserSRCAvatarIMG: PropTypes.func.isRequired,
   forwardAccount: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func,
 }
 
 
@@ -213,12 +216,7 @@ const mapStateToProps = state => {
     userName, password, repeatPassword, userSRCAvatarIMG, isQuestion, idListUser,
   } = state.newUser
   const { users } = state.listUsers
-  const userNameList = users.map(user => {
-    if (user.idListUser === idListUser) {
-    } else {
-      return user.userName
-    }
-  })
+  const userNameList = users.map(user => (user.idListUser === idListUser ? '' : user.userName))
   return {
     initialValues: {
       userName, password, repeatPassword,
