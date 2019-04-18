@@ -18,10 +18,8 @@ export default function listUsersReducer(state = { users: [] }, action) {
         error: undefined,
       }
     }
-
     case USER_LISTER_NEW_STATE__FAILURE: {
       return {
-        ...state,
         ...state,
         error: action.error,
       }
@@ -35,7 +33,6 @@ export default function listUsersReducer(state = { users: [] }, action) {
         error: undefined,
       }
     }
-
     case FORWARD_CAPABILITIES__EDIT_USER: {
       return {
         ...state,

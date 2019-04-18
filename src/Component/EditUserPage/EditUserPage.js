@@ -54,7 +54,6 @@ class EditUserPage extends Component {
                 </div>
               </div>
             </div>
-
             <div className={cx('accountDataWrapper__block')}>
               <div className={cx('accountDataWrapper__section')}>
                 <h4>Personal</h4>

@@ -36,7 +36,7 @@ class App extends Component {
               })
           }
         } else {
-          userListerNewState(users)
+          userListerNewState(...users)
         }
       })
   }

@@ -4,9 +4,7 @@ import classNames from 'classnames'
 import Select from 'react-select'
 import styles from './Contacts.scss'
 
-
 const cx = classNames.bind(styles)
-
 
 const options = [
   { value: 'en', label: 'English, EN' },

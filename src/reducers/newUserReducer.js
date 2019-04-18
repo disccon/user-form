@@ -173,7 +173,6 @@ export default function newUserReducer(state = newUser, action) {
         error: undefined,
       }
     }
-
     case DELETE_ADD_FIELD_PHONE__FAILURE: {
       return {
         ...state,

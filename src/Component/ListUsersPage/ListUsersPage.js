@@ -11,7 +11,6 @@ import db from '../../db'
 
 const cx = classNames.bind(styles)
 
-
 class ListUsersPage extends Component {
   state = {
     pageList: 0,
@@ -29,93 +28,96 @@ class ListUsersPage extends Component {
     })
   }
 
-    deleteUser = idListUser => () => {
-      const { deleteUser } = this.props
+  deleteUser = idListUser => () => {
+    const { deleteUser } = this.props
+    this.setState({
+      deleteList: false,
+    })
+    db.table('listUserDB')
+      .delete(idListUser)
+    deleteUser(idListUser)
+  }
+
+  forwardPagination = page => () => {
+    const { users } = this.props
+    if (page <= (users.length / 7) || page === 1) {
       this.setState({
-        deleteList: false,
+        pageList: page,
       })
-      db.table('listUserDB')
-        .delete(idListUser)
-      deleteUser(idListUser)
     }
+  }
 
-    forwardPagination = page => () => {
-      const { users } = this.props
-      if (page <= (users.length / 7) || page === 1) {
-        this.setState({
-          pageList: page,
-        })
-      }
+  render() {
+    const { users, createUser } = this.props
+    const { pageList, deleteList } = this.state
+    const visibleUserLength = users.length - (7 * pageList) >= 6 ? 6 : users.length - (7 * pageList)
+    const visibleUser = []
+    for (let i = 0; i < visibleUserLength; i += 1) {
+      visibleUser.push(users[i + (7 * pageList)])
     }
-
-    render() {
-      const { users, createUser } = this.props
-      const { pageList, deleteList } = this.state
-      const visibleUserLength = users.length - (7 * pageList) >= 6 ? 6 : users.length - (7 * pageList)
-      const visibleUser = []
-      for (let i = 0; i < visibleUserLength; i += 1) {
-        visibleUser.push(users[i + (7 * pageList)])
-      }
-      return (
-        <Fragment>
-          <h2 className={cx('ListUsersH2')}>List of users</h2>
-          <table className={cx('ListUsersTable')}>
-            <thead>
-              <tr>
-                <th>name</th>
-                <th>company</th>
-                <th>contacts</th>
-                <th>last update</th>
+    return (
+      <Fragment>
+        <h2 className={cx('ListUsersH2')}>List of users</h2>
+        <table className={cx('ListUsersTable')}>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>company</th>
+              <th>contacts</th>
+              <th>last update</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr />
+            {users.length > 0 && visibleUser.map(user => (
+              <tr key={user.idListUser} className={cx(deleteList === user.idListUser ? 'delete' : null)}>
+                <td>
+                  <div className={cx('wrapperUser')}>
+                    <img src={user.userSRCAvatarIMG} alt='userSRCAvatarIMG' />
+                    <div>
+                      <h4>{user.userName}</h4>
+                      <span>username</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div className={cx('wrapperUser')}>{user.company}</div>
+                </td>
+                <td>
+                  <div className={cx('wrapperUser')}>{user.email}</div>
+                </td>
+                <td>
+                  <div className={cx('wrapperUser')}>
+                  3 month ago
+                    {deleteList !== user.idListUser && (
+                    <Fragment>
+                      <button type='button' className={cx('button_editIcon')} onClick={this.editUser(user)}>
+                        <EditIcon className={cx('editIcon')} />
+                      </button>
+                      <button type='button' className={cx('button_closeIcon')}>
+                        <CloseIcon
+                          className={cx('closeIcon')}
+                          onClick={this.showRemoveUserButton(user.idListUser)}
+                        />
+                      </button>
+                    </Fragment>
+                    )
+                  }
+                  </div>
+                </td>
+                {deleteList === user.idListUser && (
+                <label htmlFor='closeIcon' onClick={this.deleteUser(user.idListUser)}>
+                  <button type='button' id='closeIcon'>
+                    <CloseIcon className={cx('deleteUser')} />
+                    delete
+                  </button>
+                </label>
+                )}
               </tr>
-            </thead>
-            <tbody>
-              <tr />
-              {users.length > 0 && visibleUser.map(user => (
-                <tr key={user.idListUser} className={cx(deleteList === user.idListUser ? 'delete' : null)}>
-                  <td>
-                    <div className={cx('wrapperUser')}>
-                      <img src={user.userSRCAvatarIMG} alt='userSRCAvatarIMG' />
-                      <div>
-                        <h4>{user.userName}</h4>
-                        <span>username</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className={cx('wrapperUser')}>{user.company}</div>
-                  </td>
-                  <td>
-                    <div className={cx('wrapperUser')}>{user.email}</div>
-                  </td>
-                  <td>
-                    <div className={cx('wrapperUser')}>
-                        3 month ago
-                      {deleteList !== user.idListUser && (
-                      <Fragment>
-                        <button type='button' className={cx('button_editIcon')} onClick={this.editUser(user)}>
-                          <EditIcon className={cx('editIcon')} />
-                        </button>
-                        <button type='button' className={cx('button_closeIcon')}>
-                          <CloseIcon className={cx('closeIcon')} onClick={this.showRemoveUserButton(user.idListUser)} />
-                        </button>
-                      </Fragment>
-                      )
-                        }
-                    </div>
-                  </td>
-                  {deleteList === user.idListUser && (
-                  <label htmlFor='closeIcon' onClick={this.deleteUser(user.idListUser)}>
-                    <button type='button' id='closeIcon'>
-                      <CloseIcon className={cx('deleteUser')} />
-                      delete
-                    </button>
-                  </label>
-                  ) }
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          {users.length > 0 && (
+            ))}
+          </tbody>
+        </table>
+        {users.length > 0 && (
           <div className={cx('ListUsers__Pagination')}>
             <button type='button'>&laquo;</button>
             <button
@@ -162,20 +164,20 @@ class ListUsersPage extends Component {
             </button>
             <button type='button' className={cx(users.length > (7 * 6) ? 'pagination__active' : '')}>&raquo;</button>
           </div>
-          )}
-          {users.length === 0
-                    && (
-                    <Fragment>
-                      <h2 className={cx('noUsersH2')}>
-                        No users here :(
-                      </h2>
-                      <button type='button' className={cx('createUserButton')} onClick={createUser}>Create new user</button>
-                    </Fragment>
-                    )
-                }
-        </Fragment>
-      )
-    }
+        )}
+        {users.length === 0
+        && (
+          <Fragment>
+            <h2 className={cx('noUsersH2')}>
+              No users here :(
+            </h2>
+            <button type='button' className={cx('createUserButton')} onClick={createUser}>Create new user</button>
+          </Fragment>
+        )
+        }
+      </Fragment>
+    )
+  }
 }
 
 ListUsersPage.propTypes = {
