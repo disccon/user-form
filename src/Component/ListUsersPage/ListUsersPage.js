@@ -15,7 +15,7 @@ const cx = classNames.bind(styles)
 class ListUsersPage extends Component {
   state = {
     pageList: 0,
-    deleteList: 3,
+    deleteList: false,
   }
 
   editUser = user => () => {
