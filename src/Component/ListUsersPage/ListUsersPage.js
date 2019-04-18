@@ -13,21 +13,39 @@ const cx = classNames.bind(styles)
 
 
 class ListUsersPage extends Component {
-    editUser = user => () => {
-      const { editUser } = this.props
-      editUser(user)
-    }
+  state = {
+    pageList: 0,
+  }
+
+  editUser = user => () => {
+    const { editUser } = this.props
+    editUser(user)
+  }
 
     deleteUser = idListUser => () => {
       const { deleteUser } = this.props
-      console.log(111111, idListUser)
       db.table('listUserDB')
         .delete(idListUser)
       deleteUser(idListUser)
     }
 
+    forwardPagination = page => () => {
+      const { users } = this.props
+      if (page >= (users.length / 7) || page === 1) {
+        this.setState({
+          pageList: page - 1,
+        })
+      }
+    }
+
     render() {
       const { users, createUser } = this.props
+      const { pageList } = this.state
+      const visibleUserLength = users.length - (7 * pageList) >= 6 ? 6 : users.length - (7 * pageList)
+      const visibleUser = []
+      for (let i = 0; i < visibleUserLength; i += 1) {
+        visibleUser.push(users[i + (7 * pageList)])
+      }
       return (
         <Fragment>
           <h2 className={cx('ListUsersH2')}>List of users</h2>
@@ -42,7 +60,7 @@ class ListUsersPage extends Component {
             </thead>
             <tbody>
               <tr />
-              {users.map(user => (
+              {users.length > 0 && visibleUser.map(user => (
                 <tr key={user.idListUser}>
                   <td>
                     <div className={cx('wrapperUser')}>
@@ -74,6 +92,19 @@ class ListUsersPage extends Component {
               ))}
             </tbody>
           </table>
+          {users.length > 0 && (
+          <div className={cx('ListUsers__Pagination')}>
+            <span>&laquo;</span>
+            <span className={cx('pagination__active')} onClick={this.forwardPagination(1)}>1</span>
+            <span className={cx(users.length > 7 ? 'pagination__active' : '')} onClick={this.forwardPagination(2)}>2</span>
+            <span className={cx(users.length > (7 * 2) ? 'pagination__active' : '')} onClick={this.forwardPagination(3)}>3</span>
+            <span className={cx(users.length > (7 * 3) ? 'pagination__active' : '')} onClick={this.forwardPagination(4)}>4</span>
+            <span className={cx(users.length > (7 * 4) ? 'pagination__active' : '')} onClick={this.forwardPagination(5)}>5</span>
+            <span className={cx(users.length > (7 * 5) ? 'pagination__active' : '')} onClick={this.forwardPagination(6)}>6</span>
+            <span className={cx(users.length > (7 * 6) ? 'pagination__active' : '')}>&raquo;</span>
+          </div>
+          )
+          }
           {users.length === 0
                     && (
                     <Fragment>

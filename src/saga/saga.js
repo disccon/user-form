@@ -318,8 +318,7 @@ export function* editUserSaga(action) {
       payload: {
         ...user,
         isQuestion: false,
-      }
-      ,
+      },
     })
   } catch (error) {
     yield put({

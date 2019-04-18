@@ -118,3 +118,29 @@
   text-align: center;
   color: #FFFFFF;
 }
+.ListUsers__Pagination{
+  display: flex;
+  font-size: 17px;
+  color: #c4d0ce;
+  margin-top: 25px;
+  margin-right: auto;
+  margin-left: auto;
+  span:first-child, span:last-child{
+    font-size: 21px;
+    margin-top: -5px;
+  }
+  span{
+    display: block;
+    cursor: pointer;
+    margin-right: 2px;
+    margin-left: 2px;
+    font-weight: 500;
+  }
+  span:hover{
+    transition: color ease 0.3s;
+    color: #4E86E4;
+  }
+  .pagination__active{
+    color: #475666;
+  }
+}

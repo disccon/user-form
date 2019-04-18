@@ -168,12 +168,7 @@ const mapStateToProps = state => {
     firstName, lastName, email, address, gender, birthDate, idListUser,
   } = state.newUser
   const { listUsers } = state
-  const userEmailList = listUsers.users.map(user => {
-    if (user.idListUser === idListUser) {
-    } else {
-      return user.email
-    }
-  })
+  const userEmailList = listUsers.users.map(user => (user.idListUser === idListUser ? '' : user.email))
   return {
     initialValues: {
       firstName, lastName, birthDate, email, address, gender,
