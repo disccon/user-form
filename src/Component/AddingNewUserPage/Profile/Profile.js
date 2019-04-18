@@ -152,7 +152,6 @@ Profile = reduxForm({
     return errors
   },
   form: 'Profile',
-  enableReinitialize: true,
 })(Profile)
 
 
@@ -168,11 +167,11 @@ const mapStateToProps = state => {
     firstName, lastName, email, address, gender, birthDate, idListUser,
   } = state.newUser
   const { listUsers } = state
-  const userEmailList = listUsers.users.forEach(user => {
+  const userEmailList = listUsers.users.map(user => {
     if (user.idListUser === idListUser) {
-      return
+    } else {
+      return user.email
     }
-    return user.email
   })
   return {
     initialValues: {

@@ -27,7 +27,6 @@ class App extends Component {
             .then(listUserDB => {
               userListerNewState(listUserDB)
             })
-
           if (pathname !== '/') {
             db.table('newUserDB')
               .toArray()
@@ -85,6 +84,7 @@ App.propTypes = {
   activeValue: PropTypes.object,
   userListerNewState: PropTypes.func.isRequired,
   pathname: PropTypes.string.isRequired,
+  continueUser: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => {
