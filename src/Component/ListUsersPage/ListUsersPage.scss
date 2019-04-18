@@ -121,22 +121,21 @@
 .ListUsers__Pagination{
   display: flex;
   font-size: 17px;
-  color: #c4d0ce;
   margin-top: 25px;
   margin-right: auto;
   margin-left: auto;
-  span:first-child, span:last-child{
+  button:first-child, button:last-child{
     font-size: 21px;
     margin-top: -5px;
   }
-  span{
+  button{
+    color: #c4d0ce;
+    background: transparent;
     display: block;
     cursor: pointer;
-    margin-right: 2px;
-    margin-left: 2px;
     font-weight: 500;
   }
-  span:hover{
+  .pagination__active:hover{
     transition: color ease 0.3s;
     color: #4E86E4;
   }

@@ -13,7 +13,10 @@ module.exports = {
       modules: true
     }
   },
+
   rules: {
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
     'react/forbid-prop-types': 0,
     'import/prefer-default-export': 0,
     'react/jsx-key': 2,

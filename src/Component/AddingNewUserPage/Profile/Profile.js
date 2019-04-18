@@ -144,9 +144,7 @@ Profile = reduxForm({
       errors.email = 'Invalid email address'
     } else {
       userEmailList.forEach(userName => {
-        if (values.email === userName) {
-          errors.email = 'already have this email in the database'
-        }
+        errors.email = values.email === userName ? 'already have this email in the database' : null
       })
     }
     return errors

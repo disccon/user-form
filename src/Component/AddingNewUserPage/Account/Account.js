@@ -174,9 +174,7 @@ Account = reduxForm({
       errors.userName = 'Must be 4 characters or more'
     } else {
       userNameList.forEach(userName => {
-        if (values.userName === userName) {
-          errors.userName = 'already have this user in the database'
-        }
+        errors.userName = values.userName === userName ? 'already have this user in the database' : null
       })
     }
 

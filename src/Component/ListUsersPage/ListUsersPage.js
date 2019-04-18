@@ -94,17 +94,52 @@ class ListUsersPage extends Component {
           </table>
           {users.length > 0 && (
           <div className={cx('ListUsers__Pagination')}>
-            <span>&laquo;</span>
-            <span className={cx('pagination__active')} onClick={this.forwardPagination(1)}>1</span>
-            <span className={cx(users.length > 7 ? 'pagination__active' : '')} onClick={this.forwardPagination(2)}>2</span>
-            <span className={cx(users.length > (7 * 2) ? 'pagination__active' : '')} onClick={this.forwardPagination(3)}>3</span>
-            <span className={cx(users.length > (7 * 3) ? 'pagination__active' : '')} onClick={this.forwardPagination(4)}>4</span>
-            <span className={cx(users.length > (7 * 4) ? 'pagination__active' : '')} onClick={this.forwardPagination(5)}>5</span>
-            <span className={cx(users.length > (7 * 5) ? 'pagination__active' : '')} onClick={this.forwardPagination(6)}>6</span>
+            <button type='button'>&laquo;</button>
+            <button
+              type='button'
+              className={cx('pagination__active')}
+              onClick={this.forwardPagination(1)}
+            >
+1
+            </button>
+            <button
+              type='button'
+              className={cx(users.length > 7 ? 'pagination__active' : '')}
+              onClick={this.forwardPagination(2)}
+            >
+2
+            </button>
+            <button
+              type='button'
+              className={cx(users.length > (7 * 2) ? 'pagination__active' : '')}
+              onClick={this.forwardPagination(3)}
+            >
+3
+            </button>
+            <button
+              type='button'
+              className={cx(users.length > (7 * 3) ? 'pagination__active' : '')}
+              onClick={this.forwardPagination(4)}
+            >
+4
+            </button>
+            <button
+              type='button'
+              className={cx(users.length > (7 * 4) ? 'pagination__active' : '')}
+              onClick={this.forwardPagination(5)}
+            >
+              5
+            </button>
+            <button
+              type='button'
+              className={cx(users.length > (7 * 5) ? 'pagination__active' : '')}
+              onClick={this.forwardPagination(6)}
+            >
+6
+            </button>
             <span className={cx(users.length > (7 * 6) ? 'pagination__active' : '')}>&raquo;</span>
           </div>
-          )
-          }
+          )}
           {users.length === 0
                     && (
                     <Fragment>
