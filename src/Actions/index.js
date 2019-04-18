@@ -64,12 +64,12 @@ export const userListerNewState = userLister => ({
 
 export const continueUser = (isContinue, newUserDB) => (
 
-    {
-  type: CONTINUE_USER,
-  payload: {
-    isContinue, newUserDB,
-  },
-})
+  {
+    type: CONTINUE_USER,
+    payload: {
+      isContinue, newUserDB,
+    },
+  })
 
 export const saveUserSRCAvatarIMG = userSRCAvatarIMG => (
   {

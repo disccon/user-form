@@ -32,8 +32,9 @@ class EditUserPage extends Component {
       <Fragment>
         <h2 className={cx('UserNamePageHeadline')}>User Name</h2>
         <h3 className={cx('UserNamePageH3')}>Users List</h3>
-        { birthDate && <div className={cx('UserNamePageContainer')}>
-        <img src={userSRCAvatarIMG} className={cx('UserNamePageContainer__avatar')} alt='userSRCAvatarIMG' />
+        { birthDate && (
+        <div className={cx('UserNamePageContainer')}>
+          <img src={userSRCAvatarIMG} className={cx('UserNamePageContainer__avatar')} alt='userSRCAvatarIMG' />
           <div className={cx('accountDataWrapper')}>
             <div className={cx('accountDataWrapper__block')}>
               <div className={cx('accountDataWrapper__section')}>
@@ -150,7 +151,8 @@ class EditUserPage extends Component {
               </div>
             </div>
           </div>
-        </div> }
+        </div>
+        ) }
       </Fragment>
     )
   }

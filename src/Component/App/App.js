@@ -28,14 +28,13 @@ class App extends Component {
               userListerNewState(listUserDB)
             })
 
-            if(pathname !== '/') {
-              db.table('newUserDB')
-                .toArray()
-                .then(newUserDB => {
-                  continueUser(true, ...newUserDB)
-                })
-            }
-
+          if (pathname !== '/') {
+            db.table('newUserDB')
+              .toArray()
+              .then(newUserDB => {
+                continueUser(true, ...newUserDB)
+              })
+          }
         }
       })
   }
