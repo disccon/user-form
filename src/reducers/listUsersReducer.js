@@ -1,5 +1,8 @@
 import { listUsers } from '../stubs/listUsers'
 import {
+  USER_LISTER_NEW_STATE__SUCCESS,
+  USER_LISTER_NEW_STATE__FAILURE,
+
   FORWARD_CAPABILITIES__ADD_NEW_USER,
   FORWARD_CAPABILITIES__EDIT_USER,
   FORWARD_CAPABILITIES__FAILURE,
@@ -10,6 +13,21 @@ import {
 
 export default function listUsersReducer(state = listUsers, action) {
   switch (action.type) {
+    case USER_LISTER_NEW_STATE__SUCCESS: {
+      return {
+        users: [...action.payload.userLister],
+        error: undefined,
+      }
+    }
+
+    case USER_LISTER_NEW_STATE__FAILURE: {
+      return {
+        ...state,
+        ...state,
+        error: action.error,
+      }
+    }
+
     case FORWARD_CAPABILITIES__ADD_NEW_USER: {
       return {
         ...state,

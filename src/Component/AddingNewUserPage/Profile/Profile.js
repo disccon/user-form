@@ -97,7 +97,10 @@ class Profile extends Component {
 Profile.propTypes = {
   firstNameForm: PropTypes.string,
   lastNameForm: PropTypes.string,
-  birthDateForm: PropTypes.string,
+  birthDateForm: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
   emailForm: PropTypes.string,
   addressForm: PropTypes.string,
   maleGender: PropTypes.string,
@@ -140,7 +143,7 @@ Profile = reduxForm({
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
       errors.email = 'Invalid email address'
     } else {
-      userEmailList.filter(userName => {
+      userEmailList.forEach(userName => {
         if (values.email === userName) {
           errors.email = 'already have this email in the database'
         }
@@ -149,6 +152,7 @@ Profile = reduxForm({
     return errors
   },
   form: 'Profile',
+  enableReinitialize: true,
 })(Profile)
 
 
@@ -161,14 +165,14 @@ const mapStateToProps = state => {
   const maleGender = selector(state, 'gender')
   const birthDateForm = selector(state, 'birthDate')
   const {
-    firstName, lastName, email, address, gender, birthDate, id,
+    firstName, lastName, email, address, gender, birthDate, idListUser,
   } = state.newUser
   const { listUsers } = state
-  const userEmailList = listUsers.users.map(user => {
-    if (user.id === id) {
-    } else {
-      return user.email
+  const userEmailList = listUsers.users.forEach(user => {
+    if (user.idListUser === idListUser) {
+      return
     }
+    return user.email
   })
   return {
     initialValues: {

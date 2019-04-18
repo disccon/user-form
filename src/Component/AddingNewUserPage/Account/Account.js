@@ -9,7 +9,7 @@ import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.s
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import { forwardAccount, saveUserSRCAvatarIMG, continueUser } from '../../../Actions'
 import { renderFieldInputAccount } from './renderFieldInputAccount'
-import db from "../../../db";
+import db from '../../../db'
 
 const cx = classNames.bind(styles)
 
@@ -24,7 +24,7 @@ class Account extends Component {
       const { continueUser } = this.props
       db.table('newUserDB')
         .toArray()
-        .then((newUserDB) => {
+        .then(newUserDB => {
           continueUser(isContinue, ...newUserDB)
         })
     }
@@ -155,7 +155,7 @@ class Account extends Component {
                 changeTypePassword={this.changeTypePassword}
                 idInput='repeatPassword'
               />
-              <button type='submit'>Forward</button>
+              <button type='submit' >Forward</button>
             </div>
           </form>
         </Fragment>
@@ -194,11 +194,12 @@ Account = reduxForm({
     return errors
   },
   form: 'Account',
+  enableReinitialize: true,
 })(Account)
 
 
 Account.propTypes = {
-  userSRCAvatarIMG: PropTypes.string,
+  userSRCAvatarIMG: PropTypes.array,
   isQuestion: PropTypes.bool.isRequired,
   continueUser: PropTypes.func.isRequired,
   saveUserSRCAvatarIMG: PropTypes.func.isRequired,
@@ -209,17 +210,17 @@ Account.propTypes = {
 
 const mapStateToProps = state => {
   const {
-    userName, password, repeatPassword, userSRCAvatarIMG, isQuestion, id,
+    userName, password, repeatPassword, userSRCAvatarIMG, isQuestion, idListUser,
   } = state.newUser
   const { users } = state.listUsers
   const userNameList = users.map(user => {
-    if (user.id === id) {
+    if (user.idListUser === idListUser) {
     } else {
       return user.userName
     }
   })
   return {
-    values: {
+    initialValues: {
       userName, password, repeatPassword,
     },
     userSRCAvatarIMG,

@@ -5,20 +5,41 @@ import './reset.css'
 import { Route, Switch, Redirect } from 'react-router'
 import { ConnectedRouter } from 'connected-react-router'
 import classNames from 'classnames'
+import { getFormNames, getFormValues } from 'redux-form'
 import NodFound from '../NodFound/NodFound'
 import styles from './App.scss'
 import { Header } from '../Header/Header'
 import db from '../../db'
-import { getFormNames, getFormValues } from 'redux-form'
-
+import { userListerNewState, continueUser } from '../../Actions'
 
 const cx = classNames.bind(styles)
 
-
 class App extends Component {
   componentDidMount() {
+    const { userListerNewState, pathname, continueUser } = this.props
     window.addEventListener('beforeunload', this.onUnload)
+    db.table('newUserDB')
+      .toArray()
+      .then(newUserDB => {
+        if (newUserDB.length === 1) {
+          db.table('listUserDB')
+            .toArray()
+            .then(listUserDB => {
+              userListerNewState(listUserDB)
+            })
+
+            if(pathname !== '/') {
+              db.table('newUserDB')
+                .toArray()
+                .then(newUserDB => {
+                  continueUser(true, ...newUserDB)
+                })
+            }
+
+        }
+      })
   }
+
   componentWillUnmount() {
     window.removeEventListener('beforeunload', this.onUnload)
   }
@@ -27,10 +48,10 @@ class App extends Component {
     const { newUser, listUsers, activeValue } = this.props
     db.table('newUserDB')
       .toArray()
-      .then((newUserDB) => {
+      .then(newUserDB => {
         if (newUserDB.length === 1) {
           db.table('newUserDB')
-            .update(1, { ...activeValue })
+            .update(1, { ...newUser, ...activeValue, id: 1 })
         } else {
           db.table('newUserDB')
             .add(newUser)
@@ -62,30 +83,24 @@ App.propTypes = {
   newUser: PropTypes.object.isRequired,
   listUsers: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  activeValue: PropTypes.object,
+  userListerNewState: PropTypes.func.isRequired,
+  pathname: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = state => {
+  const activeFormName = getFormNames()(state)
+  const activeValue = getFormValues(...activeFormName)(state)
   const { pathname } = state.router.location
-  let activeFormName
-
-  // const activeFormName = getFormNames()(state)
-  console.log(111111,diiss)
-  if(pathname === '/'){
-    activeFormName = 'Account'
-  } else if (pathname === '/Profile'){
-    activeFormName = '/Profile'
-  } else if (pathname === '/Contacts'){
-    activeFormName = '/Contacts'
-  } else if (pathname === '/Capabilities'){
-    activeFormName = '/Contacts'
-  }
-  const activeValue = getFormValues(activeFormName)(state)
   return {
-  newUser: state.newUser,
-  listUsers: state.listUsers,
-  activeValue,
-}}
+    newUser: state.newUser,
+    listUsers: state.listUsers,
+    activeValue,
+    pathname,
+  }
+}
 
 export default connect(
   mapStateToProps,
+  { userListerNewState, continueUser },
 )(App)

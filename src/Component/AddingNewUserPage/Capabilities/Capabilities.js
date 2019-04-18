@@ -130,6 +130,7 @@ Capabilities = reduxForm({
     return errors
   },
   form: 'Capabilities',
+  enableReinitialize: true,
 })(Capabilities)
 
 

@@ -220,6 +220,7 @@ Contacts = reduxForm({
     return errors
   },
   form: 'Contacts',
+  enableReinitialize: true,
 })(Contacts)
 
 const mapStateToProps = state => {

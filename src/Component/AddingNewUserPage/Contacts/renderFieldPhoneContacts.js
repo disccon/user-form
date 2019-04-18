@@ -25,7 +25,10 @@ renderFieldPhoneContacts.propTypes = {
   meta: PropTypes.object.isRequired,
   label: PropTypes.string,
   type: PropTypes.string,
-  span: PropTypes.string,
+  span: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
   placeholder: PropTypes.string,
   idField: PropTypes.string.isRequired,
   deleteFieldPhone: PropTypes.func.isRequired,

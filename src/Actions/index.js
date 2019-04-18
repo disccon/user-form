@@ -3,6 +3,10 @@ export const CONTINUE_USER__CONTINUE = 'CONTINUE_USER__CONTINUE'
 export const CONTINUE_USER__CLOSE = 'CONTINUE_USER__CLOSE'
 export const CONTINUE_USER__FAILURE = 'CONTINUE_USER__FAILURE'
 
+export const USER_LISTER_NEW_STATE = 'USER_LISTER_NEW_STATE'
+export const USER_LISTER_NEW_STATE__SUCCESS = 'USER_LISTER_NEW_STATE__SUCCESS'
+export const USER_LISTER_NEW_STATE__FAILURE = 'USER_LISTER_NEW_STATE__FAILURE'
+
 
 export const SAVE_USER_SRC_AVATAR_IMG = 'SAVE_USER_SRC_AVATAR_IMG'
 export const SAVE_USER_SRC_AVATAR_IMG__SUCCESS = 'SAVE_USER_SRC_AVATAR_IMG__SUCCESS'
@@ -50,15 +54,22 @@ export const CREATE_USER = 'CREATE_USER'
 export const CREATE_USER__SUCCESS = 'CREATE_USER__SUCCESS'
 export const CREATE_USER__FAILURE = 'CREATE_USER__FAILURE'
 
+export const userListerNewState = userLister => ({
+  type: USER_LISTER_NEW_STATE,
+  payload: {
+    userLister,
+  },
+})
 
-export const continueUser = (isContinue, newUserDB ) => {
-  return {
-    type: CONTINUE_USER,
-    payload: {
-      isContinue, newUserDB
-    },
-  }
-}
+
+export const continueUser = (isContinue, newUserDB) => (
+
+    {
+  type: CONTINUE_USER,
+  payload: {
+    isContinue, newUserDB,
+  },
+})
 
 export const saveUserSRCAvatarIMG = userSRCAvatarIMG => (
   {
@@ -144,11 +155,11 @@ export const editUser = user => (
   })
 
 
-export const deleteUser = id => (
+export const deleteUser = idListUser => (
   {
     type: DELETE_USER,
     payload: {
-      id,
+      idListUser,
     },
   })
 

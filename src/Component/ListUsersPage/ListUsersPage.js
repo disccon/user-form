@@ -7,6 +7,7 @@ import styles from './ListUsersPage.scss'
 import { ReactComponent as CloseIcon } from '../../img/icon/close.svg'
 import { ReactComponent as EditIcon } from '../../img/icon/edit.svg'
 import { editUser, deleteUser, createUser } from '../../Actions'
+import db from '../../db'
 
 const cx = classNames.bind(styles)
 
@@ -17,9 +18,12 @@ class ListUsersPage extends Component {
       editUser(user)
     }
 
-    deleteUser = id => () => {
+    deleteUser = idListUser => () => {
       const { deleteUser } = this.props
-      deleteUser(id)
+      console.log(111111, idListUser)
+      db.table('listUserDB')
+        .delete(idListUser)
+      deleteUser(idListUser)
     }
 
     createUser = () => {
@@ -44,7 +48,7 @@ class ListUsersPage extends Component {
             <tbody>
               <tr />
               {users.map(user => (
-                <tr key={user.id}>
+                <tr key={user.idListUser}>
                   <td>
                     <div className={cx('wrapperUser')}>
                       <img src={user.userSRCAvatarIMG} alt='userSRCAvatarIMG' />
@@ -62,12 +66,12 @@ class ListUsersPage extends Component {
                   </td>
                   <td>
                     <div className={cx('wrapperUser')}>
-3 month ago
+                        3 month ago
                       <button type='button' className={cx('button_editIcon')} onClick={this.editUser(user)}>
                         <EditIcon className={cx('editIcon')} />
                       </button>
                       <button type='button' className={cx('button_closeIcon')}>
-                        <CloseIcon className={cx('closeIcon')} onClick={this.deleteUser(user.id)} />
+                        <CloseIcon className={cx('closeIcon')} onClick={this.deleteUser(user.idListUser)} />
                       </button>
                     </div>
                   </td>
@@ -79,12 +83,11 @@ class ListUsersPage extends Component {
                     && (
                     <Fragment>
                       <h2 className={cx('noUsersH2')}>
-No users here :(
+                        No users here :(
                       </h2>
                       <button type='button' className={cx('createUserButton')} onClick={this.createUser}>Create new user</button>
                     </Fragment>
                     )
-
                 }
         </Fragment>
       )

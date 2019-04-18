@@ -1,8 +1,8 @@
 export const newUser = {
   isQuestion: true,
-  userName: '1111',
-  password: '1111',
-  repeatPassword: '11',
+  userName: '',
+  password: '',
+  repeatPassword: '',
   userSRCAvatarIMG: '',
   firstName: '',
   lastName: '',

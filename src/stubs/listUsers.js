@@ -5,38 +5,12 @@ import AvatarIMG4 from '../img/Ellipse(4).png'
 import AvatarIMG5 from '../img/Ellipse(5).png'
 import AvatarIMG6 from '../img/Ellipse(6).png'
 import AvatarIMG7 from '../img/Ellipse(7).png'
-import { dbName } from '../Component/App/App'
-
-
-// let indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB
-// export let listUsers
-//
-// if (!indexedDB) {
-//   window.alert("Ваш браузер не поддерживат стабильную версию IndexedDB. Такие-то функции будут недоступны")
-// } else {
-//   let stateRedux = indexedDB.open(dbName, 1)
-//
-//   stateRedux.onerror = function (event) {
-//     // Handle errors.
-//     console.log('stateRedux.onerror')
-//   }
-//
-//   stateRedux.onupgradeneeded = function (event) {
-//     let db = event.target.result
-//     let objectStore2 = db.createObjectStore("listUsers", {keyPath: "id"});
-//     let objectStore1 = db.createObjectStore("newUser1", {keyPath: "id"});
-//     for (let i in listUsers) {
-//       objectStore2.add(listUsers[i]);
-//     }
-//     objectStore1.add(newUser)
-//
-//   }
 
 
 export const listUsers = {
   users: [
     {
-      id: 1,
+      idListUser: 1,
       userName: 'Maxim Morozov 1',
       userSRCAvatarIMG: [AvatarIMG1],
       firstName: 'Maxim',
@@ -69,7 +43,7 @@ export const listUsers = {
       checkboxWtf: 'WTF is “hobbies”???',
     },
     {
-      id: 2,
+      idListUser: 2,
       userName: 'Maxim Morozov 2',
       password: '111',
       repeatPassword: '111',
@@ -104,7 +78,7 @@ export const listUsers = {
       checkboxWtf: false,
     },
     {
-      id: 3,
+      idListUser: 3,
       userName: 'Maxim Morozov 3',
       password: '111',
       repeatPassword: '111',
@@ -139,7 +113,7 @@ export const listUsers = {
       checkboxWtf: false,
     },
     {
-      id: 4,
+      idListUser: 4,
       userName: 'Maxim Morozov 4',
       password: '111',
       repeatPassword: '111',
@@ -174,7 +148,7 @@ export const listUsers = {
       checkboxWtf: false,
     },
     {
-      id: 5,
+      idListUser: 5,
       userName: 'Maxim Morozov 5',
       password: '111',
       repeatPassword: '111',
@@ -209,7 +183,7 @@ export const listUsers = {
       checkboxWtf: false,
     },
     {
-      id: 6,
+      idListUser: 6,
       userName: 'Maxim Morozov 6',
       password: '111',
       repeatPassword: '111',
@@ -243,7 +217,7 @@ export const listUsers = {
       checkboxWtf: false,
     },
     {
-      id: 7,
+      idListUser: 7,
       userName: 'Maxim Morozov 7',
       password: '111',
       repeatPassword: '111',

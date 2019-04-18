@@ -9,6 +9,9 @@ import {
   CONTINUE_USER__CLOSE,
   CONTINUE_USER__FAILURE,
 
+  USER_LISTER_NEW_STATE__SUCCESS,
+  USER_LISTER_NEW_STATE__FAILURE,
+
   SAVE_USER_SRC_AVATAR_IMG__SUCCESS,
   SAVE_USER_SRC_AVATAR_IMG__FAILURE,
 
@@ -46,8 +49,6 @@ import {
 import { newUser } from '../stubs/newUser'
 
 
-
-
 export function* continueUserSaga(action) {
   const { isContinue, newUserDB } = action.payload
   try {
@@ -74,6 +75,22 @@ export function* continueUserSaga(action) {
   }
 }
 
+export function* userListerNewStateSaga(action) {
+  const { userLister } = action.payload
+  try {
+    yield put({
+      type: USER_LISTER_NEW_STATE__SUCCESS,
+      payload: {
+        userLister,
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: USER_LISTER_NEW_STATE__FAILURE,
+      error,
+    })
+  }
+}
 
 export function* saveUserSRCAvatarIMGSaga(action) {
   const { userSRCAvatarIMG } = action.payload
@@ -235,10 +252,10 @@ export function* forwardCapabilitiesSaga(action) {
   const users = yield select(state => state.listUsers.users)
   try {
     yield put(push('/ListUsers'))
-    if (newUser.id) {
+    if (newUser.idListUser) {
       let indexEditUser
       users.forEach((item, i) => {
-        if (item.id === newUser.id) {
+        if (item.idListUser === newUser.idListUser) {
           indexEditUser = i
         }
       })
@@ -270,7 +287,7 @@ export function* forwardCapabilitiesSaga(action) {
         type: FORWARD_CAPABILITIES__ADD_NEW_USER,
         payload: {
           ...newUser,
-          id: users[users.length - 1].id + 1,
+          idListUser: users[users.length - 1].idListUser + 1,
           selectSkills,
           textareaField,
           checkboxArt,
@@ -314,13 +331,9 @@ export function* editUserSaga(action) {
 
 
 export function* deleteUserSaga(action) {
-  const { id } = action.payload
+  const { idListUser } = action.payload
   const usersList = yield select(state => state.listUsers.users)
-  const users = usersList.filter(item => {
-    if (item.id !== id) {
-      return item
-    }
-  })
+  const users = usersList.filter(item => item.idListUser !== idListUser)
   try {
     yield put({
       type: DELETE_USER__SUCCESS,
