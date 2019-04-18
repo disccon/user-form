@@ -28,6 +28,7 @@ class ListUsersPage extends Component {
       deleteList: idListUser,
     })
   }
+
     deleteUser = idListUser => () => {
       const { deleteUser } = this.props
       this.setState({
@@ -102,12 +103,14 @@ class ListUsersPage extends Component {
                         }
                     </div>
                   </td>
-                  {deleteList === user.idListUser && <label htmlFor='closeIcon' onClick={this.deleteUser(user.idListUser)}>
+                  {deleteList === user.idListUser && (
+                  <label htmlFor='closeIcon' onClick={this.deleteUser(user.idListUser)}>
                     <button type='button' id='closeIcon'>
                       <CloseIcon className={cx('deleteUser')} />
                       delete
                     </button>
-                  </label>  }
+                  </label>
+                  ) }
                 </tr>
               ))}
             </tbody>

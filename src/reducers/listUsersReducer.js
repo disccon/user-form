@@ -1,4 +1,3 @@
-import { listUsers } from '../stubs/listUsers'
 import {
   USER_LISTER_NEW_STATE__SUCCESS,
   USER_LISTER_NEW_STATE__FAILURE,
@@ -11,7 +10,7 @@ import {
   DELETE_USER__FAILURE,
 } from '../Actions'
 
-export default function listUsersReducer(state = listUsers, action) {
+export default function listUsersReducer(state = { users: [] }, action) {
   switch (action.type) {
     case USER_LISTER_NEW_STATE__SUCCESS: {
       return {

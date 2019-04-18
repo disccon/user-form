@@ -11,6 +11,7 @@ import styles from './App.scss'
 import Header from '../Header/Header'
 import db from '../../db'
 import { userListerNewState, continueUser } from '../../Actions'
+import { users } from '../../stubs/users'
 
 const cx = classNames.bind(styles)
 
@@ -34,6 +35,8 @@ class App extends Component {
                 continueUser(true, ...newUserDB)
               })
           }
+        } else {
+          userListerNewState(users)
         }
       })
   }
