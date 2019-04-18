@@ -8,10 +8,10 @@ import styles from './Contacts.scss'
 const cx = classNames.bind(styles)
 
 export const renderFieldPhoneContacts = ({
-  input, meta: { touched, error }, label, type, span, placeholder, idField, deleteFieldPhone,
+  input, meta: { touched, error }, label, type, isvisibilitiFieldPhone, placeholder, idField, deleteFieldPhone,
 }) => (
   <div className={cx('contacts__labelPhone')}>
-    {span && <span onClick={deleteFieldPhone} />}
+    {isvisibilitiFieldPhone && <button type='button' onClick={deleteFieldPhone} />}
     <label htmlFor={idField}>
       <h4>{label}</h4>
       <InputMask {...input} type={type} mask='+7 (999) 999-99-99' placeholder={placeholder} id={idField} />
@@ -25,7 +25,7 @@ renderFieldPhoneContacts.propTypes = {
   meta: PropTypes.object.isRequired,
   label: PropTypes.string,
   type: PropTypes.string,
-  span: PropTypes.oneOfType([
+  isvisibilitiFieldPhone: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.bool,
   ]),

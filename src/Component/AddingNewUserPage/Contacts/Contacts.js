@@ -41,30 +41,6 @@ class Contacts extends Component {
 
   render() {
     const { quantityPhoneField, handleSubmit } = this.props
-    const phoneFieldN1 = quantityPhoneField >= 2
-      ? (
-        <Field
-          component={renderFieldPhoneContacts}
-          type='text'
-          placeholder='+7 (066) 888-88-88'
-          label='Phone #1'
-          name='phoneN1'
-          span
-          deleteFieldPhone={this.deleteFieldPhone}
-          idField='filedPhoneN1'
-        />
-      )
-      : (
-        <Field
-          component={renderFieldPhoneContacts}
-          type='text'
-          placeholder='+7 (066) 888-88-88'
-          label='Phone #1'
-          name='phoneN1'
-          deleteFieldPhone={this.deleteFieldPhone}
-          idField='filedPhoneN1'
-        />
-      )
     const phoneFieldN2 = quantityPhoneField >= 2
       ? (
         <Field
@@ -72,7 +48,7 @@ class Contacts extends Component {
           type='text'
           label='Phone #2'
           name='phoneN2'
-          span
+          isvisibilitiFieldPhone
           deleteFieldPhone={this.deleteFieldPhone}
           idField='filedPhoneN2'
         />
@@ -85,7 +61,7 @@ class Contacts extends Component {
           type='text'
           label='Phone #3'
           name='phoneN3'
-          span
+          isvisibilitiFieldPhone
           deleteFieldPhone={this.deleteFieldPhone}
           idField='filedPhoneN3'
         />
@@ -137,7 +113,16 @@ class Contacts extends Component {
               span='*'
               idField='fieldFax'
             />
-            {phoneFieldN1}
+            <Field
+              component={renderFieldPhoneContacts}
+              type='text'
+              placeholder='+7 (066) 888-88-88'
+              label='Phone #1'
+              name='phoneN1'
+              isvisibilitiFieldPhone={quantityPhoneField >= 2}
+              deleteFieldPhone={this.deleteFieldPhone}
+              idField='filedPhoneN1'
+            />
             {phoneFieldN2}
             {phoneFieldN3}
             {addPhoneField}
