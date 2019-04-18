@@ -152,6 +152,7 @@ Profile = reduxForm({
     return errors
   },
   form: 'Profile',
+  enableReinitialize: true,
 })(Profile)
 
 
