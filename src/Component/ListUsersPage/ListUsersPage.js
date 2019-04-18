@@ -160,7 +160,7 @@ class ListUsersPage extends Component {
             >
               6
             </button>
-            <span className={cx(users.length > (7 * 6) ? 'pagination__active' : '')}>&raquo;</span>
+            <button className={cx(users.length > (7 * 6) ? 'pagination__active' : '')}>&raquo;</button>
           </div>
           )}
           {users.length === 0
