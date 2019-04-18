@@ -35,6 +35,33 @@
     }
   }
   tbody {
+    .delete{
+      position: relative;
+      transform: translateX(-70px);
+      opacity: 0.5;
+      transition: all ease 0.3s;
+      label{
+        top: 35px;
+        right: -75px;
+        position: absolute;
+        button{
+          display: flex;
+          color: #ff4144;
+          font-weight: 500;
+          background: transparent;
+          .deleteUser{
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            filter: invert(69%) sepia(52%) saturate(1475%) hue-rotate(309deg) brightness(105%) contrast(104%);
+            margin-right: 5px;
+          }
+          span{
+            display: block;
+          }
+        }
+      }
+    }
     tr:first-child{
       height: 29px;
     }

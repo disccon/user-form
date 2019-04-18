@@ -15,6 +15,7 @@ const cx = classNames.bind(styles)
 class ListUsersPage extends Component {
   state = {
     pageList: 0,
+    deleteList: 3,
   }
 
   editUser = user => () => {
@@ -22,8 +23,16 @@ class ListUsersPage extends Component {
     editUser(user)
   }
 
+  showRemoveUserButton = idListUser => () => {
+    this.setState({
+      deleteList: idListUser,
+    })
+  }
     deleteUser = idListUser => () => {
       const { deleteUser } = this.props
+      this.setState({
+        deleteList: false,
+      })
       db.table('listUserDB')
         .delete(idListUser)
       deleteUser(idListUser)
@@ -40,7 +49,7 @@ class ListUsersPage extends Component {
 
     render() {
       const { users, createUser } = this.props
-      const { pageList } = this.state
+      const { pageList, deleteList } = this.state
       const visibleUserLength = users.length - (7 * pageList) >= 6 ? 6 : users.length - (7 * pageList)
       const visibleUser = []
       for (let i = 0; i < visibleUserLength; i += 1) {
@@ -61,7 +70,7 @@ class ListUsersPage extends Component {
             <tbody>
               <tr />
               {users.length > 0 && visibleUser.map(user => (
-                <tr key={user.idListUser}>
+                <tr key={user.idListUser} className={cx(deleteList === user.idListUser ? 'delete' : null)}>
                   <td>
                     <div className={cx('wrapperUser')}>
                       <img src={user.userSRCAvatarIMG} alt='userSRCAvatarIMG' />
@@ -80,14 +89,25 @@ class ListUsersPage extends Component {
                   <td>
                     <div className={cx('wrapperUser')}>
                         3 month ago
-                      <button type='button' className={cx('button_editIcon')} onClick={this.editUser(user)}>
-                        <EditIcon className={cx('editIcon')} />
-                      </button>
-                      <button type='button' className={cx('button_closeIcon')}>
-                        <CloseIcon className={cx('closeIcon')} onClick={this.deleteUser(user.idListUser)} />
-                      </button>
+                      {deleteList !== user.idListUser && (
+                      <Fragment>
+                        <button type='button' className={cx('button_editIcon')} onClick={this.editUser(user)}>
+                          <EditIcon className={cx('editIcon')} />
+                        </button>
+                        <button type='button' className={cx('button_closeIcon')}>
+                          <CloseIcon className={cx('closeIcon')} onClick={this.showRemoveUserButton(user.idListUser)} />
+                        </button>
+                      </Fragment>
+                      )
+                        }
                     </div>
                   </td>
+                  {deleteList === user.idListUser && <label htmlFor='closeIcon' onClick={this.deleteUser(user.idListUser)}>
+                    <button type='button' id='closeIcon'>
+                      <CloseIcon className={cx('deleteUser')} />
+                      delete
+                    </button>
+                  </label>  }
                 </tr>
               ))}
             </tbody>
@@ -100,28 +120,28 @@ class ListUsersPage extends Component {
               className={cx('pagination__active')}
               onClick={this.forwardPagination(1)}
             >
-1
+              1
             </button>
             <button
               type='button'
               className={cx(users.length > 7 ? 'pagination__active' : '')}
               onClick={this.forwardPagination(2)}
             >
-2
+              2
             </button>
             <button
               type='button'
               className={cx(users.length > (7 * 2) ? 'pagination__active' : '')}
               onClick={this.forwardPagination(3)}
             >
-3
+              3
             </button>
             <button
               type='button'
               className={cx(users.length > (7 * 3) ? 'pagination__active' : '')}
               onClick={this.forwardPagination(4)}
             >
-4
+              4
             </button>
             <button
               type='button'
@@ -135,7 +155,7 @@ class ListUsersPage extends Component {
               className={cx(users.length > (7 * 5) ? 'pagination__active' : '')}
               onClick={this.forwardPagination(6)}
             >
-6
+              6
             </button>
             <span className={cx(users.length > (7 * 6) ? 'pagination__active' : '')}>&raquo;</span>
           </div>
