@@ -41,9 +41,9 @@ class ListUsersPage extends Component {
 
     forwardPagination = page => () => {
       const { users } = this.props
-      if (page >= (users.length / 7) || page === 1) {
+      if (page <= (users.length / 7) || page === 1) {
         this.setState({
-          pageList: page - 1,
+          pageList: page,
         })
       }
     }
@@ -121,42 +121,42 @@ class ListUsersPage extends Component {
             <button
               type='button'
               className={cx('pagination__active')}
-              onClick={this.forwardPagination(1)}
+              onClick={this.forwardPagination(0)}
             >
               1
             </button>
             <button
               type='button'
               className={cx(users.length > 7 ? 'pagination__active' : '')}
-              onClick={this.forwardPagination(2)}
+              onClick={this.forwardPagination(1)}
             >
               2
             </button>
             <button
               type='button'
               className={cx(users.length > (7 * 2) ? 'pagination__active' : '')}
-              onClick={this.forwardPagination(3)}
+              onClick={this.forwardPagination(2)}
             >
               3
             </button>
             <button
               type='button'
               className={cx(users.length > (7 * 3) ? 'pagination__active' : '')}
-              onClick={this.forwardPagination(4)}
+              onClick={this.forwardPagination(3)}
             >
               4
             </button>
             <button
               type='button'
               className={cx(users.length > (7 * 4) ? 'pagination__active' : '')}
-              onClick={this.forwardPagination(5)}
+              onClick={this.forwardPagination(4)}
             >
               5
             </button>
             <button
               type='button'
               className={cx(users.length > (7 * 5) ? 'pagination__active' : '')}
-              onClick={this.forwardPagination(6)}
+              onClick={this.forwardPagination(5)}
             >
               6
             </button>

@@ -6,7 +6,9 @@
     <bookmark url="file://$PROJECT_DIR$/src/Component/AddingNewUserPage/Capabilities/Capabilities.js" line="61" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="966abf2f-679a-466a-9520-94271c675336" name="Default Changelist" comment="" />
+    <list default="true" id="966abf2f-679a-466a-9520-94271c675336" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,11 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="97" column="73" selection-start-line="97" selection-start-column="73" selection-end-line="97" selection-end-column="73" />
+            <state relative-caret-position="465">
+              <caret line="43" column="16" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="16" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
@@ -51,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2538">
-              <caret line="19" column="9" lean-forward="true" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+            <state relative-caret-position="402">
+              <caret line="162" column="20" lean-forward="true" selection-start-line="162" selection-start-column="20" selection-end-line="162" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -371,7 +373,7 @@
       <workItem from="1555401420961" duration="27823000" />
       <workItem from="1555482415250" duration="7421000" />
       <workItem from="1555489918429" duration="24131000" />
-      <workItem from="1555567139430" duration="22948000" />
+      <workItem from="1555567139430" duration="23254000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1553498311885</created>
@@ -555,11 +557,18 @@
       <option name="project" value="LOCAL" />
       <updated>1555590403344</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="ListOfUsers Delete 2">
+      <created>1555591080292</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1555591080292</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="400857000" />
+    <option name="totallyTimeSpent" value="401163000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -1011,20 +1020,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js">
+    <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="97" column="73" selection-start-line="97" selection-start-column="73" selection-end-line="97" selection-end-column="73" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="402">
+          <caret line="162" column="20" lean-forward="true" selection-start-line="162" selection-start-column="20" selection-end-line="162" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.scss">
+    <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2538">
-          <caret line="19" column="9" lean-forward="true" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+        <state relative-caret-position="465">
+          <caret line="43" column="16" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
