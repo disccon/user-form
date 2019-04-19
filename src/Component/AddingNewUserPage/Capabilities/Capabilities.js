@@ -10,7 +10,6 @@ import { renderFieldTextareaCapabilities } from './renderFieldTextareaCapabiliti
 import { renderFieldCheckboxCapabilities } from './renderFieldCheckboxCapabilities'
 
 
-
 const cx = classNames.bind(styles)
 
 

@@ -18,9 +18,12 @@ import ListUsersPage from '../ListUsersPage/ListUsersPage'
 
 const cx = classNames.bind(styles)
 
+
 class App extends Component {
   componentDidMount() {
-    const { userListerNewState, pathname, continueUser } = this.props
+    const {
+      userListerNewState, pathname, continueUser, newUser, listUsers, history
+    } = this.props
     window.addEventListener('beforeunload', this.onUnload)
     db.table('newUserDB')
       .toArray()
@@ -40,6 +43,12 @@ class App extends Component {
           }
         } else {
           userListerNewState(users)
+          db.table('newUserDB')
+            .add(newUser)
+          listUsers.users.forEach(item => {
+            db.table('listUserDB')
+              .add(item)
+          })
         }
       })
   }
@@ -49,21 +58,13 @@ class App extends Component {
   }
 
   onUnload = () => {
-    const { newUser, listUsers, activeValue } = this.props
-    console.log(11111)
+    const { newUser, activeValue } = this.props
     db.table('newUserDB')
       .toArray()
       .then(newUserDB => {
         if (newUserDB.length === 1) {
           db.table('newUserDB')
             .update(1, { ...newUser, ...activeValue })
-        } else {
-          db.table('newUserDB')
-            .add(newUser)
-          listUsers.users.forEach(item => {
-            db.table('listUserDB')
-              .add(item)
-          })
         }
       })
   }
