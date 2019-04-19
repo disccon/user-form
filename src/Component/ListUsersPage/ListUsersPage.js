@@ -104,15 +104,15 @@ class ListUsersPage extends Component {
                     )
                   }
                   </div>
+                  {deleteList === user.idListUser && (
+                    <label onClick={this.deleteUser(user.idListUser)}>
+                      <button type='button' id='closeIcon'>
+                        <CloseIcon className={cx('deleteUser')} />
+                        delete
+                      </button>
+                    </label>
+                  )}
                 </td>
-                {deleteList === user.idListUser && (
-                <label htmlFor='closeIcon' onClick={this.deleteUser(user.idListUser)}>
-                  <button type='button' id='closeIcon'>
-                    <CloseIcon className={cx('deleteUser')} />
-                    delete
-                  </button>
-                </label>
-                )}
               </tr>
             ))}
           </tbody>

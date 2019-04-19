@@ -159,7 +159,10 @@ class EditUserPage extends Component {
 
 EditUserPage.propTypes = {
   userName: PropTypes.string.isRequired,
-  userSRCAvatarIMG: PropTypes.array,
+  userSRCAvatarIMG: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+  ]),
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   birthDate: PropTypes.object.isRequired,

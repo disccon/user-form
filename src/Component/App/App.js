@@ -12,6 +12,9 @@ import Header from '../Header/Header'
 import db from '../../db'
 import { userListerNewState, continueUser } from '../../Actions'
 import { users } from '../../stubs/users'
+import { AddingNewUserPage } from '../AddingNewUserPage/AddingNewUserPage'
+import EditUserPage from '../EditUserPage/EditUserPage'
+import ListUsersPage from '../ListUsersPage/ListUsersPage'
 
 const cx = classNames.bind(styles)
 
@@ -36,7 +39,7 @@ class App extends Component {
               })
           }
         } else {
-          userListerNewState(...users)
+          userListerNewState(users)
         }
       })
   }
@@ -47,12 +50,13 @@ class App extends Component {
 
   onUnload = () => {
     const { newUser, listUsers, activeValue } = this.props
+    console.log(11111)
     db.table('newUserDB')
       .toArray()
       .then(newUserDB => {
         if (newUserDB.length === 1) {
           db.table('newUserDB')
-            .update(1, { ...newUser, ...activeValue, id: 1 })
+            .update(1, { ...newUser, ...activeValue })
         } else {
           db.table('newUserDB')
             .add(newUser)
@@ -68,10 +72,13 @@ class App extends Component {
     const { history } = this.props
     return (
       <ConnectedRouter history={history}>
-        <div className={cx('container')} onClick={this.onUnload}>
+        <div className={cx('container')}>
+          <Header history={history} />
           <Switch>
             <Route path='/NodFound' component={NodFound} />
-            <Route path='/' component={Header} />
+            <Route exact path='/ListUsers' component={ListUsersPage} />
+            <Route exact path='/EditUser' component={EditUserPage} />
+            <Route path='/' component={AddingNewUserPage} />
             <Redirect to='/NodFound' />
           </Switch>
         </div>

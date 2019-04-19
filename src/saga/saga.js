@@ -47,6 +47,7 @@ import {
   CREATE_USER__FAILURE,
 } from '../Actions'
 import { newUser } from '../stubs/newUser'
+import db from '../db'
 
 
 export function* continueUserSaga(action) {
@@ -253,6 +254,18 @@ export function* forwardCapabilitiesSaga(action) {
   try {
     yield put(push('/ListUsers'))
     if (newUser.idListUser) {
+      db.table('listUserDB')
+        .update(newUser.idListUser, {
+          ...newUser,
+          selectSkills,
+          textareaField,
+          checkboxArt,
+          checkboxSport,
+          checkboxJustWant,
+          checkboxFemale,
+          checkboxGuitar,
+          checkboxWtf,
+        })
       let indexEditUser
       users.forEach((item, i) => {
         if (item.idListUser === newUser.idListUser) {
@@ -283,11 +296,42 @@ export function* forwardCapabilitiesSaga(action) {
         },
       })
     } else {
+      const idListUser = users.length > 0 ? users[users.length - 1].idListUser + 1 : 1
+      if (idListUser === 1) {
+        db.table('listUserDB')
+          .add({
+            ...newUser,
+            id: 1,
+            idListUser,
+            selectSkills,
+            textareaField,
+            checkboxArt,
+            checkboxSport,
+            checkboxJustWant,
+            checkboxFemale,
+            checkboxGuitar,
+            checkboxWtf,
+          })
+      } else {
+        db.table('listUserDB')
+          .add({
+            ...newUser,
+            idListUser,
+            selectSkills,
+            textareaField,
+            checkboxArt,
+            checkboxSport,
+            checkboxJustWant,
+            checkboxFemale,
+            checkboxGuitar,
+            checkboxWtf,
+          })
+      }
       yield put({
         type: FORWARD_CAPABILITIES__ADD_NEW_USER,
         payload: {
           ...newUser,
-          idListUser: users[users.length - 1].idListUser + 1,
+          idListUser,
           selectSkills,
           textareaField,
           checkboxArt,
