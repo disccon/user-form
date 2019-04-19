@@ -81,7 +81,6 @@ class App extends Component {
 
 App.propTypes = {
   newUser: PropTypes.object.isRequired,
-  listUsers: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   activeValue: PropTypes.object,
   userListerNewState: PropTypes.func.isRequired,

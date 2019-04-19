@@ -9,7 +9,7 @@ import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.s
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import { forwardAccount, saveUserSRCAvatarIMG, continueUser } from '../../../Actions'
 import { renderFieldInputAccount } from './renderFieldInputAccount'
-import db from '../../../db'
+
 
 const cx = classNames.bind(styles)
 
