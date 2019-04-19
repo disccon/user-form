@@ -18,28 +18,34 @@ import ListUsersPage from '../ListUsersPage/ListUsersPage'
 
 const cx = classNames.bind(styles)
 
+
 class App extends Component {
   componentDidMount() {
-    const { userListerNewState, pathname, continueUser } = this.props
+    const {
+      userListerNewState, pathname, newUser, history, continueUser,
+    } = this.props
+    if (pathname !== '/') {
+      history.push('/')
+    }
     window.addEventListener('beforeunload', this.onUnload)
     db.table('newUserDB')
       .toArray()
       .then(newUserDB => {
         if (newUserDB.length === 1) {
+          continueUser('open')
           db.table('listUserDB')
             .toArray()
             .then(listUserDB => {
               userListerNewState(listUserDB)
             })
-          if (pathname !== '/') {
-            db.table('newUserDB')
-              .toArray()
-              .then(newUserDB => {
-                continueUser(true, ...newUserDB)
-              })
-          }
         } else {
           userListerNewState(users)
+          db.table('newUserDB')
+            .add(newUser)
+          users.forEach(item => {
+            db.table('listUserDB')
+              .add(item)
+          })
         }
       })
   }
@@ -49,23 +55,9 @@ class App extends Component {
   }
 
   onUnload = () => {
-    const { newUser, listUsers, activeValue } = this.props
-    console.log(11111)
+    const { newUser, activeValue } = this.props
     db.table('newUserDB')
-      .toArray()
-      .then(newUserDB => {
-        if (newUserDB.length === 1) {
-          db.table('newUserDB')
-            .update(1, { ...newUser, ...activeValue })
-        } else {
-          db.table('newUserDB')
-            .add(newUser)
-          listUsers.users.forEach(item => {
-            db.table('listUserDB')
-              .add(item)
-          })
-        }
-      })
+      .update(1, { ...newUser, ...activeValue })
   }
 
   render() {
@@ -89,7 +81,6 @@ class App extends Component {
 
 App.propTypes = {
   newUser: PropTypes.object.isRequired,
-  listUsers: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   activeValue: PropTypes.object,
   userListerNewState: PropTypes.func.isRequired,

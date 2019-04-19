@@ -6,6 +6,7 @@ import { push } from 'connected-react-router'
 
 import {
   CONTINUE_USER__CONTINUE,
+  CONTINUE_USER__OPEN,
   CONTINUE_USER__CLOSE,
   CONTINUE_USER__FAILURE,
 
@@ -51,9 +52,22 @@ import db from '../db'
 
 
 export function* continueUserSaga(action) {
-  const { isContinue, newUserDB } = action.payload
+  const { isContinue } = action.payload
   try {
-    if (isContinue) {
+    if (isContinue === 'open') {
+      yield put({
+        type: CONTINUE_USER__OPEN,
+        payload: {
+          isQuestion: true,
+        },
+      })
+    } else if (isContinue) {
+      const promise = new Promise(resolve => {
+        db.table('newUserDB')
+          .toArray()
+          .then(newUserDB => resolve(...newUserDB))
+      })
+      const newUserDB = yield promise
       yield put({
         type: CONTINUE_USER__CONTINUE,
         payload: {
@@ -297,36 +311,20 @@ export function* forwardCapabilitiesSaga(action) {
       })
     } else {
       const idListUser = users.length > 0 ? users[users.length - 1].idListUser + 1 : 1
-      if (idListUser === 1) {
-        db.table('listUserDB')
-          .add({
-            ...newUser,
-            id: 1,
-            idListUser,
-            selectSkills,
-            textareaField,
-            checkboxArt,
-            checkboxSport,
-            checkboxJustWant,
-            checkboxFemale,
-            checkboxGuitar,
-            checkboxWtf,
-          })
-      } else {
-        db.table('listUserDB')
-          .add({
-            ...newUser,
-            idListUser,
-            selectSkills,
-            textareaField,
-            checkboxArt,
-            checkboxSport,
-            checkboxJustWant,
-            checkboxFemale,
-            checkboxGuitar,
-            checkboxWtf,
-          })
-      }
+      db.table('listUserDB')
+        .add({
+          ...newUser,
+          id: idListUser,
+          idListUser,
+          selectSkills,
+          textareaField,
+          checkboxArt,
+          checkboxSport,
+          checkboxJustWant,
+          checkboxFemale,
+          checkboxGuitar,
+          checkboxWtf,
+        })
       yield put({
         type: FORWARD_CAPABILITIES__ADD_NEW_USER,
         payload: {
