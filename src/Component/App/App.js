@@ -22,30 +22,27 @@ const cx = classNames.bind(styles)
 class App extends Component {
   componentDidMount() {
     const {
-      userListerNewState, pathname, continueUser, newUser, listUsers, history
+      userListerNewState, pathname, newUser, history, continueUser,
     } = this.props
+    if (pathname !== '/') {
+      history.push('/')
+    }
     window.addEventListener('beforeunload', this.onUnload)
     db.table('newUserDB')
       .toArray()
       .then(newUserDB => {
         if (newUserDB.length === 1) {
+          continueUser('open')
           db.table('listUserDB')
             .toArray()
             .then(listUserDB => {
               userListerNewState(listUserDB)
             })
-          if (pathname !== '/') {
-            db.table('newUserDB')
-              .toArray()
-              .then(newUserDB => {
-                continueUser(true, ...newUserDB)
-              })
-          }
         } else {
           userListerNewState(users)
           db.table('newUserDB')
             .add(newUser)
-          listUsers.users.forEach(item => {
+          users.forEach(item => {
             db.table('listUserDB')
               .add(item)
           })
@@ -60,13 +57,7 @@ class App extends Component {
   onUnload = () => {
     const { newUser, activeValue } = this.props
     db.table('newUserDB')
-      .toArray()
-      .then(newUserDB => {
-        if (newUserDB.length === 1) {
-          db.table('newUserDB')
-            .update(1, { ...newUser, ...activeValue })
-        }
-      })
+      .update(1, { ...newUser, ...activeValue })
   }
 
   render() {

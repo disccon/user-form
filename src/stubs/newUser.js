@@ -1,5 +1,5 @@
 export const newUser = {
-  isQuestion: true,
+  isQuestion: false,
   userName: '',
   password: '',
   repeatPassword: '',

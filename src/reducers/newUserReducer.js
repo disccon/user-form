@@ -2,6 +2,7 @@ import { newUser } from '../stubs/newUser'
 import {
   CONTINUE_USER__CONTINUE,
   CONTINUE_USER__CLOSE,
+  CONTINUE_USER__OPEN,
   CONTINUE_USER__FAILURE,
 
   SAVE_USER_SRC_AVATAR_IMG__SUCCESS,
@@ -42,6 +43,14 @@ export default function newUserReducer(state = newUser, action) {
         error: undefined,
       }
     }
+    case CONTINUE_USER__OPEN: {
+      return {
+        ...state,
+        isQuestion: action.payload.isQuestion,
+        error: undefined,
+      }
+    }
+
     case CONTINUE_USER__CLOSE: {
       return {
         ...state,

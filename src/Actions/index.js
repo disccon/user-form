@@ -1,5 +1,6 @@
 export const CONTINUE_USER = 'CONTINUE_USER'
 export const CONTINUE_USER__CONTINUE = 'CONTINUE_USER__CONTINUE'
+export const CONTINUE_USER__OPEN = 'CONTINUE_USER__OPEN'
 export const CONTINUE_USER__CLOSE = 'CONTINUE_USER__CLOSE'
 export const CONTINUE_USER__FAILURE = 'CONTINUE_USER__FAILURE'
 
@@ -62,12 +63,12 @@ export const userListerNewState = userLister => ({
 })
 
 
-export const continueUser = (isContinue, newUserDB) => (
+export const continueUser = isContinue => (
 
   {
     type: CONTINUE_USER,
     payload: {
-      isContinue, newUserDB,
+      isContinue,
     },
   })
 
