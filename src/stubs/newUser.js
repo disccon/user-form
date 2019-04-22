@@ -1,5 +1,6 @@
 export const newUser = {
   isQuestion: false,
+  id: 1,
   userName: '',
   password: '',
   repeatPassword: '',

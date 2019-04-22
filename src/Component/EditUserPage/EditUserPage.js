@@ -4,22 +4,21 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import styles from './EditUserPage.scss'
 import { ReactComponent as EditIcon } from '../../img/icon/edit.svg'
+import { editUser } from '../../Actions'
+
 
 const cx = classNames.bind(styles)
 
 
 class EditUserPage extends Component {
   editUser = page => () => {
+    const { editUser, pathname } = this.props
+    editUser(Number(pathname.substring(10)), page)
+  }
+
+  backListUsersPage = () => {
     const { history } = this.props
-    if (page === 'Account') {
-      history.push('/')
-    } else if (page === 'Profile') {
-      history.push('Profile')
-    } else if (page === 'Contacts') {
-      history.push('Contacts')
-    } else if (page === 'Capabilities') {
-      history.push('Capabilities')
-    }
+    history.push('ListUsers')
   }
 
   render() {
@@ -31,16 +30,16 @@ class EditUserPage extends Component {
     return (
       <Fragment>
         <h2 className={cx('UserNamePageHeadline')}>User Name</h2>
-        <h3 className={cx('UserNamePageH3')}>Users List</h3>
+        <h3 className={cx('UserNamePageH3')} onClick={this.backListUsersPage} >{'< Users List'}</h3>
         { birthDate && (
-        <div className={cx('UserNamePageContainer')}>
+        <div className={cx('UserNamePageContainer containerTable')}>
           <img src={userSRCAvatarIMG} className={cx('UserNamePageContainer__avatar')} alt='userSRCAvatarIMG' />
           <div className={cx('accountDataWrapper')}>
             <div className={cx('accountDataWrapper__block')}>
               <div className={cx('accountDataWrapper__section')}>
                 <h4>Account</h4>
                 <button type='button'>
-                  <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Account')} />
+                  <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('/')} />
                 </button>
               </div>
               <div className={cx('accountDataWrapper__sectionInfo')}>
@@ -58,7 +57,7 @@ class EditUserPage extends Component {
               <div className={cx('accountDataWrapper__section')}>
                 <h4>Personal</h4>
                 <button type='button'>
-                  <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Profile')} />
+                  <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('/Profile')} />
                 </button>
               </div>
               <div className={cx('accountDataWrapper__sectionInfo')}>
@@ -88,7 +87,7 @@ class EditUserPage extends Component {
               <div className={cx('accountDataWrapper__section')}>
                 <h4>Contacts</h4>
                 <button type='button'>
-                  <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Contacts')} />
+                  <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('/Contacts')} />
                 </button>
               </div>
               <div className={cx('accountDataWrapper__sectionInfo')}>
@@ -125,7 +124,7 @@ class EditUserPage extends Component {
             <div className={cx('accountDataWrapper__block')}>
               <div className={cx('accountDataWrapper__section')}>
                 <h4>Capabilities</h4>
-                <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Capabilities')} />
+                <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('/Capabilities')} />
               </div>
               <div className={cx('accountDataWrapper__sectionInfo')}>
                 <div className={cx('accountDataWrapper__wrapper')}>
@@ -206,38 +205,48 @@ EditUserPage.propTypes = {
     PropTypes.bool,
   ]),
   history: PropTypes.object.isRequired,
+  editUser: PropTypes.func.isRequired,
+  pathname: PropTypes.string.isRequired,
 }
 
 
 const mapStateToProps = state => {
-  const {
-    userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax, facebookLink, phoneN1, phoneN2, phoneN3,
-    selectSkills, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale, checkboxGuitar, checkboxWtf,
-  } = state.newUser
-  return {
-    userName,
-    userSRCAvatarIMG,
-    firstName,
-    lastName,
-    birthDate,
-    email,
-    address,
-    company,
-    fax,
-    facebookLink,
-    phoneN1,
-    phoneN2,
-    phoneN3,
-    selectSkills,
-    checkboxArt,
-    checkboxSport,
-    checkboxJustWant,
-    checkboxFemale,
-    checkboxGuitar,
-    checkboxWtf,
+  const { pathname } = state.router.location
+  const { users } = state.listUsers
+  let editUser
+  if (users.length >= 1) {
+    editUser = users.find(i => i.id === Number(pathname.substring(10)))
+    const {
+      userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax, facebookLink, phoneN1, phoneN2, phoneN3,
+      selectSkills, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale, checkboxGuitar, checkboxWtf,
+    } = editUser
+    return {
+      userName,
+      userSRCAvatarIMG,
+      firstName,
+      lastName,
+      birthDate,
+      email,
+      address,
+      company,
+      fax,
+      facebookLink,
+      phoneN1,
+      phoneN2,
+      phoneN3,
+      selectSkills,
+      checkboxArt,
+      checkboxSport,
+      checkboxJustWant,
+      checkboxFemale,
+      checkboxGuitar,
+      checkboxWtf,
+      pathname,
+    }
   }
 }
 
 export default connect(
   mapStateToProps,
+  { editUser },
 )(EditUserPage)

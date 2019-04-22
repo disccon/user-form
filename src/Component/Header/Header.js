@@ -8,32 +8,35 @@ import { ReactComponent as AddUserIcon } from '../../img/icon/addUser.svg'
 import { ReactComponent as LoginIcon } from '../../img/icon/login.svg'
 import { createUser } from '../../Actions'
 
-
 const cx = classNames.bind(styles)
 
 class Header extends Component {
   forwardListUsers = () => {
-    const { history } = this.props
-    const { pathname } = history.location
+    const { history, pathname } = this.props
     if (pathname !== '/ListUsers') {
       history.push('/ListUsers')
     }
   }
 
   render() {
-    const { createUser } = this.props
+    const { createUser, pathname } = this.props
     return (
       <header>
-        <div className={cx('logoA')}>
-          <LogoIcon className={cx('logoIcon')} alt='logoIcon' />
-        </div>
-        <div className={cx('addUserA')} onClick={createUser} >
-          <AddUserIcon className={cx('addUserIcon')} alt='addUserIcon' />
-          <span>Add new user</span>
-        </div>
-        <div className={cx('loginA')} onClick={this.forwardListUsers}>
-          <LoginIcon className={cx('loginIcon')} alt='loginIcon' />
-          <span>List of users</span>
+        <div className={cx('containerTable')}>
+          <div className={cx('logoA')}>
+            <LogoIcon className={cx('logoIcon')} alt='logoIcon' />
+          </div>
+          <div className={cx('addUserA', { activeIcon: pathname !== '/ListUsers' && pathname !== '/EditUser' })} onClick={createUser}>
+            <AddUserIcon className={cx('addUserIcon')} alt='addUserIcon ' />
+            <span>Add new user</span>
+          </div>
+          <div
+            className={cx('loginA', { activeIcon: pathname === '/ListUsers' || pathname === '/EditUser' })}
+            onClick={this.forwardListUsers}
+          >
+            <LoginIcon className={cx('loginIcon')} alt='loginIon' />
+            <span>List of users</span>
+          </div>
         </div>
       </header>
     )
@@ -42,10 +45,18 @@ class Header extends Component {
 
 Header.propTypes = {
   history: PropTypes.object.isRequired,
+  pathname: PropTypes.string.isRequired,
   createUser: PropTypes.func.isRequired,
 }
 
+const mapStateToProps = state => {
+  const { pathname } = state.router.location
+  return {
+    pathname,
+  }
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   { createUser },
 )(Header)

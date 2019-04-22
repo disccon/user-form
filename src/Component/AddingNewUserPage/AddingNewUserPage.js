@@ -14,25 +14,21 @@ const cx = classNames.bind(styles)
 
 export const AddingNewUserPage = ({ location }) => {
   const { pathname } = location
-  const classAccount = pathname === '/' ? 'active' : null
-  const classProfile = pathname === '/Profile' ? 'active' : null
-  const classContacts = pathname === '/Contacts' ? 'active' : null
-  const classCapabilities = pathname === '/Capabilities' ? 'active' : null
   return (
     <Fragment>
       <h2 className={cx('newUserH')}>Adding new user</h2>
-      <div className={cx('windowNewUser')}>
+      <div className={cx('windowNewUser containerTable')}>
         <div className={cx('windowNewUser__tabs')}>
-          <div className={cx(`windowNewUser__tab ${classAccount}`)}>
+          <div className={cx('windowNewUser__tab', { activeTab: pathname === '/' })}>
             <h2>1. Account</h2>
           </div>
-          <div className={cx(`windowNewUser__tab ${classProfile}`)}>
+          <div className={cx('windowNewUser__tab', { activeTab: pathname === '/Profile' })}>
             <h2>2. Profile</h2>
           </div>
-          <div className={cx(`windowNewUser__tab ${classContacts}`)}>
+          <div className={cx('windowNewUser__tab', { activeTab: pathname === '/Contacts' })}>
             <h2>3. Contacts</h2>
           </div>
-          <div className={cx(`windowNewUser__tab ${classCapabilities}`)}>
+          <div className={cx('windowNewUser__tab', { activeTab: pathname === '/Capabilities' })}>
             <h2>4. Capabilities</h2>
           </div>
         </div>

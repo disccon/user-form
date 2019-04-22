@@ -5,8 +5,11 @@ import { push } from 'connected-react-router'
 
 
 import {
+  CHANGE_QUESTION_STATE__OPEN,
+  CHANGE_QUESTION_STATE__CLOSE,
+  CHANGE_QUESTION_STATE__FAILURE,
+
   CONTINUE_USER__CONTINUE,
-  CONTINUE_USER__OPEN,
   CONTINUE_USER__CLOSE,
   CONTINUE_USER__FAILURE,
 
@@ -51,17 +54,34 @@ import { newUser } from '../stubs/newUser'
 import db from '../db'
 
 
-export function* continueUserSaga(action) {
-  const { isContinue } = action.payload
+export function* changeQuestionStateSaga(action) {
+  const { isQuestion } = action.payload
   try {
-    if (isContinue === 'open') {
+    if (isQuestion) {
       yield put({
-        type: CONTINUE_USER__OPEN,
+        type: CHANGE_QUESTION_STATE__CLOSE,
+      })
+    } else {
+      yield put({
+        type: CHANGE_QUESTION_STATE__OPEN,
         payload: {
           isQuestion: true,
         },
       })
-    } else if (isContinue) {
+    }
+  } catch (error) {
+    yield put({
+      type: CHANGE_QUESTION_STATE__FAILURE,
+      error,
+    })
+  }
+}
+
+
+export function* continueUserSaga(action) {
+  const { isContinue } = action.payload
+  try {
+    if (isContinue) {
       const promise = new Promise(resolve => {
         db.table('newUserDB')
           .toArray()
@@ -267,9 +287,9 @@ export function* forwardCapabilitiesSaga(action) {
   const users = yield select(state => state.listUsers.users)
   try {
     yield put(push('/ListUsers'))
-    if (newUser.idListUser) {
+    if (newUser.id) {
       db.table('listUserDB')
-        .update(newUser.idListUser, {
+        .update(newUser.id, {
           ...newUser,
           selectSkills,
           textareaField,
@@ -282,7 +302,7 @@ export function* forwardCapabilitiesSaga(action) {
         })
       let indexEditUser
       users.forEach((item, i) => {
-        if (item.idListUser === newUser.idListUser) {
+        if (item.id === newUser.id) {
           indexEditUser = i
         }
       })
@@ -310,12 +330,11 @@ export function* forwardCapabilitiesSaga(action) {
         },
       })
     } else {
-      const idListUser = users.length > 0 ? users[users.length - 1].idListUser + 1 : 1
+      const id = users.length > 0 ? users[users.length - 1].id + 1 : 1
       db.table('listUserDB')
         .add({
           ...newUser,
-          id: idListUser,
-          idListUser,
+          id,
           selectSkills,
           textareaField,
           checkboxArt,
@@ -329,7 +348,7 @@ export function* forwardCapabilitiesSaga(action) {
         type: FORWARD_CAPABILITIES__ADD_NEW_USER,
         payload: {
           ...newUser,
-          idListUser,
+          id,
           selectSkills,
           textareaField,
           checkboxArt,
@@ -352,13 +371,15 @@ export function* forwardCapabilitiesSaga(action) {
 
 
 export function* editUserSaga(action) {
-  const { user } = action.payload
+  const { id, page } = action.payload
   try {
-    yield put(push('/EditUser'))
+    yield put(push(page))
+    const users = yield select(state => state.listUsers.users)
+    const newUser = users.find(i => i.id === id)
     yield put({
       type: EDIT_USER__SUCCESS,
       payload: {
-        ...user,
+        ...newUser,
         isQuestion: false,
       },
     })
@@ -372,9 +393,9 @@ export function* editUserSaga(action) {
 
 
 export function* deleteUserSaga(action) {
-  const { idListUser } = action.payload
+  const { id } = action.payload
   const usersList = yield select(state => state.listUsers.users)
-  const users = usersList.filter(item => item.idListUser !== idListUser)
+  const users = usersList.filter(item => item.id !== id)
   try {
     yield put({
       type: DELETE_USER__SUCCESS,

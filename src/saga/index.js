@@ -1,5 +1,6 @@
 import { takeLatest, all } from 'redux-saga/effects'
 import {
+  changeQuestionStateSaga,
   continueUserSaga,
   userListerNewStateSaga,
   saveUserSRCAvatarIMGSaga,
@@ -16,6 +17,7 @@ import {
 
 
 import {
+  CHANGE_QUESTION_STATE,
   CONTINUE_USER,
   USER_LISTER_NEW_STATE,
   SAVE_USER_SRC_AVATAR_IMG,
@@ -33,6 +35,7 @@ import {
 
 export default function* rootSaga() {
   yield all([
+    takeLatest(CHANGE_QUESTION_STATE, changeQuestionStateSaga),
     takeLatest(CONTINUE_USER, continueUserSaga),
     takeLatest(USER_LISTER_NEW_STATE, userListerNewStateSaga),
     takeLatest(SAVE_USER_SRC_AVATAR_IMG, saveUserSRCAvatarIMGSaga),

@@ -5,10 +5,7 @@
   text-align: center;
 }
 .windowNewUser{
-  width: 970px;
   margin-top: 45px;
-  margin-right: auto;
-  margin-left: auto;
   .windowNewUser__tabs{
     width: 100%;
     display: flex;
@@ -25,7 +22,7 @@
         color: #9BB0CB  ;
       }
     }
-    .windowNewUser__tab.active{
+    .windowNewUser__tab.activeTab{
       background: #4E86E4;
       h2{
         color: #fff;

@@ -10,8 +10,9 @@ import NodFound from '../NodFound/NodFound'
 import styles from './App.scss'
 import Header from '../Header/Header'
 import db from '../../db'
-import { userListerNewState, continueUser } from '../../Actions'
+import { userListerNewState, changeQuestionState } from '../../Actions'
 import { users } from '../../stubs/users'
+import { deepEqual } from '../../helpers/deepEqual'
 import { AddingNewUserPage } from '../AddingNewUserPage/AddingNewUserPage'
 import EditUserPage from '../EditUserPage/EditUserPage'
 import ListUsersPage from '../ListUsersPage/ListUsersPage'
@@ -22,7 +23,7 @@ const cx = classNames.bind(styles)
 class App extends Component {
   componentDidMount() {
     const {
-      userListerNewState, pathname, newUser, history, continueUser,
+      userListerNewState, pathname, newUser, history, changeQuestionState,
     } = this.props
     if (pathname !== '/') {
       history.push('/')
@@ -32,7 +33,7 @@ class App extends Component {
       .toArray()
       .then(newUserDB => {
         if (newUserDB.length === 1) {
-          continueUser('open')
+          changeQuestionState(deepEqual(...newUserDB, newUser))
           db.table('listUserDB')
             .toArray()
             .then(listUserDB => {
@@ -69,7 +70,7 @@ class App extends Component {
           <Switch>
             <Route path='/NodFound' component={NodFound} />
             <Route exact path='/ListUsers' component={ListUsersPage} />
-            <Route exact path='/EditUser' component={EditUserPage} />
+            <Route exact path='/EditUser/:id' component={EditUserPage} />
             <Route path='/' component={AddingNewUserPage} />
             <Redirect to='/NodFound' />
           </Switch>
@@ -85,7 +86,7 @@ App.propTypes = {
   activeValue: PropTypes.object,
   userListerNewState: PropTypes.func.isRequired,
   pathname: PropTypes.string.isRequired,
-  continueUser: PropTypes.func.isRequired,
+  changeQuestionState: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => {
@@ -102,5 +103,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { userListerNewState, continueUser },
+  { userListerNewState, changeQuestionState },
 )(App)

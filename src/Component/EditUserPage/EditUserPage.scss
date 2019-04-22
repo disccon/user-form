@@ -7,6 +7,7 @@
 }
 
 .UserNamePageH3 {
+  cursor: pointer;
   margin-right: auto;
   margin-left: auto;
   width: 971px;
@@ -21,9 +22,6 @@
   display: flex;
   padding: 35px 58px;
   background: #fbfcff;
-  margin-right: auto;
-  margin-left: auto;
-  width: 971px;
   height: 734px;
 
   .UserNamePageContainer__avatar {

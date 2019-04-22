@@ -3,62 +3,35 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import styles from './ListUsersPage.scss'
-
-import { ReactComponent as CloseIcon } from '../../img/icon/close.svg'
-import { ReactComponent as EditIcon } from '../../img/icon/edit.svg'
-import { editUser, deleteUser, createUser } from '../../Actions'
-import db from '../../db'
+import { Pagination } from './Pagination/Pagination'
+import UserRow from './UserRow/UserRow'
+import NoHaveUserRow from './NoHaveUserRow/NoHaveUserRow'
 
 const cx = classNames.bind(styles)
 
 class ListUsersPage extends Component {
   state = {
-    pageList: 0,
-    deleteList: false,
+    activePage: 0,
   }
 
-  editUser = user => () => {
-    const { editUser } = this.props
-    editUser(user)
-  }
-
-  showRemoveUserButton = idListUser => () => {
+  changeActivePage = page => {
     this.setState({
-      deleteList: idListUser,
+      activePage: page,
     })
-  }
-
-  deleteUser = idListUser => () => {
-    const { deleteUser } = this.props
-    this.setState({
-      deleteList: false,
-    })
-    db.table('listUserDB')
-      .delete(idListUser)
-    deleteUser(idListUser)
-  }
-
-  forwardPagination = page => () => {
-    const { users } = this.props
-    if (page <= (users.length / 7) || page === 1) {
-      this.setState({
-        pageList: page,
-      })
-    }
   }
 
   render() {
-    const { users, createUser } = this.props
-    const { pageList, deleteList } = this.state
-    const visibleUserLength = users.length - (7 * pageList) >= 6 ? 6 : users.length - (7 * pageList)
+    const { users, history } = this.props
+    const { activePage } = this.state
+    const visibleUserLength = users.length - (7 * activePage) >= 6 ? 6 : users.length - (7 * activePage)
     const visibleUser = []
     for (let i = 0; i < visibleUserLength; i += 1) {
-      visibleUser.push(users[i + (7 * pageList)])
+      visibleUser.push(users[i + (7 * activePage)])
     }
     return (
       <Fragment>
         <h2 className={cx('ListUsersH2')}>List of users</h2>
-        <table className={cx('ListUsersTable')}>
+        <table className={cx('ListUsersTable containerTable')}>
           <thead>
             <tr>
               <th>name</th>
@@ -69,112 +42,19 @@ class ListUsersPage extends Component {
           </thead>
           <tbody>
             <tr />
-            {users.length > 0 && visibleUser.map(user => (
-              <tr key={user.idListUser} className={cx(deleteList === user.idListUser ? 'delete' : null)}>
-                <td>
-                  <div className={cx('wrapperUser')}>
-                    <img src={user.userSRCAvatarIMG} alt='userSRCAvatarIMG' />
-                    <div>
-                      <h4>{user.userName}</h4>
-                      <span>username</span>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div className={cx('wrapperUser')}>{user.company}</div>
-                </td>
-                <td>
-                  <div className={cx('wrapperUser')}>{user.email}</div>
-                </td>
-                <td>
-                  <div className={cx('wrapperUser')}>
-                  3 month ago
-                    {deleteList !== user.idListUser && (
-                    <Fragment>
-                      <button type='button' className={cx('button_editIcon')} onClick={this.editUser(user)}>
-                        <EditIcon className={cx('editIcon')} />
-                      </button>
-                      <button type='button' className={cx('button_closeIcon')}>
-                        <CloseIcon
-                          className={cx('closeIcon')}
-                          onClick={this.showRemoveUserButton(user.idListUser)}
-                        />
-                      </button>
-                    </Fragment>
-                    )
-                  }
-                  </div>
-                  {deleteList === user.idListUser && (
-                    <label onClick={this.deleteUser(user.idListUser)}>
-                      <button type='button' id='closeIcon'>
-                        <CloseIcon className={cx('deleteUser')} />
-                        delete
-                      </button>
-                    </label>
-                  )}
-                </td>
-              </tr>
-            ))}
+            {users.length > 0
+            && <UserRow users={visibleUser} activePage={activePage} changeActivePage={this.changeActivePage} history={history} />
+            }
           </tbody>
         </table>
-        {users.length > 0 && (
-          <div className={cx('ListUsers__Pagination')}>
-            <button type='button'>&laquo;</button>
-            <button
-              type='button'
-              className={cx('pagination__active')}
-              onClick={this.forwardPagination(0)}
-            >
-              1
-            </button>
-            <button
-              type='button'
-              className={cx(users.length > 7 ? 'pagination__active' : '')}
-              onClick={this.forwardPagination(1)}
-            >
-              2
-            </button>
-            <button
-              type='button'
-              className={cx(users.length > (7 * 2) ? 'pagination__active' : '')}
-              onClick={this.forwardPagination(2)}
-            >
-              3
-            </button>
-            <button
-              type='button'
-              className={cx(users.length > (7 * 3) ? 'pagination__active' : '')}
-              onClick={this.forwardPagination(3)}
-            >
-              4
-            </button>
-            <button
-              type='button'
-              className={cx(users.length > (7 * 4) ? 'pagination__active' : '')}
-              onClick={this.forwardPagination(4)}
-            >
-              5
-            </button>
-            <button
-              type='button'
-              className={cx(users.length > (7 * 5) ? 'pagination__active' : '')}
-              onClick={this.forwardPagination(5)}
-            >
-              6
-            </button>
-            <button type='button' className={cx(users.length > (7 * 6) ? 'pagination__active' : '')}>&raquo;</button>
-          </div>
+        {users.length === 0 && <NoHaveUserRow />}
+        {users.length > 7 && (
+        <Pagination
+          activePage={activePage}
+          pageList={users.length / 7}
+          changeActivePage={this.changeActivePage}
+        />
         )}
-        {users.length === 0
-        && (
-          <Fragment>
-            <h2 className={cx('noUsersH2')}>
-              No users here :(
-            </h2>
-            <button type='button' className={cx('createUserButton')} onClick={createUser}>Create new user</button>
-          </Fragment>
-        )
-        }
       </Fragment>
     )
   }
@@ -182,9 +62,7 @@ class ListUsersPage extends Component {
 
 ListUsersPage.propTypes = {
   users: PropTypes.array.isRequired,
-  editUser: PropTypes.func.isRequired,
-  deleteUser: PropTypes.func.isRequired,
-  createUser: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -193,5 +71,4 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { editUser, deleteUser, createUser },
 )(ListUsersPage)

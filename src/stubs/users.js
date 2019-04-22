@@ -9,7 +9,7 @@ import AvatarIMG7 from '../img/Ellipse(7).png'
 
 export const users = [
   {
-    idListUser: 1,
+    id: 1,
     userName: 'Maxim Morozov 1',
     userSRCAvatarIMG: [AvatarIMG1],
     firstName: 'Maxim',
@@ -42,7 +42,7 @@ export const users = [
     checkboxWtf: 'WTF is “hobbies”???',
   },
   {
-    idListUser: 2,
+    id: 2,
     userName: 'Maxim Morozov 2',
     password: '111',
     repeatPassword: '111',
@@ -77,7 +77,7 @@ export const users = [
     checkboxWtf: false,
   },
   {
-    idListUser: 3,
+    id: 3,
     userName: 'Maxim Morozov 3',
     password: '111',
     repeatPassword: '111',
@@ -112,7 +112,7 @@ export const users = [
     checkboxWtf: false,
   },
   {
-    idListUser: 4,
+    id: 4,
     userName: 'Maxim Morozov 4',
     password: '111',
     repeatPassword: '111',
@@ -147,7 +147,7 @@ export const users = [
     checkboxWtf: false,
   },
   {
-    idListUser: 5,
+    id: 5,
     userName: 'Maxim Morozov 5',
     password: '111',
     repeatPassword: '111',
@@ -182,7 +182,7 @@ export const users = [
     checkboxWtf: false,
   },
   {
-    idListUser: 6,
+    id: 6,
     userName: 'Maxim Morozov 6',
     password: '111',
     repeatPassword: '111',
@@ -216,7 +216,7 @@ export const users = [
     checkboxWtf: false,
   },
   {
-    idListUser: 7,
+    id: 7,
     userName: 'Maxim Morozov 7',
     password: '111',
     repeatPassword: '111',
@@ -251,7 +251,7 @@ export const users = [
     checkboxWtf: false,
   },
   {
-    idListUser: 8,
+    id: 8,
     userName: 'Maxim Morozov 8',
     password: '111',
     repeatPassword: '111',

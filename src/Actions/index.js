@@ -1,6 +1,10 @@
+export const CHANGE_QUESTION_STATE = 'CHANGE_QUESTION_STATE'
+export const CHANGE_QUESTION_STATE__OPEN = 'CHANGE_QUESTION_STATE__OPEN'
+export const CHANGE_QUESTION_STATE__CLOSE = 'CHANGE_QUESTION_STATE__CLOSE'
+export const CHANGE_QUESTION_STATE__FAILURE = 'CHANGE_QUESTION_STATE__FAILURE'
+
 export const CONTINUE_USER = 'CONTINUE_USER'
 export const CONTINUE_USER__CONTINUE = 'CONTINUE_USER__CONTINUE'
-export const CONTINUE_USER__OPEN = 'CONTINUE_USER__OPEN'
 export const CONTINUE_USER__CLOSE = 'CONTINUE_USER__CLOSE'
 export const CONTINUE_USER__FAILURE = 'CONTINUE_USER__FAILURE'
 
@@ -54,6 +58,14 @@ export const DELETE_USER__FAILURE = 'DELETE_USER__FAILURE'
 export const CREATE_USER = 'CREATE_USER'
 export const CREATE_USER__SUCCESS = 'CREATE_USER__SUCCESS'
 export const CREATE_USER__FAILURE = 'CREATE_USER__FAILURE'
+
+
+export const changeQuestionState = isQuestion => ({
+  type: CHANGE_QUESTION_STATE,
+  payload: {
+    isQuestion,
+  },
+})
 
 export const userListerNewState = userLister => ({
   type: USER_LISTER_NEW_STATE,
@@ -147,20 +159,20 @@ export const forwardCapabilities = (selectSkills, textareaField, checkboxArt, ch
   })
 
 
-export const editUser = user => (
+export const editUser = (id, page) => (
   {
     type: EDIT_USER,
     payload: {
-      user,
+      id, page,
     },
   })
 
 
-export const deleteUser = idListUser => (
+export const deleteUser = id => (
   {
     type: DELETE_USER,
     payload: {
-      idListUser,
+      id,
     },
   })
 
