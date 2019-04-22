@@ -19,7 +19,7 @@ export const renderFieldInputAccount = ({
       <h4>{label}</h4>
       {isVisibility && visibilityIcon}
       <div>
-        <input {...input} type={type} id={idInput} />
+        <input {...input} type={type} id={idInput} className={cx({ errorInput: touched && error })} />
         {touched && error && <p>{error}</p>}
       </div>
     </label>

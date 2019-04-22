@@ -8,6 +8,8 @@ import { forwardBackProfile } from '../../../Actions'
 import { renderFieldInputProfile } from './renderFieldInputProfile'
 import { renderFieldRadioProfile } from './renderFieldRadioProfile'
 import { renderDateTimePickerProfile } from './renderDateTimePickerProfile'
+import { renderFieldInputNewUser } from '../renderFieldInputNewUser'
+
 
 const cx = classNames.bind(styles)
 
@@ -32,35 +34,43 @@ class Profile extends Component {
           <form className={cx('profile__form')} onSubmit={handleSubmit(this.onSubmit)}>
             <div className={cx('profile__sideLeft')}>
               <Field
-                component={renderFieldInputProfile}
+                component={renderFieldInputNewUser}
                 type='text'
+                span
                 label='First name'
                 name='firstName'
                 idField='fieldFirstName'
+                classNameLabel='fieldInputNewUser'
               />
               <Field
-                component={renderFieldInputProfile}
+                component={renderFieldInputNewUser}
                 type='text'
+                span
                 label='Last name'
                 name='lastName'
                 idField='fieldLastName'
+                classNameLabel='fieldInputNewUser'
               />
               <Field name='birthDate' component={renderDateTimePickerProfile} />
             </div>
             <div className={cx('profile__sideRight')}>
               <Field
-                component={renderFieldInputProfile}
+                component={renderFieldInputNewUser}
                 type='text'
+                span
                 label='Email'
                 name='email'
                 idField='fieldEmail'
+                classNameLabel='fieldInputNewUser'
               />
               <Field
-                component={renderFieldInputProfile}
+                component={renderFieldInputNewUser}
                 type='text'
+                span
                 label='Address'
                 name='address'
                 idField='fieldAddress'
+                classNameLabel='fieldInputNewUser'
               />
               <h5>Gender</h5>
               <div className={cx('wrapperGender')}>

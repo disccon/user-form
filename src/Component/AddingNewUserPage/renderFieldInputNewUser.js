@@ -2,18 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import InputMask from 'react-input-mask'
-import styles from './Contacts.scss'
+import styles from './AddingNewUser.scss'
 
 const cx = classNames.bind(styles)
 
-
-export const renderFieldInputContacts = ({
-  label, input, type, meta: { touched, error }, className, span, placeholder, mask, idField,
+export const renderFieldInputNewUser = ({
+  label, input, type, meta: { touched, error }, span, placeholder,
+  idField, classNameLabel, mask,
 }) => {
   const inputRender = mask ? <InputMask {...input} mask={mask} placeholder={placeholder} id={idField} />
-    : <input {...input} type={type} className={className} placeholder={placeholder} id={idField} />
+    : <input {...input} type={type} placeholder={placeholder} id={idField} />
   return (
-    <label htmlFor={idField} className={cx('contacts__label')}>
+    <label htmlFor={idField} className={cx(classNameLabel)}>
       <h4>{label}</h4>
       {span && <span>*</span>}
       {inputRender}
@@ -22,13 +22,13 @@ export const renderFieldInputContacts = ({
   )
 }
 
-renderFieldInputContacts.propTypes = {
+renderFieldInputNewUser.propTypes = {
   input: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
+  classNameLabel: PropTypes.string,
   label: PropTypes.string,
   type: PropTypes.string,
-  className: PropTypes.string,
-  span: PropTypes.string,
+  span: PropTypes.bool,
   placeholder: PropTypes.string,
   mask: PropTypes.string,
   idField: PropTypes.string.isRequired,

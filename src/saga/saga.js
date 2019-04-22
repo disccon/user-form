@@ -195,7 +195,7 @@ export function* forwardBackProfileSaga(action) {
 
 export function* forwardBackContactsSaga(action) {
   const {
-    forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneN1, phoneN2, phoneN3,
+    forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
   } = action.payload
   try {
     let actionType
@@ -209,7 +209,7 @@ export function* forwardBackContactsSaga(action) {
     yield put({
       type: actionType,
       payload: {
-        forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneN1, phoneN2, phoneN3,
+        forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
       },
     })
   } catch (error) {
@@ -222,24 +222,23 @@ export function* forwardBackContactsSaga(action) {
 
 
 export function* deleteAddFieldPhoneSaga(action) {
-  const quantityPhoneField = yield select(state => state.newUser.quantityPhoneField)
   const { deleteAddField } = action.payload
+  const phoneArray = yield select(state => state.newUser.phoneArray)
+  let type
   try {
     if (deleteAddField === 'add') {
-      yield put({
-        type: DELETE_ADD_FIELD_PHONE__ADD,
-        payload: {
-          quantityPhoneField: quantityPhoneField + 1,
-        },
-      })
-    } else if (deleteAddField === 'delete') {
-      yield put({
-        type: DELETE_ADD_FIELD_PHONE__DELETE,
-        payload: {
-          quantityPhoneField: quantityPhoneField - 1,
-        },
-      })
+      phoneArray.push('')
+      type = DELETE_ADD_FIELD_PHONE__ADD
+    } else {
+      phoneArray.pop('')
+      type = DELETE_ADD_FIELD_PHONE__DELETE
     }
+    yield put({
+      type,
+      payload: {
+        phoneArray,
+      },
+    })
   } catch (error) {
     yield put({
       type: DELETE_ADD_FIELD_PHONE__FAILURE,
@@ -287,7 +286,7 @@ export function* forwardCapabilitiesSaga(action) {
   const users = yield select(state => state.listUsers.users)
   try {
     yield put(push('/ListUsers'))
-    if (newUser.id) {
+    if (newUser.editUser) {
       db.table('listUserDB')
         .update(newUser.id, {
           ...newUser,
@@ -380,6 +379,7 @@ export function* editUserSaga(action) {
       type: EDIT_USER__SUCCESS,
       payload: {
         ...newUser,
+        editUser: true,
         isQuestion: false,
       },
     })

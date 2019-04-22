@@ -109,11 +109,11 @@ export const forwardBackProfile = (forwardBack, firstName, lastName, birthDate, 
     },
   })
 
-export const forwardBackContacts = (forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneN1, phoneN2, phoneN3) => (
+export const forwardBackContacts = (forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3) => (
   {
     type: FORWARD_BACK_CONTACTS,
     payload: {
-      forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneN1, phoneN2, phoneN3,
+      forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
     },
   })
 

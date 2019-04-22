@@ -17,6 +17,7 @@ export const newUser = {
   facebookLink: '',
   selectLanguage: '',
   fax: '',
+  phoneArray: [''],
   phoneN1: '',
   phoneN2: '',
   phoneN3: '',

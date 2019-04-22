@@ -18,7 +18,7 @@ class EditUserPage extends Component {
 
   backListUsersPage = () => {
     const { history } = this.props
-    history.push('ListUsers')
+    history.push('/ListUsers')
   }
 
   render() {

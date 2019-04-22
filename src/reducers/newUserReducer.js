@@ -185,17 +185,18 @@ export default function newUserReducer(state = newUser, action) {
       }
     }
 
-    case DELETE_ADD_FIELD_PHONE__DELETE: {
-      return {
-        ...state,
-        quantityPhoneField: action.payload.quantityPhoneField,
-        error: undefined,
-      }
-    }
+
     case DELETE_ADD_FIELD_PHONE__ADD: {
       return {
         ...state,
-        quantityPhoneField: action.payload.quantityPhoneField,
+        phoneArray: action.payload.phoneArray,
+        error: undefined,
+      }
+    }
+    case DELETE_ADD_FIELD_PHONE__DELETE: {
+      return {
+        ...state,
+        phoneArray: action.payload.phoneArray,
         error: undefined,
       }
     }

@@ -4,10 +4,10 @@ import classNames from 'classnames'
 import InputMask from 'react-input-mask'
 import styles from './Contacts.scss'
 
-
 const cx = classNames.bind(styles)
 
-export const renderFieldPhoneContacts = ({
+
+export const renderFieldPhone = ({
   input, meta: { touched, error }, label, type, isvisibilitiFieldPhone, placeholder, idField, deleteFieldPhone,
 }) => (
   <div className={cx('contacts__labelPhone')}>
@@ -20,7 +20,7 @@ export const renderFieldPhoneContacts = ({
   </div>
 )
 
-renderFieldPhoneContacts.propTypes = {
+renderFieldPhone.propTypes = {
   input: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
   label: PropTypes.string,
@@ -31,5 +31,5 @@ renderFieldPhoneContacts.propTypes = {
   ]),
   placeholder: PropTypes.string,
   idField: PropTypes.string.isRequired,
-  deleteFieldPhone: PropTypes.func.isRequired,
+  deleteFieldPhone: PropTypes.func,
 }

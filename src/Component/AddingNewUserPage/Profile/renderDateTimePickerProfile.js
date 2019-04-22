@@ -14,6 +14,7 @@ export const renderDateTimePickerProfile = ({ input, meta: { touched, error } })
       <h4>Birth date</h4>
       <span className={cx('profile__birthDateSpan')}>*</span>
       <DatePicker
+        format='dd/MM/yyyy'
         clearIcon=''
         calendarIcon={<CalendarIcon />}
         className={cx('profile__datePicker')}

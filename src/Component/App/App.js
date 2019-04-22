@@ -25,9 +25,9 @@ class App extends Component {
     const {
       userListerNewState, pathname, newUser, history, changeQuestionState,
     } = this.props
-    if (pathname !== '/') {
-      history.push('/')
-    }
+    // if (pathname !== '/') {
+    //   history.push('/')
+    // }
     window.addEventListener('beforeunload', this.onUnload)
     db.table('newUserDB')
       .toArray()
