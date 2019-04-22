@@ -169,9 +169,8 @@ Account = reduxForm({
     } else if (values.userName.length <= 3) {
       errors.userName = 'Must be 4 characters or more'
     } else {
-      userNameList.forEach(userName => {
-        errors.userName = values.userName === userName ? 'already have this user in the database' : null
-      })
+      userNameList.find(userName => (
+        errors.userName = values.userName === userName ? 'already have this user in the database' : null))
     }
 
     if (!values.password) {
@@ -211,6 +210,7 @@ const mapStateToProps = state => {
   } = state.newUser
   const { users } = state.listUsers
   const userNameList = users.map(user => (user.id === id ? '' : user.userName))
+  console.log(userNameList)
   return {
     initialValues: {
       userName, password, repeatPassword,

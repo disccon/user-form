@@ -8,24 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="966abf2f-679a-466a-9520-94271c675336" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Component/AddingNewUserPage/renderFieldInputNewUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Actions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Account/Account.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Account/Account.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Account/renderFieldInputAccount.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Account/renderFieldInputAccount.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/AddingNewUserPage/AddingNewUser.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/AddingNewUserPage/AddingNewUser.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Contacts/Contacts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Contacts/Contacts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Contacts/Contacts.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Contacts/Contacts.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Contacts/renderFieldInputContacts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Contacts/renderFieldPhone.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Contacts/renderFieldPhoneContacts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Contacts/renderFieldArrayPhone.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Profile/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Profile/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Profile/Profile.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Profile/Profile.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Profile/renderDateTimePickerProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Profile/renderDateTimePickerProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/App/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/EditUserPage/EditUserPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/EditUserPage/EditUserPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/newUserReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/newUserReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/saga/saga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/saga/saga.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stubs/newUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/stubs/newUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Account/Account.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Account/Account.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,8 +57,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Component/AddingNewUserPage/Account/Account.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="212" column="79" lean-forward="true" selection-start-line="212" selection-start-column="79" selection-end-line="212" selection-end-column="79" />
+            <state relative-caret-position="480">
+              <caret line="173" column="10" selection-start-line="173" selection-start-column="10" selection-end-line="173" selection-end-column="10" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
@@ -238,7 +221,6 @@
         <option value="$PROJECT_DIR$/src/stubs/users.js" />
         <option value="$PROJECT_DIR$/src/Component/ListUsersPage/UserRow/UserRow.js" />
         <option value="$PROJECT_DIR$/src/saga/index.js" />
-        <option value="$PROJECT_DIR$/src/Component/AddingNewUserPage/Account/Account.js" />
         <option value="$PROJECT_DIR$/src/helpers/deepEqual.js" />
         <option value="$PROJECT_DIR$/src/Component/App/App.js" />
         <option value="$PROJECT_DIR$/src/Component/AddingNewUserPage/Profile/renderDateTimePickerProfile.js" />
@@ -259,6 +241,7 @@
         <option value="$PROJECT_DIR$/src/Actions/index.js" />
         <option value="$PROJECT_DIR$/src/Component/EditUserPage/EditUserPage.js" />
         <option value="$PROJECT_DIR$/src/saga/saga.js" />
+        <option value="$PROJECT_DIR$/src/Component/AddingNewUserPage/Account/Account.js" />
       </list>
     </option>
   </component>
@@ -308,14 +291,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Component" type="462c0819:PsiDirectoryNode" />
               <item name="AddingNewUserPage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wizardForm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wizardForm" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Component" type="462c0819:PsiDirectoryNode" />
-              <item name="AddingNewUserPage" type="462c0819:PsiDirectoryNode" />
-              <item name="Account" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="wizardForm" type="b2602c69:ProjectViewProjectNode" />
@@ -472,7 +447,7 @@
       <workItem from="1555654120812" duration="28220000" />
       <workItem from="1555912921758" duration="12618000" />
       <workItem from="1555925782028" duration="15610000" />
-      <workItem from="1555941548137" duration="2980000" />
+      <workItem from="1555941548137" duration="3244000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1553498311885</created>
@@ -719,11 +694,18 @@
       <option name="project" value="LOCAL" />
       <updated>1555930534611</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="IndexDB 4">
+      <created>1555944560284</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1555944560284</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="466879000" />
+    <option name="totallyTimeSpent" value="467143000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -828,7 +810,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Profile" />
     <MESSAGE value="Contacts" />
     <MESSAGE value="Capabilities" />
     <MESSAGE value="ListUser" />
@@ -853,7 +834,8 @@
     <MESSAGE value="Test" />
     <MESSAGE value="question 2" />
     <MESSAGE value="question 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="question 3" />
+    <MESSAGE value="IndexDB 4" />
+    <option name="LAST_COMMIT_MESSAGE" value="IndexDB 4" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Component/AddingNewUserPage/Capabilities/renderFieldSelectCapabilities.js">
@@ -1265,8 +1247,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/AddingNewUserPage/Account/Account.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="212" column="79" lean-forward="true" selection-start-line="212" selection-start-column="79" selection-end-line="212" selection-end-column="79" />
+        <state relative-caret-position="480">
+          <caret line="173" column="10" selection-start-line="173" selection-start-column="10" selection-end-line="173" selection-end-column="10" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
           </folding>
