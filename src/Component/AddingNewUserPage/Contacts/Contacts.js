@@ -27,7 +27,7 @@ class Contacts extends Component {
   onSubmit = values => {
     const { forwardBackContacts } = this.props
     forwardBackContacts('forward', values.company, values.githubLink, values.facebookLink, values.selectLanguage, values.fax,
-      values.phoneN1, values.phoneN2, values.phoneN3)
+      values.phoneArray, values.phoneN1, values.phoneN2, values.phoneN3)
   }
 
   render() {
@@ -112,7 +112,7 @@ Contacts.propTypes = {
 Contacts = reduxForm({
   validate: values => {
     const errors = {}
-
+    console.log(values)
     if (!values.selectLanguage) {
       errors.selectLanguage = 'Missing Main language'
     }
