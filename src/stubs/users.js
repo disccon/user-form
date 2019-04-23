@@ -29,7 +29,6 @@ export const users = [
     phoneN1: '+38 (066) 123 123 11',
     phoneN2: '+38 (066) 123 123 11',
     phoneN3: '+38 (066) 123 123 11',
-    quantityPhoneField: 2,
 
     selectSkills: [{ value: 'CSS', label: 'CSS' },
       { value: 'Javascript', label: 'Javascript' },
@@ -66,7 +65,6 @@ export const users = [
     phoneN1: '+38 (066) 123 123 11',
     phoneN2: '+38 (066) 123 123 11',
     phoneN3: '+38 (066) 123 123 11',
-    quantityPhoneField: 2,
 
     selectSkills: [{ value: 'CSS', label: 'CSS' },
       { value: 'Javascript', label: 'Javascript' },
@@ -103,7 +101,6 @@ export const users = [
     phoneN1: '+38 (066) 123 123 11',
     phoneN2: '+38 (066) 123 123 11',
     phoneN3: '+38 (066) 123 123 11',
-    quantityPhoneField: 2,
 
     selectSkills: [{ value: 'CSS', label: 'CSS' },
       { value: 'Javascript', label: 'Javascript' },
@@ -140,7 +137,6 @@ export const users = [
     phoneN1: '+38 (066) 123 123 11',
     phoneN2: '+38 (066) 123 123 11',
     phoneN3: '+38 (066) 123 123 11',
-    quantityPhoneField: 2,
 
     selectSkills: [{ value: 'CSS', label: 'CSS' },
       { value: 'Javascript', label: 'Javascript' },
@@ -177,7 +173,6 @@ export const users = [
     phoneN1: '+38 (066) 123 123 11',
     phoneN2: '+38 (066) 123 123 11',
     phoneN3: '+38 (066) 123 123 11',
-    quantityPhoneField: 2,
 
     selectSkills: [{ value: 'CSS', label: 'CSS' },
       { value: 'Javascript', label: 'Javascript' },
@@ -213,7 +208,6 @@ export const users = [
     phoneN1: '+38 (066) 123 123 11',
     phoneN2: '+38 (066) 123 123 11',
     phoneN3: '+38 (066) 123 123 11',
-    quantityPhoneField: 2,
 
     selectSkills: [{ value: 'CSS', label: 'CSS' },
       { value: 'Javascript', label: 'Javascript' },
@@ -250,7 +244,6 @@ export const users = [
     phoneN1: '+38 (066) 123 123 11',
     phoneN2: '+38 (066) 123 123 11',
     phoneN3: '+38 (066) 123 123 11',
-    quantityPhoneField: 2,
 
     selectSkills: [{ value: 'CSS', label: 'CSS' },
       { value: 'Javascript', label: 'Javascript' },
@@ -287,7 +280,6 @@ export const users = [
     phoneN1: '+38 (066) 123 123 11',
     phoneN2: '+38 (066) 123 123 11',
     phoneN3: '+38 (066) 123 123 11',
-    quantityPhoneField: 2,
 
     selectSkills: [{ value: 'CSS', label: 'CSS' },
       { value: 'Javascript', label: 'Javascript' },

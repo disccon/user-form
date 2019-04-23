@@ -286,7 +286,7 @@ export function* forwardCapabilitiesSaga(action) {
   const users = yield select(state => state.listUsers.users)
   try {
     yield put(push('/ListUsers'))
-    if (newUser.idList) {
+    if (newUser.idList >= 1) {
       db.table('listUserDB')
         .update(newUser.id, {
           ...newUser,

@@ -82,12 +82,12 @@ class UserRow extends Component {
                   }
               </div>
               {deleteList === user.id && (
-              <label onClick={this.deleteUser(user.id)}>
+              <div className={cx('deleteUserWrapper')} onClick={this.deleteUser(user.id)}>
                 <button type='button' id='closeIcon'>
                   <CloseIcon className={cx('deleteUser')} />
                       delete
                 </button>
-              </label>
+              </div>
               )}
             </td>
           </tr>

@@ -12,7 +12,6 @@ export const USER_LISTER_NEW_STATE = 'USER_LISTER_NEW_STATE'
 export const USER_LISTER_NEW_STATE__SUCCESS = 'USER_LISTER_NEW_STATE__SUCCESS'
 export const USER_LISTER_NEW_STATE__FAILURE = 'USER_LISTER_NEW_STATE__FAILURE'
 
-
 export const SAVE_USER_SRC_AVATAR_IMG = 'SAVE_USER_SRC_AVATAR_IMG'
 export const SAVE_USER_SRC_AVATAR_IMG__SUCCESS = 'SAVE_USER_SRC_AVATAR_IMG__SUCCESS'
 export const SAVE_USER_SRC_AVATAR_IMG__FAILURE = 'SAVE_USER_SRC_AVATAR_IMG__FAILURE'
@@ -36,7 +35,6 @@ export const DELETE_ADD_FIELD_PHONE__ADD = 'DELETE_ADD_FIELD_PHONE__ADD'
 export const DELETE_ADD_FIELD_PHONE__DELETE = 'DELETE_ADD_FIELD_PHONE__DELETE'
 export const DELETE_ADD_FIELD_PHONE__FAILURE = 'DELETE_ADD_FIELD_PHONE__FAILURE'
 
-
 export const BACK_CAPABILITIES = 'BACK_CAPABILITIES'
 export const BACK_CAPABILITIES__SUCCESS = 'BACK_CAPABILITIES__SUCCESS'
 export const BACK_CAPABILITIES__FAILURE = 'BACK_CAPABILITIES__FAILURE'
@@ -45,7 +43,6 @@ export const FORWARD_CAPABILITIES = 'FORWARD_CAPABILITIES'
 export const FORWARD_CAPABILITIES__ADD_NEW_USER = 'FORWARD_BACK_CAPABILITIES__FORWARD__ADD_NEW_USER'
 export const FORWARD_CAPABILITIES__EDIT_USER = 'FORWARD_BACK_CAPABILITIES__FORWARD__EDIT_USER'
 export const FORWARD_CAPABILITIES__FAILURE = 'FORWARD_CAPABILITIES__FAILURE'
-
 
 export const EDIT_USER = 'EDIT_USER'
 export const EDIT_USER__SUCCESS = 'EDIT_USER__SUCCESS'
@@ -109,7 +106,8 @@ export const forwardBackProfile = (forwardBack, firstName, lastName, birthDate, 
     },
   })
 
-export const forwardBackContacts = (forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3) => (
+export const forwardBackContacts = (forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneArray,
+  phoneN1, phoneN2, phoneN3) => (
   {
     type: FORWARD_BACK_CONTACTS,
     payload: {
