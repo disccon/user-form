@@ -26,12 +26,15 @@ class Header extends Component {
           <div className={cx('logoA')}>
             <LogoIcon className={cx('logoIcon')} alt='logoIcon' />
           </div>
-          <div className={cx('addUserA', { activeIcon: pathname !== '/ListUsers' && pathname !== '/EditUser' })} onClick={createUser}>
+          <div
+            className={cx('addUserA', { activeIcon: pathname !== '/ListUsers' && pathname.indexOf('/EditUser') !== 0 })}
+            onClick={createUser}
+          >
             <AddUserIcon className={cx('addUserIcon')} alt='addUserIcon ' />
             <span>Add new user</span>
           </div>
           <div
-            className={cx('loginA', { activeIcon: pathname === '/ListUsers' || pathname === '/EditUser' })}
+            className={cx('loginA', { activeIcon: pathname === '/ListUsers' || pathname.indexOf('/EditUser') === 0 })}
             onClick={this.forwardListUsers}
           >
             <LoginIcon className={cx('loginIcon')} alt='loginIon' />
