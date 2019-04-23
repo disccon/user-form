@@ -19,7 +19,7 @@ class Header extends Component {
   }
 
   render() {
-    const { createUser, pathname } = this.props
+    const { createUser, pathname, newUser } = this.props
     return (
       <header>
         <div className={cx('containerTable')}>
@@ -27,14 +27,14 @@ class Header extends Component {
             <LogoIcon className={cx('logoIcon')} alt='logoIcon' />
           </div>
           <div
-            className={cx('addUserA', { activeIcon: pathname !== '/ListUsers' && pathname.indexOf('/EditUser') !== 0 })}
+            className={cx('addUserA', { activeIcon: pathname !== '/ListUsers' && pathname.indexOf('/EditUser') !== 0 && !newUser.idList })}
             onClick={createUser}
           >
             <AddUserIcon className={cx('addUserIcon')} alt='addUserIcon ' />
             <span>Add new user</span>
           </div>
           <div
-            className={cx('loginA', { activeIcon: pathname === '/ListUsers' || pathname.indexOf('/EditUser') === 0 })}
+            className={cx('loginA', { activeIcon: pathname === '/ListUsers' || pathname.indexOf('/EditUser') === 0 || newUser.idList })}
             onClick={this.forwardListUsers}
           >
             <LoginIcon className={cx('loginIcon')} alt='loginIon' />
@@ -50,12 +50,14 @@ Header.propTypes = {
   history: PropTypes.object.isRequired,
   pathname: PropTypes.string.isRequired,
   createUser: PropTypes.func.isRequired,
+  newUser: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => {
   const { pathname } = state.router.location
   return {
     pathname,
+    newUser: state.newUser,
   }
 }
 
