@@ -19,7 +19,7 @@ export const renderDateTimePickerProfile = ({ input, meta: { touched, error } })
         calendarIcon={<CalendarIcon />}
         className={cx('profile__datePicker')}
         isOpen
-        placeholderText='DD/MM/YYYY'
+        placeholder='DD/MM/YYYY'
         locale='en'
         {...input}
         onBlur={() => input.onBlur()}

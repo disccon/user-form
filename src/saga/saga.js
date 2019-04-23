@@ -288,7 +288,7 @@ export function* forwardCapabilitiesSaga(action) {
     yield put(push('/ListUsers'))
     if (newUser.idList >= 1) {
       db.table('listUserDB')
-        .update(newUser.id, {
+        .update(newUser.idList, {
           ...newUser,
           selectSkills,
           textareaField,
@@ -301,7 +301,7 @@ export function* forwardCapabilitiesSaga(action) {
         })
       let indexEditUser
       users.forEach((item, i) => {
-        if (item.id === newUser.id) {
+        if (item.idList === newUser.idList) {
           indexEditUser = i
         }
       })

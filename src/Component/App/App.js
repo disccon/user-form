@@ -58,7 +58,7 @@ class App extends Component {
   onUnload = () => {
     const { newUser, activeValue } = this.props
     db.table('newUserDB')
-      .update(1, { ...newUser, ...activeValue })
+      .update(1, { ...newUser, ...activeValue, id: 1 })
   }
 
   render() {
