@@ -10,6 +10,7 @@ import AvatarIMG7 from '../img/Ellipse(7).png'
 export const users = [
   {
     id: 1,
+    idList: 1,
     userName: 'Maxim Morozov 1',
     userSRCAvatarIMG: [AvatarIMG1],
     firstName: 'Maxim',
@@ -43,6 +44,7 @@ export const users = [
   },
   {
     id: 2,
+    idList: 2,
     userName: 'Maxim Morozov 2',
     password: '111',
     repeatPassword: '111',
@@ -78,6 +80,7 @@ export const users = [
   },
   {
     id: 3,
+    idList: 3,
     userName: 'Maxim Morozov 3',
     password: '111',
     repeatPassword: '111',
@@ -113,6 +116,7 @@ export const users = [
   },
   {
     id: 4,
+    idList: 4,
     userName: 'Maxim Morozov 4',
     password: '111',
     repeatPassword: '111',
@@ -148,6 +152,7 @@ export const users = [
   },
   {
     id: 5,
+    idList: 5,
     userName: 'Maxim Morozov 5',
     password: '111',
     repeatPassword: '111',
@@ -183,6 +188,7 @@ export const users = [
   },
   {
     id: 6,
+    idList: 6,
     userName: 'Maxim Morozov 6',
     password: '111',
     repeatPassword: '111',
@@ -217,6 +223,7 @@ export const users = [
   },
   {
     id: 7,
+    idList: 7,
     userName: 'Maxim Morozov 7',
     password: '111',
     repeatPassword: '111',
@@ -252,6 +259,7 @@ export const users = [
   },
   {
     id: 8,
+    idList: 8,
     userName: 'Maxim Morozov 8',
     password: '111',
     repeatPassword: '111',

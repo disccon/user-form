@@ -5,7 +5,6 @@ import classNames from 'classnames'
 import { reduxForm, Field, formValueSelector } from 'redux-form'
 import styles from './Profile.scss'
 import { forwardBackProfile } from '../../../Actions'
-import { renderFieldInputProfile } from './renderFieldInputProfile'
 import { renderFieldRadioProfile } from './renderFieldRadioProfile'
 import { renderDateTimePickerProfile } from './renderDateTimePickerProfile'
 import { renderFieldInputNewUser } from '../renderFieldInputNewUser'
@@ -173,10 +172,10 @@ const mapStateToProps = state => {
   const maleGender = selector(state, 'gender')
   const birthDateForm = selector(state, 'birthDate')
   const {
-    firstName, lastName, email, address, gender, birthDate, id,
+    firstName, lastName, email, address, gender, birthDate, idList,
   } = state.newUser
   const { listUsers } = state
-  const userEmailList = listUsers.users.map(user => (user.id === id ? '' : user.email))
+  const userEmailList = listUsers.users.map(user => (user.idList === idList ? '' : user.email))
   return {
     initialValues: {
       firstName, lastName, birthDate, email, address, gender,

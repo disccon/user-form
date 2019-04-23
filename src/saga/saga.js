@@ -286,7 +286,7 @@ export function* forwardCapabilitiesSaga(action) {
   const users = yield select(state => state.listUsers.users)
   try {
     yield put(push('/ListUsers'))
-    if (newUser.editUser) {
+    if (newUser.idList) {
       db.table('listUserDB')
         .update(newUser.id, {
           ...newUser,
@@ -334,6 +334,7 @@ export function* forwardCapabilitiesSaga(action) {
         .add({
           ...newUser,
           id,
+          idList: id,
           selectSkills,
           textareaField,
           checkboxArt,
@@ -348,6 +349,7 @@ export function* forwardCapabilitiesSaga(action) {
         payload: {
           ...newUser,
           id,
+          idList: id,
           selectSkills,
           textareaField,
           checkboxArt,
@@ -379,7 +381,6 @@ export function* editUserSaga(action) {
       type: EDIT_USER__SUCCESS,
       payload: {
         ...newUser,
-        editUser: true,
         isQuestion: false,
       },
     })

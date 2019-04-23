@@ -30,7 +30,7 @@ class EditUserPage extends Component {
     return (
       <Fragment>
         <h2 className={cx('UserNamePageHeadline')}>User Name</h2>
-        <h3 className={cx('UserNamePageH3')} onClick={this.backListUsersPage} >{'< Users List'}</h3>
+        <div className={cx('UserNamePageUsersList')} onClick={this.backListUsersPage} >{'< Users List'}</div>
         { birthDate && (
         <div className={cx('UserNamePageContainer containerTable')}>
           <img src={userSRCAvatarIMG} className={cx('UserNamePageContainer__avatar')} alt='userSRCAvatarIMG' />
@@ -244,6 +244,7 @@ const mapStateToProps = state => {
       pathname,
     }
   }
+  return null
 }
 
 export default connect(
