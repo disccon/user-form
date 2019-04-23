@@ -21,7 +21,6 @@ export const newUser = {
   phoneN1: '',
   phoneN2: '',
   phoneN3: '',
-  quantityPhoneField: 2,
 
   selectSkills: '',
   textareaField: '',
