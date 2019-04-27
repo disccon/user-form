@@ -28,7 +28,7 @@ class renderFieldArrayPhone extends Component {
             name={`phoneN${index + 1}`}
             type='text'
             component={renderFieldPhone}
-            isVisibilitiDeleteField={fields.length > 1}
+            isVisibilityDeleteField={fields.length > 1}
             deleteFieldPhone={deleteAddFieldPhone}
             label={`Phone #${index + 1}`}
             idField={`phone #${index + 1}`}

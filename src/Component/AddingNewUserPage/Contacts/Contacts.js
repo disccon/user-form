@@ -66,7 +66,6 @@ class Contacts extends Component {
               component={renderFieldSelectContacts}
               name='selectLanguage'
               label='Main language'
-              idField='fieldSelectLanguage'
             />
           </div>
           <div className={cx('contacts__sideRight')}>

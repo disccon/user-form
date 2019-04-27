@@ -1,0 +1,15 @@
+.selectCapabilities{
+  margin-bottom: 150px;
+  position: relative;
+  .selectCapabilities__label {
+    position: absolute;
+    top: -23px;
+  }
+  .selectCapabilities__pError {
+    position: absolute;
+    bottom: -15px;
+    left: 10px;
+    font-size: 9px;
+    color: #EB5757;
+  }
+}

@@ -4,14 +4,19 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import styles from './ListUsersPage.scss'
 import { Pagination } from './Pagination/Pagination'
-import UserRow from './UserRow/UserRow'
+
 import NoHaveUserRow from './NoHaveUserRow/NoHaveUserRow'
+import db from '../../db'
+import { deleteUser } from '../../Actions'
+import { UserRow } from './UserRow/UserRow'
+
 
 const cx = classNames.bind(styles)
 
 class ListUsersPage extends Component {
   state = {
     activePage: 0,
+    activeDeleteRow: false,
   }
 
   changeActivePage = page => {
@@ -20,9 +25,33 @@ class ListUsersPage extends Component {
     })
   }
 
-  render() {
-    const { users, history } = this.props
+  showRemoveUserButton = id => () => {
+    this.setState({
+      activeDeleteRow: id,
+    })
+  }
+
+  deleteUser = idListUser => () => {
+    const {
+      deleteUser, users,
+    } = this.props
     const { activePage } = this.state
+    this.setState({
+      activeDeleteRow: false,
+    })
+    if (users.length === 1) {
+      this.setState({
+        activePage: (activePage - 1),
+      })
+    }
+    db.table('listUserDB')
+      .delete(idListUser)
+    deleteUser(idListUser)
+  }
+
+  render() {
+    const { users } = this.props
+    const { activePage, activeDeleteRow } = this.state
     const visibleUserLength = users.length - (7 * activePage) >= 6 ? 6 : users.length - (7 * activePage)
     const visibleUser = []
     for (let i = 0; i < visibleUserLength; i += 1) {
@@ -30,30 +59,36 @@ class ListUsersPage extends Component {
     }
     return (
       <Fragment>
-        <h2 className={cx('ListUsersH2')}>List of users</h2>
-        <table className={cx('ListUsersTable container')}>
-          <thead>
-            <tr>
-              <th>name</th>
-              <th>company</th>
-              <th>contacts</th>
-              <th>last update</th>
+        <h2 className={cx('listUsersH2')}>List of users</h2>
+        <table className={cx('listUsersTable container')}>
+          <thead className={cx('listUsers__thead')}>
+            <tr className={cx('listUsers__tr')}>
+              <th className={cx('listUsers__name')}>name</th>
+              <th className={cx('listUsers__company')}>company</th>
+              <th className={cx('listUsers__contacts')}>contacts</th>
+              <th className={cx('listUsers__update')}>last update</th>
             </tr>
           </thead>
           <tbody>
-            <tr />
-            {users.length > 0
-            && <UserRow users={visibleUser} activePage={activePage} changeActivePage={this.changeActivePage} history={history} />
-            }
+            <tr className={cx('listUsers__firstTr')} />
+            {users.length > 0 && visibleUser.map(user => (
+              <UserRow
+                key={user.id}
+                user={user}
+                activeDeleteRow={activeDeleteRow}
+                showRemoveUserButton={this.showRemoveUserButton}
+                deleteUser={this.deleteUser}
+              />
+            ))}
           </tbody>
         </table>
         {users.length === 0 && <NoHaveUserRow />}
         {users.length > 7 && (
-        <Pagination
-          activePage={activePage}
-          pageList={users.length / 7}
-          changeActivePage={this.changeActivePage}
-        />
+          <Pagination
+            activePage={activePage}
+            pageList={users.length / 7}
+            changeActivePage={this.changeActivePage}
+          />
         )}
       </Fragment>
     )
@@ -62,7 +97,7 @@ class ListUsersPage extends Component {
 
 ListUsersPage.propTypes = {
   users: PropTypes.array.isRequired,
-  history: PropTypes.object.isRequired,
+  deleteUser: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -71,4 +106,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
+  { deleteUser },
 )(ListUsersPage)

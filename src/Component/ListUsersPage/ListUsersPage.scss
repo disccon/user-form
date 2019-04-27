@@ -1,170 +1,37 @@
-.ListUsersH2 {
+.listUsersH2 {
   margin-top: 56px;
   font-weight: bold;
   font-size: 35px;
   text-align: center;
   color: #475666;
 }
-.ListUsersTable {
+.listUsersTable {
   margin-top: 28px;
-  thead {
+  .listUsers__thead {
     height: 45px;
     width: 100%;
     background: #4E86E4;
     color: #FFF;
     font-weight: 500;
-    tr{
-      th{
+    .listUsers__tr{
+      .listUsers__name, .listUsers__company, .listUsers__contacts, .listUsers__update{
         padding-top: 14px;
         padding-bottom: 14px;
         font-weight: 500;
       }
-      th:first-child{
+      .listUsers__name{
         width: 300px;
         padding-left: 70px;
       }
-      th:nth-child(2){
+      .listUsers__company{
         width: 200px;
       }
-      th:nth-child(3){
+      .listUsers__update{
         width: 270px;
       }
     }
   }
-  tbody {
-    .delete{
-      position: relative;
-      transform: translateX(-70px);
-      opacity: 0.5;
-      transition: all ease 0.3s;
-      .deleteUserWrapper{
-        top: 35px;
-        right: -75px;
-        position: absolute;
-        button{
-          display: flex;
-          color: #ff4144;
-          font-weight: 500;
-          background: transparent;
-          .deleteUser{
-            display: inline-block;
-            width: 15px;
-            height: 15px;
-            filter: invert(69%) sepia(52%) saturate(1475%) hue-rotate(309deg) brightness(105%) contrast(104%);
-            margin-right: 5px;
-          }
-          span{
-            display: block;
-          }
-        }
-      }
-    }
-    tr:first-child{
-      height: 29px;
-    }
-    tr:nth-child(even){
-      background: #E7F0FF;
-    }
-    tr {
-      transition: all ease 0.3s;
-      height: 93px;
-      td {
-        .wrapperUser {
-          height: 93px;
-          display: flex;
-          align-items: center;
-          font-weight: 500;
-          color: #475666;
-          img{
-            width: 40px;
-            height: 40px;
-            margin-right: 15px;
-          }
-          div{
-            margin-top: 7px;
-            display: flex;
-            flex-direction: column;
-            h4{
-              font-weight: 500;
-            }
-            span{
-              font-size: 9px;
-            }
-          }
-          button{
-            width: 15px;
-            height: 15px;
-            background: transparent;
-            .closeIcon{
-              cursor: pointer;
-              width: 15px;
-              height: 15px;
-            }
-            .editIcon{
-              cursor: pointer;
-              width: 15px;
-              height: 15px;
-            }
-          }
-          .button_editIcon{
-            margin-left: 44px;
-          }
-          .button_closeIcon{
-            margin-left: 22px;
-          }
-        }
-      }
-      td:first-child{
-        padding-left: 14px;
-      }
-    }
-  }
-}
-.noUsersH2{
-  margin-top: 122px;
-  text-align: center;
-  color: #9BB0CB;
-  font-weight: bold;
-  font-size: 35px;
-}
-.createUserButton{
-  display: block;
-  margin-top: 64px;
-  margin-right: auto;
-  margin-left: auto;
-  width: 160px;
-  height: 40px;
-  background: #5E97F3;
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: normal;
-  text-align: center;
-  color: #FFFFFF;
-}
-.ListUsers__Pagination{
-  display: flex;
-  font-size: 17px;
-  margin-top: 25px;
-  margin-right: auto;
-  margin-left: auto;
-  button:first-child, button:last-child{
-    font-size: 21px;
-    margin-top: -5px;
-  }
-  button{
-    color: #c4d0ce;
-    background: transparent;
-    display: block;
-    cursor: pointer;
-    font-weight: 500;
-  }
-  .pagination__active:hover{
-    transition: color ease 0.3s;
-    color: #4E86E4;
-  }
-  .pagination__active{
-    color: #475666;
+  .listUsers__firstTr{
+    height: 29px;
   }
 }

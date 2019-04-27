@@ -35,7 +35,7 @@ const options = [
 
 
 export const renderFieldSelectContacts = ({
-  input, meta: { touched, error }, label, idField,
+  input, meta: { touched, error }, label,
 }) => {
   const colourStyles = {
     control: styles => ({
@@ -96,10 +96,9 @@ export const renderFieldSelectContacts = ({
     }),
   }
   return (
-    <div className={cx('contacts__mainLanguage')}>
-      <label htmlFor={idField} className={cx('contacts__mainLanguageLabel')}>{label}</label>
+    <label className={cx('contacts__mainLanguage')}>
+      <span className={cx('contacts__mainLanguageLabel')}>{label}</span>
       <Select
-        id={idField}
         {...input}
         onBlur={() => input.onBlur()}
         onChange={input.onChange}
@@ -108,7 +107,7 @@ export const renderFieldSelectContacts = ({
         styles={colourStyles}
       />
       {touched && error && <p className={cx('mainLanguage__error')}>{error}</p>}
-    </div>
+    </label>
   )
 }
 

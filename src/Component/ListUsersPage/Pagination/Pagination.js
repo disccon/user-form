@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import styles from '../ListUsersPage.scss'
+import styles from './Pagination.scss'
 
 
 const cx = classNames.bind(styles)
@@ -19,14 +19,13 @@ export class Pagination extends Component {
     for (let i = 0; i < visiblePageListLength; i += 1) {
       visiblePageList.push(i)
     }
-
     return (
-      <div className={cx('ListUsers__Pagination')}>
+      <div className={cx('listUsers__Pagination')}>
         {visiblePageList.map(page => (
           <button
             key={page}
             type='button'
-            className={cx({ pagination__active: activePage === page })}
+            className={cx('pagination__tabs', { pagination__activeTabs: activePage === page })}
             onClick={this.changeActivePage(page)}
           >
             {1 + page}

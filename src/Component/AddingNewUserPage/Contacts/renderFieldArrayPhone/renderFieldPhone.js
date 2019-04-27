@@ -7,15 +7,15 @@ import styles from './renderFieldArrayPhone.scss'
 const cx = classNames.bind(styles)
 
 export const renderFieldPhone = ({
-                                   input, meta: { touched, error }, label, type, isVisibilitiDeleteField, placeholder, idField, deleteFieldPhone,
-                                 }) => (
+  input, meta: { touched, error }, label, type, isVisibilityDeleteField, placeholder, idField, deleteFieldPhone,
+}) => (
   <div className={cx('arrayPhone__fieldPhone')}>
-    {isVisibilitiDeleteField && (
-      <button
-        type='button'
-        onClick={deleteFieldPhone}
-        className={cx('arrayPhone__buttonDeleteField')}
-      />
+    {isVisibilityDeleteField && (
+    <button
+      type='button'
+      onClick={deleteFieldPhone}
+      className={cx('arrayPhone__buttonDeleteField')}
+    />
     )}
     <label htmlFor={idField} className={cx('arrayPhone__labelPhone')}>{label}</label>
     <InputMask
@@ -35,7 +35,7 @@ renderFieldPhone.propTypes = {
   meta: PropTypes.object.isRequired,
   label: PropTypes.string,
   type: PropTypes.string,
-  isVisibilitiDeleteField: PropTypes.oneOfType([
+  isVisibilityDeleteField: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.bool,
   ]),

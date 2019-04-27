@@ -1,113 +1,70 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import classNames from 'classnames'
-import styles from '../ListUsersPage.scss'
+import { Link } from 'react-router-dom'
+import styles from './UserRow.scss'
 import { ReactComponent as CloseIcon } from '../../../img/icon/close.svg'
 import { ReactComponent as EditIcon } from '../../../img/icon/edit.svg'
-import { editUser, deleteUser } from '../../../Actions'
-import db from '../../../db'
 
 const cx = classNames.bind(styles)
 
-class UserRow extends Component {
-  state = {
-    deleteList: false,
-  }
-
-  showRemoveUserButton = id => () => {
-    this.setState({
-      deleteList: id,
-    })
-  }
-
-  editUser = user => () => {
-    const { history } = this.props
-    history.push(`/EditUser/${user.id}`)
-  }
-
-  deleteUser = idListUser => () => {
-    const {
-      deleteUser, changeActivePage, activePage, users,
-    } = this.props
-    this.setState({
-      deleteList: false,
-    })
-    if (users.length === 1) {
-      changeActivePage(activePage - 1)
-    }
-    db.table('listUserDB')
-      .delete(idListUser)
-    deleteUser(idListUser)
-  }
-
-  render() {
-    const { users } = this.props
-    const { deleteList } = this.state
-    return (
-      <Fragment>
-        {users.map(user => (
-          <tr key={user.id} className={cx(deleteList === user.id ? 'delete' : null)}>
-            <td>
-              <div className={cx('wrapperUser')}>
-                <img src={user.userSRCAvatarIMG} alt='userSRCAvatarIMG' />
-                <div>
-                  <h4>{user.userName}</h4>
-                  <span>username</span>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div className={cx('wrapperUser')}>{user.company}</div>
-            </td>
-            <td>
-              <div className={cx('wrapperUser')}>{user.email}</div>
-            </td>
-            <td>
-              <div className={cx('wrapperUser')}>
-                  3 month ago
-                {deleteList !== user.id && (
-                <Fragment>
-                  <button type='button' className={cx('button_editIcon')} onClick={this.editUser(user)}>
-                    <EditIcon className={cx('editIcon')} />
-                  </button>
-                  <button type='button' className={cx('button_closeIcon')}>
-                    <CloseIcon
-                      className={cx('closeIcon')}
-                      onClick={this.showRemoveUserButton(user.id)}
-                    />
-                  </button>
-                </Fragment>
-                )
-                  }
-              </div>
-              {deleteList === user.id && (
-              <div className={cx('deleteUserWrapper')} onClick={this.deleteUser(user.id)}>
-                <button type='button' id='closeIcon'>
-                  <CloseIcon className={cx('deleteUser')} />
-                      delete
+export const UserRow = ({
+  user, activeDeleteRow, showRemoveUserButton, deleteUser,
+}) => (
+  <Fragment>
+    <tr className={cx('listUsers__trName', { deleteUserRow: user.id === activeDeleteRow })}>
+      <td className={cx('userRow')}>
+        <img className={cx('userRow__img')} src={user.userSRCAvatarIMG} alt='userSRCAvatarIMG' />
+        <div className={cx('userRow__wrapperDiv')}>
+          <h4 className={cx('userRow__h4')}>{user.userName}</h4>
+          <span className={cx('userRow__span')}>username</span>
+        </div>
+      </td>
+      <td className={cx('listUsers__trCompany')}>
+        <div className={cx('userRow')}>{user.company}</div>
+      </td>
+      <td>
+        <div className={cx('userRow')}>{user.email}</div>
+      </td>
+      <td>
+        <div className={cx('userRow')}>
+          3 month ago
+          {activeDeleteRow !== user.id && (
+            <Fragment>
+              <Link to={`/EditUser/${user.id}`}>
+                <button type='button' className={cx('userRow__buttonEdit')}>
+                  <EditIcon className={cx('userRow__editIcon')} />
                 </button>
-              </div>
-              )}
-            </td>
-          </tr>
-        ))}
-      </Fragment>
-    )
-  }
-}
-
+              </Link>
+              <button type='button' className={cx('userRow__buttonClose')}>
+                <CloseIcon
+                  className={cx('userRow__closeIcon')}
+                  onClick={showRemoveUserButton(user.id)}
+                />
+              </button>
+            </Fragment>
+          )
+          }
+        </div>
+        {activeDeleteRow === user.id && (
+          <div className={cx('userRow__deleteUserWrapper')} onClick={deleteUser(user.id)}>
+            <button type='button' className={cx('userRow__buttonDeleteUser')}>
+              <CloseIcon className={cx('deleteUser')} />
+              delete
+            </button>
+          </div>
+        )}
+      </td>
+    </tr>
+  </Fragment>
+)
 
 UserRow.propTypes = {
-  history: PropTypes.object.isRequired,
-  users: PropTypes.array.isRequired,
-  activePage: PropTypes.number.isRequired,
+  user: PropTypes.object.isRequired,
+  activeDeleteRow: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.number,
+  ]),
   deleteUser: PropTypes.func.isRequired,
-  changeActivePage: PropTypes.func.isRequired,
+  showRemoveUserButton: PropTypes.func.isRequired,
 }
-
-
-export default connect(
-  null,
-  { editUser, deleteUser },
-)(UserRow)

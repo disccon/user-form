@@ -39,11 +39,11 @@
       .accountDataWrapper__section {
         width: 152px;
         display: flex;
-        h4 {
+        .accountDataWrapper__h3 {
           margin-right: 8px;
           font-weight: 500;
         }
-        button {
+        .accountDataWrapper__buttonEdit {
           margin-top: 1px;
           width: 15px;
           height: 15px;
@@ -52,7 +52,9 @@
             margin-top: 1px;
             width: 15px;
             height: 15px;
-            filter: invert(30%) sepia(33%) saturate(323%) hue-rotate(170deg) brightness(96%) contrast(90%);
+            .editIcon{
+              fill: #475666;
+            }
           }
         }
       }
@@ -60,20 +62,20 @@
         .accountDataWrapper__wrapper {
           margin-bottom: 7px;
           display: flex;
-          h4 {
+          .accountDataWrapper__h4 {
             font-weight: 500;
             width: 170px;
           }
-          h5 {
+          .accountDataWrapper__span {
             margin-bottom: 9px;
             max-width: 230px;
             color: #657C9A;
           }
         }
-        .accountDataWrapper__wrapperH5 {
+        .accountDataWrapper__wrapperHobbies {
           display: flex;
           flex-direction: column;
-          h5 {
+          .accountDataWrapper__span {
             line-height: 20px;
           }
         }
