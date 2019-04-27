@@ -25,9 +25,9 @@ class App extends Component {
     const {
       userListerNewState, pathname, newUser, history, changeQuestionState,
     } = this.props
-    if (pathname !== '/') {
-      history.push('/')
-    }
+    // if (pathname !== '/') {
+    //   history.push('/')
+    // }
     window.addEventListener('beforeunload', this.onUnload)
     db.table('newUserDB')
       .toArray()
@@ -65,7 +65,7 @@ class App extends Component {
     const { history } = this.props
     return (
       <ConnectedRouter history={history}>
-        <div className={cx('container')}>
+        <div className={cx('app')}>
           <Header history={history} />
           <Switch>
             <Route path='/NodFound' component={NodFound} />

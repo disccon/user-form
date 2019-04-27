@@ -1,21 +1,25 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import styles from './renderFieldRadioProfile.scss'
 
+const cx = classNames.bind(styles)
 
 export const renderFieldRadioProfile = ({
   input, meta: { touched, error }, label, type, name, idField,
 }) => (
   <Fragment>
-    <label htmlFor={idField}>
+    <label className={cx('radioProfile')} htmlFor={idField}>
       <input
-        id={idField}
         {...input}
+        className={cx('radioProfile__input')}
+        id={idField}
         type={type}
         name={name}
       />
-      <span>{label}</span>
+      <span className={cx('radioProfile__span')}>{label}</span>
     </label>
-    {input.value === 'female' && touched && error && <p>{error}</p>}
+    {input.value === 'female' && touched && error && <p className={cx('radioProfile__pError')}>{error}</p>}
   </Fragment>
 )
 

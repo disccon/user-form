@@ -5,9 +5,9 @@ import classNames from 'classnames'
 import { reduxForm, Field, formValueSelector } from 'redux-form'
 import styles from './Profile.scss'
 import { forwardBackProfile } from '../../../Actions'
-import { renderFieldRadioProfile } from './renderFieldRadioProfile'
-import { renderDateTimePickerProfile } from './renderDateTimePickerProfile'
-import { renderFieldInputNewUser } from '../renderFieldInputNewUser'
+import { renderFieldRadioProfile } from './renderFieldRadioProfile/renderFieldRadioProfile'
+import { renderDateTimePickerProfile } from './renderDateTimePickerProfile/renderDateTimePickerProfile'
+import { renderFieldInputNewUser } from '../renderFieldInputNewUser/renderFieldInputNewUser'
 
 
 const cx = classNames.bind(styles)
@@ -190,7 +190,7 @@ const mapStateToProps = state => {
   }
 }
 
-export default Profile = connect(
+export default connect(
   mapStateToProps,
   { forwardBackProfile },
 )(Profile)

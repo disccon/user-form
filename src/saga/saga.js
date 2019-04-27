@@ -413,7 +413,6 @@ export function* deleteUserSaga(action) {
 
 export function* createUserSaga() {
   try {
-    yield put(push('/'))
     yield put({
       type: CREATE_USER__SUCCESS,
       payload: {

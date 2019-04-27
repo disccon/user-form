@@ -12,6 +12,7 @@ export const renderFieldCheckboxCapabilities = ({
         id={idCheckbox}
         {...input}
         type={type}
+        onBlur={() => input.onBlur()}
         onChange={() => input.onChange(changeValue)}
       />
       <span>{span}</span>

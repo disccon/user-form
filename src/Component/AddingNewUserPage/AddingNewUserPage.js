@@ -17,19 +17,19 @@ export const AddingNewUserPage = ({ location }) => {
   return (
     <Fragment>
       <h2 className={cx('newUserH')}>Adding new user</h2>
-      <div className={cx('windowNewUser containerTable')}>
+      <div className={cx('windowNewUser container')}>
         <div className={cx('windowNewUser__tabs')}>
           <div className={cx('windowNewUser__tab', { activeTab: pathname === '/' })}>
-            <h2>1. Account</h2>
+            <h2 className={cx('windowNewUser__h2')} >1. Account</h2>
           </div>
           <div className={cx('windowNewUser__tab', { activeTab: pathname === '/Profile' })}>
-            <h2>2. Profile</h2>
+            <h2 className={cx('windowNewUser__h2')} >2. Profile</h2>
           </div>
           <div className={cx('windowNewUser__tab', { activeTab: pathname === '/Contacts' })}>
-            <h2>3. Contacts</h2>
+            <h2 className={cx('windowNewUser__h2')} >3. Contacts</h2>
           </div>
           <div className={cx('windowNewUser__tab', { activeTab: pathname === '/Capabilities' })}>
-            <h2>4. Capabilities</h2>
+            <h2 className={cx('windowNewUser__h2')} >4. Capabilities</h2>
           </div>
         </div>
         <Switch>
@@ -39,7 +39,7 @@ export const AddingNewUserPage = ({ location }) => {
           <Route exact path='/Capabilities' component={Capabilities} />
           <Redirect to='/NodFound' />
         </Switch>
-      </div >
+      </div>
     </Fragment>
   )
 }

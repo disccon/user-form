@@ -32,7 +32,7 @@ class EditUserPage extends Component {
         <h2 className={cx('UserNamePageHeadline')}>User Name</h2>
         <div className={cx('UserNamePageUsersList')} onClick={this.backListUsersPage} >{'< Users List'}</div>
         { birthDate && (
-        <div className={cx('UserNamePageContainer containerTable')}>
+        <div className={cx('UserNamePageContainer container')}>
           <img src={userSRCAvatarIMG} className={cx('UserNamePageContainer__avatar')} alt='userSRCAvatarIMG' />
           <div className={cx('accountDataWrapper')}>
             <div className={cx('accountDataWrapper__block')}>

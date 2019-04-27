@@ -34,7 +34,7 @@ module.exports = {
     ],
     'max-len': [
       'error',
-      140,
+      120,
       2
     ],
     'eol-last': [

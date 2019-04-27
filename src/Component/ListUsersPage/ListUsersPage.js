@@ -31,7 +31,7 @@ class ListUsersPage extends Component {
     return (
       <Fragment>
         <h2 className={cx('ListUsersH2')}>List of users</h2>
-        <table className={cx('ListUsersTable containerTable')}>
+        <table className={cx('ListUsersTable container')}>
           <thead>
             <tr>
               <th>name</th>

@@ -7,27 +7,26 @@ import {
 } from 'redux-form'
 import styles from './Contacts.scss'
 import { forwardBackContacts } from '../../../Actions'
-import renderFieldArrayPhone from './renderFieldArrayPhone'
-import { renderFieldSelectContacts } from './renderFieldSelectContacts'
-import { renderFieldInputNewUser } from '../renderFieldInputNewUser'
+import renderFieldArrayPhone from './renderFieldArrayPhone/renderFieldArrayPhone'
+import { renderFieldSelectContacts } from './renderFieldSelectContacts/renderFieldSelectContacts'
+import { renderFieldInputNewUser } from '../renderFieldInputNewUser/renderFieldInputNewUser'
 
 const cx = classNames.bind(styles)
-
 
 class Contacts extends Component {
   backContacts = () => {
     const {
-      companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneArrayForm, phoneN1Form, phoneN2Form, phoneN3Form,
-      forwardBackContacts,
+      companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneArrayForm, phoneN1Form,
+      phoneN2Form, phoneN3Form, forwardBackContacts,
     } = this.props
-    forwardBackContacts('back', companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneArrayForm, phoneN1Form,
-      phoneN2Form, phoneN3Form)
+    forwardBackContacts('back', companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm,
+      phoneArrayForm, phoneN1Form, phoneN2Form, phoneN3Form)
   }
 
   onSubmit = values => {
     const { forwardBackContacts } = this.props
-    forwardBackContacts('forward', values.company, values.githubLink, values.facebookLink, values.selectLanguage, values.fax,
-      values.phoneArray, values.phoneN1, values.phoneN2, values.phoneN3)
+    forwardBackContacts('forward', values.company, values.githubLink, values.facebookLink, values.selectLanguage,
+      values.fax, values.phoneArray, values.phoneN1, values.phoneN2, values.phoneN3)
   }
 
   render() {
@@ -63,7 +62,12 @@ class Contacts extends Component {
               idField='fieldFacebookLink'
               classNameLabel='fieldInputNewUser'
             />
-            <Field component={renderFieldSelectContacts} name='selectLanguage' label='Main language' idField='fieldSelectLanguage' />
+            <Field
+              component={renderFieldSelectContacts}
+              name='selectLanguage'
+              label='Main language'
+              idField='fieldSelectLanguage'
+            />
           </div>
           <div className={cx('contacts__sideRight')}>
             <Field
@@ -108,11 +112,9 @@ Contacts.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 }
 
-
 Contacts = reduxForm({
   validate: values => {
     const errors = {}
-    console.log(values)
     if (!values.selectLanguage) {
       errors.selectLanguage = 'Missing Main language'
     }

@@ -8,7 +8,7 @@ import { ReactComponent as CloseIcon } from '../../../img/icon/close.svg'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import { forwardAccount, saveUserSRCAvatarIMG, continueUser } from '../../../Actions'
-import { renderFieldInputAccount } from './renderFieldInputAccount'
+import { renderFieldInputAccount } from './renderFieldInputAccount/renderFieldInputAccount'
 
 
 const cx = classNames.bind(styles)
@@ -82,8 +82,10 @@ class Account extends Component {
       return (
         <Fragment>
           {isQuestion && (
-            <div className={cx('accountComponent__question')}>
-              <span>You have an unsaved user data. Do you want to complete it?</span>
+            <div className={cx('accountComponentQuestion')}>
+              <span className={cx('accountComponentQuestion__span')}>
+                You have an unsaved user data. Do you want to complete it?
+              </span>
               <button
                 type='button'
                 className={cx('accountComponent__continue')}
@@ -101,7 +103,7 @@ class Account extends Component {
             </div>
           )}
           <form className={cx('accountComponent__form')} onSubmit={handleSubmit(this.onSubmit)}>
-            <div className={cx('accountComponent__userAvatarWrapper')}>
+            <div className={cx('accountComponent__userAvatarWrapper')} >
               <label htmlFor='userAvatar'>
                 {userAvatarIMG}
                 <input
@@ -139,8 +141,8 @@ class Account extends Component {
                 isVisibility
                 label='Password'
                 name='password'
-                changeTypePassword={this.changeTypePassword}
                 idInput='password'
+                changeTypePassword={this.changeTypePassword}
               />
               <Field
                 component={renderFieldInputAccount}
@@ -148,10 +150,10 @@ class Account extends Component {
                 isVisibility
                 label='Repeat Password'
                 name='repeatPassword'
-                changeTypePassword={this.changeTypePassword}
                 idInput='repeatPassword'
+                changeTypePassword={this.changeTypePassword}
               />
-              <button type='submit' >Forward</button>
+              <button className={cx('accountComponent__buttonSubmit')} type='submit' >Forward</button>
             </div>
           </form>
         </Fragment>
@@ -220,7 +222,7 @@ const mapStateToProps = state => {
   }
 }
 
-export default Account = connect(
+export default connect(
   mapStateToProps,
   { forwardAccount, saveUserSRCAvatarIMG, continueUser },
 )(Account)
