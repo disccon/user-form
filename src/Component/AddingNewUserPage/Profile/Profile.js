@@ -172,10 +172,10 @@ const mapStateToProps = state => {
   const maleGender = selector(state, 'gender')
   const birthDateForm = selector(state, 'birthDate')
   const {
-    firstName, lastName, email, address, gender, birthDate, idList,
+    firstName, lastName, email, address, gender, birthDate, id,
   } = state.newUser
   const { listUsers } = state
-  const userEmailList = listUsers.users.map(user => (user.idList === idList ? '' : user.email))
+  const userEmailList = listUsers.users.map(user => (user.id === id ? '' : user.email))
   return {
     initialValues: {
       firstName, lastName, birthDate, email, address, gender,

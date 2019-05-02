@@ -1,30 +1,3 @@
-.listUsers__trName{
-
-}
-
-.listUsers__trCompany{
-
-}
-
-.listUsers__trContacts{
-
-}
-
-.listUsers__trUpdate{
-
-}
-
-
-//tr:nth-child(even){
-//  background: #E7F0FF;
-//}
-//tr {
-//  transition: all ease 0.3s;
-//  height: 93px;
-//  td:first-child{
-//    padding-left: 14px;
-//  }
-//}
 .userRow:first-child{
   padding-left: 14px;
 }
@@ -63,14 +36,16 @@
   .userRow__buttonEdit{
     .userRow__editIcon{
       .editIcon{
-        fill: #B1BCC9;
+        fill: #475666;
       }
     }
   }
   .userRow__buttonClose{
     .userRow__closeIcon{
+      filter: invert(30%) sepia(37%) saturate(314%) hue-rotate(170deg) brightness(92%) contrast(86%);
       .closeIcon{
         fill: #128031;
+        color: #2F68C8;
       }
     }
   }

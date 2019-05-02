@@ -284,11 +284,13 @@ export function* forwardCapabilitiesSaga(action) {
   } = action.payload
   const newUser = yield select(state => state.newUser)
   const users = yield select(state => state.listUsers.users)
+  delete newUser.keyDB
+  delete newUser.isQuestion
   try {
     yield put(push('/ListUsers'))
-    if (newUser.idList >= 1) {
+    if (newUser.id >= 1) {
       db.table('listUserDB')
-        .update(newUser.idList, {
+        .update(newUser.id, {
           ...newUser,
           selectSkills,
           textareaField,
@@ -301,7 +303,7 @@ export function* forwardCapabilitiesSaga(action) {
         })
       let indexEditUser
       users.forEach((item, i) => {
-        if (item.idList === newUser.idList) {
+        if (item.id === newUser.id) {
           indexEditUser = i
         }
       })
@@ -334,7 +336,6 @@ export function* forwardCapabilitiesSaga(action) {
         .add({
           ...newUser,
           id,
-          idList: id,
           selectSkills,
           textareaField,
           checkboxArt,
@@ -349,7 +350,6 @@ export function* forwardCapabilitiesSaga(action) {
         payload: {
           ...newUser,
           id,
-          idList: id,
           selectSkills,
           textareaField,
           checkboxArt,
@@ -374,7 +374,7 @@ export function* forwardCapabilitiesSaga(action) {
 export function* editUserSaga(action) {
   const { id, page } = action.payload
   try {
-    yield put(push(page))
+    yield put(push(`/${id}${page}`))
     const users = yield select(state => state.listUsers.users)
     const newUser = users.find(i => i.id === id)
     yield put({

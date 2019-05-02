@@ -21,7 +21,7 @@ const Header = ({ createUser, pathname, newUser }) => (
       <Link
         to='/'
         className={cx('addUserA', {
-          activeIcon: pathname !== '/ListUsers' && pathname.indexOf('/EditUser') !== 0 && !newUser.idList,
+          activeIcon: pathname !== '/ListUsers' && pathname.indexOf('/EditUser') !== 0 && !newUser.id,
         })}
         onClick={createUser}
       >
@@ -31,7 +31,7 @@ const Header = ({ createUser, pathname, newUser }) => (
       <Link
         to='/ListUsers'
         className={cx('loginA', {
-          activeIcon: pathname === '/ListUsers' || pathname.indexOf('/EditUser') === 0 || newUser.idList,
+          activeIcon: pathname === '/ListUsers' || pathname.indexOf('/EditUser') === 0 || newUser.id,
         })}
       >
         <LoginIcon className={cx('loginIcon')} alt='loginIon' />

@@ -70,7 +70,7 @@ class ListUsersPage extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr className={cx('listUsers__firstTr')} />
+            <tr className={cx('listUsers__update')}/>
             {users.length > 0 && visibleUser.map(user => (
               <UserRow
                 key={user.id}

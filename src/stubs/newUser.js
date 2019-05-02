@@ -1,7 +1,7 @@
 export const newUser = {
   isQuestion: false,
-  id: 1,
-  idList: 0,
+  id: 0,
+  keyDB: 1,
   userName: '',
   password: '',
   repeatPassword: '',

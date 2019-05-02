@@ -19,16 +19,20 @@ export const AddingNewUserPage = ({ location }) => {
       <h2 className={cx('newUserH')}>Adding new user</h2>
       <div className={cx('windowNewUser container')}>
         <div className={cx('windowNewUser__tabs')}>
-          <div className={cx('windowNewUser__tab', { activeTab: pathname === '/' })}>
+          <div className={cx('windowNewUser__tab', {
+            activeTab: pathname.includes === '/'
+              || pathname.charAt(pathname.length - 2) >= 0,
+          })}
+          >
             <h2 className={cx('windowNewUser__h2')} >1. Account</h2>
           </div>
-          <div className={cx('windowNewUser__tab', { activeTab: pathname === '/Profile' })}>
+          <div className={cx('windowNewUser__tab', { activeTab: pathname.includes('/Profile') })}>
             <h2 className={cx('windowNewUser__h2')} >2. Profile</h2>
           </div>
-          <div className={cx('windowNewUser__tab', { activeTab: pathname === '/Contacts' })}>
+          <div className={cx('windowNewUser__tab', { activeTab: pathname.includes('/Contacts') })}>
             <h2 className={cx('windowNewUser__h2')} >3. Contacts</h2>
           </div>
-          <div className={cx('windowNewUser__tab', { activeTab: pathname === '/Capabilities' })}>
+          <div className={cx('windowNewUser__tab', { activeTab: pathname.includes('/Capabilities') })}>
             <h2 className={cx('windowNewUser__h2')} >4. Capabilities</h2>
           </div>
         </div>
@@ -37,6 +41,11 @@ export const AddingNewUserPage = ({ location }) => {
           <Route exact path='/Profile' component={Profile} />
           <Route exact path='/Contacts' component={Contacts} />
           <Route exact path='/Capabilities' component={Capabilities} />
+
+          <Route exact path='/:id/' component={Account} />
+          <Route exact path='/:id/Profile' component={Profile} />
+          <Route exact path='/:id/Contacts' component={Contacts} />
+          <Route exact path='/:id/Capabilities' component={Capabilities} />
           <Redirect to='/NodFound' />
         </Switch>
       </div>

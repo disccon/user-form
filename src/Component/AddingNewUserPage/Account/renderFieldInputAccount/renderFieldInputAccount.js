@@ -32,8 +32,6 @@ renderFieldInputAccount.propTypes = {
   idInput: PropTypes.string,
   label: PropTypes.string,
   input: PropTypes.object.isRequired,
-  classNameLabel: PropTypes.string.isRequired,
-  className: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   meta: PropTypes.object.isRequired,
   isVisibility: PropTypes.bool,
