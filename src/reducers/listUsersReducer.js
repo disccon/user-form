@@ -9,6 +9,8 @@ import {
   DELETE_USER__SUCCESS,
   DELETE_USER__FAILURE,
 } from '../Actions'
+import { ACCOUNT_EDITING_SAVE__SUCCESS } from '../Actions'
+import { ACCOUNT_EDITING_SAVE__FAILURE } from '../Actions'
 
 export default function listUsersReducer(state = { users: [] }, action) {
   switch (action.type) {
@@ -61,6 +63,21 @@ export default function listUsersReducer(state = { users: [] }, action) {
         error: action.error,
       }
     }
+
+    case ACCOUNT_EDITING_SAVE__SUCCESS: {
+      return {
+        ...state,
+        users: action.payload,
+        error: undefined,
+      }
+    }
+    case ACCOUNT_EDITING_SAVE__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
 
     default:
       return state

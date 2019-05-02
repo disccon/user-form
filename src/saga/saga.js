@@ -3,7 +3,6 @@ import {
 } from 'redux-saga/effects'
 import { push } from 'connected-react-router'
 
-
 import {
   CHANGE_QUESTION_STATE__OPEN,
   CHANGE_QUESTION_STATE__CLOSE,
@@ -38,7 +37,6 @@ import {
   BACK_CAPABILITIES__FAILURE,
 
   FORWARD_CAPABILITIES__ADD_NEW_USER,
-  FORWARD_CAPABILITIES__EDIT_USER,
   FORWARD_CAPABILITIES__FAILURE,
 
   EDIT_USER__SUCCESS,
@@ -49,10 +47,13 @@ import {
 
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
+
+  ACCOUNT_EDITING_SAVE__SUCCESS,
+  ACCOUNT_EDITING_SAVE__FAILURE,
+
 } from '../Actions'
 import { newUser } from '../stubs/newUser'
 import db from '../db'
-
 
 export function* changeQuestionStateSaga(action) {
   const { isQuestion } = action.payload
@@ -77,15 +78,12 @@ export function* changeQuestionStateSaga(action) {
   }
 }
 
-
 export function* continueUserSaga(action) {
   const { isContinue } = action.payload
   try {
     if (isContinue) {
       const promise = new Promise(resolve => {
-        db.table('newUserDB')
-          .toArray()
-          .then(newUserDB => resolve(...newUserDB))
+        db.newUserDB.toArray(newUserDB => resolve(...newUserDB))
       })
       const newUserDB = yield promise
       yield put({
@@ -144,7 +142,6 @@ export function* saveUserSRCAvatarIMGSaga(action) {
   }
 }
 
-
 export function* forwardAccountSaga(action) {
   const {
     userName, password, repeatPassword,
@@ -164,7 +161,6 @@ export function* forwardAccountSaga(action) {
     })
   }
 }
-
 
 export function* forwardBackProfileSaga(action) {
   const {
@@ -220,7 +216,6 @@ export function* forwardBackContactsSaga(action) {
   }
 }
 
-
 export function* deleteAddFieldPhoneSaga(action) {
   const { deleteAddField } = action.payload
   const phoneArray = yield select(state => state.newUser.phoneArray)
@@ -246,7 +241,6 @@ export function* deleteAddFieldPhoneSaga(action) {
     })
   }
 }
-
 
 export function* backCapabilitiesSaga(action) {
   const {
@@ -276,7 +270,6 @@ export function* backCapabilitiesSaga(action) {
   }
 }
 
-
 export function* forwardCapabilitiesSaga(action) {
   const {
     selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
@@ -284,83 +277,37 @@ export function* forwardCapabilitiesSaga(action) {
   } = action.payload
   const newUser = yield select(state => state.newUser)
   const users = yield select(state => state.listUsers.users)
-  delete newUser.keyDB
   delete newUser.isQuestion
   try {
     yield put(push('/ListUsers'))
-    if (newUser.id >= 1) {
-      db.table('listUserDB')
-        .update(newUser.id, {
-          ...newUser,
-          selectSkills,
-          textareaField,
-          checkboxArt,
-          checkboxSport,
-          checkboxJustWant,
-          checkboxFemale,
-          checkboxGuitar,
-          checkboxWtf,
-        })
-      let indexEditUser
-      users.forEach((item, i) => {
-        if (item.id === newUser.id) {
-          indexEditUser = i
-        }
-      })
-      const newUserStart = users.slice(0, indexEditUser)
-      const newUserEnd = users.slice(1 + indexEditUser)
-      const newObj = [
-        ...newUserStart,
-        {
-          ...newUser,
-          selectSkills,
-          textareaField,
-          checkboxArt,
-          checkboxSport,
-          checkboxJustWant,
-          checkboxFemale,
-          checkboxGuitar,
-          checkboxWtf,
-        },
-        ...newUserEnd,
-      ]
-      yield put({
-        type: FORWARD_CAPABILITIES__EDIT_USER,
-        payload: {
-          newObj,
-        },
-      })
-    } else {
-      const id = users.length > 0 ? users[users.length - 1].id + 1 : 1
-      db.table('listUserDB')
-        .add({
-          ...newUser,
-          id,
-          selectSkills,
-          textareaField,
-          checkboxArt,
-          checkboxSport,
-          checkboxJustWant,
-          checkboxFemale,
-          checkboxGuitar,
-          checkboxWtf,
-        })
-      yield put({
-        type: FORWARD_CAPABILITIES__ADD_NEW_USER,
-        payload: {
-          ...newUser,
-          id,
-          selectSkills,
-          textareaField,
-          checkboxArt,
-          checkboxSport,
-          checkboxJustWant,
-          checkboxFemale,
-          checkboxGuitar,
-          checkboxWtf,
-        },
-      })
-    }
+    const id = users.length > 0 ? users[users.length - 1].id + 1 : 1
+    db.listUserDB.add({
+      ...newUser,
+      id,
+      selectSkills,
+      textareaField,
+      checkboxArt,
+      checkboxSport,
+      checkboxJustWant,
+      checkboxFemale,
+      checkboxGuitar,
+      checkboxWtf,
+    })
+    yield put({
+      type: FORWARD_CAPABILITIES__ADD_NEW_USER,
+      payload: {
+        ...newUser,
+        id,
+        selectSkills,
+        textareaField,
+        checkboxArt,
+        checkboxSport,
+        checkboxJustWant,
+        checkboxFemale,
+        checkboxGuitar,
+        checkboxWtf,
+      },
+    })
   } catch
   (error) {
     yield put({
@@ -370,11 +317,10 @@ export function* forwardCapabilitiesSaga(action) {
   }
 }
 
-
 export function* editUserSaga(action) {
   const { id, page } = action.payload
   try {
-    yield put(push(`/${id}${page}`))
+    yield put(push(`/Editing/${id}${page}`))
     const users = yield select(state => state.listUsers.users)
     const newUser = users.find(i => i.id === id)
     yield put({
@@ -391,7 +337,6 @@ export function* editUserSaga(action) {
     })
   }
 }
-
 
 export function* deleteUserSaga(action) {
   const { id } = action.payload
@@ -410,7 +355,6 @@ export function* deleteUserSaga(action) {
   }
 }
 
-
 export function* createUserSaga() {
   try {
     yield put({
@@ -423,6 +367,54 @@ export function* createUserSaga() {
   } catch (error) {
     yield put({
       type: CREATE_USER__FAILURE,
+      error,
+    })
+  }
+}
+
+export function* accountEditingSaveSaga(action) {
+  const {
+    userName, password, repeatPassword, userSRCAvatarIMGState, id,
+  } = action.payload
+  const users = yield select(state => state.listUsers.users)
+  const user = users[id]
+  try {
+    yield put(push(`/Editing/${id}/Profile`))
+    db.listUserDB.update(id, {
+      userName,
+      password,
+      repeatPassword,
+      userSRCAvatarIMGState,
+    })
+    let indexEditUser
+    users.forEach((item, i) => {
+      if (item.id === id) {
+        indexEditUser = i
+      }
+    })
+    const newUserStart = users.slice(0, indexEditUser)
+    const newUserEnd = users.slice(1 + indexEditUser)
+    const newObj = [
+      ...newUserStart,
+      {
+        ...user,
+        userName,
+        password,
+        repeatPassword,
+        userSRCAvatarIMGState,
+      },
+      ...newUserEnd,
+    ]
+    yield put({
+      type: ACCOUNT_EDITING_SAVE__SUCCESS,
+      payload: {
+        newObj,
+      },
+    })
+  } catch
+  (error) {
+    yield put({
+      type: ACCOUNT_EDITING_SAVE__FAILURE,
       error,
     })
   }

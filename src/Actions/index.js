@@ -57,6 +57,11 @@ export const CREATE_USER__SUCCESS = 'CREATE_USER__SUCCESS'
 export const CREATE_USER__FAILURE = 'CREATE_USER__FAILURE'
 
 
+export const ACCOUNT_EDITING_SAVE = 'ACCOUNT_EDITING_SAVE'
+export const ACCOUNT_EDITING_SAVE__SUCCESS = 'ACCOUNT5_EDITING_SAVE__SUCCESS'
+export const ACCOUNT_EDITING_SAVE__FAILURE = 'ACCOUNT_EDITING_SAVE__FAILURE'
+
+
 export const changeQuestionState = isQuestion => ({
   type: CHANGE_QUESTION_STATE,
   payload: {
@@ -176,3 +181,12 @@ export const deleteUser = id => (
 
 export const createUser = () => (
   { type: CREATE_USER })
+
+
+export const accountEditingSave = (userName, password, repeatPassword, userSRCAvatarIMG, id) => (
+  {
+    type: ACCOUNT_EDITING_SAVE,
+    payload: {
+      userName, password, repeatPassword, userSRCAvatarIMG, id,
+    },
+  })

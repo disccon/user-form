@@ -13,6 +13,7 @@ import {
   editUserSaga,
   deleteUserSaga,
   createUserSaga,
+  accountEditingSaveSaga,
 } from './saga'
 
 
@@ -30,6 +31,7 @@ import {
   EDIT_USER,
   DELETE_USER,
   CREATE_USER,
+  ACCOUNT_EDITING_SAVE,
 } from '../Actions'
 
 
@@ -48,5 +50,6 @@ export default function* rootSaga() {
     takeLatest(EDIT_USER, editUserSaga),
     takeLatest(DELETE_USER, deleteUserSaga),
     takeLatest(CREATE_USER, createUserSaga),
+    takeLatest(ACCOUNT_EDITING_SAVE, accountEditingSaveSaga),
   ])
 }

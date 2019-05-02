@@ -44,8 +44,7 @@ class ListUsersPage extends Component {
         activePage: (activePage - 1),
       })
     }
-    db.table('listUserDB')
-      .delete(idListUser)
+    db.listUserDB.delete(idListUser)
     deleteUser(idListUser)
   }
 
@@ -59,7 +58,7 @@ class ListUsersPage extends Component {
     }
     return (
       <Fragment>
-        <h2 className={cx('listUsersH2')}>List of users</h2>
+        <h2 className={cx('headline')}>List of users</h2>
         <table className={cx('listUsersTable container')}>
           <thead className={cx('listUsers__thead')}>
             <tr className={cx('listUsers__tr')}>
@@ -70,7 +69,7 @@ class ListUsersPage extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr className={cx('listUsers__update')}/>
+            <tr className={cx('listUsers__update')} />
             {users.length > 0 && visibleUser.map(user => (
               <UserRow
                 key={user.id}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { reduxForm, Field, formValueSelector } from 'redux-form'
-import styles from './Profile.scss'
+import styles from './ProfileEditing.scss'
 import { forwardBackProfile } from '../../../Actions'
 import { renderFieldRadioProfile } from './renderFieldRadioProfile/renderFieldRadioProfile'
 import { renderDateTimePickerProfile } from './renderDateTimePickerProfile/renderDateTimePickerProfile'
@@ -13,10 +13,11 @@ import { renderFieldInputNewUser } from '../renderFieldInputNewUser/renderFieldI
 const cx = classNames.bind(styles)
 
 
-class Profile extends Component {
+class ProfileEditing extends Component {
     onSubmit = values => {
       const { forwardBackProfile } = this.props
-      forwardBackProfile('forward', values.firstName, values.lastName, values.birthDate, values.email, values.address, values.gender)
+      forwardBackProfile('forward', values.firstName, values.lastName, values.birthDate, values.email,
+        values.address, values.gender)
     }
 
     backProfile = () => {
@@ -103,7 +104,7 @@ class Profile extends Component {
     }
 }
 
-Profile.propTypes = {
+ProfileEditing.propTypes = {
   firstNameForm: PropTypes.string,
   lastNameForm: PropTypes.string,
   birthDateForm: PropTypes.oneOfType([
@@ -119,7 +120,7 @@ Profile.propTypes = {
 }
 
 
-Profile = reduxForm({
+ProfileEditing = reduxForm({
   validate: (values, props) => {
     const errors = {}
     const { userEmailList } = props
@@ -160,7 +161,7 @@ Profile = reduxForm({
   },
   form: 'Profile',
   enableReinitialize: true,
-})(Profile)
+})(ProfileEditing)
 
 
 const mapStateToProps = state => {
@@ -172,10 +173,14 @@ const mapStateToProps = state => {
   const maleGender = selector(state, 'gender')
   const birthDateForm = selector(state, 'birthDate')
   const {
-    firstName, lastName, email, address, gender, birthDate,
+    firstName, lastName, email, address, gender, birthDate, id,
   } = state.newUser
   const { users } = state.listUsers
-  const userEmailList = users.map(user => user.email)
+  let userEmailList
+  if(users) {
+  const userEmailFilter = users.filter(user => user.id !== id)
+  userEmailList = userEmailFilter.map(user => user.email)
+  }
   return {
     initialValues: {
       firstName, lastName, birthDate, email, address, gender,
@@ -193,4 +198,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { forwardBackProfile },
-)(Profile)
+)(ProfileEditing)

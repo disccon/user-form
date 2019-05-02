@@ -1,0 +1,19 @@
+#react-select-2-input {
+  font-weight: 500;
+}
+.contacts__label:nth-child(3){
+  margin-bottom: 21px;
+}
+.contacts__mainLanguage{
+  position: relative;
+  .contacts__mainLanguageLabel{
+    position: absolute;
+    top: -23px;
+  }
+  .mainLanguage__error{
+    margin-top: 3px;
+    margin-left: 10px;
+    font-size: 9px;
+    color: #EB5757;
+  }
+}

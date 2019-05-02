@@ -3,31 +3,25 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Field, reduxForm } from 'redux-form'
-import styles from './Account.scss'
-import { ReactComponent as CloseIcon } from '../../../img/icon/close.svg'
+import styles from './AccountEditing.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
-import { forwardAccount, saveUserSRCAvatarIMG, continueUser } from '../../../Actions'
+import { accountEditingSave } from '../../../Actions'
 import { renderFieldInputAccount } from './renderFieldInputAccount/renderFieldInputAccount'
 
 
 const cx = classNames.bind(styles)
 
 
-class Account extends Component {
+class AccountEditing extends Component {
     state = {
       avatarIMGError: null,
       typeFieldPassword: 'text',
-    }
-
-    continueUser = isContinue => () => {
-      const { continueUser } = this.props
-      continueUser(isContinue)
+      userSRCAvatarIMGState: this.props.userSRCAvatarIMG,
     }
 
     addImageUserAvatar = event => {
       event.preventDefault()
-      const { saveUserSRCAvatarIMG } = this.props
       const reader = new FileReader()
       const fileIMG = event.target.files[0]
       const fileSize = fileIMG.size / 1024 / 1024
@@ -35,8 +29,8 @@ class Account extends Component {
         reader.onloadend = () => {
           this.setState({
             avatarIMGError: false,
+            userSRCAvatarIMGState: reader.result,
           })
-          saveUserSRCAvatarIMG(reader.result)
         }
         reader.readAsDataURL(fileIMG)
       } else {
@@ -47,14 +41,9 @@ class Account extends Component {
     }
 
     onSubmit = values => {
-      const { forwardAccount, userSRCAvatarIMG } = this.props
-      if (!userSRCAvatarIMG) {
-        this.setState({
-          avatarIMGError: 'Upload a picture',
-        })
-      } else {
-        forwardAccount(values.userName, values.password, values.repeatPassword)
-      }
+      const { accountEditingSave, id } = this.props
+      const { userSRCAvatarIMGState } = this.state
+      accountEditingSave(values.userName, values.password, values.repeatPassword, userSRCAvatarIMGState, id)
     }
 
     changeTypePassword = () => {
@@ -71,36 +60,15 @@ class Account extends Component {
     }
 
     render() {
-      const { handleSubmit, userSRCAvatarIMG, isQuestion } = this.props
-      const { avatarIMGError, typeFieldPassword } = this.state
-      const userAvatarIMG = userSRCAvatarIMG
-        ? <img className={cx('accountComponent__userAvatarIMG')} src={userSRCAvatarIMG} alt='userAvatar' />
+      const { handleSubmit } = this.props
+      const { avatarIMGError, typeFieldPassword, userSRCAvatarIMGState } = this.state
+      const userAvatarIMG = userSRCAvatarIMGState
+        ? <img className={cx('accountComponent__userAvatarIMG')} src={userSRCAvatarIMGState} alt='userAvatar' />
         : <UserAvatarIcon className={cx('accountComponent__userAvatarSVG')} alt='userAvatar' />
       const UserAvatar = avatarIMGError
         ? <p className={cx('accountComponent__avatarError')}>{avatarIMGError}</p> : null
       return (
         <Fragment>
-          {isQuestion && (
-            <div className={cx('accountComponentQuestion')}>
-              <span className={cx('accountComponentQuestion__span')}>
-                You have an unsaved user data. Do you want to complete it?
-              </span>
-              <button
-                type='button'
-                className={cx('accountComponent__continue')}
-                onClick={this.continueUser(true)}
-              >
-              Continue
-              </button>
-              <button
-                type='button'
-                className={cx('accountComponent__close')}
-                onClick={this.continueUser(false)}
-              >
-                <CloseIcon className={cx('accountComponent__closeIcon')} alt='closeIcon' />
-              </button>
-            </div>
-          )}
           <form className={cx('accountComponent__form')} onSubmit={handleSubmit(this.onSubmit)}>
             <div className={cx('accountComponent__userAvatarWrapper')} >
               <label htmlFor='userAvatar'>
@@ -152,7 +120,7 @@ class Account extends Component {
                 idInput='repeatPassword'
                 changeTypePassword={this.changeTypePassword}
               />
-              <button className={cx('accountComponent__buttonSubmit')} type='submit' >Forward</button>
+              <button className={cx('accountComponent__buttonSubmit')} type='submit' >Save</button>
             </div>
           </form>
         </Fragment>
@@ -161,7 +129,7 @@ class Account extends Component {
 }
 
 
-Account = reduxForm({
+AccountEditing = reduxForm({
   validate: (values, props) => {
     const errors = {}
     const { userNameList } = props
@@ -189,39 +157,41 @@ Account = reduxForm({
   },
   form: 'Account',
   enableReinitialize: true,
-})(Account)
+})(AccountEditing)
 
 
-Account.propTypes = {
+AccountEditing.propTypes = {
+  id: PropTypes.number.isRequired,
   userSRCAvatarIMG: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
   ]),
-  isQuestion: PropTypes.bool.isRequired,
-  continueUser: PropTypes.func.isRequired,
-  saveUserSRCAvatarIMG: PropTypes.func.isRequired,
-  forwardAccount: PropTypes.func.isRequired,
+  accountEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func,
 }
 
 
 const mapStateToProps = state => {
-  const {
-    userName, password, repeatPassword, userSRCAvatarIMG, isQuestion,
-  } = state.newUser
   const { users } = state.listUsers
-  const userNameList = users.map(user => user.userName)
+  const { pathname } = state.router.location
+  const id = Number(pathname.slice(9, pathname.length - 1))
+  const user = { ...users[id - 1] }
+  const {
+    userName, password, repeatPassword, userSRCAvatarIMG,
+  } = user
+  const userFilterName = users.filter(user => user.id !== id)
+  const userNameList = userFilterName.map(user => user.userName)
   return {
     initialValues: {
       userName, password, repeatPassword,
     },
     userSRCAvatarIMG,
-    isQuestion,
     userNameList,
+    id,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { forwardAccount, saveUserSRCAvatarIMG, continueUser },
-)(Account)
+  { accountEditingSave },
+)(AccountEditing)

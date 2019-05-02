@@ -1,58 +1,83 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Redirect, Route, Switch } from 'react-router'
+import { getFormNames, getFormValues } from 'redux-form'
+import { connect } from 'react-redux'
 import styles from './AddingNewUser.scss'
 import Account from './Account/Account'
 import Contacts from './Contacts/Contacts'
 import Capabilities from './Capabilities/Capabilities'
 import Profile from './Profile/Profile'
+import db from '../../db'
 
 
 const cx = classNames.bind(styles)
 
+class AddingNewUserPage extends Component {
+  componentDidMount() {
+    window.addEventListener('beforeunload', this.onUnload)
+  }
 
-export const AddingNewUserPage = ({ location }) => {
-  const { pathname } = location
-  return (
-    <Fragment>
-      <h2 className={cx('newUserH')}>Adding new user</h2>
-      <div className={cx('windowNewUser container')}>
-        <div className={cx('windowNewUser__tabs')}>
-          <div className={cx('windowNewUser__tab', {
-            activeTab: pathname.includes === '/'
-              || pathname.charAt(pathname.length - 2) >= 0,
-          })}
-          >
-            <h2 className={cx('windowNewUser__h2')} >1. Account</h2>
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', this.onUnload)
+  }
+
+  onUnload = () => {
+    const { newUser, activeValue } = this.props
+    db.newUserDB.update(0, { ...newUser, ...activeValue })
+  }
+
+  render() {
+    const { pathname } = this.props
+    return (
+      <Fragment>
+        <h2 className={cx('headline')}>Adding new user</h2>
+        <div className={cx('windowNewUser container')}>
+          <div className={cx('windowNewUser__tabs')}>
+            <div className={cx('windowNewUser__tab', { activeTab: pathname === '/' })}>
+              <h2 className={cx('windowNewUser__h2')}>1. Account</h2>
+            </div>
+            <div className={cx('windowNewUser__tab', { activeTab: pathname === '/Profile' })}>
+              <h2 className={cx('windowNewUser__h2')}>2. Profile</h2>
+            </div>
+            <div className={cx('windowNewUser__tab', { activeTab: pathname === '/Contacts' })}>
+              <h2 className={cx('windowNewUser__h2')}>3. Contacts</h2>
+            </div>
+            <div className={cx('windowNewUser__tab', { activeTab: pathname === '/Capabilities' })}>
+              <h2 className={cx('windowNewUser__h2')}>4. Capabilities</h2>
+            </div>
           </div>
-          <div className={cx('windowNewUser__tab', { activeTab: pathname.includes('/Profile') })}>
-            <h2 className={cx('windowNewUser__h2')} >2. Profile</h2>
-          </div>
-          <div className={cx('windowNewUser__tab', { activeTab: pathname.includes('/Contacts') })}>
-            <h2 className={cx('windowNewUser__h2')} >3. Contacts</h2>
-          </div>
-          <div className={cx('windowNewUser__tab', { activeTab: pathname.includes('/Capabilities') })}>
-            <h2 className={cx('windowNewUser__h2')} >4. Capabilities</h2>
-          </div>
+          <Switch>
+            <Route exact path='/' component={Account} />
+            <Route exact path='/Profile' component={Profile} />
+            <Route exact path='/Contacts' component={Contacts} />
+            <Route exact path='/Capabilities' component={Capabilities} />
+            <Redirect to='/NodFound' />
+          </Switch>
         </div>
-        <Switch>
-          <Route exact path='/' component={Account} />
-          <Route exact path='/Profile' component={Profile} />
-          <Route exact path='/Contacts' component={Contacts} />
-          <Route exact path='/Capabilities' component={Capabilities} />
-
-          <Route exact path='/:id/' component={Account} />
-          <Route exact path='/:id/Profile' component={Profile} />
-          <Route exact path='/:id/Contacts' component={Contacts} />
-          <Route exact path='/:id/Capabilities' component={Capabilities} />
-          <Redirect to='/NodFound' />
-        </Switch>
-      </div>
-    </Fragment>
-  )
+      </Fragment>
+    )
+  }
 }
 
 AddingNewUserPage.propTypes = {
-  location: PropTypes.object.isRequired,
+  pathname: PropTypes.string.isRequired,
+  activeValue: PropTypes.object,
+  newUser: PropTypes.object,
 }
+
+const mapStateToProps = state => {
+  const activeFormName = getFormNames()(state)
+  const activeValue = getFormValues(...activeFormName)(state)
+  const { pathname } = state.router.location
+  return {
+    newUser: state.newUser,
+    activeValue,
+    pathname,
+  }
+}
+
+export default connect(
+  mapStateToProps,
+)(AddingNewUserPage)
