@@ -5,13 +5,13 @@ import './reset.css'
 import { Route, Switch, Redirect } from 'react-router'
 import { ConnectedRouter } from 'connected-react-router'
 import classNames from 'classnames'
+import _ from 'lodash/core'
 import NodFound from '../NodFound/NodFound'
 import styles from './App.scss'
 import Header from '../Header/Header'
 import db from '../../db'
 import { userListerNewState, changeQuestionState } from '../../Actions'
 import { users } from '../../stubs/users'
-import { deepEqual } from '../../helpers/deepEqual'
 import AddingNewUserPage from '../AddingNewUserPage/AddingNewUserPage'
 import EditUserPage from '../EditUserPage/EditUserPage'
 import ListUsersPage from '../ListUsersPage/ListUsersPage'
@@ -29,7 +29,7 @@ class App extends Component {
     }
     db.newUserDB.get(0, newUserDB => {
       if (newUserDB) {
-        changeQuestionState(deepEqual(newUserDB, newUser))
+        changeQuestionState(_.isEqual(newUserDB, newUser))
         db.listUserDB.toArray(listUserDB => {
           userListerNewState(listUserDB)
         })

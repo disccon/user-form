@@ -25,7 +25,7 @@ class AddingNewUserPage extends Component {
 
   onUnload = () => {
     const { newUser, activeValue } = this.props
-    db.newUserDB.update(0, { ...newUser, ...activeValue })
+    db.newUserDB.update(0, { ...newUser, ...activeValue, isQuestion: false })
   }
 
   render() {
