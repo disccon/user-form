@@ -203,8 +203,8 @@ export const profileEditingSave = (firstName, lastName, birthDate, email, addres
     },
   })
 
-export const contactsEditingSave = (company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2,
-  phoneN3, id) => (
+export const contactsEditingSave = (company, githubLink, facebookLink, selectLanguage, fax, phoneArray,
+  phoneN1, phoneN2, phoneN3, id) => (
   {
     type: CONTACTS_EDITING_SAVE,
     payload: {

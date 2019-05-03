@@ -174,7 +174,7 @@ AccountEditing.propTypes = {
 const mapStateToProps = state => {
   const { users } = state.listUsers
   const { pathname } = state.router.location
-  const id = (pathname.slice(9, pathname.length - 1))
+  const id = Number(pathname.slice(9, pathname.length - 1))
   const user = { ...users[id - 1] }
   const {
     userName, password, repeatPassword, userSRCAvatarIMG,
