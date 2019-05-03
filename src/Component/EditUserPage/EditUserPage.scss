@@ -1,96 +1,76 @@
-.UserNamePageHeadline {
-  margin-top: 56px;
-  font-weight: bold;
-  font-size: 35px;
-  text-align: center;
-  color: #475666;
-}
-
-.UserNamePageH3 {
-  margin-right: auto;
-  margin-left: auto;
-  width: 971px;
-  margin-top: -33px;
-  font-weight: bold;
-  font-size: 24px;
-  color: #9BB0CB;
-}
-
-.UserNamePageContainer {
-  margin-top: 35px;
-  display: flex;
-  padding: 35px 58px;
-  background: #fbfcff;
-  margin-right: auto;
-  margin-left: auto;
-  width: 971px;
-  height: 734px;
-
-  .UserNamePageContainer__avatar {
-    margin-right: 91px;
-    width: 200px;
-    height: 200px;
-    border: 3px solid #5E97F3;
-    border-radius: 50%;
+.container {
+  position: relative;
+  .linkBackPage {
+    position: absolute;
+    top: 63px;
+    left: 3px;
+    font-weight: bold;
+    font-size: 24px;
+    color: #9BB0CB;
   }
-
-  .accountDataWrapper {
+  .UserNamePageContainer {
+    margin-top: 35px;
     display: flex;
-    flex-direction: column;
-    color: #475666;
-    padding-top: 32px;
-
-    .accountDataWrapper__block {
-      margin-bottom: 24px;
+    padding: 35px 58px;
+    background: #fbfcff;
+    height: 734px;
+    .UserNamePageContainer__avatar {
+      margin-right: 91px;
+      width: 200px;
+      height: 200px;
+      border: 3px solid #5E97F3;
+      border-radius: 50%;
+    }
+    .accountDataWrapper {
       display: flex;
-
-      .accountDataWrapper__section {
-        width: 152px;
+      flex-direction: column;
+      color: #475666;
+      padding-top: 32px;
+      .accountDataWrapper__block {
+        margin-bottom: 24px;
         display: flex;
-
-        h4 {
-          margin-right: 8px;
-          font-weight: 500;
-        }
-
-        button {
-          margin-top: 1px;
-          width: 15px;
-          height: 15px;
-          background: transparent;
-
-          .accountDataWrapper__editIcon {
+        .accountDataWrapper__section {
+          width: 152px;
+          display: flex;
+          .accountDataWrapper__h3 {
+            margin-right: 8px;
+            font-weight: 500;
+          }
+          .accountDataWrapper__buttonEdit {
             margin-top: 1px;
             width: 15px;
             height: 15px;
-            filter: invert(30%) sepia(33%) saturate(323%) hue-rotate(170deg) brightness(96%) contrast(90%);
+            background: transparent;
+            .accountDataWrapper__editIcon {
+              margin-top: 1px;
+              width: 15px;
+              height: 15px;
+              .editIcon {
+                fill: #475666;
+              }
+            }
           }
         }
-      }
-
-      .accountDataWrapper__sectionInfo {
-        .accountDataWrapper__wrapper {
-          margin-bottom: 7px;
-          display: flex;
-
-          h4 {
-            font-weight: 500;
-            width: 170px;
+        .accountDataWrapper__sectionInfo {
+          .accountDataWrapper__wrapper {
+            margin-bottom: 7px;
+            display: flex;
+            .accountDataWrapper__h4 {
+              font-weight: 500;
+              width: 170px;
+            }
+            .accountDataWrapper__span {
+              margin-bottom: 9px;
+              max-width: 230px;
+              color: #657C9A;
+            }
           }
-
-          h5 {
-            margin-bottom: 9px;
-            max-width: 230px;
-            color: #657C9A;
-          }
-        }
-
-        .accountDataWrapper__wrapperH5 {
-          display: flex;
-          flex-direction: column;
-
-          h5 {
-            line-height: 20px;
+          .accountDataWrapper__wrapperHobbies {
+            display: flex;
+            flex-direction: column;
+            .accountDataWrapper__span {
+              line-height: 20px;
+            }
           }
         }
       }

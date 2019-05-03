@@ -1,4 +1,4 @@
-.accountComponent__question{
+.accountComponentQuestion{
   width: 100%;
   height: 42px;
   display: flex;
@@ -7,7 +7,7 @@
   padding-left: 24px;
   background: #5e97f3;
   color: #fff;
-  span{
+  .accountComponentQuestion__span{
     font-weight: 500;
   }
   .accountComponent__continue{
@@ -69,7 +69,7 @@
         color: #9BB0CB;
       }
     }
-    p{
+    .accountComponent__avatarError{
       margin-top: 5px;
       font-size: 9px;
       color: #EB5757;
@@ -82,46 +82,7 @@
     margin-top: 23px;
     margin-left: auto;
     color: #657C9A;
-    label:first-child{
-      margin-top: 23px;
-    }
-    label {
-      position: relative;
-      margin-bottom: 45px;
-      height: 40px;
-      .accountComponent__visibilityIcon{
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        width: 15px;
-        height: 10px;
-
-
-      }
-      h4 {
-        position: absolute;
-        top: -23px;
-      }
-      input {
-        margin-top: 0;
-        width: 100%;
-        height: 40px;
-        padding-right: 10px;
-        padding-left: 10px;
-        border: 1px solid #C1CFE0;
-        background: #fff;
-        font-weight: 500;
-        color: #000;
-      }
-      p{
-        display: block;
-        margin-top: 3px;
-        margin-left: 10px;
-        font-size: 9px;
-        color: #EB5757;
-      }
-    }
-    button {
+    .accountComponent__buttonSubmit {
       margin-top: auto;
       margin-left: auto;
       width: 100px;

@@ -1,25 +1,18 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
+import { Link } from 'react-router-dom'
 import styles from './EditUserPage.scss'
 import { ReactComponent as EditIcon } from '../../img/icon/edit.svg'
+import { editUser } from '../../Actions'
 
 const cx = classNames.bind(styles)
 
-
 class EditUserPage extends Component {
   editUser = page => () => {
-    const { history } = this.props
-    if (page === 'Account') {
-      history.push('/')
-    } else if (page === 'Profile') {
-      history.push('Profile')
-    } else if (page === 'Contacts') {
-      history.push('Contacts')
-    } else if (page === 'Capabilities') {
-      history.push('Capabilities')
-    }
+    const { editUser, pathname } = this.props
+    editUser(Number(pathname.substring(10)), page)
   }
 
   render() {
@@ -29,130 +22,135 @@ class EditUserPage extends Component {
       checkboxFemale, checkboxGuitar, checkboxWtf,
     } = this.props
     return (
-      <Fragment>
-        <h2 className={cx('UserNamePageHeadline')}>User Name</h2>
-        <h3 className={cx('UserNamePageH3')}>Users List</h3>
-        { birthDate && (
-        <div className={cx('UserNamePageContainer')}>
-          <img src={userSRCAvatarIMG} className={cx('UserNamePageContainer__avatar')} alt='userSRCAvatarIMG' />
-          <div className={cx('accountDataWrapper')}>
-            <div className={cx('accountDataWrapper__block')}>
-              <div className={cx('accountDataWrapper__section')}>
-                <h4>Account</h4>
-                <button type='button'>
-                  <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Account')} />
-                </button>
-              </div>
-              <div className={cx('accountDataWrapper__sectionInfo')}>
-                <div className={cx('accountDataWrapper__wrapper')}>
-                  <h4>User name:</h4>
-                  <h5>{userName}</h5>
+      <div className={cx('container')}>
+        <Link className={cx('linkBackPage')} to='/ListUsers'>{'<  Users List'}</Link>
+        <h2 className={cx('headline')}>User Name</h2>
+        {birthDate && (
+          <div className={cx('UserNamePageContainer container')}>
+            <img src={userSRCAvatarIMG} className={cx('UserNamePageContainer__avatar')} alt='userSRCAvatarIMG' />
+            <div className={cx('accountDataWrapper')}>
+              <div className={cx('accountDataWrapper__block')}>
+                <div className={cx('accountDataWrapper__section')}>
+                  <h3 className={cx('accountDataWrapper__h3')}>Account</h3>
+                  <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
+                    <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('/')} />
+                  </button>
                 </div>
-                <div className={cx('accountDataWrapper__wrapper')}>
-                  <h4>Password</h4>
-                  <h5>*******</h5>
-                </div>
-              </div>
-            </div>
-            <div className={cx('accountDataWrapper__block')}>
-              <div className={cx('accountDataWrapper__section')}>
-                <h4>Personal</h4>
-                <button type='button'>
-                  <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Profile')} />
-                </button>
-              </div>
-              <div className={cx('accountDataWrapper__sectionInfo')}>
-                <div className={cx('accountDataWrapper__wrapper')}>
-                  <h4>First name:</h4>
-                  <h5>{firstName}</h5>
-                </div>
-                <div className={cx('accountDataWrapper__wrapper')}>
-                  <h4>Last name:</h4>
-                  <h5>{lastName}</h5>
-                </div>
-                <div className={cx('accountDataWrapper__wrapper')}>
-                  <h4>Birth date:</h4>
-                  <h5>{birthDate.toLocaleDateString()}</h5>
-                </div>
-                <div className={cx('accountDataWrapper__wrapper')}>
-                  <h4>Email:</h4>
-                  <h5>{email}</h5>
-                </div>
-                <div className={cx('accountDataWrapper__wrapper')}>
-                  <h4>Adress:</h4>
-                  <h5>{address}</h5>
+                <div className={cx('accountDataWrapper__sectionInfo')}>
+                  <div className={cx('accountDataWrapper__wrapper')}>
+                    <h4 className={cx('accountDataWrapper__h4')}>User name:</h4>
+                    <span className={cx('accountDataWrapper__span')}>{userName}</span>
+                  </div>
+                  <div className={cx('accountDataWrapper__wrapper')}>
+                    <h4 className={cx('accountDataWrapper__h4')}>Password</h4>
+                    <span className={cx('accountDataWrapper__span')}>*******</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className={cx('accountDataWrapper__block')}>
-              <div className={cx('accountDataWrapper__section')}>
-                <h4>Contacts</h4>
-                <button type='button'>
-                  <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Contacts')} />
-                </button>
+              <div className={cx('accountDataWrapper__block')}>
+                <div className={cx('accountDataWrapper__section')}>
+                  <h3 className={cx('accountDataWrapper__h3')}>Personal</h3>
+                  <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
+                    <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('/Profile')} />
+                  </button>
+                </div>
+                <div className={cx('accountDataWrapper__sectionInfo')}>
+                  <div className={cx('accountDataWrapper__wrapper')}>
+                    <h4 className={cx('accountDataWrapper__h4')}>First name:</h4>
+                    <span className={cx('accountDataWrapper__span')}>{firstName}</span>
+                  </div>
+                  <div className={cx('accountDataWrapper__wrapper')}>
+                    <h4 className={cx('accountDataWrapper__h4')}>Last name:</h4>
+                    <span className={cx('accountDataWrapper__span')}>{lastName}</span>
+                  </div>
+                  <div className={cx('accountDataWrapper__wrapper')}>
+                    <h4 className={cx('accountDataWrapper__h4')}>Birth date:</h4>
+                    <span className={cx('accountDataWrapper__span')}>{birthDate.toLocaleDateString()}</span>
+                  </div>
+                  <div className={cx('accountDataWrapper__wrapper')}>
+                    <h4 className={cx('accountDataWrapper__h4')}>Email:</h4>
+                    <span className={cx('accountDataWrapper__span')}>{email}</span>
+                  </div>
+                  <div className={cx('accountDataWrapper__wrapper')}>
+                    <h4 className={cx('accountDataWrapper__h4')}>Adress:</h4>
+                    <span className={cx('accountDataWrapper__span')}>{address}</span>
+                  </div>
+                </div>
               </div>
-              <div className={cx('accountDataWrapper__sectionInfo')}>
-                <div className={cx('accountDataWrapper__wrapper')}>
-                  <h4>Company:</h4>
-                  <h5>{company}</h5>
+              <div className={cx('accountDataWrapper__block')}>
+                <div className={cx('accountDataWrapper__section')}>
+                  <h3 className={cx('accountDataWrapper__h3')}>Contacts</h3>
+                  <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
+                    <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('/Contacts')} />
+                  </button>
                 </div>
-                <div className={cx('accountDataWrapper__wrapper')}>
-                  <h4>Fax:</h4>
-                  <h5>{fax}</h5>
+                <div className={cx('accountDataWrapper__sectionInfo')}>
+                  <div className={cx('accountDataWrapper__wrapper')}>
+                    <h4 className={cx('accountDataWrapper__h4')}>Company:</h4>
+                    <span className={cx('accountDataWrapper__span')}>{company}</span>
+                  </div>
+                  <div className={cx('accountDataWrapper__wrapper')}>
+                    <h4 className={cx('accountDataWrapper__h4')}>Fax:</h4>
+                    <span className={cx('accountDataWrapper__span')}>{fax}</span>
+                  </div>
+                  <div className={cx('accountDataWrapper__wrapper')}>
+                    <h4 className={cx('accountDataWrapper__h4')}>Facebook Link:</h4>
+                    <span className={cx('accountDataWrapper__span')}>{facebookLink}</span>
+                  </div>
+                  <div className={cx('accountDataWrapper__wrapper')}>
+                    <h4 className={cx('accountDataWrapper__h4')}>Phone #1:</h4>
+                    <span className={cx('accountDataWrapper__span')}>{phoneN1}</span>
+                  </div>
+                  {phoneN2 && (
+                    <div className={cx('accountDataWrapper__wrapper')}>
+                      <h4 className={cx('accountDataWrapper__h4')}>Phone #2:</h4>
+                      <span className={cx('accountDataWrapper__span')}>{phoneN2}</span>
+                    </div>
+                  )}
+                  {phoneN3 && (
+                    <div className={cx('accountDataWrapper__wrapper')}>
+                      <h4 className={cx('accountDataWrapper__h4')}>Phone #3:</h4>
+                      <span className={cx('accountDataWrapper__span')}>{phoneN3}</span>
+                    </div>
+                  )}
                 </div>
-                <div className={cx('accountDataWrapper__wrapper')}>
-                  <h4>Facebook Link:</h4>
-                  <h5>{facebookLink}</h5>
-                </div>
-                <div className={cx('accountDataWrapper__wrapper')}>
-                  <h4>Phone #1:</h4>
-                  <h5>{phoneN1}</h5>
-                </div>
-                {phoneN2 && (
-                <div className={cx('accountDataWrapper__wrapper')}>
-                  <h4>Phone #2:</h4>
-                  <h5>{phoneN2}</h5>
-                </div>
-                ) }
-                {phoneN3 && (
-                <div className={cx('accountDataWrapper__wrapper')}>
-                  <h4>Phone #3:</h4>
-                  <h5>{phoneN3}</h5>
-                </div>
-                ) }
               </div>
-            </div>
-            <div className={cx('accountDataWrapper__block')}>
-              <div className={cx('accountDataWrapper__section')}>
-                <h4>Capabilities</h4>
-                <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('Capabilities')} />
-              </div>
-              <div className={cx('accountDataWrapper__sectionInfo')}>
-                <div className={cx('accountDataWrapper__wrapper')}>
-                  <h4>Skills:</h4>
-                  <h5>
-                    {selectSkills.map(user => (
-                      `${user.value},  `
-                    ))}
-                  </h5>
+              <div className={cx('accountDataWrapper__block')}>
+                <div className={cx('accountDataWrapper__section')}>
+                  <h3 className={cx('accountDataWrapper__h3')}>Capabilities</h3>
+                  <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
+                    <EditIcon
+                      className={cx('accountDataWrapper__editIcon')}
+                      onClick={this.editUser('/Capabilities')}
+                    />
+                  </button>
                 </div>
-                <div className={cx('accountDataWrapper__wrapper')}>
-                  <h4>Hobies:</h4>
-                  <div className={cx('accountDataWrapper__wrapperH5')}>
-                    {checkboxArt && <h5>{checkboxArt}</h5>}
-                    {checkboxSport && <h5>{checkboxSport}</h5>}
-                    {checkboxJustWant && <h5>{checkboxJustWant}</h5>}
-                    {checkboxFemale && <h5>{checkboxFemale}</h5>}
-                    {checkboxGuitar && <h5>{checkboxGuitar}</h5>}
-                    {checkboxWtf && <h5>{checkboxWtf}</h5>}
+                <div className={cx('accountDataWrapper__sectionInfo')}>
+                  <div className={cx('accountDataWrapper__wrapper')}>
+                    <h4 className={cx('accountDataWrapper__h4')}>Skills:</h4>
+                    <span className={cx('accountDataWrapper__span')}>
+                      {selectSkills.map(user => (
+                        `${user.value},  `
+                      ))}
+                    </span>
+                  </div>
+                  <div className={cx('accountDataWrapper__wrapper')}>
+                    <h4 className={cx('accountDataWrapper__h4')}>Hobbies:</h4>
+                    <div className={cx('accountDataWrapper__wrapperHobbies')}>
+                      {checkboxArt && <span className={cx('accountDataWrapper__span')}>{checkboxArt}</span>}
+                      {checkboxSport && <span className={cx('accountDataWrapper__span')}>{checkboxSport}</span>}
+                      {checkboxJustWant && <span className={cx('accountDataWrapper__span')}>{checkboxJustWant}</span>}
+                      {checkboxFemale && <span className={cx('accountDataWrapper__span')}>{checkboxFemale}</span>}
+                      {checkboxGuitar && <span className={cx('accountDataWrapper__span')}>{checkboxGuitar}</span>}
+                      {checkboxWtf && <span className={cx('accountDataWrapper__span')}>{checkboxWtf}</span>}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        ) }
-      </Fragment>
+        )}
+      </div>
     )
   }
 }
@@ -205,39 +203,49 @@ EditUserPage.propTypes = {
     PropTypes.string,
     PropTypes.bool,
   ]),
-  history: PropTypes.object.isRequired,
+  editUser: PropTypes.func.isRequired,
+  pathname: PropTypes.string.isRequired,
 }
 
-
 const mapStateToProps = state => {
-  const {
-    userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax, facebookLink, phoneN1, phoneN2, phoneN3,
-    selectSkills, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale, checkboxGuitar, checkboxWtf,
-  } = state.newUser
-  return {
-    userName,
-    userSRCAvatarIMG,
-    firstName,
-    lastName,
-    birthDate,
-    email,
-    address,
-    company,
-    fax,
-    facebookLink,
-    phoneN1,
-    phoneN2,
-    phoneN3,
-    selectSkills,
-    checkboxArt,
-    checkboxSport,
-    checkboxJustWant,
-    checkboxFemale,
-    checkboxGuitar,
-    checkboxWtf,
+  const { pathname } = state.router.location
+  const { users } = state.listUsers
+  let editUser
+  if (users.length >= 1) {
+    editUser = users.find(i => i.id === Number(pathname.substring(10)))
+    const {
+      userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax, facebookLink, phoneN1,
+      phoneN2, phoneN3, selectSkills, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale, checkboxGuitar,
+      checkboxWtf,
+    } = editUser
+    return {
+      userName,
+      userSRCAvatarIMG,
+      firstName,
+      lastName,
+      birthDate,
+      email,
+      address,
+      company,
+      fax,
+      facebookLink,
+      phoneN1,
+      phoneN2,
+      phoneN3,
+      selectSkills,
+      checkboxArt,
+      checkboxSport,
+      checkboxJustWant,
+      checkboxFemale,
+      checkboxGuitar,
+      checkboxWtf,
+      pathname,
+    }
   }
+  return null
 }
 
 export default connect(
   mapStateToProps,
+  { editUser },
 )(EditUserPage)

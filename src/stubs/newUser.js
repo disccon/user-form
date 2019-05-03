@@ -1,5 +1,6 @@
 export const newUser = {
   isQuestion: false,
+  id: 0,
   userName: '',
   password: '',
   repeatPassword: '',
@@ -16,10 +17,10 @@ export const newUser = {
   facebookLink: '',
   selectLanguage: '',
   fax: '',
+  phoneArray: [''],
   phoneN1: '',
   phoneN2: '',
   phoneN3: '',
-  quantityPhoneField: 2,
 
   selectSkills: '',
   textareaField: '',

@@ -1,0 +1,82 @@
+.userRow:first-child{
+  padding-left: 14px;
+}
+.userRow {
+  height: 93px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  color: #475666;
+  .userRow__img{
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+  }
+  .userRow__wrapperDiv{
+    margin-top: 7px;
+    display: flex;
+    flex-direction: column;
+    .userRow__h4{
+      font-weight: 500;
+    }
+    .userRow__span{
+      font-size: 9px;
+    }
+  }
+  .userRow__buttonEdit, .userRow__buttonClose, .userRow__buttonDeleteUser{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    background: transparent;
+    .userRow__closeIcon, .userRow__editIcon{
+      width: 15px;
+      height: 15px;
+    }
+  }
+  .userRow__buttonEdit{
+    .userRow__editIcon{
+      .editIcon{
+        fill: #475666;
+      }
+    }
+  }
+  .userRow__buttonClose{
+    .userRow__closeIcon{
+      filter: invert(30%) sepia(37%) saturate(314%) hue-rotate(170deg) brightness(92%) contrast(86%);
+      .closeIcon{
+        fill: #128031;
+        color: #2F68C8;
+      }
+    }
+  }
+  .userRow__buttonEdit{
+    margin-left: 44px;
+  }
+  .userRow__buttonClose{
+    margin-left: 22px;
+  }
+}
+.deleteUserRow{
+  position: relative;
+  transform: translateX(-70px);
+  opacity: 0.5;
+  transition: all ease 0.3s;
+  .userRow__deleteUserWrapper{
+    top: 35px;
+    right: -75px;
+    position: absolute;
+    .userRow__buttonDeleteUser{
+      display: flex;
+      color: #ff4144;
+      font-weight: 500;
+      background: transparent;
+      .deleteUser{
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        filter: invert(69%) sepia(52%) saturate(1475%) hue-rotate(309deg) brightness(105%) contrast(104%);
+        margin-right: 5px;
+      }
+    }
+  }
+}

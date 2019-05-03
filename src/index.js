@@ -33,5 +33,5 @@ render(
   <Provider store={store}>
     <App history={history} />
   </Provider>,
-  document.getElementsByClassName('app')[0],
+  document.getElementsByClassName('root')[0],
 )

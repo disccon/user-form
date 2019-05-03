@@ -6,10 +6,8 @@ body{
   line-height: normal;
   font-style: normal;
 }
-.container {
+.app {
   display: flex;
   flex-direction: column;
-  margin-left: auto;
-  margin-right: auto;
-  width: 1440px;
+  width: 100%;
 }

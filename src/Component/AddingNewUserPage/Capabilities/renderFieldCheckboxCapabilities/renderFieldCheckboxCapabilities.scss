@@ -1,0 +1,30 @@
+.checkboxCapabilities__label{
+  display: contents;
+  position: relative;
+  .checkboxCapabilities__span{
+    display: block;
+    color: #657C9A;
+    margin-left: 26px;
+    position: relative;
+    margin-bottom: 9px;
+  }
+  .checkboxCapabilities__span:before {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: -26px;
+    width: 13px;
+    height: 13px;
+    background: #FFFFFF;
+    border: 1px solid #C1CFE0;
+  }
+  .checkboxCapabilities__input:checked + span:before {
+    background: #4E86E4;
+    border: 3px solid #C1CFE0;
+  }
+  .checkboxCapabilities__pError{
+    margin-left: 27px;
+    font-size: 9px;
+    color: #EB5757;
+  }
+}

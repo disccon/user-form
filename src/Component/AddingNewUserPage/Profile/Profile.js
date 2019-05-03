@@ -5,9 +5,10 @@ import classNames from 'classnames'
 import { reduxForm, Field, formValueSelector } from 'redux-form'
 import styles from './Profile.scss'
 import { forwardBackProfile } from '../../../Actions'
-import { renderFieldInputProfile } from './renderFieldInputProfile'
-import { renderFieldRadioProfile } from './renderFieldRadioProfile'
-import { renderDateTimePickerProfile } from './renderDateTimePickerProfile'
+import { renderFieldRadioProfile } from './renderFieldRadioProfile/renderFieldRadioProfile'
+import { renderDateTimePickerProfile } from './renderDateTimePickerProfile/renderDateTimePickerProfile'
+import { renderFieldInputNewUser } from '../renderFieldInputNewUser/renderFieldInputNewUser'
+
 
 const cx = classNames.bind(styles)
 
@@ -32,35 +33,43 @@ class Profile extends Component {
           <form className={cx('profile__form')} onSubmit={handleSubmit(this.onSubmit)}>
             <div className={cx('profile__sideLeft')}>
               <Field
-                component={renderFieldInputProfile}
+                component={renderFieldInputNewUser}
                 type='text'
+                span
                 label='First name'
                 name='firstName'
                 idField='fieldFirstName'
+                classNameLabel='fieldInputNewUser'
               />
               <Field
-                component={renderFieldInputProfile}
+                component={renderFieldInputNewUser}
                 type='text'
+                span
                 label='Last name'
                 name='lastName'
                 idField='fieldLastName'
+                classNameLabel='fieldInputNewUser'
               />
               <Field name='birthDate' component={renderDateTimePickerProfile} />
             </div>
             <div className={cx('profile__sideRight')}>
               <Field
-                component={renderFieldInputProfile}
+                component={renderFieldInputNewUser}
                 type='text'
+                span
                 label='Email'
                 name='email'
                 idField='fieldEmail'
+                classNameLabel='fieldInputNewUser'
               />
               <Field
-                component={renderFieldInputProfile}
+                component={renderFieldInputNewUser}
                 type='text'
+                span
                 label='Address'
                 name='address'
                 idField='fieldAddress'
+                classNameLabel='fieldInputNewUser'
               />
               <h5>Gender</h5>
               <div className={cx('wrapperGender')}>
@@ -163,10 +172,10 @@ const mapStateToProps = state => {
   const maleGender = selector(state, 'gender')
   const birthDateForm = selector(state, 'birthDate')
   const {
-    firstName, lastName, email, address, gender, birthDate, idListUser,
+    firstName, lastName, email, address, gender, birthDate,
   } = state.newUser
-  const { listUsers } = state
-  const userEmailList = listUsers.users.map(user => (user.idListUser === idListUser ? '' : user.email))
+  const { users } = state.listUsers
+  const userEmailList = users.map(user => user.email)
   return {
     initialValues: {
       firstName, lastName, birthDate, email, address, gender,
@@ -181,7 +190,7 @@ const mapStateToProps = state => {
   }
 }
 
-export default Profile = connect(
+export default connect(
   mapStateToProps,
   { forwardBackProfile },
 )(Profile)

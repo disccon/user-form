@@ -1,5 +1,6 @@
 import { takeLatest, all } from 'redux-saga/effects'
 import {
+  changeQuestionStateSaga,
   continueUserSaga,
   userListerNewStateSaga,
   saveUserSRCAvatarIMGSaga,
@@ -12,10 +13,15 @@ import {
   editUserSaga,
   deleteUserSaga,
   createUserSaga,
+  accountEditingSaveSaga,
+  profileEditingSaveSaga,
+  contactsEditingSaveSaga,
+  capabilitiesEditingSaveSaga,
 } from './saga'
 
 
 import {
+  CHANGE_QUESTION_STATE,
   CONTINUE_USER,
   USER_LISTER_NEW_STATE,
   SAVE_USER_SRC_AVATAR_IMG,
@@ -28,11 +34,16 @@ import {
   EDIT_USER,
   DELETE_USER,
   CREATE_USER,
+  ACCOUNT_EDITING_SAVE,
+  PROFILE_EDITING_SAVE,
+  CONTACTS_EDITING_SAVE,
+  CAPABILITIES_EDITING_SAVE,
 } from '../Actions'
 
 
 export default function* rootSaga() {
   yield all([
+    takeLatest(CHANGE_QUESTION_STATE, changeQuestionStateSaga),
     takeLatest(CONTINUE_USER, continueUserSaga),
     takeLatest(USER_LISTER_NEW_STATE, userListerNewStateSaga),
     takeLatest(SAVE_USER_SRC_AVATAR_IMG, saveUserSRCAvatarIMGSaga),
@@ -45,5 +56,9 @@ export default function* rootSaga() {
     takeLatest(EDIT_USER, editUserSaga),
     takeLatest(DELETE_USER, deleteUserSaga),
     takeLatest(CREATE_USER, createUserSaga),
+    takeLatest(ACCOUNT_EDITING_SAVE, accountEditingSaveSaga),
+    takeLatest(PROFILE_EDITING_SAVE, profileEditingSaveSaga),
+    takeLatest(CONTACTS_EDITING_SAVE, contactsEditingSaveSaga),
+    takeLatest(CAPABILITIES_EDITING_SAVE, capabilitiesEditingSaveSaga),
   ])
 }

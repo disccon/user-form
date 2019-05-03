@@ -1,8 +1,11 @@
 import { newUser } from '../stubs/newUser'
 import {
+  CHANGE_QUESTION_STATE__OPEN,
+  CHANGE_QUESTION_STATE__CLOSE,
+  CHANGE_QUESTION_STATE__FAILURE,
+
   CONTINUE_USER__CONTINUE,
   CONTINUE_USER__CLOSE,
-  CONTINUE_USER__OPEN,
   CONTINUE_USER__FAILURE,
 
   SAVE_USER_SRC_AVATAR_IMG__SUCCESS,
@@ -36,6 +39,28 @@ import {
 
 export default function newUserReducer(state = newUser, action) {
   switch (action.type) {
+    case CHANGE_QUESTION_STATE__CLOSE: {
+      return {
+        ...state,
+        isQuestion: false,
+        error: undefined,
+      }
+    }
+    case CHANGE_QUESTION_STATE__OPEN: {
+      return {
+        ...state,
+        isQuestion: action.payload.isQuestion,
+        error: undefined,
+      }
+    }
+    case CHANGE_QUESTION_STATE__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+
     case CONTINUE_USER__CONTINUE: {
       return {
         ...action.payload.newUserDB,
@@ -43,14 +68,6 @@ export default function newUserReducer(state = newUser, action) {
         error: undefined,
       }
     }
-    case CONTINUE_USER__OPEN: {
-      return {
-        ...state,
-        isQuestion: action.payload.isQuestion,
-        error: undefined,
-      }
-    }
-
     case CONTINUE_USER__CLOSE: {
       return {
         ...state,
@@ -168,17 +185,18 @@ export default function newUserReducer(state = newUser, action) {
       }
     }
 
-    case DELETE_ADD_FIELD_PHONE__DELETE: {
-      return {
-        ...state,
-        quantityPhoneField: action.payload.quantityPhoneField,
-        error: undefined,
-      }
-    }
+
     case DELETE_ADD_FIELD_PHONE__ADD: {
       return {
         ...state,
-        quantityPhoneField: action.payload.quantityPhoneField,
+        phoneArray: action.payload.phoneArray,
+        error: undefined,
+      }
+    }
+    case DELETE_ADD_FIELD_PHONE__DELETE: {
+      return {
+        ...state,
+        phoneArray: action.payload.phoneArray,
         error: undefined,
       }
     }

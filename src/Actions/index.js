@@ -1,13 +1,16 @@
+export const CHANGE_QUESTION_STATE = 'CHANGE_QUESTION_STATE'
+export const CHANGE_QUESTION_STATE__OPEN = 'CHANGE_QUESTION_STATE__OPEN'
+export const CHANGE_QUESTION_STATE__CLOSE = 'CHANGE_QUESTION_STATE__CLOSE'
+export const CHANGE_QUESTION_STATE__FAILURE = 'CHANGE_QUESTION_STATE__FAILURE'
+
 export const CONTINUE_USER = 'CONTINUE_USER'
 export const CONTINUE_USER__CONTINUE = 'CONTINUE_USER__CONTINUE'
-export const CONTINUE_USER__OPEN = 'CONTINUE_USER__OPEN'
 export const CONTINUE_USER__CLOSE = 'CONTINUE_USER__CLOSE'
 export const CONTINUE_USER__FAILURE = 'CONTINUE_USER__FAILURE'
 
 export const USER_LISTER_NEW_STATE = 'USER_LISTER_NEW_STATE'
 export const USER_LISTER_NEW_STATE__SUCCESS = 'USER_LISTER_NEW_STATE__SUCCESS'
 export const USER_LISTER_NEW_STATE__FAILURE = 'USER_LISTER_NEW_STATE__FAILURE'
-
 
 export const SAVE_USER_SRC_AVATAR_IMG = 'SAVE_USER_SRC_AVATAR_IMG'
 export const SAVE_USER_SRC_AVATAR_IMG__SUCCESS = 'SAVE_USER_SRC_AVATAR_IMG__SUCCESS'
@@ -32,16 +35,13 @@ export const DELETE_ADD_FIELD_PHONE__ADD = 'DELETE_ADD_FIELD_PHONE__ADD'
 export const DELETE_ADD_FIELD_PHONE__DELETE = 'DELETE_ADD_FIELD_PHONE__DELETE'
 export const DELETE_ADD_FIELD_PHONE__FAILURE = 'DELETE_ADD_FIELD_PHONE__FAILURE'
 
-
 export const BACK_CAPABILITIES = 'BACK_CAPABILITIES'
 export const BACK_CAPABILITIES__SUCCESS = 'BACK_CAPABILITIES__SUCCESS'
 export const BACK_CAPABILITIES__FAILURE = 'BACK_CAPABILITIES__FAILURE'
 
 export const FORWARD_CAPABILITIES = 'FORWARD_CAPABILITIES'
 export const FORWARD_CAPABILITIES__ADD_NEW_USER = 'FORWARD_BACK_CAPABILITIES__FORWARD__ADD_NEW_USER'
-export const FORWARD_CAPABILITIES__EDIT_USER = 'FORWARD_BACK_CAPABILITIES__FORWARD__EDIT_USER'
 export const FORWARD_CAPABILITIES__FAILURE = 'FORWARD_CAPABILITIES__FAILURE'
-
 
 export const EDIT_USER = 'EDIT_USER'
 export const EDIT_USER__SUCCESS = 'EDIT_USER__SUCCESS'
@@ -55,13 +55,36 @@ export const CREATE_USER = 'CREATE_USER'
 export const CREATE_USER__SUCCESS = 'CREATE_USER__SUCCESS'
 export const CREATE_USER__FAILURE = 'CREATE_USER__FAILURE'
 
+export const ACCOUNT_EDITING_SAVE = 'ACCOUNT_EDITING_SAVE'
+export const ACCOUNT_EDITING_SAVE__SUCCESS = 'ACCOUNT_EDITING_SAVE__SUCCESS'
+export const ACCOUNT_EDITING_SAVE__FAILURE = 'ACCOUNT_EDITING_SAVE__FAILURE'
+
+export const PROFILE_EDITING_SAVE = 'PROFILE_EDITING_SAVE'
+export const PROFILE_EDITING_SAVE__SUCCESS = 'PROFILE_EDITING_SAVE__SUCCESS'
+export const PROFILE_EDITING_SAVE__FAILURE = 'PROFILE_EDITING_SAVE__FAILURE'
+
+export const CONTACTS_EDITING_SAVE = 'CONTACTS_EDITING_SAVE'
+export const CONTACTS_EDITING_SAVE__SUCCESS = 'CONTACTS_EDITING_SAVE__SUCCESS'
+export const CONTACTS_EDITING_SAVE__FAILURE = 'CONTACTS_EDITING_SAVE__FAILURE'
+
+
+export const CAPABILITIES_EDITING_SAVE = 'CAPABILITIES_EDITING_SAVE'
+export const CAPABILITIES_EDITING_SAVE__SUCCESS = 'CAPABILITIES_EDITING_SAVE__SUCCESS'
+export const CAPABILITIES_EDITING_SAVE__FAILURE = 'CAPABILITIES_EDITING_SAVE__FAILURE'
+
+export const changeQuestionState = isQuestion => ({
+  type: CHANGE_QUESTION_STATE,
+  payload: {
+    isQuestion,
+  },
+})
+
 export const userListerNewState = userLister => ({
   type: USER_LISTER_NEW_STATE,
   payload: {
     userLister,
   },
 })
-
 
 export const continueUser = isContinue => (
 
@@ -88,7 +111,6 @@ export const forwardAccount = (userName, password, repeatPassword) => (
     },
   })
 
-
 export const forwardBackProfile = (forwardBack, firstName, lastName, birthDate, email, address, gender) => (
   {
     type: FORWARD_BACK_PROFILE,
@@ -97,11 +119,12 @@ export const forwardBackProfile = (forwardBack, firstName, lastName, birthDate, 
     },
   })
 
-export const forwardBackContacts = (forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneN1, phoneN2, phoneN3) => (
+export const forwardBackContacts = (forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneArray,
+  phoneN1, phoneN2, phoneN3) => (
   {
     type: FORWARD_BACK_CONTACTS,
     payload: {
-      forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneN1, phoneN2, phoneN3,
+      forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
     },
   })
 
@@ -112,7 +135,6 @@ export const deleteAddFieldPhone = deleteAddField => (
       deleteAddField,
     },
   })
-
 
 export const backCapabilities = (selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
   checkboxFemale, checkboxGuitar, checkboxWtf) => (
@@ -146,23 +168,72 @@ export const forwardCapabilities = (selectSkills, textareaField, checkboxArt, ch
     },
   })
 
-
-export const editUser = user => (
+export const editUser = (id, page) => (
   {
     type: EDIT_USER,
     payload: {
-      user,
+      id, page,
     },
   })
 
-
-export const deleteUser = idListUser => (
+export const deleteUser = id => (
   {
     type: DELETE_USER,
     payload: {
-      idListUser,
+      id,
     },
   })
 
 export const createUser = () => (
   { type: CREATE_USER })
+
+export const accountEditingSave = (userName, password, repeatPassword, userSRCAvatarIMG, id) => (
+  {
+    type: ACCOUNT_EDITING_SAVE,
+    payload: {
+      userName, password, repeatPassword, userSRCAvatarIMG, id,
+    },
+  })
+
+export const profileEditingSave = (firstName, lastName, birthDate, email, address, gender, id) => (
+  {
+    type: PROFILE_EDITING_SAVE,
+    payload: {
+      firstName, lastName, birthDate, email, address, gender, id,
+    },
+  })
+
+export const contactsEditingSave = (company, githubLink, facebookLink, selectLanguage, fax, phoneArray,
+  phoneN1, phoneN2, phoneN3, id) => (
+  {
+    type: CONTACTS_EDITING_SAVE,
+    payload: {
+      company,
+      githubLink,
+      facebookLink,
+      selectLanguage,
+      fax,
+      phoneArray,
+      phoneN1,
+      phoneN2,
+      phoneN3,
+      id,
+    },
+  })
+
+export const capabilitiesEditingSave = (selectSkills, textareaField, checkboxArt, checkboxSport,
+  checkboxJustWant, checkboxFemale, checkboxGuitar, checkboxWtf, id) => (
+  {
+    type: CAPABILITIES_EDITING_SAVE,
+    payload: {
+      selectSkills,
+      textareaField,
+      checkboxArt,
+      checkboxSport,
+      checkboxJustWant,
+      checkboxFemale,
+      checkboxGuitar,
+      checkboxWtf,
+      id,
+    },
+  })
