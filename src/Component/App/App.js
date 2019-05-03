@@ -24,9 +24,9 @@ class App extends Component {
     const {
       userListerNewState, pathname, newUser, history, changeQuestionState,
     } = this.props
-    // if (pathname !== '/') {
-    //   history.push('/')
-    // }
+    if (pathname !== '/') {
+      history.push('/')
+    }
     db.newUserDB.get(0, newUserDB => {
       if (newUserDB) {
         changeQuestionState(deepEqual(newUserDB, newUser))
