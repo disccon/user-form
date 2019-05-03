@@ -10,156 +10,153 @@ import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import { forwardAccount, saveUserSRCAvatarIMG, continueUser } from '../../../Actions'
 import { renderFieldInputAccount } from './renderFieldInputAccount/renderFieldInputAccount'
 
-
 const cx = classNames.bind(styles)
 
-
 class Account extends Component {
-    state = {
-      avatarIMGError: null,
-      typeFieldPassword: 'text',
-    }
+  state = {
+    avatarIMGError: null,
+    typeFieldPassword: 'text',
+  }
 
-    continueUser = isContinue => () => {
-      const { continueUser } = this.props
-      continueUser(isContinue)
-    }
+  continueUser = isContinue => () => {
+    const { continueUser } = this.props
+    continueUser(isContinue)
+  }
 
-    addImageUserAvatar = event => {
-      event.preventDefault()
-      const { saveUserSRCAvatarIMG } = this.props
-      const reader = new FileReader()
-      const fileIMG = event.target.files[0]
-      const fileSize = fileIMG.size / 1024 / 1024
-      if (fileSize < 1) {
-        reader.onloadend = () => {
-          this.setState({
-            avatarIMGError: false,
-          })
-          saveUserSRCAvatarIMG(reader.result)
-        }
-        reader.readAsDataURL(fileIMG)
-      } else {
+  addImageUserAvatar = event => {
+    event.preventDefault()
+    const { saveUserSRCAvatarIMG } = this.props
+    const reader = new FileReader()
+    const fileIMG = event.target.files[0]
+    const fileSize = fileIMG.size / 1024 / 1024
+    if (fileSize < 1) {
+      reader.onloadend = () => {
         this.setState({
-          avatarIMGError: 'File should not exceed 1 mb',
+          avatarIMGError: false,
         })
+        saveUserSRCAvatarIMG(reader.result)
       }
+      reader.readAsDataURL(fileIMG)
+    } else {
+      this.setState({
+        avatarIMGError: 'File should not exceed 1 mb',
+      })
     }
+  }
 
-    onSubmit = values => {
-      const { forwardAccount, userSRCAvatarIMG } = this.props
-      if (!userSRCAvatarIMG) {
-        this.setState({
-          avatarIMGError: 'Upload a picture',
-        })
-      } else {
-        forwardAccount(values.userName, values.password, values.repeatPassword)
-      }
+  onSubmit = values => {
+    const { forwardAccount, userSRCAvatarIMG } = this.props
+    if (!userSRCAvatarIMG) {
+      this.setState({
+        avatarIMGError: 'Upload a picture',
+      })
+    } else {
+      forwardAccount(values.userName, values.password, values.repeatPassword)
     }
+  }
 
-    changeTypePassword = () => {
-      const { typeFieldPassword } = this.state
-      if (typeFieldPassword === 'text') {
-        this.setState({
-          typeFieldPassword: 'password',
-        })
-      } else {
-        this.setState({
-          typeFieldPassword: 'text',
-        })
-      }
+  changeTypePassword = () => {
+    const { typeFieldPassword } = this.state
+    if (typeFieldPassword === 'text') {
+      this.setState({
+        typeFieldPassword: 'password',
+      })
+    } else {
+      this.setState({
+        typeFieldPassword: 'text',
+      })
     }
+  }
 
-    render() {
-      const { handleSubmit, userSRCAvatarIMG, isQuestion } = this.props
-      const { avatarIMGError, typeFieldPassword } = this.state
-      const userAvatarIMG = userSRCAvatarIMG
-        ? <img className={cx('accountComponent__userAvatarIMG')} src={userSRCAvatarIMG} alt='userAvatar' />
-        : <UserAvatarIcon className={cx('accountComponent__userAvatarSVG')} alt='userAvatar' />
-      const UserAvatar = avatarIMGError
-        ? <p className={cx('accountComponent__avatarError')}>{avatarIMGError}</p> : null
-      return (
-        <Fragment>
-          {isQuestion && (
-            <div className={cx('accountComponentQuestion')}>
-              <span className={cx('accountComponentQuestion__span')}>
+  render() {
+    const { handleSubmit, userSRCAvatarIMG, isQuestion } = this.props
+    const { avatarIMGError, typeFieldPassword } = this.state
+    const userAvatarIMG = userSRCAvatarIMG
+      ? <img className={cx('accountComponent__userAvatarIMG')} src={userSRCAvatarIMG} alt='userAvatar' />
+      : <UserAvatarIcon className={cx('accountComponent__userAvatarSVG')} alt='userAvatar' />
+    const UserAvatar = avatarIMGError
+      ? <p className={cx('accountComponent__avatarError')}>{avatarIMGError}</p> : null
+    return (
+      <Fragment>
+        {isQuestion && (
+          <div className={cx('accountComponentQuestion')}>
+            <span className={cx('accountComponentQuestion__span')}>
                 You have an unsaved user data. Do you want to complete it?
-              </span>
-              <button
-                type='button'
-                className={cx('accountComponent__continue')}
-                onClick={this.continueUser(true)}
-              >
+            </span>
+            <button
+              type='button'
+              className={cx('accountComponent__continue')}
+              onClick={this.continueUser(true)}
+            >
               Continue
-              </button>
-              <button
-                type='button'
-                className={cx('accountComponent__close')}
-                onClick={this.continueUser(false)}
-              >
-                <CloseIcon className={cx('accountComponent__closeIcon')} alt='closeIcon' />
-              </button>
-            </div>
-          )}
-          <form className={cx('accountComponent__form')} onSubmit={handleSubmit(this.onSubmit)}>
-            <div className={cx('accountComponent__userAvatarWrapper')} >
-              <label htmlFor='userAvatar'>
-                {userAvatarIMG}
-                <input
-                  id='userAvatar'
-                  type='file'
-                  className={cx('accountComponent__inputFile')}
-                  accept='image/*,image/jpeg'
-                  onChange={this.addImageUserAvatar}
-                />
-              </label>
-              <label htmlFor='userAvatarIMG' className={cx('accountComponent__labelSpan')}>
-                <AddIcon className={cx('accountComponent__AddICon')} alt='addAvatar' />
-                <span className={cx('accountComponent__addAvatarSpan')}>add avatar</span>
-                <input
-                  id='userAvatarIMG'
-                  type='file'
-                  className={cx('accountComponent__inputFile')}
-                  accept='image/*,image/jpeg'
-                  onChange={this.addImageUserAvatar}
-                />
-              </label>
-              {UserAvatar}
-            </div>
-            <div className={cx('register__userData')}>
-              <Field
-                component={renderFieldInputAccount}
-                type='text'
-                label='User name'
-                name='userName'
-                idInput='userName'
+            </button>
+            <button
+              type='button'
+              className={cx('accountComponent__close')}
+              onClick={this.continueUser(false)}
+            >
+              <CloseIcon className={cx('accountComponent__closeIcon')} alt='closeIcon' />
+            </button>
+          </div>
+        )}
+        <form className={cx('accountComponent__form')} onSubmit={handleSubmit(this.onSubmit)}>
+          <div className={cx('accountComponent__userAvatarWrapper')}>
+            <label htmlFor='userAvatar'>
+              {userAvatarIMG}
+              <input
+                id='userAvatar'
+                type='file'
+                className={cx('accountComponent__inputFile')}
+                accept='image/*,image/jpeg'
+                onChange={this.addImageUserAvatar}
               />
-              <Field
-                component={renderFieldInputAccount}
-                type={typeFieldPassword}
-                isVisibility
-                label='Password'
-                name='password'
-                idInput='password'
-                changeTypePassword={this.changeTypePassword}
+            </label>
+            <label htmlFor='userAvatarIMG' className={cx('accountComponent__labelSpan')}>
+              <AddIcon className={cx('accountComponent__AddICon')} alt='addAvatar' />
+              <span className={cx('accountComponent__addAvatarSpan')}>add avatar</span>
+              <input
+                id='userAvatarIMG'
+                type='file'
+                className={cx('accountComponent__inputFile')}
+                accept='image/*,image/jpeg'
+                onChange={this.addImageUserAvatar}
               />
-              <Field
-                component={renderFieldInputAccount}
-                type={typeFieldPassword}
-                isVisibility
-                label='Repeat Password'
-                name='repeatPassword'
-                idInput='repeatPassword'
-                changeTypePassword={this.changeTypePassword}
-              />
-              <button className={cx('accountComponent__buttonSubmit')} type='submit' >Forward</button>
-            </div>
-          </form>
-        </Fragment>
-      )
-    }
+            </label>
+            {UserAvatar}
+          </div>
+          <div className={cx('register__userData')}>
+            <Field
+              component={renderFieldInputAccount}
+              type='text'
+              label='User name'
+              name='userName'
+              idInput='userName'
+            />
+            <Field
+              component={renderFieldInputAccount}
+              type={typeFieldPassword}
+              isVisibility
+              label='Password'
+              name='password'
+              idInput='password'
+              changeTypePassword={this.changeTypePassword}
+            />
+            <Field
+              component={renderFieldInputAccount}
+              type={typeFieldPassword}
+              isVisibility
+              label='Repeat Password'
+              name='repeatPassword'
+              idInput='repeatPassword'
+              changeTypePassword={this.changeTypePassword}
+            />
+            <button className={cx('accountComponent__buttonSubmit')} type='submit'>Forward</button>
+          </div>
+        </form>
+      </Fragment>
+    )
+  }
 }
-
 
 Account = reduxForm({
   validate: (values, props) => {
@@ -191,7 +188,6 @@ Account = reduxForm({
   enableReinitialize: true,
 })(Account)
 
-
 Account.propTypes = {
   userSRCAvatarIMG: PropTypes.oneOfType([
     PropTypes.string,
@@ -203,7 +199,6 @@ Account.propTypes = {
   forwardAccount: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func,
 }
-
 
 const mapStateToProps = state => {
   const {

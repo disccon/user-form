@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { reduxForm, Field, formValueSelector } from 'redux-form'
+import { reduxForm, Field } from 'redux-form'
 import styles from './ProfileEditing.scss'
-import { forwardBackProfile } from '../../../Actions'
 import { renderFieldRadioProfile } from './renderFieldRadioProfile/renderFieldRadioProfile'
 import { renderDateTimePickerProfile } from './renderDateTimePickerProfile/renderDateTimePickerProfile'
 import { renderFieldInputNewUser } from '../renderFieldInputNewUser/renderFieldInputNewUser'
+import { profileEditingSave } from '../../../Actions'
 
 
 const cx = classNames.bind(styles)
@@ -15,16 +15,9 @@ const cx = classNames.bind(styles)
 
 class ProfileEditing extends Component {
     onSubmit = values => {
-      const { forwardBackProfile } = this.props
-      forwardBackProfile('forward', values.firstName, values.lastName, values.birthDate, values.email,
-        values.address, values.gender)
-    }
-
-    backProfile = () => {
-      const {
-        firstNameForm, lastNameForm, birthDateForm, emailForm, addressForm, forwardBackProfile, maleGender,
-      } = this.props
-      forwardBackProfile('back', firstNameForm, lastNameForm, birthDateForm, emailForm, addressForm, maleGender)
+      const { profileEditingSave, id } = this.props
+      profileEditingSave(values.firstName, values.lastName, values.birthDate, values.email,
+        values.address, values.gender, id)
     }
 
     render() {
@@ -91,12 +84,7 @@ class ProfileEditing extends Component {
                   idField='fieldFemale'
                 />
               </div>
-              <div className={cx('wrapperButton')}>
-                <button type='button' onClick={this.backProfile} className={cx('profile__back')}>
-              Back
-                </button>
-                <button type='submit' className={cx('profile__forward')}>Forward</button>
-              </div>
+              <button type='submit' className={cx('saveNewListButton')}>Save</button>
             </div>
           </form>
         </div>
@@ -105,17 +93,8 @@ class ProfileEditing extends Component {
 }
 
 ProfileEditing.propTypes = {
-  firstNameForm: PropTypes.string,
-  lastNameForm: PropTypes.string,
-  birthDateForm: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ]),
-  emailForm: PropTypes.string,
-  addressForm: PropTypes.string,
-  maleGender: PropTypes.string,
-  userEmailList: PropTypes.array,
-  forwardBackProfile: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  profileEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 }
 
@@ -159,43 +138,31 @@ ProfileEditing = reduxForm({
     }
     return errors
   },
-  form: 'Profile',
+  form: 'ProfileEditing',
   enableReinitialize: true,
 })(ProfileEditing)
 
 
 const mapStateToProps = state => {
-  const selector = formValueSelector('Profile')
-  const firstNameForm = selector(state, 'firstName')
-  const lastNameForm = selector(state, 'lastName')
-  const emailForm = selector(state, 'email')
-  const addressForm = selector(state, 'address')
-  const maleGender = selector(state, 'gender')
-  const birthDateForm = selector(state, 'birthDate')
-  const {
-    firstName, lastName, email, address, gender, birthDate, id,
-  } = state.newUser
   const { users } = state.listUsers
-  let userEmailList
-  if(users) {
+  const { pathname } = state.router.location
+  const id = Number(pathname.slice(9, pathname.indexOf('/', 9)))
+  const user = { ...users[id - 1] }
+  const {
+    firstName, lastName, birthDate, email, address, gender,
+  } = user
   const userEmailFilter = users.filter(user => user.id !== id)
-  userEmailList = userEmailFilter.map(user => user.email)
-  }
+  const userEmailList = userEmailFilter.map(user => user.email)
   return {
     initialValues: {
       firstName, lastName, birthDate, email, address, gender,
     },
-    firstNameForm,
-    lastNameForm,
-    birthDateForm,
-    emailForm,
-    addressForm,
-    maleGender,
     userEmailList,
+    id,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { forwardBackProfile },
+  { profileEditingSave },
 )(ProfileEditing)

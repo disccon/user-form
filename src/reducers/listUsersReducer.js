@@ -3,14 +3,24 @@ import {
   USER_LISTER_NEW_STATE__FAILURE,
 
   FORWARD_CAPABILITIES__ADD_NEW_USER,
-  FORWARD_CAPABILITIES__EDIT_USER,
   FORWARD_CAPABILITIES__FAILURE,
 
   DELETE_USER__SUCCESS,
   DELETE_USER__FAILURE,
+
+  ACCOUNT_EDITING_SAVE__SUCCESS,
+  ACCOUNT_EDITING_SAVE__FAILURE,
+
+  PROFILE_EDITING_SAVE__SUCCESS,
+  PROFILE_EDITING_SAVE__FAILURE,
+
+  CONTACTS_EDITING_SAVE__SUCCESS,
+  CONTACTS_EDITING_SAVE__FAILURE,
+
+  CAPABILITIES_EDITING_SAVE__SUCCESS,
+  CAPABILITIES_EDITING_SAVE__FAILURE,
 } from '../Actions'
-import { ACCOUNT_EDITING_SAVE__SUCCESS } from '../Actions'
-import { ACCOUNT_EDITING_SAVE__FAILURE } from '../Actions'
+
 
 export default function listUsersReducer(state = { users: [] }, action) {
   switch (action.type) {
@@ -32,13 +42,6 @@ export default function listUsersReducer(state = { users: [] }, action) {
         ...state,
         users: [...state.users,
           action.payload],
-        error: undefined,
-      }
-    }
-    case FORWARD_CAPABILITIES__EDIT_USER: {
-      return {
-        ...state,
-        users: action.payload.newObj,
         error: undefined,
       }
     }
@@ -67,11 +70,54 @@ export default function listUsersReducer(state = { users: [] }, action) {
     case ACCOUNT_EDITING_SAVE__SUCCESS: {
       return {
         ...state,
-        users: action.payload,
+        users: action.payload.newListUsers,
         error: undefined,
       }
     }
     case ACCOUNT_EDITING_SAVE__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+
+    case PROFILE_EDITING_SAVE__SUCCESS: {
+      return {
+        ...state,
+        users: action.payload.newListUsers,
+        error: undefined,
+      }
+    }
+    case PROFILE_EDITING_SAVE__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+    case CONTACTS_EDITING_SAVE__SUCCESS: {
+      return {
+        ...state,
+        users: action.payload.newListUsers,
+        error: undefined,
+      }
+    }
+    case CONTACTS_EDITING_SAVE__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+    case CAPABILITIES_EDITING_SAVE__SUCCESS: {
+      return {
+        ...state,
+        users: action.payload.newListUsers,
+        error: undefined,
+      }
+    }
+    case CAPABILITIES_EDITING_SAVE__FAILURE: {
       return {
         ...state,
         error: action.error,

@@ -203,7 +203,6 @@ EditUserPage.propTypes = {
     PropTypes.string,
     PropTypes.bool,
   ]),
-  history: PropTypes.object.isRequired,
   editUser: PropTypes.func.isRequired,
   pathname: PropTypes.string.isRequired,
 }

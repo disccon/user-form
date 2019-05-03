@@ -3,30 +3,22 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import {
-  Field, formValueSelector, reduxForm, FieldArray,
+  Field, reduxForm, FieldArray,
 } from 'redux-form'
 import styles from './ContactsEditing.scss'
-import { forwardBackContacts } from '../../../Actions'
+import { contactsEditingSave } from '../../../Actions'
 import renderFieldArrayPhone from './renderFieldArrayPhone/renderFieldArrayPhone'
 import { renderFieldSelectContacts } from './renderFieldSelectContacts/renderFieldSelectContacts'
 import { renderFieldInputNewUser } from '../renderFieldInputNewUser/renderFieldInputNewUser'
 
+
 const cx = classNames.bind(styles)
 
 class ContactsEditing extends Component {
-  backContacts = () => {
-    const {
-      companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneArrayForm, phoneN1Form,
-      phoneN2Form, phoneN3Form, forwardBackContacts,
-    } = this.props
-    forwardBackContacts('back', companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm,
-      phoneArrayForm, phoneN1Form, phoneN2Form, phoneN3Form)
-  }
-
   onSubmit = values => {
-    const { forwardBackContacts } = this.props
-    forwardBackContacts('forward', values.company, values.githubLink, values.facebookLink, values.selectLanguage,
-      values.fax, values.phoneArray, values.phoneN1, values.phoneN2, values.phoneN3)
+    const { contactsEditingSave, id } = this.props
+    contactsEditingSave(values.company, values.githubLink, values.facebookLink, values.selectLanguage,
+      values.fax, values.phoneArray, values.phoneN1, values.phoneN2, values.phoneN3, id)
   }
 
   render() {
@@ -83,10 +75,7 @@ class ContactsEditing extends Component {
               name='phoneArray'
             />
             <div className={cx('contacts__addPhone')} />
-            <div className={cx('wrapperButton')}>
-              <button type='button' onClick={this.backContacts} className={cx('contacts__back')}>Back</button>
-              <button type='submit' className={cx('contacts__forward')}>Forward</button>
-            </div>
+            <button type='submit' className={cx('saveNewListButton')}>Save</button>
           </div>
         </form>
       </Fragment>
@@ -95,19 +84,8 @@ class ContactsEditing extends Component {
 }
 
 ContactsEditing.propTypes = {
-  companyForm: PropTypes.string,
-  githubLinkForm: PropTypes.string,
-  facebookLinkForm: PropTypes.string,
-  selectLanguageForm: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ]),
-  faxForm: PropTypes.string,
-  phoneArrayForm: PropTypes.array,
-  phoneN1Form: PropTypes.string,
-  phoneN2Form: PropTypes.string,
-  phoneN3Form: PropTypes.string,
-  forwardBackContacts: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  contactsEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 }
 
@@ -161,41 +139,27 @@ ContactsEditing = reduxForm({
 
     return errors
   },
-  form: 'Contacts',
+  form: 'ContactsEditing',
   enableReinitialize: true,
 })(ContactsEditing)
 
 const mapStateToProps = state => {
-  const selector = formValueSelector('Contacts')
-  const companyForm = selector(state, 'company')
-  const githubLinkForm = selector(state, 'githubLink')
-  const facebookLinkForm = selector(state, 'facebookLink')
-  const selectLanguageForm = selector(state, 'selectLanguage')
-  const faxForm = selector(state, 'fax')
-  const phoneArrayForm = selector(state, 'phoneArray')
-  const phoneN1Form = selector(state, 'phoneN1')
-  const phoneN2Form = selector(state, 'phoneN2')
-  const phoneN3Form = selector(state, 'phoneN3')
+  const { users } = state.listUsers
+  const { pathname } = state.router.location
+  const id = Number(pathname.slice(9, pathname.indexOf('/', 9)))
+  const user = { ...users[id - 1] }
   const {
     company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
-  } = state.newUser
+  } = user
   return {
     initialValues: {
       company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
     },
-    companyForm,
-    githubLinkForm,
-    facebookLinkForm,
-    selectLanguageForm,
-    faxForm,
-    phoneArrayForm,
-    phoneN1Form,
-    phoneN2Form,
-    phoneN3Form,
+    id,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { forwardBackContacts },
+  { contactsEditingSave },
 )(ContactsEditing)

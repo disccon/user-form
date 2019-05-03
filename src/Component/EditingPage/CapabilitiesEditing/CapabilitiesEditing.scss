@@ -22,24 +22,5 @@
     .capabilities__hobbies{
       margin-bottom: 17px;
     }
-    .capabilities__wrapperButton{
-      margin-top: auto;
-      display: flex;
-      width: 100%;
-      .capabilities__back, .capabilities__finish{
-        width: 100px;
-        height: 40px;
-        font-weight: 500;
-        color: #FFF;
-      }
-      .capabilities__back{
-        margin-right: auto;
-        background: #C1CFE0;
-      }
-      .capabilities__finish{
-        background: #4EE4A5;
-      }
-    }
   }
-
 }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { Field, formValueSelector, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
-import { backCapabilities, forwardCapabilities } from '../../../Actions'
+import { capabilitiesEditingSave } from '../../../Actions'
 import styles from './CapabilitiesEditing.scss'
 import { renderFieldSelectCapabilities } from './renderFieldSelectCapabilities/renderFieldSelectCapabilities'
 import { renderFieldTextareaCapabilities } from './renderFieldTextareaCapabilities/renderFieldTextareaCapabilities'
@@ -13,18 +13,9 @@ const cx = classNames.bind(styles)
 
 class CapabilitiesEditing extends Component {
   onSubmit = values => {
-    const { forwardCapabilities } = this.props
-    forwardCapabilities(values.selectSkills, values.textareaField, values.checkboxArt, values.checkboxSport,
-      values.checkboxJustWant, values.checkboxFemale, values.checkboxGuitar, values.checkboxWtf)
-  }
-
-  backCapabilities = () => {
-    const {
-      backCapabilities, selectSkillsForm, textareaFieldForm, checkboxArtForm, checkboxSportForm, checkboxJustWantForm,
-      checkboxFemaleForm, checkboxGuitarForm, checkboxWtfForm,
-    } = this.props
-    backCapabilities(selectSkillsForm, textareaFieldForm, checkboxArtForm, checkboxSportForm, checkboxJustWantForm,
-      checkboxFemaleForm, checkboxGuitarForm, checkboxWtfForm)
+    const { capabilitiesEditingSave, id } = this.props
+    capabilitiesEditingSave(values.selectSkills, values.textareaField, values.checkboxArt, values.checkboxSport,
+      values.checkboxJustWant, values.checkboxFemale, values.checkboxGuitar, values.checkboxWtf, id)
   }
 
   render() {
@@ -82,18 +73,9 @@ class CapabilitiesEditing extends Component {
             name='checkboxWtf'
             span='WTF is “hobbies”???'
           />
-          <div className={cx('capabilities__wrapperButton')}>
-            <button
-              type='button'
-              className={cx('capabilities__back')}
-              onClick={this.backCapabilities}
-            >
-              Back
-            </button>
-            <button type='submit' className={cx('capabilities__finish')}>
-              Finish
-            </button>
-          </div>
+          <button type='submit' className={cx('saveNewListButton')}>
+              Save
+          </button>
         </div>
       </form>
     )
@@ -101,37 +83,8 @@ class CapabilitiesEditing extends Component {
 }
 
 CapabilitiesEditing.propTypes = {
-  selectSkillsForm: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array,
-  ]),
-  textareaFieldForm: PropTypes.string,
-  checkboxArtForm: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  checkboxSportForm: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  checkboxJustWantForm: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  checkboxFemaleForm: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  checkboxGuitarForm: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  checkboxWtfForm: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  backCapabilities: PropTypes.func.isRequired,
-  forwardCapabilities: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  capabilitiesEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 }
 
@@ -156,24 +109,19 @@ CapabilitiesEditing = reduxForm({
 
     return errors
   },
-  form: 'Capabilities',
+  form: 'CapabilitiesEditing',
   enableReinitialize: true,
 })(CapabilitiesEditing)
 
 const mapStateToProps = state => {
-  const selector = formValueSelector('Capabilities')
-  const selectSkillsForm = selector(state, 'selectSkills')
-  const textareaFieldForm = selector(state, 'textareaField')
-  const checkboxArtForm = selector(state, 'checkboxArt')
-  const checkboxSportForm = selector(state, 'checkboxSport')
-  const checkboxJustWantForm = selector(state, 'checkboxJustWant')
-  const checkboxFemaleForm = selector(state, 'checkboxFemale')
-  const checkboxGuitarForm = selector(state, 'checkboxGuitar')
-  const checkboxWtfForm = selector(state, 'checkboxWtf')
+  const { users } = state.listUsers
+  const { pathname } = state.router.location
+  const id = Number(pathname.slice(9, pathname.indexOf('/', 9)))
+  const user = { ...users[id - 1] }
   const {
     selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
     checkboxGuitar, checkboxWtf,
-  } = state.newUser
+  } = user
   return {
     initialValues: {
       selectSkills,
@@ -185,18 +133,11 @@ const mapStateToProps = state => {
       checkboxGuitar,
       checkboxWtf,
     },
-    selectSkillsForm,
-    textareaFieldForm,
-    checkboxArtForm,
-    checkboxSportForm,
-    checkboxJustWantForm,
-    checkboxFemaleForm,
-    checkboxGuitarForm,
-    checkboxWtfForm,
+    id,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { backCapabilities, forwardCapabilities },
+  { capabilitiesEditingSave },
 )(CapabilitiesEditing)

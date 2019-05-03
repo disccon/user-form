@@ -120,7 +120,7 @@ class AccountEditing extends Component {
                 idInput='repeatPassword'
                 changeTypePassword={this.changeTypePassword}
               />
-              <button className={cx('accountComponent__buttonSubmit')} type='submit' >Save</button>
+              <button className={cx('saveNewListButton')} type='submit' >Save</button>
             </div>
           </form>
         </Fragment>
@@ -155,7 +155,7 @@ AccountEditing = reduxForm({
 
     return errors
   },
-  form: 'Account',
+  form: 'AccountEditing',
   enableReinitialize: true,
 })(AccountEditing)
 
@@ -174,7 +174,7 @@ AccountEditing.propTypes = {
 const mapStateToProps = state => {
   const { users } = state.listUsers
   const { pathname } = state.router.location
-  const id = Number(pathname.slice(9, pathname.length - 1))
+  const id = (pathname.slice(9, pathname.length - 1))
   const user = { ...users[id - 1] }
   const {
     userName, password, repeatPassword, userSRCAvatarIMG,

@@ -51,9 +51,18 @@ import {
   ACCOUNT_EDITING_SAVE__SUCCESS,
   ACCOUNT_EDITING_SAVE__FAILURE,
 
+  PROFILE_EDITING_SAVE__SUCCESS,
+  PROFILE_EDITING_SAVE__FAILURE,
+
+  CONTACTS_EDITING_SAVE__SUCCESS,
+  CONTACTS_EDITING_SAVE__FAILURE,
+
+  CAPABILITIES_EDITING_SAVE__SUCCESS,
+  CAPABILITIES_EDITING_SAVE__FAILURE,
 } from '../Actions'
 import { newUser } from '../stubs/newUser'
 import db from '../db'
+
 
 export function* changeQuestionStateSaga(action) {
   const { isQuestion } = action.payload
@@ -377,7 +386,7 @@ export function* accountEditingSaveSaga(action) {
     userName, password, repeatPassword, userSRCAvatarIMGState, id,
   } = action.payload
   const users = yield select(state => state.listUsers.users)
-  const user = users[id]
+  const user = users[id - 1]
   try {
     yield put(push(`/Editing/${id}/Profile`))
     db.listUserDB.update(id, {
@@ -394,7 +403,7 @@ export function* accountEditingSaveSaga(action) {
     })
     const newUserStart = users.slice(0, indexEditUser)
     const newUserEnd = users.slice(1 + indexEditUser)
-    const newObj = [
+    const newListUsers = [
       ...newUserStart,
       {
         ...user,
@@ -408,13 +417,182 @@ export function* accountEditingSaveSaga(action) {
     yield put({
       type: ACCOUNT_EDITING_SAVE__SUCCESS,
       payload: {
-        newObj,
+        newListUsers,
       },
     })
   } catch
   (error) {
     yield put({
       type: ACCOUNT_EDITING_SAVE__FAILURE,
+      error,
+    })
+  }
+}
+
+export function* profileEditingSaveSaga(action) {
+  const {
+    firstName, lastName, birthDate, email, address, gender, id,
+  } = action.payload
+  const users = yield select(state => state.listUsers.users)
+  const user = users[id - 1]
+  try {
+    yield put(push(`/Editing/${id}/Contacts`))
+    db.listUserDB.update(id, {
+      firstName,
+      lastName,
+      birthDate,
+      email,
+      address,
+      gender,
+    })
+    let indexEditUser
+    users.forEach((item, i) => {
+      if (item.id === id) {
+        indexEditUser = i
+      }
+    })
+    const newUserStart = users.slice(0, indexEditUser)
+    const newUserEnd = users.slice(1 + indexEditUser)
+    const newListUsers = [
+      ...newUserStart,
+      {
+        ...user,
+        firstName,
+        lastName,
+        birthDate,
+        email,
+        address,
+        gender,
+      },
+      ...newUserEnd,
+    ]
+    yield put({
+      type: PROFILE_EDITING_SAVE__SUCCESS,
+      payload: {
+        newListUsers,
+      },
+    })
+  } catch
+  (error) {
+    yield put({
+      type: PROFILE_EDITING_SAVE__FAILURE,
+      error,
+    })
+  }
+}
+
+
+export function* contactsEditingSaveSaga(action) {
+  const {
+    company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2,
+    phoneN3, id,
+  } = action.payload
+  const users = yield select(state => state.listUsers.users)
+  const user = users[id - 1]
+  try {
+    yield put(push(`/Editing/${id}/Capabilities`))
+    db.listUserDB.update(id, {
+      company,
+      githubLink,
+      facebookLink,
+      selectLanguage,
+      fax,
+      phoneArray,
+      phoneN1,
+      phoneN2,
+      phoneN3,
+    })
+    let indexEditUser
+    users.forEach((item, i) => {
+      if (item.id === id) {
+        indexEditUser = i
+      }
+    })
+    const newUserStart = users.slice(0, indexEditUser)
+    const newUserEnd = users.slice(1 + indexEditUser)
+    const newListUsers = [
+      ...newUserStart,
+      {
+        ...user,
+        company,
+        githubLink,
+        facebookLink,
+        selectLanguage,
+        fax,
+        phoneArray,
+        phoneN1,
+        phoneN2,
+        phoneN3,
+      },
+      ...newUserEnd,
+    ]
+    yield put({
+      type: CONTACTS_EDITING_SAVE__SUCCESS,
+      payload: {
+        newListUsers,
+      },
+    })
+  } catch
+  (error) {
+    yield put({
+      type: CONTACTS_EDITING_SAVE__FAILURE,
+      error,
+    })
+  }
+}
+
+export function* capabilitiesEditingSaveSaga(action) {
+  const {
+    selectSkills, textareaField, checkboxArt, checkboxSport,
+    checkboxJustWant, checkboxFemale, checkboxGuitar, checkboxWtf, id,
+  } = action.payload
+  const users = yield select(state => state.listUsers.users)
+  const user = users[id - 1]
+  try {
+    yield put(push(`/EditUser/${id}`))
+    db.listUserDB.update(id, {
+      selectSkills,
+      textareaField,
+      checkboxArt,
+      checkboxSport,
+      checkboxJustWant,
+      checkboxFemale,
+      checkboxGuitar,
+      checkboxWtf,
+    })
+    let indexEditUser
+    users.forEach((item, i) => {
+      if (item.id === id) {
+        indexEditUser = i
+      }
+    })
+    const newUserStart = users.slice(0, indexEditUser)
+    const newUserEnd = users.slice(1 + indexEditUser)
+    const newListUsers = [
+      ...newUserStart,
+      {
+        ...user,
+        selectSkills,
+        textareaField,
+        checkboxArt,
+        checkboxSport,
+        checkboxJustWant,
+        checkboxFemale,
+        checkboxGuitar,
+        checkboxWtf,
+      },
+      ...newUserEnd,
+    ]
+    yield put({
+      type: CAPABILITIES_EDITING_SAVE__SUCCESS,
+      payload: {
+        newListUsers,
+      },
+    })
+  } catch
+  (error) {
+    yield put({
+      type: CAPABILITIES_EDITING_SAVE__FAILURE,
       error,
     })
   }

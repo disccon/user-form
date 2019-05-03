@@ -41,7 +41,7 @@ export const EditingPage = ({ location }) => {
           <Route exact path='/Editing/:id/Profile' component={ProfileEditing} />
           <Route exact path='/Editing/:id/Contacts' component={ContactsEditing} />
           <Route exact path='/Editing/:id/Capabilities' component={CapabilitiesEditing} />
-          {/*<Redirect to='/NodFound' />*/}
+          <Redirect to='/NodFound' />
         </Switch>
       </div>
     </div>
