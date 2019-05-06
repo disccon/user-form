@@ -3,11 +3,12 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Field, reduxForm } from 'redux-form'
-import styles from './AccountEditing.scss'
+import styles from '../../UserFormBox/UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import { accountEditingSave } from '../../../Actions'
-import { renderFieldInputAccount } from './renderFieldInputAccount/renderFieldInputAccount'
+import { renderFieldInputAccount } from '../../renderFieldForm/renderFieldInputAccount/renderFieldInputAccount'
+import { UserFormBox } from '../../UserFormBox/UserFormBox'
 
 const cx = classNames.bind(styles)
 
@@ -61,30 +62,30 @@ class AccountEditing extends Component {
     const { handleSubmit } = this.props
     const { avatarIMGError, typeFieldPassword, userSRCAvatarIMGState } = this.state
     const userAvatarIMG = userSRCAvatarIMGState
-      ? <img className={cx('accountComponent__userAvatarIMG')} src={userSRCAvatarIMGState} alt='userAvatar' />
-      : <UserAvatarIcon className={cx('accountComponent__userAvatarSVG')} alt='userAvatar' />
+      ? <img className={cx('userAvatarWrapper__userAvatarIMG')} src={userSRCAvatarIMGState} alt='userAvatar' />
+      : <UserAvatarIcon className={cx('userAvatarWrapper__userAvatarSVG')} alt='userAvatar' />
     const UserAvatar = avatarIMGError
-      ? <p className={cx('accountComponent__avatarError')}>{avatarIMGError}</p> : null
+      ? <p className={cx('userAvatarWrapper__avatarError')}>{avatarIMGError}</p> : null
     return (
-      <form className={cx('accountComponent__form')} onSubmit={handleSubmit(this.onSubmit)}>
-        <div className={cx('accountComponent__userAvatarWrapper')}>
-          <label htmlFor='userAvatar'>
+      <UserFormBox handleSubmit={handleSubmit(this.onSubmit)} classForm='userFormBoxAccount' >
+        <div className={cx('userAvatarWrapper')}>
+          <label htmlFor='userAvatar' >
             {userAvatarIMG}
             <input
               id='userAvatar'
               type='file'
-              className={cx('accountComponent__inputFile')}
+              className={cx('userAvatarWrapper__inputFile')}
               accept='image/*,image/jpeg'
               onChange={this.addImageUserAvatar}
             />
           </label>
-          <label htmlFor='userAvatarIMG' className={cx('accountComponent__labelSpan')}>
-            <AddIcon className={cx('accountComponent__AddICon')} alt='addAvatar' />
-            <span className={cx('accountComponent__addAvatarSpan')}>add avatar</span>
+          <label htmlFor='userAvatarIMG' className={cx('userAvatarWrapper__labelSpan')}>
+            <AddIcon className={cx('userAvatarWrapper__AddICon')} alt='addAvatar' />
+            <span className={cx('userAvatarWrapper__addAvatarSpan')}>add avatar</span>
             <input
               id='userAvatarIMG'
               type='file'
-              className={cx('accountComponent__inputFile')}
+              className={cx('userAvatarWrapper__inputFile')}
               accept='image/*,image/jpeg'
               onChange={this.addImageUserAvatar}
             />
@@ -117,9 +118,9 @@ class AccountEditing extends Component {
             idInput='repeatPassword'
             changeTypePassword={this.changeTypePassword}
           />
-          <button className={cx('saveNewListButton')} type='submit'>Save</button>
+          <button className={cx('accountComponent__buttonSubmit')} type='submit'>Forward</button>
         </div>
-      </form>
+      </UserFormBox>
     )
   }
 }

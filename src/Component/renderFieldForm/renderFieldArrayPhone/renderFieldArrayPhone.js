@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import { Field } from 'redux-form'
 import styles from './renderFieldArrayPhone.scss'
 import { renderFieldPhone } from './renderFieldPhone'
-import { ReactComponent as AddIcon } from '../../../../img/icon/add.svg'
-import { deleteAddFieldPhone } from '../../../../Actions'
+import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
+import { deleteAddFieldPhone } from '../../../Actions'
 
 const cx = classNames.bind(styles)
 

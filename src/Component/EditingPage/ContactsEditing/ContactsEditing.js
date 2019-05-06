@@ -1,16 +1,16 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import {
   Field, reduxForm, FieldArray,
 } from 'redux-form'
-import styles from './ContactsEditing.scss'
+import styles from '../../UserFormBox/UserFormBox.scss'
 import { contactsEditingSave } from '../../../Actions'
-import renderFieldArrayPhone from './renderFieldArrayPhone/renderFieldArrayPhone'
-import { renderFieldSelectContacts } from './renderFieldSelectContacts/renderFieldSelectContacts'
-import { renderFieldInputNewUser } from '../renderFieldInputNewUser/renderFieldInputNewUser'
-
+import { UserFormBox } from '../../UserFormBox/UserFormBox'
+import { renderFieldInputNewUser } from '../../renderFieldForm/renderFieldInputNewUser/renderFieldInputNewUser'
+import { renderFieldSelectContacts } from '../../renderFieldForm/renderFieldSelectContacts/renderFieldSelectContacts'
+import renderFieldArrayPhone from '../../renderFieldForm/renderFieldArrayPhone/renderFieldArrayPhone'
 
 const cx = classNames.bind(styles)
 
@@ -24,61 +24,63 @@ class ContactsEditing extends Component {
   render() {
     const { handleSubmit } = this.props
     return (
-      <Fragment>
-        <form className={cx('contacts')} onSubmit={handleSubmit(this.onSubmit)}>
-          <div className={cx('contacts__sideLeft')}>
-            <Field
-              component={renderFieldInputNewUser}
-              type='text'
-              label='Company'
-              name='company'
-              idField='fieldCompany'
-              classNameLabel='fieldInputNewUser'
-            />
-            <Field
-              component={renderFieldInputNewUser}
-              type='text'
-              span
-              label='Github link'
-              name='githubLink'
-              idField='fieldGithubLink'
-              classNameLabel='fieldInputNewUser'
-            />
-            <Field
-              component={renderFieldInputNewUser}
-              type='text'
-              span
-              label='Facebook link'
-              name='facebookLink'
-              placeholder='www.facebook.com/hdfk_142_23lelf/'
-              idField='fieldFacebookLink'
-              classNameLabel='fieldInputNewUser'
-            />
-            <Field
-              component={renderFieldSelectContacts}
-              name='selectLanguage'
-              label='Main language'
-            />
+      <UserFormBox handleSubmit={handleSubmit(this.onSubmit)}>
+        <div className={cx('userFormBox__sideLeft')}>
+          <Field
+            component={renderFieldInputNewUser}
+            type='text'
+            label='Company'
+            name='company'
+            idField='fieldCompany'
+            classNameLabel='fieldInputNewUser'
+          />
+          <Field
+            component={renderFieldInputNewUser}
+            type='text'
+            span
+            label='Github link'
+            name='githubLink'
+            idField='fieldGithubLink'
+            classNameLabel='fieldInputNewUser'
+          />
+          <Field
+            component={renderFieldInputNewUser}
+            type='text'
+            span
+            label='Facebook link'
+            name='facebookLink'
+            placeholder='www.facebook.com/hdfk_142_23lelf/'
+            idField='fieldFacebookLink'
+            classNameLabel='fieldInputNewUser'
+          />
+          <Field
+            component={renderFieldSelectContacts}
+            name='selectLanguage'
+            label='Main language'
+          />
+        </div>
+        <div className={cx('userFormBox__sideRight')}>
+          <Field
+            component={renderFieldInputNewUser}
+            type='text'
+            label='Fax'
+            name='fax'
+            mask='+7 (999) 999-99-99'
+            idField='fieldFax'
+            classNameLabel='fieldInputNewUser'
+          />
+          <FieldArray
+            component={renderFieldArrayPhone}
+            name='phoneArray'
+          />
+          <div className={cx('userFormBox__addPhone')} />
+          <div className={cx('userFormBox__wrapperButton')}>
+            <button type='submit' className={cx('userFormBox__saveNewListButton')}>
+              Save
+            </button>
           </div>
-          <div className={cx('contacts__sideRight')}>
-            <Field
-              component={renderFieldInputNewUser}
-              type='text'
-              label='Fax'
-              name='fax'
-              mask='+7 (999) 999-99-99'
-              idField='fieldFax'
-              classNameLabel='fieldInputNewUser'
-            />
-            <FieldArray
-              component={renderFieldArrayPhone}
-              name='phoneArray'
-            />
-            <div className={cx('contacts__addPhone')} />
-            <button type='submit' className={cx('saveNewListButton')}>Save</button>
-          </div>
-        </form>
-      </Fragment>
+        </div>
+      </UserFormBox>
     )
   }
 }

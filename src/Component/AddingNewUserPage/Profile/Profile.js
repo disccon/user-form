@@ -6,8 +6,10 @@ import { reduxForm, Field, formValueSelector } from 'redux-form'
 import styles from '../../UserFormBox/UserFormBox.scss'
 import { forwardBackProfile } from '../../../Actions'
 import { renderFieldRadioProfile } from '../../renderFieldForm/renderFieldRadioProfile/renderFieldRadioProfile'
-import { renderDateTimePickerProfile } from '../../renderFieldForm/renderDateTimePickerProfile/renderDateTimePickerProfile'
-import { renderFieldInputNewUser } from '../renderFieldInputNewUser/renderFieldInputNewUser'
+import {
+  renderDateTimePickerProfile,
+} from '../../renderFieldForm/renderDateTimePickerProfile/renderDateTimePickerProfile'
+import { renderFieldInputNewUser } from '../../renderFieldForm/renderFieldInputNewUser/renderFieldInputNewUser'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
 
 

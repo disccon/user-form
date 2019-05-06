@@ -18,6 +18,9 @@
     margin-right: auto;
   }
   .userFormBox__sideRight {
+    .userFormBox__hobbies{
+      margin-bottom: 17px;
+    }
     .userFormBox__wrapperGender {
       position: relative;
       margin-top: 12px;
@@ -27,7 +30,7 @@
       margin-top: auto;
       width: 100%;
       display: flex;
-      .userFormBox__back, .userFormBox__forward {
+      .userFormBox__back, .userFormBox__forward, .userFormBox__finish, .userFormBox__saveNewListButton {
         width: 100px;
         height: 40px;
         font-weight: 500;
@@ -37,9 +40,13 @@
       .userFormBox__back {
         background: #C1CFE0;
       }
-      .userFormBox__forward {
+      .userFormBox__forward, .userFormBox__saveNewListButton {
         margin-left: auto;
         background: #5E97F3;
+      }
+      .userFormBox__finish{
+        margin-left: auto;
+        background: #4EE4A5;
       }
     }
   }
