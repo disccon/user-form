@@ -9,10 +9,7 @@ export const UserFormBox = ({
   handleSubmit, children, classForm,
 }) => (
   <form className={cx('userFormBox', classForm)} onSubmit={handleSubmit}>
-    {children.map(child => (
-      child
-    ))
-  }
+    {children.map(child => child)}
   </form>
 )
 
