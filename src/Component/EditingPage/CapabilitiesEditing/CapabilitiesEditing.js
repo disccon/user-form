@@ -4,10 +4,17 @@ import classNames from 'classnames'
 import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 import { capabilitiesEditingSave } from '../../../Actions'
-import styles from './CapabilitiesEditing.scss'
-import { renderFieldSelectCapabilities } from './renderFieldSelectCapabilities/renderFieldSelectCapabilities'
-import { renderFieldTextareaCapabilities } from './renderFieldTextareaCapabilities/renderFieldTextareaCapabilities'
-import { renderFieldCheckboxCapabilities } from './renderFieldCheckboxCapabilities/renderFieldCheckboxCapabilities'
+import styles from '../../UserFormBox/UserFormBox.scss'
+import {
+  renderFieldSelectCapabilities,
+} from '../../renderFieldForm/renderFieldSelectCapabilities/renderFieldSelectCapabilities'
+import {
+  renderFieldTextareaCapabilities,
+} from '../../renderFieldForm/renderFieldTextareaCapabilities/renderFieldTextareaCapabilities'
+import {
+  renderFieldCheckboxCapabilities,
+} from '../../renderFieldForm/renderFieldCheckboxCapabilities/renderFieldCheckboxCapabilities'
+import { UserFormBox } from '../../UserFormBox/UserFormBox'
 
 const cx = classNames.bind(styles)
 
@@ -21,8 +28,8 @@ class CapabilitiesEditing extends Component {
   render() {
     const { handleSubmit } = this.props
     return (
-      <form className={cx('capabilities')} onSubmit={handleSubmit(this.onSubmit)}>
-        <div className={cx('capabilities__sideLeft')}>
+      <UserFormBox handleSubmit={handleSubmit(this.onSubmit)}>
+        <div className={cx('userFormBox__sideLeft')}>
           <Field
             component={renderFieldSelectCapabilities}
             name='selectSkills'
@@ -35,8 +42,8 @@ class CapabilitiesEditing extends Component {
             idTextarea='idFieldTextarea'
           />
         </div>
-        <div className={cx('capabilities__sideRight')}>
-          <h3 className={cx('capabilities__hobbies')}>My hobbies</h3>
+        <div className={cx('userFormBox__sideRight')}>
+          <h3 className={cx('userFormBox__hobbies')}>My hobbies</h3>
           <Field
             component={renderFieldCheckboxCapabilities}
             type='checkbox'
@@ -73,11 +80,13 @@ class CapabilitiesEditing extends Component {
             name='checkboxWtf'
             span='WTF is “hobbies”???'
           />
-          <button type='submit' className={cx('saveNewListButton')}>
+          <div className={cx('userFormBox__wrapperButton')}>
+            <button type='submit' className={cx('userFormBox__saveNewListButton')}>
               Save
-          </button>
+            </button>
+          </div>
         </div>
-      </form>
+      </UserFormBox>
     )
   }
 }
@@ -88,7 +97,7 @@ CapabilitiesEditing.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 }
 
-CapabilitiesEditing = reduxForm({
+const CapabilitiesEditingForm = reduxForm({
   validate: values => {
     const errors = {}
 
@@ -140,4 +149,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { capabilitiesEditingSave },
-)(CapabilitiesEditing)
+)(CapabilitiesEditingForm)

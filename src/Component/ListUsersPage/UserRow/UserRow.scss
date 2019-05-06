@@ -1,76 +1,93 @@
-.userRow:first-child{
+$us: 'userRow';
+.#{$us}:first-child {
   padding-left: 14px;
 }
-.userRow {
+
+.#{$us} {
   height: 93px;
   display: flex;
   align-items: center;
   font-weight: 500;
   color: #475666;
-  .userRow__img{
+
+  .#{$us}__img {
     width: 40px;
     height: 40px;
     margin-right: 15px;
   }
-  .userRow__wrapperDiv{
+
+  .#{$us}__wrapperDiv {
     margin-top: 7px;
     display: flex;
     flex-direction: column;
-    .userRow__h4{
+
+    .#{$us}__h4 {
       font-weight: 500;
     }
-    .userRow__span{
+
+    .#{$us}__span {
       font-size: 9px;
     }
   }
-  .userRow__buttonEdit, .userRow__buttonClose, .userRow__buttonDeleteUser{
+
+  .#{$us}__buttonEdit, .#{$us}__buttonClose, .#{$us}__buttonDeleteUser {
     width: 15px;
     height: 15px;
     cursor: pointer;
     background: transparent;
-    .userRow__closeIcon, .userRow__editIcon{
+
+    .#{$us}__closeIcon, .#{$us}__editIcon {
       width: 15px;
       height: 15px;
     }
   }
-  .userRow__buttonEdit{
-    .userRow__editIcon{
-      .editIcon{
+
+  .#{$us}__buttonEdit {
+    .#{$us}__editIcon {
+      .editIcon {
         fill: #475666;
       }
     }
   }
-  .userRow__buttonClose{
-    .userRow__closeIcon{
+
+  .#{$us}__buttonClose {
+    .#{$us}__closeIcon {
       filter: invert(30%) sepia(37%) saturate(314%) hue-rotate(170deg) brightness(92%) contrast(86%);
-      .closeIcon{
+
+      .closeIcon {
         fill: #128031;
         color: #2F68C8;
       }
     }
   }
-  .userRow__buttonEdit{
+
+  .#{$us}__buttonEdit {
     margin-left: 44px;
   }
-  .userRow__buttonClose{
+
+  .#{$us}__buttonClose {
     margin-left: 22px;
   }
 }
-.deleteUserRow{
+
+.deleteUserRow {
   position: relative;
   transform: translateX(-70px);
   opacity: 0.5;
   transition: all ease 0.3s;
-  .userRow__deleteUserWrapper{
+
+  .#{$us}__deleteUserWrapper {
     top: 35px;
     right: -75px;
     position: absolute;
-    .userRow__buttonDeleteUser{
+
+    .#{$us} __buttonDeleteUser {
       display: flex;
       color: #ff4144;
       font-weight: 500;
       background: transparent;
-      .deleteUser{
+
+      .deleteUser {
         display: inline-block;
         width: 15px;
         height: 15px;

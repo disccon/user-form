@@ -1,0 +1,132 @@
+.userFormBox.userFormBoxAccount {
+  padding: 0 100px 65px;
+}
+
+$uS: 'userFormBox';
+$uA: 'userAvatarWrapper';
+
+.#{$uS} {
+  display: flex;
+  padding: 65px 100px;
+  width: 100%;
+  height: 541px;
+  background: #fbfcff;
+  color: #657C9A;
+
+  .#{$uS}__sideLeft, .#{$uS}__sideRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 300px;
+  }
+
+  .#{$uS}__sideLeft {
+    margin-right: auto;
+  }
+
+  .#{$uS}__hobbies {
+    margin-bottom: 17px;
+  }
+
+  .#{$uS}__sideRight {
+
+    .#{$uS}__wrapperGender {
+      position: relative;
+      margin-top: 12px;
+      display: flex;
+    }
+
+    .#{$uS}__wrapperButton {
+      margin-top: auto;
+      width: 100%;
+      display: flex;
+
+      .#{$uS}__back, .#{$uS}__forward, .#{$uS}__finish, .#{$uS}__saveNewListButton {
+        width: 100px;
+        height: 40px;
+        font-weight: 500;
+        text-align: center;
+        color: #FFF;
+      }
+
+      .#{$uS}__back {
+        background: #C1CFE0;
+      }
+
+      .#{$uS}__forward, .#{$uS}__saveNewListButton {
+        margin-left: auto;
+        background: #5E97F3;
+      }
+
+      .#{$uS}__finish {
+        margin-left: auto;
+        background: #4EE4A5;
+      }
+    }
+  }
+
+  .#{$uA} {
+    margin-top: 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .#{$uA}__inputFile {
+      display: none;
+    }
+
+    .#{$uA}__userAvatarSVG, .#{$uA}__userAvatarIMG {
+      cursor: pointer;
+      height: 172px;
+    }
+
+    .#{$uA}__userAvatarIMG {
+      width: 172px;
+      border-radius: 50%;
+      border: 3px solid #5E97F3;
+    }
+
+    .#{$uA}__labelSpan {
+      margin-top: 10px;
+
+      .#{$uA}__AddICon {
+        margin-bottom: -3px;
+        margin-right: 5px;
+        width: 15px;
+        height: 15px;
+        color: #9BB0CB;
+      }
+
+      .#{$uA}__addAvatarSpan {
+        font-weight: 500;
+        color: #9BB0CB;
+      }
+    }
+
+    .#{$uA}__avatarError {
+      margin-top: 5px;
+      font-size: 9px;
+      color: #EB5757;
+    }
+  }
+
+  .register__userData {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin-left: auto;
+    color: #657C9A;
+
+    .accountComponent__buttonSubmit {
+      margin-top: auto;
+      margin-left: auto;
+      width: 100px;
+      height: 40px;
+      background: #5E97F3;
+      font-weight: 500;
+      text-align: center;
+      color: #FFF;
+    }
+  }
+}
+

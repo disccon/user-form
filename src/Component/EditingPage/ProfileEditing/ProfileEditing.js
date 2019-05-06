@@ -3,11 +3,14 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { reduxForm, Field } from 'redux-form'
-import styles from './ProfileEditing.scss'
-import { renderFieldRadioProfile } from './renderFieldRadioProfile/renderFieldRadioProfile'
-import { renderDateTimePickerProfile } from './renderDateTimePickerProfile/renderDateTimePickerProfile'
-import { renderFieldInputNewUser } from '../renderFieldInputNewUser/renderFieldInputNewUser'
+import styles from '../../UserFormBox/UserFormBox.scss'
 import { profileEditingSave } from '../../../Actions'
+import { UserFormBox } from '../../UserFormBox/UserFormBox'
+import { renderFieldInputNewUser } from '../../renderFieldForm/renderFieldInputNewUser/renderFieldInputNewUser'
+import {
+  renderDateTimePickerProfile,
+} from '../../renderFieldForm/renderDateTimePickerProfile/renderDateTimePickerProfile'
+import { renderFieldRadioProfile } from '../../renderFieldForm/renderFieldRadioProfile/renderFieldRadioProfile'
 
 
 const cx = classNames.bind(styles)
@@ -23,71 +26,73 @@ class ProfileEditing extends Component {
     render() {
       const { handleSubmit } = this.props
       return (
-        <div className={cx('profile')}>
-          <form className={cx('profile__form')} onSubmit={handleSubmit(this.onSubmit)}>
-            <div className={cx('profile__sideLeft')}>
+        <UserFormBox handleSubmit={handleSubmit(this.onSubmit)}>
+          <div className={cx('userFormBox__sideLeft')}>
+            <Field
+              component={renderFieldInputNewUser}
+              type='text'
+              span
+              label='First name'
+              name='firstName'
+              idField='fieldFirstName'
+              classNameLabel='inputNewUser'
+            />
+            <Field
+              component={renderFieldInputNewUser}
+              type='text'
+              span
+              label='Last name'
+              name='lastName'
+              idField='fieldLastName'
+              classNameLabel='inputNewUser'
+            />
+            <Field name='birthDate' component={renderDateTimePickerProfile} />
+          </div>
+          <div className={cx('userFormBox__sideRight')}>
+            <Field
+              component={renderFieldInputNewUser}
+              type='text'
+              span
+              label='Email'
+              name='email'
+              idField='fieldEmail'
+              classNameLabel='inputNewUser'
+            />
+            <Field
+              component={renderFieldInputNewUser}
+              type='text'
+              span
+              label='Address'
+              name='address'
+              idField='fieldAddress'
+              classNameLabel='inputNewUser'
+            />
+            <h5>Gender</h5>
+            <div className={cx('userFormBox__wrapperGender')}>
               <Field
-                component={renderFieldInputNewUser}
-                type='text'
-                span
-                label='First name'
-                name='firstName'
-                idField='fieldFirstName'
-                classNameLabel='fieldInputNewUser'
+                component={renderFieldRadioProfile}
+                type='radio'
+                label='Male'
+                name='gender'
+                value='male'
+                idField='fieldMale'
               />
               <Field
-                component={renderFieldInputNewUser}
-                type='text'
-                span
-                label='Last name'
-                name='lastName'
-                idField='fieldLastName'
-                classNameLabel='fieldInputNewUser'
+                component={renderFieldRadioProfile}
+                type='radio'
+                label='Female'
+                name='gender'
+                value='female'
+                idField='fieldFemale'
               />
-              <Field name='birthDate' component={renderDateTimePickerProfile} />
             </div>
-            <div className={cx('profile__sideRight')}>
-              <Field
-                component={renderFieldInputNewUser}
-                type='text'
-                span
-                label='Email'
-                name='email'
-                idField='fieldEmail'
-                classNameLabel='fieldInputNewUser'
-              />
-              <Field
-                component={renderFieldInputNewUser}
-                type='text'
-                span
-                label='Address'
-                name='address'
-                idField='fieldAddress'
-                classNameLabel='fieldInputNewUser'
-              />
-              <h5>Gender</h5>
-              <div className={cx('wrapperGender')}>
-                <Field
-                  component={renderFieldRadioProfile}
-                  type='radio'
-                  label='Male'
-                  name='gender'
-                  value='male'
-                  idField='fieldMale'
-                />
-                <Field
-                  component={renderFieldRadioProfile}
-                  type='radio'
-                  label='Female'
-                  name='gender'
-                  value='female'
-                  idField='fieldFemale'
-                />
-              </div>
-              <button type='submit' className={cx('saveNewListButton')}>Save</button>
+            <div className={cx('userFormBox__wrapperButton')}>
+              <button type='submit' className={cx('userFormBox__saveNewListButton')}>
+                Save
+              </button>
             </div>
-          </form>
-        </div>
+          </div>
+        </UserFormBox>
       )
     }
 }
@@ -99,7 +104,7 @@ ProfileEditing.propTypes = {
 }
 
 
-ProfileEditing = reduxForm({
+const ProfileEditingForm = reduxForm({
   validate: (values, props) => {
     const errors = {}
     const { userEmailList } = props
@@ -165,4 +170,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { profileEditingSave },
-)(ProfileEditing)
+)(ProfileEditingForm)

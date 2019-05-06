@@ -1,5 +1,7 @@
+$ac: 'accountDataWrapper';
 .container {
   position: relative;
+
   .linkBackPage {
     position: absolute;
     top: 63px;
@@ -8,67 +10,81 @@
     font-size: 24px;
     color: #9BB0CB;
   }
-  .UserNamePageContainer {
+
+  .userNamePageContainer {
     margin-top: 35px;
     display: flex;
     padding: 35px 58px;
     background: #fbfcff;
     height: 734px;
-    .UserNamePageContainer__avatar {
+
+    .userNamePageContainer__avatar {
       margin-right: 91px;
       width: 200px;
       height: 200px;
       border: 3px solid #5E97F3;
       border-radius: 50%;
     }
-    .accountDataWrapper {
+
+    .#{$ac} {
       display: flex;
       flex-direction: column;
       color: #475666;
       padding-top: 32px;
-      .accountDataWrapper__block {
+
+      .#{$ac}__block {
         margin-bottom: 24px;
         display: flex;
-        .accountDataWrapper__section {
+
+        .#{$ac}__section {
           width: 152px;
           display: flex;
-          .accountDataWrapper__h3 {
+
+          .#{$ac}__h3 {
             margin-right: 8px;
             font-weight: 500;
           }
-          .accountDataWrapper__buttonEdit {
+
+          .#{$ac}__buttonEdit {
             margin-top: 1px;
             width: 15px;
             height: 15px;
             background: transparent;
-            .accountDataWrapper__editIcon {
+
+            .#{$ac}__editIcon {
               margin-top: 1px;
               width: 15px;
               height: 15px;
+
               .editIcon {
                 fill: #475666;
               }
             }
           }
         }
-        .accountDataWrapper__sectionInfo {
-          .accountDataWrapper__wrapper {
+
+        .#{$ac}__sectionInfo {
+          .#{$ac}__wrapper {
             margin-bottom: 7px;
             display: flex;
-            .accountDataWrapper__h4 {
+
+            .#{$ac}__h4 {
               font-weight: 500;
               width: 170px;
             }
-            .accountDataWrapper__span {
+
+            .#{$ac}__span {
               margin-bottom: 9px;
               max-width: 230px;
               color: #657C9A;
             }
           }
-          .accountDataWrapper__wrapperHobbies {
+
+          .#{$ac}__wrapperHobbies {
             display: flex;
             flex-direction: column;
-            .accountDataWrapper__span {
+
+            .#{$ac}__span {
               line-height: 20px;
             }
           }

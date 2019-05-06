@@ -26,8 +26,8 @@ class EditUserPage extends Component {
         <Link className={cx('linkBackPage')} to='/ListUsers'>{'<  Users List'}</Link>
         <h2 className={cx('headline')}>User Name</h2>
         {birthDate && (
-          <div className={cx('UserNamePageContainer container')}>
-            <img src={userSRCAvatarIMG} className={cx('UserNamePageContainer__avatar')} alt='userSRCAvatarIMG' />
+          <div className={cx('userNamePageContainer container')}>
+            <img src={userSRCAvatarIMG} className={cx('userNamePageContainer__avatar')} alt='userSRCAvatarIMG' />
             <div className={cx('accountDataWrapper')}>
               <div className={cx('accountDataWrapper__block')}>
                 <div className={cx('accountDataWrapper__section')}>

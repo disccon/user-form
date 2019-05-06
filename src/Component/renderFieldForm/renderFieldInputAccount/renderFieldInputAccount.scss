@@ -1,0 +1,55 @@
+$in: 'inputAccount';
+.#{$in}:first-child {
+  margin-top: 23px;
+}
+
+.#{$in} {
+  position: relative;
+  margin-bottom: 24px;
+
+  .#{$in}__label {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .#{$in}__wrapperInput {
+    position: relative;
+    width: 100%;
+    height: 40px;
+
+    .#{$in}__visibilityIcon {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 15px;
+      height: 10px;
+      cursor: pointer;
+    }
+
+    .#{$in}__input {
+      margin-top: 0;
+      width: 100%;
+      height: 40px;
+      padding-right: 10px;
+      padding-left: 10px;
+      border: 1px solid #C1CFE0;
+      background: #fff;
+      font-weight: 500;
+      color: #000;
+    }
+  }
+
+  .#{$in}__input.inputNewUser__errorInput {
+    border: 1px solid #EB5757;
+  }
+
+  .#{$in}__pError {
+    position: absolute;
+    margin-top: 3px;
+    margin-left: 10px;
+    font-size: 9px;
+    color: #EB5757;
+  }
+}
+
+

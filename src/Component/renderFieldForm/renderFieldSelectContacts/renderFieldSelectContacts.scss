@@ -1,0 +1,17 @@
+#react-select-2-input {
+  font-weight: 500;
+}
+.mainLanguage{
+  position: relative;
+  &__Label{
+    margin-bottom: 4px;
+    display: block;
+  }
+  &__error{
+    position: absolute;
+    margin-top: 3px;
+    margin-left: 10px;
+    font-size: 9px;
+    color: #EB5757;
+  }
+}

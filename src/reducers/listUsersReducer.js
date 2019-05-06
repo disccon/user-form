@@ -20,12 +20,14 @@ import {
   CAPABILITIES_EDITING_SAVE__SUCCESS,
   CAPABILITIES_EDITING_SAVE__FAILURE,
 } from '../Actions'
+import { initialListUsers } from '../stubs/initialListUsers'
 
 
-export default function listUsersReducer(state = { users: [] }, action) {
+export default function listUsersReducer(state = initialListUsers, action) {
   switch (action.type) {
     case USER_LISTER_NEW_STATE__SUCCESS: {
       return {
+        ...state,
         users: [...action.payload.userLister],
         error: undefined,
       }
