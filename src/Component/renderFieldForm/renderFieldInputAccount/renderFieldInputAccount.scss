@@ -1,18 +1,23 @@
-.inputAccount:first-child{
+$in: 'inputAccount';
+.#{$in}:first-child {
   margin-top: 23px;
 }
-.inputAccount{
+
+.#{$in} {
   position: relative;
   margin-bottom: 24px;
-  .inputAccount__label{
+
+  .#{$in}__label {
     display: block;
     margin-bottom: 4px;
   }
-  .inputAccount__wrapperInput {
+
+  .#{$in}__wrapperInput {
     position: relative;
     width: 100%;
     height: 40px;
-    .inputAccount__visibilityIcon {
+
+    .#{$in}__visibilityIcon {
       position: absolute;
       top: 15px;
       right: 15px;
@@ -20,7 +25,8 @@
       height: 10px;
       cursor: pointer;
     }
-    .inputAccount__input {
+
+    .#{$in}__input {
       margin-top: 0;
       width: 100%;
       height: 40px;
@@ -32,10 +38,12 @@
       color: #000;
     }
   }
-  .inputAccount__input.inputNewUser__errorInput{
+
+  .#{$in}__input.inputNewUser__errorInput {
     border: 1px solid #EB5757;
   }
-  .inputAccount__pError{
+
+  .#{$in}__pError {
     position: absolute;
     margin-top: 3px;
     margin-left: 10px;

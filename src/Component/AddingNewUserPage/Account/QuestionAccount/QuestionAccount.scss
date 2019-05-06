@@ -1,4 +1,5 @@
-.accountComponentQuestion{
+$aC: 'accountComponentQuestion';
+.#{$aC} {
   width: 100%;
   height: 42px;
   display: flex;
@@ -7,10 +8,12 @@
   padding-left: 24px;
   background: #5e97f3;
   color: #fff;
-  .accountComponentQuestion__span{
+
+  .#{$aC}__span {
     font-weight: 500;
   }
-  .accountComponent__continue{
+
+  .#{$aC}__continue {
     font-weight: 900;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
@@ -21,9 +24,11 @@
     margin-right: auto;
     margin-left: 5px;
   }
-  .accountComponent__close{
+
+  .#{$aC}__close {
     background: transparent;
-    .accountComponent__closeIcon{
+
+    .#{$aC}__closeIcon {
       width: 15px;
       height: 15px;
       filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(2deg) brightness(100%) contrast(100%)

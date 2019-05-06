@@ -32,7 +32,7 @@ class ContactsEditing extends Component {
             label='Company'
             name='company'
             idField='fieldCompany'
-            classNameLabel='fieldInputNewUser'
+            classNameLabel='inputNewUser'
           />
           <Field
             component={renderFieldInputNewUser}
@@ -41,7 +41,7 @@ class ContactsEditing extends Component {
             label='Github link'
             name='githubLink'
             idField='fieldGithubLink'
-            classNameLabel='fieldInputNewUser'
+            classNameLabel='inputNewUser'
           />
           <Field
             component={renderFieldInputNewUser}
@@ -51,7 +51,7 @@ class ContactsEditing extends Component {
             name='facebookLink'
             placeholder='www.facebook.com/hdfk_142_23lelf/'
             idField='fieldFacebookLink'
-            classNameLabel='fieldInputNewUser'
+            classNameLabel='inputNewUser'
           />
           <Field
             component={renderFieldSelectContacts}
@@ -67,7 +67,7 @@ class ContactsEditing extends Component {
             name='fax'
             mask='+7 (999) 999-99-99'
             idField='fieldFax'
-            classNameLabel='fieldInputNewUser'
+            classNameLabel='inputNewUser'
           />
           <FieldArray
             component={renderFieldArrayPhone}

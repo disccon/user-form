@@ -42,7 +42,7 @@ class Profile extends Component {
               label='First name'
               name='firstName'
               idField='fieldFirstName'
-              classNameLabel='fieldInputNewUser'
+              classNameLabel='inputNewUser'
             />
             <Field
               component={renderFieldInputNewUser}
@@ -51,7 +51,7 @@ class Profile extends Component {
               label='Last name'
               name='lastName'
               idField='fieldLastName'
-              classNameLabel='fieldInputNewUser'
+              classNameLabel='inputNewUser'
             />
             <Field name='birthDate' component={renderDateTimePickerProfile} />
           </div>
@@ -63,7 +63,7 @@ class Profile extends Component {
               label='Email'
               name='email'
               idField='fieldEmail'
-              classNameLabel='fieldInputNewUser'
+              classNameLabel='inputNewUser'
             />
             <Field
               component={renderFieldInputNewUser}
@@ -72,7 +72,7 @@ class Profile extends Component {
               label='Address'
               name='address'
               idField='fieldAddress'
-              classNameLabel='fieldInputNewUser'
+              classNameLabel='inputNewUser'
             />
             <h5>Gender</h5>
             <div className={cx('userFormBox__wrapperGender')}>

@@ -1,14 +1,17 @@
-.checkboxCapabilities__label{
+$ch: 'checkboxCapabilities';
+.#{$ch}__label {
   display: contents;
   position: relative;
-  .checkboxCapabilities__span{
+
+  .#{$ch}__span {
     display: block;
     color: #657C9A;
     margin-left: 26px;
     position: relative;
     margin-bottom: 9px;
   }
-  .checkboxCapabilities__span:before {
+
+  .#{$ch}__span:before {
     content: '';
     position: absolute;
     top: 1px;
@@ -18,11 +21,13 @@
     background: #FFFFFF;
     border: 1px solid #C1CFE0;
   }
-  .checkboxCapabilities__input:checked + span:before {
+
+  .#{$ch}__input:checked + span:before {
     background: #4E86E4;
     border: 3px solid #C1CFE0;
   }
-  .checkboxCapabilities__pError{
+
+  .#{$ch}__pError {
     margin-left: 27px;
     font-size: 9px;
     color: #EB5757;

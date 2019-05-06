@@ -1,13 +1,13 @@
 #react-select-2-input {
   font-weight: 500;
 }
-.contacts__mainLanguage{
+.mainLanguage{
   position: relative;
-  .contacts__mainLanguageLabel{
+  &__Label{
     margin-bottom: 4px;
     display: block;
   }
-  .mainLanguage__error{
+  &__error{
     position: absolute;
     margin-top: 3px;
     margin-left: 10px;

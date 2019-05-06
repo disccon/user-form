@@ -1,21 +1,26 @@
-.profile__birthDate {
+$pr: 'profile';
+.#{$pr}__birthDate {
   position: relative;
-  .profile__birthDateWrapper {
+
+  .#{$pr}__birthDateWrapper {
     display: flex;
     width: 100%;
     margin-bottom: 4px;
-    .profile__birthDateSpan {
+
+    .#{$pr}__birthDateSpan {
       margin-left: auto;
       height: 9px;
     }
   }
+
   .birthDate__error {
     margin-top: 3px;
     margin-left: 10px;
     font-size: 9px;
     color: #EB5757;
   }
-  .profile__datePicker {
+
+  .#{$pr}__datePicker {
     .react-date-picker__wrapper {
       padding-right: 5px;
       padding-left: 5px;
@@ -24,6 +29,7 @@
       background: #FFFFFF;
       border: 1px solid #E7F0FF;
       color: #657C9A;
+
       .react-date-picker__inputGroup {
         input {
           background: transparent;
@@ -36,25 +42,31 @@
         }
       }
     }
+
     .react-date-picker__calendar {
       width: 192px;
       margin-top: 9px;
     }
   }
-  .profile__datePicker.profile__datePickerError{
+
+  .#{$pr}__datePicker.profile__datePickerError {
     .react-date-picker__wrapper {
       border: 1px solid #EB5757;
     }
   }
-  .profile__react-calendar {
+
+  .#{$pr}__react-calendar {
     width: 192px;
     border: none;
+
     .react-calendar__navigation {
       height: 35px;
       margin-bottom: 0;
+
       .react-calendar__navigation__prev2-button, .react-calendar__navigation__next2-button {
         display: none;
       }
+
       .react-calendar__navigation__prev-button, .react-calendar__navigation__next-button {
         min-width: 35px;
         font-family: 'Roboto', sans-serif;
@@ -64,6 +76,7 @@
         line-height: normal;
         color: #7890af;
       }
+
       .react-calendar__navigation__label {
         font-family: 'Roboto', sans-serif;
         font-style: normal;
@@ -73,6 +86,7 @@
         color: #475666;
       }
     }
+
     .react-calendar__month-view {
       .react-calendar__month-view__weekdays {
         .react-calendar__month-view__weekdays__weekday {
@@ -80,6 +94,7 @@
             border-bottom: none;
             cursor: default;
           }
+
           abbr {
             border-bottom: none;
             text-transform: none;
@@ -94,6 +109,7 @@
           }
         }
       }
+
       .react-calendar__month-view__days {
         button {
           abbr {
@@ -107,6 +123,7 @@
           }
         }
       }
+
       .react-calendar__month-view__days__day--neighboringMonth {
         display: none;
         cursor: default;

@@ -1,11 +1,11 @@
 .selectCapabilities{
   margin-bottom: 150px;
   position: relative;
-  .selectCapabilities__label {
+  &__label {
     margin-bottom: 4px;
     display: block;
   }
-  .selectCapabilities__pError {
+  &__pError {
     position: absolute;
     bottom: -15px;
     left: 10px;

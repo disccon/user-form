@@ -1,30 +1,37 @@
-.listUsersTable {
+$li: 'listUsers';
+.#{$li}Table {
   margin-top: 28px;
-  .listUsers__thead {
+
+  .#{$li}__thead {
     height: 45px;
     width: 100%;
     background: #4E86E4;
     color: #FFF;
     font-weight: 500;
-    .listUsers__tr{
-      .listUsers__name, .listUsers__company, .listUsers__contacts, .listUsers__update{
+
+    .#{$li}__tr {
+      .#{$li}__name, .#{$li}__company, .#{$li}__contacts, .#{$li}__update {
         padding-top: 14px;
         padding-bottom: 14px;
         font-weight: 500;
       }
-      .listUsers__name{
+
+      .#{$li}__name {
         width: 300px;
         padding-left: 70px;
       }
-      .listUsers__company{
+
+      .#{$li}__company {
         width: 200px;
       }
-      .listUsers__update{
+
+      .#{$li}__update {
         width: 270px;
       }
     }
   }
-  .listUsers__firstTr{
+
+  .#{$li}__firstTr {
     height: 29px;
   }
 }

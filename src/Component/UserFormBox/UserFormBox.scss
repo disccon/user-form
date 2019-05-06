@@ -1,100 +1,122 @@
-.userFormBox.userFormBoxAccount  {
+.userFormBox.userFormBoxAccount {
   padding: 0 100px 65px;
 }
-.userFormBox  {
+
+$uS: 'userFormBox';
+$uA: 'userAvatarWrapper';
+
+.#{$uS} {
   display: flex;
   padding: 65px 100px;
   width: 100%;
   height: 541px;
   background: #fbfcff;
   color: #657C9A;
-  .userFormBox__sideLeft, .userFormBox__sideRight {
+
+  .#{$uS}__sideLeft, .#{$uS}__sideRight {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 300px;
   }
-  .userFormBox__sideLeft {
+
+  .#{$uS}__sideLeft {
     margin-right: auto;
   }
-  .userFormBox__sideRight {
-    .userFormBox__hobbies{
-      margin-bottom: 17px;
-    }
-    .userFormBox__wrapperGender {
+
+  .#{$uS}__hobbies {
+    margin-bottom: 17px;
+  }
+
+  .#{$uS}__sideRight {
+
+    .#{$uS}__wrapperGender {
       position: relative;
       margin-top: 12px;
       display: flex;
     }
-    .userFormBox__wrapperButton {
+
+    .#{$uS}__wrapperButton {
       margin-top: auto;
       width: 100%;
       display: flex;
-      .userFormBox__back, .userFormBox__forward, .userFormBox__finish, .userFormBox__saveNewListButton {
+
+      .#{$uS}__back, .#{$uS}__forward, .#{$uS}__finish, .#{$uS}__saveNewListButton {
         width: 100px;
         height: 40px;
         font-weight: 500;
         text-align: center;
         color: #FFF;
       }
-      .userFormBox__back {
+
+      .#{$uS}__back {
         background: #C1CFE0;
       }
-      .userFormBox__forward, .userFormBox__saveNewListButton {
+
+      .#{$uS}__forward, .#{$uS}__saveNewListButton {
         margin-left: auto;
         background: #5E97F3;
       }
-      .userFormBox__finish{
+
+      .#{$uS}__finish {
         margin-left: auto;
         background: #4EE4A5;
       }
     }
   }
 
-
-  .userAvatarWrapper {
+  .#{$uA} {
     margin-top: 44px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    .userAvatarWrapper__inputFile{
+
+    .#{$uA}__inputFile {
       display: none;
     }
-    .userAvatarWrapper__userAvatarSVG, .userAvatarWrapper__userAvatarIMG{
+
+    .#{$uA}__userAvatarSVG, .#{$uA}__userAvatarIMG {
       cursor: pointer;
       height: 172px;
     }
-    .userAvatarWrapper__userAvatarIMG {
+
+    .#{$uA}__userAvatarIMG {
       width: 172px;
       border-radius: 50%;
       border: 3px solid #5E97F3;
     }
-    .userAvatarWrapper__labelSpan {
+
+    .#{$uA}__labelSpan {
       margin-top: 10px;
-      .userAvatarWrapper__AddICon {
+
+      .#{$uA}__AddICon {
         margin-bottom: -3px;
         margin-right: 5px;
         width: 15px;
         height: 15px;
         color: #9BB0CB;
       }
-      .userAvatarWrapper__addAvatarSpan {
+
+      .#{$uA}__addAvatarSpan {
         font-weight: 500;
         color: #9BB0CB;
       }
     }
-    .userAvatarWrapper__avatarError{
+
+    .#{$uA}__avatarError {
       margin-top: 5px;
       font-size: 9px;
       color: #EB5757;
     }
   }
+
   .register__userData {
     display: flex;
     flex-direction: column;
     width: 400px;
     margin-left: auto;
     color: #657C9A;
+
     .accountComponent__buttonSubmit {
       margin-top: auto;
       margin-left: auto;

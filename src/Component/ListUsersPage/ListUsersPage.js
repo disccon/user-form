@@ -2,13 +2,13 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
+import Pagination from 'material-ui-flat-pagination'
 import styles from './ListUsersPage.scss'
-import { Pagination } from './Pagination/Pagination'
+// import { Pagination } from './Pagination/Pagination'
 import NoHaveUserRow from './NoHaveUserRow/NoHaveUserRow'
 import db from '../../db'
 import { deleteUser } from '../../Actions'
 import { UserRow } from './UserRow/UserRow'
-
 
 const cx = classNames.bind(styles)
 
@@ -48,12 +48,12 @@ class ListUsersPage extends Component {
   }
 
   render() {
-    const { users } = this.props
-    const { activePage, activeDeleteRow } = this.state
-    const visibleUserLength = users.length - (7 * activePage) >= 6 ? 6 : users.length - (7 * activePage)
+    const { users, perPage, page } = this.props
+    const { activeDeleteRow } = this.state
+    const visibleUserLength = users.length - (page * perPage) >= perPage ? perPage : users.length - (page * perPage)
     const visibleUser = []
     for (let i = 0; i < visibleUserLength; i += 1) {
-      visibleUser.push(users[i + (7 * activePage)])
+      visibleUser.push(users[i + (page * perPage)])
     }
     return (
       <Fragment>
@@ -81,24 +81,34 @@ class ListUsersPage extends Component {
           </tbody>
         </table>
         {users.length === 0 && <NoHaveUserRow />}
-        {users.length > 7 && (
-          <Pagination
-            activePage={activePage}
-            pageList={users.length / 7}
-            changeActivePage={this.changeActivePage}
-          />
-        )}
+        {/* {users.length > 7 && ( */}
+        {/*  <Pagination */}
+        {/*    activePage={activePage} */}
+        {/*    pageList={users.length / 7} */}
+        {/*    changeActivePage={this.changeActivePage} */}
+        {/*  /> */}
+        {/*  )} */}
+
+        <Pagination
+          limit={perPage}
+          offset={page * perPage}
+          total={users.length}
+        />
       </Fragment>
     )
   }
 }
 
 ListUsersPage.propTypes = {
+  perPage: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
   users: PropTypes.array.isRequired,
   deleteUser: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
+  page: state.listUsers.page,
+  perPage: state.listUsers.perPage,
   users: state.listUsers.users,
 })
 

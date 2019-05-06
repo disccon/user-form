@@ -96,8 +96,8 @@ export const renderFieldSelectContacts = ({
     }),
   }
   return (
-    <label className={cx('contacts__mainLanguage')}>
-      <span className={cx('contacts__mainLanguageLabel')}>{label}</span>
+    <label className={cx('mainLanguage')}>
+      <span className={cx('mainLanguage__Label')}>{label}</span>
       <Select
         {...input}
         onBlur={() => input.onBlur()}

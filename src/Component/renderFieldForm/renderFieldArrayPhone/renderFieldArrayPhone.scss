@@ -1,8 +1,9 @@
-.arrayPhone__fieldPhone {
+$ar: 'arrayPhone';
+.#{$ar}__fieldPhone {
   width: 300px;
   position: relative;
   margin-bottom: 24px;
-  .arrayPhone__buttonDeleteField {
+  .#{$ar}__buttonDeleteField {
     background: transparent;
     position: absolute;
     top: 40px;
@@ -12,11 +13,11 @@
     cursor: pointer;
     background: #CED9E5;
   }
-  .arrayPhone__labelPhone {
+  .#{$ar}__labelPhone {
     margin-bottom: 4px;
     display: block;
   }
-  .arrayPhone__inputMask {
+  .#{$ar}__inputMask {
     margin-top: 0;
     width: 100%;
     height: 40px;
@@ -27,14 +28,14 @@
     font-weight: 500;
     color: #000;
   }
-  .arrayPhone__inputMask::placeholder {
+  .#{$ar}__inputMask::placeholder {
     color: #9BB0CB;;
     opacity: 1;
   }
-  .arrayPhone__inputMaskError {
+  .#{$ar}__inputMaskError {
     border: 1px solid #EB5757;
   }
-  .arrayPhone__pError {
+  .#{$ar}__pError {
     position: absolute;
     margin-top: 3px;
     margin-left: 10px;
@@ -42,18 +43,18 @@
     color: #EB5757;
   }
 }
-.arrayPhone__addPhoneField {
+.#{$ar}__addPhoneField {
   background: transparent;
   color: #657C9A;
   position: relative;
-  .arrayPhone__addIcon {
+  .#{$ar}__addIcon {
     position: absolute;
     width: 15px;
     height: 15px;
     top: 0;
     left: 0;
   }
-  .arrayPhone__span {
+  .#{$ar}__span {
     background: transparent;
     margin-left: 15px;
   }
