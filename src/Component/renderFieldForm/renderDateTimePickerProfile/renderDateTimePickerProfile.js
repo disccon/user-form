@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import DatePicker from 'react-date-picker'
 import styles from './renderDateTimePickerProfile.scss'
-import { ReactComponent as CalendarIcon } from '../../../../img/icon/calendar.svg'
+import { ReactComponent as CalendarIcon } from '../../../img/icon/calendar.svg'
 
 
 const cx = classNames.bind(styles)

@@ -3,12 +3,13 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Field, reduxForm } from 'redux-form'
-import styles from './Account.scss'
-import { ReactComponent as CloseIcon } from '../../../img/icon/close.svg'
+import styles from '../../UserFormBox/UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import { forwardAccount, saveUserSRCAvatarIMG, continueUser } from '../../../Actions'
-import { renderFieldInputAccount } from './renderFieldInputAccount/renderFieldInputAccount'
+import { renderFieldInputAccount } from '../../renderFieldForm/renderFieldInputAccount/renderFieldInputAccount'
+import { UserFormBox } from '../../UserFormBox/UserFormBox'
+import { QuestionAccount } from './QuestionAccount/QuestionAccount'
 
 const cx = classNames.bind(styles)
 
@@ -72,52 +73,32 @@ class Account extends Component {
     const { handleSubmit, userSRCAvatarIMG, isQuestion } = this.props
     const { avatarIMGError, typeFieldPassword } = this.state
     const userAvatarIMG = userSRCAvatarIMG
-      ? <img className={cx('accountComponent__userAvatarIMG')} src={userSRCAvatarIMG} alt='userAvatar' />
-      : <UserAvatarIcon className={cx('accountComponent__userAvatarSVG')} alt='userAvatar' />
+      ? <img className={cx('userAvatarWrapper__userAvatarIMG')} src={userSRCAvatarIMG} alt='userAvatar' />
+      : <UserAvatarIcon className={cx('userAvatarWrapper__userAvatarSVG')} alt='userAvatar' />
     const UserAvatar = avatarIMGError
-      ? <p className={cx('accountComponent__avatarError')}>{avatarIMGError}</p> : null
+      ? <p className={cx('userAvatarWrapper__avatarError')}>{avatarIMGError}</p> : null
     return (
       <Fragment>
-        {isQuestion && (
-          <div className={cx('accountComponentQuestion')}>
-            <span className={cx('accountComponentQuestion__span')}>
-                You have an unsaved user data. Do you want to complete it?
-            </span>
-            <button
-              type='button'
-              className={cx('accountComponent__continue')}
-              onClick={this.continueUser(true)}
-            >
-              Continue
-            </button>
-            <button
-              type='button'
-              className={cx('accountComponent__close')}
-              onClick={this.continueUser(false)}
-            >
-              <CloseIcon className={cx('accountComponent__closeIcon')} alt='closeIcon' />
-            </button>
-          </div>
-        )}
-        <form className={cx('accountComponent__form')} onSubmit={handleSubmit(this.onSubmit)}>
-          <div className={cx('accountComponent__userAvatarWrapper')}>
-            <label htmlFor='userAvatar'>
+        {isQuestion && <QuestionAccount continueUser={this.continueUser} />}
+        <UserFormBox handleSubmit={handleSubmit(this.onSubmit)} classForm='userFormBoxAccount' >
+          <div className={cx('userAvatarWrapper')}>
+            <label htmlFor='userAvatar' >
               {userAvatarIMG}
               <input
                 id='userAvatar'
                 type='file'
-                className={cx('accountComponent__inputFile')}
+                className={cx('userAvatarWrapper__inputFile')}
                 accept='image/*,image/jpeg'
                 onChange={this.addImageUserAvatar}
               />
             </label>
-            <label htmlFor='userAvatarIMG' className={cx('accountComponent__labelSpan')}>
-              <AddIcon className={cx('accountComponent__AddICon')} alt='addAvatar' />
-              <span className={cx('accountComponent__addAvatarSpan')}>add avatar</span>
+            <label htmlFor='userAvatarIMG' className={cx('userAvatarWrapper__labelSpan')}>
+              <AddIcon className={cx('userAvatarWrapper__AddICon')} alt='addAvatar' />
+              <span className={cx('userAvatarWrapper__addAvatarSpan')}>add avatar</span>
               <input
                 id='userAvatarIMG'
                 type='file'
-                className={cx('accountComponent__inputFile')}
+                className={cx('userAvatarWrapper__inputFile')}
                 accept='image/*,image/jpeg'
                 onChange={this.addImageUserAvatar}
               />
@@ -152,7 +133,7 @@ class Account extends Component {
             />
             <button className={cx('accountComponent__buttonSubmit')} type='submit'>Forward</button>
           </div>
-        </form>
+        </UserFormBox>
       </Fragment>
     )
   }

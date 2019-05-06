@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import styles from './ListUsersPage.scss'
 import { Pagination } from './Pagination/Pagination'
-
 import NoHaveUserRow from './NoHaveUserRow/NoHaveUserRow'
 import db from '../../db'
 import { deleteUser } from '../../Actions'

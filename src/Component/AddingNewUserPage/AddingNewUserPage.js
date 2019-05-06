@@ -18,9 +18,9 @@ const cx = classNames.bind(styles)
 class AddingNewUserPage extends Component {
   componentDidMount() {
     const { pathname, push } = this.props
-    if (pathname !== '/') {
-      push('/')
-    }
+    // if (pathname !== '/') {
+    //   push('/')
+    // }
     window.addEventListener('beforeunload', this.onUnload)
   }
 

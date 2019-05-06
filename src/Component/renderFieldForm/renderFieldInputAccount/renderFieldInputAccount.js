@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { ReactComponent as VisibilityIcon } from '../../../../img/icon/visibility.svg'
-import { ReactComponent as VisibilityOffIcon } from '../../../../img/icon/visibilityOff.svg'
+import { ReactComponent as VisibilityIcon } from '../../../img/icon/visibility.svg'
+import { ReactComponent as VisibilityOffIcon } from '../../../img/icon/visibilityOff.svg'
 import styles from './renderFieldInputAccount.scss'
 
 const cx = classNames.bind(styles)
