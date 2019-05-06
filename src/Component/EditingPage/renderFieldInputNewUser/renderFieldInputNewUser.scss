@@ -1,16 +1,15 @@
 .fieldInputNewUser {
   position: relative;
   width: 300px;
-  margin-bottom: 45px;
-  height: 40px;
-  .inputNewUser__H4 {
-    position: absolute;
-    top: -23px;
-  }
-  .inputNewUser__span {
-    position: absolute;
-    top: -17px;
-    right: 0;
+  margin-bottom: 24px;
+  .inputNewUser__wrapperLabel {
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    .inputNewUser__span {
+      margin-left: auto;
+      height: 9px;
+    }
   }
   .inputNewUser__input {
     margin-top: 0;
@@ -27,7 +26,7 @@
     border: 1px solid #EB5757;
   }
   .inputNewUser__pError {
-    display: block;
+    position: absolute;
     margin-top: 3px;
     margin-left: 10px;
     font-size: 9px;

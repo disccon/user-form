@@ -287,4 +287,5 @@ export const users = [
     checkboxGuitar: false,
     checkboxWtf: false,
   },
+
 ]

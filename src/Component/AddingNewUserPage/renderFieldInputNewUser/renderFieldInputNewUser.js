@@ -30,12 +30,14 @@ export const renderFieldInputNewUser = ({
       />
     )
   return (
-    <label htmlFor={idField} className={cx(classNameLabel)}>
-      <h4 className={cx('inputNewUser__H4')}>{label}</h4>
-      {span && <span className={cx('inputNewUser__span')}>*</span>}
+    <div className={cx(classNameLabel)}>
+      <div className={cx('inputNewUser__wrapperLabel')}>
+        <label htmlFor={idField} className={cx('inputNewUser__H4')}>{label}</label>
+        {span && <label htmlFor={idField} className={cx('inputNewUser__span')}>*</label>}
+      </div>
       {inputRender}
       {touched && error && <p className={cx('inputNewUser__pError')}>{error}</p>}
-    </label>
+    </div>
   )
 }
 

@@ -11,8 +11,10 @@ const cx = classNames.bind(styles)
 export const renderDateTimePickerProfile = ({ input, meta: { touched, error } }) => (
   <Fragment>
     <div className={cx('profile__birthDate')}>
-      <span className={cx('profile__birthDateH')}>Birth date</span>
-      <span className={cx('profile__birthDateSpan')}>*</span>
+      <div className={cx('profile__birthDateWrapper')}>
+        <span className={cx('profile__birthDateLabel')}>Birth date</span>
+        <span className={cx('profile__birthDateSpan')}>*</span>
+      </div>
       <DatePicker
         format='dd/MM/yyyy'
         clearIcon=''

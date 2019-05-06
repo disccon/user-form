@@ -16,7 +16,8 @@ const cx = classNames.bind(styles)
 class Profile extends Component {
     onSubmit = values => {
       const { forwardBackProfile } = this.props
-      forwardBackProfile('forward', values.firstName, values.lastName, values.birthDate, values.email, values.address, values.gender)
+      forwardBackProfile('forward', values.firstName, values.lastName, values.birthDate, values.email, values.address,
+        values.gender)
     }
 
     backProfile = () => {
@@ -119,7 +120,7 @@ Profile.propTypes = {
 }
 
 
-Profile = reduxForm({
+const ProfileForm = reduxForm({
   validate: (values, props) => {
     const errors = {}
     const { userEmailList } = props
@@ -193,4 +194,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { forwardBackProfile },
-)(Profile)
+)(ProfileForm)

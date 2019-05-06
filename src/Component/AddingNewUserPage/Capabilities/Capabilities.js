@@ -135,7 +135,7 @@ Capabilities.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 }
 
-Capabilities = reduxForm({
+const CapabilitiesForm = reduxForm({
   validate: values => {
     const errors = {}
 
@@ -199,4 +199,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { backCapabilities, forwardCapabilities },
-)(Capabilities)
+)(CapabilitiesForm)

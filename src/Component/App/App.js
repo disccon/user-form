@@ -22,11 +22,8 @@ const cx = classNames.bind(styles)
 class App extends Component {
   componentDidMount() {
     const {
-      userListerNewState, pathname, newUser, history, changeQuestionState,
+      userListerNewState, newUser, changeQuestionState,
     } = this.props
-    if (pathname !== '/') {
-      history.push('/')
-    }
     db.newUserDB.get(0, newUserDB => {
       if (newUserDB) {
         changeQuestionState(_.isEqual(newUserDB, newUser))
@@ -67,18 +64,13 @@ App.propTypes = {
   newUser: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   userListerNewState: PropTypes.func.isRequired,
-  pathname: PropTypes.string.isRequired,
   changeQuestionState: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = state => {
-  const { pathname } = state.router.location
-  return {
-    newUser: state.newUser,
-    listUsers: state.listUsers,
-    pathname,
-  }
-}
+const mapStateToProps = state => ({
+  newUser: state.newUser,
+  listUsers: state.listUsers,
+})
 
 export default connect(
   mapStateToProps,

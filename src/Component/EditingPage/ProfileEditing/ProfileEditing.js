@@ -99,7 +99,7 @@ ProfileEditing.propTypes = {
 }
 
 
-ProfileEditing = reduxForm({
+const ProfileEditingForm = reduxForm({
   validate: (values, props) => {
     const errors = {}
     const { userEmailList } = props
@@ -165,4 +165,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { profileEditingSave },
-)(ProfileEditing)
+)(ProfileEditingForm)

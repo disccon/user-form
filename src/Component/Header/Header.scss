@@ -5,11 +5,12 @@
   box-shadow: 0px 1px 5px #C1CEDE;
   .container {
     display: flex;
+    height: 100%;
+    align-items: center;
     .logoA, .addUserA, .loginA {
       cursor: pointer;
     }
     .logoA {
-      margin-top: 21px;
       margin-right: auto;
       .logoIcon {
         width: 102px;
@@ -17,7 +18,6 @@
       }
     }
     .addUserA {
-      margin-top: 20px;
       margin-left: auto;
       margin-right: 59px;
       opacity: 0.5;
@@ -34,7 +34,6 @@
     .loginA {
       opacity: 0.5;
       color: #FFF;
-      margin-top: 19px;
       .loginIcon{
         .loginIconPath{
           fill: #FFF;

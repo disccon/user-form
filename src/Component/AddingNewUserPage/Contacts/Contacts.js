@@ -111,7 +111,7 @@ Contacts.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 }
 
-Contacts = reduxForm({
+const ContactsForm = reduxForm({
   validate: values => {
     const errors = {}
     if (!values.selectLanguage) {
@@ -198,4 +198,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { forwardBackContacts },
-)(Contacts)
+)(ContactsForm)

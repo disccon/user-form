@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { push } from 'connected-react-router'
 import { Redirect, Route, Switch } from 'react-router'
 import { getFormNames, getFormValues } from 'redux-form'
 import { connect } from 'react-redux'
@@ -16,6 +17,10 @@ const cx = classNames.bind(styles)
 
 class AddingNewUserPage extends Component {
   componentDidMount() {
+    const { pathname, push } = this.props
+    if (pathname !== '/') {
+      push('/')
+    }
     window.addEventListener('beforeunload', this.onUnload)
   }
 
@@ -65,6 +70,7 @@ AddingNewUserPage.propTypes = {
   pathname: PropTypes.string.isRequired,
   activeValue: PropTypes.object,
   newUser: PropTypes.object,
+  push: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => {
@@ -80,4 +86,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
+  { push },
 )(AddingNewUserPage)

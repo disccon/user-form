@@ -1,40 +1,6 @@
-.accountComponentQuestion{
-  width: 100%;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  padding-right: 18px;
-  padding-left: 24px;
-  background: #5e97f3;
-  color: #fff;
-  .accountComponentQuestion__span{
-    font-weight: 500;
-  }
-  .accountComponent__continue{
-    font-weight: 900;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    line-height: normal;
-    font-style: normal;
-    color: #fff;
-    background: transparent;
-    margin-right: auto;
-    margin-left: 5px;
-  }
-  .accountComponent__close{
-    background: transparent;
-    .accountComponent__closeIcon{
-      width: 15px;
-      height: 15px;
-      filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(2deg) brightness(100%) contrast(100%)
-    }
-  }
-}
 .accountComponent__form  {
   display: flex;
-  padding-right: 100px;
-  padding-bottom: 65px;
-  padding-left: 100px;
+  padding: 0 100px 65px;
   width: 100%;
   height: 541px;
   background: #fbfcff;
@@ -79,7 +45,6 @@
     display: flex;
     flex-direction: column;
     width: 400px;
-    margin-top: 23px;
     margin-left: auto;
     color: #657C9A;
   }

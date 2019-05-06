@@ -1,13 +1,13 @@
 .profile__birthDate {
   position: relative;
-  .profile__birthDateH {
-    position: absolute;
-    top: -23px;
-  }
-  .profile__birthDateSpan {
-    position: absolute;
-    top: -17px;
-    right: 0;
+  .profile__birthDateWrapper {
+    display: flex;
+    width: 100%;
+    margin-bottom: 4px;
+    .profile__birthDateSpan {
+      margin-left: auto;
+      height: 9px;
+    }
   }
   .birthDate__error {
     margin-top: 3px;

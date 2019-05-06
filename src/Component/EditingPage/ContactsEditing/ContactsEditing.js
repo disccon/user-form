@@ -89,7 +89,7 @@ ContactsEditing.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 }
 
-ContactsEditing = reduxForm({
+const ContactsEditingForm = reduxForm({
   validate: values => {
     const errors = {}
     if (!values.selectLanguage) {
@@ -162,4 +162,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { contactsEditingSave },
-)(ContactsEditing)
+)(ContactsEditingForm)

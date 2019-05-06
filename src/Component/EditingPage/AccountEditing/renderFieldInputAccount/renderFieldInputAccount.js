@@ -16,13 +16,15 @@ export const renderFieldInputAccount = ({
   return (
     <div className={cx('inputAccount')}>
       <label htmlFor={idInput} className={cx('inputAccount__label')}>{label}</label>
-      {isVisibility && visibilityIcon}
-      <input
-        {...input}
-        className={cx('inputAccount__input', { inputNewUser__errorInput: touched && error })}
-        type={type}
-        id={idInput}
-      />
+      <div className={cx('inputAccount__wrapperInput')}>
+        {isVisibility && visibilityIcon}
+        <input
+          {...input}
+          className={cx('inputAccount__input', { inputNewUser__errorInput: touched && error })}
+          type={type}
+          id={idInput}
+        />
+      </div>
       {touched && error && <p className={cx('inputAccount__pError')}>{error}</p>}
     </div>
   )

@@ -88,7 +88,7 @@ CapabilitiesEditing.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 }
 
-CapabilitiesEditing = reduxForm({
+const CapabilitiesEditingForm = reduxForm({
   validate: values => {
     const errors = {}
 
@@ -140,4 +140,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { capabilitiesEditingSave },
-)(CapabilitiesEditing)
+)(CapabilitiesEditingForm)

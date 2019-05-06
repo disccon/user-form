@@ -158,7 +158,7 @@ class Account extends Component {
   }
 }
 
-Account = reduxForm({
+const accountForm = reduxForm({
   validate: (values, props) => {
     const errors = {}
     const { userNameList } = props
@@ -219,4 +219,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { forwardAccount, saveUserSRCAvatarIMG, continueUser },
-)(Account)
+)(accountForm)
