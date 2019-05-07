@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { push } from 'connected-react-router'
 import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 import styles from './EditUserPage.scss'
@@ -10,6 +11,13 @@ import { editUser } from '../../Actions'
 const cx = classNames.bind(styles)
 
 class EditUserPage extends Component {
+  componentDidUpdate() {
+    const { push, isLoading } = this.props
+    if (isLoading === '/NodFound') {
+      push(isLoading)
+    }
+  }
+
   editUser = page => () => {
     const { editUser, id } = this.props
     editUser(id, page)
@@ -208,19 +216,25 @@ EditUserPage.propTypes = {
   ]),
   editUser: PropTypes.func.isRequired,
   id: PropTypes.number,
+  isLoading: PropTypes.string,
+  push: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
   const id = Number(ownProps.match.params.id)
   const { users } = state.listUsers
-  let editUser
   if (users.length >= 1) {
-    editUser = users.find(i => i.id === id)
+    const user = users.find(i => i.id === id)
+    if (!user) {
+      return {
+        isLoading: '/NodFound',
+      }
+    }
     const {
       userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax, facebookLink, phoneN1,
       phoneN2, phoneN3, selectSkills, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale, checkboxGuitar,
       checkboxWtf,
-    } = editUser
+    } = user
     return {
       userName,
       userSRCAvatarIMG,
@@ -252,5 +266,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { editUser },
+  { editUser, push },
 )(EditUserPage)
