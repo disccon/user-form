@@ -7,22 +7,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" line="8" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="966abf2f-679a-466a-9520-94271c675336" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/App/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/EditUserPage/EditUserPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/EditUserPage/EditUserPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/EditingPage/AccountEditing/AccountEditing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/EditingPage/AccountEditing/AccountEditing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/EditingPage/CapabilitiesEditing/CapabilitiesEditing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/EditingPage/CapabilitiesEditing/CapabilitiesEditing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/EditingPage/ContactsEditing/ContactsEditing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/EditingPage/ContactsEditing/ContactsEditing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/EditingPage/EditingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/EditingPage/EditingPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/EditingPage/ProfileEditing/ProfileEditing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/EditingPage/ProfileEditing/ProfileEditing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Header/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/UserRow/UserRow.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/ListUsersPage/UserRow/UserRow.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
-    </list>
+    <list default="true" id="966abf2f-679a-466a-9520-94271c675336" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,17 +31,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Component/EditingPage/AccountEditing/AccountEditing.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-966">
-              <caret line="2" column="37" lean-forward="true" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Component/EditingPage/ContactsEditing/ContactsEditing.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="150" column="35" lean-forward="true" selection-start-line="150" selection-start-column="35" selection-end-line="150" selection-end-column="35" />
+            <state relative-caret-position="273">
+              <caret line="61" column="12" lean-forward="true" selection-start-line="61" selection-start-column="12" selection-end-line="61" selection-end-column="12" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -64,7 +40,40 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Component/App/App.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="147">
+              <caret line="7" column="27" lean-forward="true" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Component/Header/Header.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="231">
+              <caret line="23" column="86" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="86" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Component/EditingPage/ContactsEditing/ContactsEditing.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="232">
+              <caret line="152" column="47" lean-forward="true" selection-start-line="152" selection-start-column="47" selection-end-line="152" selection-end-column="47" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Component/EditingPage/EditingPage.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="294">
@@ -236,7 +245,7 @@
               <item name="wizardForm" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Component" type="462c0819:PsiDirectoryNode" />
-              <item name="EditingPage" type="462c0819:PsiDirectoryNode" />
+              <item name="Header" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -394,14 +403,7 @@
       <workItem from="1556863291619" duration="4836000" />
       <workItem from="1557122821739" duration="7039000" />
       <workItem from="1557130316050" duration="23760000" />
-      <workItem from="1557209380155" duration="12305000" />
-    </task>
-    <task id="LOCAL-00007" summary="Contacts">
-      <created>1554278595852</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1554278595852</updated>
+      <workItem from="1557209380155" duration="12761000" />
     </task>
     <task id="LOCAL-00008" summary="Capabilities">
       <created>1554319759595</created>
@@ -739,11 +741,18 @@
       <option name="project" value="LOCAL" />
       <updated>1557152019100</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="EditingPage в компоненте улучшил поиск айди&#10;const mapStateToProps = (state, ownProps) =&gt; {     const id = Number(ownProps.match.params.id) а не искал через slice.location">
+      <created>1557221857160</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1557221857162</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="597432000" />
+    <option name="totallyTimeSpent" value="597888000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -758,7 +767,7 @@
     <frame x="0" y="25" width="1920" height="1006" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17662753" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17662753" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="npm" order="3" side_tool="true" />
@@ -848,7 +857,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ListOfUsers Delete 2" />
     <MESSAGE value="ListOfUsers Delete 3" />
     <MESSAGE value="IndexDB 3" />
     <MESSAGE value="Test" />
@@ -873,7 +881,8 @@
     <MESSAGE value="UserFormBox Account Profile" />
     <MESSAGE value="UserFormBox Account Profile Contacts Profile" />
     <MESSAGE value="scss variable" />
-    <option name="LAST_COMMIT_MESSAGE" value="scss variable" />
+    <MESSAGE value="EditingPage в компоненте улучшил поиск айди&#10;const mapStateToProps = (state, ownProps) =&gt; {     const id = Number(ownProps.match.params.id) а не искал через slice.location" />
+    <option name="LAST_COMMIT_MESSAGE" value="EditingPage в компоненте улучшил поиск айди&#10;const mapStateToProps = (state, ownProps) =&gt; {     const id = Number(ownProps.match.params.id) а не искал через slice.location" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/stubs/perPage.js" />
@@ -1147,16 +1156,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/Header/Header.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="651">
-          <caret line="31" column="24" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/AddingNewUserPage/AddingNewUserPage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-729">
@@ -1211,16 +1210,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/App/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="55" column="27" lean-forward="true" selection-start-line="55" selection-start-column="27" selection-end-line="55" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/EditUserPage/EditUserPage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
@@ -1255,13 +1244,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/EditingPage/AccountEditing/AccountEditing.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-966">
-          <caret line="2" column="37" lean-forward="true" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1805">
@@ -1272,20 +1254,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Component/EditingPage/EditingPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="14" column="17" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/EditingPage/ContactsEditing/ContactsEditing.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="150" column="35" lean-forward="true" selection-start-line="150" selection-start-column="35" selection-end-line="150" selection-end-column="35" />
+        <state relative-caret-position="232">
+          <caret line="152" column="47" lean-forward="true" selection-start-line="152" selection-start-column="47" selection-end-line="152" selection-end-column="47" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/EditingPage/EditingPage.js">
+    <entry file="file://$PROJECT_DIR$/src/Component/EditingPage/AccountEditing/AccountEditing.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" column="17" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="17" />
+        <state relative-caret-position="273">
+          <caret line="61" column="12" lean-forward="true" selection-start-line="61" selection-start-column="12" selection-end-line="61" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Component/App/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="27" lean-forward="true" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Component/Header/Header.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="23" column="86" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="86" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
