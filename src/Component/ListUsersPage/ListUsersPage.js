@@ -12,7 +12,6 @@ import db from '../../db'
 import { deleteUser } from '../../Actions'
 import UserRow from './UserRow/UserRow'
 
-
 const cx = classNames.bind(styles)
 
 const paginationStyles = {
@@ -105,16 +104,22 @@ ListUsersPage.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   const page = ownProps.match.params.id - 1
   const { perPage, users } = state.listUsers
-  if (users.length < perPage * page) {
+  if (users.length >= 1) {
+    if (users.length < perPage * page) {
+      console.log(2222, users.length, perPage * page)
+      return {
+        isLoading: '/NodFound',
+        users: [],
+      }
+    }
     return {
-      isLoading: '/NodFound',
-      users: [],
+      perPage,
+      users,
+      page,
     }
   }
   return {
-    perPage,
-    users,
-    page,
+    users: [],
   }
 }
 

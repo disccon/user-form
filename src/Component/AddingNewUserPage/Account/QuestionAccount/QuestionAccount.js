@@ -13,17 +13,17 @@ export const QuestionAccount = ({ continueUser }) => (
     </span>
     <button
       type='button'
-      className={cx('accountComponent__continue')}
+      className={cx('accountComponentQuestion__continue')}
       onClick={continueUser(true)}
     >
       Continue
     </button>
     <button
       type='button'
-      className={cx('accountComponent__close')}
+      className={cx('accountComponentQuestion__close')}
       onClick={continueUser(false)}
     >
-      <CloseIcon className={cx('accountComponent__closeIcon')} alt='closeIcon' />
+      <CloseIcon className={cx('accountComponentQuestion__closeIcon')} alt='closeIcon' />
     </button>
   </div>
 )
