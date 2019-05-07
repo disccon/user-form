@@ -52,7 +52,7 @@ class ProfileEditing extends Component {
             idField='fieldLastName'
             classNameLabel='inputNewUser'
           />
-          <Field name='birthDate' component={renderDateTimePickerProfile}/>
+          <Field name='birthDate' component={renderDateTimePickerProfile} />
         </div>
         <div className={cx('userFormBox__sideRight')}>
           <Field

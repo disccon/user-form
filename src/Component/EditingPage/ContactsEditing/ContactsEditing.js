@@ -169,5 +169,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { contactsEditingSave, push  },
+  { contactsEditingSave, push },
 )(ContactsEditingForm)

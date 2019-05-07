@@ -55,6 +55,11 @@ export const CREATE_USER = 'CREATE_USER'
 export const CREATE_USER__SUCCESS = 'CREATE_USER__SUCCESS'
 export const CREATE_USER__FAILURE = 'CREATE_USER__FAILURE'
 
+
+export const SAVE_AVATAR_ACCOUNT_EDITING = 'SAVE_AVATAR_ACCOUNT_EDITING'
+export const SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS = 'SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS'
+export const SAVE_AVATAR_ACCOUNT_EDITING__FAILURE = 'SAVE_AVATAR_ACCOUNT_EDITING__FAILURE'
+
 export const ACCOUNT_EDITING_SAVE = 'ACCOUNT_EDITING_SAVE'
 export const ACCOUNT_EDITING_SAVE__SUCCESS = 'ACCOUNT_EDITING_SAVE__SUCCESS'
 export const ACCOUNT_EDITING_SAVE__FAILURE = 'ACCOUNT_EDITING_SAVE__FAILURE'
@@ -186,6 +191,15 @@ export const deleteUser = id => (
 
 export const createUser = () => (
   { type: CREATE_USER })
+
+
+export const saveAvatarAccountEditing = (userSRCAvatarIMG, id) => (
+  {
+    type: SAVE_AVATAR_ACCOUNT_EDITING,
+    payload: {
+      userSRCAvatarIMG, id,
+    },
+  })
 
 export const accountEditingSave = (userName, password, repeatPassword, userSRCAvatarIMG, id) => (
   {

@@ -18,7 +18,6 @@ import {
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
 
 
-
 const cx = classNames.bind(styles)
 
 class CapabilitiesEditing extends Component {
@@ -146,24 +145,23 @@ const mapStateToProps = (state, ownProps) => {
       return {
         isLoading: 'NodFound',
       }
-    } else {
-      const {
-        selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
-        checkboxGuitar, checkboxWtf,
-      } = user
-      return {
-        initialValues: {
-          selectSkills,
-          textareaField,
-          checkboxArt,
-          checkboxSport,
-          checkboxJustWant,
-          checkboxFemale,
-          checkboxGuitar,
-          checkboxWtf,
-        },
-        id,
-      }
+    }
+    const {
+      selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
+      checkboxGuitar, checkboxWtf,
+    } = user
+    return {
+      initialValues: {
+        selectSkills,
+        textareaField,
+        checkboxArt,
+        checkboxSport,
+        checkboxJustWant,
+        checkboxFemale,
+        checkboxGuitar,
+        checkboxWtf,
+      },
+      id,
     }
   }
   return {
@@ -173,5 +171,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { capabilitiesEditingSave, push  },
+  { capabilitiesEditingSave, push },
 )(CapabilitiesEditingForm)
