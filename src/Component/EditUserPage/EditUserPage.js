@@ -11,8 +11,8 @@ const cx = classNames.bind(styles)
 
 class EditUserPage extends Component {
   editUser = page => () => {
-    const { editUser, pathname } = this.props
-    editUser(Number(pathname.substring(10)), page)
+    const { editUser, id } = this.props
+    editUser(id, page)
   }
 
   render() {
@@ -156,20 +156,23 @@ class EditUserPage extends Component {
 }
 
 EditUserPage.propTypes = {
-  userName: PropTypes.string.isRequired,
+  userName: PropTypes.string,
   userSRCAvatarIMG: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
   ]),
-  firstName: PropTypes.string.isRequired,
-  lastName: PropTypes.string.isRequired,
-  birthDate: PropTypes.object.isRequired,
-  email: PropTypes.string.isRequired,
-  address: PropTypes.string.isRequired,
-  company: PropTypes.string.isRequired,
-  fax: PropTypes.string.isRequired,
-  facebookLink: PropTypes.string.isRequired,
-  phoneN1: PropTypes.string.isRequired,
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  birthDate: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.bool,
+  ]),
+  email: PropTypes.string,
+  address: PropTypes.string,
+  company: PropTypes.string,
+  fax: PropTypes.string,
+  facebookLink: PropTypes.string,
+  phoneN1: PropTypes.string,
   phoneN2: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.bool,
@@ -178,7 +181,7 @@ EditUserPage.propTypes = {
     PropTypes.string,
     PropTypes.bool,
   ]),
-  selectSkills: PropTypes.array.isRequired,
+  selectSkills: PropTypes.array,
   checkboxArt: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.bool,
@@ -204,15 +207,15 @@ EditUserPage.propTypes = {
     PropTypes.bool,
   ]),
   editUser: PropTypes.func.isRequired,
-  pathname: PropTypes.string.isRequired,
+  id: PropTypes.number,
 }
 
-const mapStateToProps = state => {
-  const { pathname } = state.router.location
+const mapStateToProps = (state, ownProps) => {
+  const id = Number(ownProps.match.params.id)
   const { users } = state.listUsers
   let editUser
   if (users.length >= 1) {
-    editUser = users.find(i => i.id === Number(pathname.substring(10)))
+    editUser = users.find(i => i.id === id)
     const {
       userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax, facebookLink, phoneN1,
       phoneN2, phoneN3, selectSkills, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale, checkboxGuitar,
@@ -239,10 +242,12 @@ const mapStateToProps = state => {
       checkboxFemale,
       checkboxGuitar,
       checkboxWtf,
-      pathname,
+      id,
     }
   }
-  return null
+  return {
+    birthDate: false,
+  }
 }
 
 export default connect(

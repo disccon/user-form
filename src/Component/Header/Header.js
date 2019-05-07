@@ -29,7 +29,7 @@ const Header = ({ createUser, pathname, newUser }) => (
         <span className={cx('addUserSpan ')} >Add new user</span>
       </Link>
       <Link
-        to='/ListUsers'
+        to='/ListUsers/1'
         className={cx('loginA', {
           activeIcon: pathname === '/ListUsers' || pathname.indexOf('/EditUser') === 0 || newUser.id,
         })}
