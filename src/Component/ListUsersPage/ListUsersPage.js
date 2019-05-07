@@ -1,21 +1,45 @@
 import React, { Component, Fragment } from 'react'
+import { compose } from 'recompose'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { withStyles } from '@material-ui/core/styles'
 import classNames from 'classnames'
 import Pagination from 'material-ui-flat-pagination'
 import styles from './ListUsersPage.scss'
-// import { Pagination } from './Pagination/Pagination'
 import NoHaveUserRow from './NoHaveUserRow/NoHaveUserRow'
 import db from '../../db'
 import { deleteUser } from '../../Actions'
 import { UserRow } from './UserRow/UserRow'
 
+
 const cx = classNames.bind(styles)
+
+const paginationStyles = {
+  root: {
+    marginTop: '50px',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  rootCurrent: {
+    color: '#3f51b5',
+  },
+  rootStandard: {
+    color: '#030202',
+  },
+  text: {
+    fontSize: '18px',
+  },
+}
+
 
 class ListUsersPage extends Component {
   state = {
     activePage: 0,
     activeDeleteRow: false,
+  }
+
+  componentDidMount() {
+
   }
 
   changeActivePage = page => {
@@ -47,14 +71,16 @@ class ListUsersPage extends Component {
     deleteUser(idListUser)
   }
 
+  changePage = (event, offset) => {
+    const { perPage, page } = this.props
+  }
+
   render() {
-    const { users, perPage, page } = this.props
+    const {
+      users, perPage, page, classes,
+    } = this.props
     const { activeDeleteRow } = this.state
-    const visibleUserLength = users.length - (page * perPage) >= perPage ? perPage : users.length - (page * perPage)
-    const visibleUser = []
-    for (let i = 0; i < visibleUserLength; i += 1) {
-      visibleUser.push(users[i + (page * perPage)])
-    }
+    const visibleUser = users.slice((page * perPage), page * perPage + perPage)
     return (
       <Fragment>
         <h2 className={cx('headline')}>List of users</h2>
@@ -81,38 +107,37 @@ class ListUsersPage extends Component {
           </tbody>
         </table>
         {users.length === 0 && <NoHaveUserRow />}
-        {/* {users.length > 7 && ( */}
-        {/*  <Pagination */}
-        {/*    activePage={activePage} */}
-        {/*    pageList={users.length / 7} */}
-        {/*    changeActivePage={this.changeActivePage} */}
-        {/*  /> */}
-        {/*  )} */}
-
         <Pagination
-          limit={perPage}
+          classes={classes}
+          limit={2}
           offset={page * perPage}
           total={users.length}
+          onClick={this.changePage}
         />
+
       </Fragment>
     )
   }
 }
 
 ListUsersPage.propTypes = {
+  classes: PropTypes.object.isRequired,
   perPage: PropTypes.number.isRequired,
   page: PropTypes.number.isRequired,
   users: PropTypes.array.isRequired,
   deleteUser: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   page: state.listUsers.page,
   perPage: state.listUsers.perPage,
   users: state.listUsers.users,
 })
 
-export default connect(
-  mapStateToProps,
-  { deleteUser },
+export default compose(
+  connect(
+    mapStateToProps,
+    { deleteUser },
+  ),
+  withStyles(paginationStyles),
 )(ListUsersPage)
