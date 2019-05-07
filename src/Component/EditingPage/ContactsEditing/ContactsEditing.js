@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { push } from 'connected-react-router'
 import {
   Field, reduxForm, FieldArray,
 } from 'redux-form'
@@ -12,7 +11,6 @@ import { UserFormBox } from '../../UserFormBox/UserFormBox'
 import { renderFieldInputNewUser } from '../../renderFieldForm/renderFieldInputNewUser/renderFieldInputNewUser'
 import { renderFieldSelectContacts } from '../../renderFieldForm/renderFieldSelectContacts/renderFieldSelectContacts'
 import renderFieldArrayPhone from '../../renderFieldForm/renderFieldArrayPhone/renderFieldArrayPhone'
-
 
 const cx = classNames.bind(styles)
 
@@ -88,7 +86,7 @@ class ContactsEditing extends Component {
 }
 
 ContactsEditing.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.number.isRequired,
   contactsEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 }
@@ -147,27 +145,23 @@ const ContactsEditingForm = reduxForm({
   enableReinitialize: true,
 })(ContactsEditing)
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   const { users } = state.listUsers
-  if (users.length >= 1) {
-    const id = Number(ownProps.match.params.id)
-    const user = users.find(user => user.id === id)
-    const {
-      company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
-    } = user
-    return {
-      initialValues: {
-        company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
-      },
-      id,
-    }
-  }
+  const { pathname } = state.router.location
+  const id = Number(pathname.slice(9, pathname.indexOf('/', 9)))
+  const user = { ...users[id - 1] }
+  const {
+    company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
+  } = user
   return {
-    isLoading: false,
+    initialValues: {
+      company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
+    },
+    id,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { contactsEditingSave, push  },
+  { contactsEditingSave },
 )(ContactsEditingForm)

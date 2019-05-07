@@ -15,8 +15,7 @@ import { users } from '../../stubs/users'
 import AddingNewUserPage from '../AddingNewUserPage/AddingNewUserPage'
 import EditUserPage from '../EditUserPage/EditUserPage'
 import ListUsersPage from '../ListUsersPage/ListUsersPage'
-import EditingPage from '../EditingPage/EditingPage'
-
+import { EditingPage } from '../EditingPage/EditingPage'
 
 const cx = classNames.bind(styles)
 
@@ -49,9 +48,9 @@ class App extends Component {
           <Header />
           <Switch>
             <Route path='/NodFound' component={NodFound} />
-            <Route exact path='/ListUsers/:id' component={ListUsersPage} />
+            <Route exact path='/ListUsers' component={ListUsersPage} />
             <Route exact path='/EditUser/:id' component={EditUserPage} />
-            <Route path='/Editing/:id' component={EditingPage} />
+            <Route path='/Editing/' component={EditingPage} />
             <Route path='/' component={AddingNewUserPage} />
             <Redirect to='/NodFound' />
           </Switch>

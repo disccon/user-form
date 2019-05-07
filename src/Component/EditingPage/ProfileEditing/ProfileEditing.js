@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { push } from 'connected-react-router'
 import classNames from 'classnames'
 import { reduxForm, Field } from 'redux-form'
 import styles from '../../UserFormBox/UserFormBox.scss'
@@ -13,106 +12,97 @@ import {
 } from '../../renderFieldForm/renderDateTimePickerProfile/renderDateTimePickerProfile'
 import { renderFieldRadioProfile } from '../../renderFieldForm/renderFieldRadioProfile/renderFieldRadioProfile'
 
+
 const cx = classNames.bind(styles)
 
+
 class ProfileEditing extends Component {
-  componentDidUpdate() {
-    const { push, isLoading } = this.props
-    if (isLoading === 'NodFound') {
-      push(isLoading)
+    onSubmit = values => {
+      const { profileEditingSave, id } = this.props
+      profileEditingSave(values.firstName, values.lastName, values.birthDate, values.email,
+        values.address, values.gender, id)
     }
-  }
 
-  onSubmit = values => {
-    const { profileEditingSave, id } = this.props
-    profileEditingSave(values.firstName, values.lastName, values.birthDate, values.email,
-      values.address, values.gender, id)
-  }
-
-  render() {
-    const { handleSubmit } = this.props
-    return (
-      <UserFormBox handleSubmit={handleSubmit(this.onSubmit)}>
-        <div className={cx('userFormBox__sideLeft')}>
-          <Field
-            component={renderFieldInputNewUser}
-            type='text'
-            span
-            label='First name'
-            name='firstName'
-            idField='fieldFirstName'
-            classNameLabel='inputNewUser'
-          />
-          <Field
-            component={renderFieldInputNewUser}
-            type='text'
-            span
-            label='Last name'
-            name='lastName'
-            idField='fieldLastName'
-            classNameLabel='inputNewUser'
-          />
-          <Field name='birthDate' component={renderDateTimePickerProfile}/>
-        </div>
-        <div className={cx('userFormBox__sideRight')}>
-          <Field
-            component={renderFieldInputNewUser}
-            type='text'
-            span
-            label='Email'
-            name='email'
-            idField='fieldEmail'
-            classNameLabel='inputNewUser'
-          />
-          <Field
-            component={renderFieldInputNewUser}
-            type='text'
-            span
-            label='Address'
-            name='address'
-            idField='fieldAddress'
-            classNameLabel='inputNewUser'
-          />
-          <h5>Gender</h5>
-          <div className={cx('userFormBox__wrapperGender')}>
+    render() {
+      const { handleSubmit } = this.props
+      return (
+        <UserFormBox handleSubmit={handleSubmit(this.onSubmit)}>
+          <div className={cx('userFormBox__sideLeft')}>
             <Field
-              component={renderFieldRadioProfile}
-              type='radio'
-              label='Male'
-              name='gender'
-              value='male'
-              idField='fieldMale'
+              component={renderFieldInputNewUser}
+              type='text'
+              span
+              label='First name'
+              name='firstName'
+              idField='fieldFirstName'
+              classNameLabel='inputNewUser'
             />
             <Field
-              component={renderFieldRadioProfile}
-              type='radio'
-              label='Female'
-              name='gender'
-              value='female'
-              idField='fieldFemale'
+              component={renderFieldInputNewUser}
+              type='text'
+              span
+              label='Last name'
+              name='lastName'
+              idField='fieldLastName'
+              classNameLabel='inputNewUser'
             />
+            <Field name='birthDate' component={renderDateTimePickerProfile} />
           </div>
-          <div className={cx('userFormBox__wrapperButton')}>
-            <button type='submit' className={cx('userFormBox__saveNewListButton')}>
-              Save
-            </button>
+          <div className={cx('userFormBox__sideRight')}>
+            <Field
+              component={renderFieldInputNewUser}
+              type='text'
+              span
+              label='Email'
+              name='email'
+              idField='fieldEmail'
+              classNameLabel='inputNewUser'
+            />
+            <Field
+              component={renderFieldInputNewUser}
+              type='text'
+              span
+              label='Address'
+              name='address'
+              idField='fieldAddress'
+              classNameLabel='inputNewUser'
+            />
+            <h5>Gender</h5>
+            <div className={cx('userFormBox__wrapperGender')}>
+              <Field
+                component={renderFieldRadioProfile}
+                type='radio'
+                label='Male'
+                name='gender'
+                value='male'
+                idField='fieldMale'
+              />
+              <Field
+                component={renderFieldRadioProfile}
+                type='radio'
+                label='Female'
+                name='gender'
+                value='female'
+                idField='fieldFemale'
+              />
+            </div>
+            <div className={cx('userFormBox__wrapperButton')}>
+              <button type='submit' className={cx('userFormBox__saveNewListButton')}>
+                Save
+              </button>
+            </div>
           </div>
-        </div>
-      </UserFormBox>
-    )
-  }
+        </UserFormBox>
+      )
+    }
 }
 
 ProfileEditing.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.number.isRequired,
   profileEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  push: PropTypes.func.isRequired,
-  isLoading: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
 }
+
 
 const ProfileEditingForm = reduxForm({
   validate: (values, props) => {
@@ -157,35 +147,27 @@ const ProfileEditingForm = reduxForm({
   enableReinitialize: true,
 })(ProfileEditing)
 
-const mapStateToProps = (state, ownProps) => {
+
+const mapStateToProps = state => {
   const { users } = state.listUsers
-  if (users.length >= 1) {
-    const id = Number(ownProps.match.params.id)
-    const user = users.find(user => user.id === id)
-    if (!user) {
-      return {
-        isLoading: 'NodFound',
-      }
-    }
-    const {
-      firstName, lastName, birthDate, email, address, gender,
-    } = user
-    const userEmailFilter = users.filter(user => user.id !== id)
-    const userEmailList = userEmailFilter.map(user => user.email)
-    return {
-      initialValues: {
-        firstName, lastName, birthDate, email, address, gender,
-      },
-      userEmailList,
-      id,
-    }
-  }
+  const { pathname } = state.router.location
+  const id = Number(pathname.slice(9, pathname.indexOf('/', 9)))
+  const user = { ...users[id - 1] }
+  const {
+    firstName, lastName, birthDate, email, address, gender,
+  } = user
+  const userEmailFilter = users.filter(user => user.id !== id)
+  const userEmailList = userEmailFilter.map(user => user.email)
   return {
-    isLoading: false,
+    initialValues: {
+      firstName, lastName, birthDate, email, address, gender,
+    },
+    userEmailList,
+    id,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { profileEditingSave, push },
+  { profileEditingSave },
 )(ProfileEditingForm)

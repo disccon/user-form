@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { push } from 'connected-react-router'
 import { Field, reduxForm } from 'redux-form'
 import styles from '../../UserFormBox/UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
@@ -11,7 +10,6 @@ import { accountEditingSave } from '../../../Actions'
 import { renderFieldInputAccount } from '../../renderFieldForm/renderFieldInputAccount/renderFieldInputAccount'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
 
-
 const cx = classNames.bind(styles)
 
 class AccountEditing extends Component {
@@ -19,12 +17,6 @@ class AccountEditing extends Component {
     avatarIMGError: null,
     typeFieldPassword: 'text',
     userSRCAvatarIMGState: this.props.userSRCAvatarIMG,
-  }
-  componentDidUpdate() {
-    const { push, isLoading } = this.props
-    if (isLoading === 'NodFound') {
-      push(isLoading)
-    }
   }
 
   addImageUserAvatar = event => {
@@ -164,51 +156,36 @@ const AccountEditingForm = reduxForm({
 })(AccountEditing)
 
 AccountEditing.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.number.isRequired,
   userSRCAvatarIMG: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
   ]),
   accountEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func,
-  push: PropTypes.func.isRequired,
-  isLoading: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   const { users } = state.listUsers
-  if (users.length >= 1) {
-    const id = Number(ownProps.match.params.id)
-    const user = users.find(user => user.id === id)
-    if (!user) {
-      return {
-        isLoading: 'NodFound',
-      }
-    } else {
-      const {
-        userName, password, repeatPassword, userSRCAvatarIMG,
-      } = user
-      const userFilterName = users.filter(user => user.id !== id)
-      const userNameList = userFilterName.map(user => user.userName)
-      return {
-        initialValues: {
-          userName, password, repeatPassword,
-        },
-        userSRCAvatarIMG,
-        userNameList,
-        id,
-      }
-    }
-  }
+  const { pathname } = state.router.location
+  const id = Number(pathname.slice(9, pathname.length - 1))
+  const user = { ...users[id - 1] }
+  const {
+    userName, password, repeatPassword, userSRCAvatarIMG,
+  } = user
+  const userFilterName = users.filter(user => user.id !== id)
+  const userNameList = userFilterName.map(user => user.userName)
   return {
-    isLoading: false,
+    initialValues: {
+      userName, password, repeatPassword,
+    },
+    userSRCAvatarIMG,
+    userNameList,
+    id,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { accountEditingSave, push  },
+  { accountEditingSave },
 )(AccountEditingForm)

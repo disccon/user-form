@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
-import { push } from 'connected-react-router'
 import { capabilitiesEditingSave } from '../../../Actions'
 import styles from '../../UserFormBox/UserFormBox.scss'
 import {
@@ -17,18 +16,9 @@ import {
 } from '../../renderFieldForm/renderFieldCheckboxCapabilities/renderFieldCheckboxCapabilities'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
 
-
-
 const cx = classNames.bind(styles)
 
 class CapabilitiesEditing extends Component {
-  componentDidUpdate() {
-    const { push, isLoading } = this.props
-    if (isLoading === 'NodFound') {
-      push(isLoading)
-    }
-  }
-
   onSubmit = values => {
     const { capabilitiesEditingSave, id } = this.props
     capabilitiesEditingSave(values.selectSkills, values.textareaField, values.checkboxArt, values.checkboxSport,
@@ -102,14 +92,9 @@ class CapabilitiesEditing extends Component {
 }
 
 CapabilitiesEditing.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.number.isRequired,
   capabilitiesEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  push: PropTypes.func.isRequired,
-  isLoading: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
 }
 
 const CapabilitiesEditingForm = reduxForm({
@@ -137,41 +122,31 @@ const CapabilitiesEditingForm = reduxForm({
   enableReinitialize: true,
 })(CapabilitiesEditing)
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   const { users } = state.listUsers
-  if (users.length >= 1) {
-    const id = Number(ownProps.match.params.id)
-    const user = users.find(user => user.id === id)
-    if (!user) {
-      return {
-        isLoading: 'NodFound',
-      }
-    } else {
-      const {
-        selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
-        checkboxGuitar, checkboxWtf,
-      } = user
-      return {
-        initialValues: {
-          selectSkills,
-          textareaField,
-          checkboxArt,
-          checkboxSport,
-          checkboxJustWant,
-          checkboxFemale,
-          checkboxGuitar,
-          checkboxWtf,
-        },
-        id,
-      }
-    }
-  }
+  const { pathname } = state.router.location
+  const id = Number(pathname.slice(9, pathname.indexOf('/', 9)))
+  const user = { ...users[id - 1] }
+  const {
+    selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
+    checkboxGuitar, checkboxWtf,
+  } = user
   return {
-    isLoading: false,
+    initialValues: {
+      selectSkills,
+      textareaField,
+      checkboxArt,
+      checkboxSport,
+      checkboxJustWant,
+      checkboxFemale,
+      checkboxGuitar,
+      checkboxWtf,
+    },
+    id,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { capabilitiesEditingSave, push  },
+  { capabilitiesEditingSave },
 )(CapabilitiesEditingForm)
