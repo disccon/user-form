@@ -8,6 +8,9 @@ import {
   DELETE_USER__SUCCESS,
   DELETE_USER__FAILURE,
 
+  SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS,
+  SAVE_AVATAR_ACCOUNT_EDITING__FAILURE,
+
   ACCOUNT_EDITING_SAVE__SUCCESS,
   ACCOUNT_EDITING_SAVE__FAILURE,
 
@@ -63,6 +66,20 @@ export default function listUsersReducer(state = initialListUsers, action) {
       }
     }
     case DELETE_USER__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+    case SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS: {
+      return {
+        ...state,
+        users: action.payload.newListUsers,
+        error: undefined,
+      }
+    }
+    case SAVE_AVATAR_ACCOUNT_EDITING__FAILURE: {
       return {
         ...state,
         error: action.error,

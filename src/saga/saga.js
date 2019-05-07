@@ -48,6 +48,9 @@ import {
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
 
+  SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS,
+  SAVE_AVATAR_ACCOUNT_EDITING__FAILURE,
+
   ACCOUNT_EDITING_SAVE__SUCCESS,
   ACCOUNT_EDITING_SAVE__FAILURE,
 
@@ -376,6 +379,48 @@ export function* createUserSaga() {
   } catch (error) {
     yield put({
       type: CREATE_USER__FAILURE,
+      error,
+    })
+  }
+}
+
+
+export function* saveAvatarAccountEditingSaga(action) {
+  const {
+    userSRCAvatarIMGState, id,
+  } = action.payload
+  const users = yield select(state => state.listUsers.users)
+  const user = users[id - 1]
+  try {
+    db.listUserDB.update(id, {
+      userSRCAvatarIMGState,
+    })
+    let indexEditUser
+    users.forEach((item, i) => {
+      if (item.id === id) {
+        indexEditUser = i
+      }
+    })
+    const newUserStart = users.slice(0, indexEditUser)
+    const newUserEnd = users.slice(1 + indexEditUser)
+    const newListUsers = [
+      ...newUserStart,
+      {
+        ...user,
+        userSRCAvatarIMGState,
+      },
+      ...newUserEnd,
+    ]
+    yield put({
+      type: SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS,
+      payload: {
+        newListUsers,
+      },
+    })
+  } catch
+  (error) {
+    yield put({
+      type: SAVE_AVATAR_ACCOUNT_EDITING__FAILURE,
       error,
     })
   }

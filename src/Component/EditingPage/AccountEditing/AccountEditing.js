@@ -7,7 +7,7 @@ import { Field, reduxForm } from 'redux-form'
 import styles from '../../UserFormBox/UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
-import { accountEditingSave } from '../../../Actions'
+import { accountEditingSave, saveAvatarAccountEditing } from '../../../Actions'
 import { renderFieldInputAccount } from '../../renderFieldForm/renderFieldInputAccount/renderFieldInputAccount'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
 
@@ -18,7 +18,6 @@ class AccountEditing extends Component {
   state = {
     avatarIMGError: null,
     typeFieldPassword: 'text',
-    userSRCAvatarIMGState: this.props.userSRCAvatarIMG,
   }
 
   componentDidUpdate() {
@@ -30,6 +29,7 @@ class AccountEditing extends Component {
 
   addImageUserAvatar = event => {
     event.preventDefault()
+    const { saveAvatarAccountEditing, id } = this.props
     const reader = new FileReader()
     const fileIMG = event.target.files[0]
     const fileSize = fileIMG.size / 1024 / 1024
@@ -37,8 +37,8 @@ class AccountEditing extends Component {
       reader.onloadend = () => {
         this.setState({
           avatarIMGError: false,
-          userSRCAvatarIMGState: reader.result,
         })
+        saveAvatarAccountEditing(reader.result, id)
       }
       reader.readAsDataURL(fileIMG)
     } else {
@@ -49,9 +49,8 @@ class AccountEditing extends Component {
   }
 
   onSubmit = values => {
-    const { accountEditingSave, id } = this.props
-    const { userSRCAvatarIMGState } = this.state
-    accountEditingSave(values.userName, values.password, values.repeatPassword, userSRCAvatarIMGState, id)
+    const { accountEditingSave, id, userSRCAvatarIMG } = this.props
+    accountEditingSave(values.userName, values.password, values.repeatPassword, userSRCAvatarIMG, id)
   }
 
   changeTypePassword = () => {
@@ -68,10 +67,10 @@ class AccountEditing extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props
-    const { avatarIMGError, typeFieldPassword, userSRCAvatarIMGState } = this.state
-    const userAvatarIMG = userSRCAvatarIMGState
-      ? <img className={cx('userAvatarWrapper__userAvatarIMG')} src={userSRCAvatarIMGState} alt='userAvatar' />
+    const { handleSubmit, userSRCAvatarIMG } = this.props
+    const { avatarIMGError, typeFieldPassword } = this.state
+    const userAvatarIMG = userSRCAvatarIMG
+      ? <img className={cx('userAvatarWrapper__userAvatarIMG')} src={userSRCAvatarIMG} alt='userAvatar' />
       : <UserAvatarIcon className={cx('userAvatarWrapper__userAvatarSVG')} alt='userAvatar' />
     const UserAvatar = avatarIMGError
       ? <p className={cx('userAvatarWrapper__avatarError')}>{avatarIMGError}</p> : null
@@ -177,6 +176,7 @@ AccountEditing.propTypes = {
     PropTypes.string,
     PropTypes.bool,
   ]),
+  saveAvatarAccountEditing: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -210,5 +210,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { accountEditingSave, push },
+  { accountEditingSave, saveAvatarAccountEditing, push },
 )(AccountEditingForm)
