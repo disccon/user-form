@@ -33,11 +33,26 @@ const paginationStyles = {
 }
 
 class ListUsersPage extends Component {
-  componentDidUpdate() {
-    const { push, isLoading } = this.props
-    if (isLoading === '/NodFound') {
-      push(isLoading)
-    }
+  state = {
+    users: [],
+  }
+
+  componentDidMount() {
+    const { perPage, page, push } = this.props
+    db.listUserDB.toArray(users => {
+      if (users.length >= perPage * page) {
+        console.log(111)
+        push({ pathname: '/ListUsers', query: { page: 1, per_page: 10 } })
+        this.setState({
+          users,
+        })
+      } else {
+        // push('/NodFound')
+        // console.log(111)
+        // push({pathname: '/ListUsers',
+        //   query: {page:1,per_page:10}})
+      }
+    })
   }
 
   deleteUser = idListUser => () => {
@@ -53,8 +68,9 @@ class ListUsersPage extends Component {
 
   render() {
     const {
-      users, perPage, page, classes,
+      perPage, page, classes,
     } = this.props
+    const { users } = this.state
     const visibleUser = users.slice((page * perPage), page * perPage + perPage)
     return (
       <Fragment>
@@ -99,27 +115,15 @@ ListUsersPage.propTypes = {
   users: PropTypes.array.isRequired,
   deleteUser: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
-  isLoading: PropTypes.string,
 }
 
 const mapStateToProps = (state, ownProps) => {
   const page = ownProps.match.params.id - 1
-  const { perPage, users } = state.listUsers
-  if (users.length >= 1) {
-    if (users.length < perPage * page) {
-      return {
-        isLoading: '/NodFound',
-        users: [],
-      }
-    }
-    return {
-      perPage,
-      users,
-      page,
-    }
-  }
+  const { perPage } = state.listUsers
+
   return {
-    users: [],
+    perPage,
+    page,
   }
 }
 
