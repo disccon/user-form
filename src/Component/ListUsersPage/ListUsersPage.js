@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { compose } from 'recompose'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { push } from 'connected-react-router'
 import { withStyles } from '@material-ui/core/styles'
 import classNames from 'classnames'
 import Pagination from 'material-ui-flat-pagination'
@@ -9,7 +10,7 @@ import styles from './ListUsersPage.scss'
 import NoHaveUserRow from './NoHaveUserRow/NoHaveUserRow'
 import db from '../../db'
 import { deleteUser } from '../../Actions'
-import { UserRow } from './UserRow/UserRow'
+import UserRow from './UserRow/UserRow'
 
 
 const cx = classNames.bind(styles)
@@ -31,55 +32,29 @@ const paginationStyles = {
   },
 }
 
-
 class ListUsersPage extends Component {
-  state = {
-    activePage: 0,
-    activeDeleteRow: false,
-  }
-
-  componentDidMount() {
-
-  }
-
-  changeActivePage = page => {
-    this.setState({
-      activePage: page,
-    })
-  }
-
-  showRemoveUserButton = id => () => {
-    this.setState({
-      activeDeleteRow: id,
-    })
+  componentDidUpdate() {
+    const { push, isLoading } = this.props
+    if (isLoading === '/NodFound') {
+      push(isLoading)
+    }
   }
 
   deleteUser = idListUser => () => {
-    const {
-      deleteUser, users,
-    } = this.props
-    const { activePage } = this.state
-    this.setState({
-      activeDeleteRow: false,
-    })
-    if (users.length === 1) {
-      this.setState({
-        activePage: (activePage - 1),
-      })
-    }
+    const { deleteUser } = this.props
     db.listUserDB.delete(idListUser)
     deleteUser(idListUser)
   }
 
   changePage = (event, offset) => {
-    const { perPage, page } = this.props
+    const { perPage, push } = this.props
+    push(`/ListUsers/${offset / perPage + 1}`)
   }
 
   render() {
     const {
       users, perPage, page, classes,
     } = this.props
-    const { activeDeleteRow } = this.state
     const visibleUser = users.slice((page * perPage), page * perPage + perPage)
     return (
       <Fragment>
@@ -99,8 +74,6 @@ class ListUsersPage extends Component {
               <UserRow
                 key={user.id}
                 user={user}
-                activeDeleteRow={activeDeleteRow}
-                showRemoveUserButton={this.showRemoveUserButton}
                 deleteUser={this.deleteUser}
               />
             ))}
@@ -109,35 +82,46 @@ class ListUsersPage extends Component {
         {users.length === 0 && <NoHaveUserRow />}
         <Pagination
           classes={classes}
-          limit={2}
+          limit={perPage}
           offset={page * perPage}
           total={users.length}
           onClick={this.changePage}
         />
-
       </Fragment>
     )
   }
 }
 
 ListUsersPage.propTypes = {
-  classes: PropTypes.object.isRequired,
-  perPage: PropTypes.number.isRequired,
-  page: PropTypes.number.isRequired,
+  classes: PropTypes.object,
+  perPage: PropTypes.number,
+  page: PropTypes.number,
   users: PropTypes.array.isRequired,
   deleteUser: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
+  isLoading: PropTypes.string,
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  page: state.listUsers.page,
-  perPage: state.listUsers.perPage,
-  users: state.listUsers.users,
-})
+const mapStateToProps = (state, ownProps) => {
+  const page = ownProps.match.params.id - 1
+  const { perPage, users } = state.listUsers
+  if (users.length < perPage * page) {
+    return {
+      isLoading: '/NodFound',
+      users: [],
+    }
+  }
+  return {
+    perPage,
+    users,
+    page,
+  }
+}
 
 export default compose(
   connect(
     mapStateToProps,
-    { deleteUser },
+    { deleteUser, push },
   ),
   withStyles(paginationStyles),
 )(ListUsersPage)

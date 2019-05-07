@@ -18,13 +18,12 @@ import {
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
 
 
-
 const cx = classNames.bind(styles)
 
 class CapabilitiesEditing extends Component {
   componentDidUpdate() {
     const { push, isLoading } = this.props
-    if (isLoading === 'NodFound') {
+    if (isLoading === '/NodFound') {
       push(isLoading)
     }
   }
@@ -144,26 +143,25 @@ const mapStateToProps = (state, ownProps) => {
     const user = users.find(user => user.id === id)
     if (!user) {
       return {
-        isLoading: 'NodFound',
+        isLoading: '/NodFound',
       }
-    } else {
-      const {
-        selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
-        checkboxGuitar, checkboxWtf,
-      } = user
-      return {
-        initialValues: {
-          selectSkills,
-          textareaField,
-          checkboxArt,
-          checkboxSport,
-          checkboxJustWant,
-          checkboxFemale,
-          checkboxGuitar,
-          checkboxWtf,
-        },
-        id,
-      }
+    }
+    const {
+      selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
+      checkboxGuitar, checkboxWtf,
+    } = user
+    return {
+      initialValues: {
+        selectSkills,
+        textareaField,
+        checkboxArt,
+        checkboxSport,
+        checkboxJustWant,
+        checkboxFemale,
+        checkboxGuitar,
+        checkboxWtf,
+      },
+      id,
     }
   }
   return {
@@ -173,5 +171,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { capabilitiesEditingSave, push  },
+  { capabilitiesEditingSave, push },
 )(CapabilitiesEditingForm)

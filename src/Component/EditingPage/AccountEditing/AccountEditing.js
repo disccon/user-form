@@ -20,9 +20,10 @@ class AccountEditing extends Component {
     typeFieldPassword: 'text',
     userSRCAvatarIMGState: this.props.userSRCAvatarIMG,
   }
+
   componentDidUpdate() {
     const { push, isLoading } = this.props
-    if (isLoading === 'NodFound') {
+    if (isLoading === '/NodFound') {
       push(isLoading)
     }
   }
@@ -185,22 +186,21 @@ const mapStateToProps = (state, ownProps) => {
     const user = users.find(user => user.id === id)
     if (!user) {
       return {
-        isLoading: 'NodFound',
+        isLoading: '/NodFound',
       }
-    } else {
-      const {
-        userName, password, repeatPassword, userSRCAvatarIMG,
-      } = user
-      const userFilterName = users.filter(user => user.id !== id)
-      const userNameList = userFilterName.map(user => user.userName)
-      return {
-        initialValues: {
-          userName, password, repeatPassword,
-        },
-        userSRCAvatarIMG,
-        userNameList,
-        id,
-      }
+    }
+    const {
+      userName, password, repeatPassword, userSRCAvatarIMG,
+    } = user
+    const userFilterName = users.filter(user => user.id !== id)
+    const userNameList = userFilterName.map(user => user.userName)
+    return {
+      initialValues: {
+        userName, password, repeatPassword,
+      },
+      userSRCAvatarIMG,
+      userNameList,
+      id,
     }
   }
   return {
@@ -210,5 +210,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { accountEditingSave, push  },
+  { accountEditingSave, push },
 )(AccountEditingForm)

@@ -17,6 +17,13 @@ import renderFieldArrayPhone from '../../renderFieldForm/renderFieldArrayPhone/r
 const cx = classNames.bind(styles)
 
 class ContactsEditing extends Component {
+  componentDidUpdate() {
+    const { push, isLoading } = this.props
+    if (isLoading === '/NodFound') {
+      push(isLoading)
+    }
+  }
+
   onSubmit = values => {
     const { contactsEditingSave, id } = this.props
     contactsEditingSave(values.company, values.githubLink, values.facebookLink, values.selectLanguage,
@@ -91,6 +98,11 @@ ContactsEditing.propTypes = {
   id: PropTypes.number,
   contactsEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
+  isLoading: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
 }
 
 const ContactsEditingForm = reduxForm({
@@ -152,6 +164,11 @@ const mapStateToProps = (state, ownProps) => {
   if (users.length >= 1) {
     const id = Number(ownProps.match.params.id)
     const user = users.find(user => user.id === id)
+    if (!user) {
+      return {
+        isLoading: '/NodFound',
+      }
+    }
     const {
       company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
     } = user
@@ -169,5 +186,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { contactsEditingSave, push  },
+  { contactsEditingSave, push },
 )(ContactsEditingForm)
