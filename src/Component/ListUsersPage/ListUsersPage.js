@@ -35,6 +35,7 @@ class ListUsersPage extends Component {
   state = {
     users: [],
     page: null,
+    limitPage: null,
   }
 
   componentDidMount() {
@@ -57,17 +58,51 @@ class ListUsersPage extends Component {
         isNumberPage = 1
       }
     }
-
-    if (Number(page) > Number(limitPage)) {
-      push('/NodFound')
-    } else {
-      db.listUserDB.toArray(users => {
+    db.listUserDB.toArray(users => {
+      if (Number(page) > Number(limitPage) || Math.ceil(users.length / limitPage) !== Number(limitPage) + 1 ) {
+        push('/NodFound')
+      } else {
         this.setState({
           users,
           page: page - 1,
+          limitPage: Number(limitPage),
         })
-      })
+      }
+    })
+  }
+
+  componentDidUpdate() {
+    const { perPage, push, search } = this.props
+    let isNumberID = 9999
+    let page = search.charAt(6)
+    for (let i = 0; i < isNumberID; i++) {
+      if (search.charAt(7 + i) >= 0) {
+        page = `${page}${search.charAt(7 + i)}`
+      } else {
+        isNumberID = 1
+      }
     }
+    let isNumberPage = 9999
+    let limitPage = search.charAt(search.length - 1)
+    for (let i = 1; i < isNumberPage; i++) {
+      if (search.charAt(search.length - i - 1) >= 0) {
+        limitPage = `${search.charAt(search.length - i - 1)}${limitPage}`
+      } else {
+        isNumberPage = 1
+      }
+    }
+
+    db.listUserDB.toArray(users => {
+      if (Number(page) > Number(limitPage) || Math.ceil(users.length / limitPage) !== Number(limitPage) + 1 ) {
+        push('/NodFound')
+      } else {
+        this.setState({
+          users,
+          page: page - 1,
+          limitPage: Number(limitPage),
+        })
+      }
+    })
   }
 
   deleteUser = idListUser => () => {
@@ -78,7 +113,8 @@ class ListUsersPage extends Component {
 
   changePage = (event, offset) => {
     const { perPage, push } = this.props
-    push(`/ListUsers/${offset / perPage + 1}`)
+    const { limitPage } = this.state
+    push({ pathname: '/ListUsers', search: `?page=${offset / perPage + 1}&per_page=${limitPage}` })
   }
 
   render() {
@@ -92,22 +128,22 @@ class ListUsersPage extends Component {
         <h2 className={cx('headline')}>List of users</h2>
         <table className={cx('listUsersTable container')}>
           <thead className={cx('listUsers__thead')}>
-            <tr className={cx('listUsers__tr')}>
-              <th className={cx('listUsers__name')}>name</th>
-              <th className={cx('listUsers__company')}>company</th>
-              <th className={cx('listUsers__contacts')}>contacts</th>
-              <th className={cx('listUsers__update')}>last update</th>
-            </tr>
+          <tr className={cx('listUsers__tr')}>
+            <th className={cx('listUsers__name')}>name</th>
+            <th className={cx('listUsers__company')}>company</th>
+            <th className={cx('listUsers__contacts')}>contacts</th>
+            <th className={cx('listUsers__update')}>last update</th>
+          </tr>
           </thead>
           <tbody>
-            <tr className={cx('listUsers__update')} />
-            {users.length > 0 && visibleUser.map(user => (
-              <UserRow
-                key={user.id}
-                user={user}
-                deleteUser={this.deleteUser}
-              />
-            ))}
+          <tr className={cx('listUsers__update')} />
+          {users.length > 0 && visibleUser.map(user => (
+            <UserRow
+              key={user.id}
+              user={user}
+              deleteUser={this.deleteUser}
+            />
+          ))}
           </tbody>
         </table>
         {users.length === 0 && <NoHaveUserRow />}
