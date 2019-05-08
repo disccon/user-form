@@ -35,7 +35,7 @@ const EditingPage = ({ pathname, id }) => (
         </div>
       </div>
       <Switch>
-        <Route exact path='/Editing/:id' component={AccountEditing} disi='dsdsds' />
+        <Route exact path='/Editing/:id' component={AccountEditing} />
         <Route exact path='/Editing/:id/Profile' component={ProfileEditing} />
         <Route exact path='/Editing/:id/Contacts' component={ContactsEditing} />
         <Route exact path='/Editing/:id/Capabilities' component={CapabilitiesEditing} />

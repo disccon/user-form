@@ -12,7 +12,6 @@ import db from '../../db'
 import { deleteUser } from '../../Actions'
 import UserRow from './UserRow/UserRow'
 
-
 const cx = classNames.bind(styles)
 
 const paginationStyles = {
@@ -35,24 +34,40 @@ const paginationStyles = {
 class ListUsersPage extends Component {
   state = {
     users: [],
+    page: null,
   }
 
   componentDidMount() {
-    const { perPage, page, push } = this.props
-    db.listUserDB.toArray(users => {
-      if (users.length >= perPage * page) {
-        console.log(111)
-        push({ pathname: '/ListUsers', query: { page: 1, per_page: 10 } })
+    const { perPage, push, search } = this.props
+    let isNumberID = 9999
+    let page = search.charAt(6)
+    for (let i = 0; i < isNumberID; i++) {
+      if (search.charAt(7 + i) >= 0) {
+        page = `${page}${search.charAt(7 + i)}`
+      } else {
+        isNumberID = 1
+      }
+    }
+    let isNumberPage = 9999
+    let limitPage = search.charAt(search.length - 1)
+    for (let i = 1; i < isNumberPage; i++) {
+      if (search.charAt(search.length - i - 1) >= 0) {
+        limitPage = `${search.charAt(search.length - i - 1)}${limitPage}`
+      } else {
+        isNumberPage = 1
+      }
+    }
+
+    if (Number(page) > Number(limitPage)) {
+      push('/NodFound')
+    } else {
+      db.listUserDB.toArray(users => {
         this.setState({
           users,
+          page: page - 1,
         })
-      } else {
-        // push('/NodFound')
-        // console.log(111)
-        // push({pathname: '/ListUsers',
-        //   query: {page:1,per_page:10}})
-      }
-    })
+      })
+    }
   }
 
   deleteUser = idListUser => () => {
@@ -68,9 +83,9 @@ class ListUsersPage extends Component {
 
   render() {
     const {
-      perPage, page, classes,
+      perPage, classes,
     } = this.props
-    const { users } = this.state
+    const { users, page } = this.state
     const visibleUser = users.slice((page * perPage), page * perPage + perPage)
     return (
       <Fragment>
@@ -96,13 +111,15 @@ class ListUsersPage extends Component {
           </tbody>
         </table>
         {users.length === 0 && <NoHaveUserRow />}
-        <Pagination
-          classes={classes}
-          limit={perPage}
-          offset={page * perPage}
-          total={users.length}
-          onClick={this.changePage}
-        />
+        {users.length > 1 && (
+          <Pagination
+            classes={classes}
+            limit={perPage}
+            offset={page * perPage}
+            total={users.length}
+            onClick={this.changePage}
+          />
+        )}
       </Fragment>
     )
   }
@@ -111,19 +128,19 @@ class ListUsersPage extends Component {
 ListUsersPage.propTypes = {
   classes: PropTypes.object,
   perPage: PropTypes.number,
-  page: PropTypes.number,
-  users: PropTypes.array.isRequired,
+  // page: PropTypes.number,
+  // users: PropTypes.array.isRequired,
   deleteUser: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const page = ownProps.match.params.id - 1
+  // const page = ownProps.match.params.id - 1
   const { perPage } = state.listUsers
-
+  const { search } = ownProps.location
   return {
     perPage,
-    page,
+    search,
   }
 }
 
