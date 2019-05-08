@@ -43,6 +43,7 @@ class ListUsersPage extends Component {
     const { push, search } = this.props
     const valueQuery = queryString.parse(search)
     const { page, per_page } = valueQuery
+    console.log(page, per_page)
     db.listUserDB.toArray(users => {
       if (Number(page) > Number(per_page) || Math.ceil(users.length / per_page) !== Number(per_page) + 1 ) {
         push('/NodFound')
