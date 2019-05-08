@@ -8,8 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="966abf2f-679a-466a-9520-94271c675336" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Component/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Header/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="165" column="28" lean-forward="true" selection-start-line="165" selection-start-column="28" selection-end-line="165" selection-end-column="28" />
+            <state relative-caret-position="168">
+              <caret line="44" column="19" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
@@ -33,12 +35,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/UserRow/UserRow.js">
+        <entry file="file://$PROJECT_DIR$/src/Component/Header/Header.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="34" column="12" lean-forward="true" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
+            <state relative-caret-position="441">
+              <caret line="48" column="67" selection-start-line="48" selection-start-column="59" selection-end-line="48" selection-end-column="67" />
               <folding>
-                <element signature="e#0#50#0" expanded="true" />
+                <element signature="e#0#40#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -104,8 +106,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Component/AddingNewUserPage/UserProfileBox.js" />
-        <option value="$PROJECT_DIR$/src/Component/UserProfileBox/UserProfileBox.scss" />
         <option value="$PROJECT_DIR$/src/Component/UserProfileBox/UserProfileBox.js" />
         <option value="$PROJECT_DIR$/src/Component/EditingPage/AccountEditing/AccountEditing.scss" />
         <option value="$PROJECT_DIR$/src/Component/AddingNewUserPage/Profile/Profile.scss" />
@@ -149,11 +149,13 @@
         <option value="$PROJECT_DIR$/src/reducers/listUsersReducer.js" />
         <option value="$PROJECT_DIR$/src/stubs/initialListUsers.js" />
         <option value="$PROJECT_DIR$/src/Component/AddingNewUserPage/Account/QuestionAccount/QuestionAccount.js" />
-        <option value="$PROJECT_DIR$/src/Component/ListUsersPage/UserRow/UserRow.scss" />
         <option value="$PROJECT_DIR$/src/Component/AddingNewUserPage/AddingNewUserPage.js" />
         <option value="$PROJECT_DIR$/src/Component/EditingPage/EditingPage.js" />
         <option value="$PROJECT_DIR$/src/Component/App/App.js" />
         <option value="$PROJECT_DIR$/src/Component/Header/Header.js" />
+        <option value="$PROJECT_DIR$/src/Component/ListUsersPage/UserRow/UserRow.scss" />
+        <option value="/tmp/mozilla_user0/Archive (Артюх)/generative/perlin.html" />
+        <option value="/tmp/mozilla_user0/Archive (Артюх)/generative/lerp.html" />
         <option value="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" />
       </list>
     </option>
@@ -204,15 +206,7 @@
               <item name="wizardForm" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Component" type="462c0819:PsiDirectoryNode" />
-              <item name="ListUsersPage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wizardForm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wizardForm" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Component" type="462c0819:PsiDirectoryNode" />
-              <item name="ListUsersPage" type="462c0819:PsiDirectoryNode" />
-              <item name="UserRow" type="462c0819:PsiDirectoryNode" />
+              <item name="Header" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -371,14 +365,7 @@
       <workItem from="1557122821739" duration="7039000" />
       <workItem from="1557130316050" duration="23760000" />
       <workItem from="1557209380155" duration="12761000" />
-      <workItem from="1557296166004" duration="10985000" />
-    </task>
-    <task id="LOCAL-00013" summary="EditPage2">
-      <created>1555421349185</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1555421349185</updated>
+      <workItem from="1557296166004" duration="14391000" />
     </task>
     <task id="LOCAL-00014" summary="renderField">
       <created>1555429274728</created>
@@ -716,11 +703,18 @@
       <option name="project" value="LOCAL" />
       <updated>1557306286728</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary=" ListUsersPage indexedDB Pagination">
+      <created>1557307641487</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1557307641487</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="617432000" />
+    <option name="totallyTimeSpent" value="620838000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -735,7 +729,7 @@
     <frame x="0" y="25" width="1920" height="1006" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18089648" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18089648" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="npm" order="3" side_tool="true" />
@@ -748,7 +742,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32839224" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49786553" visible="true" weight="0.24401368" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49786553" visible="true" weight="0.24401368" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50213444" side_tool="true" weight="0.24401368" />
       <window_info anchor="bottom" id="TypeScript" order="11" weight="0.3295325" />
       <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.49893278" weight="0.327252" />
@@ -853,36 +847,6 @@
     <option name="LAST_COMMIT_MESSAGE" value=" ListUsersPage indexedDB Pagination" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/Pagination/Pagination.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="28" lean-forward="true" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/AddingNewUserPage/AddingNewUser.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="21" lean-forward="true" selection-start-column="21" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/renderFieldForm/renderFieldCheckboxCapabilities/renderFieldCheckboxCapabilities.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/renderFieldForm/renderFieldArrayPhone/renderFieldArrayPhone.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="1" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/renderFieldForm/renderFieldInputAccount/renderFieldInputAccount.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
@@ -1160,13 +1124,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/UserRow/UserRow.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/Pagination/Pagination.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1247,30 +1204,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/Header/Header.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="74" column="27" lean-forward="true" selection-start-line="74" selection-start-column="27" selection-end-line="74" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/UserRow/UserRow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="34" column="12" lean-forward="true" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
+        <state relative-caret-position="168">
+          <caret line="35" column="62" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="62" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/UserRow/UserRow.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="72" column="16" selection-start-line="72" selection-start-column="16" selection-end-line="72" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///tmp/mozilla_user0/Archive (Артюх)/generative/perlin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-19">
+          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///tmp/mozilla_user0/Archive (Артюх)/generative/circle.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///tmp/mozilla_user0/Archive (Артюх)/perf.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file:///tmp/mozilla_user0/Archive (Артюх)/generative/lerp.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="632">
+          <caret line="41" column="23" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Component/Header/Header.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="48" column="67" selection-start-line="48" selection-start-column="59" selection-end-line="48" selection-end-column="67" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="165" column="28" lean-forward="true" selection-start-line="165" selection-start-column="28" selection-end-line="165" selection-end-column="28" />
+        <state relative-caret-position="168">
+          <caret line="44" column="19" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
           </folding>

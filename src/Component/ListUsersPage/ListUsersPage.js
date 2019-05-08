@@ -11,6 +11,7 @@ import NoHaveUserRow from './NoHaveUserRow/NoHaveUserRow'
 import db from '../../db'
 import { deleteUser } from '../../Actions'
 import UserRow from './UserRow/UserRow'
+import queryString from 'query-string'
 
 const cx = classNames.bind(styles)
 
@@ -40,32 +41,16 @@ class ListUsersPage extends Component {
 
   componentDidMount() {
     const { push, search } = this.props
-    let isNumberID = 9999
-    let page = search.charAt(6)
-    for (let i = 0; i < isNumberID; i++) {
-      if (search.charAt(7 + i) >= 0) {
-        page = `${page}${search.charAt(7 + i)}`
-      } else {
-        isNumberID = 1
-      }
-    }
-    let isNumberPage = 9999
-    let limitPage = search.charAt(search.length - 1)
-    for (let i = 1; i < isNumberPage; i++) {
-      if (search.charAt(search.length - i - 1) >= 0) {
-        limitPage = `${search.charAt(search.length - i - 1)}${limitPage}`
-      } else {
-        isNumberPage = 1
-      }
-    }
+    const valueQuery = queryString.parse(search)
+    const { page, per_page } = valueQuery
     db.listUserDB.toArray(users => {
-      if (Number(page) > Number(limitPage) || Math.ceil(users.length / limitPage) !== Number(limitPage) + 1 ) {
+      if (Number(page) > Number(per_page) || Math.ceil(users.length / per_page) !== Number(per_page) + 1 ) {
         push('/NodFound')
       } else {
         this.setState({
           users,
           page: page - 1,
-          limitPage: Number(limitPage),
+          limitPage: Number(per_page),
         })
       }
     })
@@ -73,33 +58,17 @@ class ListUsersPage extends Component {
 
   componentDidUpdate() {
     const { push, search } = this.props
-    let isNumberID = 9999
-    let page = search.charAt(6)
-    for (let i = 0; i < isNumberID; i++) {
-      if (search.charAt(7 + i) >= 0) {
-        page = `${page}${search.charAt(7 + i)}`
-      } else {
-        isNumberID = 1
-      }
-    }
-    let isNumberPage = 9999
-    let limitPage = search.charAt(search.length - 1)
-    for (let i = 1; i < isNumberPage; i++) {
-      if (search.charAt(search.length - i - 1) >= 0) {
-        limitPage = `${search.charAt(search.length - i - 1)}${limitPage}`
-      } else {
-        isNumberPage = 1
-      }
-    }
+    const valueQuery = queryString.parse(search)
+    const { page, per_page } = valueQuery
 
     db.listUserDB.toArray(users => {
-      if (Number(page) > Number(limitPage) || Math.ceil(users.length / limitPage) !== Number(limitPage) + 1 ) {
+      if (Number(page) > Number(per_page) || Math.ceil(users.length / per_page) !== Number(per_page) + 1 ) {
         push('/NodFound')
       } else {
         this.setState({
           users,
           page: page - 1,
-          limitPage: Number(limitPage),
+          limitPage: Number(per_page),
         })
       }
     })
