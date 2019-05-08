@@ -23,8 +23,8 @@ const cx = classNames.bind(styles)
 class CapabilitiesEditing extends Component {
   componentDidUpdate() {
     const { push, isLoading } = this.props
-    if (isLoading === 'NodFound') {
-      push(isLoading)
+    if (isLoading === false) {
+      push('/NodFound')
     }
   }
 
@@ -105,10 +105,7 @@ CapabilitiesEditing.propTypes = {
   capabilitiesEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
-  isLoading: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
+  isLoading: PropTypes.bool,
 }
 
 const CapabilitiesEditingForm = reduxForm({
@@ -143,7 +140,7 @@ const mapStateToProps = (state, ownProps) => {
     const user = users.find(user => user.id === id)
     if (!user) {
       return {
-        isLoading: 'NodFound',
+        isLoading: false,
       }
     }
     const {
@@ -165,7 +162,7 @@ const mapStateToProps = (state, ownProps) => {
     }
   }
   return {
-    isLoading: false,
+    users: [],
   }
 }
 

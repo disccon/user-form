@@ -13,7 +13,6 @@ import db from '../../db'
 import { deleteUser } from '../../Actions'
 import UserRow from './UserRow/UserRow'
 
-
 const cx = classNames.bind(styles)
 
 const paginationStyles = {
@@ -36,65 +35,77 @@ const paginationStyles = {
 class ListUsersPage extends Component {
   state = {
     users: [],
-    page: null,
-    limitPage: null,
+    lengthPage: null,
   }
 
   componentDidMount() {
-    const { push, search, lengthVisibleUser } = this.props
-    const valueQuery = queryString.parse(search)
-    const { page, per_page } = valueQuery
-    console.log(valueQuery, page, per_page)
-    db.listUserDB.toArray(users => {
-      if (Number(page) > Number(per_page) || Math.ceil(users.length / lengthVisibleUser) !== Number(per_page)
-        || !page || !per_page) {
-        push('/NodFound')
-      } else {
+    const { push, pathname } = this.props
+    if (pathname === '/ListUsers') {
+      db.listUserDB.toArray(users => {
         this.setState({
-          users,
-          page: page - 1,
-          limitPage: Number(per_page),
+          users: users.slice(0, 10),
+          lengthPage: users.length,
         })
-      }
-    })
-  }
-
-  componentDidUpdate() {
-    const { push, search, lengthVisibleUser } = this.props
-    const valueQuery = queryString.parse(search)
-    const { page, per_page } = valueQuery
-    db.listUserDB.toArray(users => {
-      if (Number(page) > Number(per_page) || Math.ceil(users.length / lengthVisibleUser) !== Number(per_page)
-        || !page || !per_page) {
-        push('/NodFound')
-      } else {
-        this.setState({
-          users,
-          page: page - 1,
-          limitPage: Number(per_page),
-        })
-      }
-    })
+        push({ pathname: '/ListUsers', search: '?page=1&per_page=10' })
+      })
+    }
   }
 
   deleteUser = idListUser => () => {
-    const { deleteUser } = this.props
+    const { push, search } = this.props
+    const valueQuery = queryString.parse(search)
+    const { page, per_page } = valueQuery
+    const pageNumber = Number(page)
+    const per_pageNumber = Number(per_page)
     db.listUserDB.delete(idListUser)
-    deleteUser(idListUser)
+    push({
+      pathname: '/ListUsers',
+      search: `?page=${page - 1}&per_page=${per_page}`,
+    })
+    db.listUserDB.toArray(usersDB => {
+      if (usersDB.length + per_pageNumber === pageNumber * per_pageNumber) {
+        this.setState({
+          users: usersDB.slice((pageNumber - 2) * per_pageNumber, (pageNumber - 2) * per_pageNumber + per_pageNumber),
+          lengthPage: usersDB.length,
+        })
+        push({
+          pathname: '/ListUsers',
+          search: `?page=${page - 1}&per_page=${per_page}`,
+        })
+      } else {
+        this.setState({
+          users: usersDB.slice((pageNumber - 1) * per_pageNumber, (pageNumber - 1) * per_pageNumber + per_pageNumber),
+          lengthPage: usersDB.length,
+        })
+      }
+    })
   }
 
   changePage = (event, offset) => {
-    const { lengthVisibleUser, push } = this.props
-    const { limitPage } = this.state
-    push({ pathname: '/ListUsers', search: `?page=${offset / lengthVisibleUser + 1}&per_page=${limitPage}` })
+    const { push, search } = this.props
+    const valueQuery = queryString.parse(search)
+    const { per_page } = valueQuery
+    push({
+      pathname: '/ListUsers',
+      search: `?page=${offset / per_page + 1}&per_page=${per_page}`,
+    })
+    db.listUserDB.toArray(users => {
+      this.setState({
+        users: users.slice(offset, offset + Number(per_page)),
+        lengthPage: users.length,
+      })
+      push({
+        pathname: '/ListUsers',
+        search: `?page=${offset / per_page + 1}&per_page=${per_page}`,
+      })
+    })
   }
 
   render() {
-    const {
-      lengthVisibleUser, classes,
-    } = this.props
-    const { users, page } = this.state
-    const visibleUser = users.slice((page * lengthVisibleUser), page * lengthVisibleUser + lengthVisibleUser)
+    const { classes, search } = this.props
+    const { users, lengthPage } = this.state
+    const valueQuery = queryString.parse(search)
+    const { page, per_page } = valueQuery
     return (
       <Fragment>
         <h2 className={cx('headline')}>List of users</h2>
@@ -109,7 +120,7 @@ class ListUsersPage extends Component {
           </thead>
           <tbody>
             <tr className={cx('listUsers__update')} />
-            {users.length > 0 && visibleUser.map(user => (
+            {users.length > 0 && users.map(user => (
               <UserRow
                 key={user.id}
                 user={user}
@@ -119,12 +130,12 @@ class ListUsersPage extends Component {
           </tbody>
         </table>
         {users.length === 0 && <NoHaveUserRow />}
-        {users.length > 1 && (
+        {users.length !== 0 && (
           <Pagination
             classes={classes}
-            limit={lengthVisibleUser}
-            offset={page * lengthVisibleUser}
-            total={users.length}
+            limit={per_page}
+            offset={per_page * page - per_page}
+            total={lengthPage}
             onClick={this.changePage}
           />
         )}
@@ -135,22 +146,18 @@ class ListUsersPage extends Component {
 
 ListUsersPage.propTypes = {
   classes: PropTypes.object,
-  perPage: PropTypes.number,
-  // page: PropTypes.number,
-  // users: PropTypes.array.isRequired,
+  pathname: PropTypes.string.isRequired,
   search: PropTypes.string,
-  deleteUser: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
-  lengthVisibleUser: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
-  // const page = ownProps.match.params.id - 1
   const { lengthVisibleUser } = state.listUsers
-  const { search } = ownProps.location
+  const { search, pathname } = ownProps.location
   return {
     lengthVisibleUser,
     search,
+    pathname,
   }
 }
 

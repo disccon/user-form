@@ -8,7 +8,6 @@ import classNames from 'classnames'
 import _ from 'lodash/core'
 import NodFound from '../NodFound/NodFound'
 import styles from './App.scss'
-
 import db from '../../db'
 import { userListerNewState, changeQuestionState } from '../../Actions'
 import { users } from '../../stubs/users'

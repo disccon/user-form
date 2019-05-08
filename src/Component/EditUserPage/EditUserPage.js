@@ -13,8 +13,8 @@ const cx = classNames.bind(styles)
 class EditUserPage extends Component {
   componentDidUpdate() {
     const { push, isLoading } = this.props
-    if (isLoading === '/NodFound') {
-      push(isLoading)
+    if (isLoading === false) {
+      push('/NodFound')
     }
   }
 
@@ -216,7 +216,7 @@ EditUserPage.propTypes = {
   ]),
   editUser: PropTypes.func.isRequired,
   id: PropTypes.number,
-  isLoading: PropTypes.string,
+  isLoading: PropTypes.bool,
   push: PropTypes.func.isRequired,
 }
 
@@ -227,7 +227,7 @@ const mapStateToProps = (state, ownProps) => {
     const user = users.find(i => i.id === id)
     if (!user) {
       return {
-        isLoading: '/NodFound',
+        isLoading: false,
       }
     }
     const {

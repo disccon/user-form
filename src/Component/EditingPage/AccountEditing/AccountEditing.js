@@ -22,8 +22,8 @@ class AccountEditing extends Component {
 
   componentDidUpdate() {
     const { push, isLoading } = this.props
-    if (isLoading === '/NodFound') {
-      push(isLoading)
+    if (isLoading === false) {
+      push('/NodFound')
     }
   }
 
@@ -172,10 +172,7 @@ AccountEditing.propTypes = {
   accountEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func,
   push: PropTypes.func.isRequired,
-  isLoading: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
+  isLoading: PropTypes.bool,
   saveAvatarAccountEditing: PropTypes.func.isRequired,
 }
 
@@ -186,7 +183,7 @@ const mapStateToProps = (state, ownProps) => {
     const user = users.find(user => user.id === id)
     if (!user) {
       return {
-        isLoading: '/NodFound',
+        isLoading: false,
       }
     }
     const {
@@ -204,7 +201,7 @@ const mapStateToProps = (state, ownProps) => {
     }
   }
   return {
-    isLoading: false,
+    users: [],
   }
 }
 
