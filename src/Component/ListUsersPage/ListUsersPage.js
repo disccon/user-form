@@ -44,8 +44,10 @@ class ListUsersPage extends Component {
     const { push, search, lengthVisibleUser } = this.props
     const valueQuery = queryString.parse(search)
     const { page, per_page } = valueQuery
+    console.log(valueQuery, page, per_page)
     db.listUserDB.toArray(users => {
-      if (Number(page) > Number(per_page) || Math.ceil(users.length / lengthVisibleUser) !== Number(per_page)) {
+      if (Number(page) > Number(per_page) || Math.ceil(users.length / lengthVisibleUser) !== Number(per_page)
+        || !page || !per_page) {
         push('/NodFound')
       } else {
         this.setState({
@@ -62,7 +64,8 @@ class ListUsersPage extends Component {
     const valueQuery = queryString.parse(search)
     const { page, per_page } = valueQuery
     db.listUserDB.toArray(users => {
-      if (Number(page) > Number(per_page) || Math.ceil(users.length / lengthVisibleUser) !== Number(per_page)) {
+      if (Number(page) > Number(per_page) || Math.ceil(users.length / lengthVisibleUser) !== Number(per_page)
+        || !page || !per_page) {
         push('/NodFound')
       } else {
         this.setState({
