@@ -1,4 +1,4 @@
 export const initialListUsers = {
   users: [],
-  perPage: 7,
+  lengthVisibleUser: 7,
 }

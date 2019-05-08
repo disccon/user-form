@@ -29,7 +29,6 @@ class EditUserPage extends Component {
       facebookLink, phoneN1, phoneN2, phoneN3, selectSkills, checkboxArt, checkboxSport, checkboxJustWant,
       checkboxFemale, checkboxGuitar, checkboxWtf,
     } = this.props
-    console.log(4444, birthDate)
     return (
       <div className={cx('container')}>
         <Link className={cx('linkBackPage')} to='/ListUsers'>{'<  Users List'}</Link>
@@ -224,10 +223,8 @@ EditUserPage.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   const id = Number(ownProps.match.params.id)
   const { users } = state.listUsers
-  console.log(1111, users)
   if (users.length >= 1) {
     const user = users.find(i => i.id === id)
-    console.log(222222, users)
     if (!user) {
       return {
         isLoading: '/NodFound',

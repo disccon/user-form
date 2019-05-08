@@ -18,10 +18,10 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    const { perPage } = this.props
+    const { lengthVisibleUser } = this.props
     db.listUserDB.toArray(users => {
       this.setState({
-        lengthListUsersPage: Math.ceil(users.length / perPage),
+        lengthListUsersPage: Math.ceil(users.length / lengthVisibleUser),
       })
     })
   }
@@ -64,16 +64,16 @@ Header.propTypes = {
   pathname: PropTypes.string.isRequired,
   createUser: PropTypes.func.isRequired,
   newUser: PropTypes.object.isRequired,
-  perPage: PropTypes.number.isRequired,
+  lengthVisibleUser: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = state => {
   const { pathname } = state.router.location
-  const { perPage } = state.listUsers
+  const { lengthVisibleUser } = state.listUsers
   return {
     pathname,
     newUser: state.newUser,
-    perPage,
+    lengthVisibleUser,
   }
 }
 
