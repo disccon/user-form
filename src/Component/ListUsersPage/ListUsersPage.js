@@ -39,7 +39,7 @@ class ListUsersPage extends Component {
   }
 
   componentDidMount() {
-    const { perPage, push, search } = this.props
+    const { push, search } = this.props
     let isNumberID = 9999
     let page = search.charAt(6)
     for (let i = 0; i < isNumberID; i++) {
@@ -72,7 +72,7 @@ class ListUsersPage extends Component {
   }
 
   componentDidUpdate() {
-    const { perPage, push, search } = this.props
+    const { push, search } = this.props
     let isNumberID = 9999
     let page = search.charAt(6)
     for (let i = 0; i < isNumberID; i++) {
@@ -166,6 +166,7 @@ ListUsersPage.propTypes = {
   perPage: PropTypes.number,
   // page: PropTypes.number,
   // users: PropTypes.array.isRequired,
+  search: PropTypes.string,
   deleteUser: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
 }

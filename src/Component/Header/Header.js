@@ -64,7 +64,7 @@ Header.propTypes = {
   pathname: PropTypes.string.isRequired,
   createUser: PropTypes.func.isRequired,
   newUser: PropTypes.object.isRequired,
-  // perPage: PropTypes.string.isRequired,
+  perPage: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = state => {
