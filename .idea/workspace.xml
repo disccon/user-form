@@ -7,10 +7,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" line="11" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="966abf2f-679a-466a-9520-94271c675336" name="Default Changelist" comment="ListUsersPage Router IndexedDB">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" afterDir="false" />
-    </list>
+    <list default="true" id="966abf2f-679a-466a-9520-94271c675336" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.idea/shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="77" column="35" lean-forward="true" selection-start-line="77" selection-start-column="35" selection-end-line="77" selection-end-column="35" />
+            <state relative-caret-position="432">
+              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
@@ -109,6 +106,9 @@
       </map>
     </option>
     <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="b434c089-5347-48cf-8116-2ab4fdc82e13" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -247,7 +247,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="$PROJECT_DIR$/node_modules/yarn" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
@@ -379,14 +379,7 @@
       <workItem from="1557468761943" duration="6000" />
       <workItem from="1557468788033" duration="58000" />
       <workItem from="1557469255723" duration="68000" />
-      <workItem from="1557469363799" duration="1588000" />
-    </task>
-    <task id="LOCAL-00019" summary="ProfileEm">
-      <created>1555573016646</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1555573016646</updated>
+      <workItem from="1557469363799" duration="1863000" />
     </task>
     <task id="LOCAL-00020" summary="ProfileEm">
       <created>1555573050611</created>
@@ -724,11 +717,18 @@
       <option name="project" value="LOCAL" />
       <updated>1557327752925</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="ListUsersPage componentDidUpdate Router IndexedDB">
+      <created>1557470993937</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1557470993937</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="637671000" />
+    <option name="totallyTimeSpent" value="637946000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -833,7 +833,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="IndexDB 7" />
     <MESSAGE value="IndexDB 8" />
     <MESSAGE value="IndexDB 9" />
     <MESSAGE value="IndexDB 10" />
@@ -858,7 +857,17 @@
     <MESSAGE value="lengthVisibleUser" />
     <MESSAGE value="ListUsersPage Redirect to='/NodFound' if(!page || !per_page)" />
     <MESSAGE value="ListUsersPage Router IndexedDB" />
-    <option name="LAST_COMMIT_MESSAGE" value="ListUsersPage Router IndexedDB" />
+    <MESSAGE value="ListUsersPage componentDidUpdate Router IndexedDB" />
+    <option name="LAST_COMMIT_MESSAGE" value="ListUsersPage componentDidUpdate Router IndexedDB" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand>
+      <path>
+        <item name="wizardForm" type="b2602c69:ProjectViewProjectNode" />
+        <item name="wizardForm" type="462c0819:PsiDirectoryNode" />
+      </path>
+    </expand>
+    <select />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Component/renderFieldForm/renderFieldInputAccount/renderFieldInputAccount.scss">
@@ -1254,8 +1263,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="77" column="35" lean-forward="true" selection-start-line="77" selection-start-column="35" selection-end-line="77" selection-end-column="35" />
+        <state relative-caret-position="432">
+          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
           </folding>

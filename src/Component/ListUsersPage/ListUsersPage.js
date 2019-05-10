@@ -80,10 +80,6 @@ class ListUsersPage extends Component {
     db.listUserDB.delete(idListUser)
     db.listUserDB.toArray(usersDB => {
       if (usersDB.length + per_pageNumber === pageNumber * per_pageNumber) {
-        this.setState({
-          users: usersDB.slice((pageNumber - 2) * per_pageNumber, (pageNumber - 2) * per_pageNumber + per_pageNumber),
-          lengthPage: usersDB.length,
-        })
         push({
           pathname: '/ListUsers',
           search: `?page=${page - 1}&per_page=${per_page}`,
