@@ -12,7 +12,6 @@ import Capabilities from './Capabilities/Capabilities'
 import Profile from './Profile/Profile'
 import db from '../../db'
 
-
 const cx = classNames.bind(styles)
 
 class AddingNewUserPage extends Component {

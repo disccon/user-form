@@ -164,7 +164,6 @@ const ProfileForm = reduxForm({
   enableReinitialize: true,
 })(Profile)
 
-
 const mapStateToProps = state => {
   const selector = formValueSelector('Profile')
   const firstNameForm = selector(state, 'firstName')

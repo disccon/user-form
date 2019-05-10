@@ -5,7 +5,6 @@ import DatePicker from 'react-date-picker'
 import styles from './renderDateTimePickerProfile.scss'
 import { ReactComponent as CalendarIcon } from '../../../img/icon/calendar.svg'
 
-
 const cx = classNames.bind(styles)
 
 export const renderDateTimePickerProfile = ({ input, meta: { touched, error } }) => (
@@ -33,7 +32,6 @@ export const renderDateTimePickerProfile = ({ input, meta: { touched, error } })
     </div>
   </Fragment>
 )
-
 
 renderDateTimePickerProfile.propTypes = {
   input: PropTypes.object.isRequired,

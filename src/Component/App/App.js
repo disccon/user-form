@@ -6,16 +6,16 @@ import { Route, Switch, Redirect } from 'react-router'
 import { ConnectedRouter } from 'connected-react-router'
 import classNames from 'classnames'
 import _ from 'lodash/core'
-import NodFound from '../NodFound/NodFound'
 import styles from './App.scss'
-import Header from '../Header/Header'
 import db from '../../db'
 import { userListerNewState, changeQuestionState } from '../../Actions'
 import { users } from '../../stubs/users'
 import AddingNewUserPage from '../AddingNewUserPage/AddingNewUserPage'
 import EditUserPage from '../EditUserPage/EditUserPage'
 import ListUsersPage from '../ListUsersPage/ListUsersPage'
-import { EditingPage } from '../EditingPage/EditingPage'
+import EditingPage from '../EditingPage/EditingPage'
+import Header from '../Header/Header'
+import { NodFound } from '../NodFound/NodFound'
 
 const cx = classNames.bind(styles)
 
@@ -50,7 +50,7 @@ class App extends Component {
             <Route path='/NodFound' component={NodFound} />
             <Route exact path='/ListUsers' component={ListUsersPage} />
             <Route exact path='/EditUser/:id' component={EditUserPage} />
-            <Route path='/Editing/' component={EditingPage} />
+            <Route path='/Editing/:id' component={EditingPage} />
             <Route path='/' component={AddingNewUserPage} />
             <Redirect to='/NodFound' />
           </Switch>

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
+import { push } from 'connected-react-router'
 import {
   Field, reduxForm, FieldArray,
 } from 'redux-form'
@@ -86,7 +87,7 @@ class ContactsEditing extends Component {
 }
 
 ContactsEditing.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.number,
   contactsEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 }
@@ -145,23 +146,27 @@ const ContactsEditingForm = reduxForm({
   enableReinitialize: true,
 })(ContactsEditing)
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   const { users } = state.listUsers
-  const { pathname } = state.router.location
-  const id = Number(pathname.slice(9, pathname.indexOf('/', 9)))
-  const user = { ...users[id - 1] }
-  const {
-    company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
-  } = user
-  return {
-    initialValues: {
+  if (users.length >= 1) {
+    const id = Number(ownProps.match.params.id)
+    const user = users.find(user => user.id === id)
+    const {
       company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
-    },
-    id,
+    } = user
+    return {
+      initialValues: {
+        company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
+      },
+      id,
+    }
+  }
+  return {
+    isLoading: false,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { contactsEditingSave },
+  { contactsEditingSave, push },
 )(ContactsEditingForm)

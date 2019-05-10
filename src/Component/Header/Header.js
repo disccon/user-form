@@ -11,7 +11,6 @@ import { createUser } from '../../Actions'
 
 const cx = classNames.bind(styles)
 
-
 const Header = ({ createUser, pathname, newUser }) => (
   <header className={cx('header')}>
     <div className={cx('container')}>
@@ -21,7 +20,7 @@ const Header = ({ createUser, pathname, newUser }) => (
       <Link
         to='/'
         className={cx('addUserA', {
-          activeIcon: pathname !== '/ListUsers' && pathname.indexOf('/EditUser') !== 0 && !newUser.id,
+          activeIcon: pathname.indexOf('/ListUsers') !== 0 && pathname.indexOf('/EditUser') !== 0 && !newUser.id,
         })}
         onClick={createUser}
       >
@@ -31,7 +30,7 @@ const Header = ({ createUser, pathname, newUser }) => (
       <Link
         to='/ListUsers'
         className={cx('loginA', {
-          activeIcon: pathname === '/ListUsers' || pathname.indexOf('/EditUser') === 0 || newUser.id,
+          activeIcon: pathname.indexOf('/ListUsers') === 0 || pathname.indexOf('/EditUser') === 0 || newUser.id,
         })}
       >
         <LoginIcon className={cx('loginIcon')} alt='loginIon' />

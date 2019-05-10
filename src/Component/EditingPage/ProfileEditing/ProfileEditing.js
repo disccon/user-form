@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { push } from 'connected-react-router'
 import classNames from 'classnames'
 import { reduxForm, Field } from 'redux-form'
 import styles from '../../UserFormBox/UserFormBox.scss'
@@ -12,97 +13,103 @@ import {
 } from '../../renderFieldForm/renderDateTimePickerProfile/renderDateTimePickerProfile'
 import { renderFieldRadioProfile } from '../../renderFieldForm/renderFieldRadioProfile/renderFieldRadioProfile'
 
-
 const cx = classNames.bind(styles)
 
-
 class ProfileEditing extends Component {
-    onSubmit = values => {
-      const { profileEditingSave, id } = this.props
-      profileEditingSave(values.firstName, values.lastName, values.birthDate, values.email,
-        values.address, values.gender, id)
+  componentDidUpdate() {
+    const { push, isLoading } = this.props
+    if (isLoading === false) {
+      push('/NodFound')
     }
+  }
 
-    render() {
-      const { handleSubmit } = this.props
-      return (
-        <UserFormBox handleSubmit={handleSubmit(this.onSubmit)}>
-          <div className={cx('userFormBox__sideLeft')}>
+  onSubmit = values => {
+    const { profileEditingSave, id } = this.props
+    profileEditingSave(values.firstName, values.lastName, values.birthDate, values.email,
+      values.address, values.gender, id)
+  }
+
+  render() {
+    const { handleSubmit } = this.props
+    return (
+      <UserFormBox handleSubmit={handleSubmit(this.onSubmit)}>
+        <div className={cx('userFormBox__sideLeft')}>
+          <Field
+            component={renderFieldInputNewUser}
+            type='text'
+            span
+            label='First name'
+            name='firstName'
+            idField='fieldFirstName'
+            classNameLabel='inputNewUser'
+          />
+          <Field
+            component={renderFieldInputNewUser}
+            type='text'
+            span
+            label='Last name'
+            name='lastName'
+            idField='fieldLastName'
+            classNameLabel='inputNewUser'
+          />
+          <Field name='birthDate' component={renderDateTimePickerProfile} />
+        </div>
+        <div className={cx('userFormBox__sideRight')}>
+          <Field
+            component={renderFieldInputNewUser}
+            type='text'
+            span
+            label='Email'
+            name='email'
+            idField='fieldEmail'
+            classNameLabel='inputNewUser'
+          />
+          <Field
+            component={renderFieldInputNewUser}
+            type='text'
+            span
+            label='Address'
+            name='address'
+            idField='fieldAddress'
+            classNameLabel='inputNewUser'
+          />
+          <h5>Gender</h5>
+          <div className={cx('userFormBox__wrapperGender')}>
             <Field
-              component={renderFieldInputNewUser}
-              type='text'
-              span
-              label='First name'
-              name='firstName'
-              idField='fieldFirstName'
-              classNameLabel='inputNewUser'
+              component={renderFieldRadioProfile}
+              type='radio'
+              label='Male'
+              name='gender'
+              value='male'
+              idField='fieldMale'
             />
             <Field
-              component={renderFieldInputNewUser}
-              type='text'
-              span
-              label='Last name'
-              name='lastName'
-              idField='fieldLastName'
-              classNameLabel='inputNewUser'
+              component={renderFieldRadioProfile}
+              type='radio'
+              label='Female'
+              name='gender'
+              value='female'
+              idField='fieldFemale'
             />
-            <Field name='birthDate' component={renderDateTimePickerProfile} />
           </div>
-          <div className={cx('userFormBox__sideRight')}>
-            <Field
-              component={renderFieldInputNewUser}
-              type='text'
-              span
-              label='Email'
-              name='email'
-              idField='fieldEmail'
-              classNameLabel='inputNewUser'
-            />
-            <Field
-              component={renderFieldInputNewUser}
-              type='text'
-              span
-              label='Address'
-              name='address'
-              idField='fieldAddress'
-              classNameLabel='inputNewUser'
-            />
-            <h5>Gender</h5>
-            <div className={cx('userFormBox__wrapperGender')}>
-              <Field
-                component={renderFieldRadioProfile}
-                type='radio'
-                label='Male'
-                name='gender'
-                value='male'
-                idField='fieldMale'
-              />
-              <Field
-                component={renderFieldRadioProfile}
-                type='radio'
-                label='Female'
-                name='gender'
-                value='female'
-                idField='fieldFemale'
-              />
-            </div>
-            <div className={cx('userFormBox__wrapperButton')}>
-              <button type='submit' className={cx('userFormBox__saveNewListButton')}>
-                Save
-              </button>
-            </div>
+          <div className={cx('userFormBox__wrapperButton')}>
+            <button type='submit' className={cx('userFormBox__saveNewListButton')}>
+              Save
+            </button>
           </div>
-        </UserFormBox>
-      )
-    }
+        </div>
+      </UserFormBox>
+    )
+  }
 }
 
 ProfileEditing.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.number,
   profileEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
 }
-
 
 const ProfileEditingForm = reduxForm({
   validate: (values, props) => {
@@ -147,27 +154,35 @@ const ProfileEditingForm = reduxForm({
   enableReinitialize: true,
 })(ProfileEditing)
 
-
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   const { users } = state.listUsers
-  const { pathname } = state.router.location
-  const id = Number(pathname.slice(9, pathname.indexOf('/', 9)))
-  const user = { ...users[id - 1] }
-  const {
-    firstName, lastName, birthDate, email, address, gender,
-  } = user
-  const userEmailFilter = users.filter(user => user.id !== id)
-  const userEmailList = userEmailFilter.map(user => user.email)
-  return {
-    initialValues: {
+  if (users.length >= 1) {
+    const id = Number(ownProps.match.params.id)
+    const user = users.find(user => user.id === id)
+    if (!user) {
+      return {
+        isLoading: false,
+      }
+    }
+    const {
       firstName, lastName, birthDate, email, address, gender,
-    },
-    userEmailList,
-    id,
+    } = user
+    const userEmailFilter = users.filter(user => user.id !== id)
+    const userEmailList = userEmailFilter.map(user => user.email)
+    return {
+      initialValues: {
+        firstName, lastName, birthDate, email, address, gender,
+      },
+      userEmailList,
+      id,
+    }
+  }
+  return {
+    userEmailList: [],
   }
 }
 
 export default connect(
   mapStateToProps,
-  { profileEditingSave },
+  { profileEditingSave, push },
 )(ProfileEditingForm)

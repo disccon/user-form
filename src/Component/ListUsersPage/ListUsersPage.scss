@@ -17,16 +17,20 @@ $li: 'listUsers';
       }
 
       .#{$li}__name {
-        width: 300px;
+        min-width: 300px;
         padding-left: 70px;
       }
 
       .#{$li}__company {
-        width: 200px;
+        min-width: 200px;
+      }
+
+      .#{$li}__contacts {
+        min-width: 270px;
       }
 
       .#{$li}__update {
-        width: 270px;
+        min-width: 200px;
       }
     }
   }
@@ -34,4 +38,8 @@ $li: 'listUsers';
   .#{$li}__firstTr {
     height: 29px;
   }
+}
+
+.paginationbox {
+  color: #3f51b5;
 }

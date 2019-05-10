@@ -2,13 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
+import { push } from 'connected-react-router'
 import { Field, reduxForm } from 'redux-form'
 import styles from '../../UserFormBox/UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
-import { accountEditingSave } from '../../../Actions'
+import { accountEditingSave, saveAvatarAccountEditing } from '../../../Actions'
 import { renderFieldInputAccount } from '../../renderFieldForm/renderFieldInputAccount/renderFieldInputAccount'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
+import db from '../../../db'
 
 const cx = classNames.bind(styles)
 
@@ -16,11 +18,18 @@ class AccountEditing extends Component {
   state = {
     avatarIMGError: null,
     typeFieldPassword: 'text',
-    userSRCAvatarIMGState: this.props.userSRCAvatarIMG,
+  }
+
+  componentDidUpdate() {
+    const { push, isLoading } = this.props
+    if (isLoading === false) {
+      push('/NodFound')
+    }
   }
 
   addImageUserAvatar = event => {
     event.preventDefault()
+    const { saveAvatarAccountEditing, id } = this.props
     const reader = new FileReader()
     const fileIMG = event.target.files[0]
     const fileSize = fileIMG.size / 1024 / 1024
@@ -28,8 +37,8 @@ class AccountEditing extends Component {
       reader.onloadend = () => {
         this.setState({
           avatarIMGError: false,
-          userSRCAvatarIMGState: reader.result,
         })
+        saveAvatarAccountEditing(reader.result, id)
       }
       reader.readAsDataURL(fileIMG)
     } else {
@@ -40,9 +49,8 @@ class AccountEditing extends Component {
   }
 
   onSubmit = values => {
-    const { accountEditingSave, id } = this.props
-    const { userSRCAvatarIMGState } = this.state
-    accountEditingSave(values.userName, values.password, values.repeatPassword, userSRCAvatarIMGState, id)
+    const { accountEditingSave, id, userSRCAvatarIMG } = this.props
+    accountEditingSave(values.userName, values.password, values.repeatPassword, userSRCAvatarIMG, id)
   }
 
   changeTypePassword = () => {
@@ -59,17 +67,17 @@ class AccountEditing extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props
-    const { avatarIMGError, typeFieldPassword, userSRCAvatarIMGState } = this.state
-    const userAvatarIMG = userSRCAvatarIMGState
-      ? <img className={cx('userAvatarWrapper__userAvatarIMG')} src={userSRCAvatarIMGState} alt='userAvatar' />
+    const { handleSubmit, userSRCAvatarIMG } = this.props
+    const { avatarIMGError, typeFieldPassword } = this.state
+    const userAvatarIMG = userSRCAvatarIMG
+      ? <img className={cx('userAvatarWrapper__userAvatarIMG')} src={userSRCAvatarIMG} alt='userAvatar' />
       : <UserAvatarIcon className={cx('userAvatarWrapper__userAvatarSVG')} alt='userAvatar' />
     const UserAvatar = avatarIMGError
       ? <p className={cx('userAvatarWrapper__avatarError')}>{avatarIMGError}</p> : null
     return (
-      <UserFormBox handleSubmit={handleSubmit(this.onSubmit)} classForm='userFormBoxAccount' >
+      <UserFormBox handleSubmit={handleSubmit(this.onSubmit)} classForm='userFormBoxAccount'>
         <div className={cx('userAvatarWrapper')}>
-          <label htmlFor='userAvatar' >
+          <label htmlFor='userAvatar'>
             {userAvatarIMG}
             <input
               id='userAvatar'
@@ -156,36 +164,61 @@ const AccountEditingForm = reduxForm({
 })(AccountEditing)
 
 AccountEditing.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.number,
   userSRCAvatarIMG: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
   ]),
   accountEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func,
+  push: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+  saveAvatarAccountEditing: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
+  const id = Number(ownProps.match.params.id)
   const { users } = state.listUsers
-  const { pathname } = state.router.location
-  const id = Number(pathname.slice(9, pathname.length - 1))
-  const user = { ...users[id - 1] }
-  const {
-    userName, password, repeatPassword, userSRCAvatarIMG,
-  } = user
-  const userFilterName = users.filter(user => user.id !== id)
-  const userNameList = userFilterName.map(user => user.userName)
+  if (users.length >= 1) {
+    const id = Number(ownProps.match.params.id)
+    const user = users.find(user => user.id === id)
+    if (!user) {
+      return {
+        isLoading: false,
+      }
+    }
+    const {
+      userName, password, repeatPassword, userSRCAvatarIMG,
+    } = user
+    db.table('listUserDB')
+      .get(id)
+      .then(user => {
+        console.log(11123123123)
+        const { userName, password, repeatPassword } = user
+        return {
+          initialValues: {
+            userName, password, repeatPassword,
+          },
+          id,
+        }
+      })
+    const userFilterName = users.filter(user => user.id !== id)
+    const userNameList = userFilterName.map(user => user.userName)
+    // return {
+    //   initialValues: {
+    //     userName, password, repeatPassword,
+    //   },
+    //   userSRCAvatarIMG,
+    //   userNameList,
+    //   id,
+    // }
+  }
   return {
-    initialValues: {
-      userName, password, repeatPassword,
-    },
-    userSRCAvatarIMG,
-    userNameList,
-    id,
+    users: [],
   }
 }
 
 export default connect(
   mapStateToProps,
-  { accountEditingSave },
+  { accountEditingSave, saveAvatarAccountEditing, push },
 )(AccountEditingForm)

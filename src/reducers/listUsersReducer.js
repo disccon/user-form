@@ -54,7 +54,6 @@ export default function listUsersReducer(state = initialListUsers, action) {
       }
     }
 
-
     case DELETE_USER__SUCCESS: {
       return {
         ...state,

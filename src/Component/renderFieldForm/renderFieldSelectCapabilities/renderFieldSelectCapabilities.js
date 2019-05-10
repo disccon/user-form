@@ -4,9 +4,7 @@ import Select from 'react-select'
 import classNames from 'classnames'
 import styles from './renderFieldSelectCapabilities.scss'
 
-
 const cx = classNames.bind(styles)
-
 
 const options = [
   { value: 'HTML', label: 'HTML' },
@@ -28,7 +26,6 @@ const options = [
   { value: 'AWS Lambda', label: 'AWS Lambda' },
   { value: 'Firebase', label: 'Firebase' },
 ]
-
 
 export const renderFieldSelectCapabilities = ({
   label, input, meta: { touched, error },
