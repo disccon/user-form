@@ -7,6 +7,7 @@ import { push } from 'connected-react-router'
 import { withStyles } from '@material-ui/core/styles'
 import classNames from 'classnames'
 import Pagination from 'material-ui-flat-pagination'
+import _ from 'lodash/core'
 import styles from './ListUsersPage.scss'
 import NoHaveUserRow from './NoHaveUserRow/NoHaveUserRow'
 import db from '../../db'
@@ -39,8 +40,8 @@ class ListUsersPage extends Component {
   }
 
   componentDidMount() {
-    const { push, pathname } = this.props
-    if (pathname === '/ListUsers') {
+    const { push, search } = this.props
+    if (!search) {
       db.listUserDB.toArray(users => {
         this.setState({
           users: users.slice(0, 10),
@@ -51,6 +52,25 @@ class ListUsersPage extends Component {
     }
   }
 
+  componentDidUpdate() {
+    const { search } = this.props
+    const { users } = this.state
+    const valueQuery = queryString.parse(search)
+    const { page, per_page } = valueQuery
+    const pageNumber = Number(page)
+    const per_pageNumber = Number(per_page)
+    db.listUserDB.toArray(usersDB => {
+      const newUsers = usersDB.slice((pageNumber - 1) * per_pageNumber, (pageNumber - 1)
+          * per_pageNumber + per_pageNumber)
+      if (!_.isEqual(newUsers, users)) {
+        this.setState({
+          users: newUsers,
+          lengthPage: usersDB.length,
+        })
+      }
+    })
+  }
+
   deleteUser = idListUser => () => {
     const { push, search } = this.props
     const valueQuery = queryString.parse(search)
@@ -58,10 +78,6 @@ class ListUsersPage extends Component {
     const pageNumber = Number(page)
     const per_pageNumber = Number(per_page)
     db.listUserDB.delete(idListUser)
-    push({
-      pathname: '/ListUsers',
-      search: `?page=${page - 1}&per_page=${per_page}`,
-    })
     db.listUserDB.toArray(usersDB => {
       if (usersDB.length + per_pageNumber === pageNumber * per_pageNumber) {
         this.setState({
@@ -88,16 +104,6 @@ class ListUsersPage extends Component {
     push({
       pathname: '/ListUsers',
       search: `?page=${offset / per_page + 1}&per_page=${per_page}`,
-    })
-    db.listUserDB.toArray(users => {
-      this.setState({
-        users: users.slice(offset, offset + Number(per_page)),
-        lengthPage: users.length,
-      })
-      push({
-        pathname: '/ListUsers',
-        search: `?page=${offset / per_page + 1}&per_page=${per_page}`,
-      })
     })
   }
 
@@ -134,7 +140,7 @@ class ListUsersPage extends Component {
           <Pagination
             classes={classes}
             limit={per_page}
-            offset={per_page * page - per_page}
+            offset={per_page * (page - 1)}
             total={lengthPage}
             onClick={this.changePage}
           />
@@ -146,18 +152,16 @@ class ListUsersPage extends Component {
 
 ListUsersPage.propTypes = {
   classes: PropTypes.object,
-  pathname: PropTypes.string.isRequired,
   search: PropTypes.string,
   push: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
   const { lengthVisibleUser } = state.listUsers
-  const { search, pathname } = ownProps.location
+  const { search } = ownProps.location
   return {
     lengthVisibleUser,
     search,
-    pathname,
   }
 }
 

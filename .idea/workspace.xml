@@ -4,19 +4,12 @@
     <bookmark url="file://$PROJECT_DIR$/src/Component/AddingNewUserPage/Capabilities/Capabilities.js" line="75" />
     <bookmark url="file://$PROJECT_DIR$/src/Component/AddingNewUserPage/AddingNewUser.scss" line="3" />
     <bookmark url="file://$PROJECT_DIR$/src/Component/AddingNewUserPage/Profile/Profile.js" line="35" />
-    <bookmark url="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" line="10" />
+    <bookmark url="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" line="11" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="966abf2f-679a-466a-9520-94271c675336" name="Default Changelist" comment="">
+    <list default="true" id="966abf2f-679a-466a-9520-94271c675336" name="Default Changelist" comment="ListUsersPage Router IndexedDB">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/App/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/EditUserPage/EditUserPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/EditUserPage/EditUserPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/EditingPage/AccountEditing/AccountEditing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/EditingPage/AccountEditing/AccountEditing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/EditingPage/CapabilitiesEditing/CapabilitiesEditing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/EditingPage/CapabilitiesEditing/CapabilitiesEditing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/EditingPage/ProfileEditing/ProfileEditing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/EditingPage/ProfileEditing/ProfileEditing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Header/Header.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stubs/initialListUsers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/stubs/initialListUsers.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,13 +18,18 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
+  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="53" column="20" selection-start-line="53" selection-start-column="20" selection-end-line="53" selection-end-column="20" />
+            <state relative-caret-position="231">
+              <caret line="77" column="35" lean-forward="true" selection-start-line="77" selection-start-column="35" selection-end-line="77" selection-end-column="35" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
@@ -42,8 +40,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Component/App/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="10" column="25" lean-forward="true" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+            <state relative-caret-position="357">
+              <caret line="29" column="37" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="37" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -188,6 +189,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -211,20 +213,12 @@
               <item name="wizardForm" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Component" type="462c0819:PsiDirectoryNode" />
-              <item name="App" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wizardForm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wizardForm" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Component" type="462c0819:PsiDirectoryNode" />
               <item name="ListUsersPage" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -232,7 +226,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editorconfig.notification" value="f" />
     <property name="js.linters.configure.manually.selectedeslint" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../examples/react-paginate" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.jscs" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -253,7 +247,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="$PROJECT_DIR$/node_modules/yarn" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.SCSS" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
@@ -379,14 +373,13 @@
       <workItem from="1557130316050" duration="23760000" />
       <workItem from="1557209380155" duration="12761000" />
       <workItem from="1557296166004" duration="15543000" />
-      <workItem from="1557314047682" duration="13277000" />
-    </task>
-    <task id="LOCAL-00018" summary="IndexedDB2">
-      <created>1555572732153</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1555572732153</updated>
+      <workItem from="1557314047682" duration="13913000" />
+      <workItem from="1557468432511" duration="41000" />
+      <workItem from="1557468727031" duration="7000" />
+      <workItem from="1557468761943" duration="6000" />
+      <workItem from="1557468788033" duration="58000" />
+      <workItem from="1557469255723" duration="68000" />
+      <workItem from="1557469363799" duration="1588000" />
     </task>
     <task id="LOCAL-00019" summary="ProfileEm">
       <created>1555573016646</created>
@@ -724,11 +717,18 @@
       <option name="project" value="LOCAL" />
       <updated>1557314142658</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="ListUsersPage Router IndexedDB">
+      <created>1557327752925</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1557327752925</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="635267000" />
+    <option name="totallyTimeSpent" value="637671000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -743,7 +743,7 @@
     <frame x="0" y="25" width="1920" height="1006" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18303095" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14727855" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="npm" order="3" side_tool="true" />
@@ -756,7 +756,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32839224" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49786553" visible="true" weight="0.23033068" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49786553" visible="true" weight="0.22974473" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50213444" side_tool="true" weight="0.24401368" />
       <window_info anchor="bottom" id="TypeScript" order="11" weight="0.3295325" />
       <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.49893278" weight="0.327252" />
@@ -833,7 +833,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="IndexDB 6" />
     <MESSAGE value="IndexDB 7" />
     <MESSAGE value="IndexDB 8" />
     <MESSAGE value="IndexDB 9" />
@@ -858,7 +857,8 @@
     <MESSAGE value="queryString" />
     <MESSAGE value="lengthVisibleUser" />
     <MESSAGE value="ListUsersPage Redirect to='/NodFound' if(!page || !per_page)" />
-    <option name="LAST_COMMIT_MESSAGE" value="ListUsersPage Redirect to='/NodFound' if(!page || !per_page)" />
+    <MESSAGE value="ListUsersPage Router IndexedDB" />
+    <option name="LAST_COMMIT_MESSAGE" value="ListUsersPage Router IndexedDB" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Component/renderFieldForm/renderFieldInputAccount/renderFieldInputAccount.scss">
@@ -1161,30 +1161,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///tmp/mozilla_user0/Archive (Артюх)/generative/perlin.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-19">
-          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///tmp/mozilla_user0/Archive (Артюх)/generative/circle.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///tmp/mozilla_user0/Archive (Артюх)/perf.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file:///tmp/mozilla_user0/Archive (Артюх)/generative/lerp.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="632">
-          <caret line="41" column="23" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file:///tmp/mozilla_user0/Archive (Артюх)/generative/perlin.html" />
+    <entry file="file:///tmp/mozilla_user0/Archive (Артюх)/generative/circle.html" />
+    <entry file="file:///tmp/mozilla_user0/Archive (Артюх)/perf.html" />
+    <entry file="file:///tmp/mozilla_user0/Archive (Артюх)/generative/lerp.html" />
     <entry file="file://$PROJECT_DIR$/src/stubs/users.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
@@ -1264,15 +1244,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/App/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="10" column="25" lean-forward="true" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+        <state relative-caret-position="357">
+          <caret line="29" column="37" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="53" column="20" selection-start-line="53" selection-start-column="20" selection-end-line="53" selection-end-column="20" />
+        <state relative-caret-position="231">
+          <caret line="77" column="35" lean-forward="true" selection-start-line="77" selection-start-column="35" selection-end-line="77" selection-end-column="35" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
           </folding>
