@@ -104,7 +104,6 @@ const mapStateToProps = (state, ownProps) => {
   }
   return {
     usersVisible: [],
-    lengthVisibleUser,
   }
 }
 
