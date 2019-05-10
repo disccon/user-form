@@ -10,7 +10,7 @@ import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import { accountEditingSave, saveAvatarAccountEditing } from '../../../Actions'
 import { renderFieldInputAccount } from '../../renderFieldForm/renderFieldInputAccount/renderFieldInputAccount'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
-
+import db from '../../../db'
 
 const cx = classNames.bind(styles)
 
@@ -75,9 +75,9 @@ class AccountEditing extends Component {
     const UserAvatar = avatarIMGError
       ? <p className={cx('userAvatarWrapper__avatarError')}>{avatarIMGError}</p> : null
     return (
-      <UserFormBox handleSubmit={handleSubmit(this.onSubmit)} classForm='userFormBoxAccount' >
+      <UserFormBox handleSubmit={handleSubmit(this.onSubmit)} classForm='userFormBoxAccount'>
         <div className={cx('userAvatarWrapper')}>
-          <label htmlFor='userAvatar' >
+          <label htmlFor='userAvatar'>
             {userAvatarIMG}
             <input
               id='userAvatar'
@@ -177,6 +177,7 @@ AccountEditing.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  const id = Number(ownProps.match.params.id)
   const { users } = state.listUsers
   if (users.length >= 1) {
     const id = Number(ownProps.match.params.id)
@@ -189,16 +190,28 @@ const mapStateToProps = (state, ownProps) => {
     const {
       userName, password, repeatPassword, userSRCAvatarIMG,
     } = user
+    db.table('listUserDB')
+      .get(id)
+      .then(user => {
+        console.log(11123123123)
+        const { userName, password, repeatPassword } = user
+        return {
+          initialValues: {
+            userName, password, repeatPassword,
+          },
+          id,
+        }
+      })
     const userFilterName = users.filter(user => user.id !== id)
     const userNameList = userFilterName.map(user => user.userName)
-    return {
-      initialValues: {
-        userName, password, repeatPassword,
-      },
-      userSRCAvatarIMG,
-      userNameList,
-      id,
-    }
+    // return {
+    //   initialValues: {
+    //     userName, password, repeatPassword,
+    //   },
+    //   userSRCAvatarIMG,
+    //   userNameList,
+    //   id,
+    // }
   }
   return {
     users: [],

@@ -17,7 +17,6 @@ import {
 } from '../../renderFieldForm/renderFieldCheckboxCapabilities/renderFieldCheckboxCapabilities'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
 
-
 const cx = classNames.bind(styles)
 
 class CapabilitiesEditing extends Component {

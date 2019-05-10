@@ -6,7 +6,6 @@ import { Route, Switch, Redirect } from 'react-router'
 import { ConnectedRouter } from 'connected-react-router'
 import classNames from 'classnames'
 import _ from 'lodash/core'
-import NodFound from '../NodFound/NodFound'
 import styles from './App.scss'
 import db from '../../db'
 import { userListerNewState, changeQuestionState } from '../../Actions'
@@ -16,7 +15,7 @@ import EditUserPage from '../EditUserPage/EditUserPage'
 import ListUsersPage from '../ListUsersPage/ListUsersPage'
 import EditingPage from '../EditingPage/EditingPage'
 import Header from '../Header/Header'
-
+import { NodFound } from '../NodFound/NodFound'
 
 const cx = classNames.bind(styles)
 

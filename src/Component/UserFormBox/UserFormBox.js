@@ -13,7 +13,6 @@ export const UserFormBox = ({
   </form>
 )
 
-
 UserFormBox.propTypes = {
   classForm: PropTypes.string,
   children: PropTypes.array.isRequired,

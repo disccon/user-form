@@ -348,9 +348,17 @@ export function* editUserSaga(action) {
 }
 
 export function* deleteUserSaga(action) {
-  const { id } = action.payload
+  const {
+    id, currentPage, usersVisibleLength, per_page,
+  } = action.payload
   const usersList = yield select(state => state.listUsers.users)
   const users = usersList.filter(item => item.id !== id)
+  if (currentPage > 1 && usersVisibleLength === 1) {
+    yield put(push({
+      pathname: '/ListUsers',
+      search: `?page=${currentPage - 1}&per_page=${per_page}`,
+    }))
+  }
   try {
     yield put({
       type: DELETE_USER__SUCCESS,

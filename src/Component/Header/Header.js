@@ -11,7 +11,6 @@ import { createUser } from '../../Actions'
 
 const cx = classNames.bind(styles)
 
-
 const Header = ({ createUser, pathname, newUser }) => (
   <header className={cx('header')}>
     <div className={cx('container')}>

@@ -1,120 +1,37 @@
 import React, { Component, Fragment } from 'react'
-import { compose } from 'recompose'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
 import { push } from 'connected-react-router'
-import { withStyles } from '@material-ui/core/styles'
 import classNames from 'classnames'
-import Pagination from 'material-ui-flat-pagination'
-import _ from 'lodash/core'
 import styles from './ListUsersPage.scss'
 import NoHaveUserRow from './NoHaveUserRow/NoHaveUserRow'
 import db from '../../db'
-import { deleteUser } from '../../Actions'
+import { deleteUser, userListerNewState } from '../../Actions'
 import UserRow from './UserRow/UserRow'
+import { userListGetIndexDB } from '../../helpers/userListGetIndexDB'
+import Pagination from './Pagination/Pagination'
 
 const cx = classNames.bind(styles)
 
-const paginationStyles = {
-  root: {
-    marginTop: '50px',
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  rootCurrent: {
-    color: '#3f51b5',
-  },
-  rootStandard: {
-    color: '#030202',
-  },
-  text: {
-    fontSize: '18px',
-  },
-}
-
 class ListUsersPage extends Component {
-  state = {
-    users: [],
-    lengthPage: null,
-  }
-
   componentDidMount() {
-    const { push, search, lengthVisibleUser } = this.props
-    if (!search) {
-      db.listUserDB.toArray(users => {
-        this.setState({
-          users: users.slice(0, 10),
-          lengthPage: users.length,
-        })
-        push({ pathname: '/ListUsers', search: `?page=1&per_page=${lengthVisibleUser}` })
-      })
-    }
-  }
-
-  componentDidUpdate() {
-    const { search, push, lengthVisibleUser } = this.props
-    const { users } = this.state
-    const valueQuery = queryString.parse(search)
-    const { page, per_page } = valueQuery
-    const pageNumber = Number(page)
-    const per_pageNumber = Number(per_page)
-    if(search) {
-      db.listUserDB.toArray(usersDB => {
-        if (Number(page) > Number(per_page) || Math.ceil(usersDB.length / per_page) < Number(page)
-            || !page || !per_page) {
-          push({ pathname: '/ListUsers', search: `?page=1&per_page=${lengthVisibleUser}` })
-        } else {
-          const newUsers = usersDB.slice((pageNumber - 1) * per_pageNumber, (pageNumber - 1)
-              * per_pageNumber + per_pageNumber)
-          if (!_.isEqual(newUsers, users)) {
-            this.setState({
-              users: newUsers,
-              lengthPage: usersDB.length,
-            })
-          }
-        }
-      })
-    }
+    const { userListerNewState } = this.props
+    userListGetIndexDB(userListerNewState)
   }
 
   deleteUser = idListUser => () => {
-    const { push, search } = this.props
-    const valueQuery = queryString.parse(search)
-    const { page, per_page } = valueQuery
-    const pageNumber = Number(page)
-    const per_pageNumber = Number(per_page)
+    const {
+      deleteUser, currentPage, usersVisible, per_page,
+    } = this.props
     db.listUserDB.delete(idListUser)
-    db.listUserDB.toArray(usersDB => {
-      if (usersDB.length + per_pageNumber === pageNumber * per_pageNumber) {
-        push({
-          pathname: '/ListUsers',
-          search: `?page=${page - 1}&per_page=${per_page}`,
-        })
-      } else {
-        this.setState({
-          users: usersDB.slice((pageNumber - 1) * per_pageNumber, (pageNumber - 1) * per_pageNumber + per_pageNumber),
-          lengthPage: usersDB.length,
-        })
-      }
-    })
-  }
-
-  changePage = (event, offset) => {
-    const { push, search } = this.props
-    const valueQuery = queryString.parse(search)
-    const { per_page } = valueQuery
-    push({
-      pathname: '/ListUsers',
-      search: `?page=${offset / per_page + 1}&per_page=${per_page}`,
-    })
+    deleteUser(idListUser, currentPage, usersVisible.length, per_page)
   }
 
   render() {
-    const { classes, search } = this.props
-    const { users, lengthPage } = this.state
-    const valueQuery = queryString.parse(search)
-    const { page, per_page } = valueQuery
+    const {
+      usersVisible, pagesCount, currentPage, limit,
+    } = this.props
     return (
       <Fragment>
         <h2 className={cx('headline')}>List of users</h2>
@@ -129,7 +46,7 @@ class ListUsersPage extends Component {
           </thead>
           <tbody>
             <tr className={cx('listUsers__update')} />
-            {users.length > 0 && users.map(user => (
+            {usersVisible.length > 0 && usersVisible.map(user => (
               <UserRow
                 key={user.id}
                 user={user}
@@ -138,14 +55,12 @@ class ListUsersPage extends Component {
             ))}
           </tbody>
         </table>
-        {users.length === 0 && <NoHaveUserRow />}
-        {users.length !== 0 && (
+        {usersVisible.length === 0 && <NoHaveUserRow />}
+        {pagesCount > 1 && (
           <Pagination
-            classes={classes}
-            limit={per_page}
-            offset={per_page * (page - 1)}
-            total={lengthPage}
-            onClick={this.changePage}
+            pagesCount={pagesCount}
+            currentPage={currentPage}
+            limit={limit}
           />
         )}
       </Fragment>
@@ -154,24 +69,47 @@ class ListUsersPage extends Component {
 }
 
 ListUsersPage.propTypes = {
-  classes: PropTypes.object,
-  search: PropTypes.string,
-  push: PropTypes.func.isRequired,
+  deleteUser: PropTypes.func.isRequired,
+  usersVisible: PropTypes.array.isRequired,
+  userListerNewState: PropTypes.func.isRequired,
+  pagesCount: PropTypes.number,
+  currentPage: PropTypes.number,
+  limit: PropTypes.number,
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { lengthVisibleUser } = state.listUsers
+  const { users, lengthVisibleUser, limit } = state.listUsers
   const { search } = ownProps.location
+  const valueQuery = queryString.parse(search)
+  const { page } = valueQuery
+  const NumberPage = Number(page)
+  let usersVisible
+  let per_page = lengthVisibleUser
+  let currentPage = 1
+  if (!search) {
+    usersVisible = users.slice(0, lengthVisibleUser)
+  } else {
+    per_page = Number(valueQuery.per_page)
+    currentPage = NumberPage
+    usersVisible = users.slice((NumberPage - 1) * per_page, (NumberPage - 1) * per_page + per_page)
+  }
+  if (users.length > 0) {
+    return {
+      usersVisible,
+      pagesCount: Math.ceil(users.length / per_page),
+      currentPage,
+      limit,
+      per_page,
+    }
+  }
   return {
+    usersVisible: [],
     lengthVisibleUser,
-    search,
   }
 }
 
-export default compose(
-  connect(
-    mapStateToProps,
-    { deleteUser, push },
-  ),
-  withStyles(paginationStyles),
+
+export default connect(
+  mapStateToProps,
+  { deleteUser, push, userListerNewState },
 )(ListUsersPage)

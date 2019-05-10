@@ -46,12 +46,10 @@ class renderFieldArrayPhone extends Component {
   }
 }
 
-
 renderFieldArrayPhone.propTypes = {
   fields: PropTypes.object.isRequired,
   deleteAddFieldPhone: PropTypes.func,
 }
-
 
 export default connect(
   null,

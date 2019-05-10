@@ -181,11 +181,11 @@ export const editUser = (id, page) => (
     },
   })
 
-export const deleteUser = id => (
+export const deleteUser = (id, currentPage, usersVisibleLength, per_page) => (
   {
     type: DELETE_USER,
     payload: {
-      id,
+      id, currentPage, usersVisibleLength, per_page,
     },
   })
 

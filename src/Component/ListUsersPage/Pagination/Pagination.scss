@@ -4,14 +4,15 @@
   margin-top: 25px;
   margin-right: auto;
   margin-left: auto;
-  .pagination__tabs{
+  .pagination__tabs, .pagination__arrows{
     color: #c4d0ce;
     background: transparent;
     display: block;
     cursor: pointer;
     font-weight: 500;
+    font-size: 21px;
   }
-  .pagination__tabs:hover{
+  .pagination__tabs:hover, .pagination__activeTabs:hover{
     transition: color ease 0.3s;
     color: #4E86E4;
   }

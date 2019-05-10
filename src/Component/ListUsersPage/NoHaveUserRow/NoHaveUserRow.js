@@ -5,7 +5,6 @@ import classNames from 'classnames'
 import { createUser } from '../../../Actions'
 import styles from './NoHaveUserRow.scss'
 
-
 const cx = classNames.bind(styles)
 
 const NoHaveUserRow = ({ createUser }) => (

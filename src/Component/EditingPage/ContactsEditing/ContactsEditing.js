@@ -13,7 +13,6 @@ import { renderFieldInputNewUser } from '../../renderFieldForm/renderFieldInputN
 import { renderFieldSelectContacts } from '../../renderFieldForm/renderFieldSelectContacts/renderFieldSelectContacts'
 import renderFieldArrayPhone from '../../renderFieldForm/renderFieldArrayPhone/renderFieldArrayPhone'
 
-
 const cx = classNames.bind(styles)
 
 class ContactsEditing extends Component {
