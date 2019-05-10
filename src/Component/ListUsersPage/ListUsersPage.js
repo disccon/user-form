@@ -53,22 +53,29 @@ class ListUsersPage extends Component {
   }
 
   componentDidUpdate() {
-    const { search } = this.props
+    const { search, push, lengthVisibleUser } = this.props
     const { users } = this.state
     const valueQuery = queryString.parse(search)
     const { page, per_page } = valueQuery
     const pageNumber = Number(page)
     const per_pageNumber = Number(per_page)
-    db.listUserDB.toArray(usersDB => {
-      const newUsers = usersDB.slice((pageNumber - 1) * per_pageNumber, (pageNumber - 1)
-          * per_pageNumber + per_pageNumber)
-      if (!_.isEqual(newUsers, users)) {
-        this.setState({
-          users: newUsers,
-          lengthPage: usersDB.length,
-        })
-      }
-    })
+    if(search) {
+      db.listUserDB.toArray(usersDB => {
+        if (Number(page) > Number(per_page) || Math.ceil(usersDB.length / per_page) < Number(page)
+            || !page || !per_page) {
+          push({ pathname: '/ListUsers', search: `?page=1&per_page=${lengthVisibleUser}` })
+        } else {
+          const newUsers = usersDB.slice((pageNumber - 1) * per_pageNumber, (pageNumber - 1)
+              * per_pageNumber + per_pageNumber)
+          if (!_.isEqual(newUsers, users)) {
+            this.setState({
+              users: newUsers,
+              lengthPage: usersDB.length,
+            })
+          }
+        }
+      })
+    }
   }
 
   deleteUser = idListUser => () => {
