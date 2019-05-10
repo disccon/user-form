@@ -40,14 +40,14 @@ class ListUsersPage extends Component {
   }
 
   componentDidMount() {
-    const { push, search } = this.props
+    const { push, search, lengthVisibleUser } = this.props
     if (!search) {
       db.listUserDB.toArray(users => {
         this.setState({
           users: users.slice(0, 10),
           lengthPage: users.length,
         })
-        push({ pathname: '/ListUsers', search: '?page=1&per_page=10' })
+        push({ pathname: '/ListUsers', search: `?page=1&per_page=${lengthVisibleUser}` })
       })
     }
   }
