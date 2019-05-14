@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { reduxForm, Field } from 'redux-form'
 import styles from '../../UserFormBox/UserFormBox.scss'
-import { profileEditingSave, filterUserEmail } from '../../../Actions'
+import { profileEditingSave, userEditState } from '../../../Actions'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
 import { renderFieldInputNewUser } from '../../renderFieldForm/renderFieldInputNewUser/renderFieldInputNewUser'
 import {
@@ -12,16 +12,15 @@ import {
 } from '../../renderFieldForm/renderDateTimePickerProfile/renderDateTimePickerProfile'
 import { renderFieldRadioProfile } from '../../renderFieldForm/renderFieldRadioProfile/renderFieldRadioProfile'
 import db from '../../../db'
+import { userGetIndexDB } from '../../../helpers/userGetIndexDB'
 
 const cx = classNames.bind(styles)
 
 class ProfileEditing extends Component {
   componentDidMount() {
-    const { filterUserEmail } = this.props
+    const { filterUserEmail, userEditState } = this.props
     const { id } = this.props
-    db.listUserDB.toArray(listUserDB => {
-      filterUserEmail(listUserDB, id)
-    })
+    userGetIndexDB(userEditState, id)
   }
 
   onSubmit = values => {
@@ -109,12 +108,12 @@ ProfileEditing.propTypes = {
   profileEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   filterUserEmail: PropTypes.func.isRequired,
+  userEditState: PropTypes.func.isRequired,
 }
 
 const ProfileEditingForm = reduxForm({
-  validate: (values, props) => {
+  validate: values => {
     const errors = {}
-    const { userEmailList } = props
     if (!values.birthDate) {
       errors.birthDate = 'Missing Birth Date'
     } else if ((new Date().getFullYear() - values.birthDate.getFullYear()) < 18) {
@@ -143,19 +142,26 @@ const ProfileEditingForm = reduxForm({
       errors.email = 'Missing Email'
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
       errors.email = 'Invalid email address'
-    } else {
-      userEmailList.find(userEmail => (
-        errors.email = values.email === userEmail ? 'already have this email in the database' : null))
     }
     return errors
   },
   form: 'ProfileEditing',
+  asyncValidate: (values, dispatch, props) => {
+    const { id } = props
+    return db.listUserDB.toArray(listUserDB => {
+      const userFilterName = listUserDB.filter(user => user.id !== id)
+      const userEmailList = userFilterName.map(user => user.email)
+      let errorEmail
+      userEmailList.find(userEmail => (
+        errorEmail = values.email === userEmail ? 'already have this email in the database' : false))
+      throw { email: errorEmail }
+    })
+  },
   enableReinitialize: true,
 })(ProfileEditing)
 
 const mapStateToProps = (state, ownProps) => {
   const id = Number(ownProps.match.params.id)
-  const { userEmailList } = state.editUserState
   const {
     firstName, lastName, birthDate, email, address, gender,
   } = state.editUserState.editUser
@@ -163,12 +169,11 @@ const mapStateToProps = (state, ownProps) => {
     initialValues: {
       firstName, lastName, birthDate, email, address, gender,
     },
-    userEmailList,
     id,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { profileEditingSave, filterUserEmail },
+  { profileEditingSave, userEditState },
 )(ProfileEditingForm)
