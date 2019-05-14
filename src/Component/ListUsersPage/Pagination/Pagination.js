@@ -63,6 +63,7 @@ Pagination.propTypes = {
   currentPage: PropTypes.number.isRequired,
   push: PropTypes.func.isRequired,
   lengthVisibleUser: PropTypes.number.isRequired,
+  limit: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = state => {
