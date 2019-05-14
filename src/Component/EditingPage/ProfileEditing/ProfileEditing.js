@@ -18,7 +18,7 @@ const cx = classNames.bind(styles)
 
 class ProfileEditing extends Component {
   componentDidMount() {
-    const { filterUserEmail, userEditState } = this.props
+    const { userEditState } = this.props
     const { id } = this.props
     userGetIndexDB(userEditState, id)
   }
@@ -107,7 +107,6 @@ ProfileEditing.propTypes = {
   id: PropTypes.number,
   profileEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  filterUserEmail: PropTypes.func.isRequired,
   userEditState: PropTypes.func.isRequired,
 }
 
@@ -153,7 +152,7 @@ const ProfileEditingForm = reduxForm({
       const userEmailList = userFilterName.map(user => user.email)
       let errorEmail
       userEmailList.find(userEmail => (
-        errorEmail = values.email === userEmail ? 'already have this email in the database' : false))
+        errorEmail = values.email === userEmail ? 'already have this email in the database' : null))
       throw { email: errorEmail }
     })
   },
