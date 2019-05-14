@@ -8,13 +8,11 @@ import { ReactComponent as EditIcon } from '../../img/icon/edit.svg'
 import { userEditState } from '../../Actions'
 import { userGetIndexDB } from '../../helpers/userGetIndexDB'
 
-
 const cx = classNames.bind(styles)
 
 class EditUserPage extends Component {
   componentDidMount() {
-    const { userEditState } = this.props
-    const { id } = this.props
+    const { userEditState, id } = this.props
     userGetIndexDB(userEditState, id)
   }
 
@@ -23,7 +21,7 @@ class EditUserPage extends Component {
       userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax,
       facebookLink, phoneN1, phoneN2, phoneN3, selectSkills, checkboxArt, checkboxSport, checkboxJustWant,
       checkboxFemale, checkboxGuitar, checkboxWtf, id,
-    } = this.props
+    } = this.props.editUser
     return (
       <div className={cx('container')}>
         <Link className={cx('linkBackPage')} to='/ListUsers'>{'<  Users List'}</Link>
@@ -164,56 +162,7 @@ class EditUserPage extends Component {
 }
 
 EditUserPage.propTypes = {
-  userName: PropTypes.string,
-  userSRCAvatarIMG: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array,
-  ]),
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  birthDate: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.bool,
-  ]),
-  email: PropTypes.string,
-  address: PropTypes.string,
-  company: PropTypes.string,
-  fax: PropTypes.string,
-  facebookLink: PropTypes.string,
-  phoneN1: PropTypes.string,
-  phoneN2: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  phoneN3: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  selectSkills: PropTypes.array,
-  checkboxArt: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  checkboxSport: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  checkboxJustWant: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  checkboxFemale: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  checkboxGuitar: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  checkboxWtf: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
+  editUser: PropTypes.object.isRequired,
   userEditState: PropTypes.func.isRequired,
   id: PropTypes.number,
 }
@@ -221,32 +170,8 @@ EditUserPage.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   const id = Number(ownProps.match.params.id)
   const { editUser } = state.editUserState
-  const {
-    userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax, facebookLink, phoneN1,
-    phoneN2, phoneN3, selectSkills, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale, checkboxGuitar,
-    checkboxWtf,
-  } = editUser
   return {
-    userName,
-    userSRCAvatarIMG,
-    firstName,
-    lastName,
-    birthDate,
-    email,
-    address,
-    company,
-    fax,
-    facebookLink,
-    phoneN1,
-    phoneN2,
-    phoneN3,
-    selectSkills,
-    checkboxArt,
-    checkboxSport,
-    checkboxJustWant,
-    checkboxFemale,
-    checkboxGuitar,
-    checkboxWtf,
+    editUser,
     id,
   }
 }

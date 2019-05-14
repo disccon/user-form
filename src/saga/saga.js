@@ -39,36 +39,25 @@ import {
   FORWARD_CAPABILITIES__ADD_NEW_USER,
   FORWARD_CAPABILITIES__FAILURE,
 
-
-
   DELETE_USER__SUCCESS,
   DELETE_USER__FAILURE,
 
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
 
-
-
   USER_EDIT_STATE__SUCCESS,
   USER_EDIT_STATE__FAILURE,
 
+  SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS,
+  SAVE_AVATAR_ACCOUNT_EDITING__FAILURE,
 
-
-  ACCOUNT_EDITING_SAVE__SUCCESS,
   ACCOUNT_EDITING_SAVE__FAILURE,
-
-  PROFILE_EDITING_SAVE__SUCCESS,
   PROFILE_EDITING_SAVE__FAILURE,
-
-  CONTACTS_EDITING_SAVE__SUCCESS,
   CONTACTS_EDITING_SAVE__FAILURE,
-
-  CAPABILITIES_EDITING_SAVE__SUCCESS,
   CAPABILITIES_EDITING_SAVE__FAILURE,
 } from '../Actions'
 import { newUser } from '../stubs/newUser'
 import db from '../db'
-import editUser from "../reducers/editUserReducer";
 
 
 export function* changeQuestionStateSaga(action) {
@@ -334,22 +323,19 @@ export function* forwardCapabilitiesSaga(action) {
 }
 
 
-
-
-
 export function* deleteUserSaga(action) {
   const {
     id, currentPage, usersVisibleLength, per_page,
   } = action.payload
   const usersList = yield select(state => state.listUsers.users)
   const users = usersList.filter(item => item.id !== id)
-  if (currentPage > 1 && usersVisibleLength === 1) {
-    yield put(push({
-      pathname: '/ListUsers',
-      search: `?page=${currentPage - 1}&per_page=${per_page}`,
-    }))
-  }
   try {
+    if (currentPage > 1 && usersVisibleLength === 1) {
+      yield put(push({
+        pathname: '/ListUsers',
+        search: `?page=${currentPage - 1}&per_page=${per_page}`,
+      }))
+    }
     yield put({
       type: DELETE_USER__SUCCESS,
       payload: users,
@@ -397,49 +383,38 @@ export function* userEditStateSaga(action) {
 }
 
 
-
-
-
+export function* saveAvatarAccountEditingSaga(action) {
+  const { userSRCAvatarIMG, id } = action.payload
+  db.listUserDB.update(id, {
+    userSRCAvatarIMG,
+  })
+  try {
+    yield put({
+      type: SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS,
+      payload: {
+        userSRCAvatarIMG,
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: SAVE_AVATAR_ACCOUNT_EDITING__FAILURE,
+      error,
+    })
+  }
+}
 
 export function* accountEditingSaveSaga(action) {
   const {
-    userName, password, repeatPassword, userSRCAvatarIMGState, id,
+    userName, password, repeatPassword, userSRCAvatarIMG, id,
   } = action.payload
-  const users = yield select(state => state.listUsers.users)
-  const user = users[id - 1]
   try {
-    yield put(push(`/Editing/${id}/Profile`))
     db.listUserDB.update(id, {
       userName,
       password,
       repeatPassword,
-      userSRCAvatarIMGState,
+      userSRCAvatarIMG,
     })
-    let indexEditUser
-    users.forEach((item, i) => {
-      if (item.id === id) {
-        indexEditUser = i
-      }
-    })
-    const newUserStart = users.slice(0, indexEditUser)
-    const newUserEnd = users.slice(1 + indexEditUser)
-    const newListUsers = [
-      ...newUserStart,
-      {
-        ...user,
-        userName,
-        password,
-        repeatPassword,
-        userSRCAvatarIMGState,
-      },
-      ...newUserEnd,
-    ]
-    yield put({
-      type: ACCOUNT_EDITING_SAVE__SUCCESS,
-      payload: {
-        newListUsers,
-      },
-    })
+    yield put(push(`/EditUser/${id}`))
   } catch
   (error) {
     yield put({
@@ -449,14 +424,12 @@ export function* accountEditingSaveSaga(action) {
   }
 }
 
+
 export function* profileEditingSaveSaga(action) {
   const {
     firstName, lastName, birthDate, email, address, gender, id,
   } = action.payload
-  const users = yield select(state => state.listUsers.users)
-  const user = users[id - 1]
   try {
-    yield put(push(`/Editing/${id}/Contacts`))
     db.listUserDB.update(id, {
       firstName,
       lastName,
@@ -465,33 +438,7 @@ export function* profileEditingSaveSaga(action) {
       address,
       gender,
     })
-    let indexEditUser
-    users.forEach((item, i) => {
-      if (item.id === id) {
-        indexEditUser = i
-      }
-    })
-    const newUserStart = users.slice(0, indexEditUser)
-    const newUserEnd = users.slice(1 + indexEditUser)
-    const newListUsers = [
-      ...newUserStart,
-      {
-        ...user,
-        firstName,
-        lastName,
-        birthDate,
-        email,
-        address,
-        gender,
-      },
-      ...newUserEnd,
-    ]
-    yield put({
-      type: PROFILE_EDITING_SAVE__SUCCESS,
-      payload: {
-        newListUsers,
-      },
-    })
+    yield put(push(`/EditUser/${id}`))
   } catch
   (error) {
     yield put({
@@ -507,10 +454,7 @@ export function* contactsEditingSaveSaga(action) {
     company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2,
     phoneN3, id,
   } = action.payload
-  const users = yield select(state => state.listUsers.users)
-  const user = users[id - 1]
   try {
-    yield put(push(`/Editing/${id}/Capabilities`))
     db.listUserDB.update(id, {
       company,
       githubLink,
@@ -522,36 +466,7 @@ export function* contactsEditingSaveSaga(action) {
       phoneN2,
       phoneN3,
     })
-    let indexEditUser
-    users.forEach((item, i) => {
-      if (item.id === id) {
-        indexEditUser = i
-      }
-    })
-    const newUserStart = users.slice(0, indexEditUser)
-    const newUserEnd = users.slice(1 + indexEditUser)
-    const newListUsers = [
-      ...newUserStart,
-      {
-        ...user,
-        company,
-        githubLink,
-        facebookLink,
-        selectLanguage,
-        fax,
-        phoneArray,
-        phoneN1,
-        phoneN2,
-        phoneN3,
-      },
-      ...newUserEnd,
-    ]
-    yield put({
-      type: CONTACTS_EDITING_SAVE__SUCCESS,
-      payload: {
-        newListUsers,
-      },
-    })
+    yield put(push(`/EditUser/${id}`))
   } catch
   (error) {
     yield put({
@@ -566,10 +481,7 @@ export function* capabilitiesEditingSaveSaga(action) {
     selectSkills, textareaField, checkboxArt, checkboxSport,
     checkboxJustWant, checkboxFemale, checkboxGuitar, checkboxWtf, id,
   } = action.payload
-  const users = yield select(state => state.listUsers.users)
-  const user = users[id - 1]
   try {
-    yield put(push(`/EditUser/${id}`))
     db.listUserDB.update(id, {
       selectSkills,
       textareaField,
@@ -580,35 +492,7 @@ export function* capabilitiesEditingSaveSaga(action) {
       checkboxGuitar,
       checkboxWtf,
     })
-    let indexEditUser
-    users.forEach((item, i) => {
-      if (item.id === id) {
-        indexEditUser = i
-      }
-    })
-    const newUserStart = users.slice(0, indexEditUser)
-    const newUserEnd = users.slice(1 + indexEditUser)
-    const newListUsers = [
-      ...newUserStart,
-      {
-        ...user,
-        selectSkills,
-        textareaField,
-        checkboxArt,
-        checkboxSport,
-        checkboxJustWant,
-        checkboxFemale,
-        checkboxGuitar,
-        checkboxWtf,
-      },
-      ...newUserEnd,
-    ]
-    yield put({
-      type: CAPABILITIES_EDITING_SAVE__SUCCESS,
-      payload: {
-        newListUsers,
-      },
-    })
+    yield put(push(`/EditUser/${id}`))
   } catch
   (error) {
     yield put({
