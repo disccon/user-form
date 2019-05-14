@@ -29,9 +29,6 @@ import {
   BACK_CAPABILITIES__SUCCESS,
   BACK_CAPABILITIES__FAILURE,
 
-  EDIT_USER__SUCCESS,
-  EDIT_USER__FAILURE,
-
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
 } from '../Actions'
@@ -227,21 +224,6 @@ export default function newUserReducer(state = newUser, action) {
         error: action.error,
       }
     }
-
-
-    case EDIT_USER__SUCCESS: {
-      return {
-        ...action.payload,
-        error: undefined,
-      }
-    }
-    case EDIT_USER__FAILURE: {
-      return {
-        ...state,
-        error: action.error,
-      }
-    }
-
 
     case CREATE_USER__SUCCESS: {
       return {

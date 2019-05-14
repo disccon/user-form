@@ -1,33 +1,28 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { push } from 'connected-react-router'
 import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 import styles from './EditUserPage.scss'
 import { ReactComponent as EditIcon } from '../../img/icon/edit.svg'
-import { editUser } from '../../Actions'
+import { userEditState } from '../../Actions'
+import { userGetIndexDB } from '../../helpers/userGetIndexDB'
+
 
 const cx = classNames.bind(styles)
 
 class EditUserPage extends Component {
-  componentDidUpdate() {
-    const { push, isLoading } = this.props
-    if (isLoading === false) {
-      push('/NodFound')
-    }
-  }
-
-  editUser = page => () => {
-    const { editUser, id } = this.props
-    editUser(id, page)
+  componentDidMount() {
+    const { userEditState } = this.props
+    const { id } = this.props
+    userGetIndexDB(userEditState, id)
   }
 
   render() {
     const {
       userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax,
       facebookLink, phoneN1, phoneN2, phoneN3, selectSkills, checkboxArt, checkboxSport, checkboxJustWant,
-      checkboxFemale, checkboxGuitar, checkboxWtf,
+      checkboxFemale, checkboxGuitar, checkboxWtf, id,
     } = this.props
     return (
       <div className={cx('container')}>
@@ -40,9 +35,11 @@ class EditUserPage extends Component {
               <div className={cx('accountDataWrapper__block')}>
                 <div className={cx('accountDataWrapper__section')}>
                   <h3 className={cx('accountDataWrapper__h3')}>Account</h3>
-                  <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
-                    <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('/')} />
-                  </button>
+                  <Link to={`/Editing/${id}`}>
+                    <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
+                      <EditIcon className={cx('accountDataWrapper__editIcon')} />
+                    </button>
+                  </Link>
                 </div>
                 <div className={cx('accountDataWrapper__sectionInfo')}>
                   <div className={cx('accountDataWrapper__wrapper')}>
@@ -58,9 +55,11 @@ class EditUserPage extends Component {
               <div className={cx('accountDataWrapper__block')}>
                 <div className={cx('accountDataWrapper__section')}>
                   <h3 className={cx('accountDataWrapper__h3')}>Personal</h3>
-                  <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
-                    <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('/Profile')} />
-                  </button>
+                  <Link to={`/Editing/${id}/Profile`}>
+                    <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
+                      <EditIcon className={cx('accountDataWrapper__editIcon')} />
+                    </button>
+                  </Link>
                 </div>
                 <div className={cx('accountDataWrapper__sectionInfo')}>
                   <div className={cx('accountDataWrapper__wrapper')}>
@@ -88,9 +87,11 @@ class EditUserPage extends Component {
               <div className={cx('accountDataWrapper__block')}>
                 <div className={cx('accountDataWrapper__section')}>
                   <h3 className={cx('accountDataWrapper__h3')}>Contacts</h3>
-                  <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
-                    <EditIcon className={cx('accountDataWrapper__editIcon')} onClick={this.editUser('/Contacts')} />
-                  </button>
+                  <Link to={`/Editing/${id}/Contacts`}>
+                    <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
+                      <EditIcon className={cx('accountDataWrapper__editIcon')} />
+                    </button>
+                  </Link>
                 </div>
                 <div className={cx('accountDataWrapper__sectionInfo')}>
                   <div className={cx('accountDataWrapper__wrapper')}>
@@ -126,12 +127,11 @@ class EditUserPage extends Component {
               <div className={cx('accountDataWrapper__block')}>
                 <div className={cx('accountDataWrapper__section')}>
                   <h3 className={cx('accountDataWrapper__h3')}>Capabilities</h3>
-                  <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
-                    <EditIcon
-                      className={cx('accountDataWrapper__editIcon')}
-                      onClick={this.editUser('/Capabilities')}
-                    />
-                  </button>
+                  <Link to={`/Editing/${id}/Capabilities`}>
+                    <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
+                      <EditIcon className={cx('accountDataWrapper__editIcon')} />
+                    </button>
+                  </Link>
                 </div>
                 <div className={cx('accountDataWrapper__sectionInfo')}>
                   <div className={cx('accountDataWrapper__wrapper')}>
@@ -214,57 +214,44 @@ EditUserPage.propTypes = {
     PropTypes.string,
     PropTypes.bool,
   ]),
-  editUser: PropTypes.func.isRequired,
+  userEditState: PropTypes.func.isRequired,
   id: PropTypes.number,
-  isLoading: PropTypes.bool,
-  push: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
   const id = Number(ownProps.match.params.id)
-  const { users } = state.listUsers
-  if (users.length >= 1) {
-    const user = users.find(i => i.id === id)
-    if (!user) {
-      return {
-        isLoading: false,
-      }
-    }
-    const {
-      userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax, facebookLink, phoneN1,
-      phoneN2, phoneN3, selectSkills, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale, checkboxGuitar,
-      checkboxWtf,
-    } = user
-    return {
-      userName,
-      userSRCAvatarIMG,
-      firstName,
-      lastName,
-      birthDate,
-      email,
-      address,
-      company,
-      fax,
-      facebookLink,
-      phoneN1,
-      phoneN2,
-      phoneN3,
-      selectSkills,
-      checkboxArt,
-      checkboxSport,
-      checkboxJustWant,
-      checkboxFemale,
-      checkboxGuitar,
-      checkboxWtf,
-      id,
-    }
-  }
+  const { editUser } = state.editUserState
+  const {
+    userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax, facebookLink, phoneN1,
+    phoneN2, phoneN3, selectSkills, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale, checkboxGuitar,
+    checkboxWtf,
+  } = editUser
   return {
-    birthDate: false,
+    userName,
+    userSRCAvatarIMG,
+    firstName,
+    lastName,
+    birthDate,
+    email,
+    address,
+    company,
+    fax,
+    facebookLink,
+    phoneN1,
+    phoneN2,
+    phoneN3,
+    selectSkills,
+    checkboxArt,
+    checkboxSport,
+    checkboxJustWant,
+    checkboxFemale,
+    checkboxGuitar,
+    checkboxWtf,
+    id,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { editUser, push },
+  { userEditState },
 )(EditUserPage)
