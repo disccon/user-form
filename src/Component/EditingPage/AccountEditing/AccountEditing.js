@@ -162,7 +162,9 @@ const AccountEditingForm = reduxForm({
       let errorUserName
       userNameList.find(userEmail => (
         errorUserName = values.userName === userEmail ? 'already have this email in the database' : null))
-      throw { userName: errorUserName }
+      if (errorUserName) {
+        throw { userName: errorUserName }
+      }
     })
   },
   form: 'AccountEditing',
