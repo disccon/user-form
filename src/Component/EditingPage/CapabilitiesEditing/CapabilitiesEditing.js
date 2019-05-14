@@ -133,35 +133,23 @@ const CapabilitiesEditingForm = reduxForm({
 })(CapabilitiesEditing)
 
 const mapStateToProps = (state, ownProps) => {
-  const { users } = state.listUsers
-  if (users.length >= 1) {
-    const id = Number(ownProps.match.params.id)
-    const user = users.find(user => user.id === id)
-    if (!user) {
-      return {
-        isLoading: false,
-      }
-    }
-    const {
-      selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
-      checkboxGuitar, checkboxWtf,
-    } = user
-    return {
-      initialValues: {
-        selectSkills,
-        textareaField,
-        checkboxArt,
-        checkboxSport,
-        checkboxJustWant,
-        checkboxFemale,
-        checkboxGuitar,
-        checkboxWtf,
-      },
-      id,
-    }
-  }
+  const id = Number(ownProps.match.params.id)
+  const {
+    selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
+    checkboxGuitar, checkboxWtf,
+  } = state.editUserState.editUser
   return {
-    users: [],
+    initialValues: {
+      selectSkills,
+      textareaField,
+      checkboxArt,
+      checkboxSport,
+      checkboxJustWant,
+      checkboxFemale,
+      checkboxGuitar,
+      checkboxWtf,
+    },
+    id,
   }
 }
 

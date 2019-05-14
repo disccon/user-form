@@ -1,26 +1,27 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { push } from 'connected-react-router'
 import classNames from 'classnames'
 import { reduxForm, Field } from 'redux-form'
 import styles from '../../UserFormBox/UserFormBox.scss'
-import { profileEditingSave } from '../../../Actions'
+import { profileEditingSave, filterUserEmail } from '../../../Actions'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
 import { renderFieldInputNewUser } from '../../renderFieldForm/renderFieldInputNewUser/renderFieldInputNewUser'
 import {
   renderDateTimePickerProfile,
 } from '../../renderFieldForm/renderDateTimePickerProfile/renderDateTimePickerProfile'
 import { renderFieldRadioProfile } from '../../renderFieldForm/renderFieldRadioProfile/renderFieldRadioProfile'
+import db from '../../../db'
 
 const cx = classNames.bind(styles)
 
 class ProfileEditing extends Component {
-  componentDidUpdate() {
-    const { push, isLoading } = this.props
-    if (isLoading === false) {
-      push('/NodFound')
-    }
+  componentDidMount() {
+    const { filterUserEmail } = this.props
+    const { id } = this.props
+    db.listUserDB.toArray(listUserDB => {
+      filterUserEmail(listUserDB, id)
+    })
   }
 
   onSubmit = values => {
@@ -52,7 +53,7 @@ class ProfileEditing extends Component {
             idField='fieldLastName'
             classNameLabel='inputNewUser'
           />
-          <Field name='birthDate' component={renderDateTimePickerProfile} />
+          <Field name='birthDate' component={renderDateTimePickerProfile}/>
         </div>
         <div className={cx('userFormBox__sideRight')}>
           <Field
@@ -107,14 +108,14 @@ ProfileEditing.propTypes = {
   id: PropTypes.number,
   profileEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  push: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
+  filterUserEmail: PropTypes.func.isRequired,
 }
 
 const ProfileEditingForm = reduxForm({
   validate: (values, props) => {
     const errors = {}
     const { userEmailList } = props
+    console.log(444444, userEmailList)
     if (!values.birthDate) {
       errors.birthDate = 'Missing Birth Date'
     } else if ((new Date().getFullYear() - values.birthDate.getFullYear()) < 18) {
@@ -144,9 +145,8 @@ const ProfileEditingForm = reduxForm({
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
       errors.email = 'Invalid email address'
     } else {
-      userEmailList.forEach(userName => {
-        errors.email = values.email === userName ? 'already have this email in the database' : null
-      })
+      userEmailList.find(userEmail => (
+        errors.email = values.email === userEmail ? 'already have this email in the database' : null))
     }
     return errors
   },
@@ -155,34 +155,21 @@ const ProfileEditingForm = reduxForm({
 })(ProfileEditing)
 
 const mapStateToProps = (state, ownProps) => {
-  const { users } = state.listUsers
-  if (users.length >= 1) {
-    const id = Number(ownProps.match.params.id)
-    const user = users.find(user => user.id === id)
-    if (!user) {
-      return {
-        isLoading: false,
-      }
-    }
-    const {
-      firstName, lastName, birthDate, email, address, gender,
-    } = user
-    const userEmailFilter = users.filter(user => user.id !== id)
-    const userEmailList = userEmailFilter.map(user => user.email)
-    return {
-      initialValues: {
-        firstName, lastName, birthDate, email, address, gender,
-      },
-      userEmailList,
-      id,
-    }
-  }
+  const id = Number(ownProps.match.params.id)
+  const { userEmailList } = state.editUserState
+  const {
+    firstName, lastName, birthDate, email, address, gender,
+  } = state.editUserState.editUser
   return {
-    userEmailList: [],
+    initialValues: {
+      firstName, lastName, birthDate, email, address, gender,
+    },
+    userEmailList,
+    id,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { profileEditingSave, push },
+  { profileEditingSave, filterUserEmail },
 )(ProfileEditingForm)

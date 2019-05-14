@@ -7,7 +7,7 @@ import { Field, reduxForm } from 'redux-form'
 import styles from '../../UserFormBox/UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
-import { accountEditingSave, saveAvatarAccountEditing } from '../../../Actions'
+import { accountEditingSave, saveAvatarAccountEditing, filterUserName } from '../../../Actions'
 import { renderFieldInputAccount } from '../../renderFieldForm/renderFieldInputAccount/renderFieldInputAccount'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
 import db from '../../../db'
@@ -20,11 +20,12 @@ class AccountEditing extends Component {
     typeFieldPassword: 'text',
   }
 
-  componentDidUpdate() {
-    const { push, isLoading } = this.props
-    if (isLoading === false) {
-      push('/NodFound')
-    }
+  componentDidMount() {
+    const { filterUserName } = this.props
+    const { id } = this.props
+    db.listUserDB.toArray(listUserDB => {
+      filterUserName(listUserDB, id)
+    })
   }
 
   addImageUserAvatar = event => {
@@ -126,7 +127,7 @@ class AccountEditing extends Component {
             idInput='repeatPassword'
             changeTypePassword={this.changeTypePassword}
           />
-          <button className={cx('accountComponent__buttonSubmit')} type='submit'>Forward</button>
+          <button className={cx('accountComponent__buttonSubmit')} type='submit'>Save</button>
         </div>
       </UserFormBox>
     )
@@ -171,54 +172,29 @@ AccountEditing.propTypes = {
   ]),
   accountEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func,
-  push: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
   saveAvatarAccountEditing: PropTypes.func.isRequired,
+  filterUserName: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
   const id = Number(ownProps.match.params.id)
-  const { users } = state.listUsers
-  if (users.length >= 1) {
-    const id = Number(ownProps.match.params.id)
-    const user = users.find(user => user.id === id)
-    if (!user) {
-      return {
-        isLoading: false,
-      }
-    }
-    const {
-      userName, password, repeatPassword, userSRCAvatarIMG,
-    } = user
-    db.table('listUserDB')
-      .get(id)
-      .then(user => {
-        console.log(11123123123)
-        const { userName, password, repeatPassword } = user
-        return {
-          initialValues: {
-            userName, password, repeatPassword,
-          },
-          id,
-        }
-      })
-    const userFilterName = users.filter(user => user.id !== id)
-    const userNameList = userFilterName.map(user => user.userName)
-    // return {
-    //   initialValues: {
-    //     userName, password, repeatPassword,
-    //   },
-    //   userSRCAvatarIMG,
-    //   userNameList,
-    //   id,
-    // }
-  }
+  const { userNameList } = state.editUserState
+  const {
+    userName, password, repeatPassword, userSRCAvatarIMG,
+  } = state.editUserState.editUser
   return {
-    users: [],
+    initialValues: {
+      userName, password, repeatPassword,
+    },
+    userSRCAvatarIMG,
+    userNameList,
+    id,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { accountEditingSave, saveAvatarAccountEditing, push },
+  {
+    accountEditingSave, saveAvatarAccountEditing, push, filterUserName,
+  },
 )(AccountEditingForm)
