@@ -1,3 +1,5 @@
+import editUser from "../reducers/editUserReducer";
+
 export const CHANGE_QUESTION_STATE = 'CHANGE_QUESTION_STATE'
 export const CHANGE_QUESTION_STATE__OPEN = 'CHANGE_QUESTION_STATE__OPEN'
 export const CHANGE_QUESTION_STATE__CLOSE = 'CHANGE_QUESTION_STATE__CLOSE'
@@ -7,10 +9,6 @@ export const CONTINUE_USER = 'CONTINUE_USER'
 export const CONTINUE_USER__CONTINUE = 'CONTINUE_USER__CONTINUE'
 export const CONTINUE_USER__CLOSE = 'CONTINUE_USER__CLOSE'
 export const CONTINUE_USER__FAILURE = 'CONTINUE_USER__FAILURE'
-
-export const USER_LISTER_NEW_STATE = 'USER_LISTER_NEW_STATE'
-export const USER_LISTER_NEW_STATE__SUCCESS = 'USER_LISTER_NEW_STATE__SUCCESS'
-export const USER_LISTER_NEW_STATE__FAILURE = 'USER_LISTER_NEW_STATE__FAILURE'
 
 export const SAVE_USER_SRC_AVATAR_IMG = 'SAVE_USER_SRC_AVATAR_IMG'
 export const SAVE_USER_SRC_AVATAR_IMG__SUCCESS = 'SAVE_USER_SRC_AVATAR_IMG__SUCCESS'
@@ -43,9 +41,10 @@ export const FORWARD_CAPABILITIES = 'FORWARD_CAPABILITIES'
 export const FORWARD_CAPABILITIES__ADD_NEW_USER = 'FORWARD_BACK_CAPABILITIES__FORWARD__ADD_NEW_USER'
 export const FORWARD_CAPABILITIES__FAILURE = 'FORWARD_CAPABILITIES__FAILURE'
 
-export const EDIT_USER = 'EDIT_USER'
-export const EDIT_USER__SUCCESS = 'EDIT_USER__SUCCESS'
-export const EDIT_USER__FAILURE = 'EDIT_USER__FAILURE'
+
+export const LISTER_USER_STATE = 'LISTER_USER_STATE'
+export const LISTER_USER_STATE__SUCCESS = 'LISTER_USER_STATE__SUCCESS'
+export const LISTER_USER_STATE__FAILURE = 'LISTER_USER_STATE__FAILURE'
 
 export const DELETE_USER = 'DELETE_USER'
 export const DELETE_USER__SUCCESS = 'DELETE_USER__SUCCESS'
@@ -54,6 +53,13 @@ export const DELETE_USER__FAILURE = 'DELETE_USER__FAILURE'
 export const CREATE_USER = 'CREATE_USER'
 export const CREATE_USER__SUCCESS = 'CREATE_USER__SUCCESS'
 export const CREATE_USER__FAILURE = 'CREATE_USER__FAILURE'
+
+
+export const USER_EDIT_STATE = 'USER_EDIT_STATE'
+export const USER_EDIT_STATE__SUCCESS = 'USER_EDIT_STATE__SUCCESS'
+export const USER_EDIT_STATE__FAILURE = 'USER_EDIT_STATE__FAILURE'
+
+
 
 
 export const SAVE_AVATAR_ACCOUNT_EDITING = 'SAVE_AVATAR_ACCOUNT_EDITING'
@@ -85,7 +91,7 @@ export const changeQuestionState = isQuestion => ({
 })
 
 export const userListerNewState = userLister => ({
-  type: USER_LISTER_NEW_STATE,
+  type: LISTER_USER_STATE,
   payload: {
     userLister,
   },
@@ -173,13 +179,6 @@ export const forwardCapabilities = (selectSkills, textareaField, checkboxArt, ch
     },
   })
 
-export const editUser = (id, page) => (
-  {
-    type: EDIT_USER,
-    payload: {
-      id, page,
-    },
-  })
 
 export const deleteUser = (id, currentPage, usersVisibleLength, per_page) => (
   {
@@ -191,6 +190,16 @@ export const deleteUser = (id, currentPage, usersVisibleLength, per_page) => (
 
 export const createUser = () => (
   { type: CREATE_USER })
+
+
+export const userEditState = editUser => (
+  {
+    type: USER_EDIT_STATE,
+    payload: {
+      editUser,
+    },
+  })
+
 
 
 export const saveAvatarAccountEditing = (userSRCAvatarIMG, id) => (

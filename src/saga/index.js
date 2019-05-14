@@ -10,9 +10,12 @@ import {
   deleteAddFieldPhoneSaga,
   backCapabilitiesSaga,
   forwardCapabilitiesSaga,
-  editUserSaga,
+
   deleteUserSaga,
   createUserSaga,
+
+  userEditStateSaga,
+
   accountEditingSaveSaga,
   profileEditingSaveSaga,
   contactsEditingSaveSaga,
@@ -23,7 +26,7 @@ import {
 import {
   CHANGE_QUESTION_STATE,
   CONTINUE_USER,
-  USER_LISTER_NEW_STATE,
+  LISTER_USER_STATE,
   SAVE_USER_SRC_AVATAR_IMG,
   FORWARD_ACCOUNT,
   FORWARD_BACK_PROFILE,
@@ -31,9 +34,12 @@ import {
   DELETE_ADD_FIELD_PHONE,
   BACK_CAPABILITIES,
   FORWARD_CAPABILITIES,
-  EDIT_USER,
+
   DELETE_USER,
   CREATE_USER,
+
+  USER_EDIT_STATE,
+
   ACCOUNT_EDITING_SAVE,
   PROFILE_EDITING_SAVE,
   CONTACTS_EDITING_SAVE,
@@ -45,7 +51,7 @@ export default function* rootSaga() {
   yield all([
     takeLatest(CHANGE_QUESTION_STATE, changeQuestionStateSaga),
     takeLatest(CONTINUE_USER, continueUserSaga),
-    takeLatest(USER_LISTER_NEW_STATE, userListerNewStateSaga),
+    takeLatest(LISTER_USER_STATE, userListerNewStateSaga),
     takeLatest(SAVE_USER_SRC_AVATAR_IMG, saveUserSRCAvatarIMGSaga),
     takeLatest(FORWARD_ACCOUNT, forwardAccountSaga),
     takeLatest(FORWARD_BACK_PROFILE, forwardBackProfileSaga),
@@ -53,9 +59,13 @@ export default function* rootSaga() {
     takeLatest(DELETE_ADD_FIELD_PHONE, deleteAddFieldPhoneSaga),
     takeLatest(BACK_CAPABILITIES, backCapabilitiesSaga),
     takeLatest(FORWARD_CAPABILITIES, forwardCapabilitiesSaga),
-    takeLatest(EDIT_USER, editUserSaga),
+
     takeLatest(DELETE_USER, deleteUserSaga),
     takeLatest(CREATE_USER, createUserSaga),
+
+    takeLatest(USER_EDIT_STATE, userEditStateSaga),
+
+
     takeLatest(ACCOUNT_EDITING_SAVE, accountEditingSaveSaga),
     takeLatest(PROFILE_EDITING_SAVE, profileEditingSaveSaga),
     takeLatest(CONTACTS_EDITING_SAVE, contactsEditingSaveSaga),

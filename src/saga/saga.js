@@ -12,8 +12,8 @@ import {
   CONTINUE_USER__CLOSE,
   CONTINUE_USER__FAILURE,
 
-  USER_LISTER_NEW_STATE__SUCCESS,
-  USER_LISTER_NEW_STATE__FAILURE,
+  LISTER_USER_STATE__SUCCESS,
+  LISTER_USER_STATE__FAILURE,
 
   SAVE_USER_SRC_AVATAR_IMG__SUCCESS,
   SAVE_USER_SRC_AVATAR_IMG__FAILURE,
@@ -39,14 +39,20 @@ import {
   FORWARD_CAPABILITIES__ADD_NEW_USER,
   FORWARD_CAPABILITIES__FAILURE,
 
-  EDIT_USER__SUCCESS,
-  EDIT_USER__FAILURE,
+
 
   DELETE_USER__SUCCESS,
   DELETE_USER__FAILURE,
 
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
+
+
+
+  USER_EDIT_STATE__SUCCESS,
+  USER_EDIT_STATE__FAILURE,
+
+
 
   ACCOUNT_EDITING_SAVE__SUCCESS,
   ACCOUNT_EDITING_SAVE__FAILURE,
@@ -62,6 +68,7 @@ import {
 } from '../Actions'
 import { newUser } from '../stubs/newUser'
 import db from '../db'
+import editUser from "../reducers/editUserReducer";
 
 
 export function* changeQuestionStateSaga(action) {
@@ -121,14 +128,14 @@ export function* userListerNewStateSaga(action) {
   const { userLister } = action.payload
   try {
     yield put({
-      type: USER_LISTER_NEW_STATE__SUCCESS,
+      type: LISTER_USER_STATE__SUCCESS,
       payload: {
         userLister,
       },
     })
   } catch (error) {
     yield put({
-      type: USER_LISTER_NEW_STATE__FAILURE,
+      type: LISTER_USER_STATE__FAILURE,
       error,
     })
   }
@@ -326,26 +333,9 @@ export function* forwardCapabilitiesSaga(action) {
   }
 }
 
-export function* editUserSaga(action) {
-  const { id, page } = action.payload
-  try {
-    yield put(push(`/Editing/${id}${page}`))
-    const users = yield select(state => state.listUsers.users)
-    const newUser = users.find(i => i.id === id)
-    yield put({
-      type: EDIT_USER__SUCCESS,
-      payload: {
-        ...newUser,
-        isQuestion: false,
-      },
-    })
-  } catch (error) {
-    yield put({
-      type: EDIT_USER__FAILURE,
-      error,
-    })
-  }
-}
+
+
+
 
 export function* deleteUserSaga(action) {
   const {
@@ -388,6 +378,28 @@ export function* createUserSaga() {
     })
   }
 }
+
+export function* userEditStateSaga(action) {
+  const { editUser } = action.payload
+  try {
+    yield put({
+      type: USER_EDIT_STATE__SUCCESS,
+      payload: {
+        editUser,
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: USER_EDIT_STATE__FAILURE,
+      error,
+    })
+  }
+}
+
+
+
+
+
 
 export function* accountEditingSaveSaga(action) {
   const {
