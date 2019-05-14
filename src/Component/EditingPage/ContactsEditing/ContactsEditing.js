@@ -147,22 +147,15 @@ const ContactsEditingForm = reduxForm({
 })(ContactsEditing)
 
 const mapStateToProps = (state, ownProps) => {
-  const { users } = state.listUsers
-  if (users.length >= 1) {
-    const id = Number(ownProps.match.params.id)
-    const user = users.find(user => user.id === id)
-    const {
-      company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
-    } = user
-    return {
-      initialValues: {
-        company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
-      },
-      id,
-    }
-  }
+  const id = Number(ownProps.match.params.id)
+  const {
+    company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
+  } = state.editUserState.editUser
   return {
-    isLoading: false,
+    initialValues: {
+      company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
+    },
+    id,
   }
 }
 
