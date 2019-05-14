@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
-import { push } from 'connected-react-router'
-import { capabilitiesEditingSave } from '../../../Actions'
+import { capabilitiesEditingSave, userEditState } from '../../../Actions'
 import styles from '../../UserFormBox/UserFormBox.scss'
 import {
   renderFieldSelectCapabilities,
@@ -16,15 +15,14 @@ import {
   renderFieldCheckboxCapabilities,
 } from '../../renderFieldForm/renderFieldCheckboxCapabilities/renderFieldCheckboxCapabilities'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
+import { userGetIndexDB } from '../../../helpers/userGetIndexDB'
 
 const cx = classNames.bind(styles)
 
 class CapabilitiesEditing extends Component {
-  componentDidUpdate() {
-    const { push, isLoading } = this.props
-    if (isLoading === false) {
-      push('/NodFound')
-    }
+  componentDidMount() {
+    const { userEditState, id } = this.props
+    userGetIndexDB(userEditState, id)
   }
 
   onSubmit = values => {
@@ -103,8 +101,7 @@ CapabilitiesEditing.propTypes = {
   id: PropTypes.number,
   capabilitiesEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  push: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
+  userEditState: PropTypes.func.isRequired,
 }
 
 const CapabilitiesEditingForm = reduxForm({
@@ -155,5 +152,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { capabilitiesEditingSave, push },
+  { capabilitiesEditingSave, userEditState },
 )(CapabilitiesEditingForm)

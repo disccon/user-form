@@ -2,20 +2,25 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { push } from 'connected-react-router'
 import {
   Field, reduxForm, FieldArray,
 } from 'redux-form'
 import styles from '../../UserFormBox/UserFormBox.scss'
-import { contactsEditingSave } from '../../../Actions'
+import { contactsEditingSave, userEditState } from '../../../Actions'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
 import { renderFieldInputNewUser } from '../../renderFieldForm/renderFieldInputNewUser/renderFieldInputNewUser'
 import { renderFieldSelectContacts } from '../../renderFieldForm/renderFieldSelectContacts/renderFieldSelectContacts'
 import renderFieldArrayPhone from '../../renderFieldForm/renderFieldArrayPhone/renderFieldArrayPhone'
+import { userGetIndexDB } from '../../../helpers/userGetIndexDB'
 
 const cx = classNames.bind(styles)
 
 class ContactsEditing extends Component {
+  componentDidMount() {
+    const { userEditState, id } = this.props
+    userGetIndexDB(userEditState, id)
+  }
+
   onSubmit = values => {
     const { contactsEditingSave, id } = this.props
     contactsEditingSave(values.company, values.githubLink, values.facebookLink, values.selectLanguage,
@@ -90,6 +95,7 @@ ContactsEditing.propTypes = {
   id: PropTypes.number,
   contactsEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  userEditState: PropTypes.func.isRequired,
 }
 
 const ContactsEditingForm = reduxForm({
@@ -161,5 +167,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { contactsEditingSave, push },
+  { contactsEditingSave, userEditState },
 )(ContactsEditingForm)

@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { push } from 'connected-react-router'
 import { Field, reduxForm } from 'redux-form'
 import styles from '../../UserFormBox/UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
-import { accountEditingSave, saveAvatarAccountEditing, filterUserName } from '../../../Actions'
+import { accountEditingSave, saveAvatarAccountEditing, userEditState } from '../../../Actions'
 import { renderFieldInputAccount } from '../../renderFieldForm/renderFieldInputAccount/renderFieldInputAccount'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
 import db from '../../../db'
+import { userGetIndexDB } from '../../../helpers/userGetIndexDB'
 
 const cx = classNames.bind(styles)
 
@@ -21,11 +21,9 @@ class AccountEditing extends Component {
   }
 
   componentDidMount() {
-    const { filterUserName } = this.props
+    const { userEditState } = this.props
     const { id } = this.props
-    db.listUserDB.toArray(listUserDB => {
-      filterUserName(listUserDB, id)
-    })
+    userGetIndexDB(userEditState, id)
   }
 
   addImageUserAvatar = event => {
@@ -135,16 +133,12 @@ class AccountEditing extends Component {
 }
 
 const AccountEditingForm = reduxForm({
-  validate: (values, props) => {
+  validate: values => {
     const errors = {}
-    const { userNameList } = props
     if (!values.userName) {
       errors.userName = 'Missing User Name'
     } else if (values.userName.length <= 3) {
       errors.userName = 'Must be 4 characters or more'
-    } else {
-      userNameList.find(userName => (
-        errors.userName = values.userName === userName ? 'already have this user in the database' : null))
     }
 
     if (!values.password) {
@@ -160,6 +154,17 @@ const AccountEditingForm = reduxForm({
 
     return errors
   },
+  asyncValidate: (values, dispatch, props) => {
+    const { id } = props
+    return db.listUserDB.toArray(listUserDB => {
+      const userFilterName = listUserDB.filter(user => user.id !== id)
+      const userNameList = userFilterName.map(user => user.userName)
+      let errorUserName
+      userNameList.find(userEmail => (
+        errorUserName = values.userName === userEmail ? 'already have this email in the database' : false))
+      throw { userName: errorUserName }
+    })
+  },
   form: 'AccountEditing',
   enableReinitialize: true,
 })(AccountEditing)
@@ -173,12 +178,11 @@ AccountEditing.propTypes = {
   accountEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func,
   saveAvatarAccountEditing: PropTypes.func.isRequired,
-  filterUserName: PropTypes.func.isRequired,
+  userEditState: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
   const id = Number(ownProps.match.params.id)
-  const { userNameList } = state.editUserState
   const {
     userName, password, repeatPassword, userSRCAvatarIMG,
   } = state.editUserState.editUser
@@ -187,7 +191,6 @@ const mapStateToProps = (state, ownProps) => {
       userName, password, repeatPassword,
     },
     userSRCAvatarIMG,
-    userNameList,
     id,
   }
 }
@@ -195,6 +198,6 @@ const mapStateToProps = (state, ownProps) => {
 export default connect(
   mapStateToProps,
   {
-    accountEditingSave, saveAvatarAccountEditing, push, filterUserName,
+    accountEditingSave, saveAvatarAccountEditing, userEditState,
   },
 )(AccountEditingForm)
