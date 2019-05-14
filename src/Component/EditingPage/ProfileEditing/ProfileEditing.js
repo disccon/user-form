@@ -153,7 +153,9 @@ const ProfileEditingForm = reduxForm({
       let errorEmail
       userEmailList.find(userEmail => (
         errorEmail = values.email === userEmail ? 'already have this email in the database' : null))
-      throw { email: errorEmail }
+      if (errorEmail) {
+        throw { email: errorEmail }
+      }
     })
   },
   enableReinitialize: true,
