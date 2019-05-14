@@ -53,7 +53,7 @@ class ProfileEditing extends Component {
             idField='fieldLastName'
             classNameLabel='inputNewUser'
           />
-          <Field name='birthDate' component={renderDateTimePickerProfile}/>
+          <Field name='birthDate' component={renderDateTimePickerProfile} />
         </div>
         <div className={cx('userFormBox__sideRight')}>
           <Field
@@ -115,7 +115,6 @@ const ProfileEditingForm = reduxForm({
   validate: (values, props) => {
     const errors = {}
     const { userEmailList } = props
-    console.log(444444, userEmailList)
     if (!values.birthDate) {
       errors.birthDate = 'Missing Birth Date'
     } else if ((new Date().getFullYear() - values.birthDate.getFullYear()) < 18) {
