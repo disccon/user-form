@@ -10,7 +10,7 @@ import { contactsEditingSave, userEditState } from '../../../Actions'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
 import { renderFieldInputNewUser } from '../../renderFieldForm/renderFieldInputNewUser/renderFieldInputNewUser'
 import { renderFieldSelectContacts } from '../../renderFieldForm/renderFieldSelectContacts/renderFieldSelectContacts'
-import renderFieldArrayPhone from '../../renderFieldForm/renderFieldArrayPhone/renderFieldArrayPhone'
+import { renderFieldArrayPhone } from '../../renderFieldForm/renderFieldArrayPhone/renderFieldArrayPhone'
 import { userGetIndexDB } from '../../../helpers/userGetIndexDB'
 
 const cx = classNames.bind(styles)

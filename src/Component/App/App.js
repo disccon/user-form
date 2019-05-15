@@ -10,7 +10,8 @@ import EditUserPage from '../EditUserPage/EditUserPage'
 import ListUsersPage from '../ListUsersPage/ListUsersPage'
 import EditingPage from '../EditingPage/EditingPage'
 import Header from '../Header/Header'
-import { NodFound } from '../NodFound/NodFound'
+import { NotFound } from '../NotFound/NotFound'
+
 
 const cx = classNames.bind(styles)
 
@@ -19,12 +20,12 @@ export const App = ({ history }) => (
     <div className={cx('app')}>
       <Header />
       <Switch>
-        <Route path='/NodFound' component={NodFound} />
-        <Route exact path='/ListUsers' component={ListUsersPage} />
-        <Route exact path='/EditUser/:id' component={EditUserPage} />
-        <Route path='/Editing/:id' component={EditingPage} />
+        <Route path='/not-found' component={NotFound} />
+        <Route exact path='/users' component={ListUsersPage} />
+        <Route exact path='/user/:id' component={EditUserPage} />
+        <Route path='/edit-user/:id' component={EditingPage} />
         <Route path='/' component={AddingNewUserPage} />
-        <Redirect to='/NodFound' />
+        <Redirect to='/not-found' />
       </Switch>
     </div>
   </ConnectedRouter>
