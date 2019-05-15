@@ -12,8 +12,8 @@ import {
   CONTINUE_USER__CLOSE,
   CONTINUE_USER__FAILURE,
 
-  LISTER_USER_STATE__SUCCESS,
-  LISTER_USER_STATE__FAILURE,
+  LISTER_USERS_STATE__SUCCESS,
+  LISTER_USERS_STATE__FAILURE,
 
   SAVE_USER_SRC_AVATAR_IMG__SUCCESS,
   SAVE_USER_SRC_AVATAR_IMG__FAILURE,
@@ -38,9 +38,6 @@ import {
 
   FORWARD_CAPABILITIES__ADD_NEW_USER,
   FORWARD_CAPABILITIES__FAILURE,
-
-  DELETE_USER__SUCCESS,
-  DELETE_USER__FAILURE,
 
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
@@ -113,18 +110,19 @@ export function* continueUserSaga(action) {
   }
 }
 
-export function* userListerNewStateSaga(action) {
-  const { userLister } = action.payload
+export function* usersListerStateSaga(action) {
+  const { users, usersLength } = action.payload
   try {
     yield put({
-      type: LISTER_USER_STATE__SUCCESS,
+      type: LISTER_USERS_STATE__SUCCESS,
       payload: {
-        userLister,
+        users,
+        usersLength,
       },
     })
   } catch (error) {
     yield put({
-      type: LISTER_USER_STATE__FAILURE,
+      type: LISTER_USERS_STATE__FAILURE,
       error,
     })
   }
@@ -280,15 +278,12 @@ export function* forwardCapabilitiesSaga(action) {
     selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
     checkboxFemale, checkboxGuitar, checkboxWtf,
   } = action.payload
-  const newUser = yield select(state => state.newUser)
-  const users = yield select(state => state.listUsers.users)
+  const newUserDB = yield select(state => state.newUser)
   delete newUser.isQuestion
   try {
     yield put(push('/users'))
-    const id = users.length > 0 ? users[users.length - 1].id + 1 : 1
     db.listUserDB.add({
-      ...newUser,
-      id,
+      ...newUserDB,
       selectSkills,
       textareaField,
       checkboxArt,
@@ -301,16 +296,7 @@ export function* forwardCapabilitiesSaga(action) {
     yield put({
       type: FORWARD_CAPABILITIES__ADD_NEW_USER,
       payload: {
-        ...newUser,
-        id,
-        selectSkills,
-        textareaField,
-        checkboxArt,
-        checkboxSport,
-        checkboxJustWant,
-        checkboxFemale,
-        checkboxGuitar,
-        checkboxWtf,
+        newUser,
       },
     })
   } catch
@@ -322,31 +308,6 @@ export function* forwardCapabilitiesSaga(action) {
   }
 }
 
-
-export function* deleteUserSaga(action) {
-  const {
-    id, currentPage, usersVisibleLength, per_page,
-  } = action.payload
-  const usersList = yield select(state => state.listUsers.users)
-  const users = usersList.filter(item => item.id !== id)
-  try {
-    if (currentPage > 1 && usersVisibleLength === 1) {
-      yield put(push({
-        pathname: '/users',
-        search: `?page=${currentPage - 1}&per_page=${per_page}`,
-      }))
-    }
-    yield put({
-      type: DELETE_USER__SUCCESS,
-      payload: users,
-    })
-  } catch (error) {
-    yield put({
-      type: DELETE_USER__FAILURE,
-      error,
-    })
-  }
-}
 
 export function* createUserSaga() {
   try {

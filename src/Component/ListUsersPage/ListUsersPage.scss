@@ -39,7 +39,9 @@ $li: 'listUsers';
     height: 29px;
   }
 }
-
+.#{$li}__trEmpty{
+  height: 29px;
+}
 .paginationbox {
   color: #3f51b5;
 }

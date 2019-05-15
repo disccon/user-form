@@ -1,5 +1,5 @@
 export const initialListUsers = {
   users: [],
-  lengthVisibleUser: 10,
-  limit: 6,
+  perPage: 10,
+  usersLength: 0,
 }

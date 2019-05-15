@@ -40,13 +40,10 @@ export const FORWARD_CAPABILITIES__ADD_NEW_USER = 'FORWARD_BACK_CAPABILITIES__FO
 export const FORWARD_CAPABILITIES__FAILURE = 'FORWARD_CAPABILITIES__FAILURE'
 
 
-export const LISTER_USER_STATE = 'LISTER_USER_STATE'
-export const LISTER_USER_STATE__SUCCESS = 'LISTER_USER_STATE__SUCCESS'
-export const LISTER_USER_STATE__FAILURE = 'LISTER_USER_STATE__FAILURE'
+export const LISTER_USERS_STATE = 'LISTER_USERS_STATE'
+export const LISTER_USERS_STATE__SUCCESS = 'LISTER_USERS_STATE__SUCCESS'
+export const LISTER_USERS_STATE__FAILURE = 'LISTER_USERS_STATE__FAILURE'
 
-export const DELETE_USER = 'DELETE_USER'
-export const DELETE_USER__SUCCESS = 'DELETE_USER__SUCCESS'
-export const DELETE_USER__FAILURE = 'DELETE_USER__FAILURE'
 
 export const CREATE_USER = 'CREATE_USER'
 export const CREATE_USER__SUCCESS = 'CREATE_USER__SUCCESS'
@@ -163,20 +160,13 @@ export const forwardCapabilities = (selectSkills, textareaField, checkboxArt, ch
   })
 
 
-export const userListerNewState = userLister => ({
-  type: LISTER_USER_STATE,
+export const usersListerState = (users, usersLength) => ({
+  type: LISTER_USERS_STATE,
   payload: {
-    userLister,
+    users, usersLength,
   },
 })
 
-export const deleteUser = (id, currentPage, usersVisibleLength, per_page) => (
-  {
-    type: DELETE_USER,
-    payload: {
-      id, currentPage, usersVisibleLength, per_page,
-    },
-  })
 
 export const createUser = () => (
   { type: CREATE_USER })

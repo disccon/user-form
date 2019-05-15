@@ -24,7 +24,7 @@ class EditUserPage extends Component {
     } = this.props.editUser
     return (
       <div className={cx('container')}>
-        <Link className={cx('linkBackPage')} to='/ListUsers'>{'<  Users List'}</Link>
+        <Link className={cx('linkBackPage')} to='/users'>{'<  Users List'}</Link>
         <h2 className={cx('headline')}>User Name</h2>
         {birthDate && (
           <div className={cx('userNamePageContainer container')}>

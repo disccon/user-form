@@ -11,7 +11,7 @@ import { forwardBackContacts, deleteAddFieldPhone } from '../../../Actions'
 import { renderFieldSelectContacts } from '../../renderFieldForm/renderFieldSelectContacts/renderFieldSelectContacts'
 import { renderFieldInputNewUser } from '../../renderFieldForm/renderFieldInputNewUser/renderFieldInputNewUser'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
-import { renderFieldArrayPhone } from "../../renderFieldForm/renderFieldArrayPhone/renderFieldArrayPhone";
+import { renderFieldArrayPhone } from '../../renderFieldForm/renderFieldArrayPhone/renderFieldArrayPhone'
 
 const cx = classNames.bind(styles)
 

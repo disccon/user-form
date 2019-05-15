@@ -33,22 +33,22 @@ class UserRow extends Component {
     const { user, deleteUser } = this.props
     const { deleteUserClass } = this.state
     return (
-      <tr className={cx('listUsers__trName', { deleteUserClass })}>
-        <td className={cx('userRow userRow_fistTD')}>
+      <tr className={cx('userRow', { deleteUserClass })}>
+        <td className={cx('userRow__fistTD')}>
           <img className={cx('userRow__img')} src={user.userSRCAvatarIMG} alt='userSRCAvatarIMG' />
           <div className={cx('userRow__wrapperDiv')}>
             <h4 className={cx('userRow__h4')}>{user.userName}</h4>
             <span className={cx('userRow__span')}>username</span>
           </div>
         </td>
-        <td className={cx('listUsers__trCompany')}>
-          <div className={cx('userRow')}>{user.company}</div>
+        <td className={cx('userRow__td')}>
+          <div className={cx('userRow__div')}>{user.company}</div>
         </td>
-        <td>
-          <div className={cx('userRow')}>{user.email}</div>
+        <td className={cx('userRow__td')}>
+          <div className={cx('userRow__div')}>{user.email}</div>
         </td>
-        <td>
-          <div className={cx('userRow')}>
+        <td className={cx('userRow__td')}>
+          <div className={cx('userRow__div')}>
             3 month ago
             {!deleteUserClass && (
               <Fragment>
@@ -64,16 +64,15 @@ class UserRow extends Component {
                   />
                 </button>
               </Fragment>
-            )
-            }
+            )}
           </div>
           {deleteUserClass && (
-            <div className={cx('userRow__deleteUserWrapper')} onClick={deleteUser(user.id)}>
-              <button type='button' className={cx('userRow__buttonDeleteUser')}>
+            <button type='button' className={cx('userRow__buttonDeleteUser')} onClick={deleteUser(user.id)}>
+              <div className={cx('userRow__deleteUserWrapper')}>
                 <CloseIcon className={cx('deleteUser')} />
                 delete
-              </button>
-            </div>
+              </div>
+            </button>
           )}
         </td>
       </tr>

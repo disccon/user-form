@@ -29,6 +29,8 @@ import {
   BACK_CAPABILITIES__SUCCESS,
   BACK_CAPABILITIES__FAILURE,
 
+  FORWARD_CAPABILITIES__ADD_NEW_USER,
+
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
 } from '../Actions'
@@ -221,6 +223,12 @@ export default function newUserReducer(state = newUser, action) {
     case BACK_CAPABILITIES__FAILURE: {
       return {
         ...state,
+        error: action.error,
+      }
+    }
+    case FORWARD_CAPABILITIES__ADD_NEW_USER: {
+      return {
+        ...action.payload,
         error: action.error,
       }
     }
