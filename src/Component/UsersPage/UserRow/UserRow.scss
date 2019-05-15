@@ -3,9 +3,11 @@ $us: 'userRow';
   background: #E7F0FF;
 }
 .#{$us} {
+  color: #475666;;
   transition: all ease 0.3s;
   .#{$us}__td {
     .#{$us}__div {
+      font-weight: 500;
       height: 93px;
       display: flex;
       align-items: center;
@@ -18,7 +20,6 @@ $us: 'userRow';
     display: flex;
     align-items: center;
     font-weight: 500;
-    color: #475666;
 
     .#{$us}__img {
       width: 40px;

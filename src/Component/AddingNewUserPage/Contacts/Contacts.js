@@ -42,7 +42,7 @@ class Contacts extends Component {
   }
 
   render() {
-    const { handleSubmit, deleteAddFieldPhone } = this.props
+    const { handleSubmit } = this.props
     return (
       <UserFormBox handleSubmit={handleSubmit(this.onSubmit)}>
         <div className={cx('userFormBox__sideLeft')}>
@@ -91,6 +91,8 @@ class Contacts extends Component {
           />
           <FieldArray
             component={renderFieldArrayPhone}
+            addFieldPhone={this.addFieldPhone}
+            deleteFieldPhone={this.deleteFieldPhone}
             name='phoneArray'
           />
           <div className={cx('userFormBox__addPhone')} />
@@ -119,6 +121,7 @@ Contacts.propTypes = {
   phoneN3Form: PropTypes.string,
   forwardBackContacts: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  deleteAddFieldPhone: PropTypes.func.isRequired,
 }
 
 const ContactsForm = reduxForm({

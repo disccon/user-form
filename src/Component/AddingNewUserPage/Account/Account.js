@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Field, reduxForm } from 'redux-form'
-import _ from 'lodash/core'
 import styles from '../../UserFormBox/UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
@@ -21,13 +20,6 @@ class Account extends Component {
   state = {
     avatarIMGError: null,
     typeFieldPassword: 'text',
-  }
-
-  componentDidMount() {
-    const { newUser, changeQuestionState } = this.props
-    db.newUserDB.get(0, newUserDB => {
-      changeQuestionState(_.isEqual(newUserDB, newUser))
-    })
   }
 
   continueUser = isContinue => () => {
@@ -152,8 +144,8 @@ class Account extends Component {
 
 
 const accountForm = reduxForm({
-  asyncValidate: values => db.listUserDB.toArray(listUserDB => {
-    const userNameList = listUserDB.map(user => user.userName)
+  asyncValidate: values => db.usersDB.toArray(usersDB => {
+    const userNameList = usersDB.map(user => user.userName)
     let errorUserName
     userNameList.find(userEmail => (
       errorUserName = values.userName === userEmail ? 'already have this email in the database' : null))

@@ -156,8 +156,8 @@ const AccountEditingForm = reduxForm({
   },
   asyncValidate: (values, dispatch, props) => {
     const { id } = props
-    return db.listUserDB.toArray(listUserDB => {
-      const userFilterName = listUserDB.filter(user => user.id !== id)
+    return db.usersDB.toArray(usersDB => {
+      const userFilterName = usersDB.filter(user => user.id !== id)
       const userNameList = userFilterName.map(user => user.userName)
       let errorUserName
       userNameList.find(userEmail => (

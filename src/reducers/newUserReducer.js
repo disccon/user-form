@@ -1,4 +1,4 @@
-import { newUser } from '../stubs/newUser'
+import { initialNewUserState } from '../stubs/initialNewUserState'
 import {
   CHANGE_QUESTION_STATE__OPEN,
   CHANGE_QUESTION_STATE__CLOSE,
@@ -36,7 +36,7 @@ import {
 } from '../Actions'
 
 
-export default function newUserReducer(state = newUser, action) {
+export default function newUserReducer(state = initialNewUserState, action) {
   switch (action.type) {
     case CHANGE_QUESTION_STATE__CLOSE: {
       return {

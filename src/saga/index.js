@@ -2,7 +2,6 @@ import { takeLatest, all } from 'redux-saga/effects'
 import {
   changeQuestionStateSaga,
   continueUserSaga,
-  usersListerStateSaga,
   saveUserSRCAvatarIMGSaga,
   forwardAccountSaga,
   forwardBackProfileSaga,
@@ -10,11 +9,13 @@ import {
   deleteAddFieldPhoneSaga,
   backCapabilitiesSaga,
   forwardCapabilitiesSaga,
+  fetchUsersDBSaga,
   createUserSaga,
   userEditStateSaga,
   saveAvatarAccountEditingSaga,
   accountEditingSaveSaga,
   profileEditingSaveSaga,
+  deleteFieldPhoneEditingSaga,
   contactsEditingSaveSaga,
   capabilitiesEditingSaveSaga,
 } from './saga'
@@ -23,7 +24,7 @@ import {
 import {
   CHANGE_QUESTION_STATE,
   CONTINUE_USER,
-  LISTER_USERS_STATE,
+  FETCH_USERS,
   SAVE_USER_SRC_AVATAR_IMG,
   FORWARD_ACCOUNT,
   FORWARD_BACK_PROFILE,
@@ -36,6 +37,7 @@ import {
   SAVE_AVATAR_ACCOUNT_EDITING,
   ACCOUNT_EDITING_SAVE,
   PROFILE_EDITING_SAVE,
+  DELETE_FIELD_PHONE_EDITING,
   CONTACTS_EDITING_SAVE,
   CAPABILITIES_EDITING_SAVE,
 } from '../Actions'
@@ -45,7 +47,6 @@ export default function* rootSaga() {
   yield all([
     takeLatest(CHANGE_QUESTION_STATE, changeQuestionStateSaga),
     takeLatest(CONTINUE_USER, continueUserSaga),
-    takeLatest(LISTER_USERS_STATE, usersListerStateSaga),
     takeLatest(SAVE_USER_SRC_AVATAR_IMG, saveUserSRCAvatarIMGSaga),
     takeLatest(FORWARD_ACCOUNT, forwardAccountSaga),
     takeLatest(FORWARD_BACK_PROFILE, forwardBackProfileSaga),
@@ -54,10 +55,12 @@ export default function* rootSaga() {
     takeLatest(BACK_CAPABILITIES, backCapabilitiesSaga),
     takeLatest(FORWARD_CAPABILITIES, forwardCapabilitiesSaga),
     takeLatest(CREATE_USER, createUserSaga),
+    takeLatest(FETCH_USERS, fetchUsersDBSaga),
     takeLatest(USER_EDIT_STATE, userEditStateSaga),
     takeLatest(SAVE_AVATAR_ACCOUNT_EDITING, saveAvatarAccountEditingSaga),
     takeLatest(ACCOUNT_EDITING_SAVE, accountEditingSaveSaga),
     takeLatest(PROFILE_EDITING_SAVE, profileEditingSaveSaga),
+    takeLatest(DELETE_FIELD_PHONE_EDITING, deleteFieldPhoneEditingSaga),
     takeLatest(CONTACTS_EDITING_SAVE, contactsEditingSaveSaga),
     takeLatest(CAPABILITIES_EDITING_SAVE, capabilitiesEditingSaveSaga),
   ])

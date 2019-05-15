@@ -9,10 +9,10 @@ const cx = classNames.bind(styles)
 
 const NoHaveUserRow = ({ createUser }) => (
   <Fragment>
-    <h2 className={cx('listUsers__noUsersH2')}>
+    <h2 className={cx('usersPage__noUsersH2')}>
     No users here :(
     </h2>
-    <button type='button' className={cx('listUsers__createUserButton')} onClick={createUser}>Create new user</button>
+    <button type='button' className={cx('usersPage__createUserButton')} onClick={createUser}>Create new user</button>
   </Fragment>
 )
 

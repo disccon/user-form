@@ -1,4 +1,4 @@
-export const newUser = {
+export const initialNewUserState = {
   isQuestion: false,
   id: 0,
   userName: '',

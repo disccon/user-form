@@ -5,6 +5,10 @@ import {
   SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS,
   SAVE_AVATAR_ACCOUNT_EDITING__FAILURE,
 
+  DELETE_FIELD_PHONE_EDITING__ADD,
+  DELETE_FIELD_PHONE_EDITING__DELETE,
+  DELETE_FIELD_PHONE_EDITING__FAILURE,
+
   ACCOUNT_EDITING_SAVE__FAILURE,
   PROFILE_EDITING_SAVE__FAILURE,
   CONTACTS_EDITING_SAVE__FAILURE,
@@ -12,7 +16,7 @@ import {
 } from '../Actions'
 
 
-export default function listUsersReducer(state = { editUser: {} }, action) {
+export default function usersReducer(state = { editUser: {} }, action) {
   switch (action.type) {
     case USER_EDIT_STATE__SUCCESS: {
       return {
@@ -44,6 +48,30 @@ export default function listUsersReducer(state = { editUser: {} }, action) {
         error: action.error,
       }
     }
+
+
+    case DELETE_FIELD_PHONE_EDITING__ADD: {
+      return {
+        ...state,
+        phoneArray: action.payload.phoneArray,
+        error: undefined,
+      }
+    }
+
+    case DELETE_FIELD_PHONE_EDITING__DELETE: {
+      return {
+        ...state,
+        phoneArray: action.payload.phoneArray,
+        error: undefined,
+      }
+    }
+    case DELETE_FIELD_PHONE_EDITING__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
 
     case ACCOUNT_EDITING_SAVE__FAILURE: {
       return {
