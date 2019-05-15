@@ -15,7 +15,7 @@ const cx = classNames.bind(styles)
 
 const EditingPage = ({ pathname, id }) => (
   <div className={cx('container')}>
-    <Link className={cx('linkBackPage')} to={`/EditUser/${id}`}>{'<  User Profile'}</Link>
+    <Link className={cx('linkBackPage')} to={`/edit-user/${id}`}>{'<  User Profile'}</Link>
     <h2 className={cx('headline')}>Editing</h2>
     <div className={cx('editingPage')}>
       <div className={cx('editingPage__tabs')}>
@@ -36,11 +36,11 @@ const EditingPage = ({ pathname, id }) => (
         </div>
       </div>
       <Switch>
-        <Route exact path='/Editing/:id' component={AccountEditing} />
-        <Route exact path='/Editing/:id/Profile' component={ProfileEditing} />
-        <Route exact path='/Editing/:id/Contacts' component={ContactsEditing} />
-        <Route exact path='/Editing/:id/Capabilities' component={CapabilitiesEditing} />
-        <Redirect to='/NodFound' />
+        <Route exact path='/edit-user/:id' component={AccountEditing} />
+        <Route exact path='/edit-user/:id/profile' component={ProfileEditing} />
+        <Route exact path='/edit-user/:id/contacts' component={ContactsEditing} />
+        <Route exact path='/edit-user/:id/capabilities' component={CapabilitiesEditing} />
+        <Redirect to='/not-found' />
       </Switch>
     </div>
   </div>

@@ -30,7 +30,7 @@ class ListUsersPage extends Component {
 
   render() {
     const {
-      usersVisible, pagesCount, currentPage, limit,
+      usersVisible, pagesCount, currentPage,
     } = this.props
     return (
       <Fragment>
@@ -60,7 +60,7 @@ class ListUsersPage extends Component {
           <Pagination
             pagesCount={pagesCount}
             currentPage={currentPage}
-            limit={limit}
+            limit={6}
           />
         )}
       </Fragment>
@@ -74,11 +74,10 @@ ListUsersPage.propTypes = {
   userListerNewState: PropTypes.func.isRequired,
   pagesCount: PropTypes.number,
   currentPage: PropTypes.number,
-  limit: PropTypes.number,
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { users, lengthVisibleUser, limit } = state.listUsers
+  const { users, lengthVisibleUser } = state.listUsers
   const { search } = ownProps.location
   const valueQuery = queryString.parse(search)
   const { page } = valueQuery
@@ -98,7 +97,6 @@ const mapStateToProps = (state, ownProps) => {
       usersVisible,
       pagesCount: Math.ceil(users.length / per_page),
       currentPage,
-      limit,
       per_page,
     }
   }

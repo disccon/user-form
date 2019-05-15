@@ -15,11 +15,11 @@ class Pagination extends Component {
       push, lengthVisibleUser, currentPage, pagesCount,
     } = this.props
     if (onClickButton === 'back' && currentPage > 1) {
-      push({ pathname: '/ListUsers', search: `?page=${currentPage - 1}&per_page=${lengthVisibleUser}` })
+      push({ pathname: '/users', search: `?page=${currentPage - 1}&per_page=${lengthVisibleUser}` })
     } else if (onClickButton === 'forward' && currentPage !== pagesCount) {
-      push({ pathname: '/ListUsers', search: `?page=${currentPage + 1}&per_page=${lengthVisibleUser}` })
+      push({ pathname: '/users', search: `?page=${currentPage + 1}&per_page=${lengthVisibleUser}` })
     } else if (onClickButton > 0) {
-      push({ pathname: '/ListUsers', search: `?page=${onClickButton}&per_page=${lengthVisibleUser}` })
+      push({ pathname: '/users', search: `?page=${onClickButton}&per_page=${lengthVisibleUser}` })
     }
   }
 
@@ -32,7 +32,7 @@ class Pagination extends Component {
         <button
           type='button'
           className={cx('pagination__arrows', { pagination__activeTabs: currentPage !== 1 })}
-          onClick={this.changePage('back')}
+          onClick={this.changePage(-1)}
         >
           {'<'}
         </button>

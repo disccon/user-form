@@ -6,11 +6,12 @@ import {
   Field, formValueSelector, reduxForm, FieldArray,
 } from 'redux-form'
 import styles from '../../UserFormBox/UserFormBox.scss'
-import { forwardBackContacts } from '../../../Actions'
-import renderFieldArrayPhone from '../../renderFieldForm/renderFieldArrayPhone/renderFieldArrayPhone'
+import { forwardBackContacts, deleteAddFieldPhone } from '../../../Actions'
+
 import { renderFieldSelectContacts } from '../../renderFieldForm/renderFieldSelectContacts/renderFieldSelectContacts'
 import { renderFieldInputNewUser } from '../../renderFieldForm/renderFieldInputNewUser/renderFieldInputNewUser'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
+import { renderFieldArrayPhone } from "../../renderFieldForm/renderFieldArrayPhone/renderFieldArrayPhone";
 
 const cx = classNames.bind(styles)
 
@@ -30,8 +31,18 @@ class Contacts extends Component {
       values.fax, values.phoneArray, values.phoneN1, values.phoneN2, values.phoneN3)
   }
 
+  deleteFieldPhone = () => {
+    const { deleteAddFieldPhone } = this.props
+    deleteAddFieldPhone('delete')
+  }
+
+  addFieldPhone = () => {
+    const { deleteAddFieldPhone } = this.props
+    deleteAddFieldPhone('add')
+  }
+
   render() {
-    const { handleSubmit } = this.props
+    const { handleSubmit, deleteAddFieldPhone } = this.props
     return (
       <UserFormBox handleSubmit={handleSubmit(this.onSubmit)}>
         <div className={cx('userFormBox__sideLeft')}>
@@ -196,5 +207,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { forwardBackContacts },
+  { forwardBackContacts, deleteAddFieldPhone },
 )(ContactsForm)
