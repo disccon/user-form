@@ -26,9 +26,7 @@ class Account extends Component {
   componentDidMount() {
     const { newUser, changeQuestionState } = this.props
     db.newUserDB.get(0, newUserDB => {
-      if (newUserDB) {
-        changeQuestionState(_.isEqual(newUserDB, newUser))
-      }
+      changeQuestionState(_.isEqual(newUserDB, newUser))
     })
   }
 

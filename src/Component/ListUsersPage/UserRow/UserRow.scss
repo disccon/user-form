@@ -9,6 +9,7 @@ $us: 'userRow';
   align-items: center;
   font-weight: 500;
   color: #475666;
+  transition: all ease 0.3s;
 
   .#{$us}__img {
     width: 40px;

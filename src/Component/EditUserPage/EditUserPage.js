@@ -33,7 +33,7 @@ class EditUserPage extends Component {
               <div className={cx('accountDataWrapper__block')}>
                 <div className={cx('accountDataWrapper__section')}>
                   <h3 className={cx('accountDataWrapper__h3')}>Account</h3>
-                  <Link to={`/Editing/${id}`}>
+                  <Link to={`/edit-user/${id}`}>
                     <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
                       <EditIcon className={cx('accountDataWrapper__editIcon')} />
                     </button>
@@ -53,7 +53,7 @@ class EditUserPage extends Component {
               <div className={cx('accountDataWrapper__block')}>
                 <div className={cx('accountDataWrapper__section')}>
                   <h3 className={cx('accountDataWrapper__h3')}>Personal</h3>
-                  <Link to={`/Editing/${id}/Profile`}>
+                  <Link to={`/edit-user/${id}/profile`}>
                     <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
                       <EditIcon className={cx('accountDataWrapper__editIcon')} />
                     </button>
@@ -85,7 +85,7 @@ class EditUserPage extends Component {
               <div className={cx('accountDataWrapper__block')}>
                 <div className={cx('accountDataWrapper__section')}>
                   <h3 className={cx('accountDataWrapper__h3')}>Contacts</h3>
-                  <Link to={`/Editing/${id}/Contacts`}>
+                  <Link to={`/edit-user/${id}/contacts`}>
                     <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
                       <EditIcon className={cx('accountDataWrapper__editIcon')} />
                     </button>
@@ -125,7 +125,7 @@ class EditUserPage extends Component {
               <div className={cx('accountDataWrapper__block')}>
                 <div className={cx('accountDataWrapper__section')}>
                   <h3 className={cx('accountDataWrapper__h3')}>Capabilities</h3>
-                  <Link to={`/Editing/${id}/Capabilities`}>
+                  <Link to={`/edit-user/${id}/capabilities`}>
                     <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
                       <EditIcon className={cx('accountDataWrapper__editIcon')} />
                     </button>
