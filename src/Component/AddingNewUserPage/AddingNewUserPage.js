@@ -12,11 +12,19 @@ import Capabilities from './Capabilities/Capabilities'
 import Profile from './Profile/Profile'
 import db from '../../db'
 
+
 const cx = classNames.bind(styles)
 
 class AddingNewUserPage extends Component {
   componentDidMount() {
-    const { pathname, push } = this.props
+    const {
+      pathname, push, newUser,
+    } = this.props
+    db.newUserDB.get(0, newUserDB => {
+      if (!newUserDB) {
+        db.newUserDB.add(newUser)
+      }
+    })
     if (pathname !== '/') {
       push('/')
     }
@@ -74,7 +82,7 @@ AddingNewUserPage.propTypes = {
 
 const mapStateToProps = state => {
   const activeFormName = getFormNames()(state)
-  const activeValue = getFormValues(...activeFormName)(state)
+  const activeValue = getFormValues(activeFormName[0])(state)
   const { pathname } = state.router.location
   return {
     newUser: state.newUser,

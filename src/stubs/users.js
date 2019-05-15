@@ -122,7 +122,7 @@ export const users = [
     firstName: 'Maxim',
     lastName: 'Morozov',
     birthDate: new Date(2000, 2, 1),
-    email: 'my_email1@gmail.com',
+    email: 'my_email4@gmail.com',
     address: 'Street TRUE, 130',
     gender: '',
 

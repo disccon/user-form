@@ -3,13 +3,17 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Field, reduxForm } from 'redux-form'
+import _ from 'lodash/core'
 import styles from '../../UserFormBox/UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
-import { forwardAccount, saveUserSRCAvatarIMG, continueUser } from '../../../Actions'
+import {
+  forwardAccount, saveUserSRCAvatarIMG, continueUser, changeQuestionState,
+} from '../../../Actions'
 import { renderFieldInputAccount } from '../../renderFieldForm/renderFieldInputAccount/renderFieldInputAccount'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
 import { QuestionAccount } from './QuestionAccount/QuestionAccount'
+import db from '../../../db'
 
 const cx = classNames.bind(styles)
 
@@ -17,6 +21,15 @@ class Account extends Component {
   state = {
     avatarIMGError: null,
     typeFieldPassword: 'text',
+  }
+
+  componentDidMount() {
+    const { newUser, changeQuestionState } = this.props
+    db.newUserDB.get(0, newUserDB => {
+      if (newUserDB) {
+        changeQuestionState(_.isEqual(newUserDB, newUser))
+      }
+    })
   }
 
   continueUser = isContinue => () => {
@@ -80,9 +93,9 @@ class Account extends Component {
     return (
       <Fragment>
         {isQuestion && <QuestionAccount continueUser={this.continueUser} />}
-        <UserFormBox handleSubmit={handleSubmit(this.onSubmit)} classForm='userFormBoxAccount' >
+        <UserFormBox handleSubmit={handleSubmit(this.onSubmit)} classForm='userFormBoxAccount'>
           <div className={cx('userAvatarWrapper')}>
-            <label htmlFor='userAvatar' >
+            <label htmlFor='userAvatar'>
               {userAvatarIMG}
               <input
                 id='userAvatar'
@@ -139,17 +152,26 @@ class Account extends Component {
   }
 }
 
+
 const accountForm = reduxForm({
-  validate: (values, props) => {
+  asyncValidate: values => db.listUserDB.toArray(listUserDB => {
+    const userNameList = listUserDB.map(user => user.userName)
+    let errorUserName
+    userNameList.find(userEmail => (
+      errorUserName = values.userName === userEmail ? 'already have this email in the database' : null))
+    if (errorUserName) {
+      return Promise.reject({
+        userName: errorUserName,
+      })
+    }
+  }),
+
+  validate: values => {
     const errors = {}
-    const { userNameList } = props
     if (!values.userName) {
       errors.userName = 'Missing User Name'
     } else if (values.userName.length <= 3) {
       errors.userName = 'Must be 4 characters or more'
-    } else {
-      userNameList.find(userName => (
-        errors.userName = values.userName === userName ? 'already have this user in the database' : null))
     }
 
     if (!values.password) {
@@ -179,25 +201,27 @@ Account.propTypes = {
   saveUserSRCAvatarIMG: PropTypes.func.isRequired,
   forwardAccount: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func,
+  newUser: PropTypes.object.isRequired,
+  changeQuestionState: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => {
   const {
     userName, password, repeatPassword, userSRCAvatarIMG, isQuestion,
   } = state.newUser
-  const { users } = state.listUsers
-  const userNameList = users.map(user => user.userName)
   return {
     initialValues: {
       userName, password, repeatPassword,
     },
     userSRCAvatarIMG,
     isQuestion,
-    userNameList,
+    newUser: state.newUser,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { forwardAccount, saveUserSRCAvatarIMG, continueUser },
+  {
+    forwardAccount, saveUserSRCAvatarIMG, continueUser, changeQuestionState,
+  },
 )(accountForm)
