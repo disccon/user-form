@@ -2,23 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="966abf2f-679a-466a-9520-94271c675336" name="Default Changelist" comment="IndexDB_Initial">
-      <change beforePath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Account/Account.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Account/Account.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/AddingNewUserPage/AddingNewUserPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/AddingNewUserPage/AddingNewUserPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Contacts/Contacts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Contacts/Contacts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/App/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/EditUserPage/EditUserPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/EditUserPage/EditUserPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/EditingPage/ContactsEditing/ContactsEditing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/EditingPage/ContactsEditing/ContactsEditing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/EditingPage/EditingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/EditingPage/EditingPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Header/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/Pagination/Pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/ListUsersPage/Pagination/Pagination.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/UserRow/UserRow.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/ListUsersPage/UserRow/UserRow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/UserRow/UserRow.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/ListUsersPage/UserRow/UserRow.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/NodFound/NodFound.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/NotFound/NotFound.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/NodFound/NodFound.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/NotFound/NotFound.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/renderFieldForm/renderFieldArrayPhone/renderFieldArrayPhone.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/renderFieldForm/renderFieldArrayPhone/renderFieldArrayPhone.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/saga/saga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/saga/saga.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stubs/initialListUsers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/stubs/initialListUsers.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/shelf/" />
@@ -34,7 +19,37 @@
     </execution>
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/stubs/initialListUsers.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="42">
+              <caret line="2" column="21" lean-forward="true" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1345">
+              <caret line="88" column="52" lean-forward="true" selection-start-line="88" selection-start-column="52" selection-end-line="88" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/db.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -47,8 +62,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>isQ</find>
-      <find>23</find>
       <find>history</find>
       <find>profile__label</find>
       <find>selectCapabilities__label</find>
@@ -77,6 +90,8 @@
       <find>editUser</find>
       <find>USER_EDIT_STATE__SUCCESS</find>
       <find>isQuestion</find>
+      <find>Contacts</find>
+      <find>Capabilities</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -140,7 +155,6 @@
         <option value="$PROJECT_DIR$/src/Component/NodFound/NodFound.js" />
         <option value="$PROJECT_DIR$/src/Component/AddingNewUserPage/Profile/Profile.js" />
         <option value="$PROJECT_DIR$/src/Component/ListUsersPage/Pagination/Pagination.scss" />
-        <option value="$PROJECT_DIR$/src/stubs/initialListUsers.js" />
         <option value="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" />
         <option value="$PROJECT_DIR$/src/Component/ListUsersPage/Pagination/Pagination.js" />
         <option value="$PROJECT_DIR$/src/reducers/newUserReducer.js" />
@@ -151,6 +165,7 @@
         <option value="$PROJECT_DIR$/src/Component/EditingPage/EditingPage.js" />
         <option value="$PROJECT_DIR$/src/Component/App/App.js" />
         <option value="$PROJECT_DIR$/src/reducers/editUserReducer.js" />
+        <option value="$PROJECT_DIR$/src/stubs/initialListUsers.js" />
         <option value="$PROJECT_DIR$/src/Component/EditUserPage/EditUserPage.js" />
       </list>
     </option>
@@ -188,6 +203,19 @@
               <item name="wizardForm" type="b2602c69:ProjectViewProjectNode" />
               <item name="wizardForm" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wizardForm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wizardForm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Component" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wizardForm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wizardForm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Component" type="462c0819:PsiDirectoryNode" />
+              <item name="ListUsersPage" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="wizardForm" type="b2602c69:ProjectViewProjectNode" />
@@ -366,21 +394,7 @@
       <workItem from="1557814433096" duration="5000" />
       <workItem from="1557815449426" duration="44000" />
       <workItem from="1557815508308" duration="2084000" />
-      <workItem from="1557907773350" duration="240000" />
-    </task>
-    <task id="LOCAL-00027" summary="ListOfUsers Delete 2">
-      <created>1555591080292</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1555591080292</updated>
-    </task>
-    <task id="LOCAL-00028" summary="ListOfUsers Delete 2">
-      <created>1555591363555</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1555591363555</updated>
+      <workItem from="1557907773350" duration="745000" />
     </task>
     <task id="LOCAL-00029" summary="ListOfUsers Delete 3">
       <created>1555594333479</created>
@@ -711,11 +725,25 @@
       <option name="project" value="LOCAL" />
       <updated>1557907893377</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="IndexDB_Initial">
+      <created>1557908022511</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1557908022511</updated>
+    </task>
+    <task id="LOCAL-00077" summary="React Router">
+      <created>1557908103341</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1557908103341</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="669640000" />
+    <option name="totallyTimeSpent" value="670145000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -842,9 +870,9 @@
     <MESSAGE value="ListUsersPage componentDidUpdate Router IndexedDB" />
     <MESSAGE value="ListUsersPage Redirect to='/NodFound' if(!page || !per_page)" />
     <MESSAGE value="ListUsersPage Pagination Router" />
-    <MESSAGE value="React Router" />
     <MESSAGE value="IndexDB_Initial" />
-    <option name="LAST_COMMIT_MESSAGE" value="IndexDB_Initial" />
+    <MESSAGE value="React Router" />
+    <option name="LAST_COMMIT_MESSAGE" value="React Router" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
@@ -856,13 +884,6 @@
     <select />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/UserRow/UserRow.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="72" column="16" selection-start-line="72" selection-start-column="16" selection-end-line="72" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///tmp/mozilla_user0/Archive (Артюх)/generative/perlin.html" />
     <entry file="file:///tmp/mozilla_user0/Archive (Артюх)/generative/circle.html" />
     <entry file="file:///tmp/mozilla_user0/Archive (Артюх)/perf.html" />
@@ -1068,13 +1089,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/stubs/initialListUsers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" column="11" lean-forward="true" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/stubs/newUser.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -1126,16 +1140,6 @@
           <caret line="160" column="51" selection-start-line="160" selection-start-column="51" selection-end-line="160" selection-end-column="51" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="49" column="20" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1269,6 +1273,29 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
           <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stubs/initialListUsers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="21" lean-forward="true" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1345">
+          <caret line="88" column="52" lean-forward="true" selection-start-line="88" selection-start-column="52" selection-end-line="88" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
