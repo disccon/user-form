@@ -152,7 +152,7 @@ export function* forwardAccountSaga(action) {
     userName, password, repeatPassword,
   } = action.payload
   try {
-    yield put(push('/Profile'))
+    yield put(push('/profile'))
     yield put({
       type: FORWARD_ACCOUNT__SUCCESS,
       payload: {
@@ -178,7 +178,7 @@ export function* forwardBackProfileSaga(action) {
       yield put(push('/'))
     } else if (forwardBack === 'forward') {
       actionType = FORWARD_BACK_PROFILE__FORWARD
-      yield put(push('/Contacts'))
+      yield put(push('/contacts'))
     }
     yield put({
       type: actionType,
@@ -202,10 +202,10 @@ export function* forwardBackContactsSaga(action) {
     let actionType
     if (forwardBack === 'back') {
       actionType = FORWARD_BACK_CONTACTS__BACK
-      yield put(push('/Profile'))
+      yield put(push('/profile'))
     } else if (forwardBack === 'forward') {
       actionType = FORWARD_BACK_CONTACTS__FORWARD
-      yield put(push('/Capabilities'))
+      yield put(push('/capabilities'))
     }
     yield put({
       type: actionType,
@@ -253,7 +253,7 @@ export function* backCapabilitiesSaga(action) {
     checkboxFemale, checkboxGuitar, checkboxWtf,
   } = action.payload
   try {
-    yield put(push('/Contacts'))
+    yield put(push('/contacts'))
     yield put({
       type: BACK_CAPABILITIES__SUCCESS,
       payload: {
@@ -284,7 +284,7 @@ export function* forwardCapabilitiesSaga(action) {
   const users = yield select(state => state.listUsers.users)
   delete newUser.isQuestion
   try {
-    yield put(push('/ListUsers'))
+    yield put(push('/users'))
     const id = users.length > 0 ? users[users.length - 1].id + 1 : 1
     db.listUserDB.add({
       ...newUser,
@@ -332,7 +332,7 @@ export function* deleteUserSaga(action) {
   try {
     if (currentPage > 1 && usersVisibleLength === 1) {
       yield put(push({
-        pathname: '/ListUsers',
+        pathname: '/users',
         search: `?page=${currentPage - 1}&per_page=${per_page}`,
       }))
     }
@@ -413,7 +413,7 @@ export function* accountEditingSaveSaga(action) {
       repeatPassword,
       userSRCAvatarIMG,
     })
-    yield put(push(`/EditUser/${id}`))
+    yield put(push(`/user/${id}`))
   } catch
   (error) {
     yield put({
@@ -437,7 +437,7 @@ export function* profileEditingSaveSaga(action) {
       address,
       gender,
     })
-    yield put(push(`/EditUser/${id}`))
+    yield put(push(`/user/${id}`))
   } catch
   (error) {
     yield put({
@@ -465,7 +465,7 @@ export function* contactsEditingSaveSaga(action) {
       phoneN2,
       phoneN3,
     })
-    yield put(push(`/EditUser/${id}`))
+    yield put(push(`/user/${id}`))
   } catch
   (error) {
     yield put({
@@ -491,7 +491,7 @@ export function* capabilitiesEditingSaveSaga(action) {
       checkboxGuitar,
       checkboxWtf,
     })
-    yield put(push(`/EditUser/${id}`))
+    yield put(push(`/user/${id}`))
   } catch
   (error) {
     yield put({

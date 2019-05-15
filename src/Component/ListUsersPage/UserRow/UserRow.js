@@ -52,7 +52,7 @@ class UserRow extends Component {
             3 month ago
             {!deleteUserClass && (
               <Fragment>
-                <Link to={`/EditUser/${user.id}`}>
+                <Link to={`/user/${user.id}`}>
                   <button type='button' className={cx('userRow__buttonEdit')}>
                     <EditIcon className={cx('userRow__editIcon')} />
                   </button>

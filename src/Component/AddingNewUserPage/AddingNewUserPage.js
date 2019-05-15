@@ -18,13 +18,8 @@ const cx = classNames.bind(styles)
 class AddingNewUserPage extends Component {
   componentDidMount() {
     const {
-      pathname, push, newUser,
+      pathname, push,
     } = this.props
-    db.newUserDB.get(0, newUserDB => {
-      if (!newUserDB) {
-        db.newUserDB.add(newUser)
-      }
-    })
     if (pathname !== '/') {
       push('/')
     }
@@ -50,13 +45,13 @@ class AddingNewUserPage extends Component {
             <div className={cx('windowNewUser__tab', { activeTab: pathname === '/' })}>
               <h2 className={cx('windowNewUser__h2')}>1. Account</h2>
             </div>
-            <div className={cx('windowNewUser__tab', { activeTab: pathname === '/Profile' })}>
+            <div className={cx('windowNewUser__tab', { activeTab: pathname === '/profile' })}>
               <h2 className={cx('windowNewUser__h2')}>2. Profile</h2>
             </div>
-            <div className={cx('windowNewUser__tab', { activeTab: pathname === '/Contacts' })}>
+            <div className={cx('windowNewUser__tab', { activeTab: pathname === '/contacts' })}>
               <h2 className={cx('windowNewUser__h2')}>3. Contacts</h2>
             </div>
-            <div className={cx('windowNewUser__tab', { activeTab: pathname === '/Capabilities' })}>
+            <div className={cx('windowNewUser__tab', { activeTab: pathname === '/capabilities' })}>
               <h2 className={cx('windowNewUser__h2')}>4. Capabilities</h2>
             </div>
           </div>
