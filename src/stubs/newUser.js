@@ -30,4 +30,6 @@ export const newUser = {
   checkboxFemale: '',
   checkboxGuitar: '',
   checkboxWtf: '',
+
+  error: undefined,
 }
