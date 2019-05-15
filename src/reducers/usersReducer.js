@@ -2,7 +2,7 @@ import {
   FETCH_USERS__SUCCESS,
   FETCH_USERS__FAILURE,
 
-} from '../Actions'
+} from '../actions'
 import { initialUsersState } from '../stubs/initialUsersState'
 
 

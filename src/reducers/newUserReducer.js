@@ -33,7 +33,7 @@ import {
 
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
-} from '../Actions'
+} from '../actions'
 
 
 export default function newUserReducer(state = initialNewUserState, action) {

@@ -40,7 +40,7 @@ import {
   DELETE_FIELD_PHONE_EDITING,
   CONTACTS_EDITING_SAVE,
   CAPABILITIES_EDITING_SAVE,
-} from '../Actions'
+} from '../actions'
 
 
 export default function* rootSaga() {
