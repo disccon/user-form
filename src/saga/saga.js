@@ -354,7 +354,6 @@ export function* createUserSaga() {
       type: CREATE_USER__SUCCESS,
       payload: {
         ...newUser,
-        isQuestion: false,
       },
     })
   } catch (error) {
