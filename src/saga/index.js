@@ -10,12 +10,10 @@ import {
   deleteAddFieldPhoneSaga,
   backCapabilitiesSaga,
   forwardCapabilitiesSaga,
-
   deleteUserSaga,
   createUserSaga,
-
   userEditStateSaga,
-
+  saveAvatarAccountEditingSaga,
   accountEditingSaveSaga,
   profileEditingSaveSaga,
   contactsEditingSaveSaga,
@@ -34,12 +32,10 @@ import {
   DELETE_ADD_FIELD_PHONE,
   BACK_CAPABILITIES,
   FORWARD_CAPABILITIES,
-
   DELETE_USER,
   CREATE_USER,
-
   USER_EDIT_STATE,
-
+  SAVE_AVATAR_ACCOUNT_EDITING,
   ACCOUNT_EDITING_SAVE,
   PROFILE_EDITING_SAVE,
   CONTACTS_EDITING_SAVE,
@@ -59,13 +55,10 @@ export default function* rootSaga() {
     takeLatest(DELETE_ADD_FIELD_PHONE, deleteAddFieldPhoneSaga),
     takeLatest(BACK_CAPABILITIES, backCapabilitiesSaga),
     takeLatest(FORWARD_CAPABILITIES, forwardCapabilitiesSaga),
-
     takeLatest(DELETE_USER, deleteUserSaga),
     takeLatest(CREATE_USER, createUserSaga),
-
     takeLatest(USER_EDIT_STATE, userEditStateSaga),
-
-
+    takeLatest(SAVE_AVATAR_ACCOUNT_EDITING, saveAvatarAccountEditingSaga),
     takeLatest(ACCOUNT_EDITING_SAVE, accountEditingSaveSaga),
     takeLatest(PROFILE_EDITING_SAVE, profileEditingSaveSaga),
     takeLatest(CONTACTS_EDITING_SAVE, contactsEditingSaveSaga),

@@ -5,6 +5,9 @@ import {
   DELETE_USER__SUCCESS,
   DELETE_USER__FAILURE,
 
+  FORWARD_CAPABILITIES__ADD_NEW_USER,
+  FORWARD_CAPABILITIES__FAILURE,
+
 } from '../Actions'
 import { initialListUsers } from '../stubs/initialListUsers'
 
@@ -33,6 +36,21 @@ export default function listUsersReducer(state = initialListUsers, action) {
       }
     }
     case DELETE_USER__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+    case FORWARD_CAPABILITIES__ADD_NEW_USER: {
+      return {
+        ...state,
+        users: [...state.users,
+          action.payload],
+        error: undefined,
+      }
+    }
+    case FORWARD_CAPABILITIES__FAILURE: {
       return {
         ...state,
         error: action.error,
