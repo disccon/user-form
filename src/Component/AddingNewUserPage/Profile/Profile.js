@@ -11,6 +11,7 @@ import {
 } from '../../renderFieldForm/renderDateTimePickerProfile/renderDateTimePickerProfile'
 import { renderFieldInputNewUser } from '../../renderFieldForm/renderFieldInputNewUser/renderFieldInputNewUser'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
+import db from '../../../db'
 
 
 const cx = classNames.bind(styles)
@@ -115,16 +116,25 @@ Profile.propTypes = {
   emailForm: PropTypes.string,
   addressForm: PropTypes.string,
   maleGender: PropTypes.string,
-  userEmailList: PropTypes.array,
   forwardBackProfile: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 }
 
 
 const ProfileForm = reduxForm({
-  validate: (values, props) => {
+  asyncValidate: values => db.listUserDB.toArray(listUserDB => {
+    const userEmailList = listUserDB.map(user => user.email)
+    let errorEmail
+    userEmailList.find(userEmail => (
+      errorEmail = values.email === userEmail ? 'already have this email in the database' : null))
+    if (errorEmail) {
+      return Promise.reject({
+        email: errorEmail,
+      })
+    }
+  }),
+  validate: values => {
     const errors = {}
-    const { userEmailList } = props
     if (!values.birthDate) {
       errors.birthDate = 'Missing Birth Date'
     } else if ((new Date().getFullYear() - values.birthDate.getFullYear()) < 18) {
@@ -153,10 +163,6 @@ const ProfileForm = reduxForm({
       errors.email = 'Missing Email'
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
       errors.email = 'Invalid email address'
-    } else {
-      userEmailList.forEach(userName => {
-        errors.email = values.email === userName ? 'already have this email in the database' : null
-      })
     }
     return errors
   },
@@ -175,8 +181,6 @@ const mapStateToProps = state => {
   const {
     firstName, lastName, email, address, gender, birthDate,
   } = state.newUser
-  const { users } = state.listUsers
-  const userEmailList = users.map(user => user.email)
   return {
     initialValues: {
       firstName, lastName, birthDate, email, address, gender,
@@ -187,7 +191,6 @@ const mapStateToProps = state => {
     emailForm,
     addressForm,
     maleGender,
-    userEmailList,
   }
 }
 

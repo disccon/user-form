@@ -1,5 +1,3 @@
-import editUser from "../reducers/editUserReducer";
-
 export const CHANGE_QUESTION_STATE = 'CHANGE_QUESTION_STATE'
 export const CHANGE_QUESTION_STATE__OPEN = 'CHANGE_QUESTION_STATE__OPEN'
 export const CHANGE_QUESTION_STATE__CLOSE = 'CHANGE_QUESTION_STATE__CLOSE'
@@ -59,41 +57,26 @@ export const USER_EDIT_STATE = 'USER_EDIT_STATE'
 export const USER_EDIT_STATE__SUCCESS = 'USER_EDIT_STATE__SUCCESS'
 export const USER_EDIT_STATE__FAILURE = 'USER_EDIT_STATE__FAILURE'
 
-
-
-
 export const SAVE_AVATAR_ACCOUNT_EDITING = 'SAVE_AVATAR_ACCOUNT_EDITING'
 export const SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS = 'SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS'
 export const SAVE_AVATAR_ACCOUNT_EDITING__FAILURE = 'SAVE_AVATAR_ACCOUNT_EDITING__FAILURE'
 
 export const ACCOUNT_EDITING_SAVE = 'ACCOUNT_EDITING_SAVE'
-export const ACCOUNT_EDITING_SAVE__SUCCESS = 'ACCOUNT_EDITING_SAVE__SUCCESS'
 export const ACCOUNT_EDITING_SAVE__FAILURE = 'ACCOUNT_EDITING_SAVE__FAILURE'
 
 export const PROFILE_EDITING_SAVE = 'PROFILE_EDITING_SAVE'
-export const PROFILE_EDITING_SAVE__SUCCESS = 'PROFILE_EDITING_SAVE__SUCCESS'
 export const PROFILE_EDITING_SAVE__FAILURE = 'PROFILE_EDITING_SAVE__FAILURE'
 
 export const CONTACTS_EDITING_SAVE = 'CONTACTS_EDITING_SAVE'
-export const CONTACTS_EDITING_SAVE__SUCCESS = 'CONTACTS_EDITING_SAVE__SUCCESS'
 export const CONTACTS_EDITING_SAVE__FAILURE = 'CONTACTS_EDITING_SAVE__FAILURE'
 
-
 export const CAPABILITIES_EDITING_SAVE = 'CAPABILITIES_EDITING_SAVE'
-export const CAPABILITIES_EDITING_SAVE__SUCCESS = 'CAPABILITIES_EDITING_SAVE__SUCCESS'
 export const CAPABILITIES_EDITING_SAVE__FAILURE = 'CAPABILITIES_EDITING_SAVE__FAILURE'
 
 export const changeQuestionState = isQuestion => ({
   type: CHANGE_QUESTION_STATE,
   payload: {
     isQuestion,
-  },
-})
-
-export const userListerNewState = userLister => ({
-  type: LISTER_USER_STATE,
-  payload: {
-    userLister,
   },
 })
 
@@ -180,6 +163,13 @@ export const forwardCapabilities = (selectSkills, textareaField, checkboxArt, ch
   })
 
 
+export const userListerNewState = userLister => ({
+  type: LISTER_USER_STATE,
+  payload: {
+    userLister,
+  },
+})
+
 export const deleteUser = (id, currentPage, usersVisibleLength, per_page) => (
   {
     type: DELETE_USER,
@@ -192,14 +182,13 @@ export const createUser = () => (
   { type: CREATE_USER })
 
 
-export const userEditState = editUser => (
+export const userEditState = (editUser, listUserDB) => (
   {
     type: USER_EDIT_STATE,
     payload: {
-      editUser,
+      editUser, listUserDB,
     },
   })
-
 
 
 export const saveAvatarAccountEditing = (userSRCAvatarIMG, id) => (
@@ -217,6 +206,7 @@ export const accountEditingSave = (userName, password, repeatPassword, userSRCAv
       userName, password, repeatPassword, userSRCAvatarIMG, id,
     },
   })
+
 
 export const profileEditingSave = (firstName, lastName, birthDate, email, address, gender, id) => (
   {
