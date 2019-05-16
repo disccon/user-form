@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
+import { createSelector } from 'reselect'
 import classNames from 'classnames'
 import { push } from 'connected-react-router'
 import styles from './UsersPage.scss'
@@ -11,25 +12,31 @@ import UserRow from './userRow/UserRow'
 import { Pagination } from './pagination/Pagination'
 import db from '../../db'
 
+
 const cx = classNames.bind(styles)
 
 class UsersPage extends Component {
-  componentDidMount() {
-    const { perPage } = this.props
-    const currentPage = this.queryStringPage()
-    this.fetchUsers(currentPage, perPage)
+  state = {
+    searchInput: 'dsds',
   }
 
-  // searchingUsersFullName = () => {
-  //
-  // }
+  componentDidMount() {
+    const { per_page, fetchUsersDB } = this.props
+    const currentPage = this.queryStringPage()
+    fetchUsersDB(currentPage, per_page)
+  }
 
-
-  fetchUsers = (currentPage, perPage) => {
-    const start = (currentPage - 1) * perPage
-    const { fetchUsersDB } = this.props
+  searchingUsers = ({ target }) => {
+    const { fetchUsersDB, per_page } = this.props
+    const { value } = target
     db.usersDB.toArray(usersDB => {
-      fetchUsersDB(usersDB.slice(start, start + perPage), usersDB.length)
+      const userFilter = usersDB.filter(user => `${user.firstName} ${user.lastName}`.includes(value))
+      const currentPage = this.queryStringPage()
+      const start = (currentPage - 1) * per_page
+      fetchUsersDB(userFilter.slice(start, start + per_page), userFilter.length)
+    })
+    this.setState({
+      searchInput: target.value,
     })
   }
 
@@ -42,28 +49,33 @@ class UsersPage extends Component {
 
   deleteUser = id => () => {
     const {
-      perPage, total, deleteUser,
+      per_page, total, deleteUser,
     } = this.props
     const currentPage = this.queryStringPage()
-    deleteUser(id, currentPage, total, perPage)
+    deleteUser(id, currentPage, total, per_page)
   }
 
-  changePage = pageId => () => {
+  changePage = page => () => {
     const {
-      perPage, push,
+      per_page, push, fetchUsersDB,
     } = this.props
-    push({ pathname: '/users', search: `?page=${pageId}&per-page=${perPage}` })
-    this.fetchUsers(pageId, perPage)
+    push({ pathname: '/users', search: `?page=${page}&per_page=${per_page}` })
+    fetchUsersDB(page, per_page)
   }
 
   render() {
-    const { users, total, perPage } = this.props
+    const { users, total, per_page } = this.props
+    const pagesCount = Math.ceil(total / per_page)
     const currentPage = this.queryStringPage()
-    const pagesCount = Math.ceil(total / perPage)
     return (
       <Fragment>
         <h2 className={cx('headline')}>List of users</h2>
-        <input className={cx('usersPage__search')} type='search' />
+        <input
+          className={cx('usersPage__search')}
+          type='search'
+          onChange={this.searchingUsers}
+          value={this.state.searchInput}
+        />
         <table className={cx('usersPageTable container')}>
           <thead className={cx('usersPage__thead')}>
             <tr className={cx('usersPage__tr')}>
@@ -101,7 +113,7 @@ class UsersPage extends Component {
 UsersPage.propTypes = {
   search: PropTypes.string.isRequired,
   users: PropTypes.array.isRequired,
-  perPage: PropTypes.number.isRequired,
+  per_page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
   push: PropTypes.func.isRequired,
   fetchUsersDB: PropTypes.func.isRequired,
@@ -109,13 +121,19 @@ UsersPage.propTypes = {
 }
 
 const mapStateToProps = state => {
-  const { users, perPage, total } = state.usersReducer
+  const { users, per_page, total, filterFullName } = state.usersReducer
   const { search } = state.router.location
+  const selectorUsers = createSelector(
+    users,
+    filterFullName,
+    (usersAll, fullName) => usersAll.filter(user => `${user.firstName} ${user.lastName}`.includes(fullName))
+  )
+  console.log(selectorUsers)
   return {
     users,
     total,
     search,
-    perPage,
+    per_page,
   }
 }
 

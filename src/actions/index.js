@@ -168,18 +168,18 @@ export const forwardCapabilities = (selectSkills, textareaField, checkboxArt, ch
   })
 
 
-export const fetchUsersDB = (users, total) => ({
+export const fetchUsersDB = (currentPage, per_page) => ({
   type: FETCH_USERS,
   payload: {
-    users, total,
+    currentPage, per_page,
   },
 })
 
-export const deleteUser = (id, currentPage, total, perPage) => (
+export const deleteUser = (id, currentPage, total, per_page) => (
   {
     type: DELETE_USER,
     payload: {
-      id, currentPage, total, perPage,
+      id, currentPage, total, per_page,
     },
   })
 
@@ -194,7 +194,6 @@ export const userEditState = (editUser, users) => (
       editUser, users,
     },
   })
-
 
 
 export const saveAvatarAccountEditing = (userSRCAvatarIMG, id) => (

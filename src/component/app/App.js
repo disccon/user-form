@@ -16,7 +16,6 @@ import { NotFound } from '../notFound/NotFound'
 import db from '../../db'
 import { changeQuestionState } from '../../actions'
 
-
 const cx = classNames.bind(styles)
 
 class App extends Component {

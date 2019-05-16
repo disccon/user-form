@@ -1,5 +1,6 @@
 export const initialUsersState = {
   users: [],
-  perPage: 10,
+  per_page: 10,
   total: 0,
+  filterFullName: null,
 }
