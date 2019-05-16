@@ -134,7 +134,7 @@ const mapStateToProps = (state, ownProps) => {
   const {
     selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
     checkboxGuitar, checkboxWtf,
-  } = state.editUserState.editUser
+  } = state.editUserReducer.editUser
   return {
     initialValues: {
       selectSkills,

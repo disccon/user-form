@@ -189,7 +189,7 @@ const mapStateToProps = (state, ownProps) => {
   const id = Number(ownProps.match.params.id)
   const {
     userName, password, repeatPassword, userSRCAvatarIMG,
-  } = state.editUserState.editUser
+  } = state.editUserReducer.editUser
   return {
     initialValues: {
       userName, password, repeatPassword,

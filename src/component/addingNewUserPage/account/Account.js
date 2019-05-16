@@ -191,8 +191,6 @@ Account.propTypes = {
   saveUserSRCAvatarIMG: PropTypes.func.isRequired,
   forwardAccount: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func,
-  newUser: PropTypes.object.isRequired,
-  changeQuestionState: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => {

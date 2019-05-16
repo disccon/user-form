@@ -169,7 +169,7 @@ EditUserPage.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   const id = Number(ownProps.match.params.id)
-  const { editUser } = state.editUserState
+  const { editUser } = state.editUserReducer
   return {
     editUser,
     id,

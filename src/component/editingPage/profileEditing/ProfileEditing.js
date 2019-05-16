@@ -167,7 +167,7 @@ const mapStateToProps = (state, ownProps) => {
   const id = Number(ownProps.match.params.id)
   const {
     firstName, lastName, birthDate, email, address, gender,
-  } = state.editUserState.editUser
+  } = state.editUserReducer.editUser
   return {
     initialValues: {
       firstName, lastName, birthDate, email, address, gender,

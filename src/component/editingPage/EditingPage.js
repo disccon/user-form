@@ -15,7 +15,7 @@ const cx = classNames.bind(styles)
 
 const EditingPage = ({ pathname, id }) => (
   <div className={cx('container')}>
-    <Link className={cx('linkBackPage')} to={`/edit-user/${id}`}>{'<  User Profile'}</Link>
+    <Link className={cx('linkBackPage')} to={`/user/${id}`}>{'<  User Profile'}</Link>
     <h2 className={cx('headline')}>Editing</h2>
     <div className={cx('editingPage')}>
       <div className={cx('editingPage__tabs')}>
@@ -25,13 +25,13 @@ const EditingPage = ({ pathname, id }) => (
         >
           <h2 className={cx('editingPage__h2')}>1. Account</h2>
         </div>
-        <div className={cx('editingPage__tab', { activeTab: pathname.includes('/Profile') })}>
+        <div className={cx('editingPage__tab', { activeTab: pathname.includes('/profile') })}>
           <h2 className={cx('editingPage__h2')}>2. Profile</h2>
         </div>
-        <div className={cx('editingPage__tab', { activeTab: pathname.includes('/Contacts') })}>
+        <div className={cx('editingPage__tab', { activeTab: pathname.includes('/contacts') })}>
           <h2 className={cx('editingPage__h2')}>3. Contacts</h2>
         </div>
-        <div className={cx('editingPage__tab', { activeTab: pathname.includes('/Capabilities') })}>
+        <div className={cx('editingPage__tab', { activeTab: pathname.includes('/capabilities') })}>
           <h2 className={cx('editingPage__h2')}>4. Capabilities</h2>
         </div>
       </div>

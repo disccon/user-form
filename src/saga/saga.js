@@ -414,7 +414,7 @@ export function* profileEditingSaveSaga(action) {
 
 export function* deleteFieldPhoneEditingSaga(action) {
   const { deleteAddField, id } = action.payload
-  const phoneArray = yield select(state => state.editUserState.phoneArray)
+  const phoneArray = yield select(state => state.editUserReducer.editUser.phoneArray)
   let type
   try {
     if (deleteAddField === 'add') {
