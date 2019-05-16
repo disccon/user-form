@@ -20,6 +20,11 @@ class UsersPage extends Component {
     this.fetchUsers(currentPage, perPage)
   }
 
+  // searchingUsersFullName = () => {
+  //
+  // }
+
+
   fetchUsers = (currentPage, perPage) => {
     const start = (currentPage - 1) * perPage
     const { fetchUsersDB } = this.props
