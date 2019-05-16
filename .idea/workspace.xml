@@ -1,42 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="966abf2f-679a-466a-9520-94271c675336" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Component/UsersPage/Pagination/Pagination.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Component/UsersPage/UsersPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reducers/usersReducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stubs/initialUsersState.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Actions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Account/Account.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Account/Account.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Contacts/Contacts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Contacts/Contacts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Profile/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/AddingNewUserPage/Profile/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/App/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/EditingPage/AccountEditing/AccountEditing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/EditingPage/AccountEditing/AccountEditing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/EditingPage/ContactsEditing/ContactsEditing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/EditingPage/ContactsEditing/ContactsEditing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/EditingPage/ProfileEditing/ProfileEditing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/EditingPage/ProfileEditing/ProfileEditing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/UsersPage/UsersPage.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/NoHaveUserRow/NoHaveUserRow.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/UsersPage/NoHaveUserRow/NoHaveUserRow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/NoHaveUserRow/NoHaveUserRow.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/UsersPage/NoHaveUserRow/NoHaveUserRow.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/Pagination/Pagination.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/Pagination/Pagination.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/UsersPage/Pagination/Pagination.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/UserRow/UserRow.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/UsersPage/UserRow/UserRow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/ListUsersPage/UserRow/UserRow.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/UsersPage/UserRow/UserRow.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/renderFieldForm/renderFieldArrayPhone/renderFieldArrayPhone.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/renderFieldForm/renderFieldArrayPhone/renderFieldArrayPhone.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/userGetIndexDB.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/userGetIndexDB.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/userListGetIndexDB.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/editUserReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/editUserReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/listUsersReducer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/newUserReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/newUserReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/saga/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/saga/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/saga/saga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/saga/saga.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stubs/initialListUsers.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stubs/newUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/stubs/initialNewUserState.js" afterDir="false" />
-    </list>
+    <list default="true" id="966abf2f-679a-466a-9520-94271c675336" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.idea/shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,69 +34,90 @@
         <entry file="file://$PROJECT_DIR$/src/stubs/initialUsersState.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="63">
-              <caret line="3" column="14" lean-forward="true" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+              <caret line="3" column="11" lean-forward="true" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Component/UsersPage/UsersPage.js">
+        <entry file="file://$PROJECT_DIR$/src/Component/UserFormBox/UserFormBox.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1125">
-              <caret line="115" column="10" lean-forward="true" selection-start-line="115" selection-start-column="10" selection-end-line="115" selection-end-column="10" />
+            <state relative-caret-position="336">
+              <caret line="16" column="30" lean-forward="true" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
               <folding>
-                <element signature="e#0#50#0" expanded="true" />
+                <element signature="e#0#25#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/saga/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-70">
+              <caret line="43" column="28" lean-forward="true" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/saga/saga.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="61" column="19" lean-forward="true" selection-start-line="61" selection-start-column="19" selection-end-line="61" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Component/UsersPage/UserRow/UserRow.js">
+        <entry file="file://$PROJECT_DIR$/src/Component/UsersPage/UsersPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="604">
-              <caret line="62" column="51" lean-forward="true" selection-start-line="62" selection-start-column="51" selection-end-line="62" selection-end-column="51" />
+            <state relative-caret-position="168">
+              <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/reducers/newUserReducer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="24" column="30" lean-forward="true" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/reducers/editUserReducer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="15" column="19" lean-forward="true" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
               <folding>
-                <element signature="e#0#50#0" expanded="true" />
+                <element signature="e#0#417#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Component/UsersPage/UserRow/UserRow.scss">
+        <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="6" column="28" lean-forward="true" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/stubs/initialNewUserState.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="17" selection-start-column="17" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Component/UsersPage/Pagination/Pagination.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="6" column="34" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Component/UsersPage/Pagination/Pagination.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-105">
-              <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+            <state relative-caret-position="210">
+              <caret line="10" column="10" lean-forward="true" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
               <folding>
-                <element signature="e#0#25#0" expanded="true" />
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/reducers/usersReducer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="231">
+              <caret line="11" column="56" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
+              <folding>
+                <element signature="e#0#126#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -222,7 +208,6 @@
         <option value="$PROJECT_DIR$/src/Component/EditUserPage/EditUserPage.js" />
         <option value="$PROJECT_DIR$/src/Component/ListUsersPage/UserRow/UserRow.scss" />
         <option value="$PROJECT_DIR$/src/Component/ListUsersPage/ListUsersPage.scss" />
-        <option value="$PROJECT_DIR$/src/reducers/newUserReducer.js" />
         <option value="$PROJECT_DIR$/src/Component/ListUsersPage/UserRow/UserRow.js" />
         <option value="$PROJECT_DIR$/src/reducers/listUsersReducer.js" />
         <option value="$PROJECT_DIR$/src/Component/renderFieldForm/renderFieldArrayPhone/renderFieldArrayPhone.js" />
@@ -242,21 +227,22 @@
         <option value="$PROJECT_DIR$/src/Component/AddingNewUserPage/Profile/Profile.js" />
         <option value="$PROJECT_DIR$/src/Component/EditingPage/AccountEditing/AccountEditing.js" />
         <option value="$PROJECT_DIR$/src/Component/EditingPage/ProfileEditing/ProfileEditing.js" />
-        <option value="$PROJECT_DIR$/src/reducers/editUserReducer.js" />
         <option value="$PROJECT_DIR$/src/db.js" />
         <option value="$PROJECT_DIR$/src/Component/UsersPage/NoHaveUserRow/NoHaveUserRow.scss" />
         <option value="$PROJECT_DIR$/src/stubs/newUser.js" />
         <option value="$PROJECT_DIR$/src/stubs/initialNewUserState.js" />
-        <option value="$PROJECT_DIR$/src/saga/index.js" />
         <option value="$PROJECT_DIR$/src/Component/AddingNewUserPage/Account/Account.js" />
         <option value="$PROJECT_DIR$/src/Component/AddingNewUserPage/AddingNewUserPage.js" />
         <option value="$PROJECT_DIR$/src/Component/UsersPage/Pagination/Pagination.js" />
         <option value="$PROJECT_DIR$/src/stubs/initialUsersState.js" />
-        <option value="$PROJECT_DIR$/src/saga/saga.js" />
-        <option value="$PROJECT_DIR$/src/reducers/usersReducer.js" />
         <option value="$PROJECT_DIR$/src/Actions/index.js" />
-        <option value="$PROJECT_DIR$/src/Component/UsersPage/UsersPage.js" />
         <option value="$PROJECT_DIR$/src/Component/UsersPage/UserRow/UserRow.scss" />
+        <option value="$PROJECT_DIR$/src/reducers/editUserReducer.js" />
+        <option value="$PROJECT_DIR$/src/reducers/newUserReducer.js" />
+        <option value="$PROJECT_DIR$/src/reducers/usersReducer.js" />
+        <option value="$PROJECT_DIR$/src/saga/index.js" />
+        <option value="$PROJECT_DIR$/src/saga/saga.js" />
+        <option value="$PROJECT_DIR$/src/Component/UsersPage/UsersPage.js" />
       </list>
     </option>
   </component>
@@ -293,6 +279,19 @@
               <item name="wizardForm" type="b2602c69:ProjectViewProjectNode" />
               <item name="wizardForm" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wizardForm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wizardForm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Component" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wizardForm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wizardForm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Component" type="462c0819:PsiDirectoryNode" />
+              <item name="UsersPage" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -471,27 +470,6 @@
       <workItem from="1557928400619" duration="28000" />
       <workItem from="1557928442172" duration="714000" />
       <workItem from="1557929179265" duration="2305000" />
-    </task>
-    <task id="LOCAL-00031" summary="IndexDB 3">
-      <created>1555674225971</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1555674225971</updated>
-    </task>
-    <task id="LOCAL-00032" summary="Test">
-      <created>1555678771541</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1555678771541</updated>
-    </task>
-    <task id="LOCAL-00033" summary="question 2">
-      <created>1555682790902</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1555682790903</updated>
     </task>
     <task id="LOCAL-00034" summary="question 2">
       <created>1555682891782</created>
@@ -815,11 +793,32 @@
       <option name="project" value="LOCAL" />
       <updated>1557922127100</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="UsersPage DeleteUser Saga">
+      <created>1557995121753</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1557995121753</updated>
+    </task>
+    <task id="LOCAL-00081" summary="UsersPage DeleteUser Saga">
+      <created>1557995520125</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1557995520125</updated>
+    </task>
+    <task id="LOCAL-00082" summary="UsersPage DeleteUser Saga">
+      <created>1557995561629</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1557995561629</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="691406000" />
+    <option name="totallyTimeSpent" value="692291000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -833,7 +832,7 @@
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1920" height="1006" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14781217" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13233724" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="npm" order="3" side_tool="true" />
@@ -848,7 +847,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5026681" side_tool="true" weight="0.22974473" />
       <window_info anchor="bottom" id="TypeScript" order="10" weight="0.3295325" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49733192" visible="true" weight="0.23261118" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49733192" visible="true" weight="0.23033068" />
       <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.49893278" weight="0.32611173" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -923,7 +922,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="IndexDB 12" />
     <MESSAGE value="IndexDB 13" />
     <MESSAGE value="IndexDB 14" />
     <MESSAGE value="teg css" />
@@ -948,7 +946,8 @@
     <MESSAGE value="React Router" />
     <MESSAGE value="IndexDB_Initial" />
     <MESSAGE value="ListUser State Redux" />
-    <option name="LAST_COMMIT_MESSAGE" value="ListUser State Redux" />
+    <MESSAGE value="UsersPage DeleteUser Saga" />
+    <option name="LAST_COMMIT_MESSAGE" value="UsersPage DeleteUser Saga" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
@@ -960,16 +959,6 @@
     <select />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Component/UserFormBox/UserFormBox.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/renderFieldForm/renderDateTimePickerProfile/renderDateTimePickerProfile.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
@@ -1189,29 +1178,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/editUserReducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="52" column="43" lean-forward="true" selection-start-line="52" selection-start-column="43" selection-end-line="52" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/EditingPage/ContactsEditing/ContactsEditing.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1806">
           <caret line="87" column="21" lean-forward="true" selection-start-line="87" selection-start-column="21" selection-end-line="87" selection-end-column="21" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="10" lean-forward="true" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1223,13 +1195,6 @@
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/newUserReducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1428">
-          <caret line="22" column="33" lean-forward="true" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -1258,16 +1223,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/usersReducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="17" lean-forward="true" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#91#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/db.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -1275,13 +1230,6 @@
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/saga/saga.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -1306,16 +1254,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="6" column="37" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/saga/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="55" column="47" selection-start-line="55" selection-start-column="47" selection-end-line="55" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1357,20 +1295,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/UsersPage/UsersPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1125">
-          <caret line="115" column="10" lean-forward="true" selection-start-line="115" selection-start-column="10" selection-end-line="115" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/stubs/initialUsersState.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="63">
-          <caret line="3" column="14" lean-forward="true" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+          <caret line="3" column="11" lean-forward="true" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -1381,6 +1309,74 @@
           <folding>
             <element signature="e#0#50#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Component/UserFormBox/UserFormBox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="16" column="30" lean-forward="true" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/editUserReducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="15" column="19" lean-forward="true" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#417#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="10" lean-forward="true" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/newUserReducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="24" column="30" lean-forward="true" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/usersReducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="56" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#126#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/saga/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-70">
+          <caret line="43" column="28" lean-forward="true" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/saga/saga.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="61" column="19" lean-forward="true" selection-start-line="61" selection-start-column="19" selection-end-line="61" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Component/UsersPage/UsersPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
         </state>
       </provider>
     </entry>

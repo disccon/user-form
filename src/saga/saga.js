@@ -39,6 +39,9 @@ import {
   FETCH_USERS__SUCCESS,
   FETCH_USERS__FAILURE,
 
+  DELETE_USER__SUCCESS,
+  DELETE_USER__FAILURE,
+
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
 
@@ -313,6 +316,40 @@ export function* fetchUsersDBSaga(action) {
   }
 }
 
+export function* deleteUserSaga(action) {
+  const {
+    id, currentPage, total, perPage,
+  } = action.payload
+  try {
+    db.usersDB.delete(id)
+    const isPagesCountChange = Math.ceil(total / perPage) !== Math.ceil((total - 1) / perPage)
+    const page = isPagesCountChange ? currentPage - 1 : currentPage
+    if (isPagesCountChange) {
+      yield put(push({ pathname: '/users', search: `?page=${page}&per-page=${perPage}` }))
+    }
+    const promise = new Promise(resolve => {
+      const start = (page - 1) * perPage
+      db.usersDB.toArray(usersDB => {
+        resolve(usersDB.slice(start, start + perPage))
+      })
+    })
+    const users = yield promise
+    yield put({
+      type: DELETE_USER__SUCCESS,
+      payload: {
+        users,
+        total: total - 1,
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: DELETE_USER__FAILURE,
+      error,
+    })
+  }
+}
+
+
 export function* createUserSaga() {
   try {
     yield put({
@@ -414,7 +451,7 @@ export function* profileEditingSaveSaga(action) {
 
 export function* deleteFieldPhoneEditingSaga(action) {
   const { deleteAddField, id } = action.payload
-  const phoneArray = yield select(state => state.editUserState.phoneArray)
+  const phoneArray = yield select(state => state.editUserReducer.editUser.phoneArray)
   let type
   try {
     if (deleteAddField === 'add') {

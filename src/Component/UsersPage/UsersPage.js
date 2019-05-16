@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import { push } from 'connected-react-router'
 import styles from './UsersPage.scss'
 import NoHaveUserRow from './NoHaveUserRow/NoHaveUserRow'
-import { fetchUsersDB } from '../../Actions'
+import { fetchUsersDB, deleteUser } from '../../Actions'
 import UserRow from './UserRow/UserRow'
 import { Pagination } from './Pagination/Pagination'
 import db from '../../db'
@@ -15,36 +15,32 @@ const cx = classNames.bind(styles)
 
 class UsersPage extends Component {
   componentDidMount() {
-    const { perPage, search } = this.props
-    const valueQuery = queryString.parse(search)
-    const currentPage = Number(valueQuery.page) || 1
-    const start = (currentPage - 1) * perPage
-    this.fetchUsers(start, start + perPage)
+    const { perPage } = this.props
+    const currentPage = this.queryStringPage()
+    this.fetchUsers(currentPage, perPage)
   }
 
-  fetchUsers = (start, end) => {
+  fetchUsers = (currentPage, perPage) => {
+    const start = (currentPage - 1) * perPage
     const { fetchUsersDB } = this.props
     db.usersDB.toArray(usersDB => {
-      fetchUsersDB(usersDB.slice(start, end), usersDB.length)
+      fetchUsersDB(usersDB.slice(start, start + perPage), usersDB.length)
     })
+  }
+
+  queryStringPage = () => {
+    const { search } = this.props
+    const valueQuery = queryString.parse(search)
+    const currentPage = Number(valueQuery.page) || 1
+    return currentPage
   }
 
   deleteUser = id => () => {
     const {
-      perPage, push, search, total,
+      perPage, total, deleteUser,
     } = this.props
-    const valueQuery = queryString.parse(search)
-    const currentPage = Number(valueQuery.page) || 1
-    let newCurrentPage = currentPage
-    db.usersDB.delete(id)
-      .then(() => {
-        if (Math.ceil(total / perPage) !== Math.ceil((total - 1) / perPage)) {
-          newCurrentPage = currentPage - 1
-          push({ pathname: '/users', search: `?page=${currentPage - 1}&per-page=${perPage}` })
-        }
-        const start = (newCurrentPage - 1) * perPage
-        this.fetchUsers(start, start + perPage)
-      })
+    const currentPage = this.queryStringPage()
+    deleteUser(id, currentPage, total, perPage)
   }
 
   changePage = pageId => () => {
@@ -52,20 +48,17 @@ class UsersPage extends Component {
       perPage, push,
     } = this.props
     push({ pathname: '/users', search: `?page=${pageId}&per-page=${perPage}` })
-    const start = (pageId - 1) * perPage
-    this.fetchUsers(start, start + perPage)
+    this.fetchUsers(pageId, perPage)
   }
 
   render() {
-    const {
-      users, total, perPage, search,
-    } = this.props
-    const valueQuery = queryString.parse(search)
-    const currentPage = Number(valueQuery.page) || 1
+    const { users, total, perPage } = this.props
+    const currentPage = this.queryStringPage()
     const pagesCount = Math.ceil(total / perPage)
     return (
       <Fragment>
         <h2 className={cx('headline')}>List of users</h2>
+        <input className={cx('usersPage__search')} type='search' />
         <table className={cx('usersPageTable container')}>
           <thead className={cx('usersPage__thead')}>
             <tr className={cx('usersPage__tr')}>
@@ -107,6 +100,7 @@ UsersPage.propTypes = {
   total: PropTypes.number.isRequired,
   push: PropTypes.func.isRequired,
   fetchUsersDB: PropTypes.func.isRequired,
+  deleteUser: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => {
@@ -123,5 +117,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchUsersDB, push },
+  { fetchUsersDB, push, deleteUser },
 )(UsersPage)

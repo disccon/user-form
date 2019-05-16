@@ -16,7 +16,7 @@ import {
 } from '../Actions'
 
 
-export default function usersReducer(state = { editUser: {} }, action) {
+export default function editUserReducer(state = { editUser: {} }, action) {
   switch (action.type) {
     case USER_EDIT_STATE__SUCCESS: {
       return {
@@ -53,7 +53,10 @@ export default function usersReducer(state = { editUser: {} }, action) {
     case DELETE_FIELD_PHONE_EDITING__ADD: {
       return {
         ...state,
-        phoneArray: action.payload.phoneArray,
+        editUser: {
+          ...state.editUser,
+          phoneArray: action.payload.phoneArray,
+        },
         error: undefined,
       }
     }
