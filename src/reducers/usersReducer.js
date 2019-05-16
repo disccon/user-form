@@ -2,6 +2,9 @@ import {
   FETCH_USERS__SUCCESS,
   FETCH_USERS__FAILURE,
 
+  DELETE_USER__SUCCESS,
+  DELETE_USER__FAILURE,
+
 } from '../actions'
 import { initialUsersState } from '../stubs/initialUsersState'
 
@@ -23,6 +26,20 @@ export default function usersReducer(state = initialUsersState, action) {
       }
     }
 
+    case DELETE_USER__SUCCESS: {
+      return {
+        ...state,
+        users: [...action.payload.users],
+        total: action.payload.total,
+        error: undefined,
+      }
+    }
+    case DELETE_USER__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
     default:
       return state
   }

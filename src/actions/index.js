@@ -43,6 +43,11 @@ export const FETCH_USERS = 'FETCH_USERS'
 export const FETCH_USERS__SUCCESS = 'FETCH_USERS__SUCCESS'
 export const FETCH_USERS__FAILURE = 'FETCH_USERS__FAILURE'
 
+export const DELETE_USER = 'DELETE_USER'
+export const DELETE_USER__SUCCESS = 'DELETE_USER__SUCCESS'
+export const DELETE_USER__FAILURE = 'DELETE_USER__FAILURE'
+
+
 export const CREATE_USER = 'CREATE_USER'
 export const CREATE_USER__SUCCESS = 'CREATE_USER__SUCCESS'
 export const CREATE_USER__FAILURE = 'CREATE_USER__FAILURE'
@@ -170,6 +175,13 @@ export const fetchUsersDB = (users, total) => ({
   },
 })
 
+export const deleteUser = (id, currentPage, total, perPage) => (
+  {
+    type: DELETE_USER,
+    payload: {
+      id, currentPage, total, perPage,
+    },
+  })
 
 export const createUser = () => (
   { type: CREATE_USER })
@@ -182,6 +194,7 @@ export const userEditState = (editUser, users) => (
       editUser, users,
     },
   })
+
 
 
 export const saveAvatarAccountEditing = (userSRCAvatarIMG, id) => (
