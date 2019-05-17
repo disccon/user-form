@@ -1,4 +1,17 @@
-$li: 'listUsers';
+$li: 'usersPage';
+.#{$li}__search{
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  height: 40px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border: 1px solid #C1CFE0;
+  background: #fff;
+  font-weight: 500;
+  color: #000;
+}
 .#{$li}Table {
   margin-top: 28px;
 
@@ -39,7 +52,9 @@ $li: 'listUsers';
     height: 29px;
   }
 }
-
+.#{$li}__trEmpty{
+  height: 29px;
+}
 .paginationbox {
   color: #3f51b5;
 }

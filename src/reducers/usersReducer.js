@@ -1,27 +1,26 @@
 import {
-  LISTER_USER_STATE__SUCCESS,
-  LISTER_USER_STATE__FAILURE,
+  FETCH_USERS__SUCCESS,
+  FETCH_USERS__FAILURE,
 
   DELETE_USER__SUCCESS,
   DELETE_USER__FAILURE,
 
-  FORWARD_CAPABILITIES__ADD_NEW_USER,
-  FORWARD_CAPABILITIES__FAILURE,
-
+  SEARCHING_USERS__SUCCESS,
+  SEARCHING_USERS__FAILURE,
 } from '../Actions'
-import { initialListUsers } from '../stubs/initialListUsers'
+import { initialUsersState } from '../stubs/initialUsersState'
 
 
-export default function listUsersReducer(state = initialListUsers, action) {
+export default function usersReducer(state = initialUsersState, action) {
   switch (action.type) {
-    case LISTER_USER_STATE__SUCCESS: {
+    case FETCH_USERS__SUCCESS: {
       return {
         ...state,
-        users: [...action.payload.userLister],
+        users: [...action.payload.users],
         error: undefined,
       }
     }
-    case LISTER_USER_STATE__FAILURE: {
+    case FETCH_USERS__FAILURE: {
       return {
         ...state,
         error: action.error,
@@ -31,7 +30,8 @@ export default function listUsersReducer(state = initialListUsers, action) {
     case DELETE_USER__SUCCESS: {
       return {
         ...state,
-        users: action.payload,
+        users: [...action.payload.users],
+        total: action.payload.total,
         error: undefined,
       }
     }
@@ -41,16 +41,14 @@ export default function listUsersReducer(state = initialListUsers, action) {
         error: action.error,
       }
     }
-
-    case FORWARD_CAPABILITIES__ADD_NEW_USER: {
+    case SEARCHING_USERS__SUCCESS: {
       return {
         ...state,
-        users: [...state.users,
-          action.payload],
+        filterUsers: action.payload.filterUsers,
         error: undefined,
       }
     }
-    case FORWARD_CAPABILITIES__FAILURE: {
+    case SEARCHING_USERS__FAILURE: {
       return {
         ...state,
         error: action.error,

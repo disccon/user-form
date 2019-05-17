@@ -1,4 +1,4 @@
-import { newUser } from '../stubs/newUser'
+import { initialNewUserState } from '../stubs/initialNewUserState'
 import {
   CHANGE_QUESTION_STATE__OPEN,
   CHANGE_QUESTION_STATE__CLOSE,
@@ -29,12 +29,14 @@ import {
   BACK_CAPABILITIES__SUCCESS,
   BACK_CAPABILITIES__FAILURE,
 
+  FORWARD_CAPABILITIES__ADD_NEW_USER,
+
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
 } from '../Actions'
 
 
-export default function newUserReducer(state = newUser, action) {
+export default function newUserReducer(state = initialNewUserState, action) {
   switch (action.type) {
     case CHANGE_QUESTION_STATE__CLOSE: {
       return {
@@ -221,6 +223,12 @@ export default function newUserReducer(state = newUser, action) {
     case BACK_CAPABILITIES__FAILURE: {
       return {
         ...state,
+        error: action.error,
+      }
+    }
+    case FORWARD_CAPABILITIES__ADD_NEW_USER: {
+      return {
+        ...action.payload,
         error: action.error,
       }
     }

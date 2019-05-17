@@ -6,7 +6,7 @@ import {
   Field, reduxForm, FieldArray,
 } from 'redux-form'
 import styles from '../../UserFormBox/UserFormBox.scss'
-import { contactsEditingSave, userEditState } from '../../../Actions'
+import { contactsEditingSave, userEditState, deleteFieldPhoneEditing } from '../../../Actions'
 import { UserFormBox } from '../../UserFormBox/UserFormBox'
 import { renderFieldInputNewUser } from '../../renderFieldForm/renderFieldInputNewUser/renderFieldInputNewUser'
 import { renderFieldSelectContacts } from '../../renderFieldForm/renderFieldSelectContacts/renderFieldSelectContacts'
@@ -25,6 +25,16 @@ class ContactsEditing extends Component {
     const { contactsEditingSave, id } = this.props
     contactsEditingSave(values.company, values.githubLink, values.facebookLink, values.selectLanguage,
       values.fax, values.phoneArray, values.phoneN1, values.phoneN2, values.phoneN3, id)
+  }
+
+  deleteFieldPhone = () => {
+    const { deleteFieldPhoneEditing, id } = this.props
+    deleteFieldPhoneEditing('delete', id)
+  }
+
+  addFieldPhone = () => {
+    const { deleteFieldPhoneEditing, id } = this.props
+    deleteFieldPhoneEditing('add', id)
   }
 
   render() {
@@ -77,6 +87,8 @@ class ContactsEditing extends Component {
           />
           <FieldArray
             component={renderFieldArrayPhone}
+            addFieldPhone={this.addFieldPhone}
+            deleteFieldPhone={this.deleteFieldPhone}
             name='phoneArray'
           />
           <div className={cx('userFormBox__addPhone')} />
@@ -96,6 +108,7 @@ ContactsEditing.propTypes = {
   contactsEditingSave: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   userEditState: PropTypes.func.isRequired,
+  deleteFieldPhoneEditing: PropTypes.func.isRequired,
 }
 
 const ContactsEditingForm = reduxForm({
@@ -167,5 +180,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { contactsEditingSave, userEditState },
+  { contactsEditingSave, userEditState, deleteFieldPhoneEditing },
 )(ContactsEditingForm)

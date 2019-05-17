@@ -122,8 +122,8 @@ Profile.propTypes = {
 
 
 const ProfileForm = reduxForm({
-  asyncValidate: values => db.listUserDB.toArray(listUserDB => {
-    const userEmailList = listUserDB.map(user => user.email)
+  asyncValidate: values => db.usersDB.toArray(usersDB => {
+    const userEmailList = usersDB.map(user => user.email)
     let errorEmail
     userEmailList.find(userEmail => (
       errorEmail = values.email === userEmail ? 'already have this email in the database' : null))

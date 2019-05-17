@@ -1,5 +1,5 @@
 import {
-  put, select,
+  put, select, call,
 } from 'redux-saga/effects'
 import { push } from 'connected-react-router'
 
@@ -11,9 +11,6 @@ import {
   CONTINUE_USER__CONTINUE,
   CONTINUE_USER__CLOSE,
   CONTINUE_USER__FAILURE,
-
-  LISTER_USER_STATE__SUCCESS,
-  LISTER_USER_STATE__FAILURE,
 
   SAVE_USER_SRC_AVATAR_IMG__SUCCESS,
   SAVE_USER_SRC_AVATAR_IMG__FAILURE,
@@ -39,8 +36,14 @@ import {
   FORWARD_CAPABILITIES__ADD_NEW_USER,
   FORWARD_CAPABILITIES__FAILURE,
 
+  FETCH_USERS__SUCCESS,
+  FETCH_USERS__FAILURE,
+
   DELETE_USER__SUCCESS,
   DELETE_USER__FAILURE,
+
+  SEARCHING_USERS__SUCCESS,
+  SEARCHING_USERS__FAILURE,
 
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
@@ -51,12 +54,16 @@ import {
   SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS,
   SAVE_AVATAR_ACCOUNT_EDITING__FAILURE,
 
+  DELETE_FIELD_PHONE_EDITING__ADD,
+  DELETE_FIELD_PHONE_EDITING__DELETE,
+  DELETE_FIELD_PHONE_EDITING__FAILURE,
+
   ACCOUNT_EDITING_SAVE__FAILURE,
   PROFILE_EDITING_SAVE__FAILURE,
   CONTACTS_EDITING_SAVE__FAILURE,
   CAPABILITIES_EDITING_SAVE__FAILURE,
 } from '../Actions'
-import { newUser } from '../stubs/newUser'
+import { initialNewUserState } from '../stubs/initialNewUserState'
 import db from '../db'
 
 
@@ -87,15 +94,10 @@ export function* continueUserSaga(action) {
   const { isContinue } = action.payload
   try {
     if (isContinue) {
-      const promise = new Promise(resolve => {
-        db.newUserDB.toArray(newUserDB => resolve(...newUserDB))
-      })
-      const newUserDB = yield promise
+      const newUserDB = yield call(() => db.newUserDB.get(0, newUserDB => newUserDB))
       yield put({
         type: CONTINUE_USER__CONTINUE,
-        payload: {
-          newUserDB,
-        },
+        payload: newUserDB,
       })
     } else {
       yield put({
@@ -108,23 +110,6 @@ export function* continueUserSaga(action) {
   } catch (error) {
     yield put({
       type: CONTINUE_USER__FAILURE,
-      error,
-    })
-  }
-}
-
-export function* userListerNewStateSaga(action) {
-  const { userLister } = action.payload
-  try {
-    yield put({
-      type: LISTER_USER_STATE__SUCCESS,
-      payload: {
-        userLister,
-      },
-    })
-  } catch (error) {
-    yield put({
-      type: LISTER_USER_STATE__FAILURE,
       error,
     })
   }
@@ -280,15 +265,13 @@ export function* forwardCapabilitiesSaga(action) {
     selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
     checkboxFemale, checkboxGuitar, checkboxWtf,
   } = action.payload
-  const newUser = yield select(state => state.newUser)
-  const users = yield select(state => state.listUsers.users)
-  delete newUser.isQuestion
+  const newUserDB = yield select(state => state.newUser)
+  delete initialNewUserState.isQuestion
+  delete newUserDB.id
   try {
     yield put(push('/users'))
-    const id = users.length > 0 ? users[users.length - 1].id + 1 : 1
-    db.listUserDB.add({
-      ...newUser,
-      id,
+    db.usersDB.add({
+      ...newUserDB,
       selectSkills,
       textareaField,
       checkboxArt,
@@ -297,20 +280,12 @@ export function* forwardCapabilitiesSaga(action) {
       checkboxFemale,
       checkboxGuitar,
       checkboxWtf,
+      lastUpdate: new Date(),
     })
     yield put({
       type: FORWARD_CAPABILITIES__ADD_NEW_USER,
       payload: {
-        ...newUser,
-        id,
-        selectSkills,
-        textareaField,
-        checkboxArt,
-        checkboxSport,
-        checkboxJustWant,
-        checkboxFemale,
-        checkboxGuitar,
-        checkboxWtf,
+        newUser: initialNewUserState,
       },
     })
   } catch
@@ -322,23 +297,44 @@ export function* forwardCapabilitiesSaga(action) {
   }
 }
 
+export function* fetchUsersDBSaga() {
+  try {
+    const users = yield call(() => db.usersDB.toArray(users => users))
+    yield put({
+      type: FETCH_USERS__SUCCESS,
+      payload: {
+        users,
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: FETCH_USERS__FAILURE,
+      error,
+    })
+  }
+}
 
 export function* deleteUserSaga(action) {
   const {
-    id, currentPage, usersVisibleLength, per_page,
+    id, currentPage, total, per_page,
   } = action.payload
-  const usersList = yield select(state => state.listUsers.users)
-  const users = usersList.filter(item => item.id !== id)
   try {
-    if (currentPage > 1 && usersVisibleLength === 1) {
-      yield put(push({
-        pathname: '/users',
-        search: `?page=${currentPage - 1}&per_page=${per_page}`,
-      }))
+    db.usersDB.delete(id)
+    const isPagesCountChange = Math.ceil(total / per_page) !== Math.ceil((total - 1) / per_page)
+    const page = isPagesCountChange ? currentPage - 1 : currentPage
+    if (isPagesCountChange) {
+      yield put(push({ pathname: '/users', search: `?page=${page}&per_page=${per_page}` }))
     }
+    const users = yield call((page, per_page) => {
+      const start = (page - 1) * per_page
+      return db.usersDB.toArray(usersDB => usersDB.slice(start, start + per_page))
+    }, page, per_page)
     yield put({
       type: DELETE_USER__SUCCESS,
-      payload: users,
+      payload: {
+        users,
+        total: total - 1,
+      },
     })
   } catch (error) {
     yield put({
@@ -348,13 +344,30 @@ export function* deleteUserSaga(action) {
   }
 }
 
+
+export function* searchingUsersSaga(action) {
+  const { filterUsers } = action.payload
+  try {
+    yield put({
+      type: SEARCHING_USERS__SUCCESS,
+      payload: {
+        filterUsers,
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: SEARCHING_USERS__FAILURE,
+      error,
+    })
+  }
+}
+
+
 export function* createUserSaga() {
   try {
     yield put({
       type: CREATE_USER__SUCCESS,
-      payload: {
-        ...newUser,
-      },
+      payload: initialNewUserState,
     })
   } catch (error) {
     yield put({
@@ -384,7 +397,7 @@ export function* userEditStateSaga(action) {
 
 export function* saveAvatarAccountEditingSaga(action) {
   const { userSRCAvatarIMG, id } = action.payload
-  db.listUserDB.update(id, {
+  db.usersDB.update(id, {
     userSRCAvatarIMG,
   })
   try {
@@ -407,7 +420,7 @@ export function* accountEditingSaveSaga(action) {
     userName, password, repeatPassword, userSRCAvatarIMG, id,
   } = action.payload
   try {
-    db.listUserDB.update(id, {
+    db.usersDB.update(id, {
       userName,
       password,
       repeatPassword,
@@ -429,7 +442,7 @@ export function* profileEditingSaveSaga(action) {
     firstName, lastName, birthDate, email, address, gender, id,
   } = action.payload
   try {
-    db.listUserDB.update(id, {
+    db.usersDB.update(id, {
       firstName,
       lastName,
       birthDate,
@@ -447,6 +460,34 @@ export function* profileEditingSaveSaga(action) {
   }
 }
 
+export function* deleteFieldPhoneEditingSaga(action) {
+  const { deleteAddField, id } = action.payload
+  const phoneArray = yield select(state => state.editUserReducer.editUser.phoneArray)
+  let type
+  try {
+    if (deleteAddField === 'add') {
+      phoneArray.push('')
+      type = DELETE_FIELD_PHONE_EDITING__ADD
+    } else {
+      phoneArray.pop('')
+      type = DELETE_FIELD_PHONE_EDITING__DELETE
+    }
+    db.usersDB.update(id, {
+      phoneArray,
+    })
+    yield put({
+      type,
+      payload: {
+        phoneArray,
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: DELETE_FIELD_PHONE_EDITING__FAILURE,
+      error,
+    })
+  }
+}
 
 export function* contactsEditingSaveSaga(action) {
   const {
@@ -454,7 +495,7 @@ export function* contactsEditingSaveSaga(action) {
     phoneN3, id,
   } = action.payload
   try {
-    db.listUserDB.update(id, {
+    db.usersDB.update(id, {
       company,
       githubLink,
       facebookLink,
@@ -481,7 +522,7 @@ export function* capabilitiesEditingSaveSaga(action) {
     checkboxJustWant, checkboxFemale, checkboxGuitar, checkboxWtf, id,
   } = action.payload
   try {
-    db.listUserDB.update(id, {
+    db.usersDB.update(id, {
       selectSkills,
       textareaField,
       checkboxArt,

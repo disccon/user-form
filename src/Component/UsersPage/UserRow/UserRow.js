@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 import onClickOutside from 'react-onclickoutside'
+import moment from 'moment'
 import styles from './UserRow.scss'
 import { ReactComponent as CloseIcon } from '../../../img/icon/close.svg'
 import { ReactComponent as EditIcon } from '../../../img/icon/edit.svg'
@@ -33,23 +34,27 @@ class UserRow extends Component {
     const { user, deleteUser } = this.props
     const { deleteUserClass } = this.state
     return (
-      <tr className={cx('listUsers__trName', { deleteUserClass })}>
-        <td className={cx('userRow userRow_fistTD')}>
+      <tr className={cx('userRow', { deleteUserClass })}>
+        <td className={cx('userRow__fistTD')}>
           <img className={cx('userRow__img')} src={user.userSRCAvatarIMG} alt='userSRCAvatarIMG' />
           <div className={cx('userRow__wrapperDiv')}>
-            <h4 className={cx('userRow__h4')}>{user.userName}</h4>
-            <span className={cx('userRow__span')}>username</span>
+            <h4 className={cx('userRow__h4')}>
+              {`${user.firstName} ${user.lastName}`}
+            </h4>
+            <span className={cx('userRow__span')}>{user.userName}</span>
           </div>
         </td>
-        <td className={cx('listUsers__trCompany')}>
-          <div className={cx('userRow')}>{user.company}</div>
+        <td className={cx('userRow__td')}>
+          <div className={cx('userRow__div')}>{user.company}</div>
         </td>
-        <td>
-          <div className={cx('userRow')}>{user.email}</div>
+        <td className={cx('userRow__td')}>
+          <div className={cx('userRow__div')}>{user.email}</div>
         </td>
-        <td>
-          <div className={cx('userRow')}>
-            3 month ago
+        <td className={cx('userRow__td')}>
+          <div className={cx('userRow__div')}>
+            <span className={cx('userRow__lastUpdate')}>
+              {moment(moment(user.lastUpdate).format('YYYY-MM-DD HH:mm:ss'), 'YYYY-MM-DD HH:mm:ss').fromNow()}
+            </span>
             {!deleteUserClass && (
               <Fragment>
                 <Link to={`/user/${user.id}`}>
@@ -64,16 +69,15 @@ class UserRow extends Component {
                   />
                 </button>
               </Fragment>
-            )
-            }
+            )}
           </div>
           {deleteUserClass && (
-            <div className={cx('userRow__deleteUserWrapper')} onClick={deleteUser(user.id)}>
-              <button type='button' className={cx('userRow__buttonDeleteUser')}>
+            <button type='button' className={cx('userRow__buttonDeleteUser')} onClick={deleteUser(user.id)}>
+              <div className={cx('userRow__deleteUserWrapper')}>
                 <CloseIcon className={cx('deleteUser')} />
                 delete
-              </button>
-            </div>
+              </div>
+            </button>
           )}
         </td>
       </tr>

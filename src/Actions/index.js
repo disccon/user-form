@@ -39,23 +39,26 @@ export const FORWARD_CAPABILITIES = 'FORWARD_CAPABILITIES'
 export const FORWARD_CAPABILITIES__ADD_NEW_USER = 'FORWARD_BACK_CAPABILITIES__FORWARD__ADD_NEW_USER'
 export const FORWARD_CAPABILITIES__FAILURE = 'FORWARD_CAPABILITIES__FAILURE'
 
-
-export const LISTER_USER_STATE = 'LISTER_USER_STATE'
-export const LISTER_USER_STATE__SUCCESS = 'LISTER_USER_STATE__SUCCESS'
-export const LISTER_USER_STATE__FAILURE = 'LISTER_USER_STATE__FAILURE'
+export const FETCH_USERS = 'FETCH_USERS'
+export const FETCH_USERS__SUCCESS = 'FETCH_USERS__SUCCESS'
+export const FETCH_USERS__FAILURE = 'FETCH_USERS__FAILURE'
 
 export const DELETE_USER = 'DELETE_USER'
 export const DELETE_USER__SUCCESS = 'DELETE_USER__SUCCESS'
 export const DELETE_USER__FAILURE = 'DELETE_USER__FAILURE'
 
+export const SEARCHING_USERS = 'SEARCHING_USERS'
+export const SEARCHING_USERS__SUCCESS = 'SEARCHING_USERS__SUCCESS'
+export const SEARCHING_USERS__FAILURE = 'SEARCHING_USERS__FAILURE'
+
 export const CREATE_USER = 'CREATE_USER'
 export const CREATE_USER__SUCCESS = 'CREATE_USER__SUCCESS'
 export const CREATE_USER__FAILURE = 'CREATE_USER__FAILURE'
 
-
 export const USER_EDIT_STATE = 'USER_EDIT_STATE'
 export const USER_EDIT_STATE__SUCCESS = 'USER_EDIT_STATE__SUCCESS'
 export const USER_EDIT_STATE__FAILURE = 'USER_EDIT_STATE__FAILURE'
+
 
 export const SAVE_AVATAR_ACCOUNT_EDITING = 'SAVE_AVATAR_ACCOUNT_EDITING'
 export const SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS = 'SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS'
@@ -69,6 +72,11 @@ export const PROFILE_EDITING_SAVE__FAILURE = 'PROFILE_EDITING_SAVE__FAILURE'
 
 export const CONTACTS_EDITING_SAVE = 'CONTACTS_EDITING_SAVE'
 export const CONTACTS_EDITING_SAVE__FAILURE = 'CONTACTS_EDITING_SAVE__FAILURE'
+
+export const DELETE_FIELD_PHONE_EDITING = 'DELETE_FIELD_PHONE_EDITING'
+export const DELETE_FIELD_PHONE_EDITING__ADD = 'DELETE_FIELD_PHONE_EDITING__ADD'
+export const DELETE_FIELD_PHONE_EDITING__DELETE = 'DELETE_FIELD_PHONE_EDITING__DELETE'
+export const DELETE_FIELD_PHONE_EDITING__FAILURE = 'DELETE_FIELD_PHONE_EDITING__FAILURE'
 
 export const CAPABILITIES_EDITING_SAVE = 'CAPABILITIES_EDITING_SAVE'
 export const CAPABILITIES_EDITING_SAVE__FAILURE = 'CAPABILITIES_EDITING_SAVE__FAILURE'
@@ -163,30 +171,36 @@ export const forwardCapabilities = (selectSkills, textareaField, checkboxArt, ch
   })
 
 
-export const userListerNewState = userLister => ({
-  type: LISTER_USER_STATE,
-  payload: {
-    userLister,
-  },
+export const fetchUsersDB = () => ({
+  type: FETCH_USERS,
 })
 
-export const deleteUser = (id, currentPage, usersVisibleLength, per_page) => (
+export const deleteUser = (id, currentPage, total, per_page) => (
   {
     type: DELETE_USER,
     payload: {
-      id, currentPage, usersVisibleLength, per_page,
+      id, currentPage, total, per_page,
     },
   })
+
+export const searchingUsers = filterUsers => (
+  {
+    type: SEARCHING_USERS,
+    payload: {
+      filterUsers,
+    },
+  })
+
 
 export const createUser = () => (
   { type: CREATE_USER })
 
 
-export const userEditState = (editUser, listUserDB) => (
+export const userEditState = (editUser, users) => (
   {
     type: USER_EDIT_STATE,
     payload: {
-      editUser, listUserDB,
+      editUser, users,
     },
   })
 
@@ -215,6 +229,16 @@ export const profileEditingSave = (firstName, lastName, birthDate, email, addres
       firstName, lastName, birthDate, email, address, gender, id,
     },
   })
+
+
+export const deleteFieldPhoneEditing = (deleteAddField, id) => (
+  {
+    type: DELETE_FIELD_PHONE_EDITING,
+    payload: {
+      deleteAddField, id,
+    },
+  })
+
 
 export const contactsEditingSave = (company, githubLink, facebookLink, selectLanguage, fax, phoneArray,
   phoneN1, phoneN2, phoneN3, id) => (
