@@ -33,7 +33,7 @@ import {
 
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
-} from '../Actions'
+} from '../actions'
 
 
 export default function newUserReducer(state = initialNewUserState, action) {
@@ -62,7 +62,7 @@ export default function newUserReducer(state = initialNewUserState, action) {
 
     case CONTINUE_USER__CONTINUE: {
       return {
-        ...action.payload.newUserDB,
+        ...action.payload,
         isQuestion: false,
         error: undefined,
       }

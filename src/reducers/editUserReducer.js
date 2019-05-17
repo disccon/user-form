@@ -13,7 +13,7 @@ import {
   PROFILE_EDITING_SAVE__FAILURE,
   CONTACTS_EDITING_SAVE__FAILURE,
   CAPABILITIES_EDITING_SAVE__FAILURE,
-} from '../Actions'
+} from '../actions'
 
 
 export default function editUserReducer(state = { editUser: {} }, action) {
