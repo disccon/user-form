@@ -175,11 +175,11 @@ export const fetchUsersDB = () => ({
   type: FETCH_USERS,
 })
 
-export const deleteUser = (id, currentPage, total, per_page) => (
+export const deleteUser = (id, currentPage) => (
   {
     type: DELETE_USER,
     payload: {
-      id, currentPage, total, per_page,
+      id, currentPage,
     },
   })
 

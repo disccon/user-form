@@ -26,10 +26,8 @@ class UsersPage extends Component {
   }
 
   deleteUser = id => () => {
-    const {
-      per_page, total, deleteUser, currentPage,
-    } = this.props
-    deleteUser(id, currentPage, total, per_page)
+    const { deleteUser, currentPage } = this.props
+    deleteUser(id, currentPage)
   }
 
   changePage = page => () => {
