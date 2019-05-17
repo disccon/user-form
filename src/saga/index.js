@@ -1,5 +1,7 @@
 import { takeLatest, all } from 'redux-saga/effects'
+
 import {
+  createUserSaga,
   changeQuestionStateSaga,
   continueUserSaga,
   saveUserSRCAvatarIMGSaga,
@@ -9,10 +11,16 @@ import {
   deleteAddFieldPhoneSaga,
   backCapabilitiesSaga,
   forwardCapabilitiesSaga,
+} from './newUserSaga'
+
+import {
   fetchUsersDBSaga,
   deleteUserSaga,
   searchingUsersSaga,
-  createUserSaga,
+} from './usersSaga'
+
+
+import {
   userEditStateSaga,
   saveAvatarAccountEditingSaga,
   accountEditingSaveSaga,
@@ -20,7 +28,7 @@ import {
   deleteFieldPhoneEditingSaga,
   contactsEditingSaveSaga,
   capabilitiesEditingSaveSaga,
-} from './saga'
+} from './editUserSaga'
 
 
 import {
@@ -44,11 +52,12 @@ import {
   DELETE_FIELD_PHONE_EDITING,
   CONTACTS_EDITING_SAVE,
   CAPABILITIES_EDITING_SAVE,
-} from '../Actions'
+} from '../actions'
 
 
 export default function* rootSaga() {
   yield all([
+    takeLatest(CREATE_USER, createUserSaga),
     takeLatest(CHANGE_QUESTION_STATE, changeQuestionStateSaga),
     takeLatest(CONTINUE_USER, continueUserSaga),
     takeLatest(SAVE_USER_SRC_AVATAR_IMG, saveUserSRCAvatarIMGSaga),
@@ -58,10 +67,11 @@ export default function* rootSaga() {
     takeLatest(DELETE_ADD_FIELD_PHONE, deleteAddFieldPhoneSaga),
     takeLatest(BACK_CAPABILITIES, backCapabilitiesSaga),
     takeLatest(FORWARD_CAPABILITIES, forwardCapabilitiesSaga),
-    takeLatest(CREATE_USER, createUserSaga),
+
     takeLatest(FETCH_USERS, fetchUsersDBSaga),
     takeLatest(DELETE_USER, deleteUserSaga),
     takeLatest(SEARCHING_USERS, searchingUsersSaga),
+
     takeLatest(USER_EDIT_STATE, userEditStateSaga),
     takeLatest(SAVE_AVATAR_ACCOUNT_EDITING, saveAvatarAccountEditingSaga),
     takeLatest(ACCOUNT_EDITING_SAVE, accountEditingSaveSaga),

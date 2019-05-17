@@ -29,8 +29,8 @@ export const users = [
     fax: '+38 (066) 123 123 11',
     phoneArray: ['', '', ''],
     phoneN1: '+38 (066) 123 123 11',
-    phoneN2: '+38 (066) 123 123 11',
-    phoneN3: '+38 (066) 123 123 11',
+    phoneN2: '+38 (066) 123 123 22',
+    phoneN3: '+38 (066) 123 123 33',
 
     selectSkills: [{ value: 'CSS', label: 'CSS' },
       { value: 'Javascript', label: 'Javascript' },

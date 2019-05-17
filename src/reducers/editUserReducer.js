@@ -13,7 +13,7 @@ import {
   PROFILE_EDITING_SAVE__FAILURE,
   CONTACTS_EDITING_SAVE__FAILURE,
   CAPABILITIES_EDITING_SAVE__FAILURE,
-} from '../Actions'
+} from '../actions'
 
 
 export default function editUserReducer(state = { editUser: {} }, action) {
@@ -56,6 +56,9 @@ export default function editUserReducer(state = { editUser: {} }, action) {
         editUser: {
           ...state.editUser,
           phoneArray: action.payload.phoneArray,
+          phoneN1: action.payload.phoneN1,
+          phoneN2: action.payload.phoneN2,
+          phoneN3: action.payload.phoneN3,
         },
         error: undefined,
       }
@@ -64,7 +67,13 @@ export default function editUserReducer(state = { editUser: {} }, action) {
     case DELETE_FIELD_PHONE_EDITING__DELETE: {
       return {
         ...state,
-        phoneArray: action.payload.phoneArray,
+        editUser: {
+          ...state.editUser,
+          phoneArray: action.payload.phoneArray,
+          phoneN1: action.payload.phoneN1,
+          phoneN2: action.payload.phoneN2,
+          phoneN3: action.payload.phoneN3,
+        },
         error: undefined,
       }
     }
