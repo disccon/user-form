@@ -9,7 +9,7 @@ import NoHaveUserRow from './NoHaveUserRow/NoHaveUserRow'
 import { fetchUsersDB, deleteUser, searchingUsers } from '../../Actions'
 import UserRow from './UserRow/UserRow'
 import { Pagination } from './Pagination/Pagination'
-import { getfilterUsers } from './UserPageReselect'
+import { getFilterUsers } from './getFilterUsers'
 
 const cx = classNames.bind(styles)
 
@@ -17,6 +17,16 @@ class UsersPage extends Component {
   componentDidMount() {
     const { fetchUsersDB } = this.props
     fetchUsersDB()
+  }
+
+  componentWillMount() {
+    const {
+      currentPage, total, per_page, push,
+    } = this.props
+    const pagesCount = Math.ceil(total / per_page)
+    if (currentPage > pagesCount) {
+      push({ pathname: '/users', search: `?page=${pagesCount}&per_page=${per_page}` })
+    }
   }
 
   searchingUsersFilter = ({ target }) => {
@@ -50,7 +60,7 @@ class UsersPage extends Component {
 
   render() {
     const {
-      users, total, per_page, searchUsers, currentPage,
+      users, total, per_page, currentPage, filterUsers,
     } = this.props
     const pagesCount = Math.ceil(total / per_page)
     return (
@@ -60,7 +70,7 @@ class UsersPage extends Component {
           className={cx('usersPage__search')}
           type='search'
           onChange={this.searchingUsersFilter}
-          value={searchUsers}
+          value={filterUsers}
         />
         <table className={cx('usersPageTable container')}>
           <thead className={cx('usersPage__thead')}>
@@ -105,21 +115,19 @@ UsersPage.propTypes = {
   fetchUsersDB: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
   searchingUsers: PropTypes.func.isRequired,
-  searchUsers: PropTypes.string.isRequired,
+  filterUsers: PropTypes.string.isRequired,
   currentPage: PropTypes.number,
 }
 
 const mapStateToProps = state => {
-  const { per_page } = state.usersReducer
-  const { search } = state.router.location
-  const valueQuery = queryString.parse(search)
-  const currentPage = Number(valueQuery.page) || 1
-  const userFilter = getfilterUsers(state, currentPage)
+  const { per_page, filterUsers } = state.usersReducer
+  const userFilter = getFilterUsers(state)
   return {
     users: userFilter.users,
     total: userFilter.total,
-    currentPage,
+    currentPage: userFilter.currentPage,
     per_page,
+    filterUsers,
   }
 }
 
