@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="966abf2f-679a-466a-9520-94271c675336" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Actions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/UsersPage/UserPageReselect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/UsersPage/getFilterUsers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/UsersPage/UsersPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/UsersPage/UsersPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/usersReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/usersReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/saga/saga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/saga/saga.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stubs/initialUsersState.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/stubs/initialUsersState.js" afterDir="false" />
-    </list>
+    <list default="true" id="966abf2f-679a-466a-9520-94271c675336" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.idea/shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,11 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Component/UsersPage/UsersPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="121" column="21" selection-start-line="121" selection-start-column="21" selection-end-line="121" selection-end-column="21" />
+            <state relative-caret-position="358">
+              <caret line="56" column="20" selection-start-line="56" selection-start-column="10" selection-end-line="56" selection-end-column="20" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
@@ -59,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Component/UsersPage/getFilterUsers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="10" column="50" lean-forward="true" selection-start-line="10" selection-start-column="50" selection-end-line="10" selection-end-column="50" />
+            <state relative-caret-position="399">
+              <caret line="19" column="60" lean-forward="true" selection-start-line="19" selection-start-column="60" selection-end-line="19" selection-end-column="60" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -224,8 +216,8 @@
         <option value="$PROJECT_DIR$/src/Actions/index.js" />
         <option value="$PROJECT_DIR$/src/stubs/initialUsersState.js" />
         <option value="$PROJECT_DIR$/src/Component/UsersPage/UserPageReselect.js" />
-        <option value="$PROJECT_DIR$/src/Component/UsersPage/UsersPage.js" />
         <option value="$PROJECT_DIR$/src/Component/UsersPage/getFilterUsers.js" />
+        <option value="$PROJECT_DIR$/src/Component/UsersPage/UsersPage.js" />
       </list>
     </option>
   </component>
@@ -478,28 +470,7 @@
       <workItem from="1557991418166" duration="2756000" />
       <workItem from="1558002724731" duration="15961000" />
       <workItem from="1558074529135" duration="7136000" />
-      <workItem from="1558081729072" duration="4028000" />
-    </task>
-    <task id="LOCAL-00042" summary="IndexDB 10">
-      <created>1556003984663</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1556003984663</updated>
-    </task>
-    <task id="LOCAL-00043" summary="IndexDB 13">
-      <created>1556010553174</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1556010553174</updated>
-    </task>
-    <task id="LOCAL-00044" summary="IndexDB 14">
-      <created>1556011576710</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1556011576710</updated>
+      <workItem from="1558081729072" duration="4272000" />
     </task>
     <task id="LOCAL-00045" summary="teg css">
       <created>1556363867243</created>
@@ -823,11 +794,32 @@
       <option name="project" value="LOCAL" />
       <updated>1558083109778</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="usersPage getFilterUsers search">
+      <created>1558085788205</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1558085788205</updated>
+    </task>
+    <task id="LOCAL-00092" summary="usersPage getFilterUsers search">
+      <created>1558085842875</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1558085842875</updated>
+    </task>
+    <task id="LOCAL-00093" summary="usersPage getFilterUsers search">
+      <created>1558085971992</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1558085971992</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="728903000" />
+    <option name="totallyTimeSpent" value="729147000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -842,7 +834,7 @@
     <frame x="0" y="25" width="1920" height="1006" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21504803" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21504803" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="npm" order="3" side_tool="true" />
@@ -857,7 +849,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5026681" side_tool="true" weight="0.22974473" />
       <window_info anchor="bottom" id="TypeScript" order="10" weight="0.3295325" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49733192" visible="true" weight="0.354618" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49733192" visible="true" weight="0.354618" />
       <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.49893278" weight="0.32611173" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -932,7 +924,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="EditingPage" />
     <MESSAGE value="Правки по кнопкам" />
     <MESSAGE value="UserFormBox Account Profile" />
     <MESSAGE value="UserFormBox Account Profile Contacts Profile" />
@@ -957,7 +948,8 @@
     <MESSAGE value="selectUsers" />
     <MESSAGE value="usersPage selectUsers" />
     <MESSAGE value="usersPage searching users by full name" />
-    <option name="LAST_COMMIT_MESSAGE" value="usersPage searching users by full name" />
+    <MESSAGE value="usersPage getFilterUsers search" />
+    <option name="LAST_COMMIT_MESSAGE" value="usersPage getFilterUsers search" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
@@ -1138,22 +1130,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/UsersPage/UsersPage.js">
+    <entry file="file://$PROJECT_DIR$/src/Component/UsersPage/getFilterUsers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="121" column="21" selection-start-line="121" selection-start-column="21" selection-end-line="121" selection-end-column="21" />
+        <state relative-caret-position="399">
+          <caret line="19" column="60" lean-forward="true" selection-start-line="19" selection-start-column="60" selection-end-line="19" selection-end-column="60" />
           <folding>
-            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/UsersPage/getFilterUsers.js">
+    <entry file="file://$PROJECT_DIR$/src/Component/UsersPage/UsersPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="50" lean-forward="true" selection-start-line="10" selection-start-column="50" selection-end-line="10" selection-end-column="50" />
+        <state relative-caret-position="358">
+          <caret line="56" column="20" selection-start-line="56" selection-start-column="10" selection-end-line="56" selection-end-column="20" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#50#0" expanded="true" />
           </folding>
         </state>
       </provider>

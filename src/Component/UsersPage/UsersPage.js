@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import queryString from 'query-string'
 import classNames from 'classnames'
 import { push } from 'connected-react-router'
 import styles from './UsersPage.scss'
@@ -17,16 +16,6 @@ class UsersPage extends Component {
   componentDidMount() {
     const { fetchUsersDB } = this.props
     fetchUsersDB()
-  }
-
-  componentWillMount() {
-    const {
-      currentPage, total, per_page, push,
-    } = this.props
-    const pagesCount = Math.ceil(total / per_page)
-    if (currentPage > pagesCount) {
-      push({ pathname: '/users', search: `?page=${pagesCount}&per_page=${per_page}` })
-    }
   }
 
   searchingUsersFilter = ({ target }) => {
@@ -99,7 +88,6 @@ class UsersPage extends Component {
 }
 
 UsersPage.propTypes = {
-  search: PropTypes.string,
   users: PropTypes.array.isRequired,
   per_page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
