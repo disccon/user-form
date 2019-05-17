@@ -2,6 +2,7 @@ import {
   put, call, select,
 } from 'redux-saga/effects'
 
+import { push } from 'connected-react-router'
 import {
   FETCH_USERS__SUCCESS,
   FETCH_USERS__FAILURE,
@@ -14,7 +15,6 @@ import {
 } from '../actions'
 import db from '../db'
 import { fetchUsers } from '../helpers/fetchUsers'
-import { push } from 'connected-react-router'
 
 export function* fetchUsersDBSaga() {
   try {

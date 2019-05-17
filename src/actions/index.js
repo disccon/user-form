@@ -235,7 +235,7 @@ export const deleteFieldPhoneEditing = (deleteAddField, phoneN1Form, phoneN2Form
   {
     type: DELETE_FIELD_PHONE_EDITING,
     payload: {
-      deleteAddField, phoneN1Form, phoneN2Form, phoneN3Form
+      deleteAddField, phoneN1Form, phoneN2Form, phoneN3Form,
     },
   })
 

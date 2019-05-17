@@ -1,5 +1,5 @@
-import { createSelector } from 'reselect'
-import queryString from 'query-string'
+import { createSelector } from 'reselect/lib/index'
+import queryString from 'query-string/index'
 
 const users = state => state.usersReducer.users
 const filter = state => state.usersReducer.filterUsers
@@ -14,12 +14,16 @@ export const getFilterUsers = createSelector(
     const start = (currentPage - 1) * per_page
     if (searchUsers === '') {
       const users = usersRedux.slice(start, start + per_page)
-      const pagesCount = Math.ceil(users.length / per_page)
-      return { users, total: usersRedux.length, currentPage, pagesCount }
+      const pagesCount = Math.ceil(usersRedux.length / per_page)
+      return {
+        users, total: usersRedux.length, currentPage, pagesCount,
+      }
     }
     const filterUsers = usersRedux.filter(user => `${user.firstName} ${user.lastName}`.includes(searchUsers))
     const users = filterUsers.slice(start, start + per_page)
-    const pagesCount = Math.ceil(users.length / per_page)
-    return { users, total: filterUsers.length, currentPage, pagesCount }
+    const pagesCount = Math.ceil(filterUsers.length / per_page)
+    return {
+      users, total: filterUsers.length, currentPage, pagesCount,
+    }
   },
 )
