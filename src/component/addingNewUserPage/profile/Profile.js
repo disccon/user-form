@@ -5,11 +5,11 @@ import classNames from 'classnames'
 import { reduxForm, Field, formValueSelector } from 'redux-form'
 import styles from '../../userFormBox/UserFormBox.scss'
 import { forwardBackProfile } from '../../../actions'
-import { renderFieldRadioProfile } from '../../fieldForm/fieldRadioProfile/FieldRadioProfile'
+import { FieldRadioProfile } from '../../fieldForm/fieldRadioProfile/FieldRadioProfile'
 import {
-  dateTimePickerProfile,
+  DateTimePickerProfile,
 } from '../../fieldForm/dateTimePickerProfile/DateTimePickerProfile'
-import { fieldInputNewUser } from '../../fieldForm/fieldInputNewUser/FieldInputNewUser'
+import { FieldInputNewUser } from '../../fieldForm/fieldInputNewUser/FieldInputNewUser'
 import { UserFormBox } from '../../userFormBox/UserFormBox'
 import db from '../../../db'
 
@@ -37,7 +37,7 @@ class Profile extends Component {
         <UserFormBox handleSubmit={handleSubmit(this.onSubmit)}>
           <div className={cx('userFormBox__sideLeft')}>
             <Field
-              component={fieldInputNewUser}
+              component={FieldInputNewUser}
               type='text'
               span
               label='First name'
@@ -46,7 +46,7 @@ class Profile extends Component {
               classNameLabel='inputNewUser'
             />
             <Field
-              component={fieldInputNewUser}
+              component={FieldInputNewUser}
               type='text'
               span
               label='Last name'
@@ -54,11 +54,11 @@ class Profile extends Component {
               idField='fieldLastName'
               classNameLabel='inputNewUser'
             />
-            <Field name='birthDate' component={dateTimePickerProfile} />
+            <Field name='birthDate' component={DateTimePickerProfile} />
           </div>
           <div className={cx('userFormBox__sideRight')}>
             <Field
-              component={fieldInputNewUser}
+              component={FieldInputNewUser}
               type='text'
               span
               label='Email'
@@ -67,7 +67,7 @@ class Profile extends Component {
               classNameLabel='inputNewUser'
             />
             <Field
-              component={fieldInputNewUser}
+              component={FieldInputNewUser}
               type='text'
               span
               label='Address'
@@ -78,7 +78,7 @@ class Profile extends Component {
             <h5>Gender</h5>
             <div className={cx('userFormBox__wrapperGender')}>
               <Field
-                component={renderFieldRadioProfile}
+                component={FieldRadioProfile}
                 type='radio'
                 label='Male'
                 name='gender'
@@ -86,7 +86,7 @@ class Profile extends Component {
                 idField='fieldMale'
               />
               <Field
-                component={renderFieldRadioProfile}
+                component={FieldRadioProfile}
                 type='radio'
                 label='Female'
                 name='gender'

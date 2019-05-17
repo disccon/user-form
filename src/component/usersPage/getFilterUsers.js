@@ -14,10 +14,12 @@ export const getFilterUsers = createSelector(
     const start = (currentPage - 1) * per_page
     if (searchUsers === '') {
       const users = usersRedux.slice(start, start + per_page)
-      return { users, total: usersRedux.length, currentPage }
+      const pagesCount = Math.ceil(users.length / per_page)
+      return { users, total: usersRedux.length, currentPage, pagesCount }
     }
     const filterUsers = usersRedux.filter(user => `${user.firstName} ${user.lastName}`.includes(searchUsers))
     const users = filterUsers.slice(start, start + per_page)
-    return { users, total: filterUsers.length, currentPage }
+    const pagesCount = Math.ceil(users.length / per_page)
+    return { users, total: filterUsers.length, currentPage, pagesCount }
   },
 )

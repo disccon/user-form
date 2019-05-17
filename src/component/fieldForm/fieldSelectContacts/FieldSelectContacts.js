@@ -33,7 +33,7 @@ const options = [
   { value: 'ko', label: 'Korean, KO' },
 ]
 
-export const fieldSelectContacts = ({
+export const FieldSelectContacts = ({
   input, meta: { touched, error }, label,
 }) => {
   const colourStyles = {
@@ -110,7 +110,7 @@ export const fieldSelectContacts = ({
   )
 }
 
-fieldSelectContacts.propTypes = {
+FieldSelectContacts.propTypes = {
   input: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
   label: PropTypes.string,

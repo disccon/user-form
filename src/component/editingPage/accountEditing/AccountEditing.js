@@ -7,7 +7,7 @@ import styles from '../../userFormBox/UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import { accountEditingSave, saveAvatarAccountEditing, userEditState } from '../../../actions'
-import { fieldInputAccount } from '../../fieldForm/fieldInputAccount/FieldInputAccount'
+import { FieldInputAccount } from '../../fieldForm/fieldInputAccount/FieldInputAccount'
 import { UserFormBox } from '../../userFormBox/UserFormBox'
 import db from '../../../db'
 import { userGetIndexDB } from '../../../helpers/userGetIndexDB'
@@ -101,14 +101,14 @@ class AccountEditing extends Component {
         </div>
         <div className={cx('register__userData')}>
           <Field
-            component={fieldInputAccount}
+            component={FieldInputAccount}
             type='text'
             label='User name'
             name='userName'
             idInput='userName'
           />
           <Field
-            component={fieldInputAccount}
+            component={FieldInputAccount}
             type={typeFieldPassword}
             isVisibility
             label='Password'
@@ -117,7 +117,7 @@ class AccountEditing extends Component {
             changeTypePassword={this.changeTypePassword}
           />
           <Field
-            component={fieldInputAccount}
+            component={FieldInputAccount}
             type={typeFieldPassword}
             isVisibility
             label='Repeat Password'

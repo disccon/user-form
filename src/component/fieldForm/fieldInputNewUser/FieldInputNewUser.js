@@ -6,7 +6,7 @@ import styles from './FieldInputNewUser.scss'
 
 const cx = classNames.bind(styles)
 
-export const fieldInputNewUser = ({
+export const FieldInputNewUser = ({
   label, input, type, meta: { touched, error }, span, placeholder,
   idField, classNameLabel, mask,
 }) => {
@@ -41,7 +41,7 @@ export const fieldInputNewUser = ({
   )
 }
 
-fieldInputNewUser.propTypes = {
+FieldInputNewUser.propTypes = {
   input: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
   classNameLabel: PropTypes.string,

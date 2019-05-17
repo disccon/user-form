@@ -19,6 +19,10 @@ class UsersPage extends Component {
     fetchUsersDB()
   }
 
+  componentDidUpdate() {
+    const {  pagesCount } = this.props
+  }
+
   searchingUsersFilter = ({ target }) => {
     const { searchingUsers } = this.props
     const { value } = target
@@ -40,9 +44,8 @@ class UsersPage extends Component {
 
   render() {
     const {
-      users, total, per_page, currentPage, filterUsers,
+      users, total, per_page, currentPage, filterUsers, pagesCount,
     } = this.props
-    const pagesCount = Math.ceil(total / per_page)
     return (
       <Fragment>
         <h2 className={cx('headline')}>List of users</h2>
@@ -107,6 +110,7 @@ const mapStateToProps = state => {
     currentPage: userFilter.currentPage,
     per_page,
     filterUsers,
+    pagesCount: userFilter.pagesCount,
   }
 }
 

@@ -7,7 +7,7 @@ import styles from './FieldInputAccount.scss'
 
 const cx = classNames.bind(styles)
 
-export const fieldInputAccount = ({
+export const FieldInputAccount = ({
   input, type, meta: { touched, error }, label, isVisibility, idInput, changeTypePassword,
 }) => {
   const visibilityIcon = type === 'text'
@@ -30,7 +30,7 @@ export const fieldInputAccount = ({
   )
 }
 
-fieldInputAccount.propTypes = {
+FieldInputAccount.propTypes = {
   idInput: PropTypes.string,
   label: PropTypes.string,
   input: PropTypes.object.isRequired,

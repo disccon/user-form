@@ -8,9 +8,9 @@ import {
 import styles from '../../userFormBox/UserFormBox.scss'
 import { contactsEditingSave, userEditState, deleteFieldPhoneEditing } from '../../../actions'
 import { UserFormBox } from '../../userFormBox/UserFormBox'
-import { fieldInputNewUser } from '../../fieldForm/fieldInputNewUser/FieldInputNewUser'
-import { fieldSelectContacts } from '../../fieldForm/fieldSelectContacts/FieldSelectContacts'
-import { fieldArrayPhone } from '../../fieldForm/fieldArrayPhone/FieldArrayPhone'
+import { FieldInputNewUser } from '../../fieldForm/fieldInputNewUser/FieldInputNewUser'
+import { FieldSelectContacts } from '../../fieldForm/fieldSelectContacts/FieldSelectContacts'
+import { FieldArrayPhone } from '../../fieldForm/fieldArrayPhone/FieldArrayPhone'
 import { userGetIndexDB } from '../../../helpers/userGetIndexDB'
 
 const cx = classNames.bind(styles)
@@ -47,7 +47,7 @@ class ContactsEditing extends Component {
       <UserFormBox handleSubmit={handleSubmit(this.onSubmit)}>
         <div className={cx('userFormBox__sideLeft')}>
           <Field
-            component={fieldInputNewUser}
+            component={FieldInputNewUser}
             type='text'
             label='Company'
             name='company'
@@ -55,7 +55,7 @@ class ContactsEditing extends Component {
             classNameLabel='inputNewUser'
           />
           <Field
-            component={fieldInputNewUser}
+            component={FieldInputNewUser}
             type='text'
             span
             label='Github link'
@@ -64,7 +64,7 @@ class ContactsEditing extends Component {
             classNameLabel='inputNewUser'
           />
           <Field
-            component={fieldInputNewUser}
+            component={FieldInputNewUser}
             type='text'
             span
             label='Facebook link'
@@ -74,14 +74,14 @@ class ContactsEditing extends Component {
             classNameLabel='inputNewUser'
           />
           <Field
-            component={fieldSelectContacts}
+            component={FieldSelectContacts}
             name='selectLanguage'
             label='Main language'
           />
         </div>
         <div className={cx('userFormBox__sideRight')}>
           <Field
-            component={fieldInputNewUser}
+            component={FieldInputNewUser}
             type='text'
             label='Fax'
             name='fax'
@@ -90,7 +90,7 @@ class ContactsEditing extends Component {
             classNameLabel='inputNewUser'
           />
           <FieldArray
-            component={fieldArrayPhone}
+            component={FieldArrayPhone}
             addFieldPhone={this.addFieldPhone}
             deleteFieldPhone={this.deleteFieldPhone}
             name='phoneArray'

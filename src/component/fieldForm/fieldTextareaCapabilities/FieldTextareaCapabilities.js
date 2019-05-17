@@ -5,7 +5,7 @@ import styles from './FieldTextareaCapabilities.scss'
 
 const cx = classNames.bind(styles)
 
-export const fieldTextareaCapabilities = ({
+export const FieldTextareaCapabilities = ({
   label, input, meta: { touched, error }, idTextarea,
 }) => (
   <div className={cx('fieldTextareaCapabilities')}>
@@ -27,7 +27,7 @@ export const fieldTextareaCapabilities = ({
   </div>
 )
 
-fieldTextareaCapabilities.propTypes = {
+FieldTextareaCapabilities.propTypes = {
   idInput: PropTypes.string,
   label: PropTypes.string,
   input: PropTypes.object.isRequired,

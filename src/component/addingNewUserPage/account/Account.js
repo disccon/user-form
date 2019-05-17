@@ -9,7 +9,7 @@ import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import {
   forwardAccount, saveUserSRCAvatarIMG, continueUser, changeQuestionState,
 } from '../../../actions'
-import { fieldInputAccount } from '../../fieldForm/fieldInputAccount/FieldInputAccount'
+import { FieldInputAccount } from '../../fieldForm/fieldInputAccount/FieldInputAccount'
 import { UserFormBox } from '../../userFormBox/UserFormBox'
 import { QuestionAccount } from './questionAccount/QuestionAccount'
 import db from '../../../db'
@@ -110,14 +110,14 @@ class Account extends Component {
           </div>
           <div className={cx('register__userData')}>
             <Field
-              component={fieldInputAccount}
+              component={FieldInputAccount}
               type='text'
               label='User name'
               name='userName'
               idInput='userName'
             />
             <Field
-              component={fieldInputAccount}
+              component={FieldInputAccount}
               type={typeFieldPassword}
               isVisibility
               label='Password'
@@ -126,7 +126,7 @@ class Account extends Component {
               changeTypePassword={this.changeTypePassword}
             />
             <Field
-              component={fieldInputAccount}
+              component={FieldInputAccount}
               type={typeFieldPassword}
               isVisibility
               label='Repeat Password'

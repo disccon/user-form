@@ -6,13 +6,13 @@ import PropTypes from 'prop-types'
 import { backCapabilities, forwardCapabilities } from '../../../actions'
 import styles from '../../userFormBox/UserFormBox.scss'
 import {
-  fieldSelectCapabilities,
+  FieldSelectCapabilities,
 } from '../../fieldForm/fieldSelectCapabilities/FieldSelectCapabilities'
 import {
-  fieldTextareaCapabilities,
-} from '../../fieldForm/fieldTextareaCapabilities/fieldTextareaCapabilities'
+  FieldTextareaCapabilities,
+} from '../../fieldForm/fieldTextareaCapabilities/FieldTextareaCapabilities'
 import {
-  fieldCheckboxCapabilities,
+  FieldCheckboxCapabilities,
 } from '../../fieldForm/fieldCheckboxCapabilities/FieldCheckboxCapabilities'
 import { UserFormBox } from '../../userFormBox/UserFormBox'
 
@@ -40,12 +40,12 @@ class Capabilities extends Component {
       <UserFormBox handleSubmit={handleSubmit(this.onSubmit)}>
         <div className={cx('userFormBox__sideLeft')}>
           <Field
-            component={fieldSelectCapabilities}
+            component={FieldSelectCapabilities}
             name='selectSkills'
             label='Skills'
           />
           <Field
-            component={fieldTextareaCapabilities}
+            component={FieldTextareaCapabilities}
             name='textareaField'
             label='Additional information'
             idTextarea='idFieldTextarea'
@@ -54,37 +54,37 @@ class Capabilities extends Component {
         <div className={cx('userFormBox__sideRight')}>
           <h3 className={cx('userFormBox__hobbies')}>My hobbies</h3>
           <Field
-            component={fieldCheckboxCapabilities}
+            component={FieldCheckboxCapabilities}
             type='checkbox'
             name='checkboxArt'
             span='Art'
           />
           <Field
-            component={fieldCheckboxCapabilities}
+            component={FieldCheckboxCapabilities}
             type='checkbox'
             name='checkboxSport'
             span='Sport,fitness, aerobica and staff like that'
           />
           <Field
-            component={fieldCheckboxCapabilities}
+            component={FieldCheckboxCapabilities}
             type='checkbox'
             name='checkboxJustWant'
             span='just want to play games, I’m not living in this life'
           />
           <Field
-            component={fieldCheckboxCapabilities}
+            component={FieldCheckboxCapabilities}
             type='checkbox'
             name='checkboxFemale'
             span='I’m a female... I’m doing nothing. Every day.'
           />
           <Field
-            component={fieldCheckboxCapabilities}
+            component={FieldCheckboxCapabilities}
             type='checkbox'
             name='checkboxGuitar'
             span='Guitar, guitar and guitar again. I’m fall in love with it.'
           />
           <Field
-            component={fieldCheckboxCapabilities}
+            component={FieldCheckboxCapabilities}
             type='checkbox'
             name='checkboxWtf'
             span='WTF is “hobbies”???'
