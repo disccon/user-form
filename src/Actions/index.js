@@ -47,6 +47,9 @@ export const DELETE_USER = 'DELETE_USER'
 export const DELETE_USER__SUCCESS = 'DELETE_USER__SUCCESS'
 export const DELETE_USER__FAILURE = 'DELETE_USER__FAILURE'
 
+export const SEARCHING_USERS = 'SEARCHING_USERS'
+export const SEARCHING_USERS__SUCCESS = 'SEARCHING_USERS__SUCCESS'
+export const SEARCHING_USERS__FAILURE = 'SEARCHING_USERS__FAILURE'
 
 export const CREATE_USER = 'CREATE_USER'
 export const CREATE_USER__SUCCESS = 'CREATE_USER__SUCCESS'
@@ -168,20 +171,26 @@ export const forwardCapabilities = (selectSkills, textareaField, checkboxArt, ch
   })
 
 
-export const fetchUsersDB = (users, total) => ({
+export const fetchUsersDB = () => ({
   type: FETCH_USERS,
-  payload: {
-    users, total,
-  },
 })
 
-export const deleteUser = (id, currentPage, total, perPage) => (
+export const deleteUser = (id, currentPage, total, per_page) => (
   {
     type: DELETE_USER,
     payload: {
-      id, currentPage, total, perPage,
+      id, currentPage, total, per_page,
     },
   })
+
+export const searchingUsers = searchUsers => (
+  {
+    type: SEARCHING_USERS,
+    payload: {
+      searchUsers,
+    },
+  })
+
 
 export const createUser = () => (
   { type: CREATE_USER })
@@ -194,7 +203,6 @@ export const userEditState = (editUser, users) => (
       editUser, users,
     },
   })
-
 
 
 export const saveAvatarAccountEditing = (userSRCAvatarIMG, id) => (
