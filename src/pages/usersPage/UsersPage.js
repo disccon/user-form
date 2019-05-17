@@ -19,9 +19,9 @@ class UsersPage extends Component {
     fetchUsersDB()
   }
 
-  componentDidUpdate() {
-    const {  pagesCount } = this.props
-  }
+  // componentDidUpdate() {
+  //   const {  pagesCount } = this.props
+  // }
 
   searchingUsersFilter = ({ target }) => {
     const { searchingUsers } = this.props
@@ -44,7 +44,7 @@ class UsersPage extends Component {
 
   render() {
     const {
-      users, total, per_page, currentPage, filterUsers, pagesCount,
+      users, currentPage, filterUsers, pagesCount,
     } = this.props
     return (
       <Fragment>

@@ -4,17 +4,17 @@ import classNames from 'classnames'
 import { Field, formValueSelector, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 import { backCapabilities, forwardCapabilities } from '../../../actions'
-import styles from '../../userFormBox/UserFormBox.scss'
+import styles from '../../../component/userFormBox/UserFormBox.scss'
 import {
   FieldSelectCapabilities,
-} from '../../fieldForm/fieldSelectCapabilities/FieldSelectCapabilities'
+} from '../../../component/fieldForm/fieldSelectCapabilities/FieldSelectCapabilities'
 import {
   FieldTextareaCapabilities,
-} from '../../fieldForm/fieldTextareaCapabilities/FieldTextareaCapabilities'
+} from '../../../component/fieldForm/fieldTextareaCapabilities/FieldTextareaCapabilities'
 import {
   FieldCheckboxCapabilities,
-} from '../../fieldForm/fieldCheckboxCapabilities/FieldCheckboxCapabilities'
-import { UserFormBox } from '../../userFormBox/UserFormBox'
+} from '../../../component/fieldForm/fieldCheckboxCapabilities/FieldCheckboxCapabilities'
+import { UserFormBox } from '../../../component/userFormBox/UserFormBox'
 
 const cx = classNames.bind(styles)
 

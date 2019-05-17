@@ -3,46 +3,42 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import {
-  Field, formValueSelector, reduxForm, FieldArray,
+  Field, reduxForm, FieldArray, formValueSelector,
 } from 'redux-form'
-import styles from '../../userFormBox/UserFormBox.scss'
-import { forwardBackContacts, deleteAddFieldPhone } from '../../../actions'
-
-import { FieldSelectContacts } from '../../fieldForm/fieldSelectContacts/FieldSelectContacts'
-import { FieldInputNewUser } from '../../fieldForm/fieldInputNewUser/FieldInputNewUser'
-import { UserFormBox } from '../../userFormBox/UserFormBox'
-import { FieldArrayPhone } from '../../fieldForm/fieldArrayPhone/FieldArrayPhone'
+import styles from '../../../component/userFormBox/UserFormBox.scss'
+import { contactsEditingSave, userEditState, deleteFieldPhoneEditing } from '../../../actions'
+import { UserFormBox } from '../../../component/userFormBox/UserFormBox'
+import { FieldInputNewUser } from '../../../component/fieldForm/fieldInputNewUser/FieldInputNewUser'
+import { FieldSelectContacts } from '../../../component/fieldForm/fieldSelectContacts/FieldSelectContacts'
+import { FieldArrayPhone } from '../../../component/fieldForm/fieldArrayPhone/FieldArrayPhone'
+import { userGetIndexDB } from '../../../helpers/userGetIndexDB'
 
 const cx = classNames.bind(styles)
 
-class Contacts extends Component {
-  backContacts = () => {
-    const {
-      companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneArrayForm, phoneN1Form,
-      phoneN2Form, phoneN3Form, forwardBackContacts,
-    } = this.props
-    forwardBackContacts('back', companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm,
-      phoneArrayForm, phoneN1Form, phoneN2Form, phoneN3Form)
+class ContactsEditing extends Component {
+  componentDidMount() {
+    const { userEditState, id } = this.props
+    userGetIndexDB(userEditState, id)
   }
 
   onSubmit = values => {
-    const { forwardBackContacts } = this.props
-    forwardBackContacts('forward', values.company, values.githubLink, values.facebookLink, values.selectLanguage,
-      values.fax, values.phoneArray, values.phoneN1, values.phoneN2, values.phoneN3)
+    const { contactsEditingSave, id } = this.props
+    contactsEditingSave(values.company, values.githubLink, values.facebookLink, values.selectLanguage,
+      values.fax, values.phoneArray, values.phoneN1, values.phoneN2, values.phoneN3, id)
   }
 
   deleteFieldPhone = () => {
     const {
-      deleteAddFieldPhone, phoneN1Form, phoneN2Form, phoneN3Form
+      deleteFieldPhoneEditing, phoneN1Form, phoneN2Form, phoneN3Form,
     } = this.props
-    deleteAddFieldPhone('delete', phoneN1Form, phoneN2Form, phoneN3Form)
+    deleteFieldPhoneEditing('delete', phoneN1Form, phoneN2Form, phoneN3Form)
   }
 
   addFieldPhone = () => {
     const {
-      deleteAddFieldPhone, phoneN1Form, phoneN2Form, phoneN3Form
+      deleteFieldPhoneEditing, phoneN1Form, phoneN2Form, phoneN3Form,
     } = this.props
-    deleteAddFieldPhone('add', phoneN1Form, phoneN2Form, phoneN3Form)
+    deleteFieldPhoneEditing('add', phoneN1Form, phoneN2Form, phoneN3Form)
   }
 
   render() {
@@ -101,8 +97,9 @@ class Contacts extends Component {
           />
           <div className={cx('userFormBox__addPhone')} />
           <div className={cx('userFormBox__wrapperButton')}>
-            <button type='button' onClick={this.backContacts} className={cx('userFormBox__back')}>Back</button>
-            <button type='submit' className={cx('userFormBox__forward')}>Forward</button>
+            <button type='submit' className={cx('userFormBox__saveNewListButton')}>
+              Save
+            </button>
           </div>
         </div>
       </UserFormBox>
@@ -110,25 +107,18 @@ class Contacts extends Component {
   }
 }
 
-Contacts.propTypes = {
-  companyForm: PropTypes.string,
-  githubLinkForm: PropTypes.string,
-  facebookLinkForm: PropTypes.string,
-  selectLanguageForm: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ]),
-  faxForm: PropTypes.string,
-  phoneArrayForm: PropTypes.array,
+ContactsEditing.propTypes = {
+  id: PropTypes.number,
+  contactsEditingSave: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  userEditState: PropTypes.func.isRequired,
+  deleteFieldPhoneEditing: PropTypes.func.isRequired,
   phoneN1Form: PropTypes.string,
   phoneN2Form: PropTypes.string,
   phoneN3Form: PropTypes.string,
-  forwardBackContacts: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  deleteAddFieldPhone: PropTypes.func.isRequired,
 }
 
-const ContactsForm = reduxForm({
+const ContactsEditingForm = reduxForm({
   validate: values => {
     const errors = {}
     if (!values.selectLanguage) {
@@ -178,34 +168,24 @@ const ContactsForm = reduxForm({
 
     return errors
   },
-  form: 'Contacts',
+  form: 'ContactsEditing',
   enableReinitialize: true,
-})(Contacts)
+})(ContactsEditing)
 
-const mapStateToProps = state => {
-  const selector = formValueSelector('Contacts')
-  const companyForm = selector(state, 'company')
-  const githubLinkForm = selector(state, 'githubLink')
-  const facebookLinkForm = selector(state, 'facebookLink')
-  const selectLanguageForm = selector(state, 'selectLanguage')
-  const faxForm = selector(state, 'fax')
-  const phoneArrayForm = selector(state, 'phoneArray')
+const mapStateToProps = (state, ownProps) => {
+  const id = Number(ownProps.match.params.id)
+  const selector = formValueSelector('ContactsEditing')
   const phoneN1Form = selector(state, 'phoneN1')
   const phoneN2Form = selector(state, 'phoneN2')
   const phoneN3Form = selector(state, 'phoneN3')
   const {
     company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
-  } = state.newUser
+  } = state.editUserReducer.editUser
   return {
     initialValues: {
       company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
     },
-    companyForm,
-    githubLinkForm,
-    facebookLinkForm,
-    selectLanguageForm,
-    faxForm,
-    phoneArrayForm,
+    id,
     phoneN1Form,
     phoneN2Form,
     phoneN3Form,
@@ -214,5 +194,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { forwardBackContacts, deleteAddFieldPhone },
-)(ContactsForm)
+  { contactsEditingSave, userEditState, deleteFieldPhoneEditing },
+)(ContactsEditingForm)

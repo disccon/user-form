@@ -1,5 +1,5 @@
-import { createSelector } from 'reselect'
-import queryString from 'query-string'
+import { createSelector } from 'reselect/lib/index'
+import queryString from 'query-string/index'
 
 const users = state => state.usersReducer.users
 const filter = state => state.usersReducer.filterUsers
