@@ -1,5 +1,5 @@
 import {
-  put, select,
+  put, select, call,
 } from 'redux-saga/effects'
 import { push } from 'connected-react-router'
 
@@ -41,6 +41,9 @@ import {
 
   DELETE_USER__SUCCESS,
   DELETE_USER__FAILURE,
+
+  SEARCHING_USERS__SUCCESS,
+  SEARCHING_USERS__FAILURE,
 
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
@@ -91,15 +94,10 @@ export function* continueUserSaga(action) {
   const { isContinue } = action.payload
   try {
     if (isContinue) {
-      const promise = new Promise(resolve => {
-        db.newUserDB.toArray(newUserDB => resolve(...newUserDB))
-      })
-      const newUserDB = yield promise
+      const newUserDB = yield call(() => db.newUserDB.get(0, newUserDB => newUserDB))
       yield put({
         type: CONTINUE_USER__CONTINUE,
-        payload: {
-          newUserDB,
-        },
+        payload: newUserDB,
       })
     } else {
       yield put({
@@ -269,6 +267,7 @@ export function* forwardCapabilitiesSaga(action) {
   } = action.payload
   const newUserDB = yield select(state => state.newUser)
   delete initialNewUserState.isQuestion
+  delete newUserDB.id
   try {
     yield put(push('/users'))
     db.usersDB.add({
@@ -281,6 +280,7 @@ export function* forwardCapabilitiesSaga(action) {
       checkboxFemale,
       checkboxGuitar,
       checkboxWtf,
+      lastUpdate: new Date(),
     })
     yield put({
       type: FORWARD_CAPABILITIES__ADD_NEW_USER,
@@ -297,15 +297,13 @@ export function* forwardCapabilitiesSaga(action) {
   }
 }
 
-
-export function* fetchUsersDBSaga(action) {
-  const { users, total } = action.payload
+export function* fetchUsersDBSaga() {
   try {
+    const users = yield call(() => db.usersDB.toArray(users => users))
     yield put({
       type: FETCH_USERS__SUCCESS,
       payload: {
         users,
-        total,
       },
     })
   } catch (error) {
@@ -318,22 +316,19 @@ export function* fetchUsersDBSaga(action) {
 
 export function* deleteUserSaga(action) {
   const {
-    id, currentPage, total, perPage,
+    id, currentPage, total, per_page,
   } = action.payload
   try {
     db.usersDB.delete(id)
-    const isPagesCountChange = Math.ceil(total / perPage) !== Math.ceil((total - 1) / perPage)
+    const isPagesCountChange = Math.ceil(total / per_page) !== Math.ceil((total - 1) / per_page)
     const page = isPagesCountChange ? currentPage - 1 : currentPage
     if (isPagesCountChange) {
-      yield put(push({ pathname: '/users', search: `?page=${page}&per-page=${perPage}` }))
+      yield put(push({ pathname: '/users', search: `?page=${page}&per_page=${per_page}` }))
     }
-    const promise = new Promise(resolve => {
-      const start = (page - 1) * perPage
-      db.usersDB.toArray(usersDB => {
-        resolve(usersDB.slice(start, start + perPage))
-      })
-    })
-    const users = yield promise
+    const users = yield call((page, per_page) => {
+      const start = (page - 1) * per_page
+      return db.usersDB.toArray(usersDB => usersDB.slice(start, start + per_page))
+    }, page, per_page)
     yield put({
       type: DELETE_USER__SUCCESS,
       payload: {
@@ -350,13 +345,29 @@ export function* deleteUserSaga(action) {
 }
 
 
+export function* searchingUsersSaga(action) {
+  const { searchUsers } = action.payload
+  try {
+    yield put({
+      type: SEARCHING_USERS__SUCCESS,
+      payload: {
+        searchUsers,
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: SEARCHING_USERS__FAILURE,
+      error,
+    })
+  }
+}
+
+
 export function* createUserSaga() {
   try {
     yield put({
       type: CREATE_USER__SUCCESS,
-      payload: {
-        ...initialNewUserState,
-      },
+      payload: initialNewUserState,
     })
   } catch (error) {
     yield put({

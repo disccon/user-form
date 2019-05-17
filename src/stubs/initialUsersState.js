@@ -1,5 +1,5 @@
 export const initialUsersState = {
   users: [],
-  perPage: 10,
-  total: 0,
+  per_page: 10,
+  searchUsers: '',
 }

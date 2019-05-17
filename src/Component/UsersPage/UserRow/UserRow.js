@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 import onClickOutside from 'react-onclickoutside'
+import moment from 'moment'
 import styles from './UserRow.scss'
 import { ReactComponent as CloseIcon } from '../../../img/icon/close.svg'
 import { ReactComponent as EditIcon } from '../../../img/icon/edit.svg'
@@ -37,8 +38,10 @@ class UserRow extends Component {
         <td className={cx('userRow__fistTD')}>
           <img className={cx('userRow__img')} src={user.userSRCAvatarIMG} alt='userSRCAvatarIMG' />
           <div className={cx('userRow__wrapperDiv')}>
-            <h4 className={cx('userRow__h4')}>{user.userName}</h4>
-            <span className={cx('userRow__span')}>username</span>
+            <h4 className={cx('userRow__h4')}>
+              {`${user.firstName} ${user.lastName}`}
+            </h4>
+            <span className={cx('userRow__span')}>{user.userName}</span>
           </div>
         </td>
         <td className={cx('userRow__td')}>
@@ -49,7 +52,9 @@ class UserRow extends Component {
         </td>
         <td className={cx('userRow__td')}>
           <div className={cx('userRow__div')}>
-            3 month ago
+            <span className={cx('userRow__lastUpdate')}>
+              {moment(moment(user.lastUpdate).format('YYYY-MM-DD HH:mm:ss'), 'YYYY-MM-DD HH:mm:ss').fromNow()}
+            </span>
             {!deleteUserClass && (
               <Fragment>
                 <Link to={`/user/${user.id}`}>
