@@ -7,7 +7,7 @@ import {
 
   SEARCHING_USERS__SUCCESS,
   SEARCHING_USERS__FAILURE,
-} from '../Actions'
+} from '../actions'
 import { initialUsersState } from '../stubs/initialUsersState'
 
 
@@ -31,7 +31,6 @@ export default function usersReducer(state = initialUsersState, action) {
       return {
         ...state,
         users: [...action.payload.users],
-        total: action.payload.total,
         error: undefined,
       }
     }

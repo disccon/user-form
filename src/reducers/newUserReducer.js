@@ -33,7 +33,7 @@ import {
 
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
-} from '../Actions'
+} from '../actions'
 
 
 export default function newUserReducer(state = initialNewUserState, action) {
@@ -62,7 +62,7 @@ export default function newUserReducer(state = initialNewUserState, action) {
 
     case CONTINUE_USER__CONTINUE: {
       return {
-        ...action.payload.newUserDB,
+        ...action.payload,
         isQuestion: false,
         error: undefined,
       }
@@ -189,6 +189,9 @@ export default function newUserReducer(state = initialNewUserState, action) {
       return {
         ...state,
         phoneArray: action.payload.phoneArray,
+        phoneN1: action.payload.phoneN1,
+        phoneN2: action.payload.phoneN2,
+        phoneN3: action.payload.phoneN3,
         error: undefined,
       }
     }
@@ -196,6 +199,9 @@ export default function newUserReducer(state = initialNewUserState, action) {
       return {
         ...state,
         phoneArray: action.payload.phoneArray,
+        phoneN1: action.payload.phoneN1,
+        phoneN2: action.payload.phoneN2,
+        phoneN3: action.payload.phoneN3,
         error: undefined,
       }
     }
