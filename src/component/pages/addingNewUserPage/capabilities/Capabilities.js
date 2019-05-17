@@ -3,18 +3,18 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Field, formValueSelector, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
-import { backCapabilities, forwardCapabilities } from '../../../actions'
-import styles from '../../userFormBox/UserFormBox.scss'
+import { backCapabilities, forwardCapabilities } from '../../../../actions'
+import styles from '../../../userFormBox/UserFormBox.scss'
 import {
   FieldSelectCapabilities,
-} from '../../fieldForm/fieldSelectCapabilities/FieldSelectCapabilities'
+} from '../../../fieldForm/fieldSelectCapabilities/FieldSelectCapabilities'
 import {
   FieldTextareaCapabilities,
-} from '../../fieldForm/fieldTextareaCapabilities/FieldTextareaCapabilities'
+} from '../../../fieldForm/fieldTextareaCapabilities/FieldTextareaCapabilities'
 import {
   FieldCheckboxCapabilities,
-} from '../../fieldForm/fieldCheckboxCapabilities/FieldCheckboxCapabilities'
-import { UserFormBox } from '../../userFormBox/UserFormBox'
+} from '../../../fieldForm/fieldCheckboxCapabilities/FieldCheckboxCapabilities'
+import { UserFormBox } from '../../../userFormBox/UserFormBox'
 
 const cx = classNames.bind(styles)
 

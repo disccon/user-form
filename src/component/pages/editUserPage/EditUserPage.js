@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 import styles from './EditUserPage.scss'
-import { ReactComponent as EditIcon } from '../../img/icon/edit.svg'
-import { userEditState } from '../../actions'
-import { userGetIndexDB } from '../../helpers/userGetIndexDB'
+import { ReactComponent as EditIcon } from '../../../img/icon/edit.svg'
+import { userEditState } from '../../../actions'
+import { userGetIndexDB } from '../../../helpers/userGetIndexDB'
 
 const cx = classNames.bind(styles)
 

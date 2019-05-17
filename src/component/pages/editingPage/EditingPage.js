@@ -9,7 +9,7 @@ import AccountEditing from './accountEditing/AccountEditing'
 import ContactsEditing from './contactsEditing/ContactsEditing'
 import CapabilitiesEditing from './capabilitiesEditing/CapabilitiesEditing'
 import ProfileEditing from './profileEditing/ProfileEditing'
-import { userEditState } from '../../actions'
+import { userEditState } from '../../../actions'
 
 const cx = classNames.bind(styles)
 

@@ -10,7 +10,7 @@ import Account from './account/Account'
 import Contacts from './contacts/Contacts'
 import Capabilities from './capabilities/Capabilities'
 import Profile from './profile/Profile'
-import db from '../../db'
+import db from '../../../db'
 
 
 const cx = classNames.bind(styles)

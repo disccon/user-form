@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { push } from 'connected-react-router'
 import styles from './UsersPage.scss'
 import NoHaveUserRow from './noHaveUserRow/NoHaveUserRow'
-import { fetchUsersDB, deleteUser, searchingUsers } from '../../actions'
+import { fetchUsersDB, deleteUser, searchingUsers } from '../../../actions'
 import UserRow from './userRow/UserRow'
 import { Pagination } from './pagination/Pagination'
 import { getFilterUsers } from './getFilterUsers'
@@ -19,8 +19,12 @@ class UsersPage extends Component {
     fetchUsersDB()
   }
 
-  componentDidUpdate() {
-    const {  pagesCount } = this.props
+  componentDidUpdate(prevProps) {
+    const { pagesCount, push, per_page } = this.props
+    console.log(22222, pagesCount, prevProps.pagesCount)
+    // if (pagesCount > prevProps.pagesCount){
+    //   push({ pathname: '/users', search: `?page=${pagesCount}&per_page=${per_page}` })
+    // }
   }
 
   searchingUsersFilter = ({ target }) => {
