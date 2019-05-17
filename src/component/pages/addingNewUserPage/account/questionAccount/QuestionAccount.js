@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { ReactComponent as CloseIcon } from '../../../../img/icon/close.svg'
+import { ReactComponent as CloseIcon } from '../../../../../img/icon/close.svg'
 import styles from './QuestionAccount.scss'
 
 const cx = classNames.bind(styles)

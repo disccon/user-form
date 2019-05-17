@@ -3,16 +3,16 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { reduxForm, Field } from 'redux-form'
-import styles from '../../userFormBox/UserFormBox.scss'
-import { profileEditingSave, userEditState } from '../../../actions'
-import { UserFormBox } from '../../userFormBox/UserFormBox'
-import { FieldInputNewUser } from '../../fieldForm/fieldInputNewUser/FieldInputNewUser'
+import styles from '../../../userFormBox/UserFormBox.scss'
+import { profileEditingSave, userEditState } from '../../../../actions'
+import { UserFormBox } from '../../../userFormBox/UserFormBox'
+import { FieldInputNewUser } from '../../../fieldForm/fieldInputNewUser/FieldInputNewUser'
 import {
   DateTimePickerProfile,
-} from '../../fieldForm/dateTimePickerProfile/DateTimePickerProfile'
-import { FieldRadioProfile } from '../../fieldForm/fieldRadioProfile/FieldRadioProfile'
-import db from '../../../db'
-import { userGetIndexDB } from '../../../helpers/userGetIndexDB'
+} from '../../../fieldForm/dateTimePickerProfile/DateTimePickerProfile'
+import { FieldRadioProfile } from '../../../fieldForm/fieldRadioProfile/FieldRadioProfile'
+import db from '../../../../db'
+import { userGetIndexDB } from '../../../../helpers/userGetIndexDB'
 
 const cx = classNames.bind(styles)
 

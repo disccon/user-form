@@ -3,16 +3,16 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Field, reduxForm } from 'redux-form'
-import styles from '../../userFormBox/UserFormBox.scss'
-import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
-import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
+import styles from '../../../userFormBox/UserFormBox.scss'
+import { ReactComponent as UserAvatarIcon } from '../../../../img/icon/UserAvatar.svg'
+import { ReactComponent as AddIcon } from '../../../../img/icon/add.svg'
 import {
   forwardAccount, saveUserSRCAvatarIMG, continueUser, changeQuestionState,
-} from '../../../actions'
-import { FieldInputAccount } from '../../fieldForm/fieldInputAccount/FieldInputAccount'
-import { UserFormBox } from '../../userFormBox/UserFormBox'
+} from '../../../../actions'
+import { FieldInputAccount } from '../../../fieldForm/fieldInputAccount/FieldInputAccount'
+import { UserFormBox } from '../../../userFormBox/UserFormBox'
 import { QuestionAccount } from './questionAccount/QuestionAccount'
-import db from '../../../db'
+import db from '../../../../db'
 
 const cx = classNames.bind(styles)
 
