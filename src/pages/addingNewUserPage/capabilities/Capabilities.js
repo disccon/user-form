@@ -1,34 +1,37 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { Field, reduxForm } from 'redux-form'
+import { Field, formValueSelector, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
-import { capabilitiesEditingSave, userEditState } from '../../../actions'
-import styles from '../../userFormBox/UserFormBox.scss'
+import { backCapabilities, forwardCapabilities } from '../../../actions'
+import styles from '../../../components/userFormBox/UserFormBox.scss'
 import {
   FieldSelectCapabilities,
-} from '../../fieldForm/fieldSelectCapabilities/FieldSelectCapabilities'
+} from '../../../components/fieldForm/fieldSelectCapabilities/FieldSelectCapabilities'
 import {
   FieldTextareaCapabilities,
-} from '../../fieldForm/fieldTextareaCapabilities/FieldTextareaCapabilities'
+} from '../../../components/fieldForm/fieldTextareaCapabilities/FieldTextareaCapabilities'
 import {
   FieldCheckboxCapabilities,
-} from '../../fieldForm/fieldCheckboxCapabilities/FieldCheckboxCapabilities'
-import { UserFormBox } from '../../userFormBox/UserFormBox'
-import { userGetIndexDB } from '../../../helpers/userGetIndexDB'
+} from '../../../components/fieldForm/fieldCheckboxCapabilities/FieldCheckboxCapabilities'
+import { UserFormBox } from '../../../components/userFormBox/UserFormBox'
 
 const cx = classNames.bind(styles)
 
-class CapabilitiesEditing extends Component {
-  componentDidMount() {
-    const { userEditState, id } = this.props
-    userGetIndexDB(userEditState, id)
+class Capabilities extends Component {
+  onSubmit = values => {
+    const { forwardCapabilities } = this.props
+    forwardCapabilities(values.selectSkills, values.textareaField, values.checkboxArt, values.checkboxSport,
+      values.checkboxJustWant, values.checkboxFemale, values.checkboxGuitar, values.checkboxWtf)
   }
 
-  onSubmit = values => {
-    const { capabilitiesEditingSave, id } = this.props
-    capabilitiesEditingSave(values.selectSkills, values.textareaField, values.checkboxArt, values.checkboxSport,
-      values.checkboxJustWant, values.checkboxFemale, values.checkboxGuitar, values.checkboxWtf, id)
+  backCapabilities = () => {
+    const {
+      backCapabilities, selectSkillsForm, textareaFieldForm, checkboxArtForm, checkboxSportForm, checkboxJustWantForm,
+      checkboxFemaleForm, checkboxGuitarForm, checkboxWtfForm,
+    } = this.props
+    backCapabilities(selectSkillsForm, textareaFieldForm, checkboxArtForm, checkboxSportForm, checkboxJustWantForm,
+      checkboxFemaleForm, checkboxGuitarForm, checkboxWtfForm)
   }
 
   render() {
@@ -87,8 +90,15 @@ class CapabilitiesEditing extends Component {
             span='WTF is “hobbies”???'
           />
           <div className={cx('userFormBox__wrapperButton')}>
-            <button type='submit' className={cx('userFormBox__saveNewListButton')}>
-              Save
+            <button
+              type='button'
+              className={cx('userFormBox__back')}
+              onClick={this.backCapabilities}
+            >
+              Back
+            </button>
+            <button type='submit' className={cx('userFormBox__finish')}>
+              Finish
             </button>
           </div>
         </div>
@@ -97,14 +107,42 @@ class CapabilitiesEditing extends Component {
   }
 }
 
-CapabilitiesEditing.propTypes = {
-  id: PropTypes.number,
-  capabilitiesEditingSave: PropTypes.func.isRequired,
+Capabilities.propTypes = {
+  selectSkillsForm: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+  ]),
+  textareaFieldForm: PropTypes.string,
+  checkboxArtForm: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
+  checkboxSportForm: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
+  checkboxJustWantForm: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
+  checkboxFemaleForm: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
+  checkboxGuitarForm: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
+  checkboxWtfForm: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
+  backCapabilities: PropTypes.func.isRequired,
+  forwardCapabilities: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  userEditState: PropTypes.func.isRequired,
 }
 
-const CapabilitiesEditingForm = reduxForm({
+const CapabilitiesForm = reduxForm({
   validate: values => {
     const errors = {}
 
@@ -125,16 +163,24 @@ const CapabilitiesEditingForm = reduxForm({
 
     return errors
   },
-  form: 'CapabilitiesEditing',
+  form: 'Capabilities',
   enableReinitialize: true,
-})(CapabilitiesEditing)
+})(Capabilities)
 
-const mapStateToProps = (state, ownProps) => {
-  const id = Number(ownProps.match.params.id)
+const mapStateToProps = state => {
+  const selector = formValueSelector('Capabilities')
+  const selectSkillsForm = selector(state, 'selectSkills')
+  const textareaFieldForm = selector(state, 'textareaField')
+  const checkboxArtForm = selector(state, 'checkboxArt')
+  const checkboxSportForm = selector(state, 'checkboxSport')
+  const checkboxJustWantForm = selector(state, 'checkboxJustWant')
+  const checkboxFemaleForm = selector(state, 'checkboxFemale')
+  const checkboxGuitarForm = selector(state, 'checkboxGuitar')
+  const checkboxWtfForm = selector(state, 'checkboxWtf')
   const {
     selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
     checkboxGuitar, checkboxWtf,
-  } = state.editUserReducer.editUser
+  } = state.newUser
   return {
     initialValues: {
       selectSkills,
@@ -146,11 +192,18 @@ const mapStateToProps = (state, ownProps) => {
       checkboxGuitar,
       checkboxWtf,
     },
-    id,
+    selectSkillsForm,
+    textareaFieldForm,
+    checkboxArtForm,
+    checkboxSportForm,
+    checkboxJustWantForm,
+    checkboxFemaleForm,
+    checkboxGuitarForm,
+    checkboxWtfForm,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { capabilitiesEditingSave, userEditState },
-)(CapabilitiesEditingForm)
+  { backCapabilities, forwardCapabilities },
+)(CapabilitiesForm)

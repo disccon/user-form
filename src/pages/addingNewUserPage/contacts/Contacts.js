@@ -5,13 +5,13 @@ import classNames from 'classnames'
 import {
   Field, formValueSelector, reduxForm, FieldArray,
 } from 'redux-form'
-import styles from '../../userFormBox/UserFormBox.scss'
+import styles from '../../../components/userFormBox/UserFormBox.scss'
 import { forwardBackContacts, deleteAddFieldPhone } from '../../../actions'
 
-import { FieldSelectContacts } from '../../fieldForm/fieldSelectContacts/FieldSelectContacts'
-import { FieldInputNewUser } from '../../fieldForm/fieldInputNewUser/FieldInputNewUser'
-import { UserFormBox } from '../../userFormBox/UserFormBox'
-import { FieldArrayPhone } from '../../fieldForm/fieldArrayPhone/FieldArrayPhone'
+import { FieldSelectContacts } from '../../../components/fieldForm/fieldSelectContacts/FieldSelectContacts'
+import { FieldInputNewUser } from '../../../components/fieldForm/fieldInputNewUser/FieldInputNewUser'
+import { UserFormBox } from '../../../components/userFormBox/UserFormBox'
+import { FieldArrayPhone } from '../../../components/fieldForm/fieldArrayPhone/FieldArrayPhone'
 
 const cx = classNames.bind(styles)
 
@@ -33,14 +33,14 @@ class Contacts extends Component {
 
   deleteFieldPhone = () => {
     const {
-      deleteAddFieldPhone, phoneN1Form, phoneN2Form, phoneN3Form
+      deleteAddFieldPhone, phoneN1Form, phoneN2Form, phoneN3Form,
     } = this.props
     deleteAddFieldPhone('delete', phoneN1Form, phoneN2Form, phoneN3Form)
   }
 
   addFieldPhone = () => {
     const {
-      deleteAddFieldPhone, phoneN1Form, phoneN2Form, phoneN3Form
+      deleteAddFieldPhone, phoneN1Form, phoneN2Form, phoneN3Form,
     } = this.props
     deleteAddFieldPhone('add', phoneN1Form, phoneN2Form, phoneN3Form)
   }

@@ -5,12 +5,12 @@ import classNames from 'classnames'
 import {
   Field, reduxForm, FieldArray, formValueSelector,
 } from 'redux-form'
-import styles from '../../userFormBox/UserFormBox.scss'
+import styles from '../../../components/userFormBox/UserFormBox.scss'
 import { contactsEditingSave, userEditState, deleteFieldPhoneEditing } from '../../../actions'
-import { UserFormBox } from '../../userFormBox/UserFormBox'
-import { FieldInputNewUser } from '../../fieldForm/fieldInputNewUser/FieldInputNewUser'
-import { FieldSelectContacts } from '../../fieldForm/fieldSelectContacts/FieldSelectContacts'
-import { FieldArrayPhone } from '../../fieldForm/fieldArrayPhone/FieldArrayPhone'
+import { UserFormBox } from '../../../components/userFormBox/UserFormBox'
+import { FieldInputNewUser } from '../../../components/fieldForm/fieldInputNewUser/FieldInputNewUser'
+import { FieldSelectContacts } from '../../../components/fieldForm/fieldSelectContacts/FieldSelectContacts'
+import { FieldArrayPhone } from '../../../components/fieldForm/fieldArrayPhone/FieldArrayPhone'
 import { userGetIndexDB } from '../../../helpers/userGetIndexDB'
 
 const cx = classNames.bind(styles)
