@@ -2,42 +2,27 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
-import { createSelector } from 'reselect'
 import classNames from 'classnames'
 import { push } from 'connected-react-router'
 import styles from './UsersPage.scss'
 import NoHaveUserRow from './noHaveUserRow/NoHaveUserRow'
-import { fetchUsersDB, deleteUser } from '../../actions'
+import { fetchUsersDB, deleteUser, searchingUsers } from '../../actions'
 import UserRow from './userRow/UserRow'
 import { Pagination } from './pagination/Pagination'
-import db from '../../db'
-
+import { getfilterUsers } from './noHaveUserRow/UserPageReselect'
 
 const cx = classNames.bind(styles)
 
 class UsersPage extends Component {
-  state = {
-    searchInput: 'dsds',
-  }
-
   componentDidMount() {
-    const { per_page, fetchUsersDB } = this.props
-    const currentPage = this.queryStringPage()
-    fetchUsersDB(currentPage, per_page)
+    const { fetchUsersDB } = this.props
+    fetchUsersDB()
   }
 
-  searchingUsers = ({ target }) => {
-    const { fetchUsersDB, per_page } = this.props
+  searchingUsersFilter = ({ target }) => {
+    const { searchingUsers } = this.props
     const { value } = target
-    db.usersDB.toArray(usersDB => {
-      const userFilter = usersDB.filter(user => `${user.firstName} ${user.lastName}`.includes(value))
-      const currentPage = this.queryStringPage()
-      const start = (currentPage - 1) * per_page
-      fetchUsersDB(userFilter.slice(start, start + per_page), userFilter.length)
-    })
-    this.setState({
-      searchInput: target.value,
-    })
+    searchingUsers(value)
   }
 
   queryStringPage = () => {
@@ -62,19 +47,17 @@ class UsersPage extends Component {
     push({ pathname: '/users', search: `?page=${page}&per_page=${per_page}` })
     fetchUsersDB(page, per_page)
   }
-
   render() {
-    const { users, total, per_page } = this.props
+    const { users, total, per_page, searchUsers, currentPage } = this.props
     const pagesCount = Math.ceil(total / per_page)
-    const currentPage = this.queryStringPage()
     return (
       <Fragment>
         <h2 className={cx('headline')}>List of users</h2>
         <input
           className={cx('usersPage__search')}
           type='search'
-          onChange={this.searchingUsers}
-          value={this.state.searchInput}
+          onChange={this.searchingUsersFilter}
+          value={searchUsers}
         />
         <table className={cx('usersPageTable container')}>
           <thead className={cx('usersPage__thead')}>
@@ -111,28 +94,28 @@ class UsersPage extends Component {
 }
 
 UsersPage.propTypes = {
-  search: PropTypes.string.isRequired,
+  search: PropTypes.string,
   users: PropTypes.array.isRequired,
   per_page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
   push: PropTypes.func.isRequired,
   fetchUsersDB: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
+  searchingUsers: PropTypes.func.isRequired,
+  searchUsers: PropTypes.string.isRequired,
+  currentPage: PropTypes.number,
 }
 
 const mapStateToProps = state => {
-  const { users, per_page, total, filterFullName } = state.usersReducer
+  const { per_page } = state.usersReducer
   const { search } = state.router.location
-  const selectorUsers = createSelector(
-    users,
-    filterFullName,
-    (usersAll, fullName) => usersAll.filter(user => `${user.firstName} ${user.lastName}`.includes(fullName))
-  )
-  console.log(selectorUsers)
+  const valueQuery = queryString.parse(search)
+  const currentPage = Number(valueQuery.page) || 1
+  const userFilter = getfilterUsers(state, currentPage)
   return {
-    users,
-    total,
-    search,
+    users: userFilter.users,
+    total: userFilter.total,
+    currentPage,
     per_page,
   }
 }
@@ -140,5 +123,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchUsersDB, push, deleteUser },
+  { fetchUsersDB, push, deleteUser, searchingUsers }
 )(UsersPage)

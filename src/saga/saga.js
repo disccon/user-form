@@ -42,6 +42,9 @@ import {
   DELETE_USER__SUCCESS,
   DELETE_USER__FAILURE,
 
+  SEARCHING_USERS__SUCCESS,
+  SEARCHING_USERS__FAILURE,
+
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
 
@@ -295,15 +298,13 @@ export function* forwardCapabilitiesSaga(action) {
   }
 }
 
-export function* fetchUsersDBSaga(action) {
-  const { currentPage, per_page } = action.payload
+export function* fetchUsersDBSaga() {
   try {
-    const getFetchUsers = yield call(fetchUsers, currentPage, per_page)
+    const users = yield call(() => db.usersDB.toArray(users => users))
     yield put({
       type: FETCH_USERS__SUCCESS,
       payload: {
-        users: getFetchUsers.users,
-        total: getFetchUsers.total,
+        users,
       },
     })
   } catch (error) {
@@ -339,6 +340,24 @@ export function* deleteUserSaga(action) {
   } catch (error) {
     yield put({
       type: DELETE_USER__FAILURE,
+      error,
+    })
+  }
+}
+
+
+export function* searchingUsersSaga(action) {
+  const { searchUsers } = action.payload
+  try {
+    yield put({
+      type: SEARCHING_USERS__SUCCESS,
+      payload: {
+        searchUsers,
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: SEARCHING_USERS__FAILURE,
       error,
     })
   }

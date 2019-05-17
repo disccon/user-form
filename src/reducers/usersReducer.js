@@ -5,6 +5,8 @@ import {
   DELETE_USER__SUCCESS,
   DELETE_USER__FAILURE,
 
+  SEARCHING_USERS__SUCCESS,
+  SEARCHING_USERS__FAILURE,
 } from '../actions'
 import { initialUsersState } from '../stubs/initialUsersState'
 
@@ -15,7 +17,6 @@ export default function usersReducer(state = initialUsersState, action) {
       return {
         ...state,
         users: [...action.payload.users],
-        total: action.payload.total,
         error: undefined,
       }
     }
@@ -40,6 +41,20 @@ export default function usersReducer(state = initialUsersState, action) {
         error: action.error,
       }
     }
+    case SEARCHING_USERS__SUCCESS: {
+      return {
+        ...state,
+        searchUsers: action.payload.searchUsers,
+        error: undefined,
+      }
+    }
+    case SEARCHING_USERS__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
     default:
       return state
   }
