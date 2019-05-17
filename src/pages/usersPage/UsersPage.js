@@ -19,9 +19,12 @@ class UsersPage extends Component {
     fetchUsersDB()
   }
 
-  // componentDidUpdate() {
-  //   const {  pagesCount } = this.props
-  // }
+  componentDidUpdate(prevProps) {
+    const { pagesCount, per_page, push } = this.props
+    if (prevProps.pagesCount !== pagesCount && prevProps.pagesCount !== 0) {
+      push({ pathname: '/users', search: `?page=${pagesCount}&per_page=${per_page}` })
+    }
+  }
 
   searchingUsersFilter = ({ target }) => {
     const { searchingUsers } = this.props
@@ -92,7 +95,7 @@ class UsersPage extends Component {
 UsersPage.propTypes = {
   users: PropTypes.array.isRequired,
   per_page: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
+  pagesCount: PropTypes.number.isRequired,
   push: PropTypes.func.isRequired,
   fetchUsersDB: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,

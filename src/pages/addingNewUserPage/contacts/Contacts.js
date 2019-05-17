@@ -33,14 +33,14 @@ class Contacts extends Component {
 
   deleteFieldPhone = () => {
     const {
-      deleteAddFieldPhone, phoneN1Form, phoneN2Form, phoneN3Form
+      deleteAddFieldPhone, phoneN1Form, phoneN2Form, phoneN3Form,
     } = this.props
     deleteAddFieldPhone('delete', phoneN1Form, phoneN2Form, phoneN3Form)
   }
 
   addFieldPhone = () => {
     const {
-      deleteAddFieldPhone, phoneN1Form, phoneN2Form, phoneN3Form
+      deleteAddFieldPhone, phoneN1Form, phoneN2Form, phoneN3Form,
     } = this.props
     deleteAddFieldPhone('add', phoneN1Form, phoneN2Form, phoneN3Form)
   }
