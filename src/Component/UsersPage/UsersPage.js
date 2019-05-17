@@ -35,18 +35,10 @@ class UsersPage extends Component {
     searchingUsers(value)
   }
 
-  queryStringPage = () => {
-    const { search } = this.props
-    const valueQuery = queryString.parse(search)
-    const currentPage = Number(valueQuery.page) || 1
-    return currentPage
-  }
-
   deleteUser = id => () => {
     const {
-      per_page, total, deleteUser,
+      per_page, total, deleteUser, currentPage,
     } = this.props
-    const currentPage = this.queryStringPage()
     deleteUser(id, currentPage, total, per_page)
   }
 
