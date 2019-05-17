@@ -346,12 +346,12 @@ export function* deleteUserSaga(action) {
 
 
 export function* searchingUsersSaga(action) {
-  const { searchUsers } = action.payload
+  const { filterUsers } = action.payload
   try {
     yield put({
       type: SEARCHING_USERS__SUCCESS,
       payload: {
-        searchUsers,
+        filterUsers,
       },
     })
   } catch (error) {

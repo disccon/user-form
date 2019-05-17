@@ -183,11 +183,11 @@ export const deleteUser = (id, currentPage, total, per_page) => (
     },
   })
 
-export const searchingUsers = searchUsers => (
+export const searchingUsers = filterUsers => (
   {
     type: SEARCHING_USERS,
     payload: {
-      searchUsers,
+      filterUsers,
     },
   })
 

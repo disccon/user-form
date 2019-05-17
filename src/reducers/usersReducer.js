@@ -44,7 +44,7 @@ export default function usersReducer(state = initialUsersState, action) {
     case SEARCHING_USERS__SUCCESS: {
       return {
         ...state,
-        searchUsers: action.payload.searchUsers,
+        filterUsers: action.payload.filterUsers,
         error: undefined,
       }
     }
