@@ -3,15 +3,15 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { reduxForm, Field, formValueSelector } from 'redux-form'
-import styles from '../../userFormBox/UserFormBox.scss'
-import { forwardBackProfile } from '../../../actions'
-import { FieldRadioProfile } from '../../fieldForm/fieldRadioProfile/FieldRadioProfile'
+import styles from '../../../userFormBox/UserFormBox.scss'
+import { forwardBackProfile } from '../../../../actions'
+import { FieldRadioProfile } from '../../../fieldForm/fieldRadioProfile/FieldRadioProfile'
 import {
   DateTimePickerProfile,
-} from '../../fieldForm/dateTimePickerProfile/DateTimePickerProfile'
-import { FieldInputNewUser } from '../../fieldForm/fieldInputNewUser/FieldInputNewUser'
-import { UserFormBox } from '../../userFormBox/UserFormBox'
-import db from '../../../db'
+} from '../../../fieldForm/dateTimePickerProfile/DateTimePickerProfile'
+import { FieldInputNewUser } from '../../../fieldForm/fieldInputNewUser/FieldInputNewUser'
+import { UserFormBox } from '../../../userFormBox/UserFormBox'
+import db from '../../../../db'
 
 
 const cx = classNames.bind(styles)
