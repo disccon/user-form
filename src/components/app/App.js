@@ -14,7 +14,7 @@ import EditingPage from '../../pages/editingPage/EditingPage'
 import Header from '../header/Header'
 import { NotFound } from '../../pages/notFound/NotFound'
 import db from '../../db'
-import { changeQuestionState } from '../../actions'
+import { changeQuestionState } from '../../actions/actionNewUser'
 
 const cx = classNames.bind(styles)
 

@@ -1,3 +1,7 @@
+export const CREATE_USER = 'CREATE_USER'
+export const CREATE_USER__SUCCESS = 'CREATE_USER__SUCCESS'
+export const CREATE_USER__FAILURE = 'CREATE_USER__FAILURE'
+
 export const CHANGE_QUESTION_STATE = 'CHANGE_QUESTION_STATE'
 export const CHANGE_QUESTION_STATE__OPEN = 'CHANGE_QUESTION_STATE__OPEN'
 export const CHANGE_QUESTION_STATE__CLOSE = 'CHANGE_QUESTION_STATE__CLOSE'
@@ -39,47 +43,8 @@ export const FORWARD_CAPABILITIES = 'FORWARD_CAPABILITIES'
 export const FORWARD_CAPABILITIES__ADD_NEW_USER = 'FORWARD_BACK_CAPABILITIES__FORWARD__ADD_NEW_USER'
 export const FORWARD_CAPABILITIES__FAILURE = 'FORWARD_CAPABILITIES__FAILURE'
 
-export const FETCH_USERS = 'FETCH_USERS'
-export const FETCH_USERS__SUCCESS = 'FETCH_USERS__SUCCESS'
-export const FETCH_USERS__FAILURE = 'FETCH_USERS__FAILURE'
-
-export const DELETE_USER = 'DELETE_USER'
-export const DELETE_USER__SUCCESS = 'DELETE_USER__SUCCESS'
-export const DELETE_USER__FAILURE = 'DELETE_USER__FAILURE'
-
-export const SEARCHING_USERS = 'SEARCHING_USERS'
-export const SEARCHING_USERS__SUCCESS = 'SEARCHING_USERS__SUCCESS'
-export const SEARCHING_USERS__FAILURE = 'SEARCHING_USERS__FAILURE'
-
-export const CREATE_USER = 'CREATE_USER'
-export const CREATE_USER__SUCCESS = 'CREATE_USER__SUCCESS'
-export const CREATE_USER__FAILURE = 'CREATE_USER__FAILURE'
-
-export const USER_EDIT_STATE = 'USER_EDIT_STATE'
-export const USER_EDIT_STATE__SUCCESS = 'USER_EDIT_STATE__SUCCESS'
-export const USER_EDIT_STATE__FAILURE = 'USER_EDIT_STATE__FAILURE'
-
-
-export const SAVE_AVATAR_ACCOUNT_EDITING = 'SAVE_AVATAR_ACCOUNT_EDITING'
-export const SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS = 'SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS'
-export const SAVE_AVATAR_ACCOUNT_EDITING__FAILURE = 'SAVE_AVATAR_ACCOUNT_EDITING__FAILURE'
-
-export const ACCOUNT_EDITING_SAVE = 'ACCOUNT_EDITING_SAVE'
-export const ACCOUNT_EDITING_SAVE__FAILURE = 'ACCOUNT_EDITING_SAVE__FAILURE'
-
-export const PROFILE_EDITING_SAVE = 'PROFILE_EDITING_SAVE'
-export const PROFILE_EDITING_SAVE__FAILURE = 'PROFILE_EDITING_SAVE__FAILURE'
-
-export const CONTACTS_EDITING_SAVE = 'CONTACTS_EDITING_SAVE'
-export const CONTACTS_EDITING_SAVE__FAILURE = 'CONTACTS_EDITING_SAVE__FAILURE'
-
-export const DELETE_FIELD_PHONE_EDITING = 'DELETE_FIELD_PHONE_EDITING'
-export const DELETE_FIELD_PHONE_EDITING__ADD = 'DELETE_FIELD_PHONE_EDITING__ADD'
-export const DELETE_FIELD_PHONE_EDITING__DELETE = 'DELETE_FIELD_PHONE_EDITING__DELETE'
-export const DELETE_FIELD_PHONE_EDITING__FAILURE = 'DELETE_FIELD_PHONE_EDITING__FAILURE'
-
-export const CAPABILITIES_EDITING_SAVE = 'CAPABILITIES_EDITING_SAVE'
-export const CAPABILITIES_EDITING_SAVE__FAILURE = 'CAPABILITIES_EDITING_SAVE__FAILURE'
+export const createUser = () => (
+  { type: CREATE_USER })
 
 export const changeQuestionState = isQuestion => ({
   type: CHANGE_QUESTION_STATE,
@@ -89,7 +54,6 @@ export const changeQuestionState = isQuestion => ({
 })
 
 export const continueUser = isContinue => (
-
   {
     type: CONTINUE_USER,
     payload: {
@@ -167,110 +131,5 @@ export const forwardCapabilities = (selectSkills, textareaField, checkboxArt, ch
       checkboxFemale,
       checkboxGuitar,
       checkboxWtf,
-    },
-  })
-
-
-export const fetchUsersDB = () => ({
-  type: FETCH_USERS,
-})
-
-export const deleteUser = (id, currentPage) => (
-  {
-    type: DELETE_USER,
-    payload: {
-      id, currentPage,
-    },
-  })
-
-export const searchingUsers = filterUsers => (
-  {
-    type: SEARCHING_USERS,
-    payload: {
-      filterUsers,
-    },
-  })
-
-
-export const createUser = () => (
-  { type: CREATE_USER })
-
-
-export const userEditState = (editUser, users) => (
-  {
-    type: USER_EDIT_STATE,
-    payload: {
-      editUser, users,
-    },
-  })
-
-
-export const saveAvatarAccountEditing = (userSRCAvatarIMG, id) => (
-  {
-    type: SAVE_AVATAR_ACCOUNT_EDITING,
-    payload: {
-      userSRCAvatarIMG, id,
-    },
-  })
-
-export const accountEditingSave = (userName, password, repeatPassword, userSRCAvatarIMG, id) => (
-  {
-    type: ACCOUNT_EDITING_SAVE,
-    payload: {
-      userName, password, repeatPassword, userSRCAvatarIMG, id,
-    },
-  })
-
-
-export const profileEditingSave = (firstName, lastName, birthDate, email, address, gender, id) => (
-  {
-    type: PROFILE_EDITING_SAVE,
-    payload: {
-      firstName, lastName, birthDate, email, address, gender, id,
-    },
-  })
-
-
-export const deleteFieldPhoneEditing = (deleteAddField, phoneN1Form, phoneN2Form, phoneN3Form) => (
-  {
-    type: DELETE_FIELD_PHONE_EDITING,
-    payload: {
-      deleteAddField, phoneN1Form, phoneN2Form, phoneN3Form,
-    },
-  })
-
-
-export const contactsEditingSave = (company, githubLink, facebookLink, selectLanguage, fax, phoneArray,
-  phoneN1, phoneN2, phoneN3, id) => (
-  {
-    type: CONTACTS_EDITING_SAVE,
-    payload: {
-      company,
-      githubLink,
-      facebookLink,
-      selectLanguage,
-      fax,
-      phoneArray,
-      phoneN1,
-      phoneN2,
-      phoneN3,
-      id,
-    },
-  })
-
-export const capabilitiesEditingSave = (selectSkills, textareaField, checkboxArt, checkboxSport,
-  checkboxJustWant, checkboxFemale, checkboxGuitar, checkboxWtf, id) => (
-  {
-    type: CAPABILITIES_EDITING_SAVE,
-    payload: {
-      selectSkills,
-      textareaField,
-      checkboxArt,
-      checkboxSport,
-      checkboxJustWant,
-      checkboxFemale,
-      checkboxGuitar,
-      checkboxWtf,
-      id,
     },
   })

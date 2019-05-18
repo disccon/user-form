@@ -8,7 +8,7 @@ import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.s
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import {
   forwardAccount, saveUserSRCAvatarIMG, continueUser, changeQuestionState,
-} from '../../../actions'
+} from '../../../actions/actionNewUser'
 import { FieldInputAccount } from '../../../components/fieldForm/fieldInputAccount/FieldInputAccount'
 import { UserFormBox } from '../../../components/userFormBox/UserFormBox'
 import { QuestionAccount } from './questionAccount/QuestionAccount'

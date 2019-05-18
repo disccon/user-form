@@ -2,7 +2,6 @@ import {
   put, select, call,
 } from 'redux-saga/effects'
 import { push } from 'connected-react-router'
-
 import {
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
@@ -38,11 +37,9 @@ import {
 
   FORWARD_CAPABILITIES__ADD_NEW_USER,
   FORWARD_CAPABILITIES__FAILURE,
-
-} from '../actions'
+} from '../actions/actionNewUser'
 import { initialNewUserState } from '../stubs/initialNewUserState'
 import db from '../db'
-
 
 export function* createUserSaga() {
   try {

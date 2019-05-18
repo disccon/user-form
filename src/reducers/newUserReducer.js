@@ -33,7 +33,7 @@ import {
 
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
-} from '../actions'
+} from '../actions/actionNewUser'
 
 
 export default function newUserReducer(state = initialNewUserState, action) {
@@ -59,7 +59,6 @@ export default function newUserReducer(state = initialNewUserState, action) {
       }
     }
 
-
     case CONTINUE_USER__CONTINUE: {
       return {
         ...action.payload,
@@ -81,7 +80,6 @@ export default function newUserReducer(state = initialNewUserState, action) {
       }
     }
 
-
     case SAVE_USER_SRC_AVATAR_IMG__SUCCESS: {
       return {
         ...state,
@@ -95,7 +93,6 @@ export default function newUserReducer(state = initialNewUserState, action) {
         error: action.error,
       }
     }
-
 
     case FORWARD_ACCOUNT__SUCCESS: {
       return {
@@ -113,8 +110,7 @@ export default function newUserReducer(state = initialNewUserState, action) {
       }
     }
 
-
-    case FORWARD_BACK_PROFILE__BACK: {
+    case FORWARD_BACK_PROFILE__FORWARD: {
       return {
         ...state,
         firstName: action.payload.firstName,
@@ -126,7 +122,7 @@ export default function newUserReducer(state = initialNewUserState, action) {
         error: undefined,
       }
     }
-    case FORWARD_BACK_PROFILE__FORWARD: {
+    case FORWARD_BACK_PROFILE__BACK: {
       return {
         ...state,
         firstName: action.payload.firstName,
@@ -144,7 +140,6 @@ export default function newUserReducer(state = initialNewUserState, action) {
         error: action.error,
       }
     }
-
 
     case FORWARD_BACK_CONTACTS__FORWARD: {
       return {
@@ -176,14 +171,12 @@ export default function newUserReducer(state = initialNewUserState, action) {
         error: undefined,
       }
     }
-
     case FORWARD_BACK_CONTACTS__FAILURE: {
       return {
         ...state,
         error: action.error,
       }
     }
-
 
     case DELETE_ADD_FIELD_PHONE__ADD: {
       return {
@@ -251,7 +244,6 @@ export default function newUserReducer(state = initialNewUserState, action) {
         error: action.error,
       }
     }
-
 
     default:
       return state

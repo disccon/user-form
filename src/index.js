@@ -8,7 +8,6 @@ import createSagaMiddleware from 'redux-saga'
 import logger from 'redux-logger'
 import { routerMiddleware } from 'connected-react-router'
 import rootSaga from './saga'
-
 import rootReducer from './reducers'
 import App from './components/app/App'
 

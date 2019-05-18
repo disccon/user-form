@@ -7,9 +7,8 @@ import {
 
   SEARCHING_USERS__SUCCESS,
   SEARCHING_USERS__FAILURE,
-} from '../actions'
+} from '../actions/actionUsers'
 import { initialUsersState } from '../stubs/initialUsersState'
-
 
 export default function usersReducer(state = initialUsersState, action) {
   switch (action.type) {
@@ -40,6 +39,7 @@ export default function usersReducer(state = initialUsersState, action) {
         error: action.error,
       }
     }
+
     case SEARCHING_USERS__SUCCESS: {
       return {
         ...state,

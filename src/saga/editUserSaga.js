@@ -2,65 +2,59 @@ import {
   put, select,
 } from 'redux-saga/effects'
 import { push } from 'connected-react-router'
-
 import {
-  USER_EDIT_STATE__SUCCESS,
-  USER_EDIT_STATE__FAILURE,
+  FETCH_EDIT_USER__SUCCESS,
+  FETCH_EDIT_USER__FAILURE,
 
-  SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS,
-  SAVE_AVATAR_ACCOUNT_EDITING__FAILURE,
+  CHANGE_AVATAR_ACCOUNT_EDITING__SUCCESS,
+  CHANGE_AVATAR_ACCOUNT_EDITING__FAILURE,
 
   DELETE_FIELD_PHONE_EDITING__ADD,
   DELETE_FIELD_PHONE_EDITING__DELETE,
   DELETE_FIELD_PHONE_EDITING__FAILURE,
 
-  ACCOUNT_EDITING_SAVE__FAILURE,
-  PROFILE_EDITING_SAVE__FAILURE,
-  CONTACTS_EDITING_SAVE__FAILURE,
-  CAPABILITIES_EDITING_SAVE__FAILURE,
-} from '../actions'
+  SAVE_CHANGES_ACCOUNT_EDITING__FAILURE,
+  SAVE_CHANGES_PROFILE_EDITING__FAILURE,
+  SAVE_CHANGES_CONTACTS_EDITING__FAILURE,
+  SAVE_CHANGES_CAPABILITIES_EDITING__FAILURE,
+} from '../actions/actionEditUser'
 import db from '../db'
-
 
 export function* userEditStateSaga(action) {
   const { editUser } = action.payload
   try {
     yield put({
-      type: USER_EDIT_STATE__SUCCESS,
+      type: FETCH_EDIT_USER__SUCCESS,
       payload: {
         editUser,
       },
     })
   } catch (error) {
     yield put({
-      type: USER_EDIT_STATE__FAILURE,
+      type: FETCH_EDIT_USER__FAILURE,
       error,
     })
   }
 }
 
-
-export function* saveAvatarAccountEditingSaga(action) {
-  const { userSRCAvatarIMG, id } = action.payload
-  db.usersDB.update(id, {
-    userSRCAvatarIMG,
-  })
+export function* changeAvatarAccountEditingSaga(action) {
+  const { userSRCAvatarIMG } = action.payload
   try {
     yield put({
-      type: SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS,
+      type: CHANGE_AVATAR_ACCOUNT_EDITING__SUCCESS,
       payload: {
         userSRCAvatarIMG,
       },
     })
   } catch (error) {
     yield put({
-      type: SAVE_AVATAR_ACCOUNT_EDITING__FAILURE,
+      type: CHANGE_AVATAR_ACCOUNT_EDITING__FAILURE,
       error,
     })
   }
 }
 
-export function* accountEditingSaveSaga(action) {
+export function* saveChangesAccountEditingSaga(action) {
   const {
     userName, password, repeatPassword, userSRCAvatarIMG, id,
   } = action.payload
@@ -76,14 +70,13 @@ export function* accountEditingSaveSaga(action) {
   } catch
   (error) {
     yield put({
-      type: ACCOUNT_EDITING_SAVE__FAILURE,
+      type: SAVE_CHANGES_ACCOUNT_EDITING__FAILURE,
       error,
     })
   }
 }
 
-
-export function* profileEditingSaveSaga(action) {
+export function* saveChangesProfileSaga(action) {
   const {
     firstName, lastName, birthDate, email, address, gender, id,
   } = action.payload
@@ -101,7 +94,7 @@ export function* profileEditingSaveSaga(action) {
   } catch
   (error) {
     yield put({
-      type: PROFILE_EDITING_SAVE__FAILURE,
+      type: SAVE_CHANGES_PROFILE_EDITING__FAILURE,
       error,
     })
   }
@@ -143,7 +136,7 @@ export function* deleteFieldPhoneEditingSaga(action) {
   }
 }
 
-export function* contactsEditingSaveSaga(action) {
+export function* saveChangesContactsSaga(action) {
   const {
     company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2,
     phoneN3, id,
@@ -165,13 +158,13 @@ export function* contactsEditingSaveSaga(action) {
   } catch
   (error) {
     yield put({
-      type: CONTACTS_EDITING_SAVE__FAILURE,
+      type: SAVE_CHANGES_CONTACTS_EDITING__FAILURE,
       error,
     })
   }
 }
 
-export function* capabilitiesEditingSaveSaga(action) {
+export function* saveChangesCapabilitiesSaga(action) {
   const {
     selectSkills, textareaField, checkboxArt, checkboxSport,
     checkboxJustWant, checkboxFemale, checkboxGuitar, checkboxWtf, id,
@@ -192,7 +185,7 @@ export function* capabilitiesEditingSaveSaga(action) {
   } catch
   (error) {
     yield put({
-      type: CAPABILITIES_EDITING_SAVE__FAILURE,
+      type: SAVE_CHANGES_CAPABILITIES_EDITING__FAILURE,
       error,
     })
   }

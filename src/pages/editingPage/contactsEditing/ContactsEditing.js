@@ -6,24 +6,24 @@ import {
   Field, reduxForm, FieldArray, formValueSelector,
 } from 'redux-form'
 import styles from '../../../components/userFormBox/UserFormBox.scss'
-import { contactsEditingSave, userEditState, deleteFieldPhoneEditing } from '../../../actions'
+import { saveChangesContactsEditing, fetchEditUser, deleteFieldPhoneEditing } from '../../../actions/actionEditUser'
 import { UserFormBox } from '../../../components/userFormBox/UserFormBox'
 import { FieldInputNewUser } from '../../../components/fieldForm/fieldInputNewUser/FieldInputNewUser'
 import { FieldSelectContacts } from '../../../components/fieldForm/fieldSelectContacts/FieldSelectContacts'
 import { FieldArrayPhone } from '../../../components/fieldForm/fieldArrayPhone/FieldArrayPhone'
-import { userGetIndexDB } from '../../../helpers/userGetIndexDB'
+import { getEditUserIndexDB } from '../../../helpers/getEditUserIndexDB'
 
 const cx = classNames.bind(styles)
 
 class ContactsEditing extends Component {
   componentDidMount() {
-    const { userEditState, id } = this.props
-    userGetIndexDB(userEditState, id)
+    const { fetchEditUser, id } = this.props
+    getEditUserIndexDB(fetchEditUser, id)
   }
 
   onSubmit = values => {
-    const { contactsEditingSave, id } = this.props
-    contactsEditingSave(values.company, values.githubLink, values.facebookLink, values.selectLanguage,
+    const { saveChangesContactsEditing, id } = this.props
+    saveChangesContactsEditing(values.company, values.githubLink, values.facebookLink, values.selectLanguage,
       values.fax, values.phoneArray, values.phoneN1, values.phoneN2, values.phoneN3, id)
   }
 
@@ -109,9 +109,9 @@ class ContactsEditing extends Component {
 
 ContactsEditing.propTypes = {
   id: PropTypes.number,
-  contactsEditingSave: PropTypes.func.isRequired,
+  saveChangesContactsEditing: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  userEditState: PropTypes.func.isRequired,
+  fetchEditUser: PropTypes.func.isRequired,
   deleteFieldPhoneEditing: PropTypes.func.isRequired,
   phoneN1Form: PropTypes.string,
   phoneN2Form: PropTypes.string,
@@ -194,5 +194,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { contactsEditingSave, userEditState, deleteFieldPhoneEditing },
+  { saveChangesContactsEditing, fetchEditUser, deleteFieldPhoneEditing },
 )(ContactsEditingForm)

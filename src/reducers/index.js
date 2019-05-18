@@ -5,7 +5,6 @@ import newUser from './newUserReducer'
 import usersReducer from './usersReducer'
 import editUserReducer from './editUserReducer'
 
-
 export default history => combineReducers({
   router: connectRouter(history),
   newUser,

@@ -7,7 +7,7 @@ import styles from './Header.scss'
 import { ReactComponent as LogoIcon } from '../../img/icon/logo.svg'
 import { ReactComponent as AddUserIcon } from '../../img/icon/addUser.svg'
 import { ReactComponent as LoginIcon } from '../../img/icon/login.svg'
-import { createUser } from '../../actions'
+import { createUser } from '../../actions/actionNewUser'
 
 const cx = classNames.bind(styles)
 
