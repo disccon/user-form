@@ -15,14 +15,13 @@ import {
   FieldCheckboxCapabilities,
 } from '../../../components/fieldForm/fieldCheckboxCapabilities/FieldCheckboxCapabilities'
 import { UserFormBox } from '../../../components/userFormBox/UserFormBox'
-import { getEditUserIndexDB } from '../../../helpers/getEditUserIndexDB'
 
 const cx = classNames.bind(styles)
 
 class CapabilitiesEditing extends Component {
   componentDidMount() {
     const { fetchEditUser, id } = this.props
-    getEditUserIndexDB(fetchEditUser, id)
+    fetchEditUser(id)
   }
 
   onSubmit = values => {

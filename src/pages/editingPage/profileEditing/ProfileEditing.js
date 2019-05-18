@@ -12,15 +12,13 @@ import {
 } from '../../../components/fieldForm/dateTimePickerProfile/DateTimePickerProfile'
 import { FieldRadioProfile } from '../../../components/fieldForm/fieldRadioProfile/FieldRadioProfile'
 import db from '../../../db'
-import { getEditUserIndexDB } from '../../../helpers/getEditUserIndexDB'
 
 const cx = classNames.bind(styles)
 
 class ProfileEditing extends Component {
   componentDidMount() {
-    const { fetchEditUser } = this.props
-    const { id } = this.props
-    getEditUserIndexDB(fetchEditUser, id)
+    const { fetchEditUser, id } = this.props
+    fetchEditUser(id)
   }
 
   onSubmit = values => {
