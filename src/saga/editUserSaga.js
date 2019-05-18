@@ -70,6 +70,7 @@ export function* accountEditingSaveSaga(action) {
       password,
       repeatPassword,
       userSRCAvatarIMG,
+      lastUpdate: new Date(),
     })
     yield put(push(`/user/${id}`))
   } catch
@@ -94,6 +95,7 @@ export function* profileEditingSaveSaga(action) {
       email,
       address,
       gender,
+      lastUpdate: new Date(),
     })
     yield put(push(`/user/${id}`))
   } catch
@@ -157,6 +159,7 @@ export function* contactsEditingSaveSaga(action) {
       phoneN1,
       phoneN2,
       phoneN3,
+      lastUpdate: new Date(),
     })
     yield put(push(`/user/${id}`))
   } catch
@@ -183,6 +186,7 @@ export function* capabilitiesEditingSaveSaga(action) {
       checkboxFemale,
       checkboxGuitar,
       checkboxWtf,
+      lastUpdate: new Date(),
     })
     yield put(push(`/user/${id}`))
   } catch
