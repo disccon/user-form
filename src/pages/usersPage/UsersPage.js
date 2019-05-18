@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { push } from 'connected-react-router'
 import styles from './UsersPage.scss'
 import NoHaveUserRow from './noHaveUserRow/NoHaveUserRow'
-import { fetchUsersDB, deleteUser, searchingUsers } from '../../actions'
+import { fetchUsers, deleteUser, searchingUsers } from '../../actions/actionUsers'
 import UserRow from './userRow/UserRow'
 import { Pagination } from './pagination/Pagination'
 import { getFilterUsers } from './getFilterUsers'
@@ -15,8 +15,8 @@ const cx = classNames.bind(styles)
 
 class UsersPage extends Component {
   componentDidMount() {
-    const { fetchUsersDB } = this.props
-    fetchUsersDB()
+    const { fetchUsers } = this.props
+    fetchUsers()
   }
 
   componentDidUpdate(prevProps) {
@@ -97,7 +97,7 @@ UsersPage.propTypes = {
   per_page: PropTypes.number.isRequired,
   pagesCount: PropTypes.number.isRequired,
   push: PropTypes.func.isRequired,
-  fetchUsersDB: PropTypes.func.isRequired,
+  fetchUsers: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
   searchingUsers: PropTypes.func.isRequired,
   filterUsers: PropTypes.string.isRequired,
@@ -121,6 +121,6 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    fetchUsersDB, push, deleteUser, searchingUsers,
+    fetchUsers, push, deleteUser, searchingUsers,
   },
 )(UsersPage)

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { reduxForm, Field } from 'redux-form'
 import styles from '../../../components/userFormBox/UserFormBox.scss'
-import { profileEditingSave, userEditState } from '../../../actions'
+import { saveChangesProfileEditing, fetchEditUser } from '../../../actions/actionEditUser'
 import { UserFormBox } from '../../../components/userFormBox/UserFormBox'
 import { FieldInputNewUser } from '../../../components/fieldForm/fieldInputNewUser/FieldInputNewUser'
 import {
@@ -12,20 +12,20 @@ import {
 } from '../../../components/fieldForm/dateTimePickerProfile/DateTimePickerProfile'
 import { FieldRadioProfile } from '../../../components/fieldForm/fieldRadioProfile/FieldRadioProfile'
 import db from '../../../db'
-import { userGetIndexDB } from '../../../helpers/userGetIndexDB'
+import { getEditUserIndexDB } from '../../../helpers/getEditUserIndexDB'
 
 const cx = classNames.bind(styles)
 
 class ProfileEditing extends Component {
   componentDidMount() {
-    const { userEditState } = this.props
+    const { fetchEditUser } = this.props
     const { id } = this.props
-    userGetIndexDB(userEditState, id)
+    getEditUserIndexDB(fetchEditUser, id)
   }
 
   onSubmit = values => {
-    const { profileEditingSave, id } = this.props
-    profileEditingSave(values.firstName, values.lastName, values.birthDate, values.email,
+    const { saveChangesProfileEditing, id } = this.props
+    saveChangesProfileEditing(values.firstName, values.lastName, values.birthDate, values.email,
       values.address, values.gender, id)
   }
 
@@ -105,9 +105,9 @@ class ProfileEditing extends Component {
 
 ProfileEditing.propTypes = {
   id: PropTypes.number,
-  profileEditingSave: PropTypes.func.isRequired,
+  saveChangesProfileEditing: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  userEditState: PropTypes.func.isRequired,
+  fetchEditUser: PropTypes.func.isRequired,
 }
 
 const ProfileEditingForm = reduxForm({
@@ -178,5 +178,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { profileEditingSave, userEditState },
+  { saveChangesProfileEditing, fetchEditUser },
 )(ProfileEditingForm)

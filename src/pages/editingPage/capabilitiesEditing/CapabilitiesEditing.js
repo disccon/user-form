@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
-import { capabilitiesEditingSave, userEditState } from '../../../actions'
+import { saveChangesCapabilitiesEditing, fetchEditUser } from '../../../actions/actionEditUser'
 import styles from '../../../components/userFormBox/UserFormBox.scss'
 import {
   FieldSelectCapabilities,
@@ -15,19 +15,19 @@ import {
   FieldCheckboxCapabilities,
 } from '../../../components/fieldForm/fieldCheckboxCapabilities/FieldCheckboxCapabilities'
 import { UserFormBox } from '../../../components/userFormBox/UserFormBox'
-import { userGetIndexDB } from '../../../helpers/userGetIndexDB'
+import { getEditUserIndexDB } from '../../../helpers/getEditUserIndexDB'
 
 const cx = classNames.bind(styles)
 
 class CapabilitiesEditing extends Component {
   componentDidMount() {
-    const { userEditState, id } = this.props
-    userGetIndexDB(userEditState, id)
+    const { fetchEditUser, id } = this.props
+    getEditUserIndexDB(fetchEditUser, id)
   }
 
   onSubmit = values => {
-    const { capabilitiesEditingSave, id } = this.props
-    capabilitiesEditingSave(values.selectSkills, values.textareaField, values.checkboxArt, values.checkboxSport,
+    const { saveChangesCapabilitiesEditing, id } = this.props
+    saveChangesCapabilitiesEditing(values.selectSkills, values.textareaField, values.checkboxArt, values.checkboxSport,
       values.checkboxJustWant, values.checkboxFemale, values.checkboxGuitar, values.checkboxWtf, id)
   }
 
@@ -99,9 +99,9 @@ class CapabilitiesEditing extends Component {
 
 CapabilitiesEditing.propTypes = {
   id: PropTypes.number,
-  capabilitiesEditingSave: PropTypes.func.isRequired,
+  saveChangesCapabilitiesEditing: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  userEditState: PropTypes.func.isRequired,
+  fetchEditUser: PropTypes.func.isRequired,
 }
 
 const CapabilitiesEditingForm = reduxForm({
@@ -152,5 +152,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { capabilitiesEditingSave, userEditState },
+  { saveChangesCapabilitiesEditing, fetchEditUser },
 )(CapabilitiesEditingForm)

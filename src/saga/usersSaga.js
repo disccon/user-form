@@ -1,7 +1,6 @@
 import {
   put, call, select,
 } from 'redux-saga/effects'
-
 import { push } from 'connected-react-router'
 import {
   FETCH_USERS__SUCCESS,
@@ -12,13 +11,13 @@ import {
 
   SEARCHING_USERS__SUCCESS,
   SEARCHING_USERS__FAILURE,
-} from '../actions'
+} from '../actions/actionUsers'
 import db from '../db'
-import { fetchUsers } from '../helpers/fetchUsers'
+import { getUsersIndexDB } from '../helpers/getUsersIndexDB'
 
-export function* fetchUsersDBSaga() {
+export function* fetchUsersSaga() {
   try {
-    const users = yield call(fetchUsers)
+    const users = yield call(getUsersIndexDB)
     yield put({
       type: FETCH_USERS__SUCCESS,
       payload: {

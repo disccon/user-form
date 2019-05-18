@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { reduxForm, Field, formValueSelector } from 'redux-form'
 import styles from '../../../components/userFormBox/UserFormBox.scss'
-import { forwardBackProfile } from '../../../actions'
+import { forwardBackProfile } from '../../../actions/actionNewUser'
 import { FieldRadioProfile } from '../../../components/fieldForm/fieldRadioProfile/FieldRadioProfile'
 import {
   DateTimePickerProfile,

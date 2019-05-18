@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Field, formValueSelector, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
-import { backCapabilities, forwardCapabilities } from '../../../actions'
+import { backCapabilities, forwardCapabilities } from '../../../actions/actionNewUser'
 import styles from '../../../components/userFormBox/UserFormBox.scss'
 import {
   FieldSelectCapabilities,

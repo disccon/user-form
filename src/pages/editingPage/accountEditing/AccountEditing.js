@@ -6,11 +6,11 @@ import { Field, reduxForm } from 'redux-form'
 import styles from '../../../components/userFormBox/UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
-import { accountEditingSave, saveAvatarAccountEditing, userEditState } from '../../../actions'
+import { saveChangesAccountEditing, changeAvatarAccountEditing, fetchEditUser } from '../../../actions/actionEditUser'
 import { FieldInputAccount } from '../../../components/fieldForm/fieldInputAccount/FieldInputAccount'
 import { UserFormBox } from '../../../components/userFormBox/UserFormBox'
 import db from '../../../db'
-import { userGetIndexDB } from '../../../helpers/userGetIndexDB'
+import { getEditUserIndexDB } from '../../../helpers/getEditUserIndexDB'
 
 const cx = classNames.bind(styles)
 
@@ -21,14 +21,14 @@ class AccountEditing extends Component {
   }
 
   componentDidMount() {
-    const { userEditState } = this.props
+    const { fetchEditUser } = this.props
     const { id } = this.props
-    userGetIndexDB(userEditState, id)
+    getEditUserIndexDB(fetchEditUser, id)
   }
 
   addImageUserAvatar = event => {
     event.preventDefault()
-    const { saveAvatarAccountEditing, id } = this.props
+    const { changeAvatarAccountEditing } = this.props
     const reader = new FileReader()
     const fileIMG = event.target.files[0]
     const fileSize = fileIMG.size / 1024 / 1024
@@ -37,7 +37,7 @@ class AccountEditing extends Component {
         this.setState({
           avatarIMGError: false,
         })
-        saveAvatarAccountEditing(reader.result, id)
+        changeAvatarAccountEditing(reader.result)
       }
       reader.readAsDataURL(fileIMG)
     } else {
@@ -48,8 +48,8 @@ class AccountEditing extends Component {
   }
 
   onSubmit = values => {
-    const { accountEditingSave, id, userSRCAvatarIMG } = this.props
-    accountEditingSave(values.userName, values.password, values.repeatPassword, userSRCAvatarIMG, id)
+    const { saveChangesAccountEditing, id, userSRCAvatarIMG } = this.props
+    saveChangesAccountEditing(values.userName, values.password, values.repeatPassword, userSRCAvatarIMG, id)
   }
 
   changeTypePassword = () => {
@@ -179,10 +179,10 @@ AccountEditing.propTypes = {
     PropTypes.string,
     PropTypes.array,
   ]),
-  accountEditingSave: PropTypes.func.isRequired,
+  saveChangesAccountEditing: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func,
-  saveAvatarAccountEditing: PropTypes.func.isRequired,
-  userEditState: PropTypes.func.isRequired,
+  changeAvatarAccountEditing: PropTypes.func.isRequired,
+  fetchEditUser: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -202,6 +202,6 @@ const mapStateToProps = (state, ownProps) => {
 export default connect(
   mapStateToProps,
   {
-    accountEditingSave, saveAvatarAccountEditing, userEditState,
+    saveChangesAccountEditing, changeAvatarAccountEditing, fetchEditUser,
   },
 )(AccountEditingForm)

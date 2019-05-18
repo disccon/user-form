@@ -6,7 +6,7 @@ import {
   Field, formValueSelector, reduxForm, FieldArray,
 } from 'redux-form'
 import styles from '../../../components/userFormBox/UserFormBox.scss'
-import { forwardBackContacts, deleteAddFieldPhone } from '../../../actions'
+import { forwardBackContacts, deleteAddFieldPhone } from '../../../actions/actionNewUser'
 
 import { FieldSelectContacts } from '../../../components/fieldForm/fieldSelectContacts/FieldSelectContacts'
 import { FieldInputNewUser } from '../../../components/fieldForm/fieldInputNewUser/FieldInputNewUser'

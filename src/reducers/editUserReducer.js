@@ -1,38 +1,38 @@
 import {
-  USER_EDIT_STATE__SUCCESS,
-  USER_EDIT_STATE__FAILURE,
+  FETCH_EDIT_USER__SUCCESS,
+  FETCH_EDIT_USER__FAILURE,
 
-  SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS,
-  SAVE_AVATAR_ACCOUNT_EDITING__FAILURE,
+  CHANGE_AVATAR_ACCOUNT_EDITING__SUCCESS,
+  CHANGE_AVATAR_ACCOUNT_EDITING__FAILURE,
 
   DELETE_FIELD_PHONE_EDITING__ADD,
   DELETE_FIELD_PHONE_EDITING__DELETE,
   DELETE_FIELD_PHONE_EDITING__FAILURE,
 
-  ACCOUNT_EDITING_SAVE__FAILURE,
-  PROFILE_EDITING_SAVE__FAILURE,
-  CONTACTS_EDITING_SAVE__FAILURE,
-  CAPABILITIES_EDITING_SAVE__FAILURE,
-} from '../actions'
+  SAVE_CHANGES_ACCOUNT_EDITING__FAILURE,
+  SAVE_CHANGES_PROFILE_EDITING__FAILURE,
+  SAVE_CHANGES_CONTACTS_EDITING__FAILURE,
+  SAVE_CHANGES_CAPABILITIES_EDITING__FAILURE,
+} from '../actions/actionEditUser'
 
 
 export default function editUserReducer(state = { editUser: {} }, action) {
   switch (action.type) {
-    case USER_EDIT_STATE__SUCCESS: {
+    case FETCH_EDIT_USER__SUCCESS: {
       return {
         ...state,
         editUser: action.payload.editUser,
         error: undefined,
       }
     }
-    case USER_EDIT_STATE__FAILURE: {
+    case FETCH_EDIT_USER__FAILURE: {
       return {
         ...state,
         error: action.error,
       }
     }
 
-    case SAVE_AVATAR_ACCOUNT_EDITING__SUCCESS: {
+    case CHANGE_AVATAR_ACCOUNT_EDITING__SUCCESS: {
       return {
         ...state,
         editUser: {
@@ -42,13 +42,12 @@ export default function editUserReducer(state = { editUser: {} }, action) {
         error: undefined,
       }
     }
-    case SAVE_AVATAR_ACCOUNT_EDITING__FAILURE: {
+    case CHANGE_AVATAR_ACCOUNT_EDITING__FAILURE: {
       return {
         ...state,
         error: action.error,
       }
     }
-
 
     case DELETE_FIELD_PHONE_EDITING__ADD: {
       return {
@@ -63,7 +62,6 @@ export default function editUserReducer(state = { editUser: {} }, action) {
         error: undefined,
       }
     }
-
     case DELETE_FIELD_PHONE_EDITING__DELETE: {
       return {
         ...state,
@@ -84,32 +82,30 @@ export default function editUserReducer(state = { editUser: {} }, action) {
       }
     }
 
-
-    case ACCOUNT_EDITING_SAVE__FAILURE: {
+    case SAVE_CHANGES_ACCOUNT_EDITING__FAILURE: {
       return {
         ...state,
         error: action.error,
       }
     }
-    case PROFILE_EDITING_SAVE__FAILURE: {
+    case SAVE_CHANGES_PROFILE_EDITING__FAILURE: {
       return {
         ...state,
         error: action.error,
       }
     }
-    case CONTACTS_EDITING_SAVE__FAILURE: {
+    case SAVE_CHANGES_CONTACTS_EDITING__FAILURE: {
       return {
         ...state,
         error: action.error,
       }
     }
-    case CAPABILITIES_EDITING_SAVE__FAILURE: {
+    case SAVE_CHANGES_CAPABILITIES_EDITING__FAILURE: {
       return {
         ...state,
         error: action.error,
       }
     }
-
 
     default:
       return state

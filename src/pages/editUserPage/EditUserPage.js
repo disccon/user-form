@@ -5,15 +5,15 @@ import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 import styles from './EditUserPage.scss'
 import { ReactComponent as EditIcon } from '../../img/icon/edit.svg'
-import { userEditState } from '../../actions'
-import { userGetIndexDB } from '../../helpers/userGetIndexDB'
+import { fetchEditUser } from '../../actions/actionEditUser'
+import { getEditUserIndexDB } from '../../helpers/getEditUserIndexDB'
 
 const cx = classNames.bind(styles)
 
 class EditUserPage extends Component {
   componentDidMount() {
-    const { userEditState, id } = this.props
-    userGetIndexDB(userEditState, id)
+    const { fetchEditUser, id } = this.props
+    getEditUserIndexDB(fetchEditUser, id)
   }
 
   render() {
@@ -163,7 +163,7 @@ class EditUserPage extends Component {
 
 EditUserPage.propTypes = {
   editUser: PropTypes.object.isRequired,
-  userEditState: PropTypes.func.isRequired,
+  fetchEditUser: PropTypes.func.isRequired,
   id: PropTypes.number,
 }
 
@@ -178,5 +178,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { userEditState },
+  { fetchEditUser },
 )(EditUserPage)
