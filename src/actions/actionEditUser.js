@@ -23,11 +23,11 @@ export const DELETE_FIELD_PHONE_EDITING__FAILURE = 'DELETE_FIELD_PHONE_EDITING__
 export const SAVE_CHANGES_CAPABILITIES_EDITING = 'SAVE_CHANGES_CAPABILITIES_EDITING'
 export const SAVE_CHANGES_CAPABILITIES_EDITING__FAILURE = 'SAVE_CHANGES_CAPABILITIES_EDITING__FAILURE'
 
-export const fetchEditUser = (editUser, users) => (
+export const fetchEditUser = id => (
   {
     type: FETCH_EDIT_USER,
     payload: {
-      editUser, users,
+      id,
     },
   })
 
