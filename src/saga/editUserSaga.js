@@ -1,5 +1,5 @@
 import {
-  put, select,
+  put, select, call,
 } from 'redux-saga/effects'
 import { push } from 'connected-react-router'
 import {
@@ -19,10 +19,12 @@ import {
   SAVE_CHANGES_CAPABILITIES_EDITING__FAILURE,
 } from '../actions/actionEditUser'
 import db from '../db'
+import { getEditUserIndexDB } from '../helpers/getEditUserIndexDB'
 
 export function* userEditStateSaga(action) {
-  const { editUser } = action.payload
+  const { id } = action.payload
   try {
+    const editUser = yield call(getEditUserIndexDB, id)
     yield put({
       type: FETCH_EDIT_USER__SUCCESS,
       payload: {

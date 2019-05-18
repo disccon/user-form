@@ -10,7 +10,6 @@ import { saveChangesAccountEditing, changeAvatarAccountEditing, fetchEditUser } 
 import { FieldInputAccount } from '../../../components/fieldForm/fieldInputAccount/FieldInputAccount'
 import { UserFormBox } from '../../../components/userFormBox/UserFormBox'
 import db from '../../../db'
-import { getEditUserIndexDB } from '../../../helpers/getEditUserIndexDB'
 
 const cx = classNames.bind(styles)
 
@@ -21,9 +20,8 @@ class AccountEditing extends Component {
   }
 
   componentDidMount() {
-    const { fetchEditUser } = this.props
-    const { id } = this.props
-    getEditUserIndexDB(fetchEditUser, id)
+    const { fetchEditUser, id } = this.props
+    fetchEditUser(id)
   }
 
   addImageUserAvatar = event => {
