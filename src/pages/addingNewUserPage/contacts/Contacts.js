@@ -7,7 +7,6 @@ import {
 } from 'redux-form'
 import styles from '../../../components/userFormBox/UserFormBox.scss'
 import { forwardBackContacts, deleteAddFieldPhone } from '../../../actions/actionNewUser'
-
 import { FieldSelectContacts } from '../../../components/fieldForm/fieldSelectContacts/FieldSelectContacts'
 import { FieldInputNewUser } from '../../../components/fieldForm/fieldInputNewUser/FieldInputNewUser'
 import { UserFormBox } from '../../../components/userFormBox/UserFormBox'
@@ -18,31 +17,35 @@ const cx = classNames.bind(styles)
 class Contacts extends Component {
   backContacts = () => {
     const {
-      companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneArrayForm, phoneN1Form,
+      companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneArray, phoneN1Form,
       phoneN2Form, phoneN3Form, forwardBackContacts,
     } = this.props
     forwardBackContacts('back', companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm,
-      phoneArrayForm, phoneN1Form, phoneN2Form, phoneN3Form)
+      phoneArray, phoneN1Form, phoneN2Form, phoneN3Form)
   }
 
   onSubmit = values => {
-    const { forwardBackContacts } = this.props
+    const { forwardBackContacts, phoneArray } = this.props
     forwardBackContacts('forward', values.company, values.githubLink, values.facebookLink, values.selectLanguage,
-      values.fax, values.phoneArray, values.phoneN1, values.phoneN2, values.phoneN3)
+      values.fax, phoneArray, values.phoneN1, values.phoneN2, values.phoneN3)
   }
 
   deleteFieldPhone = () => {
     const {
-      deleteAddFieldPhone, phoneN1Form, phoneN2Form, phoneN3Form,
+      deleteAddFieldPhone, companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm,
+      phoneArray, phoneN1Form, phoneN2Form, phoneN3Form,
     } = this.props
-    deleteAddFieldPhone('delete', phoneN1Form, phoneN2Form, phoneN3Form)
+    deleteAddFieldPhone('delete', companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm,
+      phoneArray, phoneN1Form, phoneN2Form, phoneN3Form)
   }
 
   addFieldPhone = () => {
     const {
-      deleteAddFieldPhone, phoneN1Form, phoneN2Form, phoneN3Form,
+      deleteAddFieldPhone, companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm,
+      phoneArray, phoneN1Form, phoneN2Form, phoneN3Form,
     } = this.props
-    deleteAddFieldPhone('add', phoneN1Form, phoneN2Form, phoneN3Form)
+    deleteAddFieldPhone('add', companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm,
+      phoneArray, phoneN1Form, phoneN2Form, phoneN3Form)
   }
 
   render() {
@@ -119,7 +122,7 @@ Contacts.propTypes = {
     PropTypes.object,
   ]),
   faxForm: PropTypes.string,
-  phoneArrayForm: PropTypes.array,
+  phoneArray: PropTypes.array,
   phoneN1Form: PropTypes.string,
   phoneN2Form: PropTypes.string,
   phoneN3Form: PropTypes.string,
@@ -189,7 +192,6 @@ const mapStateToProps = state => {
   const facebookLinkForm = selector(state, 'facebookLink')
   const selectLanguageForm = selector(state, 'selectLanguage')
   const faxForm = selector(state, 'fax')
-  const phoneArrayForm = selector(state, 'phoneArray')
   const phoneN1Form = selector(state, 'phoneN1')
   const phoneN2Form = selector(state, 'phoneN2')
   const phoneN3Form = selector(state, 'phoneN3')
@@ -204,8 +206,8 @@ const mapStateToProps = state => {
     githubLinkForm,
     facebookLinkForm,
     selectLanguageForm,
+    phoneArray,
     faxForm,
-    phoneArrayForm,
     phoneN1Form,
     phoneN2Form,
     phoneN3Form,

@@ -84,7 +84,6 @@ export const forwardBackProfile = (forwardBack, firstName, lastName, birthDate, 
       forwardBack, firstName, lastName, birthDate, email, address, gender,
     },
   })
-
 export const forwardBackContacts = (forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneArray,
   phoneN1, phoneN2, phoneN3) => (
   {
@@ -94,11 +93,21 @@ export const forwardBackContacts = (forwardBack, company, githubLink, facebookLi
     },
   })
 
-export const deleteAddFieldPhone = (deleteAddField, phoneN1Form, phoneN2Form, phoneN3Form) => (
+export const deleteAddFieldPhone = (deleteAddField, company, githubLink, facebookLink, selectLanguage, fax,
+  phoneArray, phoneN1, phoneN2, phoneN3) => (
   {
     type: DELETE_ADD_FIELD_PHONE,
     payload: {
-      deleteAddField, phoneN1Form, phoneN2Form, phoneN3Form,
+      deleteAddField,
+      company,
+      githubLink,
+      facebookLink,
+      selectLanguage,
+      fax,
+      phoneArray,
+      phoneN1,
+      phoneN2,
+      phoneN3,
     },
   })
 
