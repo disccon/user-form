@@ -82,10 +82,17 @@ export function* continueUserSaga(action) {
   const { isContinue } = action.payload
   try {
     if (isContinue) {
-      const newUserDB = yield call(() => db.newUserDB.get(0, newUserDB => newUserDB))
+      const newUser = yield call(() => db.newUserDB.get(0, newUserDB => newUserDB))
+      if (newUser.company) {
+        yield put(push('/capabilities'))
+      } else if (newUser.firstName) {
+        yield put(push('/contacts'))
+      } else if (newUser.userName) {
+        yield put(push('/profile'))
+      }
       yield put({
         type: CONTINUE_USER__CONTINUE,
-        payload: newUserDB,
+        payload: newUser,
       })
     } else {
       yield put({
