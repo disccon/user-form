@@ -54,6 +54,11 @@ export default function editUserReducer(state = { editUser: {} }, action) {
         ...state,
         editUser: {
           ...state.editUser,
+          company: action.payload.company,
+          githubLink: action.payload.githubLink,
+          facebookLink: action.payload.facebookLink,
+          selectLanguage: action.payload.selectLanguage,
+          fax: action.payload.fax,
           phoneArray: action.payload.phoneArray,
           phoneN1: action.payload.phoneN1,
           phoneN2: action.payload.phoneN2,
@@ -67,6 +72,11 @@ export default function editUserReducer(state = { editUser: {} }, action) {
         ...state,
         editUser: {
           ...state.editUser,
+          company: action.payload.company,
+          githubLink: action.payload.githubLink,
+          facebookLink: action.payload.facebookLink,
+          selectLanguage: action.payload.selectLanguage,
+          fax: action.payload.fax,
           phoneArray: action.payload.phoneArray,
           phoneN1: action.payload.phoneN1,
           phoneN2: action.payload.phoneN2,

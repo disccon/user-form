@@ -1,5 +1,5 @@
 import {
-  put, select, call,
+  put, call,
 } from 'redux-saga/effects'
 import { push } from 'connected-react-router'
 import {
@@ -103,31 +103,36 @@ export function* saveChangesProfileSaga(action) {
 }
 
 export function* deleteFieldPhoneEditingSaga(action) {
-  const { deleteAddField, phoneN1Form } = action.payload
-  let { phoneN2Form, phoneN3Form } = action.payload
-  const phoneArray = yield select(state => state.editUserReducer.editUser.phoneArray)
+  const {
+    deleteAddField, company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1,
+  } = action.payload
+  let { phoneN2, phoneN3 } = action.payload
+  const newPhoneArray = [...phoneArray]
   let type
   try {
     if (deleteAddField === 'add' && phoneArray.length < 3) {
-      phoneArray.push('')
+      phoneN2 = phoneArray.length === 1 ? '' : phoneN2
+      phoneN3 = phoneArray.length === 2 ? '' : phoneN3
+      newPhoneArray.push('')
       type = DELETE_FIELD_PHONE_EDITING__ADD
     } else if (deleteAddField === 'delete' && phoneArray.length > 1) {
-      phoneArray.pop('')
+      phoneN2 = phoneArray.length === 2 ? null : phoneN2
+      phoneN3 = null
+      newPhoneArray.pop('')
       type = DELETE_FIELD_PHONE_EDITING__DELETE
-    }
-    if (phoneArray.length > 1) {
-      phoneN3Form = ''
-    } else {
-      phoneN2Form = ''
-      phoneN3Form = ''
     }
     yield put({
       type,
       payload: {
-        phoneArray,
-        phoneN1: phoneN1Form,
-        phoneN2: phoneN2Form,
-        phoneN3: phoneN3Form,
+        company,
+        githubLink,
+        facebookLink,
+        selectLanguage,
+        fax,
+        phoneArray: newPhoneArray,
+        phoneN1,
+        phoneN2,
+        phoneN3,
       },
     })
   } catch (error) {

@@ -144,12 +144,12 @@ export default function newUserReducer(state = initialNewUserState, action) {
     case FORWARD_BACK_CONTACTS__FORWARD: {
       return {
         ...state,
-        forwardBack: action.payload.forwardBack,
         company: action.payload.company,
         githubLink: action.payload.githubLink,
         facebookLink: action.payload.facebookLink,
         selectLanguage: action.payload.selectLanguage,
         fax: action.payload.fax,
+        phoneArray: action.payload.phoneArray,
         phoneN1: action.payload.phoneN1,
         phoneN2: action.payload.phoneN2,
         phoneN3: action.payload.phoneN3,
@@ -159,12 +159,12 @@ export default function newUserReducer(state = initialNewUserState, action) {
     case FORWARD_BACK_CONTACTS__BACK: {
       return {
         ...state,
-        forwardBack: action.payload.forwardBack,
         company: action.payload.company,
         githubLink: action.payload.githubLink,
         facebookLink: action.payload.facebookLink,
         selectLanguage: action.payload.selectLanguage,
         fax: action.payload.fax,
+        phoneArray: action.payload.phoneArray,
         phoneN1: action.payload.phoneN1,
         phoneN2: action.payload.phoneN2,
         phoneN3: action.payload.phoneN3,
@@ -181,6 +181,11 @@ export default function newUserReducer(state = initialNewUserState, action) {
     case DELETE_ADD_FIELD_PHONE__ADD: {
       return {
         ...state,
+        company: action.payload.company,
+        githubLink: action.payload.githubLink,
+        facebookLink: action.payload.facebookLink,
+        selectLanguage: action.payload.selectLanguage,
+        fax: action.payload.fax,
         phoneArray: action.payload.phoneArray,
         phoneN1: action.payload.phoneN1,
         phoneN2: action.payload.phoneN2,
@@ -191,6 +196,11 @@ export default function newUserReducer(state = initialNewUserState, action) {
     case DELETE_ADD_FIELD_PHONE__DELETE: {
       return {
         ...state,
+        company: action.payload.company,
+        githubLink: action.payload.githubLink,
+        facebookLink: action.payload.facebookLink,
+        selectLanguage: action.payload.selectLanguage,
+        fax: action.payload.fax,
         phoneArray: action.payload.phoneArray,
         phoneN1: action.payload.phoneN1,
         phoneN2: action.payload.phoneN2,
