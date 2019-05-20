@@ -39,10 +39,9 @@ class UsersPage extends Component {
 
   changePage = page => () => {
     const {
-      per_page, push, fetchUsersDB,
+      per_page, push,
     } = this.props
     push({ pathname: '/users', search: `?page=${page}&per_page=${per_page}` })
-    fetchUsersDB(page, per_page)
   }
 
   render() {

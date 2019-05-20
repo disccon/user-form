@@ -28,16 +28,20 @@ class ContactsEditing extends Component {
 
   deleteFieldPhone = () => {
     const {
-      deleteFieldPhoneEditing, phoneN1Form, phoneN2Form, phoneN3Form,
+      deleteFieldPhoneEditing, companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm,
+      phoneArray, phoneN1Form, phoneN2Form, phoneN3Form,
     } = this.props
-    deleteFieldPhoneEditing('delete', phoneN1Form, phoneN2Form, phoneN3Form)
+    deleteFieldPhoneEditing('delete', companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm,
+      phoneArray, phoneN1Form, phoneN2Form, phoneN3Form)
   }
 
   addFieldPhone = () => {
     const {
-      deleteFieldPhoneEditing, phoneN1Form, phoneN2Form, phoneN3Form,
+      deleteFieldPhoneEditing, companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm,
+      phoneArray, phoneN1Form, phoneN2Form, phoneN3Form,
     } = this.props
-    deleteFieldPhoneEditing('add', phoneN1Form, phoneN2Form, phoneN3Form)
+    deleteFieldPhoneEditing('add', companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm,
+      phoneArray, phoneN1Form, phoneN2Form, phoneN3Form)
   }
 
   render() {
@@ -107,14 +111,23 @@ class ContactsEditing extends Component {
 }
 
 ContactsEditing.propTypes = {
+  companyForm: PropTypes.string,
+  githubLinkForm: PropTypes.string,
+  facebookLinkForm: PropTypes.string,
+  selectLanguageForm: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
+  faxForm: PropTypes.string,
+  phoneArray: PropTypes.array,
+  phoneN1Form: PropTypes.string,
+  phoneN2Form: PropTypes.string,
+  phoneN3Form: PropTypes.string,
   id: PropTypes.number,
   saveChangesContactsEditing: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   fetchEditUser: PropTypes.func.isRequired,
   deleteFieldPhoneEditing: PropTypes.func.isRequired,
-  phoneN1Form: PropTypes.string,
-  phoneN2Form: PropTypes.string,
-  phoneN3Form: PropTypes.string,
 }
 
 const ContactsEditingForm = reduxForm({
@@ -174,6 +187,11 @@ const ContactsEditingForm = reduxForm({
 const mapStateToProps = (state, ownProps) => {
   const id = Number(ownProps.match.params.id)
   const selector = formValueSelector('ContactsEditing')
+  const companyForm = selector(state, 'company')
+  const githubLinkForm = selector(state, 'githubLink')
+  const facebookLinkForm = selector(state, 'facebookLink')
+  const selectLanguageForm = selector(state, 'selectLanguage')
+  const faxForm = selector(state, 'fax')
   const phoneN1Form = selector(state, 'phoneN1')
   const phoneN2Form = selector(state, 'phoneN2')
   const phoneN3Form = selector(state, 'phoneN3')
@@ -185,6 +203,12 @@ const mapStateToProps = (state, ownProps) => {
       company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
     },
     id,
+    companyForm,
+    githubLinkForm,
+    facebookLinkForm,
+    selectLanguageForm,
+    faxForm,
+    phoneArray,
     phoneN1Form,
     phoneN2Form,
     phoneN3Form,

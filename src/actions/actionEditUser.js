@@ -58,11 +58,21 @@ export const saveChangesProfileEditing = (firstName, lastName, birthDate, email,
   })
 
 
-export const deleteFieldPhoneEditing = (deleteAddField, phoneN1Form, phoneN2Form, phoneN3Form) => (
+export const deleteFieldPhoneEditing = (deleteAddField, company, githubLink, facebookLink, selectLanguage, fax,
+  phoneArray, phoneN1, phoneN2, phoneN3) => (
   {
     type: DELETE_FIELD_PHONE_EDITING,
     payload: {
-      deleteAddField, phoneN1Form, phoneN2Form, phoneN3Form,
+      deleteAddField,
+      company,
+      githubLink,
+      facebookLink,
+      selectLanguage,
+      fax,
+      phoneArray,
+      phoneN1,
+      phoneN2,
+      phoneN3,
     },
   })
 
