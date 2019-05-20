@@ -60,28 +60,15 @@ class Account extends Component {
     }
   }
 
-  changeTypeFirstInput = () => {
-    const { typePasswordFirstInput } = this.state
-    if (typePasswordFirstInput === 'text') {
+  changeTypePassword = nameTypePassword => () => {
+    const { [nameTypePassword]: typePassword } = this.state
+    if (typePassword === 'text') {
       this.setState({
-        typePasswordFirstInput: 'password',
+        [nameTypePassword]: 'password',
       })
     } else {
       this.setState({
-        typePasswordFirstInput: 'text',
-      })
-    }
-  }
-
-  changeTypeSecondInput = () => {
-    const { typePasswordSecondInput } = this.state
-    if (typePasswordSecondInput === 'text') {
-      this.setState({
-        typePasswordSecondInput: 'password',
-      })
-    } else {
-      this.setState({
-        typePasswordSecondInput: 'text',
+        [nameTypePassword]: 'text',
       })
     }
   }
@@ -137,7 +124,7 @@ class Account extends Component {
               label='Password'
               name='password'
               idInput='password'
-              changeTypePassword={this.changeTypeFirstInput}
+              changeTypePassword={this.changeTypePassword('typePasswordFirstInput')}
             />
             <Field
               component={FieldInputAccount}
@@ -146,7 +133,7 @@ class Account extends Component {
               label='Repeat Password'
               name='repeatPassword'
               idInput='repeatPassword'
-              changeTypePassword={this.changeTypeSecondInput}
+              changeTypePassword={this.changeTypePassword('typePasswordSecondInput')}
             />
             <button className={cx('accountComponent__buttonSubmit')} type='submit'>Forward</button>
           </div>
