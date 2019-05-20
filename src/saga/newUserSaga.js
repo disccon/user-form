@@ -129,14 +129,17 @@ export function* saveUserSRCAvatarIMGSaga(action) {
 
 export function* forwardAccountSaga(action) {
   const {
-    userName, password, repeatPassword,
+    userName, password, userSRCAvatarIMG,
   } = action.payload
   try {
+    db.newUserDB.update(0, {
+      userName, password, repeatPassword: password, userSRCAvatarIMG,
+    })
     yield put(push('/profile'))
     yield put({
       type: FORWARD_ACCOUNT__SUCCESS,
       payload: {
-        userName, password, repeatPassword,
+        userName, password, repeatPassword: password,
       },
     })
   } catch (error) {
@@ -159,6 +162,9 @@ export function* forwardBackProfileSaga(action) {
     } else if (forwardBack === 'forward') {
       actionType = FORWARD_BACK_PROFILE__FORWARD
       yield put(push('/contacts'))
+      db.newUserDB.update(0, {
+        firstName, lastName, birthDate, email, address, gender,
+      })
     }
     yield put({
       type: actionType,
@@ -185,6 +191,9 @@ export function* forwardBackContactsSaga(action) {
       yield put(push('/profile'))
     } else if (forwardBack === 'forward') {
       actionType = FORWARD_BACK_CONTACTS__FORWARD
+      db.newUserDB.update(0, {
+        company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
+      })
       yield put(push('/capabilities'))
     }
     yield put({

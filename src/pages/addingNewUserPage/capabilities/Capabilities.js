@@ -92,7 +92,6 @@ class Capabilities extends Component {
           <div className={cx('userFormBox__wrapperButton')}>
             <button
               type='button'
-              disabled
               className={cx('userFormBox__back')}
               onClick={this.backCapabilities}
             >

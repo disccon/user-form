@@ -69,7 +69,7 @@ class Account extends Component {
         avatarIMGError: 'Upload a picture',
       })
     } else {
-      forwardAccount(values.userName, values.password, values.repeatPassword)
+      forwardAccount(values.userName, values.password, userSRCAvatarIMG)
     }
   }
 

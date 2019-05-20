@@ -69,11 +69,11 @@ export const saveUserSRCAvatarIMG = userSRCAvatarIMG => (
     },
   })
 
-export const forwardAccount = (userName, password, repeatPassword) => (
+export const forwardAccount = (userName, password, userSRCAvatarIMG) => (
   {
     type: FORWARD_ACCOUNT,
     payload: {
-      userName, password, repeatPassword,
+      userName, password, userSRCAvatarIMG,
     },
   })
 
