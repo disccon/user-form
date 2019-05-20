@@ -19,7 +19,8 @@ const cx = classNames.bind(styles)
 class Account extends Component {
   state = {
     avatarIMGError: null,
-    typeFieldPassword: 'text',
+    typePasswordFirstInput: 'text',
+    typePasswordSecondInput: 'text',
   }
 
   continueUser = isContinue => () => {
@@ -59,22 +60,35 @@ class Account extends Component {
     }
   }
 
-  changeTypePassword = () => {
-    const { typeFieldPassword } = this.state
-    if (typeFieldPassword === 'text') {
+  changeTypeFirstInput = () => {
+    const { typePasswordFirstInput } = this.state
+    if (typePasswordFirstInput === 'text') {
       this.setState({
-        typeFieldPassword: 'password',
+        typePasswordFirstInput: 'password',
       })
     } else {
       this.setState({
-        typeFieldPassword: 'text',
+        typePasswordFirstInput: 'text',
+      })
+    }
+  }
+
+  changeTypeSecondInput = () => {
+    const { typePasswordSecondInput } = this.state
+    if (typePasswordSecondInput === 'text') {
+      this.setState({
+        typePasswordSecondInput: 'password',
+      })
+    } else {
+      this.setState({
+        typePasswordSecondInput: 'text',
       })
     }
   }
 
   render() {
     const { handleSubmit, userSRCAvatarIMG, isQuestion } = this.props
-    const { avatarIMGError, typeFieldPassword } = this.state
+    const { avatarIMGError, typePasswordFirstInput, typePasswordSecondInput } = this.state
     const userAvatarIMG = userSRCAvatarIMG
       ? <img className={cx('userAvatarWrapper__userAvatarIMG')} src={userSRCAvatarIMG} alt='userAvatar' />
       : <UserAvatarIcon className={cx('userAvatarWrapper__userAvatarSVG')} alt='userAvatar' />
@@ -118,21 +132,21 @@ class Account extends Component {
             />
             <Field
               component={FieldInputAccount}
-              type={typeFieldPassword}
+              type={typePasswordFirstInput}
               isVisibility
               label='Password'
               name='password'
               idInput='password'
-              changeTypePassword={this.changeTypePassword}
+              changeTypePassword={this.changeTypeFirstInput}
             />
             <Field
               component={FieldInputAccount}
-              type={typeFieldPassword}
+              type={typePasswordSecondInput}
               isVisibility
               label='Repeat Password'
               name='repeatPassword'
               idInput='repeatPassword'
-              changeTypePassword={this.changeTypePassword}
+              changeTypePassword={this.changeTypeSecondInput}
             />
             <button className={cx('accountComponent__buttonSubmit')} type='submit'>Forward</button>
           </div>
