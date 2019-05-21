@@ -97,6 +97,7 @@ export default function newUserReducer(state = initialNewUserState, action) {
     case FORWARD_ACCOUNT__SUCCESS: {
       return {
         ...state,
+        accountFilled: action.payload.accountFilled,
         userName: action.payload.userName,
         password: action.payload.password,
         repeatPassword: action.payload.repeatPassword,
@@ -113,6 +114,7 @@ export default function newUserReducer(state = initialNewUserState, action) {
     case FORWARD_BACK_PROFILE__FORWARD: {
       return {
         ...state,
+        profileFilled: action.payload.profileFilled,
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
         birthDate: action.payload.birthDate,
@@ -125,6 +127,7 @@ export default function newUserReducer(state = initialNewUserState, action) {
     case FORWARD_BACK_PROFILE__BACK: {
       return {
         ...state,
+        profileFilled: action.payload.profileFilled,
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
         birthDate: action.payload.birthDate,
@@ -144,6 +147,7 @@ export default function newUserReducer(state = initialNewUserState, action) {
     case FORWARD_BACK_CONTACTS__FORWARD: {
       return {
         ...state,
+        contactsFilled: action.payload.contactsFilled,
         company: action.payload.company,
         githubLink: action.payload.githubLink,
         facebookLink: action.payload.facebookLink,

@@ -22,16 +22,16 @@ const EditingPage = ({ pathname, id }) => (
           activeTab: pathname.charAt(pathname.length - 1) >= 0,
         })}
         >
-          <h2 className={cx('editingPage__h2')}>1. Account</h2>
+          <Link to={`/edit-user/${id}`} className={cx('editingPage__link')}>1. Account</Link>
         </div>
         <div className={cx('editingPage__tab', { activeTab: pathname.includes('/profile') })}>
-          <h2 className={cx('editingPage__h2')}>2. Profile</h2>
+          <Link to={`/edit-user/${id}/profile`} className={cx('editingPage__link')}>2. Profile</Link>
         </div>
         <div className={cx('editingPage__tab', { activeTab: pathname.includes('/contacts') })}>
-          <h2 className={cx('editingPage__h2')}>3. Contacts</h2>
+          <Link to={`/edit-user/${id}/contacts`} className={cx('editingPage__link')}>3. Contacts</Link>
         </div>
         <div className={cx('editingPage__tab', { activeTab: pathname.includes('/capabilities') })}>
-          <h2 className={cx('editingPage__h2')}>4. Capabilities</h2>
+          <Link to={`/edit-user/${id}/capabilities`} className={cx('editingPage__link')}>4. Capabilities</Link>
         </div>
       </div>
       <Switch>

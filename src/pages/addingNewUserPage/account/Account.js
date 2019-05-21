@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Field, reduxForm } from 'redux-form'
+import Cropper from 'react-cropper'
 import styles from '../../../components/userFormBox/UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
@@ -13,6 +14,7 @@ import { FieldInputAccount } from '../../../components/fieldForm/fieldInputAccou
 import { UserFormBox } from '../../../components/userFormBox/UserFormBox'
 import { QuestionAccount } from './questionAccount/QuestionAccount'
 import db from '../../../db'
+import 'cropperjs/dist/cropper.css'
 
 const cx = classNames.bind(styles)
 
@@ -21,6 +23,7 @@ class Account extends Component {
     avatarIMGError: null,
     typePasswordFirstInput: 'text',
     typePasswordSecondInput: 'text',
+    cropperSrc: null,
   }
 
   continueUser = isContinue => () => {
@@ -30,7 +33,6 @@ class Account extends Component {
 
   addImageUserAvatar = event => {
     event.preventDefault()
-    const { saveUserSRCAvatarIMG } = this.props
     const reader = new FileReader()
     const fileIMG = event.target.files[0]
     const fileSize = fileIMG.size / 1024 / 1024
@@ -38,8 +40,8 @@ class Account extends Component {
       reader.onloadend = () => {
         this.setState({
           avatarIMGError: false,
+          cropperSrc: reader.result,
         })
-        saveUserSRCAvatarIMG(reader.result)
       }
       reader.readAsDataURL(fileIMG)
     } else {
@@ -49,6 +51,17 @@ class Account extends Component {
     }
   }
 
+  cropImage = () => {
+    const { saveUserSRCAvatarIMG } = this.props
+    if (typeof this.cropper.getCroppedCanvas() === 'undefined') {
+      return
+    }
+    this.setState({
+      cropperSrc: null,
+    })
+    saveUserSRCAvatarIMG(this.cropper.getCroppedCanvas().toDataURL())
+  }
+
   onSubmit = values => {
     const { forwardAccount, userSRCAvatarIMG } = this.props
     if (!userSRCAvatarIMG) {
@@ -56,26 +69,41 @@ class Account extends Component {
         avatarIMGError: 'Upload a picture',
       })
     } else {
-      forwardAccount(values.userName, values.password, values.repeatPassword)
+      forwardAccount(values.userName, values.password, userSRCAvatarIMG)
     }
   }
 
-  changeTypePassword = nameTypePassword => () => {
-    const { [nameTypePassword]: typePassword } = this.state
-    if (typePassword === 'text') {
+  changeTypeFirstInput = () => {
+    const { typePasswordFirstInput } = this.state
+    if (typePasswordFirstInput === 'text') {
       this.setState({
-        [nameTypePassword]: 'password',
+        typePasswordFirstInput: 'password',
       })
     } else {
       this.setState({
-        [nameTypePassword]: 'text',
+        typePasswordFirstInput: 'text',
+      })
+    }
+  }
+
+  changeTypeSecondInput = () => {
+    const { typePasswordSecondInput } = this.state
+    if (typePasswordSecondInput === 'text') {
+      this.setState({
+        typePasswordSecondInput: 'password',
+      })
+    } else {
+      this.setState({
+        typePasswordSecondInput: 'text',
       })
     }
   }
 
   render() {
-    const { handleSubmit, userSRCAvatarIMG, isQuestion } = this.props
-    const { avatarIMGError, typePasswordFirstInput, typePasswordSecondInput } = this.state
+    const { handleSubmit, isQuestion, userSRCAvatarIMG } = this.props
+    const {
+      avatarIMGError, typePasswordFirstInput, typePasswordSecondInput, cropperSrc,
+    } = this.state
     const userAvatarIMG = userSRCAvatarIMG
       ? <img className={cx('userAvatarWrapper__userAvatarIMG')} src={userSRCAvatarIMG} alt='userAvatar' />
       : <UserAvatarIcon className={cx('userAvatarWrapper__userAvatarSVG')} alt='userAvatar' />
@@ -124,7 +152,7 @@ class Account extends Component {
               label='Password'
               name='password'
               idInput='password'
-              changeTypePassword={this.changeTypePassword('typePasswordFirstInput')}
+              changeTypePassword={this.changeTypeFirstInput}
             />
             <Field
               component={FieldInputAccount}
@@ -133,11 +161,32 @@ class Account extends Component {
               label='Repeat Password'
               name='repeatPassword'
               idInput='repeatPassword'
-              changeTypePassword={this.changeTypePassword('typePasswordSecondInput')}
+              changeTypePassword={this.changeTypeSecondInput}
             />
             <button className={cx('accountComponent__buttonSubmit')} type='submit'>Forward</button>
           </div>
         </UserFormBox>
+        {cropperSrc && (
+        <Cropper
+          src={cropperSrc}
+          style={{
+            position: 'fixed',
+            top: '15%',
+            bottom: '15%',
+            left: '15%',
+            right: '15%',
+            zIndex: '99',
+          }}
+          aspectRatio={9 / 9}
+          guides={false}
+          ref={cropper => { this.cropper = cropper }}
+        />
+        )}
+        {cropperSrc && (
+        <button className={cx('accountComponent__cropImage')} type='button' onClick={this.cropImage} >
+          Crop Image
+        </button>
+        ) }
       </Fragment>
     )
   }

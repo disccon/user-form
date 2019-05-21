@@ -14,17 +14,21 @@ $wi: 'windowNewUser';
       justify-content: center;
       background: #EAF0FC;
 
-      .#{$wi}__h2 {
+      .#{$wi}__link {
+        pointer-events: none;
         font-weight: bold;
         font-size: 24px;
         color: #9BB0CB;
       }
+      .#{$wi}__link.activeLink {
+        pointer-events: auto;
+        color: #475666;
+      }
     }
-
     .#{$wi}__tab.activeTab {
+      pointer-events: none;
       background: #4E86E4;
-
-      .#{$wi}__h2 {
+      .#{$wi}__link {
         color: #fff;
       }
     }

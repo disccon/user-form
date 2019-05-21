@@ -1,10 +1,13 @@
 export const initialNewUserState = {
   isQuestion: false,
   id: 0,
+  accountFilled: false,
   userName: '',
   password: '',
   repeatPassword: '',
   userSRCAvatarIMG: '',
+
+  profileFilled: false,
   firstName: '',
   lastName: '',
   birthDate: '',
@@ -12,6 +15,7 @@ export const initialNewUserState = {
   address: '',
   gender: '',
 
+  contactsFilled: false,
   company: '',
   githubLink: '',
   facebookLink: '',

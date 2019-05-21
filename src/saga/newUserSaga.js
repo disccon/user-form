@@ -82,10 +82,17 @@ export function* continueUserSaga(action) {
   const { isContinue } = action.payload
   try {
     if (isContinue) {
-      const newUserDB = yield call(() => db.newUserDB.get(0, newUserDB => newUserDB))
+      const newUser = yield call(() => db.newUserDB.get(0, newUserDB => newUserDB))
+      if (newUser.contactsFilled) {
+        yield put(push('/capabilities'))
+      } else if (newUser.profileFilled) {
+        yield put(push('/contacts'))
+      } else if (newUser.accountFilled) {
+        yield put(push('/profile'))
+      }
       yield put({
         type: CONTINUE_USER__CONTINUE,
-        payload: newUserDB,
+        payload: newUser,
       })
     } else {
       yield put({
@@ -122,14 +129,18 @@ export function* saveUserSRCAvatarIMGSaga(action) {
 
 export function* forwardAccountSaga(action) {
   const {
-    userName, password, repeatPassword,
+    userName, password, userSRCAvatarIMG,
   } = action.payload
   try {
+    const accountFilled = true
+    db.newUserDB.update(0, {
+      userName, password, repeatPassword: password, userSRCAvatarIMG, accountFilled,
+    })
     yield put(push('/profile'))
     yield put({
       type: FORWARD_ACCOUNT__SUCCESS,
       payload: {
-        userName, password, repeatPassword,
+        userName, password, repeatPassword: password, accountFilled,
       },
     })
   } catch (error) {
@@ -145,6 +156,7 @@ export function* forwardBackProfileSaga(action) {
     forwardBack, firstName, lastName, birthDate, email, address, gender,
   } = action.payload
   try {
+    const profileFilled = true
     let actionType
     if (forwardBack === 'back') {
       actionType = FORWARD_BACK_PROFILE__BACK
@@ -152,11 +164,14 @@ export function* forwardBackProfileSaga(action) {
     } else if (forwardBack === 'forward') {
       actionType = FORWARD_BACK_PROFILE__FORWARD
       yield put(push('/contacts'))
+      db.newUserDB.update(0, {
+        firstName, lastName, birthDate, email, address, gender, profileFilled,
+      })
     }
     yield put({
       type: actionType,
       payload: {
-        firstName, lastName, birthDate, email, address, gender,
+        firstName, lastName, birthDate, email, address, gender, profileFilled,
       },
     })
   } catch (error) {
@@ -172,18 +187,41 @@ export function* forwardBackContactsSaga(action) {
     forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
   } = action.payload
   try {
+    const contactsFilled = true
     let actionType
     if (forwardBack === 'back') {
       actionType = FORWARD_BACK_CONTACTS__BACK
       yield put(push('/profile'))
     } else if (forwardBack === 'forward') {
       actionType = FORWARD_BACK_CONTACTS__FORWARD
+      db.newUserDB.update(0, {
+        company,
+        githubLink,
+        facebookLink,
+        selectLanguage,
+        fax,
+        phoneArray,
+        phoneN1,
+        phoneN2,
+        phoneN3,
+        contactsFilled,
+      })
       yield put(push('/capabilities'))
     }
     yield put({
       type: actionType,
       payload: {
-        forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
+        forwardBack,
+        company,
+        githubLink,
+        facebookLink,
+        selectLanguage,
+        fax,
+        phoneArray,
+        phoneN1,
+        phoneN2,
+        phoneN3,
+        contactsFilled,
       },
     })
   } catch (error) {
@@ -241,6 +279,7 @@ export function* backCapabilitiesSaga(action) {
     checkboxFemale, checkboxGuitar, checkboxWtf,
   } = action.payload
   try {
+    const capabilitiesFilled = true
     yield put(push('/contacts'))
     yield put({
       type: BACK_CAPABILITIES__SUCCESS,
@@ -253,6 +292,7 @@ export function* backCapabilitiesSaga(action) {
         checkboxFemale,
         checkboxGuitar,
         checkboxWtf,
+        capabilitiesFilled,
       },
     })
   } catch (error) {
@@ -270,7 +310,11 @@ export function* forwardCapabilitiesSaga(action) {
   } = action.payload
   const newUserDB = yield select(state => state.newUser)
   delete initialNewUserState.isQuestion
+  delete newUserDB.isQuestion
   delete newUserDB.id
+  delete newUserDB.accountFilled
+  delete newUserDB.profileFilled
+  delete newUserDB.contactsFilled
   try {
     yield put(push('/users'))
     db.usersDB.add({

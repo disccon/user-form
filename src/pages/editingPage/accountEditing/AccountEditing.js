@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Field, reduxForm } from 'redux-form'
+import Cropper from 'react-cropper'
 import styles from '../../../components/userFormBox/UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
@@ -18,6 +19,7 @@ class AccountEditing extends Component {
     avatarIMGError: null,
     typePasswordFirstInput: 'text',
     typePasswordSecondInput: 'text',
+    cropperSrc: null,
   }
 
   componentDidMount() {
@@ -27,7 +29,6 @@ class AccountEditing extends Component {
 
   addImageUserAvatar = event => {
     event.preventDefault()
-    const { changeAvatarAccountEditing } = this.props
     const reader = new FileReader()
     const fileIMG = event.target.files[0]
     const fileSize = fileIMG.size / 1024 / 1024
@@ -35,8 +36,8 @@ class AccountEditing extends Component {
       reader.onloadend = () => {
         this.setState({
           avatarIMGError: false,
+          cropperSrc: reader.result,
         })
-        changeAvatarAccountEditing(reader.result)
       }
       reader.readAsDataURL(fileIMG)
     } else {
@@ -46,87 +47,136 @@ class AccountEditing extends Component {
     }
   }
 
+  cropImage = () => {
+    const { changeAvatarAccountEditing } = this.props
+    if (typeof this.cropper.getCroppedCanvas() === 'undefined') {
+      return
+    }
+    this.setState({
+      cropperSrc: null,
+    })
+    changeAvatarAccountEditing(this.cropper.getCroppedCanvas().toDataURL())
+  }
+
   onSubmit = values => {
     const { saveChangesAccountEditing, id, userSRCAvatarIMG } = this.props
     saveChangesAccountEditing(values.userName, values.password, values.repeatPassword, userSRCAvatarIMG, id)
   }
 
-  changeTypePassword = nameTypePassword => () => {
-    const { [nameTypePassword]: typePassword } = this.state
-    if (typePassword === 'text') {
+  changeTypeFirstInput = () => {
+    const { typePasswordFirstInput } = this.state
+    if (typePasswordFirstInput === 'text') {
       this.setState({
-        [nameTypePassword]: 'password',
+        typePasswordFirstInput: 'password',
       })
     } else {
       this.setState({
-        [nameTypePassword]: 'text',
+        typePasswordFirstInput: 'text',
+      })
+    }
+  }
+
+  changeTypeSecondInput = () => {
+    const { typePasswordSecondInput } = this.state
+    if (typePasswordSecondInput === 'text') {
+      this.setState({
+        typePasswordSecondInput: 'password',
+      })
+    } else {
+      this.setState({
+        typePasswordSecondInput: 'text',
       })
     }
   }
 
   render() {
     const { handleSubmit, userSRCAvatarIMG } = this.props
-    const { avatarIMGError, typePasswordFirstInput, typePasswordSecondInput } = this.state
+    const {
+      avatarIMGError, typePasswordFirstInput, typePasswordSecondInput, cropperSrc,
+    } = this.state
     const userAvatarIMG = userSRCAvatarIMG
       ? <img className={cx('userAvatarWrapper__userAvatarIMG')} src={userSRCAvatarIMG} alt='userAvatar' />
       : <UserAvatarIcon className={cx('userAvatarWrapper__userAvatarSVG')} alt='userAvatar' />
     const UserAvatar = avatarIMGError
       ? <p className={cx('userAvatarWrapper__avatarError')}>{avatarIMGError}</p> : null
     return (
-      <UserFormBox handleSubmit={handleSubmit(this.onSubmit)} classForm='userFormBoxAccount'>
-        <div className={cx('userAvatarWrapper')}>
-          <label htmlFor='userAvatar'>
-            {userAvatarIMG}
-            <input
-              id='userAvatar'
-              type='file'
-              className={cx('userAvatarWrapper__inputFile')}
-              accept='image/*,image/jpeg'
-              onChange={this.addImageUserAvatar}
+      <Fragment>
+        <UserFormBox handleSubmit={handleSubmit(this.onSubmit)} classForm='userFormBoxAccount'>
+          <div className={cx('userAvatarWrapper')}>
+            <label htmlFor='userAvatar'>
+              {userAvatarIMG}
+              <input
+                id='userAvatar'
+                type='file'
+                className={cx('userAvatarWrapper__inputFile')}
+                accept='image/*,image/jpeg'
+                onChange={this.addImageUserAvatar}
+              />
+            </label>
+            <label htmlFor='userAvatarIMG' className={cx('userAvatarWrapper__labelSpan')}>
+              <AddIcon className={cx('userAvatarWrapper__AddICon')} alt='addAvatar' />
+              <span className={cx('userAvatarWrapper__addAvatarSpan')}>add avatar</span>
+              <input
+                id='userAvatarIMG'
+                type='file'
+                className={cx('userAvatarWrapper__inputFile')}
+                accept='image/*,image/jpeg'
+                onChange={this.addImageUserAvatar}
+              />
+            </label>
+            {UserAvatar}
+          </div>
+          <div className={cx('register__userData')}>
+            <Field
+              component={FieldInputAccount}
+              type='text'
+              label='User name'
+              name='userName'
+              idInput='userName'
             />
-          </label>
-          <label htmlFor='userAvatarIMG' className={cx('userAvatarWrapper__labelSpan')}>
-            <AddIcon className={cx('userAvatarWrapper__AddICon')} alt='addAvatar' />
-            <span className={cx('userAvatarWrapper__addAvatarSpan')}>add avatar</span>
-            <input
-              id='userAvatarIMG'
-              type='file'
-              className={cx('userAvatarWrapper__inputFile')}
-              accept='image/*,image/jpeg'
-              onChange={this.addImageUserAvatar}
+            <Field
+              component={FieldInputAccount}
+              type={typePasswordFirstInput}
+              isVisibility
+              label='Password'
+              name='password'
+              idInput='password'
+              changeTypePassword={this.changeTypeFirstInput}
             />
-          </label>
-          {UserAvatar}
-        </div>
-        <div className={cx('register__userData')}>
-          <Field
-            component={FieldInputAccount}
-            type='text'
-            label='User name'
-            name='userName'
-            idInput='userName'
+            <Field
+              component={FieldInputAccount}
+              type={typePasswordSecondInput}
+              isVisibility
+              label='Repeat Password'
+              name='repeatPassword'
+              idInput='repeatPassword'
+              changeTypePassword={this.changeTypeSecondInput}
+            />
+            <button className={cx('accountComponent__buttonSubmit')} type='submit'>Save</button>
+          </div>
+        </UserFormBox>
+        {cropperSrc && (
+          <Cropper
+            src={cropperSrc}
+            style={{
+              position: 'fixed',
+              top: '15%',
+              bottom: '15%',
+              left: '15%',
+              right: '15%',
+              zIndex: '99',
+            }}
+            aspectRatio={9 / 9}
+            guides={false}
+            ref={cropper => { this.cropper = cropper }}
           />
-          <Field
-            component={FieldInputAccount}
-            type={typePasswordFirstInput}
-            isVisibility
-            label='Password'
-            name='password'
-            idInput='password'
-            changeTypePassword={this.changeTypePassword('typePasswordFirstInput')}
-          />
-          <Field
-            component={FieldInputAccount}
-            type={typePasswordSecondInput}
-            isVisibility
-            label='Repeat Password'
-            name='repeatPassword'
-            idInput='repeatPassword'
-            changeTypePassword={this.changeTypePassword('typePasswordSecondInput')}
-          />
-          <button className={cx('accountComponent__buttonSubmit')} type='submit'>Save</button>
-        </div>
-      </UserFormBox>
+        )}
+        {cropperSrc && (
+          <button className={cx('accountComponent__cropImage')} type='button' onClick={this.cropImage} >
+            Crop Image
+          </button>
+        ) }
+      </Fragment>
     )
   }
 }
