@@ -14,8 +14,8 @@ import {
   CONTINUE_USER__CLOSE,
   CONTINUE_USER__FAILURE,
 
-  SAVE_USER_SRC_AVATAR_IMG__SUCCESS,
-  SAVE_USER_SRC_AVATAR_IMG__FAILURE,
+  CHANGE_AVATAR_ACCOUNT__SUCCESS,
+  CHANGE_AVATAR_ACCOUNT__FAILURE,
 
   FORWARD_ACCOUNT__SUCCESS,
   FORWARD_ACCOUNT__FAILURE,
@@ -103,18 +103,18 @@ export function* continueUserSaga(action) {
   }
 }
 
-export function* saveUserSRCAvatarIMGSaga(action) {
+export function* changeAvatarAccountSaga(action) {
   const { userSRCAvatarIMG } = action.payload
   try {
     yield put({
-      type: SAVE_USER_SRC_AVATAR_IMG__SUCCESS,
+      type: CHANGE_AVATAR_ACCOUNT__SUCCESS,
       payload: {
         userSRCAvatarIMG,
       },
     })
   } catch (error) {
     yield put({
-      type: SAVE_USER_SRC_AVATAR_IMG__FAILURE,
+      type: CHANGE_AVATAR_ACCOUNT__FAILURE,
       error,
     })
   }

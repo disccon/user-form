@@ -7,11 +7,12 @@ import styles from '../../../components/userFormBox/UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import {
-  forwardAccount, saveUserSRCAvatarIMG, continueUser, changeQuestionState,
+  forwardAccount, continueUser, changeQuestionState, changeAvatarAccount,
 } from '../../../actions/actionNewUser'
 import { FieldInputAccount } from '../../../components/fieldForm/fieldInputAccount/FieldInputAccount'
 import { UserFormBox } from '../../../components/userFormBox/UserFormBox'
 import { QuestionAccount } from './questionAccount/QuestionAccount'
+import CropperModal from '../../../components/cropperModalWindow/CropperModal'
 import db from '../../../db'
 
 const cx = classNames.bind(styles)
@@ -21,6 +22,7 @@ class Account extends Component {
     avatarIMGError: null,
     typePasswordFirstInput: 'text',
     typePasswordSecondInput: 'text',
+    cropperSrc: null,
   }
 
   continueUser = isContinue => () => {
@@ -30,7 +32,6 @@ class Account extends Component {
 
   addImageUserAvatar = event => {
     event.preventDefault()
-    const { saveUserSRCAvatarIMG } = this.props
     const reader = new FileReader()
     const fileIMG = event.target.files[0]
     const fileSize = fileIMG.size / 1024 / 1024
@@ -38,8 +39,8 @@ class Account extends Component {
       reader.onloadend = () => {
         this.setState({
           avatarIMGError: false,
+          cropperSrc: reader.result,
         })
-        saveUserSRCAvatarIMG(reader.result)
       }
       reader.readAsDataURL(fileIMG)
     } else {
@@ -73,9 +74,19 @@ class Account extends Component {
     }
   }
 
+  setCropperSrc = () => {
+    this.setState({
+      cropperSrc: null,
+    })
+  }
+
   render() {
-    const { handleSubmit, userSRCAvatarIMG, isQuestion } = this.props
-    const { avatarIMGError, typePasswordFirstInput, typePasswordSecondInput } = this.state
+    const {
+      handleSubmit, isQuestion, userSRCAvatarIMG, changeAvatarAccount,
+    } = this.props
+    const {
+      avatarIMGError, typePasswordFirstInput, typePasswordSecondInput, cropperSrc,
+    } = this.state
     const userAvatarIMG = userSRCAvatarIMG
       ? <img className={cx('userAvatarWrapper__userAvatarIMG')} src={userSRCAvatarIMG} alt='userAvatar' />
       : <UserAvatarIcon className={cx('userAvatarWrapper__userAvatarSVG')} alt='userAvatar' />
@@ -137,6 +148,13 @@ class Account extends Component {
             />
             <button className={cx('accountComponent__buttonSubmit')} type='submit'>Forward</button>
           </div>
+          {cropperSrc && (
+            <CropperModal
+              cropperSrc={cropperSrc}
+              setCropperSrc={this.setCropperSrc}
+              changeAvatar={changeAvatarAccount}
+            />
+          )}
         </UserFormBox>
       </Fragment>
     )
@@ -189,9 +207,9 @@ Account.propTypes = {
   ]),
   isQuestion: PropTypes.bool.isRequired,
   continueUser: PropTypes.func.isRequired,
-  saveUserSRCAvatarIMG: PropTypes.func.isRequired,
   forwardAccount: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func,
+  changeAvatarAccount: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => {
@@ -211,6 +229,6 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    forwardAccount, saveUserSRCAvatarIMG, continueUser, changeQuestionState,
+    forwardAccount, continueUser, changeQuestionState, changeAvatarAccount,
   },
 )(accountForm)

@@ -6,6 +6,7 @@ $uS: 'userFormBox';
 $uA: 'userAvatarWrapper';
 
 .#{$uS} {
+  position: relative;
   display: flex;
   padding: 65px 100px;
   width: 100%;
@@ -129,4 +130,3 @@ $uA: 'userAvatarWrapper';
     }
   }
 }
-
