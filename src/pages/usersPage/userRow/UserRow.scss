@@ -26,6 +26,7 @@ $us: 'userRow';
     font-weight: 500;
 
     .#{$us}__img {
+      border-radius: 50%;
       width: 40px;
       height: 40px;
       margin-right: 15px;
