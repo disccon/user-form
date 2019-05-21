@@ -6,14 +6,14 @@ import { Link } from 'react-router-dom'
 import styles from './EditUserPage.scss'
 import { ReactComponent as EditIcon } from '../../img/icon/edit.svg'
 import { fetchEditUser } from '../../actions/actionEditUser'
-import { getEditUserIndexDB } from '../../helpers/getEditUserIndexDB'
+
 
 const cx = classNames.bind(styles)
 
 class EditUserPage extends Component {
   componentDidMount() {
     const { fetchEditUser, id } = this.props
-    getEditUserIndexDB(fetchEditUser, id)
+    fetchEditUser(id)
   }
 
   render() {
