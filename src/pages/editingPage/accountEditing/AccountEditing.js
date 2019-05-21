@@ -9,6 +9,7 @@ import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import { saveChangesAccountEditing, changeAvatarAccountEditing, fetchEditUser } from '../../../actions/actionEditUser'
 import { FieldInputAccount } from '../../../components/fieldForm/fieldInputAccount/FieldInputAccount'
 import { UserFormBox } from '../../../components/userFormBox/UserFormBox'
+import CropperModal from '../../../components/cropperModalWindow/CropperModal'
 import db from '../../../db'
 
 const cx = classNames.bind(styles)
@@ -18,6 +19,7 @@ class AccountEditing extends Component {
     avatarIMGError: null,
     typePasswordFirstInput: 'text',
     typePasswordSecondInput: 'text',
+    cropperSrc: null,
   }
 
   componentDidMount() {
@@ -27,7 +29,6 @@ class AccountEditing extends Component {
 
   addImageUserAvatar = event => {
     event.preventDefault()
-    const { changeAvatarAccountEditing } = this.props
     const reader = new FileReader()
     const fileIMG = event.target.files[0]
     const fileSize = fileIMG.size / 1024 / 1024
@@ -35,8 +36,8 @@ class AccountEditing extends Component {
       reader.onloadend = () => {
         this.setState({
           avatarIMGError: false,
+          cropperSrc: reader.result,
         })
-        changeAvatarAccountEditing(reader.result)
       }
       reader.readAsDataURL(fileIMG)
     } else {
@@ -64,9 +65,17 @@ class AccountEditing extends Component {
     }
   }
 
+  setCropperSrc = () => {
+    this.setState({
+      cropperSrc: null,
+    })
+  }
+
   render() {
-    const { handleSubmit, userSRCAvatarIMG } = this.props
-    const { avatarIMGError, typePasswordFirstInput, typePasswordSecondInput } = this.state
+    const { handleSubmit, userSRCAvatarIMG, changeAvatarAccountEditing } = this.props
+    const {
+      avatarIMGError, typePasswordFirstInput, typePasswordSecondInput, cropperSrc,
+    } = this.state
     const userAvatarIMG = userSRCAvatarIMG
       ? <img className={cx('userAvatarWrapper__userAvatarIMG')} src={userSRCAvatarIMG} alt='userAvatar' />
       : <UserAvatarIcon className={cx('userAvatarWrapper__userAvatarSVG')} alt='userAvatar' />
@@ -126,6 +135,13 @@ class AccountEditing extends Component {
           />
           <button className={cx('accountComponent__buttonSubmit')} type='submit'>Save</button>
         </div>
+        {cropperSrc && (
+          <CropperModal
+            cropperSrc={cropperSrc}
+            setCropperSrc={this.setCropperSrc}
+            changeAvatar={changeAvatarAccountEditing}
+          />
+        )}
       </UserFormBox>
     )
   }

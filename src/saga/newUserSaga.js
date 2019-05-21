@@ -14,8 +14,8 @@ import {
   CONTINUE_USER__CLOSE,
   CONTINUE_USER__FAILURE,
 
-  SAVE_USER_SRC_AVATAR_IMG__SUCCESS,
-  SAVE_USER_SRC_AVATAR_IMG__FAILURE,
+  CHANGE_AVATAR_ACCOUNT__SUCCESS,
+  CHANGE_AVATAR_ACCOUNT__FAILURE,
 
   FORWARD_ACCOUNT__SUCCESS,
   FORWARD_ACCOUNT__FAILURE,
@@ -103,18 +103,18 @@ export function* continueUserSaga(action) {
   }
 }
 
-export function* saveUserSRCAvatarIMGSaga(action) {
+export function* changeAvatarAccountSaga(action) {
   const { userSRCAvatarIMG } = action.payload
   try {
     yield put({
-      type: SAVE_USER_SRC_AVATAR_IMG__SUCCESS,
+      type: CHANGE_AVATAR_ACCOUNT__SUCCESS,
       payload: {
         userSRCAvatarIMG,
       },
     })
   } catch (error) {
     yield put({
-      type: SAVE_USER_SRC_AVATAR_IMG__FAILURE,
+      type: CHANGE_AVATAR_ACCOUNT__FAILURE,
       error,
     })
   }
@@ -122,14 +122,14 @@ export function* saveUserSRCAvatarIMGSaga(action) {
 
 export function* forwardAccountSaga(action) {
   const {
-    userName, password, repeatPassword,
+    userName, password, userSRCAvatarIMG,
   } = action.payload
   try {
     yield put(push('/profile'))
     yield put({
       type: FORWARD_ACCOUNT__SUCCESS,
       payload: {
-        userName, password, repeatPassword,
+        userName, password, repeatPassword: password, userSRCAvatarIMG,
       },
     })
   } catch (error) {
@@ -183,7 +183,15 @@ export function* forwardBackContactsSaga(action) {
     yield put({
       type: actionType,
       payload: {
-        forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
+        company,
+        githubLink,
+        facebookLink,
+        selectLanguage,
+        fax,
+        phoneArray,
+        phoneN1,
+        phoneN2,
+        phoneN3,
       },
     })
   } catch (error) {
@@ -270,6 +278,7 @@ export function* forwardCapabilitiesSaga(action) {
   } = action.payload
   const newUserDB = yield select(state => state.newUser)
   delete initialNewUserState.isQuestion
+  delete newUserDB.isQuestion
   delete newUserDB.id
   try {
     yield put(push('/users'))

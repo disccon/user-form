@@ -12,7 +12,6 @@ import Capabilities from './capabilities/Capabilities'
 import Profile from './profile/Profile'
 import db from '../../db'
 
-
 const cx = classNames.bind(styles)
 
 class AddingNewUserPage extends Component {
@@ -74,7 +73,6 @@ AddingNewUserPage.propTypes = {
   newUser: PropTypes.object,
   push: PropTypes.func.isRequired,
 }
-
 const mapStateToProps = state => {
   const activeFormName = getFormNames()(state)
   const activeValue = getFormValues(activeFormName[0])(state)
@@ -85,7 +83,6 @@ const mapStateToProps = state => {
     pathname,
   }
 }
-
 export default connect(
   mapStateToProps,
   { push },
