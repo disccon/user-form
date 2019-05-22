@@ -8,8 +8,8 @@ import {
   CONTINUE_USER__CLOSE,
   CONTINUE_USER__FAILURE,
 
-  SAVE_USER_SRC_AVATAR_IMG__SUCCESS,
-  SAVE_USER_SRC_AVATAR_IMG__FAILURE,
+  CHANGE_AVATAR_ACCOUNT__SUCCESS,
+  CHANGE_AVATAR_ACCOUNT__FAILURE,
 
   FORWARD_ACCOUNT__SUCCESS,
   FORWARD_ACCOUNT__FAILURE,
@@ -80,14 +80,14 @@ export default function newUserReducer(state = initialNewUserState, action) {
       }
     }
 
-    case SAVE_USER_SRC_AVATAR_IMG__SUCCESS: {
+    case CHANGE_AVATAR_ACCOUNT__SUCCESS: {
       return {
         ...state,
         userSRCAvatarIMG: action.payload.userSRCAvatarIMG,
         error: undefined,
       }
     }
-    case SAVE_USER_SRC_AVATAR_IMG__FAILURE: {
+    case CHANGE_AVATAR_ACCOUNT__FAILURE: {
       return {
         ...state,
         error: action.error,

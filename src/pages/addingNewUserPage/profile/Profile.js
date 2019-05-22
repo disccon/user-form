@@ -26,9 +26,9 @@ class Profile extends Component {
 
     backProfile = () => {
       const {
-        firstNameForm, lastNameForm, birthDateForm, emailForm, addressForm, forwardBackProfile, maleGender,
+        firstNameForm, lastNameForm, birthDateForm, emailForm, addressForm, forwardBackProfile, genderForm,
       } = this.props
-      forwardBackProfile('back', firstNameForm, lastNameForm, birthDateForm, emailForm, addressForm, maleGender)
+      forwardBackProfile('back', firstNameForm, lastNameForm, birthDateForm, emailForm, addressForm, genderForm)
     }
 
     render() {
@@ -115,7 +115,7 @@ Profile.propTypes = {
   ]),
   emailForm: PropTypes.string,
   addressForm: PropTypes.string,
-  maleGender: PropTypes.string,
+  genderForm: PropTypes.string,
   forwardBackProfile: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 }
@@ -176,7 +176,7 @@ const mapStateToProps = state => {
   const lastNameForm = selector(state, 'lastName')
   const emailForm = selector(state, 'email')
   const addressForm = selector(state, 'address')
-  const maleGender = selector(state, 'gender')
+  const genderForm = selector(state, 'gender')
   const birthDateForm = selector(state, 'birthDate')
   const {
     firstName, lastName, email, address, gender, birthDate,
@@ -190,7 +190,7 @@ const mapStateToProps = state => {
     birthDateForm,
     emailForm,
     addressForm,
-    maleGender,
+    genderForm,
   }
 }
 
