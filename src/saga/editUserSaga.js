@@ -21,17 +21,22 @@ import {
 import db from '../db'
 import { getEditUserIndexDB } from '../helpers/getEditUserIndexDB'
 
-export function* userEditStateSaga(action) {
+export function* fetchEditUserSaga(action) {
   const { id } = action.payload
   try {
     const editUser = yield call(getEditUserIndexDB, id)
-    yield put({
-      type: FETCH_EDIT_USER__SUCCESS,
-      payload: {
-        editUser,
-      },
-    })
+    if (editUser) {
+      yield put({
+        type: FETCH_EDIT_USER__SUCCESS,
+        payload: {
+          editUser,
+        },
+      })
+    } else {
+      yield put(push('/not-found'))
+    }
   } catch (error) {
+    yield put(push('/not-found'))
     yield put({
       type: FETCH_EDIT_USER__FAILURE,
       error,

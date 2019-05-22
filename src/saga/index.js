@@ -19,7 +19,7 @@ import {
 } from './usersSaga'
 
 import {
-  userEditStateSaga,
+  fetchEditUserSaga,
   changeAvatarAccountEditingSaga,
   saveChangesAccountEditingSaga,
   saveChangesProfileSaga,
@@ -75,7 +75,7 @@ export default function* rootSaga() {
     takeLatest(DELETE_USER, deleteUserSaga),
     takeLatest(SEARCHING_USERS, searchingUsersSaga),
 
-    takeLatest(FETCH_EDIT_USER, userEditStateSaga),
+    takeLatest(FETCH_EDIT_USER, fetchEditUserSaga),
     takeLatest(CHANGE_AVATAR_ACCOUNT_EDITING, changeAvatarAccountEditingSaga),
     takeLatest(SAVE_CHANGES_ACCOUNT_EDITING, saveChangesAccountEditingSaga),
     takeLatest(SAVE_CHANGES_PROFILE_EDITING, saveChangesProfileSaga),
