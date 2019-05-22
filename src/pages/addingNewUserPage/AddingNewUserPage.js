@@ -20,7 +20,7 @@ class AddingNewUserPage extends Component {
     const {
       pathname, push,
     } = this.props
-    if (pathname === '/profile' || pathname === '/contacts' || pathname === '/capabilities') {
+    if (pathname !== '/') {
       push('/')
     }
     window.addEventListener('beforeunload', this.onUnload)
