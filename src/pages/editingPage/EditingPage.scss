@@ -27,17 +27,18 @@ $ed: 'editingPage';
         justify-content: center;
         background: #EAF0FC;
 
-        .#{$ed}__h2 {
+        .#{$ed}__link {
           font-weight: bold;
           font-size: 24px;
-          color: #9BB0CB;
+          color: #475666;
         }
       }
 
       .#{$ed}__tab.activeTab {
         background: #4E86E4;
+        pointer-events: none;
 
-        .#{$ed}__h2 {
+        .#{$ed}__link {
           color: #fff;
         }
       }

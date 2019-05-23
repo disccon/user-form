@@ -1,3 +1,3 @@
 import db from '../db'
 
-export const getEditUserIndexDB = id => db.usersDB.get(id, user => user)
+export const getEditUserIndexDB = id => db.usersDB.get(id)
