@@ -5,7 +5,7 @@ import styles from './UserFormBox.scss'
 
 const cx = classNames.bind(styles)
 
-export const UserFormBox = ({
+const UserFormBox = ({
   handleSubmit, children, classForm,
 }) => (
   <form className={cx('userFormBox', classForm)} onSubmit={handleSubmit}>
@@ -18,3 +18,5 @@ UserFormBox.propTypes = {
   children: PropTypes.array.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 }
+
+export default UserFormBox

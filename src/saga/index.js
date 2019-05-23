@@ -57,7 +57,6 @@ import {
   SAVE_CHANGES_CAPABILITIES_EDITING,
 } from '../actions/actionEditUser'
 
-
 export default function* rootSaga() {
   yield all([
     takeLatest(CREATE_USER, createUserSaga),

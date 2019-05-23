@@ -6,7 +6,6 @@ import AvatarIMG5 from '../img/Ellipse(5).png'
 import AvatarIMG6 from '../img/Ellipse(6).png'
 import AvatarIMG7 from '../img/Ellipse(7).png'
 
-
 export const users = [
   {
     id: 1,

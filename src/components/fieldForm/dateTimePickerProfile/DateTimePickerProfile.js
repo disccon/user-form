@@ -7,7 +7,7 @@ import { ReactComponent as CalendarIcon } from '../../../img/icon/calendar.svg'
 
 const cx = classNames.bind(styles)
 
-export const DateTimePickerProfile = ({ input, meta: { touched, error } }) => (
+const DateTimePickerProfile = ({ input, meta: { touched, error } }) => (
   <Fragment>
     <div className={cx('profile__birthDate')}>
       <div className={cx('profile__birthDateWrapper')}>
@@ -37,3 +37,5 @@ DateTimePickerProfile.propTypes = {
   input: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
 }
+
+export default DateTimePickerProfile

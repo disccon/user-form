@@ -33,7 +33,7 @@ const options = [
   { value: 'ko', label: 'Korean, KO' },
 ]
 
-export const FieldSelectContacts = ({
+const FieldSelectContacts = ({
   input, meta: { touched, error }, label,
 }) => {
   const colourStyles = {
@@ -116,3 +116,5 @@ FieldSelectContacts.propTypes = {
   label: PropTypes.string,
   idField: PropTypes.string,
 }
+
+export default FieldSelectContacts

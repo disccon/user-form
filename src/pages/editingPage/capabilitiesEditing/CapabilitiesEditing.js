@@ -5,16 +5,13 @@ import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 import { saveChangesCapabilitiesEditing, fetchEditUser } from '../../../actions/actionEditUser'
 import styles from '../../../components/userFormBox/UserFormBox.scss'
-import {
-  FieldSelectCapabilities,
-} from '../../../components/fieldForm/fieldSelectCapabilities/FieldSelectCapabilities'
-import {
-  FieldTextareaCapabilities,
-} from '../../../components/fieldForm/fieldTextareaCapabilities/FieldTextareaCapabilities'
-import {
-  FieldCheckboxCapabilities,
-} from '../../../components/fieldForm/fieldCheckboxCapabilities/FieldCheckboxCapabilities'
-import { UserFormBox } from '../../../components/userFormBox/UserFormBox'
+import FieldSelectCapabilities
+  from '../../../components/fieldForm/fieldSelectCapabilities/FieldSelectCapabilities'
+import FieldTextareaCapabilities
+  from '../../../components/fieldForm/fieldTextareaCapabilities/FieldTextareaCapabilities'
+import FieldCheckboxCapabilities
+  from '../../../components/fieldForm/fieldCheckboxCapabilities/FieldCheckboxCapabilities'
+import UserFormBox from '../../../components/userFormBox/UserFormBox'
 
 const cx = classNames.bind(styles)
 

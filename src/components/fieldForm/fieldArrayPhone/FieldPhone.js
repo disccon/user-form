@@ -6,7 +6,7 @@ import styles from './FieldArrayPhone.scss'
 
 const cx = classNames.bind(styles)
 
-export const FieldPhone = ({
+const FieldPhone = ({
   input, meta: { touched, error }, label, type, isVisibilityDeleteField, placeholder, idField, deleteFieldPhone,
 }) => (
   <div className={cx('arrayPhone__fieldPhone')}>
@@ -43,3 +43,5 @@ FieldPhone.propTypes = {
   idField: PropTypes.string.isRequired,
   deleteFieldPhone: PropTypes.func,
 }
+
+export default FieldPhone

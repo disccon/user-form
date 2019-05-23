@@ -35,7 +35,6 @@ import {
   CREATE_USER__FAILURE,
 } from '../actions/actionNewUser'
 
-
 export default function newUserReducer(state = initialNewUserState, action) {
   switch (action.type) {
     case CHANGE_QUESTION_STATE__CLOSE: {

@@ -89,4 +89,5 @@ UserRow.propTypes = {
   user: PropTypes.object.isRequired,
   deleteUser: PropTypes.func.isRequired,
 }
+
 export default onClickOutside(UserRow)

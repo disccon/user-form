@@ -27,7 +27,7 @@ const options = [
   { value: 'Firebase', label: 'Firebase' },
 ]
 
-export const FieldSelectCapabilities = ({
+const FieldSelectCapabilities = ({
   label, input, meta: { touched, error },
 }) => {
   const colourStyles = {
@@ -129,3 +129,6 @@ FieldSelectCapabilities.propTypes = {
   input: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
 }
+
+
+export default FieldSelectCapabilities

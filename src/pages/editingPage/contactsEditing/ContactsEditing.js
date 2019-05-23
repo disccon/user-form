@@ -7,10 +7,10 @@ import {
 } from 'redux-form'
 import styles from '../../../components/userFormBox/UserFormBox.scss'
 import { saveChangesContactsEditing, fetchEditUser, deleteFieldPhoneEditing } from '../../../actions/actionEditUser'
-import { UserFormBox } from '../../../components/userFormBox/UserFormBox'
-import { FieldInputNewUser } from '../../../components/fieldForm/fieldInputNewUser/FieldInputNewUser'
-import { FieldSelectContacts } from '../../../components/fieldForm/fieldSelectContacts/FieldSelectContacts'
-import { FieldArrayPhone } from '../../../components/fieldForm/fieldArrayPhone/FieldArrayPhone'
+import UserFormBox from '../../../components/userFormBox/UserFormBox'
+import FieldInputNewUser from '../../../components/fieldForm/fieldInputNewUser/FieldInputNewUser'
+import FieldSelectContacts from '../../../components/fieldForm/fieldSelectContacts/FieldSelectContacts'
+import FieldArrayPhone from '../../../components/fieldForm/fieldArrayPhone/FieldArrayPhone'
 
 const cx = classNames.bind(styles)
 
