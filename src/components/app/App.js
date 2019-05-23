@@ -15,15 +15,16 @@ import Header from '../header/Header'
 import { NotFound } from '../../pages/notFound/NotFound'
 import db from '../../db'
 import { changeQuestionState } from '../../actions/actionNewUser'
+import { initialNewUserState } from '../../stubs/initialNewUserState'
 
 const cx = classNames.bind(styles)
 
 class App extends Component {
   componentDidMount() {
-    const { newUser, changeQuestionState } = this.props
+    const { changeQuestionState } = this.props
     db.newUserDB.get(0, newUserDB => {
       if (newUserDB) {
-        changeQuestionState(_.isEqual(newUserDB, newUser))
+        changeQuestionState(_.isEqual(newUserDB, initialNewUserState))
       }
     })
   }
@@ -49,14 +50,11 @@ class App extends Component {
 }
 
 App.propTypes = {
-  newUser: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   changeQuestionState: PropTypes.func.isRequired,
 }
 
 export default connect(
-  state => ({
-    newUser: state.newUser,
-  }),
+  null,
   { changeQuestionState },
 )(App)
