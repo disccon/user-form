@@ -8,37 +8,45 @@ const cx = classNames.bind(styles)
 
 export const Pagination = ({
   pagesCount, currentPage, limit, changePage,
-}) => (
-  <div className={cx('usersPage__Pagination')}>
-    <button
-      disabled={currentPage === 1}
-      type='button'
-      className={cx('pagination__arrows', { pagination__activeTabs: currentPage !== 1 })}
-      onClick={changePage(currentPage - 1)}
-    >
-      {'<'}
-    </button>
-    {_.times(Math.min(limit, pagesCount), page => (
+}) => {
+  const indentLimit = Math.floor(limit / 2)
+  const indentPage = (pagesCount - currentPage) >= indentLimit ? indentLimit
+    : limit - 1 - (pagesCount - currentPage)
+  return (
+    <div className={cx('usersPage__Pagination')}>
       <button
-        disabled={currentPage === page + 1}
-        key={page + 1}
+        disabled={currentPage === 1}
         type='button'
-        className={cx('pagination__tabs', { pagination__activeTabs: currentPage === page + 1 })}
-        onClick={changePage(page + 1)}
+        className={cx('pagination__arrows', { pagination__activeTabs: currentPage !== 1 })}
+        onClick={changePage(currentPage - 1)}
       >
-        {page + 1}
+        {'<'}
       </button>
-    ))}
-    <button
-      disabled={currentPage === pagesCount}
-      type='button'
-      className={cx('pagination__arrows', { pagination__activeTabs: currentPage !== pagesCount })}
-      onClick={changePage(currentPage + 1)}
-    >
-      {'>'}
-    </button>
-  </div>
-)
+      {_.times(Math.min(limit, pagesCount), page => {
+        const nowPage = currentPage > indentPage ? page + currentPage - indentPage : page + 1
+        return (
+          <button
+            disabled={currentPage === nowPage}
+            key={nowPage}
+            type='button'
+            className={cx('pagination__tabs', { pagination__activeTabs: currentPage === nowPage })}
+            onClick={changePage(nowPage)}
+          >
+            {nowPage}
+          </button>
+        )
+      })}
+      <button
+        disabled={currentPage === pagesCount}
+        type='button'
+        className={cx('pagination__arrows', { pagination__activeTabs: currentPage !== pagesCount })}
+        onClick={changePage(currentPage + 1)}
+      >
+        {'>'}
+      </button>
+    </div>
+  )
+}
 
 Pagination.propTypes = {
   pagesCount: PropTypes.number.isRequired,

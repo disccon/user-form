@@ -14,11 +14,11 @@ export const fetchUsers = () => ({
   type: FETCH_USERS,
 })
 
-export const deleteUser = (id, currentPage) => (
+export const deleteUser = id => (
   {
     type: DELETE_USER,
     payload: {
-      id, currentPage,
+      id,
     },
   })
 
