@@ -1,10 +1,12 @@
-.usersPage__Pagination{
+$pl: 'pagination';
+.usersPage__#{$pl} {
   display: flex;
   font-size: 17px;
   margin-top: 25px;
   margin-right: auto;
   margin-left: auto;
-  .pagination__tabs, .pagination__arrows{
+
+  .#{$pl}__tabs, .#{$pl}__arrows {
     color: #c4d0ce;
     background: transparent;
     display: block;
@@ -12,11 +14,22 @@
     font-weight: 500;
     font-size: 21px;
   }
-  .pagination__tabs:hover, .pagination__activeTabs:hover{
+
+  .#{$pl}__tabs:hover, .#{$pl}__activeTabs:hover {
     transition: color ease 0.3s;
     color: #4E86E4;
   }
-  .pagination__activeTabs{
+
+  .#{$pl}__activeTabs {
     color: #475666;
+  }
+
+  .#{$pl}__points {
+    width: 24px;
+    background: transparent;
+    display: block;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 16px;
   }
 }

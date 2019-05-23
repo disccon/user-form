@@ -3,6 +3,9 @@ import {
 } from 'redux-saga/effects'
 import { push } from 'connected-react-router'
 import {
+  SAVE_NEW_USER_DATA__SUCCESS,
+  SAVE_NEW_USER_DATA__FAILURE,
+
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
 
@@ -17,29 +20,28 @@ import {
   CHANGE_AVATAR_ACCOUNT__SUCCESS,
   CHANGE_AVATAR_ACCOUNT__FAILURE,
 
-  FORWARD_ACCOUNT__SUCCESS,
-  FORWARD_ACCOUNT__FAILURE,
-
-  FORWARD_BACK_PROFILE__FORWARD,
-  FORWARD_BACK_PROFILE__BACK,
-  FORWARD_BACK_PROFILE__FAILURE,
-
-  FORWARD_BACK_CONTACTS__FORWARD,
-  FORWARD_BACK_CONTACTS__BACK,
-  FORWARD_BACK_CONTACTS__FAILURE,
-
-  DELETE_ADD_FIELD_PHONE__ADD,
-  DELETE_ADD_FIELD_PHONE__DELETE,
-  DELETE_ADD_FIELD_PHONE__FAILURE,
-
-  BACK_CAPABILITIES__SUCCESS,
-  BACK_CAPABILITIES__FAILURE,
-
   FORWARD_CAPABILITIES__ADD_NEW_USER,
   FORWARD_CAPABILITIES__FAILURE,
 } from '../actions/actionNewUser'
 import { initialNewUserState } from '../stubs/initialNewUserState'
 import db from '../db'
+
+export function* saveNewUserDataSaga(action) {
+  const { activeFormValue } = action.payload
+  try {
+    yield put({
+      type: SAVE_NEW_USER_DATA__SUCCESS,
+      payload: {
+        ...activeFormValue,
+      },
+    })
+  } catch (error) {
+    yield put({
+      type: SAVE_NEW_USER_DATA__FAILURE,
+      error,
+    })
+  }
+}
 
 export function* createUserSaga() {
   try {
@@ -130,179 +132,6 @@ export function* changeAvatarAccountSaga(action) {
   }
 }
 
-export function* forwardAccountSaga(action) {
-  const {
-    userName, password, userSRCAvatarIMG,
-  } = action.payload
-  try {
-    const accountFilled = true
-    db.newUserDB.update(0, {
-      userName, password, repeatPassword: password, userSRCAvatarIMG, accountFilled,
-    })
-    yield put(push('/profile'))
-    yield put({
-      type: FORWARD_ACCOUNT__SUCCESS,
-      payload: {
-        userName, password, repeatPassword: password, userSRCAvatarIMG, accountFilled,
-      },
-    })
-  } catch (error) {
-    yield put({
-      type: FORWARD_ACCOUNT__FAILURE,
-      error,
-    })
-  }
-}
-
-export function* forwardBackProfileSaga(action) {
-  const {
-    forwardBack, firstName, lastName, birthDate, email, address, gender,
-  } = action.payload
-  try {
-    let actionType
-    const profileFilled = true
-    if (forwardBack === 'back') {
-      actionType = FORWARD_BACK_PROFILE__BACK
-      yield put(push('/'))
-    } else if (forwardBack === 'forward') {
-      actionType = FORWARD_BACK_PROFILE__FORWARD
-      yield put(push('/contacts'))
-      db.newUserDB.update(0, {
-        firstName, lastName, birthDate, email, address, gender, profileFilled,
-      })
-    }
-    yield put({
-      type: actionType,
-      payload: {
-        firstName, lastName, birthDate, email, address, gender, profileFilled,
-      },
-    })
-  } catch (error) {
-    yield put({
-      type: FORWARD_BACK_PROFILE__FAILURE,
-      error,
-    })
-  }
-}
-
-export function* forwardBackContactsSaga(action) {
-  const {
-    forwardBack, company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
-  } = action.payload
-  try {
-    const contactsFilled = true
-    let actionType
-    if (forwardBack === 'back') {
-      actionType = FORWARD_BACK_CONTACTS__BACK
-      yield put(push('/profile'))
-    } else if (forwardBack === 'forward') {
-      actionType = FORWARD_BACK_CONTACTS__FORWARD
-      yield put(push('/capabilities'))
-      db.newUserDB.update(0, {
-        company,
-        githubLink,
-        facebookLink,
-        selectLanguage,
-        fax,
-        phoneArray,
-        phoneN1,
-        phoneN2,
-        phoneN3,
-        contactsFilled,
-      })
-    }
-    yield put({
-      type: actionType,
-      payload: {
-        company,
-        githubLink,
-        facebookLink,
-        selectLanguage,
-        fax,
-        phoneArray,
-        phoneN1,
-        phoneN2,
-        phoneN3,
-        contactsFilled,
-      },
-    })
-  } catch (error) {
-    yield put({
-      type: FORWARD_BACK_CONTACTS__FAILURE,
-      error,
-    })
-  }
-}
-
-export function* deleteAddFieldPhoneSaga(action) {
-  const {
-    deleteAddField, company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1,
-  } = action.payload
-  let { phoneN2, phoneN3 } = action.payload
-  const newPhoneArray = [...phoneArray]
-  let type
-  try {
-    if (deleteAddField === 'add' && phoneArray.length < 3) {
-      phoneN2 = phoneArray.length === 1 ? '' : phoneN2
-      phoneN3 = phoneArray.length === 2 ? '' : phoneN3
-      newPhoneArray.push('')
-      type = DELETE_ADD_FIELD_PHONE__ADD
-    } else if (deleteAddField === 'delete' && phoneArray.length > 1) {
-      phoneN2 = phoneArray.length === 2 ? null : phoneN2
-      phoneN3 = null
-      newPhoneArray.pop('')
-      type = DELETE_ADD_FIELD_PHONE__DELETE
-    }
-    yield put({
-      type,
-      payload: {
-        company,
-        githubLink,
-        facebookLink,
-        selectLanguage,
-        fax,
-        phoneArray: newPhoneArray,
-        phoneN1,
-        phoneN2,
-        phoneN3,
-      },
-    })
-  } catch (error) {
-    yield put({
-      type: DELETE_ADD_FIELD_PHONE__FAILURE,
-      error,
-    })
-  }
-}
-
-export function* backCapabilitiesSaga(action) {
-  const {
-    selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
-    checkboxFemale, checkboxGuitar, checkboxWtf,
-  } = action.payload
-  try {
-    yield put(push('/contacts'))
-    yield put({
-      type: BACK_CAPABILITIES__SUCCESS,
-      payload: {
-        selectSkills,
-        textareaField,
-        checkboxArt,
-        checkboxSport,
-        checkboxJustWant,
-        checkboxFemale,
-        checkboxGuitar,
-        checkboxWtf,
-      },
-    })
-  } catch (error) {
-    yield put({
-      type: BACK_CAPABILITIES__FAILURE,
-      error,
-    })
-  }
-}
-
 export function* forwardCapabilitiesSaga(action) {
   db.newUserDB.update(0, {
     ...initialNewUserState,
@@ -313,7 +142,7 @@ export function* forwardCapabilitiesSaga(action) {
   } = action.payload
   try {
     const newUser = yield select(state => state.newUser)
-    delete initialNewUserState.isQuestion
+    delete newUser.isQuestion
     delete newUser.id
     delete newUser.accountFilled
     delete newUser.profileFilled

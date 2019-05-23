@@ -31,7 +31,9 @@ $aC: 'accountComponentQuestion';
     .#{$aC}__closeIcon {
       width: 15px;
       height: 15px;
-      filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(2deg) brightness(100%) contrast(100%)
+      path{
+        stroke: #fff;
+      }
     }
   }
 }

@@ -1,5 +1,8 @@
 import { initialNewUserState } from '../stubs/initialNewUserState'
 import {
+  SAVE_NEW_USER_DATA__SUCCESS,
+  SAVE_NEW_USER_DATA__FAILURE,
+
   CHANGE_QUESTION_STATE__OPEN,
   CHANGE_QUESTION_STATE__CLOSE,
   CHANGE_QUESTION_STATE__FAILURE,
@@ -11,25 +14,8 @@ import {
   CHANGE_AVATAR_ACCOUNT__SUCCESS,
   CHANGE_AVATAR_ACCOUNT__FAILURE,
 
-  FORWARD_ACCOUNT__SUCCESS,
-  FORWARD_ACCOUNT__FAILURE,
-
-  FORWARD_BACK_PROFILE__FORWARD,
-  FORWARD_BACK_PROFILE__BACK,
-  FORWARD_BACK_PROFILE__FAILURE,
-
-  FORWARD_BACK_CONTACTS__FORWARD,
-  FORWARD_BACK_CONTACTS__BACK,
-  FORWARD_BACK_CONTACTS__FAILURE,
-
-  DELETE_ADD_FIELD_PHONE__ADD,
-  DELETE_ADD_FIELD_PHONE__DELETE,
-  DELETE_ADD_FIELD_PHONE__FAILURE,
-
-  BACK_CAPABILITIES__SUCCESS,
-  BACK_CAPABILITIES__FAILURE,
-
   FORWARD_CAPABILITIES__ADD_NEW_USER,
+  FORWARD_CAPABILITIES__FAILURE,
 
   CREATE_USER__SUCCESS,
   CREATE_USER__FAILURE,
@@ -37,6 +23,20 @@ import {
 
 export default function newUserReducer(state = initialNewUserState, action) {
   switch (action.type) {
+    case SAVE_NEW_USER_DATA__SUCCESS: {
+      return {
+        ...state,
+        ...action.payload,
+        error: undefined,
+      }
+    }
+    case SAVE_NEW_USER_DATA__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
     case CHANGE_QUESTION_STATE__CLOSE: {
       return {
         ...state,
@@ -93,154 +93,15 @@ export default function newUserReducer(state = initialNewUserState, action) {
       }
     }
 
-    case FORWARD_ACCOUNT__SUCCESS: {
-      return {
-        ...state,
-        accountFilled: action.payload.accountFilled,
-        userName: action.payload.userName,
-        password: action.payload.password,
-        repeatPassword: action.payload.repeatPassword,
-        error: undefined,
-      }
-    }
-    case FORWARD_ACCOUNT__FAILURE: {
-      return {
-        ...state,
-        error: action.error,
-      }
-    }
-
-    case FORWARD_BACK_PROFILE__FORWARD: {
-      return {
-        ...state,
-        profileFilled: action.payload.profileFilled,
-        firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
-        birthDate: action.payload.birthDate,
-        email: action.payload.email,
-        address: action.payload.address,
-        gender: action.payload.gender,
-        error: undefined,
-      }
-    }
-    case FORWARD_BACK_PROFILE__BACK: {
-      return {
-        ...state,
-        profileFilled: action.payload.profileFilled,
-        firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
-        birthDate: action.payload.birthDate,
-        email: action.payload.email,
-        address: action.payload.address,
-        gender: action.payload.gender,
-        error: undefined,
-      }
-    }
-    case FORWARD_BACK_PROFILE__FAILURE: {
-      return {
-        ...state,
-        error: action.error,
-      }
-    }
-
-    case FORWARD_BACK_CONTACTS__FORWARD: {
-      return {
-        ...state,
-        contactsFilled: action.payload.contactsFilled,
-        company: action.payload.company,
-        githubLink: action.payload.githubLink,
-        facebookLink: action.payload.facebookLink,
-        selectLanguage: action.payload.selectLanguage,
-        fax: action.payload.fax,
-        phoneArray: action.payload.phoneArray,
-        phoneN1: action.payload.phoneN1,
-        phoneN2: action.payload.phoneN2,
-        phoneN3: action.payload.phoneN3,
-        error: undefined,
-      }
-    }
-    case FORWARD_BACK_CONTACTS__BACK: {
-      return {
-        ...state,
-        company: action.payload.company,
-        githubLink: action.payload.githubLink,
-        facebookLink: action.payload.facebookLink,
-        selectLanguage: action.payload.selectLanguage,
-        fax: action.payload.fax,
-        phoneArray: action.payload.phoneArray,
-        phoneN1: action.payload.phoneN1,
-        phoneN2: action.payload.phoneN2,
-        phoneN3: action.payload.phoneN3,
-        error: undefined,
-      }
-    }
-    case FORWARD_BACK_CONTACTS__FAILURE: {
-      return {
-        ...state,
-        error: action.error,
-      }
-    }
-
-    case DELETE_ADD_FIELD_PHONE__ADD: {
-      return {
-        ...state,
-        company: action.payload.company,
-        githubLink: action.payload.githubLink,
-        facebookLink: action.payload.facebookLink,
-        selectLanguage: action.payload.selectLanguage,
-        fax: action.payload.fax,
-        phoneArray: action.payload.phoneArray,
-        phoneN1: action.payload.phoneN1,
-        phoneN2: action.payload.phoneN2,
-        phoneN3: action.payload.phoneN3,
-        error: undefined,
-      }
-    }
-    case DELETE_ADD_FIELD_PHONE__DELETE: {
-      return {
-        ...state,
-        company: action.payload.company,
-        githubLink: action.payload.githubLink,
-        facebookLink: action.payload.facebookLink,
-        selectLanguage: action.payload.selectLanguage,
-        fax: action.payload.fax,
-        phoneArray: action.payload.phoneArray,
-        phoneN1: action.payload.phoneN1,
-        phoneN2: action.payload.phoneN2,
-        phoneN3: action.payload.phoneN3,
-        error: undefined,
-      }
-    }
-    case DELETE_ADD_FIELD_PHONE__FAILURE: {
-      return {
-        ...state,
-        error: action.error,
-      }
-    }
-
-    case BACK_CAPABILITIES__SUCCESS: {
-      return {
-        ...state,
-        selectSkills: action.payload.selectSkills,
-        textareaField: action.payload.textareaField,
-        checkboxArt: action.payload.checkboxArt,
-        checkboxSport: action.payload.checkboxSport,
-        checkboxJustWant: action.payload.checkboxJustWant,
-        checkboxFemale: action.payload.checkboxFemale,
-        checkboxGuitar: action.payload.checkboxGuitar,
-        checkboxWtf: action.payload.checkboxWtf,
-        error: undefined,
-      }
-    }
-    case BACK_CAPABILITIES__FAILURE: {
-      return {
-        ...state,
-        error: action.error,
-      }
-    }
     case FORWARD_CAPABILITIES__ADD_NEW_USER: {
       return {
         ...action.payload,
+        error: undefined,
+      }
+    }
+    case FORWARD_CAPABILITIES__FAILURE: {
+      return {
+        ...state,
         error: action.error,
       }
     }

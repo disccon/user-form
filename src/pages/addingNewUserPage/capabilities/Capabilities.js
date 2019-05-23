@@ -3,7 +3,11 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Field, formValueSelector, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
-import { backCapabilities, forwardCapabilities } from '../../../actions/actionNewUser'
+import { push } from 'connected-react-router'
+import {
+  saveNewUserData,
+  forwardCapabilities,
+} from '../../../actions/actionNewUser'
 import styles from '../../../components/userFormBox/UserFormBox.scss'
 import FieldSelectCapabilities
   from '../../../components/fieldForm/fieldSelectCapabilities/FieldSelectCapabilities'
@@ -24,11 +28,20 @@ class Capabilities extends Component {
 
   backCapabilities = () => {
     const {
-      backCapabilities, selectSkillsForm, textareaFieldForm, checkboxArtForm, checkboxSportForm, checkboxJustWantForm,
-      checkboxFemaleForm, checkboxGuitarForm, checkboxWtfForm,
+      saveNewUserData, selectSkillsForm, textareaFieldForm, checkboxArtForm, checkboxSportForm,
+      checkboxJustWantForm, checkboxFemaleForm, checkboxGuitarForm, checkboxWtfForm, push,
     } = this.props
-    backCapabilities(selectSkillsForm, textareaFieldForm, checkboxArtForm, checkboxSportForm, checkboxJustWantForm,
-      checkboxFemaleForm, checkboxGuitarForm, checkboxWtfForm)
+    push('/contacts')
+    saveNewUserData({
+      selectSkills: selectSkillsForm,
+      textareaField: textareaFieldForm,
+      checkboxArt: checkboxArtForm,
+      checkboxSport: checkboxSportForm,
+      checkboxJustWant: checkboxJustWantForm,
+      checkboxFemale: checkboxFemaleForm,
+      checkboxGuitar: checkboxGuitarForm,
+      checkboxWtf: checkboxWtfForm,
+    })
   }
 
   render() {
@@ -134,9 +147,10 @@ Capabilities.propTypes = {
     PropTypes.string,
     PropTypes.bool,
   ]),
-  backCapabilities: PropTypes.func.isRequired,
+  saveNewUserData: PropTypes.func.isRequired,
   forwardCapabilities: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
 }
 
 const CapabilitiesForm = reduxForm({
@@ -202,5 +216,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { backCapabilities, forwardCapabilities },
+  { saveNewUserData, forwardCapabilities, push },
 )(CapabilitiesForm)

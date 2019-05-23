@@ -16,11 +16,12 @@ class EditUserPage extends Component {
   }
 
   render() {
+    const { id, editUser } = this.props
     const {
       userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax,
-      facebookLink, phoneN1, phoneN2, phoneN3, selectSkills, checkboxArt, checkboxSport, checkboxJustWant,
-      checkboxFemale, checkboxGuitar, checkboxWtf, id,
-    } = this.props.editUser
+      facebookLink, phoneArray, selectSkills, checkboxArt, checkboxSport, checkboxJustWant,
+      checkboxFemale, checkboxGuitar, checkboxWtf,
+    } = editUser
     return (
       <div className={cx('container')}>
         <Link className={cx('linkBackPage')} to='/users'>{'<  Users List'}</Link>
@@ -101,22 +102,29 @@ class EditUserPage extends Component {
                   </div>
                   <div className={cx('accountDataWrapper__wrapper')}>
                     <h4 className={cx('accountDataWrapper__h4')}>Facebook Link:</h4>
-                    <span className={cx('accountDataWrapper__span')}>{facebookLink}</span>
+                    <a
+                      className={cx('accountDataWrapper__span accountDataWrapper__a')}
+                      href={`https://${facebookLink}`}
+                    >
+                      {facebookLink}
+                    </a>
                   </div>
-                  <div className={cx('accountDataWrapper__wrapper')}>
-                    <h4 className={cx('accountDataWrapper__h4')}>Phone #1:</h4>
-                    <span className={cx('accountDataWrapper__span')}>{phoneN1}</span>
-                  </div>
-                  {phoneN2 && (
+                  {phoneArray.length > 0 && (
                     <div className={cx('accountDataWrapper__wrapper')}>
-                      <h4 className={cx('accountDataWrapper__h4')}>Phone #2:</h4>
-                      <span className={cx('accountDataWrapper__span')}>{phoneN2}</span>
+                      <h4 className={cx('accountDataWrapper__h4')}>Phone #1:</h4>
+                      <span className={cx('accountDataWrapper__span')}>{phoneArray[0].phone}</span>
                     </div>
                   )}
-                  {phoneN3 && (
+                  {phoneArray.length > 1 && (
+                    <div className={cx('accountDataWrapper__wrapper')}>
+                      <h4 className={cx('accountDataWrapper__h4')}>Phone #2:</h4>
+                      <span className={cx('accountDataWrapper__span')}>{phoneArray[1].phone}</span>
+                    </div>
+                  )}
+                  {phoneArray.length > 2 && (
                     <div className={cx('accountDataWrapper__wrapper')}>
                       <h4 className={cx('accountDataWrapper__h4')}>Phone #3:</h4>
-                      <span className={cx('accountDataWrapper__span')}>{phoneN3}</span>
+                      <span className={cx('accountDataWrapper__span')}>{phoneArray[0].phone}</span>
                     </div>
                   )}
                 </div>

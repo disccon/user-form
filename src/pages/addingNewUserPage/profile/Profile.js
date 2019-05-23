@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
+import { push } from 'connected-react-router'
 import { reduxForm, Field, formValueSelector } from 'redux-form'
 import styles from '../../../components/userFormBox/UserFormBox.scss'
-import { forwardBackProfile } from '../../../actions/actionNewUser'
+import {
+  saveNewUserData,
+} from '../../../actions/actionNewUser'
 import FieldRadioProfile from '../../../components/fieldForm/fieldRadioProfile/FieldRadioProfile'
 import DateTimePickerProfile
   from '../../../components/fieldForm/dateTimePickerProfile/DateTimePickerProfile'
@@ -16,16 +19,32 @@ const cx = classNames.bind(styles)
 
 class Profile extends Component {
     onSubmit = values => {
-      const { forwardBackProfile } = this.props
-      forwardBackProfile('forward', values.firstName, values.lastName, values.birthDate, values.email, values.address,
-        values.gender)
+      const { saveNewUserData, push } = this.props
+      push('/contacts')
+      saveNewUserData({
+        firstName: values.firstName,
+        lastName: values.lastName,
+        birthDate: values.birthDate,
+        email: values.email,
+        address: values.address,
+        gender: values.gender,
+        profileFilled: true,
+      })
     }
 
     backProfile = () => {
       const {
-        firstNameForm, lastNameForm, birthDateForm, emailForm, addressForm, forwardBackProfile, genderForm,
+        saveNewUserData, firstNameForm, lastNameForm, birthDateForm, emailForm, addressForm, genderForm, push,
       } = this.props
-      forwardBackProfile('back', firstNameForm, lastNameForm, birthDateForm, emailForm, addressForm, genderForm)
+      push('/')
+      saveNewUserData({
+        firstName: firstNameForm,
+        lastName: lastNameForm,
+        birthDate: birthDateForm,
+        email: emailForm,
+        address: addressForm,
+        gender: genderForm,
+      })
     }
 
     render() {
@@ -113,8 +132,9 @@ Profile.propTypes = {
   emailForm: PropTypes.string,
   addressForm: PropTypes.string,
   genderForm: PropTypes.string,
-  forwardBackProfile: PropTypes.func.isRequired,
+  saveNewUserData: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
 }
 
 
@@ -193,5 +213,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { forwardBackProfile },
+  { saveNewUserData, push },
 )(ProfileForm)

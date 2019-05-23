@@ -22,7 +22,7 @@ class CropperModal extends Component {
   }
 
   render() {
-    const { cropperSrc } = this.props
+    const { cropperSrc, setCropperSrc } = this.props
     return (
       <Fragment>
         <div className={cx('cropperModal__wrapper')}>
@@ -39,9 +39,14 @@ class CropperModal extends Component {
             ref={this.setCropper}
           />
         </div>
-        <button className={cx('cropperModal__cropImage')} type='button' onClick={this.cropImage} >
-          Crop Image
-        </button>
+        <div className={cx('cropperModal__wrapperButton')}>
+          <button className={cx('cropperModal__close')} type='button' onClick={setCropperSrc} >
+            Close
+          </button>
+          <button className={cx('cropperModal__cropImage')} type='button' onClick={this.cropImage} >
+            Crop Image
+          </button>
+        </div>
       </Fragment>
     )
   }

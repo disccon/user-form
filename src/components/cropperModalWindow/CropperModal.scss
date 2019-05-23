@@ -1,4 +1,5 @@
-.cropperModal__wrapper{
+$cr: 'cropperModal';
+.#{$cr}__wrapper{
   position: absolute;
   width: 100%;
   height: 100%;
@@ -8,15 +9,27 @@
   background: #fff;
 }
 
-.cropperModal__cropImage{
-  position: absolute;
-  bottom: -80px;
-  left: calc(50% - 50px);
-  width: 100px;
+.#{$cr}__wrapperButton{
+  display: flex;
+  width: 300px;
   height: 40px;
-  margin-top: 35px;
-  background: #5E97F3;
-  font-weight: 500;
-  text-align: center;
-  color: #FFF;
+  position: absolute;
+  left: calc(50% - 150px);
+  bottom: -80px;
+  .#{$cr}__cropImage, .#{$cr}__close{
+    width: 100px;
+    height: 40px;
+    font-weight: 500;
+    text-align: center;
+    color: #FFF;
+  }
+
+  .#{$cr}__cropImage{
+    margin-left: auto;
+    background: #5E97F3;
+  }
+
+  .#{$cr}__close{
+    background: #e22217;
+  }
 }

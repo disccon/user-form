@@ -13,7 +13,7 @@ export const Pagination = ({
   const indentPage = (pagesCount - currentPage) >= indentLimit ? indentLimit
     : limit - 1 - (pagesCount - currentPage)
   return (
-    <div className={cx('usersPage__Pagination')}>
+    <div className={cx('usersPage__pagination')}>
       <button
         disabled={currentPage === 1}
         type='button'
@@ -22,6 +22,15 @@ export const Pagination = ({
       >
         {'<'}
       </button>
+      {currentPage > indentLimit + 1 && pagesCount > limit && (
+      <button
+        type='button'
+        className={cx('pagination__points')}
+        onClick={changePage(1)}
+      >
+        ...
+      </button>
+      )}
       {_.times(Math.min(limit, pagesCount), page => {
         const nowPage = currentPage > indentPage ? page + currentPage - indentPage : page + 1
         return (
@@ -36,6 +45,16 @@ export const Pagination = ({
           </button>
         )
       })}
+      {currentPage < pagesCount - indentLimit && pagesCount > limit && (
+      <button
+        disabled={currentPage === pagesCount}
+        type='button'
+        className={cx('pagination__points')}
+        onClick={changePage(pagesCount)}
+      >
+        ...
+      </button>
+      )}
       <button
         disabled={currentPage === pagesCount}
         type='button'
