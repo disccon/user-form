@@ -8,14 +8,21 @@ import NoHaveUserRow from './noHaveUserRow/NoHaveUserRow'
 import { fetchUsers, deleteUser, searchingUsers } from '../../actions/actionUsers'
 import UserRow from './userRow/UserRow'
 import { Pagination } from './pagination/Pagination'
-import { getFilterUsers } from './getFilterUsers'
+import { getFilterUsers } from '../../helpers/getFilterUsers'
+import { validateUsersUrl } from '../../helpers/validateUsersUrl'
 
 const cx = classNames.bind(styles)
 
 class UsersPage extends Component {
   componentDidMount() {
-    const { fetchUsers } = this.props
-    fetchUsers()
+    const {
+      fetchUsers, search, push,
+    } = this.props
+    if (validateUsersUrl(search)) {
+      push('/not-found')
+    } else {
+      fetchUsers()
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -32,8 +39,8 @@ class UsersPage extends Component {
   }
 
   deleteUser = id => () => {
-    const { deleteUser, currentPage } = this.props
-    deleteUser(id, currentPage)
+    const { deleteUser } = this.props
+    deleteUser(id)
   }
 
   changePage = page => () => {
@@ -82,7 +89,7 @@ class UsersPage extends Component {
             pagesCount={pagesCount}
             currentPage={currentPage}
             changePage={this.changePage}
-            limit={6}
+            limit={5}
           />
         )}
       </Fragment>
@@ -91,6 +98,7 @@ class UsersPage extends Component {
 }
 
 UsersPage.propTypes = {
+  search: PropTypes.string,
   users: PropTypes.array.isRequired,
   per_page: PropTypes.number.isRequired,
   pagesCount: PropTypes.number.isRequired,
@@ -103,18 +111,19 @@ UsersPage.propTypes = {
 }
 
 const mapStateToProps = state => {
-  const { per_page, filterUsers } = state.usersReducer
+  const { filterUsers } = state.usersReducer
+  const { search } = state.router.location
   const userFilter = getFilterUsers(state)
   return {
     users: userFilter.users,
     total: userFilter.total,
     currentPage: userFilter.currentPage,
-    per_page,
+    per_page: userFilter.per_page,
+    search,
     filterUsers,
     pagesCount: userFilter.pagesCount,
   }
 }
-
 
 export default connect(
   mapStateToProps,
