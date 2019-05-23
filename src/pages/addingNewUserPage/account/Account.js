@@ -2,12 +2,16 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
+import { push } from 'connected-react-router'
 import { Field, reduxForm } from 'redux-form'
 import styles from '../../../components/userFormBox/UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import {
-  forwardAccount, continueUser, changeQuestionState, changeAvatarAccount,
+  saveNewUserData,
+  continueUser,
+  changeQuestionState,
+  changeAvatarAccount,
 } from '../../../actions/actionNewUser'
 import FieldInputAccount from '../../../components/fieldForm/fieldInputAccount/FieldInputAccount'
 import UserFormBox from '../../../components/userFormBox/UserFormBox'
@@ -51,13 +55,20 @@ class Account extends Component {
   }
 
   onSubmit = values => {
-    const { forwardAccount, userSRCAvatarIMG } = this.props
+    const { saveNewUserData, userSRCAvatarIMG, push } = this.props
     if (!userSRCAvatarIMG) {
       this.setState({
         avatarIMGError: 'Upload a picture',
       })
     } else {
-      forwardAccount(values.userName, values.password, userSRCAvatarIMG)
+      push('/profile')
+      saveNewUserData({
+        userName: values.userName,
+        password: values.password,
+        repeatPassword: values.password,
+        userSRCAvatarIMG,
+        accountFilled: true,
+      })
     }
   }
 
@@ -207,9 +218,10 @@ Account.propTypes = {
   ]),
   isQuestion: PropTypes.bool.isRequired,
   continueUser: PropTypes.func.isRequired,
-  forwardAccount: PropTypes.func.isRequired,
+  saveNewUserData: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func,
   changeAvatarAccount: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => {
@@ -229,6 +241,6 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    forwardAccount, continueUser, changeQuestionState, changeAvatarAccount,
+    saveNewUserData, continueUser, changeQuestionState, changeAvatarAccount, push,
   },
 )(accountForm)

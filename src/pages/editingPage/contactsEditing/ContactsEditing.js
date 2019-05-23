@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import {
-  Field, reduxForm, FieldArray, formValueSelector,
-} from 'redux-form'
+import { Field, reduxForm, FieldArray } from 'redux-form'
 import styles from '../../../components/userFormBox/UserFormBox.scss'
-import { saveChangesContactsEditing, fetchEditUser, deleteFieldPhoneEditing } from '../../../actions/actionEditUser'
+import { saveChangesContactsEditing, fetchEditUser } from '../../../actions/actionEditUser'
 import UserFormBox from '../../../components/userFormBox/UserFormBox'
 import FieldInputNewUser from '../../../components/fieldForm/fieldInputNewUser/FieldInputNewUser'
 import FieldSelectContacts from '../../../components/fieldForm/fieldSelectContacts/FieldSelectContacts'
@@ -23,25 +21,7 @@ class ContactsEditing extends Component {
   onSubmit = values => {
     const { saveChangesContactsEditing, id } = this.props
     saveChangesContactsEditing(values.company, values.githubLink, values.facebookLink, values.selectLanguage,
-      values.fax, values.phoneArray, values.phoneN1, values.phoneN2, values.phoneN3, id)
-  }
-
-  deleteFieldPhone = () => {
-    const {
-      deleteFieldPhoneEditing, companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm,
-      phoneArray, phoneN1Form, phoneN2Form, phoneN3Form,
-    } = this.props
-    deleteFieldPhoneEditing('delete', companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm,
-      phoneArray, phoneN1Form, phoneN2Form, phoneN3Form)
-  }
-
-  addFieldPhone = () => {
-    const {
-      deleteFieldPhoneEditing, companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm,
-      phoneArray, phoneN1Form, phoneN2Form, phoneN3Form,
-    } = this.props
-    deleteFieldPhoneEditing('add', companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm,
-      phoneArray, phoneN1Form, phoneN2Form, phoneN3Form)
+      values.fax, values.phoneArray, id)
   }
 
   render() {
@@ -94,8 +74,6 @@ class ContactsEditing extends Component {
           />
           <FieldArray
             component={FieldArrayPhone}
-            addFieldPhone={this.addFieldPhone}
-            deleteFieldPhone={this.deleteFieldPhone}
             name='phoneArray'
           />
           <div className={cx('userFormBox__addPhone')} />
@@ -111,23 +89,10 @@ class ContactsEditing extends Component {
 }
 
 ContactsEditing.propTypes = {
-  companyForm: PropTypes.string,
-  githubLinkForm: PropTypes.string,
-  facebookLinkForm: PropTypes.string,
-  selectLanguageForm: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ]),
-  faxForm: PropTypes.string,
-  phoneArray: PropTypes.array,
-  phoneN1Form: PropTypes.string,
-  phoneN2Form: PropTypes.string,
-  phoneN3Form: PropTypes.string,
   id: PropTypes.number,
   saveChangesContactsEditing: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   fetchEditUser: PropTypes.func.isRequired,
-  deleteFieldPhoneEditing: PropTypes.func.isRequired,
 }
 
 const ContactsEditingForm = reduxForm({
@@ -186,36 +151,18 @@ const ContactsEditingForm = reduxForm({
 
 const mapStateToProps = (state, ownProps) => {
   const id = Number(ownProps.match.params.id)
-  const selector = formValueSelector('ContactsEditing')
-  const companyForm = selector(state, 'company')
-  const githubLinkForm = selector(state, 'githubLink')
-  const facebookLinkForm = selector(state, 'facebookLink')
-  const selectLanguageForm = selector(state, 'selectLanguage')
-  const faxForm = selector(state, 'fax')
-  const phoneN1Form = selector(state, 'phoneN1')
-  const phoneN2Form = selector(state, 'phoneN2')
-  const phoneN3Form = selector(state, 'phoneN3')
   const {
-    company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
+    company, githubLink, facebookLink, selectLanguage, fax, phoneArray,
   } = state.editUserReducer.editUser
   return {
     initialValues: {
-      company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2, phoneN3,
+      company, githubLink, facebookLink, selectLanguage, fax, phoneArray,
     },
     id,
-    companyForm,
-    githubLinkForm,
-    facebookLinkForm,
-    selectLanguageForm,
-    faxForm,
-    phoneArray,
-    phoneN1Form,
-    phoneN2Form,
-    phoneN3Form,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { saveChangesContactsEditing, fetchEditUser, deleteFieldPhoneEditing },
+  { saveChangesContactsEditing, fetchEditUser },
 )(ContactsEditingForm)

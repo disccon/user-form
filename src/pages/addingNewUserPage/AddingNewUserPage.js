@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { push } from 'connected-react-router'
 import { Redirect, Route, Switch } from 'react-router'
+import { getFormNames, getFormValues } from 'redux-form'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import styles from './AddingNewUser.scss'
@@ -10,6 +11,8 @@ import Account from './account/Account'
 import Contacts from './contacts/Contacts'
 import Capabilities from './capabilities/Capabilities'
 import Profile from './profile/Profile'
+import db from '../../db'
+
 
 const cx = classNames.bind(styles)
 
@@ -21,7 +24,18 @@ class AddingNewUserPage extends Component {
     if (pathname === '/profile' || pathname === '/contacts' || pathname === '/capabilities') {
       push('/')
     }
+    window.addEventListener('beforeunload', this.onUnload)
   }
+
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', this.onUnload)
+  }
+
+  onUnload = () => {
+    const { newUser, activeFormValue } = this.props
+    db.newUserDB.update(0, { ...newUser, ...activeFormValue, isQuestion: false })
+  }
+
 
   render() {
     const {
@@ -87,6 +101,8 @@ AddingNewUserPage.propTypes = {
   accountFilled: PropTypes.bool.isRequired,
   profileFilled: PropTypes.bool.isRequired,
   contactsFilled: PropTypes.bool.isRequired,
+  activeFormValue: PropTypes.object,
+  newUser: PropTypes.object,
   push: PropTypes.func.isRequired,
 }
 
@@ -94,8 +110,12 @@ const mapStateToProps = state => {
   const {
     accountFilled, profileFilled, contactsFilled,
   } = state.newUser
+  const activeFormName = getFormNames()(state)
+  const activeFormValue = getFormValues(activeFormName[0])(state)
   const { pathname } = state.router.location
   return {
+    newUser: state.newUser,
+    activeFormValue,
     pathname,
     accountFilled,
     profileFilled,

@@ -21,10 +21,7 @@ export const initialNewUserState = {
   facebookLink: '',
   selectLanguage: '',
   fax: '',
-  phoneArray: [''],
-  phoneN1: '',
-  phoneN2: '',
-  phoneN3: '',
+  phoneArray: [{}],
 
   selectSkills: '',
   textareaField: '',

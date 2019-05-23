@@ -9,10 +9,6 @@ import {
   CHANGE_AVATAR_ACCOUNT_EDITING__SUCCESS,
   CHANGE_AVATAR_ACCOUNT_EDITING__FAILURE,
 
-  DELETE_FIELD_PHONE_EDITING__ADD,
-  DELETE_FIELD_PHONE_EDITING__DELETE,
-  DELETE_FIELD_PHONE_EDITING__FAILURE,
-
   SAVE_CHANGES_ACCOUNT_EDITING__FAILURE,
   SAVE_CHANGES_PROFILE_EDITING__FAILURE,
   SAVE_CHANGES_CONTACTS_EDITING__FAILURE,
@@ -107,51 +103,9 @@ export function* saveChangesProfileSaga(action) {
   }
 }
 
-export function* deleteFieldPhoneEditingSaga(action) {
-  const {
-    deleteAddField, company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1,
-  } = action.payload
-  let { phoneN2, phoneN3 } = action.payload
-  const newPhoneArray = [...phoneArray]
-  let type
-  try {
-    if (deleteAddField === 'add' && phoneArray.length < 3) {
-      phoneN2 = phoneArray.length === 1 ? '' : phoneN2
-      phoneN3 = phoneArray.length === 2 ? '' : phoneN3
-      newPhoneArray.push('')
-      type = DELETE_FIELD_PHONE_EDITING__ADD
-    } else if (deleteAddField === 'delete' && phoneArray.length > 1) {
-      phoneN2 = phoneArray.length === 2 ? null : phoneN2
-      phoneN3 = null
-      newPhoneArray.pop('')
-      type = DELETE_FIELD_PHONE_EDITING__DELETE
-    }
-    yield put({
-      type,
-      payload: {
-        company,
-        githubLink,
-        facebookLink,
-        selectLanguage,
-        fax,
-        phoneArray: newPhoneArray,
-        phoneN1,
-        phoneN2,
-        phoneN3,
-      },
-    })
-  } catch (error) {
-    yield put({
-      type: DELETE_FIELD_PHONE_EDITING__FAILURE,
-      error,
-    })
-  }
-}
-
 export function* saveChangesContactsSaga(action) {
   const {
-    company, githubLink, facebookLink, selectLanguage, fax, phoneArray, phoneN1, phoneN2,
-    phoneN3, id,
+    company, githubLink, facebookLink, selectLanguage, fax, phoneArray, id,
   } = action.payload
   try {
     db.usersDB.update(id, {
@@ -161,9 +115,6 @@ export function* saveChangesContactsSaga(action) {
       selectLanguage,
       fax,
       phoneArray,
-      phoneN1,
-      phoneN2,
-      phoneN3,
       lastUpdate: new Date(),
     })
     yield put(push(`/user/${id}`))

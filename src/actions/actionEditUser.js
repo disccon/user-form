@@ -15,11 +15,6 @@ export const SAVE_CHANGES_PROFILE_EDITING__FAILURE = 'SAVE_CHANGES_PROFILE_EDITI
 export const SAVE_CHANGES_CONTACTS_EDITING = 'SAVE_CHANGES_CONTACTS_EDITING'
 export const SAVE_CHANGES_CONTACTS_EDITING__FAILURE = 'SAVE_CHANGES_CONTACTS_EDITING__FAILURE'
 
-export const DELETE_FIELD_PHONE_EDITING = 'DELETE_FIELD_PHONE_EDITING'
-export const DELETE_FIELD_PHONE_EDITING__ADD = 'DELETE_FIELD_PHONE_EDITING__ADD'
-export const DELETE_FIELD_PHONE_EDITING__DELETE = 'DELETE_FIELD_PHONE_EDITING__DELETE'
-export const DELETE_FIELD_PHONE_EDITING__FAILURE = 'DELETE_FIELD_PHONE_EDITING__FAILURE'
-
 export const SAVE_CHANGES_CAPABILITIES_EDITING = 'SAVE_CHANGES_CAPABILITIES_EDITING'
 export const SAVE_CHANGES_CAPABILITIES_EDITING__FAILURE = 'SAVE_CHANGES_CAPABILITIES_EDITING__FAILURE'
 
@@ -57,27 +52,7 @@ export const saveChangesProfileEditing = (firstName, lastName, birthDate, email,
     },
   })
 
-
-export const deleteFieldPhoneEditing = (deleteAddField, company, githubLink, facebookLink, selectLanguage, fax,
-  phoneArray, phoneN1, phoneN2, phoneN3) => (
-  {
-    type: DELETE_FIELD_PHONE_EDITING,
-    payload: {
-      deleteAddField,
-      company,
-      githubLink,
-      facebookLink,
-      selectLanguage,
-      fax,
-      phoneArray,
-      phoneN1,
-      phoneN2,
-      phoneN3,
-    },
-  })
-
-export const saveChangesContactsEditing = (company, githubLink, facebookLink, selectLanguage, fax, phoneArray,
-  phoneN1, phoneN2, phoneN3, id) => (
+export const saveChangesContactsEditing = (company, githubLink, facebookLink, selectLanguage, fax, phoneArray, id) => (
   {
     type: SAVE_CHANGES_CONTACTS_EDITING,
     payload: {
@@ -87,9 +62,6 @@ export const saveChangesContactsEditing = (company, githubLink, facebookLink, se
       selectLanguage,
       fax,
       phoneArray,
-      phoneN1,
-      phoneN2,
-      phoneN3,
       id,
     },
   })
