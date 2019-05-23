@@ -9,9 +9,9 @@ import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import {
   forwardAccount, continueUser, changeQuestionState, changeAvatarAccount,
 } from '../../../actions/actionNewUser'
-import { FieldInputAccount } from '../../../components/fieldForm/fieldInputAccount/FieldInputAccount'
-import { UserFormBox } from '../../../components/userFormBox/UserFormBox'
-import { QuestionAccount } from './questionAccount/QuestionAccount'
+import FieldInputAccount from '../../../components/fieldForm/fieldInputAccount/FieldInputAccount'
+import UserFormBox from '../../../components/userFormBox/UserFormBox'
+import QuestionAccount from './questionAccount/QuestionAccount'
 import CropperModal from '../../../components/cropperModalWindow/CropperModal'
 import db from '../../../db'
 

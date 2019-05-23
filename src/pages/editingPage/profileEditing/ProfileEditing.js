@@ -5,12 +5,11 @@ import classNames from 'classnames'
 import { reduxForm, Field } from 'redux-form'
 import styles from '../../../components/userFormBox/UserFormBox.scss'
 import { saveChangesProfileEditing, fetchEditUser } from '../../../actions/actionEditUser'
-import { UserFormBox } from '../../../components/userFormBox/UserFormBox'
-import { FieldInputNewUser } from '../../../components/fieldForm/fieldInputNewUser/FieldInputNewUser'
-import {
-  DateTimePickerProfile,
-} from '../../../components/fieldForm/dateTimePickerProfile/DateTimePickerProfile'
-import { FieldRadioProfile } from '../../../components/fieldForm/fieldRadioProfile/FieldRadioProfile'
+import UserFormBox from '../../../components/userFormBox/UserFormBox'
+import FieldInputNewUser from '../../../components/fieldForm/fieldInputNewUser/FieldInputNewUser'
+import DateTimePickerProfile
+  from '../../../components/fieldForm/dateTimePickerProfile/DateTimePickerProfile'
+import FieldRadioProfile from '../../../components/fieldForm/fieldRadioProfile/FieldRadioProfile'
 import db from '../../../db'
 
 const cx = classNames.bind(styles)

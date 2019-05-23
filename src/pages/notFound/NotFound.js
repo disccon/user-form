@@ -5,5 +5,5 @@ import styles from './NotFound.scss'
 const cx = classNames.bind(styles)
 
 export const NotFound = () => (
-  <h1 className={cx('nodFound')}>NodFound 404!</h1>
+  <h1 className={cx('notFound')}>NodFound 404!</h1>
 )

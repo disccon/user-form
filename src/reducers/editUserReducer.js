@@ -15,7 +15,6 @@ import {
   SAVE_CHANGES_CAPABILITIES_EDITING__FAILURE,
 } from '../actions/actionEditUser'
 
-
 export default function editUserReducer(state = { editUser: {} }, action) {
   switch (action.type) {
     case FETCH_EDIT_USER__SUCCESS: {

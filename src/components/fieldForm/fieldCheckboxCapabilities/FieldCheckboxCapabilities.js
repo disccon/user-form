@@ -5,7 +5,7 @@ import styles from './FieldCheckboxCapabilities.scss'
 
 const cx = classNames.bind(styles)
 
-export const FieldCheckboxCapabilities = ({
+const FieldCheckboxCapabilities = ({
   type, input, meta: { touched, error }, span, idCheckbox,
 }) => {
   const changeValue = input.value ? '' : span
@@ -33,3 +33,5 @@ FieldCheckboxCapabilities.propTypes = {
   type: PropTypes.string.isRequired,
   meta: PropTypes.object.isRequired,
 }
+
+export default FieldCheckboxCapabilities

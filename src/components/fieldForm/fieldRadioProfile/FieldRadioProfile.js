@@ -5,7 +5,7 @@ import styles from './FieldRadioProfile.scss'
 
 const cx = classNames.bind(styles)
 
-export const FieldRadioProfile = ({
+const FieldRadioProfile = ({
   input, meta: { touched, error }, label, type, name, idField,
 }) => (
   <Fragment>
@@ -31,3 +31,5 @@ FieldRadioProfile.propTypes = {
   name: PropTypes.string,
   idField: PropTypes.string,
 }
+
+export default FieldRadioProfile

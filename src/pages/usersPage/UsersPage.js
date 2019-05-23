@@ -10,7 +10,6 @@ import UserRow from './userRow/UserRow'
 import { Pagination } from './pagination/Pagination'
 import { getFilterUsers } from './getFilterUsers'
 
-
 const cx = classNames.bind(styles)
 
 class UsersPage extends Component {

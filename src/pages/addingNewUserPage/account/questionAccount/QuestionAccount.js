@@ -6,7 +6,7 @@ import styles from './QuestionAccount.scss'
 
 const cx = classNames.bind(styles)
 
-export const QuestionAccount = ({ continueUser }) => (
+const QuestionAccount = ({ continueUser }) => (
   <div className={cx('accountComponentQuestion')}>
     <span className={cx('accountComponentQuestion__span')}>
             You have an unsaved user data. Do you want to complete it?
@@ -31,3 +31,5 @@ export const QuestionAccount = ({ continueUser }) => (
 QuestionAccount.propTypes = {
   continueUser: PropTypes.func.isRequired,
 }
+
+export default QuestionAccount

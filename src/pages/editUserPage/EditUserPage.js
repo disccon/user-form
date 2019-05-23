@@ -7,7 +7,6 @@ import styles from './EditUserPage.scss'
 import { ReactComponent as EditIcon } from '../../img/icon/edit.svg'
 import { fetchEditUser } from '../../actions/actionEditUser'
 
-
 const cx = classNames.bind(styles)
 
 class EditUserPage extends Component {

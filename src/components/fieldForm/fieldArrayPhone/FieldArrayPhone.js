@@ -3,13 +3,12 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Field } from 'redux-form'
 import styles from './FieldArrayPhone.scss'
-import { FieldPhone } from './FieldPhone'
+import FieldPhone from './FieldPhone'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 
 const cx = classNames.bind(styles)
 
-
-export const FieldArrayPhone = ({ fields, addFieldPhone, deleteFieldPhone }) => (
+const FieldArrayPhone = ({ fields, addFieldPhone, deleteFieldPhone }) => (
   <Fragment>
     {fields.map((hobby, index) => (
       <Field
@@ -33,9 +32,10 @@ export const FieldArrayPhone = ({ fields, addFieldPhone, deleteFieldPhone }) => 
   </Fragment>
 )
 
-
 FieldArrayPhone.propTypes = {
   fields: PropTypes.object.isRequired,
   addFieldPhone: PropTypes.func.isRequired,
   deleteFieldPhone: PropTypes.func.isRequired,
 }
+
+export default FieldArrayPhone
