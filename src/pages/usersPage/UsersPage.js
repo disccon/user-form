@@ -6,7 +6,9 @@ import queryString from 'query-string'
 import { push } from 'connected-react-router'
 import styles from './UsersPage.scss'
 import NoHaveUserRow from './noHaveUserRow/NoHaveUserRow'
-import { fetchUsers, deleteUser, searchingUsers } from '../../actions/actionUsers'
+import {
+  fetchUsers, deleteUser, searchingUsers, loadingInterval,
+} from '../../actions/actionUsers'
 import UserRow from './userRow/UserRow'
 import { Pagination } from './pagination/Pagination'
 import { getFilterUsers } from '../../helpers/getFilterUsers'
@@ -16,14 +18,6 @@ import preloaderIcon from '../../img/icon/preloader.gif'
 const cx = classNames.bind(styles)
 
 class UsersPage extends Component {
-  state = {
-    listUsers: [],
-    total: 0,
-    currentPage: 1,
-    preloader: true,
-    perPage: 10,
-  }
-
   componentDidMount() {
     const {
       fetchUsers, search, push,
@@ -35,57 +29,6 @@ class UsersPage extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const {
-      preloader, total, pagesCount, perPage,
-    } = this.state
-    const {
-      users, filterUsers, search, push,
-    } = this.props
-    if ((prevProps.search !== search || prevProps.filterUsers !== filterUsers) && !preloader) {
-      clearTimeout(this.interval)
-      this.setState({
-        preloader: true,
-      })
-    }
-    if (prevProps.users !== users && total !== 0) {
-      const valueQuery = queryString.parse(search)
-      const per_page = Number(valueQuery.per_page) || perPage
-      const newPagesCount = Math.ceil((total - 1) / per_page)
-      const currentPage = Number(valueQuery.page) || 1
-      if (pagesCount > newPagesCount && pagesCount !== 0 && currentPage === pagesCount) {
-        push({ pathname: '/users', search: `?page=${newPagesCount}&per_page=${per_page}` })
-      } else {
-        this.getListUsers()
-      }
-    } else if (prevProps.search !== search || prevProps.filterUsers !== filterUsers || total === 0) {
-      this.loadData()
-    }
-  }
-
-  getListUsers = () => {
-    const { search, filterUsers, users } = this.props
-    const { perPage } = this.state
-    const valueQuery = queryString.parse(search)
-    const per_page = Number(valueQuery.per_page) || perPage
-    const listUsers = getFilterUsers({
-      users, filterUsers, per_page, search,
-    })
-    this.setState({
-      listUsers: listUsers.users,
-      total: listUsers.total,
-      currentPage: listUsers.currentPage,
-      pagesCount: listUsers.pagesCount,
-      preloader: false,
-    })
-  }
-
-  loadData = () => {
-    this.interval = setTimeout(() => {
-      this.getListUsers()
-    }, 500)
-  }
-
   searchingUsersFilter = ({ target }) => {
     const { searchingUsers } = this.props
     const { value } = target
@@ -93,22 +36,28 @@ class UsersPage extends Component {
   }
 
   deleteUser = id => () => {
-    const { deleteUser } = this.props
-    deleteUser(id)
+    const {
+      deleteUser, currentPage, pagesCount, search, perPage
+    } = this.props
+    const valueQuery = queryString.parse(search)
+    const per_page = Number(valueQuery.per_page) || perPage
+    deleteUser(id, currentPage, pagesCount, per_page)
   }
 
   changePage = page => () => {
-    const { push, search } = this.props
-    const { perPage } = this.state
+    const {
+      push, search, perPage, loadingInterval,
+    } = this.props
     const valueQuery = queryString.parse(search)
     const per_page = Number(valueQuery.per_page) || perPage
+    loadingInterval()
     push({ pathname: '/users', search: `?page=${page}&per_page=${per_page}` })
   }
 
   render() {
     const {
-      preloader, listUsers, currentPage, filterUsers, pagesCount,
-    } = this.state
+      isLoading, listUsers, currentPage, filterUsers, pagesCount,
+    } = this.props
     return (
       <Fragment>
         <h2 className={cx('headline')}>List of users</h2>
@@ -129,7 +78,7 @@ class UsersPage extends Component {
           </thead>
           <tbody>
             <tr className={cx('usersPage__firstTr')} />
-            {listUsers.length > 0 && !preloader && listUsers.map(user => (
+            {listUsers.length > 0 && !isLoading && listUsers.map(user => (
               <UserRow
                 key={user.id}
                 user={user}
@@ -138,8 +87,8 @@ class UsersPage extends Component {
             ))}
           </tbody>
         </table>
-        {listUsers.length === 0 && !preloader && <NoHaveUserRow />}
-        {pagesCount > 1 && !preloader && (
+        {listUsers.length === 0 && !isLoading && <NoHaveUserRow />}
+        {pagesCount > 1 && !isLoading && (
           <Pagination
             pagesCount={pagesCount}
             currentPage={currentPage}
@@ -147,7 +96,7 @@ class UsersPage extends Component {
             limit={5}
           />
         )}
-        {preloader && <img src={preloaderIcon} alt='preloader' className={cx('usersPage__preloader')} />}
+        {isLoading && <img src={preloaderIcon} alt='preloader' className={cx('usersPage__preloader')} />}
       </Fragment>
     )
   }
@@ -155,27 +104,44 @@ class UsersPage extends Component {
 
 UsersPage.propTypes = {
   search: PropTypes.string,
-  users: PropTypes.array.isRequired,
   filterUsers: PropTypes.string.isRequired,
   push: PropTypes.func.isRequired,
   fetchUsers: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   searchingUsers: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => {
-  const { filterUsers, users } = state.usersReducer
+  const {
+    filterUsers, users, isLoading, perPage,
+  } = state.usersReducer
   const { search } = state.router.location
+  if (!isLoading) {
+    const userFilter = getFilterUsers(state)
+    return {
+      search,
+      listUsers: userFilter.users,
+      total: userFilter.total,
+      currentPage: userFilter.currentPage,
+      pagesCount: userFilter.pagesCount,
+      perPage,
+      filterUsers,
+      isLoading,
+    }
+  }
   return {
-    users,
     search,
+    perPage,
+    listUsers: users,
     filterUsers,
+    isLoading,
   }
 }
 
 export default connect(
   mapStateToProps,
   {
-    fetchUsers, push, deleteUser, searchingUsers,
+    fetchUsers, push, deleteUser, searchingUsers, loadingInterval,
   },
 )(UsersPage)

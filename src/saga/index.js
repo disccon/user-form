@@ -12,6 +12,7 @@ import {
   fetchUsersSaga,
   deleteUserSaga,
   searchingUsersSaga,
+  loadingIntervalSaga,
 } from './usersSaga'
 
 import {
@@ -36,6 +37,7 @@ import {
   FETCH_USERS,
   DELETE_USER,
   SEARCHING_USERS,
+  LOADING_INTERVAL,
 } from '../actions/actionUsers'
 
 import {
@@ -59,6 +61,7 @@ export default function* rootSaga() {
     takeLatest(FETCH_USERS, fetchUsersSaga),
     takeLatest(DELETE_USER, deleteUserSaga),
     takeLatest(SEARCHING_USERS, searchingUsersSaga),
+    takeLatest(LOADING_INTERVAL, loadingIntervalSaga),
 
     takeLatest(FETCH_EDIT_USER, fetchEditUserSaga),
     takeLatest(CHANGE_AVATAR_ACCOUNT_EDITING, changeAvatarAccountEditingSaga),

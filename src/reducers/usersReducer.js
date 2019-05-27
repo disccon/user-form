@@ -7,6 +7,9 @@ import {
 
   SEARCHING_USERS__SUCCESS,
   SEARCHING_USERS__FAILURE,
+
+  LOADING_INTERVAL__SUCCESS,
+  LOADING_INTERVAL__FAILURE,
 } from '../actions/actionUsers'
 import { initialUsersState } from '../stubs/initialUsersState'
 
@@ -16,6 +19,7 @@ export default function usersReducer(state = initialUsersState, action) {
       return {
         ...state,
         users: [...action.payload.users],
+        isLoading: action.payload.isLoading,
         error: undefined,
       }
     }
@@ -30,6 +34,7 @@ export default function usersReducer(state = initialUsersState, action) {
       return {
         ...state,
         users: [...action.payload.users],
+        isLoading: action.payload.isLoading,
         error: undefined,
       }
     }
@@ -44,6 +49,7 @@ export default function usersReducer(state = initialUsersState, action) {
       return {
         ...state,
         filterUsers: action.payload.filterUsers,
+        isLoading: action.payload.isLoading,
         error: undefined,
       }
     }
@@ -53,6 +59,21 @@ export default function usersReducer(state = initialUsersState, action) {
         error: action.error,
       }
     }
+
+    case LOADING_INTERVAL__SUCCESS: {
+      return {
+        ...state,
+        isLoading: action.payload.isLoading,
+        error: undefined,
+      }
+    }
+    case LOADING_INTERVAL__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
 
     default:
       return state
