@@ -1,10 +1,11 @@
 import { createSelector } from 'reselect/lib/index'
 import queryString from 'query-string/index'
 
-const users = state => state.usersReducer.users
-const filter = state => state.usersReducer.filterUsers
-const perPageReducer = state => state.usersReducer.per_page
-const location = state => state.router.location.search
+const users = props => props.users
+const filter = props => props.filterUsers
+const perPageReducer = props => props.per_page
+const location = props => props.search
+
 
 export const getFilterUsers = createSelector(
   [users, filter, perPageReducer, location],
@@ -20,7 +21,7 @@ export const getFilterUsers = createSelector(
         users, total: usersRedux.length, currentPage, pagesCount, per_page,
       }
     }
-    const filterUsers = usersRedux.filter(user => `${user.firstName} ${user.lastName}`.includes(searchUsers))
+    const filterUsers = usersRedux.filter(user => `${user.firstName} ${user.lastName}`.toLowerCase().includes(searchUsers.toLowerCase()))
     const users = filterUsers.slice(start, start + per_page)
     const pagesCount = Math.ceil(filterUsers.length / per_page)
     return {

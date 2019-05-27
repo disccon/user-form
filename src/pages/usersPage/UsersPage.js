@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
+import queryString from 'query-string'
 import { push } from 'connected-react-router'
 import styles from './UsersPage.scss'
 import NoHaveUserRow from './noHaveUserRow/NoHaveUserRow'
@@ -10,10 +11,19 @@ import UserRow from './userRow/UserRow'
 import { Pagination } from './pagination/Pagination'
 import { getFilterUsers } from '../../helpers/getFilterUsers'
 import { validateUsersUrl } from '../../helpers/validateUsersUrl'
+import preloaderIcon from '../../img/icon/preloader.gif'
 
 const cx = classNames.bind(styles)
 
 class UsersPage extends Component {
+  state = {
+    listUsers: [],
+    total: 0,
+    currentPage: 1,
+    preloader: true,
+    perPage: 10,
+  }
+
   componentDidMount() {
     const {
       fetchUsers, search, push,
@@ -26,10 +36,54 @@ class UsersPage extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { pagesCount, per_page, push } = this.props
-    if (prevProps.pagesCount !== pagesCount && prevProps.pagesCount !== 0) {
-      push({ pathname: '/users', search: `?page=${pagesCount}&per_page=${per_page}` })
+    const {
+      preloader, total, pagesCount, perPage,
+    } = this.state
+    const {
+      users, filterUsers, search, push,
+    } = this.props
+    if ((prevProps.search !== search || prevProps.filterUsers !== filterUsers) && !preloader) {
+      clearTimeout(this.interval)
+      this.setState({
+        preloader: true,
+      })
     }
+    if (prevProps.users !== users && total !== 0) {
+      const valueQuery = queryString.parse(search)
+      const per_page = Number(valueQuery.per_page) || perPage
+      const newPagesCount = Math.ceil((total - 1) / per_page)
+      const currentPage = Number(valueQuery.page) || 1
+      if (pagesCount > newPagesCount && pagesCount !== 0 && currentPage === pagesCount) {
+        push({ pathname: '/users', search: `?page=${newPagesCount}&per_page=${per_page}` })
+      } else {
+        this.getListUsers()
+      }
+    } else if (prevProps.search !== search || prevProps.filterUsers !== filterUsers || total === 0) {
+      this.loadData()
+    }
+  }
+
+  getListUsers = () => {
+    const { search, filterUsers, users } = this.props
+    const { perPage } = this.state
+    const valueQuery = queryString.parse(search)
+    const per_page = Number(valueQuery.per_page) || perPage
+    const listUsers = getFilterUsers({
+      users, filterUsers, per_page, search,
+    })
+    this.setState({
+      listUsers: listUsers.users,
+      total: listUsers.total,
+      currentPage: listUsers.currentPage,
+      pagesCount: listUsers.pagesCount,
+      preloader: false,
+    })
+  }
+
+  loadData = () => {
+    this.interval = setTimeout(() => {
+      this.getListUsers()
+    }, 500)
   }
 
   searchingUsersFilter = ({ target }) => {
@@ -44,16 +98,17 @@ class UsersPage extends Component {
   }
 
   changePage = page => () => {
-    const {
-      per_page, push,
-    } = this.props
+    const { push, search } = this.props
+    const { perPage } = this.state
+    const valueQuery = queryString.parse(search)
+    const per_page = Number(valueQuery.per_page) || perPage
     push({ pathname: '/users', search: `?page=${page}&per_page=${per_page}` })
   }
 
   render() {
     const {
-      users, currentPage, filterUsers, pagesCount,
-    } = this.props
+      preloader, listUsers, currentPage, filterUsers, pagesCount,
+    } = this.state
     return (
       <Fragment>
         <h2 className={cx('headline')}>List of users</h2>
@@ -73,8 +128,8 @@ class UsersPage extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr className={cx('usersPage__trEmpty')} />
-            {users.length > 0 && users.map(user => (
+            <tr className={cx('usersPage__firstTr')} />
+            {listUsers.length > 0 && !preloader && listUsers.map(user => (
               <UserRow
                 key={user.id}
                 user={user}
@@ -83,8 +138,8 @@ class UsersPage extends Component {
             ))}
           </tbody>
         </table>
-        {users.length === 0 && <NoHaveUserRow />}
-        {pagesCount > 1 && (
+        {listUsers.length === 0 && !preloader && <NoHaveUserRow />}
+        {pagesCount > 1 && !preloader && (
           <Pagination
             pagesCount={pagesCount}
             currentPage={currentPage}
@@ -92,6 +147,7 @@ class UsersPage extends Component {
             limit={5}
           />
         )}
+        {preloader && <img src={preloaderIcon} alt='preloader' className={cx('usersPage__preloader')} />}
       </Fragment>
     )
   }
@@ -100,28 +156,20 @@ class UsersPage extends Component {
 UsersPage.propTypes = {
   search: PropTypes.string,
   users: PropTypes.array.isRequired,
-  per_page: PropTypes.number.isRequired,
-  pagesCount: PropTypes.number.isRequired,
+  filterUsers: PropTypes.string.isRequired,
   push: PropTypes.func.isRequired,
   fetchUsers: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
   searchingUsers: PropTypes.func.isRequired,
-  filterUsers: PropTypes.string.isRequired,
-  currentPage: PropTypes.number,
 }
 
 const mapStateToProps = state => {
-  const { filterUsers } = state.usersReducer
+  const { filterUsers, users } = state.usersReducer
   const { search } = state.router.location
-  const userFilter = getFilterUsers(state)
   return {
-    users: userFilter.users,
-    total: userFilter.total,
-    currentPage: userFilter.currentPage,
-    per_page: userFilter.per_page,
+    users,
     search,
     filterUsers,
-    pagesCount: userFilter.pagesCount,
   }
 }
 
