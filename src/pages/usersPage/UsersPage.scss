@@ -1,5 +1,5 @@
 $li: 'usersPage';
-.#{$li}__search{
+.#{$li}__search {
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
@@ -12,6 +12,7 @@ $li: 'usersPage';
   font-weight: 500;
   color: #000;
 }
+
 .#{$li}Table {
   margin-top: 28px;
 
@@ -48,13 +49,25 @@ $li: 'usersPage';
     }
   }
 
-  .#{$li}__firstTr {
-    height: 29px;
+  .usersPage__tbody {
+    position: relative;
+
+    .#{$li}__firstTr {
+      height: 29px;
+      width: 100%;
+    }
+
+    .#{$li}__preloader {
+      width: 64px;
+      height: 64px;
+      top: 240px;
+      left: calc(50% - 32px);
+      position: absolute;
+      z-index: 99;
+    }
   }
 }
-.#{$li}__trEmpty{
-  height: 29px;
-}
-.paginationbox {
-  color: #3f51b5;
-}
+
+
+
+

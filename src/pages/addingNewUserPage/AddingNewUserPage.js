@@ -13,7 +13,6 @@ import Capabilities from './capabilities/Capabilities'
 import Profile from './profile/Profile'
 import db from '../../db'
 
-
 const cx = classNames.bind(styles)
 
 class AddingNewUserPage extends Component {
@@ -35,7 +34,6 @@ class AddingNewUserPage extends Component {
     const { newUser, activeFormValue } = this.props
     db.newUserDB.update(0, { ...newUser, ...activeFormValue, isQuestion: false })
   }
-
 
   render() {
     const {

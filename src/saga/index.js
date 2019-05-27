@@ -11,7 +11,6 @@ import {
 import {
   fetchUsersSaga,
   deleteUserSaga,
-  searchingUsersSaga,
 } from './usersSaga'
 
 import {
@@ -35,7 +34,6 @@ import {
 import {
   FETCH_USERS,
   DELETE_USER,
-  SEARCHING_USERS,
 } from '../actions/actionUsers'
 
 import {
@@ -58,7 +56,6 @@ export default function* rootSaga() {
 
     takeLatest(FETCH_USERS, fetchUsersSaga),
     takeLatest(DELETE_USER, deleteUserSaga),
-    takeLatest(SEARCHING_USERS, searchingUsersSaga),
 
     takeLatest(FETCH_EDIT_USER, fetchEditUserSaga),
     takeLatest(CHANGE_AVATAR_ACCOUNT_EDITING, changeAvatarAccountEditingSaga),

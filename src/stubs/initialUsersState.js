@@ -1,5 +1,6 @@
 export const initialUsersState = {
   users: [],
-  per_page: 10,
-  filterUsers: '',
+  filteredUsers: [],
+  searchQuery: '',
+  isLoading: true,
 }
