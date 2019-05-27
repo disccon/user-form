@@ -45,7 +45,6 @@ const EditingPage = ({ pathname, id }) => (
   </div>
 )
 
-
 EditingPage.propTypes = {
   pathname: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
