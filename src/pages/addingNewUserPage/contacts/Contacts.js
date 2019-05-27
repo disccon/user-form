@@ -154,21 +154,23 @@ const ContactsForm = reduxForm({
       errors.fax = values.fax.charAt(17) >= 0 ? null : 'Must be 10 digits'
     }
 
-    if (!values.phoneN1) {
-      errors.phoneN1 = 'Missing Phone Number'
+    const phoneArrayErrors = []
+    if (!values.phoneArray || !values.phoneArray.length) {
+      errors.phoneArray = { phoneArray: 'Missing Phone Number' }
     } else {
-      errors.phoneN1 = values.phoneN1.charAt(17) >= 0 ? null : 'Must be 10 digits'
+      values.phoneArray.forEach((phone, phoneIndex) => {
+        const phoneErrors = {}
+        if (!phone.phone) {
+          phoneErrors.phone = 'Missing Phone Number'
+          phoneArrayErrors[phoneIndex] = phoneErrors
+        } else {
+          phoneErrors.phone = phone.phone.charAt(17) >= 0 ? null : 'Must be 10 digits'
+          phoneArrayErrors[phoneIndex] = phoneErrors
+        }
+      })
     }
-
-    if (!values.phoneN2) {
-      errors.phoneN2 = 'Missing Phone Number'
-    } else {
-      errors.phoneN2 = values.phoneN2.charAt(17) >= 0 ? null : 'Must be 10 digits'
-    }
-    if (!values.phoneN3) {
-      errors.phoneN3 = 'Missing Phone Number'
-    } else {
-      errors.phoneN3 = values.phoneN3.charAt(17) >= 0 ? null : 'Must be 10 digits'
+    if (phoneArrayErrors.length) {
+      errors.phoneArray = phoneArrayErrors
     }
 
     return errors

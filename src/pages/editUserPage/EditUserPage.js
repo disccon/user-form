@@ -109,24 +109,14 @@ class EditUserPage extends Component {
                       {facebookLink}
                     </a>
                   </div>
-                  {phoneArray.length > 0 && (
-                    <div className={cx('accountDataWrapper__wrapper')}>
-                      <h4 className={cx('accountDataWrapper__h4')}>Phone #1:</h4>
-                      <span className={cx('accountDataWrapper__span')}>{phoneArray[0].phone}</span>
+                  {phoneArray.map((phone, index) => (
+                    <div key={index} className={cx('accountDataWrapper__wrapper')}>
+                      <h4 className={cx('accountDataWrapper__h4')}>
+                        {`Phone #${index + 1}:`}
+                      </h4>
+                      <span className={cx('accountDataWrapper__span')}>{phoneArray[index].phone}</span>
                     </div>
-                  )}
-                  {phoneArray.length > 1 && (
-                    <div className={cx('accountDataWrapper__wrapper')}>
-                      <h4 className={cx('accountDataWrapper__h4')}>Phone #2:</h4>
-                      <span className={cx('accountDataWrapper__span')}>{phoneArray[1].phone}</span>
-                    </div>
-                  )}
-                  {phoneArray.length > 2 && (
-                    <div className={cx('accountDataWrapper__wrapper')}>
-                      <h4 className={cx('accountDataWrapper__h4')}>Phone #3:</h4>
-                      <span className={cx('accountDataWrapper__span')}>{phoneArray[0].phone}</span>
-                    </div>
-                  )}
+                  ))}
                 </div>
               </div>
               <div className={cx('accountDataWrapper__block')}>
