@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { reduxForm, Field } from 'redux-form'
-import styles from '../../../components/userFormBox/UserFormBox.scss'
+import styles from '../../../components/UserFormBox/UserFormBox.scss'
 import { saveChangesProfileEditing, fetchEditUser } from '../../../actions/actionEditUser'
-import UserFormBox from '../../../components/userFormBox/UserFormBox'
-import FieldInputNewUser from '../../../components/fieldForm/fieldInputNewUser/FieldInputNewUser'
+import UserFormBox from '../../../components/UserFormBox/UserFormBox'
+import FieldInputNewUser from '../../../components/fieldForm/FieldInputNewUser/FieldInputNewUser'
 import DateTimePickerProfile
-  from '../../../components/fieldForm/dateTimePickerProfile/DateTimePickerProfile'
-import FieldRadioProfile from '../../../components/fieldForm/fieldRadioProfile/FieldRadioProfile'
+  from '../../../components/fieldForm/DateTimePickerProfile/DateTimePickerProfile'
+import FieldRadioProfile from '../../../components/fieldForm/FieldRadioProfile/FieldRadioProfile'
 import db from '../../../db'
 
 const cx = classNames.bind(styles)

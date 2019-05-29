@@ -73,7 +73,7 @@ export function* deleteUserSaga(action) {
       },
     })
     const deleteCount = yield call(() => db.usersDB.where({ id }).delete())
-    if (deleteCount === 0) {
+    if (deleteCount === 1) {
       yield delay(1000)
       const usersReducer = yield select(state => state.usersReducer.users)
       const filteredUsersReducer = yield select(state => state.usersReducer.filteredUsers)

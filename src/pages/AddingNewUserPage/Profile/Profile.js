@@ -4,15 +4,15 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { push } from 'connected-react-router'
 import { reduxForm, Field, formValueSelector } from 'redux-form'
-import styles from '../../../components/userFormBox/UserFormBox.scss'
+import styles from '../../../components/UserFormBox/UserFormBox.scss'
 import {
   saveNewUserData,
 } from '../../../actions/actionNewUser'
-import FieldRadioProfile from '../../../components/fieldForm/fieldRadioProfile/FieldRadioProfile'
+import FieldRadioProfile from '../../../components/fieldForm/FieldRadioProfile/FieldRadioProfile'
 import DateTimePickerProfile
-  from '../../../components/fieldForm/dateTimePickerProfile/DateTimePickerProfile'
-import FieldInputNewUser from '../../../components/fieldForm/fieldInputNewUser/FieldInputNewUser'
-import UserFormBox from '../../../components/userFormBox/UserFormBox'
+  from '../../../components/fieldForm/DateTimePickerProfile/DateTimePickerProfile'
+import FieldInputNewUser from '../../../components/fieldForm/FieldInputNewUser/FieldInputNewUser'
+import UserFormBox from '../../../components/UserFormBox/UserFormBox'
 import db from '../../../db'
 
 const cx = classNames.bind(styles)
