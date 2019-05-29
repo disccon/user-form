@@ -1,6 +1,7 @@
 import {
   FETCH_USERS__LOADING,
   FETCH_USERS__SUCCESS,
+  FETCH_USERS__NOHAVE_USERS,
   FETCH_USERS__FAILURE,
 
   DELETE_USER__LOADING,
@@ -19,6 +20,13 @@ export default function usersReducer(state = initialUsersState, action) {
       }
     }
     case FETCH_USERS__SUCCESS: {
+      return {
+        ...state,
+        ...action.payload,
+        error: undefined,
+      }
+    }
+    case FETCH_USERS__NOHAVE_USERS: {
       return {
         ...state,
         ...action.payload,
