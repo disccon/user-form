@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { push } from 'connected-react-router'
 import { Field, reduxForm } from 'redux-form'
-import styles from '../../../components/userFormBox/UserFormBox.scss'
+import styles from '../../../components/UserFormBox/UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import {
@@ -13,10 +13,10 @@ import {
   changeQuestionState,
   changeAvatarAccount,
 } from '../../../actions/actionNewUser'
-import FieldInputAccount from '../../../components/fieldForm/fieldInputAccount/FieldInputAccount'
-import UserFormBox from '../../../components/userFormBox/UserFormBox'
-import QuestionAccount from './questionAccount/QuestionAccount'
-import CropperModal from '../../../components/cropperModalWindow/CropperModal'
+import FieldInputAccount from '../../../components/fieldForm/FieldInputAccount/FieldInputAccount'
+import UserFormBox from '../../../components/UserFormBox/UserFormBox'
+import QuestionAccount from './QuestionAccount/QuestionAccount'
+import CropperModal from '../../../components/CropperModalWindow/CropperModal'
 import db from '../../../db'
 
 const cx = classNames.bind(styles)

@@ -8,14 +8,14 @@ import {
   saveNewUserData,
   forwardCapabilities,
 } from '../../../actions/actionNewUser'
-import styles from '../../../components/userFormBox/UserFormBox.scss'
+import styles from '../../../components/UserFormBox/UserFormBox.scss'
 import FieldSelectCapabilities
-  from '../../../components/fieldForm/fieldSelectCapabilities/FieldSelectCapabilities'
+  from '../../../components/fieldForm/FieldSelectCapabilities/FieldSelectCapabilities'
 import FieldTextareaCapabilities
-  from '../../../components/fieldForm/fieldTextareaCapabilities/FieldTextareaCapabilities'
-import UserFormBox from '../../../components/userFormBox/UserFormBox'
+  from '../../../components/fieldForm/FieldTextareaCapabilities/FieldTextareaCapabilities'
+import UserFormBox from '../../../components/UserFormBox/UserFormBox'
 import FieldCheckboxCapabilities
-  from '../../../components/fieldForm/fieldCheckboxCapabilities/FieldCheckboxCapabilities'
+  from '../../../components/fieldForm/FieldCheckboxCapabilities/FieldCheckboxCapabilities'
 
 const cx = classNames.bind(styles)
 

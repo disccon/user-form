@@ -2,26 +2,47 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { Field, reduxForm, FieldArray } from 'redux-form'
-import styles from '../../../components/userFormBox/UserFormBox.scss'
-import { saveChangesContactsEditing, fetchEditUser } from '../../../actions/actionEditUser'
-import UserFormBox from '../../../components/userFormBox/UserFormBox'
-import FieldInputNewUser from '../../../components/fieldForm/fieldInputNewUser/FieldInputNewUser'
-import FieldSelectContacts from '../../../components/fieldForm/fieldSelectContacts/FieldSelectContacts'
-import FieldArrayPhone from '../../../components/fieldForm/fieldArrayPhone/FieldArrayPhone'
+import { push } from 'connected-react-router'
+import {
+  Field, formValueSelector, reduxForm, FieldArray,
+} from 'redux-form'
+import styles from '../../../components/UserFormBox/UserFormBox.scss'
+import { saveNewUserData } from '../../../actions/actionNewUser'
+import FieldSelectContacts from '../../../components/fieldForm/FieldSelectContacts/FieldSelectContacts'
+import FieldInputNewUser from '../../../components/fieldForm/FieldInputNewUser/FieldInputNewUser'
+import UserFormBox from '../../../components/UserFormBox/UserFormBox'
+import FieldArrayPhone from '../../../components/fieldForm/FieldArrayPhone/FieldArrayPhone'
 
 const cx = classNames.bind(styles)
 
-class ContactsEditing extends Component {
-  componentDidMount() {
-    const { fetchEditUser, id } = this.props
-    fetchEditUser(id)
+class Contacts extends Component {
+  backContacts = () => {
+    const {
+      saveNewUserData, companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneArrayForm, push,
+    } = this.props
+    push('/profile')
+    saveNewUserData({
+      company: companyForm,
+      githubLink: githubLinkForm,
+      facebookLink: facebookLinkForm,
+      selectLanguage: selectLanguageForm,
+      fax: faxForm,
+      phoneArray: phoneArrayForm,
+    })
   }
 
   onSubmit = values => {
-    const { saveChangesContactsEditing, id } = this.props
-    saveChangesContactsEditing(values.company, values.githubLink, values.facebookLink, values.selectLanguage,
-      values.fax, values.phoneArray, id)
+    const { saveNewUserData, push } = this.props
+    push('/capabilities')
+    saveNewUserData({
+      company: values.company,
+      githubLink: values.githubLink,
+      facebookLink: values.facebookLink,
+      selectLanguage: values.selectLanguage,
+      fax: values.fax,
+      phoneArray: values.phoneArray,
+      contactsFilled: true,
+    })
   }
 
   render() {
@@ -78,9 +99,8 @@ class ContactsEditing extends Component {
           />
           <div className={cx('userFormBox__addPhone')} />
           <div className={cx('userFormBox__wrapperButton')}>
-            <button type='submit' className={cx('userFormBox__saveNewListButton')}>
-              Save
-            </button>
+            <button type='button' onClick={this.backContacts} className={cx('userFormBox__back')}>Back</button>
+            <button type='submit' className={cx('userFormBox__forward')}>Forward</button>
           </div>
         </div>
       </UserFormBox>
@@ -88,14 +108,22 @@ class ContactsEditing extends Component {
   }
 }
 
-ContactsEditing.propTypes = {
-  id: PropTypes.number,
-  saveChangesContactsEditing: PropTypes.func.isRequired,
+Contacts.propTypes = {
+  companyForm: PropTypes.string,
+  githubLinkForm: PropTypes.string,
+  facebookLinkForm: PropTypes.string,
+  selectLanguageForm: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
+  faxForm: PropTypes.string,
+  phoneArrayForm: PropTypes.array,
+  saveNewUserData: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  fetchEditUser: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
 }
 
-const ContactsEditingForm = reduxForm({
+const ContactsForm = reduxForm({
   validate: values => {
     const errors = {}
     if (!values.selectLanguage) {
@@ -147,24 +175,36 @@ const ContactsEditingForm = reduxForm({
 
     return errors
   },
-  form: 'ContactsEditing',
+  form: 'Contacts',
   enableReinitialize: true,
-})(ContactsEditing)
+})(Contacts)
 
-const mapStateToProps = (state, ownProps) => {
-  const id = Number(ownProps.match.params.id)
+const mapStateToProps = state => {
+  const selector = formValueSelector('Contacts')
+  const companyForm = selector(state, 'company')
+  const githubLinkForm = selector(state, 'githubLink')
+  const facebookLinkForm = selector(state, 'facebookLink')
+  const selectLanguageForm = selector(state, 'selectLanguage')
+  const faxForm = selector(state, 'fax')
+  const phoneArrayForm = selector(state, 'phoneArray')
   const {
     company, githubLink, facebookLink, selectLanguage, fax, phoneArray,
-  } = state.editUserReducer.editUser
+  } = state.newUser
   return {
     initialValues: {
       company, githubLink, facebookLink, selectLanguage, fax, phoneArray,
     },
-    id,
+    companyForm,
+    githubLinkForm,
+    facebookLinkForm,
+    selectLanguageForm,
+    phoneArray,
+    faxForm,
+    phoneArrayForm,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { saveChangesContactsEditing, fetchEditUser },
-)(ContactsEditingForm)
+  { saveNewUserData, push },
+)(ContactsForm)

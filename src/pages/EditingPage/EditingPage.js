@@ -5,10 +5,10 @@ import classNames from 'classnames'
 import { Redirect, Route, Switch } from 'react-router'
 import { Link } from 'react-router-dom'
 import styles from './EditingPage.scss'
-import AccountEditing from './accountEditing/AccountEditing'
-import ContactsEditing from './contactsEditing/ContactsEditing'
-import CapabilitiesEditing from './capabilitiesEditing/CapabilitiesEditing'
-import ProfileEditing from './profileEditing/ProfileEditing'
+import AccountEditing from './AccountEditing/AccountEditing'
+import ContactsEditing from './ContactsEditing/ContactsEditing'
+import CapabilitiesEditing from './CapabilitiesEditing/CapabilitiesEditing'
+import ProfileEditing from './ProfileEditing/ProfileEditing'
 
 const cx = classNames.bind(styles)
 
