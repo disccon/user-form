@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { reduxForm, Field } from 'redux-form'
 import styles from '../../../components/UserFormBox/UserFormBox.scss'
-import { saveChangesProfileEditing, fetchEditUser } from '../../../actions/actionEditUser'
+import { saveEditUserData, fetchEditUser } from '../../../actions/actionEditUser'
 import UserFormBox from '../../../components/UserFormBox/UserFormBox'
 import FieldInputNewUser from '../../../components/fieldForm/FieldInputNewUser/FieldInputNewUser'
 import DateTimePickerProfile
@@ -21,9 +21,15 @@ class ProfileEditing extends Component {
   }
 
   onSubmit = values => {
-    const { saveChangesProfileEditing, id } = this.props
-    saveChangesProfileEditing(values.firstName, values.lastName, values.birthDate, values.email,
-      values.address, values.gender, id)
+    const { saveEditUserData, id } = this.props
+    saveEditUserData(id, {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      birthDate: values.birthDate,
+      email: values.email,
+      address: values.address,
+      gender: values.gender,
+    })
   }
 
   render() {
@@ -102,7 +108,7 @@ class ProfileEditing extends Component {
 
 ProfileEditing.propTypes = {
   id: PropTypes.number,
-  saveChangesProfileEditing: PropTypes.func.isRequired,
+  saveEditUserData: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   fetchEditUser: PropTypes.func.isRequired,
 }
@@ -175,5 +181,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { saveChangesProfileEditing, fetchEditUser },
+  { saveEditUserData, fetchEditUser },
 )(ProfileEditingForm)

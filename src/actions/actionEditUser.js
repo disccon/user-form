@@ -2,21 +2,16 @@ export const FETCH_EDIT_USER = 'FETCH_EDIT_USER'
 export const FETCH_EDIT_USER__SUCCESS = 'FETCH_EDIT_USER__SUCCESS'
 export const FETCH_EDIT_USER__FAILURE = 'FETCH_EDIT_USER__FAILURE'
 
+export const SAVE_CROPPER_AVATAR = 'SAVE_CROPPER_AVATAR'
+export const SAVE_CROPPER_AVATAR__SUCCESS = 'SAVE_CROPPER_AVATAR__SUCCESS'
+export const SAVE_CROPPER_AVATAR__FAILURE = 'SAVE_CROPPER_AVATAR__FAILURE'
+
 export const CHANGE_AVATAR_ACCOUNT_EDITING = 'CHANGE_AVATAR_ACCOUNT_EDITING'
 export const CHANGE_AVATAR_ACCOUNT_EDITING__SUCCESS = 'CHANGE_AVATAR_ACCOUNT_EDITING__SUCCESS'
 export const CHANGE_AVATAR_ACCOUNT_EDITING__FAILURE = 'CHANGE_AVATAR_ACCOUNT_EDITING__FAILURE'
 
-export const SAVE_CHANGES_ACCOUNT_EDITING = 'SAVE_CHANGES_ACCOUNT_EDITING'
-export const SAVE_CHANGES_ACCOUNT_EDITING__FAILURE = 'SAVE_CHANGES_ACCOUNT_EDITING__FAILURE'
-
-export const SAVE_CHANGES_PROFILE_EDITING = 'SAVE_CHANGES_PROFILE_EDITING'
-export const SAVE_CHANGES_PROFILE_EDITING__FAILURE = 'SAVE_CHANGES_PROFILE_EDITING__FAILURE'
-
-export const SAVE_CHANGES_CONTACTS_EDITING = 'SAVE_CHANGES_CONTACTS_EDITING'
-export const SAVE_CHANGES_CONTACTS_EDITING__FAILURE = 'SAVE_CHANGES_CONTACTS_EDITING__FAILURE'
-
-export const SAVE_CHANGES_CAPABILITIES_EDITING = 'SAVE_CHANGES_CAPABILITIES_EDITING'
-export const SAVE_CHANGES_CAPABILITIES_EDITING__FAILURE = 'SAVE_CHANGES_CAPABILITIES_EDITING__FAILURE'
+export const SAVE_EDIT_USER_DATA = 'SAVE_EDIT_USER_DATA'
+export const SAVE_EDIT_USER_DATA__FAILURE = 'SAVE_EDIT_USER_DATA__FAILURE'
 
 export const fetchEditUser = id => (
   {
@@ -26,59 +21,27 @@ export const fetchEditUser = id => (
     },
   })
 
+export const saveCropperAvatar = userAvatarIMGCropper => (
+  {
+    type: SAVE_CROPPER_AVATAR,
+    payload: {
+      userAvatarIMGCropper,
+    },
+  })
 
-export const changeAvatarAccountEditing = userSRCAvatarIMG => (
+export const changeAvatarAccountEditing = (userAvatarIMGCropper, userAvatarIMG) => (
   {
     type: CHANGE_AVATAR_ACCOUNT_EDITING,
     payload: {
-      userSRCAvatarIMG,
-    },
-  })
-
-export const saveChangesAccountEditing = (userName, password, repeatPassword, userSRCAvatarIMG, id) => (
-  {
-    type: SAVE_CHANGES_ACCOUNT_EDITING,
-    payload: {
-      userName, password, repeatPassword, userSRCAvatarIMG, id,
+      userAvatarIMGCropper, userAvatarIMG,
     },
   })
 
 
-export const saveChangesProfileEditing = (firstName, lastName, birthDate, email, address, gender, id) => (
+export const saveEditUserData = (id, activeFormValue) => (
   {
-    type: SAVE_CHANGES_PROFILE_EDITING,
+    type: SAVE_EDIT_USER_DATA,
     payload: {
-      firstName, lastName, birthDate, email, address, gender, id,
-    },
-  })
-
-export const saveChangesContactsEditing = (company, githubLink, facebookLink, selectLanguage, fax, phoneArray, id) => (
-  {
-    type: SAVE_CHANGES_CONTACTS_EDITING,
-    payload: {
-      company,
-      githubLink,
-      facebookLink,
-      selectLanguage,
-      fax,
-      phoneArray,
-      id,
-    },
-  })
-
-export const saveChangesCapabilitiesEditing = (selectSkills, textareaField, checkboxArt, checkboxSport,
-  checkboxJustWant, checkboxFemale, checkboxGuitar, checkboxWtf, id) => (
-  {
-    type: SAVE_CHANGES_CAPABILITIES_EDITING,
-    payload: {
-      selectSkills,
-      textareaField,
-      checkboxArt,
-      checkboxSport,
-      checkboxJustWant,
-      checkboxFemale,
-      checkboxGuitar,
-      checkboxWtf,
-      id,
+      id, activeFormValue,
     },
   })

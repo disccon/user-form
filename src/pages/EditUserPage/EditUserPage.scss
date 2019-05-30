@@ -1,4 +1,6 @@
 $ac: 'accountDataWrapper';
+$us: 'userNamePage';
+
 .container {
   position: relative;
 
@@ -11,19 +13,42 @@ $ac: 'accountDataWrapper';
     color: #9BB0CB;
   }
 
-  .userNamePageContainer {
+  .#{$us} {
     margin-top: 35px;
     display: flex;
     padding: 35px 58px;
     background: #fbfcff;
     min-height: 734px;
-
-    .userNamePageContainer__avatar {
+    .#{$us}__wrapperImg{
       margin-right: 91px;
       width: 200px;
-      height: 200px;
-      border: 3px solid #5E97F3;
-      border-radius: 50%;
+      .#{$us}__avatar {
+        width: 200px;
+        height: 200px;
+        border: 3px solid #5E97F3;
+        border-radius: 50%;
+      }
+      .#{$us}__cropImage{
+        display: block;
+        margin-top: 30px;
+        margin-right: auto;
+        margin-left: auto;
+        transition: all ease 0.3s;
+        background-color: #007bff;
+        border-color: #007bff;
+        border-radius: 4px;
+        width: 100px;
+        height: 40px;
+        font-weight: 500;
+        text-align: center;
+        color: #FFF;
+      }
+
+      .#{$us}__cropImage:hover {
+        transition: all ease 0.3s;
+        background-color: #0069d9;
+        border-color: #0062cc;
+      }
     }
 
     .#{$ac} {

@@ -1,22 +1,68 @@
 $cr: 'cropperModal';
-.#{$cr}__wrapper{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0px;
-  border: 4px solid #4E86E4;
-  background: #fff;
+.#{$cr}__backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0;
+  transition: all ease 0.5s;
+}
+.#{$cr}__backdropShow {
+  opacity: .5;
+  transition: all ease 0.5s;
 }
 
-.#{$cr}__wrapperButton{
+.#{$cr}__modal {
+  transform: scale(0.5,0.5);
+  opacity: .0;
+  transition: all ease 0.3s;
+  top: 100px;
+  left: calc(50% - 510px);
+  position: fixed;
+  z-index: 1050;
+  background: #fff;
+  border-radius: 4px;
+  width: 1020px;
+  padding: 20px;
+
+  .#{$cr}__modalHeader {
+    display: flex;
+    padding-bottom: 20px;
+
+    .#{$cr}__title {
+      color: #1a1a1a;
+      font-weight: 500;
+      font-size: 24px;
+    }
+
+    .#{$cr}__closeButton {
+      transition: all ease 0.3s;
+      font-family: Arial;
+      background: transparent;
+      margin-left: auto;
+      font-size: 23px;
+      font-weight: 700;
+      color: #75797e;
+    }
+
+    .#{$cr}__closeButton:hover {
+      transition: all ease 0.3s;
+      color: #000;
+    }
+  }
+}
+
+.#{$cr}__wrapperButton {
+  margin-top: 20px;
   display: flex;
-  width: 300px;
+  width: 100%;
   height: 40px;
-  position: absolute;
-  left: calc(50% - 150px);
-  bottom: -80px;
-  .#{$cr}__cropImage, .#{$cr}__close{
+
+  .#{$cr}__saveAvatar, .#{$cr}__close {
+    border-radius: 4px;
     width: 100px;
     height: 40px;
     font-weight: 500;
@@ -24,12 +70,37 @@ $cr: 'cropperModal';
     color: #FFF;
   }
 
-  .#{$cr}__cropImage{
-    margin-left: auto;
-    background: #5E97F3;
+  .#{$cr}__saveAvatar {
+    transition: all ease 0.3s;
+    background-color: #007bff;
+    border-color: #007bff;
   }
 
-  .#{$cr}__close{
-    background: #e22217;
+  .#{$cr}__saveAvatar:hover {
+    transition: all ease 0.3s;
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+
+  .#{$cr}__close {
+    margin-left: auto;
+    margin-right: 20px;
+    transition: all ease 0.3s;
+    background-color: #6c757d;
+    border-color: #6c757d;
+  }
+
+  .#{$cr}__close:hover {
+    transition: all ease 0.3s;
+    background-color: #5a6268;
+    border-color: #545b62;
   }
 }
+
+.#{$cr}__modalShow {
+  transform: scale(1,1);
+  opacity: 1;
+  transition: all ease 0.3s;
+}
+
+

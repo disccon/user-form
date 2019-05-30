@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Field, reduxForm, FieldArray } from 'redux-form'
 import styles from '../../../components/UserFormBox/UserFormBox.scss'
-import { saveChangesContactsEditing, fetchEditUser } from '../../../actions/actionEditUser'
+import { saveEditUserData, fetchEditUser } from '../../../actions/actionEditUser'
 import UserFormBox from '../../../components/UserFormBox/UserFormBox'
 import FieldInputNewUser from '../../../components/fieldForm/FieldInputNewUser/FieldInputNewUser'
 import FieldSelectContacts from '../../../components/fieldForm/FieldSelectContacts/FieldSelectContacts'
@@ -19,9 +19,15 @@ class ContactsEditing extends Component {
   }
 
   onSubmit = values => {
-    const { saveChangesContactsEditing, id } = this.props
-    saveChangesContactsEditing(values.company, values.githubLink, values.facebookLink, values.selectLanguage,
-      values.fax, values.phoneArray, id)
+    const { saveEditUserData, id } = this.props
+    saveEditUserData(id, {
+      company: values.company,
+      githubLink: values.githubLink,
+      facebookLink: values.facebookLink,
+      selectLanguage: values.selectLanguage,
+      fax: values.fax,
+      phoneArray: values.phoneArray,
+    })
   }
 
   render() {
@@ -90,7 +96,7 @@ class ContactsEditing extends Component {
 
 ContactsEditing.propTypes = {
   id: PropTypes.number,
-  saveChangesContactsEditing: PropTypes.func.isRequired,
+  saveEditUserData: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   fetchEditUser: PropTypes.func.isRequired,
 }
@@ -166,5 +172,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { saveChangesContactsEditing, fetchEditUser },
+  { saveEditUserData, fetchEditUser },
 )(ContactsEditingForm)

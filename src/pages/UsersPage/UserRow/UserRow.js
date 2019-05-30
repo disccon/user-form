@@ -36,7 +36,7 @@ class UserRow extends Component {
     return (
       <tr className={cx('userRow', { deleteUserClass })}>
         <td className={cx('userRow__fistTD')}>
-          <img className={cx('userRow__img')} src={user.userSRCAvatarIMG} alt='userSRCAvatarIMG' />
+          <img className={cx('userRow__img')} src={user.userAvatarIMG} alt='userAvatarIMG' />
           <div className={cx('userRow__wrapperDiv')}>
             <h4 className={cx('userRow__h4')}>
               {`${user.firstName} ${user.lastName}`}

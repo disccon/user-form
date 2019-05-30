@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
-import { saveChangesCapabilitiesEditing, fetchEditUser } from '../../../actions/actionEditUser'
+import { saveEditUserData, fetchEditUser } from '../../../actions/actionEditUser'
 import styles from '../../../components/UserFormBox/UserFormBox.scss'
 import FieldSelectCapabilities
   from '../../../components/fieldForm/FieldSelectCapabilities/FieldSelectCapabilities'
@@ -22,9 +22,17 @@ class CapabilitiesEditing extends Component {
   }
 
   onSubmit = values => {
-    const { saveChangesCapabilitiesEditing, id } = this.props
-    saveChangesCapabilitiesEditing(values.selectSkills, values.textareaField, values.checkboxArt, values.checkboxSport,
-      values.checkboxJustWant, values.checkboxFemale, values.checkboxGuitar, values.checkboxWtf, id)
+    const { saveEditUserData, id } = this.props
+    saveEditUserData(id, {
+      selectSkills: values.selectSkills,
+      textareaField: values.textareaField,
+      checkboxArt: values.checkboxArt,
+      checkboxSport: values.checkboxSport,
+      checkboxJustWant: values.checkboxJustWant,
+      checkboxFemale: values.checkboxFemale,
+      checkboxGuitar: values.checkboxGuitar,
+      checkboxWtf: values.checkboxWtf,
+    })
   }
 
   render() {
@@ -95,7 +103,7 @@ class CapabilitiesEditing extends Component {
 
 CapabilitiesEditing.propTypes = {
   id: PropTypes.number,
-  saveChangesCapabilitiesEditing: PropTypes.func.isRequired,
+  saveEditUserData: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   fetchEditUser: PropTypes.func.isRequired,
 }
@@ -148,5 +156,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { saveChangesCapabilitiesEditing, fetchEditUser },
+  { saveEditUserData, fetchEditUser },
 )(CapabilitiesEditingForm)

@@ -8,7 +8,6 @@ export const DELETE_USER__LOADING = 'DELETE_USER__LOADING'
 export const DELETE_USER__SUCCESS = 'DELETE_USER__SUCCESS'
 export const DELETE_USER__FAILURE = 'DELETE_USER__FAILURE'
 
-
 export const fetchUsers = (currentPage, per_page, searchQuery) => ({
   type: FETCH_USERS,
   payload: {
