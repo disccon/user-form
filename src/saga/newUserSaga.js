@@ -116,12 +116,12 @@ export function* continueUserSaga(action) {
 }
 
 export function* changeAvatarAccountSaga(action) {
-  const { userSRCAvatarIMG } = action.payload
+  const { userAvatarIMGCropper, userAvatarIMG } = action.payload
   try {
     yield put({
       type: CHANGE_AVATAR_ACCOUNT__SUCCESS,
       payload: {
-        userSRCAvatarIMG,
+        userAvatarIMGCropper, userAvatarIMG,
       },
     })
   } catch (error) {
@@ -136,30 +136,21 @@ export function* forwardCapabilitiesSaga(action) {
   db.newUserDB.update(0, {
     ...initialNewUserState,
   })
-  const {
-    selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
-    checkboxFemale, checkboxGuitar, checkboxWtf,
-  } = action.payload
+  const { activeFormValue } = action.payload
   try {
     const newUser = yield select(state => state.newUser)
     delete newUser.isQuestion
     delete newUser.id
+    delete newUser.error
     delete newUser.accountFilled
     delete newUser.profileFilled
     delete newUser.contactsFilled
-    yield put(push('/users'))
-    db.usersDB.add({
+    yield call(() => db.usersDB.add({
       ...newUser,
-      selectSkills,
-      textareaField,
-      checkboxArt,
-      checkboxSport,
-      checkboxJustWant,
-      checkboxFemale,
-      checkboxGuitar,
-      checkboxWtf,
+      ...activeFormValue,
       lastUpdate: new Date(),
-    })
+    }))
+    yield put(push('/users'))
     yield put({
       type: FORWARD_CAPABILITIES__ADD_NEW_USER,
       payload: {

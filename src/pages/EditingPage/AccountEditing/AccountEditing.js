@@ -6,7 +6,7 @@ import { Field, reduxForm } from 'redux-form'
 import styles from '../../../components/UserFormBox/UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
-import { saveChangesAccountEditing, changeAvatarAccountEditing, fetchEditUser } from '../../../actions/actionEditUser'
+import { saveEditUserData, changeAvatarAccountEditing, fetchEditUser } from '../../../actions/actionEditUser'
 import FieldInputAccount from '../../../components/fieldForm/FieldInputAccount/FieldInputAccount'
 import UserFormBox from '../../../components/UserFormBox/UserFormBox'
 import CropperModal from '../../../components/CropperModalWindow/CropperModal'
@@ -48,8 +48,16 @@ class AccountEditing extends Component {
   }
 
   onSubmit = values => {
-    const { saveChangesAccountEditing, id, userSRCAvatarIMG } = this.props
-    saveChangesAccountEditing(values.userName, values.password, values.repeatPassword, userSRCAvatarIMG, id)
+    const {
+      saveEditUserData, id, userAvatarIMGCropper, userAvatarIMG,
+    } = this.props
+    saveEditUserData(id, {
+      userName: values.userName,
+      password: values.password,
+      repeatPassword: values.repeatPassword,
+      userAvatarIMGCropper,
+      userAvatarIMG,
+    })
   }
 
   changeTypePassword = nameTypePassword => () => {
@@ -65,27 +73,35 @@ class AccountEditing extends Component {
     }
   }
 
-  setCropperSrc = () => {
+  setCropperSrc = isCropperSrc => () => {
     this.setState({
-      cropperSrc: null,
+      cropperSrc: isCropperSrc,
     })
   }
 
+  cropperAvatar = () => {
+    const { userAvatarIMG } = this.props
+    this.setState({
+      cropperSrc: userAvatarIMG,
+    })
+  }
+
+
   render() {
-    const { handleSubmit, userSRCAvatarIMG, changeAvatarAccountEditing } = this.props
+    const { handleSubmit, userAvatarIMGCropper, changeAvatarAccountEditing } = this.props
     const {
       avatarIMGError, typePasswordFirstInput, typePasswordSecondInput, cropperSrc,
     } = this.state
-    const userAvatarIMG = userSRCAvatarIMG
-      ? <img className={cx('userAvatarWrapper__userAvatarIMG')} src={userSRCAvatarIMG} alt='userAvatar' />
+    const userAvatar = userAvatarIMGCropper
+      ? <img className={cx('userAvatarWrapper__userAvatarIMG')} src={userAvatarIMGCropper} alt='userAvatar' />
       : <UserAvatarIcon className={cx('userAvatarWrapper__userAvatarSVG')} alt='userAvatar' />
-    const UserAvatar = avatarIMGError
+    const userAvatarError = avatarIMGError
       ? <p className={cx('userAvatarWrapper__avatarError')}>{avatarIMGError}</p> : null
     return (
       <UserFormBox handleSubmit={handleSubmit(this.onSubmit)} classForm='userFormBoxAccount'>
         <div className={cx('userAvatarWrapper')}>
           <label htmlFor='userAvatar'>
-            {userAvatarIMG}
+            {userAvatar}
             <input
               id='userAvatar'
               type='file'
@@ -105,7 +121,11 @@ class AccountEditing extends Component {
               onChange={this.addImageUserAvatar}
             />
           </label>
-          {UserAvatar}
+          <button className={cx('userAvatarWrapper__buttonCrop')} type='button' onClick={this.cropperAvatar}>
+            Crop Avatar
+          </button>
+
+          {userAvatarError}
         </div>
         <div className={cx('register__userData')}>
           <Field
@@ -190,11 +210,15 @@ const AccountEditingForm = reduxForm({
 
 AccountEditing.propTypes = {
   id: PropTypes.number,
-  userSRCAvatarIMG: PropTypes.oneOfType([
+  userAvatarIMG: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
   ]),
-  saveChangesAccountEditing: PropTypes.func.isRequired,
+  userAvatarIMGCropper: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+  ]),
+  saveEditUserData: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func,
   changeAvatarAccountEditing: PropTypes.func.isRequired,
   fetchEditUser: PropTypes.func.isRequired,
@@ -203,13 +227,14 @@ AccountEditing.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   const id = Number(ownProps.match.params.id)
   const {
-    userName, password, repeatPassword, userSRCAvatarIMG,
+    userName, password, repeatPassword, userAvatarIMGCropper, userAvatarIMG,
   } = state.editUserReducer.editUser
   return {
     initialValues: {
       userName, password, repeatPassword,
     },
-    userSRCAvatarIMG,
+    userAvatarIMGCropper,
+    userAvatarIMG,
     id,
   }
 }
@@ -217,6 +242,6 @@ const mapStateToProps = (state, ownProps) => {
 export default connect(
   mapStateToProps,
   {
-    saveChangesAccountEditing, changeAvatarAccountEditing, fetchEditUser,
+    saveEditUserData, changeAvatarAccountEditing, fetchEditUser,
   },
 )(AccountEditingForm)

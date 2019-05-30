@@ -22,8 +22,16 @@ const cx = classNames.bind(styles)
 class Capabilities extends Component {
   onSubmit = values => {
     const { forwardCapabilities } = this.props
-    forwardCapabilities(values.selectSkills, values.textareaField, values.checkboxArt, values.checkboxSport,
-      values.checkboxJustWant, values.checkboxFemale, values.checkboxGuitar, values.checkboxWtf)
+    forwardCapabilities({
+      selectSkills: values.selectSkills,
+      textareaField: values.textareaField,
+      checkboxArt: values.checkboxArt,
+      checkboxSport: values.checkboxSport,
+      checkboxJustWant: values.checkboxJustWant,
+      checkboxFemale: values.checkboxFemale,
+      checkboxGuitar: values.checkboxGuitar,
+      checkboxWtf: values.checkboxWtf,
+    })
   }
 
   backCapabilities = () => {

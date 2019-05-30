@@ -137,7 +137,6 @@ Profile.propTypes = {
   push: PropTypes.func.isRequired,
 }
 
-
 const ProfileForm = reduxForm({
   asyncValidate: values => db.usersDB.toArray(usersDB => {
     const userEmailList = usersDB.map(user => user.email)

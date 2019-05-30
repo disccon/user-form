@@ -55,8 +55,10 @@ class Account extends Component {
   }
 
   onSubmit = values => {
-    const { saveNewUserData, userSRCAvatarIMG, push } = this.props
-    if (!userSRCAvatarIMG) {
+    const {
+      saveNewUserData, userAvatarIMGCropper, push,
+    } = this.props
+    if (!userAvatarIMGCropper) {
       this.setState({
         avatarIMGError: 'Upload a picture',
       })
@@ -66,8 +68,8 @@ class Account extends Component {
         userName: values.userName,
         password: values.password,
         repeatPassword: values.password,
-        userSRCAvatarIMG,
         accountFilled: true,
+        isQuestion: false,
       })
     }
   }
@@ -85,23 +87,23 @@ class Account extends Component {
     }
   }
 
-  setCropperSrc = () => {
+  setCropperSrc = isCropperSrc => () => {
     this.setState({
-      cropperSrc: null,
+      cropperSrc: isCropperSrc,
     })
   }
 
   render() {
     const {
-      handleSubmit, isQuestion, userSRCAvatarIMG, changeAvatarAccount,
+      handleSubmit, isQuestion, userAvatarIMGCropper, changeAvatarAccount,
     } = this.props
     const {
       avatarIMGError, typePasswordFirstInput, typePasswordSecondInput, cropperSrc,
     } = this.state
-    const userAvatarIMG = userSRCAvatarIMG
-      ? <img className={cx('userAvatarWrapper__userAvatarIMG')} src={userSRCAvatarIMG} alt='userAvatar' />
+    const userAvatar = userAvatarIMGCropper
+      ? <img className={cx('userAvatarWrapper__userAvatarIMG')} src={userAvatarIMGCropper} alt='userAvatar' />
       : <UserAvatarIcon className={cx('userAvatarWrapper__userAvatarSVG')} alt='userAvatar' />
-    const UserAvatar = avatarIMGError
+    const userAvatarError = avatarIMGError
       ? <p className={cx('userAvatarWrapper__avatarError')}>{avatarIMGError}</p> : null
     return (
       <Fragment>
@@ -109,7 +111,7 @@ class Account extends Component {
         <UserFormBox handleSubmit={handleSubmit(this.onSubmit)} classForm='userFormBoxAccount'>
           <div className={cx('userAvatarWrapper')}>
             <label htmlFor='userAvatar'>
-              {userAvatarIMG}
+              {userAvatar}
               <input
                 id='userAvatar'
                 type='file'
@@ -129,7 +131,7 @@ class Account extends Component {
                 onChange={this.addImageUserAvatar}
               />
             </label>
-            {UserAvatar}
+            {userAvatarError}
           </div>
           <div className={cx('register__userData')}>
             <Field
@@ -172,7 +174,6 @@ class Account extends Component {
   }
 }
 
-
 const accountForm = reduxForm({
   asyncValidate: values => db.usersDB.toArray(usersDB => {
     const userNameList = usersDB.map(user => user.userName)
@@ -212,7 +213,7 @@ const accountForm = reduxForm({
 })(Account)
 
 Account.propTypes = {
-  userSRCAvatarIMG: PropTypes.oneOfType([
+  userAvatarIMGCropper: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
   ]),
@@ -226,13 +227,13 @@ Account.propTypes = {
 
 const mapStateToProps = state => {
   const {
-    userName, password, repeatPassword, userSRCAvatarIMG, isQuestion,
+    userName, password, repeatPassword, userAvatarIMGCropper, isQuestion,
   } = state.newUser
   return {
     initialValues: {
       userName, password, repeatPassword,
     },
-    userSRCAvatarIMG,
+    userAvatarIMGCropper,
     isQuestion,
     newUser: state.newUser,
   }

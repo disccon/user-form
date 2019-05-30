@@ -82,7 +82,7 @@ export default function newUserReducer(state = initialNewUserState, action) {
     case CHANGE_AVATAR_ACCOUNT__SUCCESS: {
       return {
         ...state,
-        userSRCAvatarIMG: action.payload.userSRCAvatarIMG,
+        ...action.payload,
         error: undefined,
       }
     }

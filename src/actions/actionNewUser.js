@@ -50,26 +50,18 @@ export const continueUser = isContinue => (
     },
   })
 
-export const changeAvatarAccount = userSRCAvatarIMG => (
+export const changeAvatarAccount = (userAvatarIMGCropper, userAvatarIMG) => (
   {
     type: CHANGE_AVATAR_ACCOUNT,
     payload: {
-      userSRCAvatarIMG,
+      userAvatarIMG, userAvatarIMGCropper,
     },
   })
 
-export const forwardCapabilities = (selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant,
-  checkboxFemale, checkboxGuitar, checkboxWtf) => (
+export const forwardCapabilities = activeFormValue => (
   {
     type: FORWARD_CAPABILITIES,
     payload: {
-      selectSkills,
-      textareaField,
-      checkboxArt,
-      checkboxSport,
-      checkboxJustWant,
-      checkboxFemale,
-      checkboxGuitar,
-      checkboxWtf,
+      activeFormValue,
     },
   })

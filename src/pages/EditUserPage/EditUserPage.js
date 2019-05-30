@@ -5,30 +5,51 @@ import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 import styles from './EditUserPage.scss'
 import { ReactComponent as EditIcon } from '../../img/icon/edit.svg'
-import { fetchEditUser } from '../../actions/actionEditUser'
+import { fetchEditUser, saveCropperAvatar } from '../../actions/actionEditUser'
+import CropperModal from '../../components/CropperModalWindow/CropperModal'
 
 const cx = classNames.bind(styles)
 
 class EditUserPage extends Component {
+  state = {
+    isModal: null,
+  }
+
   componentDidMount() {
     const { fetchEditUser, id } = this.props
     fetchEditUser(id)
   }
 
+  setCropperSrc = isCropper => () => {
+    this.setState({
+      isModal: isCropper,
+    })
+  }
+
   render() {
-    const { id, editUser } = this.props
+    const { isModal } = this.state
+    const { id, editUser, saveCropperAvatar } = this.props
     const {
-      userName, userSRCAvatarIMG, firstName, lastName, birthDate, email, address, company, fax,
+      userName, userAvatarIMG, firstName, lastName, birthDate, email, address, company, fax,
       facebookLink, phoneArray, selectSkills, checkboxArt, checkboxSport, checkboxJustWant,
-      checkboxFemale, checkboxGuitar, checkboxWtf,
+      checkboxFemale, checkboxGuitar, checkboxWtf, userAvatarIMGCropper,
     } = editUser
     return (
       <div className={cx('container')}>
         <Link className={cx('linkBackPage')} to='/users'>{'<  Users List'}</Link>
         <h2 className={cx('headline')}>User Name</h2>
         {birthDate && (
-          <div className={cx('userNamePageContainer container')}>
-            <img src={userSRCAvatarIMG} className={cx('userNamePageContainer__avatar')} alt='userSRCAvatarIMG' />
+          <div className={cx('userNamePage container')}>
+            <div className={cx('userNamePage__wrapperImg')}>
+              <img src={userAvatarIMGCropper} className={cx('userNamePage__avatar')} alt='userSRCAvatarIMG' />
+              <button
+                type='button'
+                className={cx('userNamePage__cropImage')}
+                onClick={this.setCropperSrc(true)}
+              >
+                Crop Avatar
+              </button>
+            </div>
             <div className={cx('accountDataWrapper')}>
               <div className={cx('accountDataWrapper__block')}>
                 <div className={cx('accountDataWrapper__section')}>
@@ -153,6 +174,13 @@ class EditUserPage extends Component {
             </div>
           </div>
         )}
+        {isModal && (
+          <CropperModal
+            cropperSrc={userAvatarIMG}
+            setCropperSrc={this.setCropperSrc}
+            changeAvatar={saveCropperAvatar}
+          />
+        )}
       </div>
     )
   }
@@ -162,6 +190,7 @@ EditUserPage.propTypes = {
   editUser: PropTypes.object.isRequired,
   fetchEditUser: PropTypes.func.isRequired,
   id: PropTypes.number,
+  saveCropperAvatar: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -175,5 +204,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { fetchEditUser },
+  { fetchEditUser, saveCropperAvatar },
 )(EditUserPage)

@@ -3,13 +3,13 @@ import {
   FETCH_EDIT_USER__SUCCESS,
   FETCH_EDIT_USER__FAILURE,
 
+  SAVE_CROPPER_AVATAR__SUCCESS,
+  SAVE_CROPPER_AVATAR__FAILURE,
+
   CHANGE_AVATAR_ACCOUNT_EDITING__SUCCESS,
   CHANGE_AVATAR_ACCOUNT_EDITING__FAILURE,
 
-  SAVE_CHANGES_ACCOUNT_EDITING__FAILURE,
-  SAVE_CHANGES_PROFILE_EDITING__FAILURE,
-  SAVE_CHANGES_CONTACTS_EDITING__FAILURE,
-  SAVE_CHANGES_CAPABILITIES_EDITING__FAILURE,
+  SAVE_EDIT_USER_DATA__FAILURE,
 } from '../actions/actionEditUser'
 
 export default function editUserReducer(state = { editUser: {} }, action) {
@@ -17,11 +17,28 @@ export default function editUserReducer(state = { editUser: {} }, action) {
     case FETCH_EDIT_USER__SUCCESS: {
       return {
         ...state,
-        editUser: action.payload.editUser,
+        editUser: { ...action.payload.editUser },
         error: undefined,
       }
     }
     case FETCH_EDIT_USER__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+    case SAVE_CROPPER_AVATAR__SUCCESS: {
+      return {
+        ...state,
+        editUser: {
+          ...state.editUser,
+          ...action.payload,
+        },
+        error: action.error,
+      }
+    }
+    case SAVE_CROPPER_AVATAR__FAILURE: {
       return {
         ...state,
         error: action.error,
@@ -33,7 +50,7 @@ export default function editUserReducer(state = { editUser: {} }, action) {
         ...state,
         editUser: {
           ...state.editUser,
-          userSRCAvatarIMG: action.payload.userSRCAvatarIMG,
+          ...action.payload,
         },
         error: undefined,
       }
@@ -45,25 +62,7 @@ export default function editUserReducer(state = { editUser: {} }, action) {
       }
     }
 
-    case SAVE_CHANGES_ACCOUNT_EDITING__FAILURE: {
-      return {
-        ...state,
-        error: action.error,
-      }
-    }
-    case SAVE_CHANGES_PROFILE_EDITING__FAILURE: {
-      return {
-        ...state,
-        error: action.error,
-      }
-    }
-    case SAVE_CHANGES_CONTACTS_EDITING__FAILURE: {
-      return {
-        ...state,
-        error: action.error,
-      }
-    }
-    case SAVE_CHANGES_CAPABILITIES_EDITING__FAILURE: {
+    case SAVE_EDIT_USER_DATA__FAILURE: {
       return {
         ...state,
         error: action.error,

@@ -5,7 +5,8 @@ export const initialNewUserState = {
   userName: '',
   password: '',
   repeatPassword: '',
-  userSRCAvatarIMG: '',
+  userAvatarIMG: '',
+  userAvatarIMGCropper: '',
 
   profileFilled: false,
   firstName: '',
