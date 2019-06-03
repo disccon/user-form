@@ -15,13 +15,18 @@ class UserRow extends Component {
     deleteUserClass: false,
   }
 
-  handleClickOutside = () => {
-    const { deleteUserClass } = this.state
-    if (deleteUserClass) {
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
       this.setState({
         deleteUserClass: false,
       })
     }
+  }
+
+  handleClickOutside = () => {
+    this.setState({
+      deleteUserClass: false,
+    })
   }
 
   showDeleteButton = () => {
@@ -31,26 +36,28 @@ class UserRow extends Component {
   }
 
   render() {
-    const { user, deleteUser } = this.props
+    const { user, deleteUser, oldIndex } = this.props
     const { deleteUserClass } = this.state
     return (
-      <tr className={cx('userRow', { deleteUserClass })}>
+      <tr className={cx('userRow', { deleteUserClass }, { oldIndex })}>
         <td className={cx('userRow__fistTD')}>
-          <img className={cx('userRow__img')} src={user.userAvatarIMG} alt='userAvatarIMG' />
-          <div className={cx('userRow__wrapperDiv')}>
-            <h4 className={cx('userRow__h4')}>
-              {`${user.firstName} ${user.lastName}`}
-            </h4>
-            <span className={cx('userRow__span')}>{user.userName}</span>
+          <div className={cx('userRow__fistTDWrapper')}>
+            <img className={cx('userRow__img')} src={user.userAvatarIMG} alt='userAvatarIMG' />
+            <div className={cx('userRow__wrapperDiv')}>
+              <h4 className={cx('userRow__h4')}>
+                {`${user.firstName} ${user.lastName}`}
+              </h4>
+              <span className={cx('userRow__span')}>{user.userName}</span>
+            </div>
           </div>
         </td>
-        <td className={cx('userRow__td')}>
+        <td className={cx('userRow__td userRow__company')}>
           <div className={cx('userRow__div')}>{user.company}</div>
         </td>
-        <td className={cx('userRow__td')}>
+        <td className={cx('userRow__td userRow__contacts')}>
           <div className={cx('userRow__div')}>{user.email}</div>
         </td>
-        <td className={cx('userRow__td')}>
+        <td className={cx('userRow__td userRow__update')}>
           <div className={cx('userRow__div')}>
             <span className={cx('userRow__lastUpdate')}>
               {moment(moment(user.lastUpdate).format('YYYY-MM-DD HH:mm:ss'), 'YYYY-MM-DD HH:mm:ss').fromNow()}
@@ -86,6 +93,10 @@ class UserRow extends Component {
 }
 
 UserRow.propTypes = {
+  oldIndex: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.bool,
+  ]),
   user: PropTypes.object.isRequired,
   deleteUser: PropTypes.func.isRequired,
 }
