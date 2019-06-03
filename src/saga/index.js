@@ -1,4 +1,4 @@
-import { takeLatest, all } from 'redux-saga/effects'
+import { takeLatest, all, throttle } from 'redux-saga/effects'
 import {
   saveNewUserDataSaga,
   createUserSaga,
@@ -11,6 +11,7 @@ import {
 import {
   fetchUsersSaga,
   deleteUserSaga,
+  swapUsersSaga,
 } from './usersSaga'
 
 import {
@@ -32,6 +33,7 @@ import {
 import {
   FETCH_USERS,
   DELETE_USER,
+  SWAP_USERS,
 } from '../actions/actionUsers'
 
 import {
@@ -52,6 +54,7 @@ export default function* rootSaga() {
 
     takeLatest(FETCH_USERS, fetchUsersSaga),
     takeLatest(DELETE_USER, deleteUserSaga),
+    throttle(1200, SWAP_USERS, swapUsersSaga),
 
     takeLatest(FETCH_EDIT_USER, fetchEditUserSaga),
     takeLatest(SAVE_CROPPER_AVATAR, saveCropperAvatarSaga),
