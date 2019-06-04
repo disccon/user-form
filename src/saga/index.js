@@ -1,7 +1,7 @@
 import { takeLatest, all, throttle } from 'redux-saga/effects'
 import {
   saveNewUserDataSaga,
-  createUserSaga,
+  clearUserSaga,
   changeQuestionStateSaga,
   continueUserSaga,
   changeAvatarAccountSaga,
@@ -23,7 +23,7 @@ import {
 
 import {
   SAVE_NEW_USER_DATA,
-  CREATE_USER,
+  CLEAR_USER,
   CHANGE_QUESTION_STATE,
   CONTINUE_USER,
   CHANGE_AVATAR_ACCOUNT,
@@ -46,7 +46,7 @@ import {
 export default function* rootSaga() {
   yield all([
     takeLatest(SAVE_NEW_USER_DATA, saveNewUserDataSaga),
-    takeLatest(CREATE_USER, createUserSaga),
+    takeLatest(CLEAR_USER, clearUserSaga),
     takeLatest(CHANGE_QUESTION_STATE, changeQuestionStateSaga),
     takeLatest(CONTINUE_USER, continueUserSaga),
     takeLatest(CHANGE_AVATAR_ACCOUNT, changeAvatarAccountSaga),

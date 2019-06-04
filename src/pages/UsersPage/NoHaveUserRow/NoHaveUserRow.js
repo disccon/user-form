@@ -3,15 +3,13 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import classNames from 'classnames'
-import { createUser } from '../../../actions/actionNewUser'
 import styles from './NoHaveUserRow.scss'
 
 const cx = classNames.bind(styles)
 
-const NoHaveUserRow = ({ push, createUser }) => {
-  const createUserNew = () => {
+const NoHaveUserRow = ({ push }) => {
+  const pushCreateUser = () => {
     push('/')
-    createUser()
   }
 
   return (
@@ -19,7 +17,7 @@ const NoHaveUserRow = ({ push, createUser }) => {
       <h2 className={cx('usersPage__noUsersH2')}>
         No users here :(
       </h2>
-      <button type='button' className={cx('usersPage__createUserButton')} onClick={createUserNew}>
+      <button type='button' className={cx('usersPage__createUserButton')} onClick={pushCreateUser}>
         Create new user
       </button>
     </Fragment>
@@ -27,11 +25,10 @@ const NoHaveUserRow = ({ push, createUser }) => {
 }
 
 NoHaveUserRow.propTypes = {
-  createUser: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
 }
 
 export default connect(
   null,
-  { createUser, push },
+  { push },
 )(NoHaveUserRow)

@@ -6,8 +6,8 @@ import {
   SAVE_NEW_USER_DATA__SUCCESS,
   SAVE_NEW_USER_DATA__FAILURE,
 
-  CREATE_USER__SUCCESS,
-  CREATE_USER__FAILURE,
+  CLEAR_USER__SUCCESS,
+  CLEAR_USER__FAILURE,
 
   CHANGE_QUESTION_STATE__OPEN,
   CHANGE_QUESTION_STATE__CLOSE,
@@ -43,18 +43,15 @@ export function* saveNewUserDataSaga(action) {
   }
 }
 
-export function* createUserSaga() {
+export function* clearUserSaga() {
   try {
-    db.newUserDB.update(0, {
-      ...initialNewUserState,
-    })
     yield put({
-      type: CREATE_USER__SUCCESS,
+      type: CLEAR_USER__SUCCESS,
       payload: initialNewUserState,
     })
   } catch (error) {
     yield put({
-      type: CREATE_USER__FAILURE,
+      type: CLEAR_USER__FAILURE,
       error,
     })
   }

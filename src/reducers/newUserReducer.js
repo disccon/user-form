@@ -17,8 +17,8 @@ import {
   FORWARD_CAPABILITIES__ADD_NEW_USER,
   FORWARD_CAPABILITIES__FAILURE,
 
-  CREATE_USER__SUCCESS,
-  CREATE_USER__FAILURE,
+  CLEAR_USER__SUCCESS,
+  CLEAR_USER__FAILURE,
 } from '../actions/actionNewUser'
 
 export default function newUserReducer(state = initialNewUserState, action) {
@@ -106,13 +106,13 @@ export default function newUserReducer(state = initialNewUserState, action) {
       }
     }
 
-    case CREATE_USER__SUCCESS: {
+    case CLEAR_USER__SUCCESS: {
       return {
         ...action.payload,
         error: undefined,
       }
     }
-    case CREATE_USER__FAILURE: {
+    case CLEAR_USER__FAILURE: {
       return {
         ...state,
         error: action.error,

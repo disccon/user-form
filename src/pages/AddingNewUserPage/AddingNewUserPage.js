@@ -12,14 +12,13 @@ import Contacts from './Contacts/Contacts'
 import Capabilities from './Capabilities/Capabilities'
 import Profile from './Profile/Profile'
 import db from '../../db'
+import { clearUser } from '../../actions/actionNewUser'
 
 const cx = classNames.bind(styles)
 
 class AddingNewUserPage extends Component {
   componentDidMount() {
-    const {
-      pathname, push,
-    } = this.props
+    const { pathname, push } = this.props
     if (pathname === '/profile' || pathname === '/contacts' || pathname === '/capabilities') {
       push('/')
     }
@@ -27,6 +26,8 @@ class AddingNewUserPage extends Component {
   }
 
   componentWillUnmount() {
+    const { clearUser } = this.props
+    clearUser()
     window.removeEventListener('beforeunload', this.onUnload)
   }
 
@@ -102,6 +103,7 @@ AddingNewUserPage.propTypes = {
   activeFormValue: PropTypes.object,
   newUser: PropTypes.object,
   push: PropTypes.func.isRequired,
+  clearUser: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => {
@@ -123,5 +125,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { push },
+  { push, clearUser },
 )(AddingNewUserPage)
