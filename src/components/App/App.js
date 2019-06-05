@@ -7,15 +7,15 @@ import classNames from 'classnames'
 import _ from 'lodash/core'
 import './reset.css'
 import styles from './App.scss'
-import AddingNewUserPage from '../../pages/AddingNewUserPage/AddingNewUserPage'
-import EditUserPage from '../../pages/EditUserPage/EditUserPage'
-import UsersPage from '../../pages/UsersPage/UsersPage'
-import EditingPage from '../../pages/EditingPage/EditingPage'
 import Header from '../Header/Header'
 import { NotFound } from '../../pages/NotFound/NotFound'
 import db from '../../db'
 import { changeQuestionState } from '../../actions/actionNewUser'
 import { initialNewUserState } from '../../stubs/initialNewUserState'
+import UsersPage from '../../pages/UsersPage/UsersPage'
+import UserPage from '../../pages/UserPage/UserPage'
+import EditUserPage from '../../pages/EditUserPage/EditUserPage'
+import CreateUserPage from '../../pages/CreateUserPage/CreateUserPage'
 
 const cx = classNames.bind(styles)
 
@@ -38,9 +38,9 @@ class App extends Component {
           <Switch>
             <Route path='/not-found' component={NotFound} />
             <Route exact path='/users' component={UsersPage} />
-            <Route exact path='/user/:id' component={EditUserPage} />
-            <Route path='/edit-user/:id' component={EditingPage} />
-            <Route path='/' component={AddingNewUserPage} />
+            <Route exact path='/user/:id' component={UserPage} />
+            <Route path='/edit-user/:id' component={EditUserPage} />
+            <Route path='/' component={CreateUserPage} />
             <Redirect to='/not-found' />
           </Switch>
         </div>

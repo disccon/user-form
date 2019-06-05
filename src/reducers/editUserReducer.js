@@ -6,8 +6,8 @@ import {
   SAVE_CROPPER_AVATAR__SUCCESS,
   SAVE_CROPPER_AVATAR__FAILURE,
 
-  CHANGE_AVATAR_ACCOUNT_EDITING__SUCCESS,
-  CHANGE_AVATAR_ACCOUNT_EDITING__FAILURE,
+  CHANGE_AVATAR_ACCOUNT_EDIT__SUCCESS,
+  CHANGE_AVATAR_ACCOUNT_EDIT__FAILURE,
 
   SAVE_EDIT_USER_DATA__FAILURE,
 } from '../actions/actionEditUser'
@@ -17,7 +17,7 @@ export default function editUserReducer(state = { editUser: {} }, action) {
     case FETCH_EDIT_USER__SUCCESS: {
       return {
         ...state,
-        editUser: { ...action.payload.editUser },
+        editUser: { ...action.payload },
         error: undefined,
       }
     }
@@ -45,7 +45,7 @@ export default function editUserReducer(state = { editUser: {} }, action) {
       }
     }
 
-    case CHANGE_AVATAR_ACCOUNT_EDITING__SUCCESS: {
+    case CHANGE_AVATAR_ACCOUNT_EDIT__SUCCESS: {
       return {
         ...state,
         editUser: {
@@ -55,7 +55,7 @@ export default function editUserReducer(state = { editUser: {} }, action) {
         error: undefined,
       }
     }
-    case CHANGE_AVATAR_ACCOUNT_EDITING__FAILURE: {
+    case CHANGE_AVATAR_ACCOUNT_EDIT__FAILURE: {
       return {
         ...state,
         error: action.error,

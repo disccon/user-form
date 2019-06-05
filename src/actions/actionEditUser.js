@@ -6,9 +6,9 @@ export const SAVE_CROPPER_AVATAR = 'SAVE_CROPPER_AVATAR'
 export const SAVE_CROPPER_AVATAR__SUCCESS = 'SAVE_CROPPER_AVATAR__SUCCESS'
 export const SAVE_CROPPER_AVATAR__FAILURE = 'SAVE_CROPPER_AVATAR__FAILURE'
 
-export const CHANGE_AVATAR_ACCOUNT_EDITING = 'CHANGE_AVATAR_ACCOUNT_EDITING'
-export const CHANGE_AVATAR_ACCOUNT_EDITING__SUCCESS = 'CHANGE_AVATAR_ACCOUNT_EDITING__SUCCESS'
-export const CHANGE_AVATAR_ACCOUNT_EDITING__FAILURE = 'CHANGE_AVATAR_ACCOUNT_EDITING__FAILURE'
+export const CHANGE_AVATAR_ACCOUNT_EDIT = 'CHANGE_AVATAR_ACCOUNT_EDIT'
+export const CHANGE_AVATAR_ACCOUNT_EDIT__SUCCESS = 'CHANGE_AVATAR_ACCOUNT_EDIT__SUCCESS'
+export const CHANGE_AVATAR_ACCOUNT_EDIT__FAILURE = 'CHANGE_AVATAR_ACCOUNT_EDIT__FAILURE'
 
 export const SAVE_EDIT_USER_DATA = 'SAVE_EDIT_USER_DATA'
 export const SAVE_EDIT_USER_DATA__FAILURE = 'SAVE_EDIT_USER_DATA__FAILURE'
@@ -29,19 +29,19 @@ export const saveCropperAvatar = userAvatarIMGCropper => (
     },
   })
 
-export const changeAvatarAccountEditing = (userAvatarIMGCropper, userAvatarIMG) => (
+export const changeAvatarAccountEdit = (userAvatarIMGCropper, userAvatarIMG) => (
   {
-    type: CHANGE_AVATAR_ACCOUNT_EDITING,
+    type: CHANGE_AVATAR_ACCOUNT_EDIT,
     payload: {
       userAvatarIMGCropper, userAvatarIMG,
     },
   })
 
 
-export const saveEditUserData = (id, activeFormValue) => (
+export const saveEditUserData = (activeFormValue, id) => (
   {
     type: SAVE_EDIT_USER_DATA,
     payload: {
-      id, activeFormValue,
+      activeFormValue, id,
     },
   })

@@ -1,41 +1,27 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment, Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { push } from 'connected-react-router'
 import { Field, reduxForm } from 'redux-form'
-import styles from '../../../components/UserFormBox/UserFormBox.scss'
+import styles from '../UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
-import {
-  saveNewUserData,
-  continueUser,
-  changeQuestionState,
-  changeAvatarAccount,
-} from '../../../actions/actionNewUser'
-import FieldInputAccount from '../../../components/fieldForm/FieldInputAccount/FieldInputAccount'
-import UserFormBox from '../../../components/UserFormBox/UserFormBox'
-import QuestionAccount from './QuestionAccount/QuestionAccount'
-import CropperModal from '../../../components/CropperModalWindow/CropperModal'
-import db from '../../../db'
+import FieldInputAccount from '../../fieldForm/FieldInputAccount/FieldInputAccount'
+import UserFormBox from '../UserFormBox'
+import CropperModal from '../../CropperModalWindow/CropperModal'
+import { validateAccount } from '../validateForm/validateAccount'
 
 const cx = classNames.bind(styles)
 
 class Account extends Component {
   state = {
-    avatarIMGError: null,
     typePasswordFirstInput: 'text',
     typePasswordSecondInput: 'text',
-    cropperSrc: null,
-  }
-
-  continueUser = isContinue => () => {
-    const { continueUser } = this.props
-    continueUser(isContinue)
+    avatarIMGError: null,
   }
 
   addImageUserAvatar = event => {
     event.preventDefault()
+    const { setCropperSrc } = this.props
     const reader = new FileReader()
     const fileIMG = event.target.files[0]
     const fileSize = fileIMG.size / 1024 / 1024
@@ -43,8 +29,8 @@ class Account extends Component {
       reader.onloadend = () => {
         this.setState({
           avatarIMGError: false,
-          cropperSrc: reader.result,
         })
+        setCropperSrc(reader.result)()
       }
       reader.readAsDataURL(fileIMG)
     } else {
@@ -54,23 +40,14 @@ class Account extends Component {
     }
   }
 
-  onSubmit = values => {
-    const {
-      saveNewUserData, userAvatarIMGCropper, push,
-    } = this.props
+  onSubmitForm = values => {
+    const { userAvatarIMGCropper, onSubmit } = this.props
     if (!userAvatarIMGCropper) {
       this.setState({
         avatarIMGError: 'Upload a picture',
       })
     } else {
-      push('/profile')
-      saveNewUserData({
-        userName: values.userName,
-        password: values.password,
-        repeatPassword: values.password,
-        accountFilled: true,
-        isQuestion: false,
-      })
+      onSubmit(values)
     }
   }
 
@@ -87,28 +64,25 @@ class Account extends Component {
     }
   }
 
-  setCropperSrc = isCropperSrc => () => {
-    this.setState({
-      cropperSrc: isCropperSrc,
-    })
-  }
-
   render() {
     const {
-      handleSubmit, isQuestion, userAvatarIMGCropper, changeAvatarAccount,
+      handleSubmit, labelButton,
+      setCropperSrc, userAvatarIMGCropper, cropperSrc,
+      changeAvatar, cropperButton, question,
     } = this.props
-    const {
-      avatarIMGError, typePasswordFirstInput, typePasswordSecondInput, cropperSrc,
-    } = this.state
+    const { typePasswordFirstInput, typePasswordSecondInput, avatarIMGError } = this.state
+
     const userAvatar = userAvatarIMGCropper
       ? <img className={cx('userAvatarWrapper__userAvatarIMG')} src={userAvatarIMGCropper} alt='userAvatar' />
       : <UserAvatarIcon className={cx('userAvatarWrapper__userAvatarSVG')} alt='userAvatar' />
+
     const userAvatarError = avatarIMGError
       ? <p className={cx('userAvatarWrapper__avatarError')}>{avatarIMGError}</p> : null
+
     return (
       <Fragment>
-        {isQuestion && <QuestionAccount continueUser={this.continueUser} />}
-        <UserFormBox handleSubmit={handleSubmit(this.onSubmit)} classForm='userFormBoxAccount'>
+        {question}
+        <UserFormBox handleSubmit={handleSubmit(this.onSubmitForm)} classForm='userFormBoxAccount'>
           <div className={cx('userAvatarWrapper')}>
             <label htmlFor='userAvatar'>
               {userAvatar}
@@ -131,6 +105,7 @@ class Account extends Component {
                 onChange={this.addImageUserAvatar}
               />
             </label>
+            {cropperButton}
             {userAvatarError}
           </div>
           <div className={cx('register__userData')}>
@@ -159,13 +134,13 @@ class Account extends Component {
               idInput='repeatPassword'
               changeTypePassword={this.changeTypePassword('typePasswordSecondInput')}
             />
-            <button className={cx('accountComponent__buttonSubmit')} type='submit'>Forward</button>
+            <button className={cx('accountComponent__buttonSubmit')} type='submit'>{labelButton}</button>
           </div>
           {cropperSrc && (
             <CropperModal
               cropperSrc={cropperSrc}
-              setCropperSrc={this.setCropperSrc}
-              changeAvatar={changeAvatarAccount}
+              setCropperSrc={setCropperSrc}
+              changeAvatar={changeAvatar}
             />
           )}
         </UserFormBox>
@@ -174,74 +149,36 @@ class Account extends Component {
   }
 }
 
-const accountForm = reduxForm({
-  asyncValidate: values => db.usersDB.toArray(usersDB => {
-    const userNameList = usersDB.map(user => user.userName)
-    let errorUserName
-    userNameList.find(userEmail => (
-      errorUserName = values.userName === userEmail ? 'already have this email in the database' : null))
-    if (errorUserName) {
-      return Promise.reject({
-        userName: errorUserName,
-      })
-    }
-  }),
-
-  validate: values => {
-    const errors = {}
-    if (!values.userName) {
-      errors.userName = 'Missing User Name'
-    } else if (values.userName.length <= 3) {
-      errors.userName = 'Must be 4 characters or more'
-    }
-
-    if (!values.password) {
-      errors.password = 'Missing Password'
-    } else if (values.password.length <= 3) {
-      errors.password = 'Must be 4 characters or more'
-    }
-
-    if (!values.repeatPassword) {
-      errors.repeatPassword = 'Missing Repeat Password'
-    }
-    if (values.password !== values.repeatPassword) errors.repeatPassword = "Passwords doesn't match"
-
-    return errors
-  },
-  form: 'Account',
-  enableReinitialize: true,
-})(Account)
-
 Account.propTypes = {
   userAvatarIMGCropper: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.object,
     PropTypes.string,
-    PropTypes.array,
   ]),
-  isQuestion: PropTypes.bool.isRequired,
-  continueUser: PropTypes.func.isRequired,
-  saveNewUserData: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func,
-  changeAvatarAccount: PropTypes.func.isRequired,
-  push: PropTypes.func.isRequired,
+  cropperSrc: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.object,
+    PropTypes.string,
+  ]),
+  cropperButton: PropTypes.object,
+  question: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.object,
+  ]),
+  labelButton: PropTypes.string.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  setCropperSrc: PropTypes.func.isRequired,
+  changeAvatar: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = state => {
-  const {
-    userName, password, repeatPassword, userAvatarIMGCropper, isQuestion,
-  } = state.newUser
-  return {
-    initialValues: {
-      userName, password, repeatPassword,
-    },
-    userAvatarIMGCropper,
-    isQuestion,
-    newUser: state.newUser,
-  }
-}
+const AccountForm = reduxForm({
+  validate: validateAccount,
+  asyncValidate: (values, dispatch, props) => props.asyncValidateAccount(values, props.id),
+  form: 'AccountForm',
+  enableReinitialize: true,
+  touchOnBlur: false,
+})(Account)
 
-export default connect(
-  mapStateToProps,
-  {
-    saveNewUserData, continueUser, changeQuestionState, changeAvatarAccount, push,
-  },
-)(accountForm)
+
+export default AccountForm

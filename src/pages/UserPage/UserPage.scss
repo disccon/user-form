@@ -1,0 +1,130 @@
+$ac: 'accountDataWrapper';
+$us: 'userNamePage';
+
+.container {
+  position: relative;
+
+  .linkBackPage {
+    position: absolute;
+    top: 63px;
+    left: 3px;
+    font-weight: bold;
+    font-size: 24px;
+    color: #9BB0CB;
+  }
+
+  .#{$us} {
+    margin-top: 35px;
+    display: flex;
+    padding: 35px 58px;
+    background: #fbfcff;
+    min-height: 734px;
+    .#{$us}__wrapperImg{
+      margin-right: 91px;
+      width: 200px;
+      .#{$us}__avatar {
+        width: 200px;
+        height: 200px;
+        border: 3px solid #5E97F3;
+        border-radius: 50%;
+      }
+      .#{$us}__cropImage{
+        display: block;
+        margin-top: 30px;
+        margin-right: auto;
+        margin-left: auto;
+        transition: all ease 0.3s;
+        background-color: #007bff;
+        border-color: #007bff;
+        border-radius: 4px;
+        width: 100px;
+        height: 40px;
+        font-weight: 500;
+        text-align: center;
+        color: #FFF;
+      }
+
+      .#{$us}__cropImage:hover {
+        transition: all ease 0.3s;
+        background-color: #0069d9;
+        border-color: #0062cc;
+      }
+    }
+
+    .#{$ac} {
+      display: flex;
+      flex-direction: column;
+      color: #475666;
+      padding-top: 32px;
+
+      .#{$ac}__block {
+        margin-bottom: 24px;
+        display: flex;
+
+        .#{$ac}__section {
+          width: 152px;
+          display: flex;
+
+          .#{$ac}__h3 {
+            margin-right: 8px;
+            font-weight: 500;
+          }
+
+          .#{$ac}__buttonEdit {
+            margin-top: 1px;
+            width: 15px;
+            height: 15px;
+            background: transparent;
+
+            .#{$ac}__editIcon {
+              margin-top: 1px;
+              width: 15px;
+              height: 15px;
+
+              .editIcon {
+                fill: #475666;
+              }
+            }
+          }
+        }
+
+        .#{$ac}__sectionInfo {
+          .#{$ac}__wrapper {
+            margin-bottom: 7px;
+            display: flex;
+
+            .#{$ac}__h4 {
+              font-weight: 500;
+              width: 170px;
+            }
+
+            .#{$ac}__span {
+              margin-bottom: 9px;
+              max-width: 230px;
+              color: #657C9A;
+            }
+
+            .#{$ac}__a {
+              text-decoration-line: underline;
+              transition: all ease 0.4s;
+            }
+
+            .#{$ac}__a:hover {
+              text-decoration-line: none;
+              transition: all ease 0.4s;
+            }
+          }
+
+          .#{$ac}__wrapperHobbies {
+            display: flex;
+            flex-direction: column;
+
+            .#{$ac}__span {
+              line-height: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

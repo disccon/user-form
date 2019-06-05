@@ -9,8 +9,8 @@ import {
   SAVE_CROPPER_AVATAR__SUCCESS,
   SAVE_CROPPER_AVATAR__FAILURE,
 
-  CHANGE_AVATAR_ACCOUNT_EDITING__SUCCESS,
-  CHANGE_AVATAR_ACCOUNT_EDITING__FAILURE,
+  CHANGE_AVATAR_ACCOUNT_EDIT__SUCCESS,
+  CHANGE_AVATAR_ACCOUNT_EDIT__FAILURE,
 
   SAVE_EDIT_USER_DATA__FAILURE,
 } from '../actions/actionEditUser'
@@ -25,7 +25,7 @@ export function* fetchEditUserSaga(action) {
       yield put({
         type: FETCH_EDIT_USER__SUCCESS,
         payload: {
-          editUser,
+          ...editUser,
         },
       })
     } else {
@@ -63,31 +63,30 @@ export function* saveCropperAvatarSaga(action) {
   }
 }
 
-export function* changeAvatarAccountEditingSaga(action) {
+export function* changeAvatarAccountEditSaga(action) {
   const { userAvatarIMGCropper, userAvatarIMG } = action.payload
   try {
     yield put({
-      type: CHANGE_AVATAR_ACCOUNT_EDITING__SUCCESS,
+      type: CHANGE_AVATAR_ACCOUNT_EDIT__SUCCESS,
       payload: {
         userAvatarIMGCropper, userAvatarIMG,
       },
     })
   } catch (error) {
     yield put({
-      type: CHANGE_AVATAR_ACCOUNT_EDITING__FAILURE,
+      type: CHANGE_AVATAR_ACCOUNT_EDIT__FAILURE,
       error,
     })
   }
 }
 
 export function* saveEditUserDataSaga(action) {
-  const { id, activeFormValue } = action.payload
+  const { activeFormValue, id } = action.payload
   try {
     yield call(() => db.usersDB.update(id, {
       ...activeFormValue,
       lastUpdate: new Date(),
     }))
-    yield put(push(`/user/${id}`))
   } catch (error) {
     yield put({
       type: SAVE_EDIT_USER_DATA__FAILURE,

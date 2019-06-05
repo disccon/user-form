@@ -1,0 +1,77 @@
+import { connect } from 'react-redux'
+import { push } from 'connected-react-router'
+import _ from 'lodash/core'
+import React, { Component, Fragment } from 'react'
+import classNames from 'classnames'
+import PropTypes from 'prop-types'
+import { fetchEditUser, saveEditUserData } from '../../../actions/actionEditUser'
+import CapabilitiesForm from '../../../components/UserFormBox/CapabilitiesForm/CapabilitiesForm'
+import styles from '../../../components/UserFormBox/UserFormBox.scss'
+
+const cx = classNames.bind(styles)
+
+class EditUserCapabilities extends Component {
+  componentDidMount() {
+    const { fetchEditUser, id } = this.props
+    fetchEditUser(id)
+  }
+
+  onSubmit = values => {
+    const {
+      id, push, saveUserData,
+    } = this.props
+    saveUserData(values, id)
+    push(`/user/${id}`)
+  }
+
+  render() {
+    const wrapperButton = (
+      <Fragment>
+        <button type='button' onClick={this.backCapabilities} className={cx('userFormBox__back')}>Back</button>
+        <button type='submit' className={cx('userFormBox__forward')}>Forward</button>
+      </Fragment>
+    )
+    return (
+      <CapabilitiesForm
+        onSubmit={this.onSubmit}
+        wrapperButton={wrapperButton}
+        initialValues={_.pick(this.props, ['selectSkills', 'textareaField', 'checkboxArt', 'checkboxSport',
+          'checkboxJustWant', 'checkboxFemale', 'checkboxGuitar', 'checkboxWtf'])}
+      />
+    )
+  }
+}
+
+EditUserCapabilities.propTypes = {
+  id: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.bool,
+  ]),
+  saveUserData: PropTypes.func,
+  push: PropTypes.func.isRequired,
+  fetchEditUser: PropTypes.func.isRequired,
+}
+
+const mapStateToProps = (state, ownProps) => {
+  const id = Number(ownProps.match.params.id)
+  const {
+    selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
+    checkboxGuitar, checkboxWtf,
+  } = state.editUserReducer.editUser
+  return {
+    selectSkills,
+    textareaField,
+    checkboxArt,
+    checkboxSport,
+    checkboxJustWant,
+    checkboxFemale,
+    checkboxGuitar,
+    checkboxWtf,
+    id,
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  { push, saveUserData: saveEditUserData, fetchEditUser },
+)(EditUserCapabilities)

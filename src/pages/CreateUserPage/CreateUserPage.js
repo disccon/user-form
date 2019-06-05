@@ -1,25 +1,24 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { push } from 'connected-react-router'
 import { Redirect, Route, Switch } from 'react-router'
+import { push } from 'connected-react-router'
 import { getFormNames, getFormValues } from 'redux-form'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import styles from './AddingNewUser.scss'
-import Account from './Account/Account'
-import Contacts from './Contacts/Contacts'
-import Capabilities from './Capabilities/Capabilities'
-import Profile from './Profile/Profile'
+import styles from './CreateUserPage.scss'
 import db from '../../db'
+import { clearUser } from '../../actions/actionNewUser'
+import CreateUserAccount from './CreateUserAccount/CreateUserAccount'
+import CreateUserProfile from './CreateUserProfile/CreateUserProfile'
+import CreateUserContacts from './CreateUserContacts/CreateUserContacts'
+import CreateUserCapabilities from './CreateUserCapabilities/CreateUserCapabilities'
 
 const cx = classNames.bind(styles)
 
-class AddingNewUserPage extends Component {
+class CreateUserPage extends Component {
   componentDidMount() {
-    const {
-      pathname, push,
-    } = this.props
+    const { pathname, push } = this.props
     if (pathname === '/profile' || pathname === '/contacts' || pathname === '/capabilities') {
       push('/')
     }
@@ -27,7 +26,11 @@ class AddingNewUserPage extends Component {
   }
 
   componentWillUnmount() {
+    const { clearUser } = this.props
     window.removeEventListener('beforeunload', this.onUnload)
+    setTimeout(() => {
+      clearUser()
+    }, 100)
   }
 
   onUnload = () => {
@@ -82,10 +85,10 @@ class AddingNewUserPage extends Component {
             </div>
           </div>
           <Switch>
-            <Route exact path='/' component={Account} />
-            <Route exact path='/profile' component={Profile} />
-            <Route exact path='/contacts' component={Contacts} />
-            <Route exact path='/capabilities' component={Capabilities} />
+            <Route exact path='/' component={CreateUserAccount} />
+            <Route exact path='/profile' component={CreateUserProfile} />
+            <Route exact path='/contacts' component={CreateUserContacts} />
+            <Route exact path='/capabilities' component={CreateUserCapabilities} />
             <Redirect to='/not-found' />
           </Switch>
         </div>
@@ -94,7 +97,7 @@ class AddingNewUserPage extends Component {
   }
 }
 
-AddingNewUserPage.propTypes = {
+CreateUserPage.propTypes = {
   pathname: PropTypes.string.isRequired,
   accountFilled: PropTypes.bool.isRequired,
   profileFilled: PropTypes.bool.isRequired,
@@ -102,6 +105,7 @@ AddingNewUserPage.propTypes = {
   activeFormValue: PropTypes.object,
   newUser: PropTypes.object,
   push: PropTypes.func.isRequired,
+  clearUser: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => {
@@ -123,5 +127,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { push },
-)(AddingNewUserPage)
+  { push, clearUser },
+)(CreateUserPage)
