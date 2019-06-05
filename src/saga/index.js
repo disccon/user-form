@@ -1,7 +1,7 @@
 import { takeLatest, all, throttle } from 'redux-saga/effects'
 import {
   saveNewUserDataSaga,
-  createUserSaga,
+  clearUserSaga,
   changeQuestionStateSaga,
   continueUserSaga,
   changeAvatarAccountSaga,
@@ -17,13 +17,13 @@ import {
 import {
   fetchEditUserSaga,
   saveCropperAvatarSaga,
-  changeAvatarAccountEditingSaga,
+  changeAvatarAccountEditSaga,
   saveEditUserDataSaga,
 } from './editUserSaga'
 
 import {
   SAVE_NEW_USER_DATA,
-  CREATE_USER,
+  CLEAR_USER,
   CHANGE_QUESTION_STATE,
   CONTINUE_USER,
   CHANGE_AVATAR_ACCOUNT,
@@ -38,7 +38,7 @@ import {
 
 import {
   FETCH_EDIT_USER,
-  CHANGE_AVATAR_ACCOUNT_EDITING,
+  CHANGE_AVATAR_ACCOUNT_EDIT,
   SAVE_EDIT_USER_DATA,
   SAVE_CROPPER_AVATAR,
 } from '../actions/actionEditUser'
@@ -46,7 +46,7 @@ import {
 export default function* rootSaga() {
   yield all([
     takeLatest(SAVE_NEW_USER_DATA, saveNewUserDataSaga),
-    takeLatest(CREATE_USER, createUserSaga),
+    takeLatest(CLEAR_USER, clearUserSaga),
     takeLatest(CHANGE_QUESTION_STATE, changeQuestionStateSaga),
     takeLatest(CONTINUE_USER, continueUserSaga),
     takeLatest(CHANGE_AVATAR_ACCOUNT, changeAvatarAccountSaga),
@@ -58,7 +58,7 @@ export default function* rootSaga() {
 
     takeLatest(FETCH_EDIT_USER, fetchEditUserSaga),
     takeLatest(SAVE_CROPPER_AVATAR, saveCropperAvatarSaga),
-    takeLatest(CHANGE_AVATAR_ACCOUNT_EDITING, changeAvatarAccountEditingSaga),
+    takeLatest(CHANGE_AVATAR_ACCOUNT_EDIT, changeAvatarAccountEditSaga),
     takeLatest(SAVE_EDIT_USER_DATA, saveEditUserDataSaga),
   ])
 }

@@ -6,9 +6,9 @@ export const FORWARD_CAPABILITIES = 'FORWARD_CAPABILITIES'
 export const FORWARD_CAPABILITIES__ADD_NEW_USER = 'FORWARD_BACK_CAPABILITIES__FORWARD__ADD_NEW_USER'
 export const FORWARD_CAPABILITIES__FAILURE = 'FORWARD_CAPABILITIES__FAILURE'
 
-export const CREATE_USER = 'CREATE_USER'
-export const CREATE_USER__SUCCESS = 'CREATE_USER__SUCCESS'
-export const CREATE_USER__FAILURE = 'CREATE_USER__FAILURE'
+export const CLEAR_USER = 'CLEAR_USER'
+export const CLEAR_USER__SUCCESS = 'CLEAR_USER__SUCCESS'
+export const CLEAR_USER__FAILURE = 'CLEAR_USER__FAILURE'
 
 export const CHANGE_QUESTION_STATE = 'CHANGE_QUESTION_STATE'
 export const CHANGE_QUESTION_STATE__OPEN = 'CHANGE_QUESTION_STATE__OPEN'
@@ -32,8 +32,8 @@ export const saveNewUserData = activeFormValue => (
     },
   })
 
-export const createUser = () => (
-  { type: CREATE_USER })
+export const clearUser = () => (
+  { type: CLEAR_USER })
 
 export const changeQuestionState = isQuestion => ({
   type: CHANGE_QUESTION_STATE,

@@ -1,19 +1,19 @@
 import AvatarIMG1 from '../img/Ellipse(1).png'
 
 export const users = []
-for (let i = 0; i < 40; i += 1) {
+for (let i = 1; i < 42; i += 1) {
   users[i] = {
     id: i,
-    userName: `Maxim ${i + 1}`,
+    userName: `Maxim ${i}`,
     password: '2222',
     repeatPassword: '2222',
     userAvatarIMG: AvatarIMG1,
     userAvatarIMGCropper: AvatarIMG1,
     firstName: 'Maxim',
-    lastName: `Morozov ${i + 1}`,
-    fullName: `Maxim Morozov ${i + 1}`,
+    lastName: `Morozov ${i}`,
+    fullName: `Maxim Morozov ${i}`,
     birthDate: new Date(1980, i, 1),
-    email: `my_email${i + 1}@gmail.com`,
+    email: `my_email${i}@gmail.com`,
     address: 'Street TRUE, 130',
     gender: '',
 

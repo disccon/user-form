@@ -7,11 +7,10 @@ import styles from './Header.scss'
 import { ReactComponent as LogoIcon } from '../../img/icon/logo.svg'
 import { ReactComponent as AddUserIcon } from '../../img/icon/addUser.svg'
 import { ReactComponent as LoginIcon } from '../../img/icon/login.svg'
-import { createUser } from '../../actions/actionNewUser'
 
 const cx = classNames.bind(styles)
 
-const Header = ({ createUser, pathname, newUser }) => (
+const Header = ({ pathname, newUser }) => (
   <header className={cx('header')}>
     <div className={cx('container')}>
       <div className={cx('logoA')}>
@@ -23,7 +22,6 @@ const Header = ({ createUser, pathname, newUser }) => (
           activeIcon: pathname.indexOf('/users') !== 0 && pathname.indexOf('/user') !== 0
             && pathname.indexOf('/edit-user') !== 0 && !newUser.id,
         })}
-        onClick={createUser}
       >
         <AddUserIcon className={cx('addUserIcon')} alt='addUserIcon' />
         <span className={cx('addUserSpan ')} >Add new user</span>
@@ -44,7 +42,6 @@ const Header = ({ createUser, pathname, newUser }) => (
 
 Header.propTypes = {
   pathname: PropTypes.string.isRequired,
-  createUser: PropTypes.func.isRequired,
   newUser: PropTypes.object.isRequired,
 }
 
@@ -58,5 +55,4 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { createUser },
 )(Header)
