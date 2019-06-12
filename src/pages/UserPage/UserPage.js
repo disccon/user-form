@@ -31,7 +31,7 @@ class UserPage extends Component {
     const { id, editUser, saveCropperAvatar } = this.props
     const {
       userName, userAvatarIMG, firstName, lastName, birthDate, email, address, company, fax,
-      facebookLink, phoneArray, selectSkills, checkboxArt, checkboxSport, checkboxJustWant,
+      facebookLink, phoneArray, skills, checkboxArt, checkboxSport, checkboxJustWant,
       checkboxFemale, checkboxGuitar, checkboxWtf, userAvatarIMGCropper,
     } = editUser
     return (
@@ -153,7 +153,7 @@ class UserPage extends Component {
                   <div className={cx('accountDataWrapper__wrapper')}>
                     <h4 className={cx('accountDataWrapper__h4')}>Skills:</h4>
                     <span className={cx('accountDataWrapper__span')}>
-                      {selectSkills.map(user => (
+                      {skills.map(user => (
                         `${user.value},  `
                       ))}
                     </span>

@@ -1,0 +1,75 @@
+.newFieldsFilterPopup {
+  width: 230px;
+
+  .newFieldsFilterPopup__addFilter {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #d8d8d8;
+    padding-right: 15px;
+    padding-left: 15px;
+    flex-direction: column;
+    transition: all ease .4s;
+
+    .newFieldsFilterPopup__rowWrapper {
+      opacity: 1;
+      display: flex;
+      cursor: pointer;
+      align-items: center;
+      height: 30px;
+
+      .newFieldsFilterPopup__userAvatar, .newFieldsFilterPopup__avatarIcon {
+        fill: #303030;
+        width: 17px;
+        height: 17px;
+      }
+
+      .newFieldsFilterPopup__calendarIcon {
+        margin-bottom: 6px;
+        cursor: pointer;
+        fill: #303030;
+        width: 15px;
+        height: 15px;
+      }
+
+      .newFieldsFilterPopup__filterHeadline {
+        cursor: pointer;
+        margin-left: 15px;
+        font-family: 'Open Sans';
+        font-size: 13px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .newFieldsFilterPopup__searchFilter {
+    align-items: center;
+    padding-right: 26px;
+    flex-direction: row;
+
+    .newFieldsFilterPopup__searchIcon {
+      width: 15px;
+      height: 15px;
+      fill: #8c8c8c;
+    }
+
+    .newFieldsFilterPopup__searchInput {
+      font-family: 'Open Sans';
+      font-size: 13px;
+      font-weight: 600;
+      width: 156px;
+      margin-left: 16px;
+      border: none;
+    }
+
+    .newFieldsFilterPopup__searchInput::placeholder {
+      font-weight: 400;
+    }
+
+    .newFieldsFilterPopup__searchReset {
+      position: absolute;
+      background: transparent;
+      top: 9px;
+      right: -1px;
+    }
+  }
+}

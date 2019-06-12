@@ -35,7 +35,7 @@ class EditUserCapabilities extends Component {
       <CapabilitiesForm
         onSubmit={this.onSubmit}
         wrapperButton={wrapperButton}
-        initialValues={_.pick(this.props, ['selectSkills', 'textareaField', 'checkboxArt', 'checkboxSport',
+        initialValues={_.pick(this.props, ['skills', 'textareaField', 'checkboxArt', 'checkboxSport',
           'checkboxJustWant', 'checkboxFemale', 'checkboxGuitar', 'checkboxWtf'])}
       />
     )
@@ -55,11 +55,11 @@ EditUserCapabilities.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   const id = Number(ownProps.match.params.id)
   const {
-    selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
+    skills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
     checkboxGuitar, checkboxWtf,
   } = state.editUserReducer.editUser
   return {
-    selectSkills,
+    skills,
     textareaField,
     checkboxArt,
     checkboxSport,

@@ -10,6 +10,13 @@ import {
 
   SWAP_USERS__SUCCESS,
   SWAP_USERS__FAILURE,
+
+  SHOW_BUTTON_FILTER__SUCCESS,
+  SHOW_BUTTON_FILTER__FAILURE,
+
+  APPLY_FILTER_FILTER_USERS__SUCCESS,
+  APPLY_FILTER_FILTER_USERS__FAILURE,
+
 } from '../actions/actionUsers'
 import { initialUsersState } from '../stubs/initialUsersState'
 
@@ -18,8 +25,8 @@ export default function usersReducer(state = initialUsersState, action) {
     case FETCH_USERS__LOADING: {
       return {
         ...state,
-        searchQuery: action.payload.searchQuery,
-        isLoading: action.payload.isLoading,
+        ...action.payload,
+        error: undefined,
       }
     }
     case FETCH_USERS__SUCCESS: {
@@ -80,6 +87,34 @@ export default function usersReducer(state = initialUsersState, action) {
       }
     }
 
+    case SHOW_BUTTON_FILTER__SUCCESS: {
+      return {
+        ...state,
+        ...action.payload,
+        error: undefined,
+      }
+    }
+    case SHOW_BUTTON_FILTER__FAILURE: {
+      return {
+        ...state,
+        error: action.error,
+      }
+    }
+
+    case APPLY_FILTER_FILTER_USERS__SUCCESS: {
+      return {
+        ...state,
+        ...action.payload,
+        error: undefined,
+      }
+    }
+    case APPLY_FILTER_FILTER_USERS__FAILURE: {
+      return {
+        ...state,
+        isLoading: action.payload.isLoading,
+        error: action.error,
+      }
+    }
 
     default:
       return state
