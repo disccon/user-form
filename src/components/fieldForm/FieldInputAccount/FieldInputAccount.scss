@@ -1,23 +1,22 @@
-$in: 'inputAccount';
-.#{$in}:first-child {
+.inputAccount:first-child {
   margin-top: 23px;
 }
 
-.#{$in} {
+.inputAccount {
   position: relative;
   margin-bottom: 24px;
 
-  .#{$in}__label {
+  .inputAccount__label {
     display: block;
     margin-bottom: 4px;
   }
 
-  .#{$in}__wrapperInput {
+  .inputAccount__wrapperInput {
     position: relative;
     width: 100%;
     height: 40px;
 
-    .#{$in}__visibilityIcon {
+    .inputAccount__visibilityIcon {
       position: absolute;
       top: 15px;
       right: 15px;
@@ -26,7 +25,7 @@ $in: 'inputAccount';
       cursor: pointer;
     }
 
-    .#{$in}__input {
+    .inputAccount__input {
       margin-top: 0;
       width: 100%;
       height: 40px;
@@ -39,11 +38,11 @@ $in: 'inputAccount';
     }
   }
 
-  .#{$in}__input.inputNewUser__errorInput {
+  .inputAccount__input.inputNewUser__errorInput {
     border: 1px solid #EB5757;
   }
 
-  .#{$in}__pError {
+  .inputAccount__pError {
     position: absolute;
     margin-top: 3px;
     margin-left: 10px;

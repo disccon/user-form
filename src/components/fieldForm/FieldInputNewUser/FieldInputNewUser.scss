@@ -1,18 +1,17 @@
-$in: 'inputNewUser';
-.#{$in} {
+.inputNewUser {
   position: relative;
   width: 300px;
   margin-bottom: 24px;
-  .#{$in}__wrapperLabel {
+  .inputNewUser__wrapperLabel {
     margin-bottom: 4px;
     display: flex;
     align-items: center;
-    .#{$in}__span {
+    .inputNewUser__span {
       margin-left: auto;
       height: 9px;
     }
   }
-  .#{$in}__input {
+  .inputNewUser__input {
     margin-top: 0;
     width: 100%;
     height: 40px;
@@ -23,17 +22,17 @@ $in: 'inputNewUser';
     font-weight: 500;
     color: #000;
   }
-  .#{$in}__errorInput {
+  .inputNewUser__errorInput {
     border: 1px solid #EB5757;
   }
-  .#{$in}__pError {
+  .inputNewUser__pError {
     position: absolute;
     margin-top: 3px;
     margin-left: 10px;
     font-size: 9px;
     color: #EB5757;
   }
-  .#{$in}__errorInput{
+  .inputNewUser__errorInput{
     border: 1px solid #EB5757;
   }
 }

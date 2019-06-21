@@ -1,11 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import Cropper from 'react-cropper'
-import classNames from 'classnames'
+import cn from 'classnames'
 import 'cropperjs/dist/cropper.css'
-import styles from './CropperModal.scss'
-
-const cx = classNames.bind(styles)
+import './CropperModal.scss'
 
 class CropperModal extends Component {
   state = {
@@ -13,11 +11,16 @@ class CropperModal extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
+    this.timeoutShow = setTimeout(() => {
       this.setState({
         show: true,
       })
     }, 50)
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeoutCropper)
+    clearTimeout(this.timeoutShow)
   }
 
   saveAvatar = () => {
@@ -38,7 +41,7 @@ class CropperModal extends Component {
     this.setState({
       show: false,
     })
-    setTimeout(() => {
+    this.timeoutCropper = setTimeout(() => {
       setCropperSrc(false)()
     }, 400)
   }
@@ -49,13 +52,13 @@ class CropperModal extends Component {
     return (
       <Fragment>
         <div
-          className={cx('cropperModal__backdrop', { cropperModal__backdropShow: show })}
+          className={cn('cropperModal__backdrop', { cropperModal__backdropShow: show })}
           onClick={this.closeModal}
         />
-        <div className={cx('cropperModal__modal', { cropperModal__modalShow: show })}>
-          <div className={cx('cropperModal__modalHeader')}>
-            <h4 className={cx('cropperModal__title')}>Crop Image</h4>
-            <button className={cx('cropperModal__closeButton')} type='button' onClick={this.closeModal}>
+        <div className={cn('cropperModal__modal', { cropperModal__modalShow: show })}>
+          <div className='cropperModal__modalHeader'>
+            <h4 className='cropperModal__title'>Crop Image</h4>
+            <button className='cropperModal__closeButton' type='button' onClick={this.closeModal}>
               X
             </button>
           </div>
@@ -73,11 +76,11 @@ class CropperModal extends Component {
             background={false}
             ref={this.setCropper}
           />
-          <div className={cx('cropperModal__wrapperButton')}>
-            <button className={cx('cropperModal__close')} type='button' onClick={this.closeModal}>
+          <div className='cropperModal__wrapperButton'>
+            <button className='cropperModal__close' type='button' onClick={this.closeModal}>
               Close
             </button>
-            <button className={cx('cropperModal__saveAvatar')} type='button' onClick={this.saveAvatar}>
+            <button className='cropperModal__saveAvatar' type='button' onClick={this.saveAvatar}>
               Save Avatar
             </button>
           </div>

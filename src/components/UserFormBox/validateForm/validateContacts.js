@@ -1,7 +1,7 @@
 export const validateContacts = values => {
   const errors = {}
-  if (!values.selectLanguage) {
-    errors.selectLanguage = 'Missing Main language'
+  if (!values.language) {
+    errors.language = 'Missing Main language'
   }
 
   if (!values.company) {

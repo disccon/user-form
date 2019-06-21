@@ -4,12 +4,10 @@ export const asyncValidateEditAccount = (values, id) => (
   db.usersDB.toArray(usersDB => {
     const userFilterName = usersDB.filter(user => user.id !== id)
     const userNameList = userFilterName.map(user => user.userName)
-    let errorUserName
-    userNameList.find(userEmail => (
-      errorUserName = values.userName === userEmail ? 'already have this userName in the database' : null))
-    if (errorUserName) {
+    const userFound = userNameList.find(userName => values.userName.toLowerCase() === userName.toLowerCase())
+    if (userFound) {
       return Promise.reject({
-        userName: errorUserName,
+        userName: 'already have this userName in the database',
       })
     }
   })

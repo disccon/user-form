@@ -10,46 +10,10 @@ import { ReactComponent as CalendarIcon } from '../../../../img/icon/calendar2.s
 import './NewFieldsFilterPopup.scss'
 import LiFilter from './LiFilter/LiFilter'
 
-const initialLiFilterArr = [
-  {
-    title: 'User Name',
-    show: true,
-    icon: <AvatarIcon className='newFieldsFilterPopup__avatarIcon' />,
-    nameFilter: 'userNameIsBoxShow',
-    key: 1,
-  },
-  {
-    title: 'Company',
-    show: true,
-    icon: <AvatarIcon className='newFieldsFilterPopup__avatarIcon' />,
-    nameFilter: 'companyIsBoxShow',
-    key: 2,
-  },
-  {
-    title: 'Birth Date',
-    show: true,
-    icon: <CalendarIcon className='newFieldsFilterPopup__calendarIcon' />,
-    nameFilter: 'birthDateIsBoxShow',
-    key: 3,
-  },
-  {
-    title: 'Updated At',
-    show: true,
-    icon: <CalendarIcon className='newFieldsFilterPopup__calendarIcon' />,
-    nameFilter: 'lastUpdateIsBoxShow',
-    key: 4,
-  },
-  {
-    title: 'Skills',
-    show: true,
-    icon: <AvatarIcon className='newFieldsFilterPopup__avatarIcon' />,
-    nameFilter: 'skillsIsBoxShow',
-    key: 5,
-  }]
-
 class NewFieldsFilterPopupOutside extends Component {
   state = {
-    liFilterArr: initialLiFilterArr,
+    filterNameArr: [{ name: 'User Name', show: true }, { name: 'Company', show: true },
+      { name: 'Birth Date', show: true }, { name: 'Updated At', show: true }, { name: 'Skills', show: true }],
     inputSearchValue: '',
   }
 
@@ -62,47 +26,48 @@ class NewFieldsFilterPopupOutside extends Component {
   }
 
   searchFilter = ({ target }) => {
+    const filterNameArr = [{ name: 'User Name', show: true }, { name: 'Company', show: true },
+      { name: 'Birth Date', show: true }, { name: 'Updated At ', show: true }, { name: 'Skills', show: true }]
+    const filterNameArrShowFalse = [{ name: 'User Name', show: false }, { name: 'Company', show: false },
+      { name: 'Birth Date', show: false }, { name: 'Updated At ', show: false }, { name: 'Skills', show: false }]
     const { value } = target
     if (value !== '' && value !== ' ') {
-      const liFilterArr = initialLiFilterArr.map(user => ({
-        ...user,
-        show: user.title.toLowerCase().includes(value.toLowerCase()),
+      const newArr = filterNameArr.map(user => ({
+        name: user.name,
+        show: user.name.toLowerCase().includes(value.toLowerCase()),
       }))
       this.setState({
-        liFilterArr,
+        filterNameArr: newArr,
         inputSearchValue: value,
       })
-      return
-    }
-    if (value === ' ') {
-      const liFilterArr = initialLiFilterArr.map(user => ({
-        ...user,
-        show: false,
-      }))
+    } else if (value === ' ') {
       this.setState({
-        liFilterArr,
+        filterNameArr: filterNameArrShowFalse,
         inputSearchValue: value,
       })
-      return
-    }
-    if (value === '') {
+    } else {
       this.setState({
-        liFilterArr: initialLiFilterArr,
+        filterNameArr,
         inputSearchValue: value,
       })
     }
   }
 
   closeSearch = () => {
+    const filterNameArr = [{ name: 'User Name', show: true }, { name: 'Company', show: true },
+      { name: 'Birth Date', show: true }, { name: 'Updated At ', show: true }, { name: 'Skills', show: true }]
     this.setState({
-      liFilterArr: initialLiFilterArr,
+      filterNameArr,
       inputSearchValue: '',
     })
   }
 
   render() {
-    const { isNewFilterPopupShow, closeNewFilterFields } = this.props
-    const { liFilterArr, inputSearchValue } = this.state
+    const {
+      userNameIsBoxShow, companyIsBoxShow, birthDateIsBoxShow, lastUpdateIsBoxShow, skillsIsBoxShow,
+      isNewFilterPopupShow, closeNewFilterFields,
+    } = this.props
+    const { filterNameArr, inputSearchValue } = this.state
     return (
       <ul className={cn('newFieldsFilterPopup', 'menuFilterPopup', { menuFilterPopupShow: isNewFilterPopupShow })}>
         <li className='newFieldsFilterPopup__addFilter newFieldsFilterPopup__searchFilter'>
@@ -120,23 +85,57 @@ class NewFieldsFilterPopupOutside extends Component {
             <ResetIcon className='newFieldsFilterPopup__searchResetIcon' />
           </button>
         </li>
-        {liFilterArr.map(filter => (
-          !this.props[filter.nameFilter] && filter.show && (
-            <LiFilter
-              key={filter.key}
-              icon={filter.icon}
-              title={filter.title}
-              nameFilter={filter.nameFilter}
-              closeFilterFields={closeNewFilterFields}
-            />
-          )
-        ))}
+        {!userNameIsBoxShow && filterNameArr[0].show && (
+          <LiFilter
+            icon={<AvatarIcon className='newFieldsFilterPopup__avatarIcon' />}
+            title={filterNameArr[0].name}
+            nameFilter='userNameIsBoxShow'
+            closeFilterFields={closeNewFilterFields}
+          />
+        )}
+        {!companyIsBoxShow && filterNameArr[1].show && (
+          <LiFilter
+            icon={<AvatarIcon className='newFieldsFilterPopup__avatarIcon' />}
+            title={filterNameArr[1].name}
+            nameFilter='companyIsBoxShow'
+            closeFilterFields={closeNewFilterFields}
+          />
+        )}
+        {!birthDateIsBoxShow && filterNameArr[2].show && (
+          <LiFilter
+            icon={<CalendarIcon className='newFieldsFilterPopup__calendarIcon' />}
+            title={filterNameArr[2].name}
+            nameFilter='birthDateIsBoxShow'
+            closeFilterFields={closeNewFilterFields}
+          />
+        )}
+        {!lastUpdateIsBoxShow && filterNameArr[3].show && (
+          <LiFilter
+            icon={<CalendarIcon className='newFieldsFilterPopup__calendarIcon' />}
+            title={filterNameArr[3].name}
+            nameFilter='lastUpdateIsBoxShow'
+            closeFilterFields={closeNewFilterFields}
+          />
+        )}
+        {!skillsIsBoxShow && filterNameArr[4].show && (
+          <LiFilter
+            icon={<AvatarIcon className='newFieldsFilterPopup__avatarIcon' />}
+            title={filterNameArr[4].name}
+            nameFilter='skillsIsBoxShow'
+            closeFilterFields={closeNewFilterFields}
+          />
+        )}
       </ul>
     )
   }
 }
 
 NewFieldsFilterPopupOutside.propTypes = {
+  userNameIsBoxShow: PropTypes.bool,
+  companyIsBoxShow: PropTypes.bool,
+  birthDateIsBoxShow: PropTypes.bool,
+  lastUpdateIsBoxShow: PropTypes.bool,
+  skillsIsBoxShow: PropTypes.bool,
   isNewFilterPopupShow: PropTypes.bool.isRequired,
   closeNewFilterFields: PropTypes.func.isRequired,
 }

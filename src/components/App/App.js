@@ -3,10 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Route, Switch, Redirect } from 'react-router'
 import { ConnectedRouter } from 'connected-react-router'
-import classNames from 'classnames'
 import _ from 'lodash/core'
 import './reset.css'
-import styles from './App.scss'
+import './App.scss'
 import Header from '../Header/Header'
 import { NotFound } from '../../pages/NotFound/NotFound'
 import db from '../../db'
@@ -16,8 +15,6 @@ import UsersPage from '../../pages/UsersPage/UsersPage'
 import UserPage from '../../pages/UserPage/UserPage'
 import EditUserPage from '../../pages/EditUserPage/EditUserPage'
 import CreateUserPage from '../../pages/CreateUserPage/CreateUserPage'
-
-const cx = classNames.bind(styles)
 
 class App extends Component {
   componentDidMount() {
@@ -33,7 +30,7 @@ class App extends Component {
     const { history } = this.props
     return (
       <ConnectedRouter history={history}>
-        <div className={cx('app')}>
+        <div className='app'>
           <Header />
           <Switch>
             <Route path='/not-found' component={NotFound} />

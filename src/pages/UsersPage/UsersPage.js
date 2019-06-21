@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import classNames from 'classnames'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 import { push } from 'connected-react-router'
-import styles from './UsersPage.scss'
+import './UsersPage.scss'
 import NoHaveUserRow from './NoHaveUserRow/NoHaveUserRow'
 import {
   fetchUsers, deleteUser, swapUsers, applyFilterUsers,
@@ -15,8 +14,6 @@ import { validateUsersUrl } from '../../helpers/validateUsersUrl'
 import preloaderIcon from '../../img/icon/preloader.gif'
 import { getQueryString } from '../../helpers/valueQuery'
 import MenuFilter from './MenuFilter/MenuFilter'
-
-const cx = classNames.bind(styles)
 
 const SortableItem = SortableElement(({ user, deleteUser, oldIndex }) => (
   <UserRow
@@ -30,10 +27,10 @@ const SortableItem = SortableElement(({ user, deleteUser, oldIndex }) => (
 const SortableList = SortableContainer(({
   users, deleteUser, isLoading, oldIndex,
 }) => (
-  <tbody className={cx('usersPage__tbody')}>
-    <tr className={cx('usersPage__firstTr')}>
+  <tbody className='usersPage__tbody'>
+    <tr className='usersPage__firstTr'>
       <td>
-        {isLoading && <img src={preloaderIcon} alt='preloader' className={cx('usersPage__preloader')} />}
+        {isLoading && <img src={preloaderIcon} alt='preloader' className='usersPage__preloader' />}
       </td>
     </tr>
     {users.map((user, index) => (
@@ -114,21 +111,21 @@ class UsersPage extends Component {
     const { oldIndex } = this.state
     return (
       <Fragment>
-        <h2 className={cx('headline')}>List of users</h2>
+        <h2 className='headline'>List of users</h2>
         <input
-          className={cx('usersPage__search')}
+          className='usersPage__search'
           type='search'
           onChange={this.searchUsers}
           value={searchQuery}
         />
         <MenuFilter />
-        <table className={cx('usersPageTable container')}>
-          <thead className={cx('usersPage__thead')}>
-            <tr className={cx('usersPage__tr')}>
-              <th className={cx('usersPage__name')}>name</th>
-              <th className={cx('usersPage__company')}>company</th>
-              <th className={cx('usersPage__contacts')}>contacts</th>
-              <th className={cx('usersPage__update')}>last update</th>
+        <table className='usersPageTable container'>
+          <thead className='usersPage__thead'>
+            <tr className='usersPage__tr'>
+              <th className='usersPage__name'>name</th>
+              <th className='usersPage__company'>company</th>
+              <th className='usersPage__contacts'>contacts</th>
+              <th className='usersPage__update'>last update</th>
             </tr>
           </thead>
           <SortableList

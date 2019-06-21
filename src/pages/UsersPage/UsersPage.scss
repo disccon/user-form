@@ -1,6 +1,4 @@
-$li: 'usersPage';
-
-.#{$li}__search {
+.usersPage__search {
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
@@ -13,49 +11,49 @@ $li: 'usersPage';
   font-weight: 500;
   color: #000;
 }
-.#{$li}Table {
+.usersPageTable {
   margin-top: 28px;
 
-  .#{$li}__thead {
+  .usersPage__thead {
     height: 45px;
     width: 100%;
     background: #4E86E4;
     color: #FFF;
     font-weight: 500;
 
-    .#{$li}__tr {
-      .#{$li}__name, .#{$li}__company, .#{$li}__contacts, .#{$li}__update {
+    .usersPage__tr {
+      .usersPage__name, .usersPage__company, .usersPage__contacts, .usersPage__update {
         padding-top: 14px;
         padding-bottom: 14px;
         font-weight: 500;
       }
 
-      .#{$li}__name {
+      .usersPage__name {
         min-width: 300px;
         padding-left: 70px;
       }
 
-      .#{$li}__company {
+      .usersPage__company {
         min-width: 200px;
       }
 
-      .#{$li}__contacts {
+      .usersPage__contacts {
         min-width: 260px;
       }
 
-      .#{$li}__update {
+      .usersPage__update {
         min-width: 210px;
       }
     }
   }
 
   .usersPage__tbody {
-    .#{$li}__firstTr {
+    .usersPage__firstTr {
       height: 29px;
       width: 100%;
     }
 
-    .#{$li}__preloader {
+    .usersPage__preloader {
       width: 64px;
       height: 64px;
       top: 240px;

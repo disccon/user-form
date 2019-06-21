@@ -1,14 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
+import cn from 'classnames'
 import { Link } from 'react-router-dom'
 import onClickOutside from 'react-onclickoutside'
 import moment from 'moment/moment'
-import styles from './UserRow.scss'
+import './UserRow.scss'
 import { ReactComponent as CloseIcon } from '../../../img/icon/close.svg'
 import { ReactComponent as EditIcon } from '../../../img/icon/edit.svg'
-
-const cx = classNames.bind(styles)
 
 class UserRow extends Component {
   state = {
@@ -39,39 +37,39 @@ class UserRow extends Component {
     const { user, deleteUser, oldIndex } = this.props
     const { deleteUserClass } = this.state
     return (
-      <tr className={cx('userRow', { deleteUserClass }, { oldIndex })}>
-        <td className={cx('userRow__fistTD')}>
-          <div className={cx('userRow__fistTDWrapper')}>
-            <img className={cx('userRow__img')} src={user.userAvatarIMG} alt='userAvatarIMG' />
-            <div className={cx('userRow__wrapperDiv')}>
-              <h4 className={cx('userRow__h4')}>
+      <tr className={cn('userRow', { deleteUserClass }, { oldIndex })}>
+        <td className='userRow__fistTD'>
+          <div className='userRow__fistTDWrapper'>
+            <img className='userRow__img' src={user.userAvatarIMGCropper} alt='userAvatarIMG' />
+            <div className='userRow__wrapperDiv'>
+              <h4 className='userRow__h4'>
                 {`${user.firstName} ${user.lastName}`}
               </h4>
-              <span className={cx('userRow__span')}>{user.userName}</span>
+              <span className='userRow__span'>{user.userName}</span>
             </div>
           </div>
         </td>
-        <td className={cx('userRow__td userRow__company')}>
-          <div className={cx('userRow__div')}>{user.company}</div>
+        <td className='userRow__td userRow__company'>
+          <div className='userRow__div'>{user.company}</div>
         </td>
-        <td className={cx('userRow__td userRow__contacts')}>
-          <div className={cx('userRow__div')}>{user.email}</div>
+        <td className='userRow__td userRow__contacts'>
+          <div className='userRow__div'>{user.email}</div>
         </td>
-        <td className={cx('userRow__td userRow__update')}>
-          <div className={cx('userRow__div')}>
-            <span className={cx('userRow__lastUpdate')}>
+        <td className='userRow__td userRow__update'>
+          <div className='userRow__div'>
+            <span className='userRow__lastUpdate'>
               {moment(moment(user.lastUpdate).format('YYYY-MM-DD HH:mm:ss'), 'YYYY-MM-DD HH:mm:ss').fromNow()}
             </span>
             {!deleteUserClass && (
               <Fragment>
                 <Link to={`/user/${user.id}`}>
-                  <button type='button' className={cx('userRow__buttonEdit')}>
-                    <EditIcon className={cx('userRow__editIcon')} />
+                  <button type='button' className='userRow__buttonEdit'>
+                    <EditIcon className='userRow__editIcon' />
                   </button>
                 </Link>
-                <button type='button' className={cx('userRow__buttonClose')}>
+                <button type='button' className='userRow__buttonClose'>
                   <CloseIcon
-                    className={cx('userRow__closeIcon')}
+                    className='userRow__closeIcon'
                     onClick={this.showDeleteButton}
                   />
                 </button>
@@ -79,9 +77,9 @@ class UserRow extends Component {
             )}
           </div>
           {deleteUserClass && (
-            <button type='button' className={cx('userRow__buttonDeleteUser')} onClick={deleteUser(user.id)}>
-              <div className={cx('userRow__deleteUserWrapper')}>
-                <CloseIcon className={cx('deleteUser')} />
+            <button type='button' className='userRow__buttonDeleteUser' onClick={deleteUser(user.id)}>
+              <div className='userRow__deleteUserWrapper'>
+                <CloseIcon className='deleteUser' />
                 delete
               </div>
             </button>

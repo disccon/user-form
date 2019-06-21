@@ -1,4 +1,3 @@
-$ed: 'editPage';
 .container {
   position: relative;
 
@@ -11,34 +10,34 @@ $ed: 'editPage';
     color: #9BB0CB;
   }
 
-  .#{$ed} {
+  .editPage {
     margin-top: 45px;
     width: 100%;
 
-    .#{$ed}__tabs {
+    .editPage__tabs {
       width: 100%;
       display: flex;
       height: 62px;
 
-      .#{$ed}__tab {
+      .editPage__tab {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
         background: #EAF0FC;
 
-        .#{$ed}__link {
+        .editPage__link {
           font-weight: bold;
           font-size: 24px;
           color: #475666;
         }
       }
 
-      .#{$ed}__tab.activeTab {
+      .editPage__tab.activeTab {
         background: #4E86E4;
         pointer-events: none;
 
-        .#{$ed}__link {
+        .editPage__link {
           color: #fff;
         }
       }

@@ -26,7 +26,7 @@ import {
 } from '../actions/actionUsers'
 import { getUsersIndexDB } from '../helpers/getUsersIndexDB'
 import db from '../db'
-import { returnNewFilteredUsers } from '../helpers/returnNewFilteredUsers'
+import { returnNewFilteredUsers } from '../helpers/newFilteredUsers'
 import { getQueryString } from '../helpers/valueQuery'
 import { getUsersFiltersIndexDB } from '../helpers/getUsersFiltersIndexDB'
 

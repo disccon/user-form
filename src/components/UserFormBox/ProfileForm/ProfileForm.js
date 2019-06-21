@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 import { Field, reduxForm } from 'redux-form'
-import styles from '../UserFormBox.scss'
+import '../UserFormBox.scss'
 import FieldRadioProfile from '../../fieldForm/FieldRadioProfile/FieldRadioProfile'
 import DateTimePickerProfile
   from '../../fieldForm/DateTimePickerProfile/DateTimePickerProfile'
@@ -10,15 +9,13 @@ import FieldInputNewUser from '../../fieldForm/FieldInputNewUser/FieldInputNewUs
 import UserFormBox from '../UserFormBox'
 import { validateProfile } from '../validateForm/validateProfile'
 
-const cx = classNames.bind(styles)
-
 const Profile = ({ handleSubmit, onSubmit, wrapperButton }) => (
   <UserFormBox handleSubmit={handleSubmit(onSubmit)}>
-    <div className={cx('userFormBox__sideLeft')}>
+    <div className='userFormBox__sideLeft'>
       <Field
         component={FieldInputNewUser}
         type='text'
-        span
+        visibleStar
         label='First name'
         name='firstName'
         idField='fieldFirstName'
@@ -27,7 +24,7 @@ const Profile = ({ handleSubmit, onSubmit, wrapperButton }) => (
       <Field
         component={FieldInputNewUser}
         type='text'
-        span
+        visibleStar
         label='Last name'
         name='lastName'
         idField='fieldLastName'
@@ -35,11 +32,11 @@ const Profile = ({ handleSubmit, onSubmit, wrapperButton }) => (
       />
       <Field name='birthDate' component={DateTimePickerProfile} />
     </div>
-    <div className={cx('userFormBox__sideRight')}>
+    <div className='userFormBox__sideRight'>
       <Field
         component={FieldInputNewUser}
         type='text'
-        span
+        visibleStar
         label='Email'
         name='email'
         idField='fieldEmail'
@@ -48,14 +45,14 @@ const Profile = ({ handleSubmit, onSubmit, wrapperButton }) => (
       <Field
         component={FieldInputNewUser}
         type='text'
-        span
+        visibleStar
         label='Address'
         name='address'
         idField='fieldAddress'
         classNameLabel='inputNewUser'
       />
       <h5>Gender</h5>
-      <div className={cx('userFormBox__wrapperGender')}>
+      <div className='userFormBox__wrapperGender'>
         <Field
           component={FieldRadioProfile}
           type='radio'
@@ -73,7 +70,7 @@ const Profile = ({ handleSubmit, onSubmit, wrapperButton }) => (
           idField='fieldFemale'
         />
       </div>
-      <div className={cx('userFormBox__wrapperButton')}>
+      <div className='userFormBox__wrapperButton'>
         {wrapperButton}
       </div>
     </div>

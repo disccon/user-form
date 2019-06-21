@@ -2,10 +2,7 @@
   padding: 0 100px 65px;
 }
 
-$uS: 'userFormBox';
-$uA: 'userAvatarWrapper';
-
-.#{$uS} {
+.userFormBox {
   position: relative;
   display: flex;
   padding: 65px 100px;
@@ -14,35 +11,35 @@ $uA: 'userAvatarWrapper';
   background: #fbfcff;
   color: #657C9A;
 
-  .#{$uS}__sideLeft, .#{$uS}__sideRight {
+  .userFormBox__sideLeft, .userFormBox__sideRight {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 300px;
   }
 
-  .#{$uS}__sideLeft {
+  .userFormBox__sideLeft {
     margin-right: auto;
   }
 
-  .#{$uS}__hobbies {
+  .userFormBox__hobbies {
     margin-bottom: 17px;
   }
 
-  .#{$uS}__sideRight {
+  .userFormBox__sideRight {
 
-    .#{$uS}__wrapperGender {
+    .userFormBox__wrapperGender {
       position: relative;
       margin-top: 12px;
       display: flex;
     }
 
-    .#{$uS}__wrapperButton {
+    .userFormBox__wrapperButton {
       margin-top: auto;
       width: 100%;
       display: flex;
 
-      .#{$uS}__back, .#{$uS}__forward, .#{$uS}__finish, .#{$uS}__saveNewListButton {
+      .userFormBox__back, .userFormBox__forward, .userFormBox__finish, .userFormBox__saveNewListButton {
         width: 100px;
         height: 40px;
         font-weight: 500;
@@ -50,33 +47,33 @@ $uA: 'userAvatarWrapper';
         color: #FFF;
       }
 
-      .#{$uS}__back {
+      .userFormBox__back {
         background: #C1CFE0;
       }
 
-      .#{$uS}__forward, .#{$uS}__saveNewListButton {
+      .userFormBox__forward, .userFormBox__saveNewListButton {
         margin-left: auto;
         background: #5E97F3;
       }
 
-      .#{$uS}__finish {
+      .userFormBox__finish {
         margin-left: auto;
         background: #4EE4A5;
       }
     }
   }
 
-  .#{$uA} {
+  .userAvatarWrapper {
     margin-top: 44px;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    .#{$uA}__inputFile {
+    .userAvatarWrapper__inputFile {
       display: none;
     }
 
-    .#{$uA}__buttonCrop {
+    .userAvatarWrapper__buttonCrop {
       margin-top: 14px;
       transition: all ease 0.3s;
       background-color: #007bff;
@@ -89,27 +86,27 @@ $uA: 'userAvatarWrapper';
       color: #FFF;
     }
 
-    .#{$uA}__buttonCrop:hover {
+    .userAvatarWrapper__buttonCrop:hover {
       transition: all ease 0.3s;
       background-color: #0069d9;
       border-color: #0062cc;
     }
 
-    .#{$uA}__userAvatarSVG, .#{$uA}__userAvatarIMG {
+    .userAvatarWrapper__userAvatarSVG, .userAvatarWrapper__userAvatarIMG {
       cursor: pointer;
       height: 172px;
     }
 
-    .#{$uA}__userAvatarIMG {
+    .userAvatarWrapper__userAvatarIMG {
       width: 172px;
       border-radius: 50%;
       border: 3px solid #5E97F3;
     }
 
-    .#{$uA}__labelSpan {
+    .userAvatarWrapper__labelSpan {
       margin-top: 10px;
 
-      .#{$uA}__AddICon {
+      .userAvatarWrapper__AddICon {
         margin-bottom: -3px;
         margin-right: 5px;
         width: 15px;
@@ -117,13 +114,13 @@ $uA: 'userAvatarWrapper';
         color: #9BB0CB;
       }
 
-      .#{$uA}__addAvatarSpan {
+      .userAvatarWrapper__addAvatarSpan {
         font-weight: 500;
         color: #9BB0CB;
       }
     }
 
-    .#{$uA}__avatarError {
+    .userAvatarWrapper__avatarError {
       margin-top: 5px;
       font-size: 9px;
       color: #EB5757;

@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash/core'
-import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import ContactsForm from '../../../components/UserFormBox/ContactsForm/ContactsForm'
 import { fetchEditUser, saveEditUserData } from '../../../actions/actionEditUser'
-import styles from '../../../components/UserFormBox/UserFormBox.scss'
+import '../../../components/UserFormBox/UserFormBox.scss'
 
-const cx = classNames.bind(styles)
 
 class EditUserContacts extends Component {
   componentDidMount() {
@@ -23,12 +21,12 @@ class EditUserContacts extends Component {
   }
 
   render() {
-    const wrapperButton = <button type='submit' className={cx('userFormBox__forward')}>Save</button>
+    const wrapperButton = <button type='submit' className='userFormBox__forward'>Save</button>
     return (
       <ContactsForm
         onSubmit={this.onSubmit}
         wrapperButton={wrapperButton}
-        initialValues={_.pick(this.props, ['company', 'githubLink', 'facebookLink', 'selectLanguage',
+        initialValues={_.pick(this.props, ['company', 'githubLink', 'facebookLink', 'language',
           'fax', 'phoneArray'])}
       />
     )
@@ -48,13 +46,13 @@ EditUserContacts.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   const id = Number(ownProps.match.params.id)
   const {
-    company, githubLink, facebookLink, selectLanguage, fax, phoneArray,
+    company, githubLink, facebookLink, language, fax, phoneArray,
   } = state.editUserReducer.editUser
   return {
     company,
     githubLink,
     facebookLink,
-    selectLanguage,
+    language,
     fax,
     phoneArray,
     id,

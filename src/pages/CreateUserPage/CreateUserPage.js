@@ -1,20 +1,18 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
+import cn from 'classnames'
 import { Redirect, Route, Switch } from 'react-router'
 import { push } from 'connected-react-router'
 import { getFormNames, getFormValues } from 'redux-form'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import styles from './CreateUserPage.scss'
+import './CreateUserPage.scss'
 import db from '../../db'
 import { clearUser } from '../../actions/actionNewUser'
 import CreateUserAccount from './CreateUserAccount/CreateUserAccount'
 import CreateUserProfile from './CreateUserProfile/CreateUserProfile'
 import CreateUserContacts from './CreateUserContacts/CreateUserContacts'
 import CreateUserCapabilities from './CreateUserCapabilities/CreateUserCapabilities'
-
-const cx = classNames.bind(styles)
 
 class CreateUserPage extends Component {
   componentDidMount() {
@@ -44,40 +42,40 @@ class CreateUserPage extends Component {
     } = this.props
     return (
       <Fragment>
-        <h2 className={cx('headline')}>Adding new user</h2>
-        <div className={cx('windowNewUser container')}>
-          <div className={cx('windowNewUser__tabs')}>
-            <div className={cx('windowNewUser__tab', { activeTab: pathname === '/' })}>
+        <h2 className='headline'>Adding new user</h2>
+        <div className='windowNewUser container'>
+          <div className='windowNewUser__tabs'>
+            <div className={cn('windowNewUser__tab', { activeTab: pathname === '/' })}>
               <Link
                 to='/'
-                className={cx('windowNewUser__link',
+                className={cn('windowNewUser__link',
                   { activeLink: pathname !== '/' })}
               >
                 1. Account
               </Link>
             </div>
-            <div className={cx('windowNewUser__tab', { activeTab: pathname === '/profile' })}>
+            <div className={cn('windowNewUser__tab', { activeTab: pathname === '/profile' })}>
               <Link
                 to='/profile'
-                className={cx('windowNewUser__link',
+                className={cn('windowNewUser__link',
                   { activeLink: accountFilled && pathname !== '/profile' })}
               >
                 2. Profile
               </Link>
             </div>
-            <div className={cx('windowNewUser__tab', { activeTab: pathname === '/contacts' })}>
+            <div className={cn('windowNewUser__tab', { activeTab: pathname === '/contacts' })}>
               <Link
                 to='/contacts'
-                className={cx('windowNewUser__link',
+                className={cn('windowNewUser__link',
                   { activeLink: profileFilled && pathname !== '/contacts' })}
               >
                 3. Contacts
               </Link>
             </div>
-            <div className={cx('windowNewUser__tab', { activeTab: pathname === '/capabilities' })}>
+            <div className={cn('windowNewUser__tab', { activeTab: pathname === '/capabilities' })}>
               <Link
                 to='/capabilities'
-                className={cx('windowNewUser__link',
+                className={cn('windowNewUser__link',
                   { activeLink: contactsFilled && pathname !== '/capabilities' })}
               >
                 4. Capabilities

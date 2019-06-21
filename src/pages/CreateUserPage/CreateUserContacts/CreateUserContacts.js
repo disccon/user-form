@@ -3,13 +3,10 @@ import PropTypes from 'prop-types'
 import _ from 'lodash/core'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
-import classNames from 'classnames'
 import { formValueSelector } from 'redux-form'
 import { saveNewUserData } from '../../../actions/actionNewUser'
-import styles from '../../../components/UserFormBox/UserFormBox.scss'
+import '../../../components/UserFormBox/UserFormBox.scss'
 import ContactsForm from '../../../components/UserFormBox/ContactsForm/ContactsForm'
-
-const cx = classNames.bind(styles)
 
 class CreateUserContacts extends Component {
   onSubmit = values => {
@@ -25,13 +22,13 @@ class CreateUserContacts extends Component {
 
   backContacts = () => {
     const {
-      saveNewUserData, companyForm, githubLinkForm, facebookLinkForm, selectLanguageForm, faxForm, phoneArrayForm, push,
+      saveNewUserData, companyForm, githubLinkForm, facebookLinkForm, languageForm, faxForm, phoneArrayForm, push,
     } = this.props
     saveNewUserData({
       company: companyForm,
       githubLink: githubLinkForm,
       facebookLink: facebookLinkForm,
-      selectLanguage: selectLanguageForm,
+      language: languageForm,
       fax: faxForm,
       phoneArray: phoneArrayForm,
     })
@@ -41,15 +38,15 @@ class CreateUserContacts extends Component {
   render() {
     const wrapperButton = (
       <Fragment>
-        <button type='button' onClick={this.backContacts} className={cx('userFormBox__back')}>Back</button>
-        <button type='submit' className={cx('userFormBox__forward')}>Forward</button>
+        <button type='button' onClick={this.backContacts} className='userFormBox__back'>Back</button>
+        <button type='submit' className='userFormBox__forward'>Forward</button>
       </Fragment>
     )
     return (
       <ContactsForm
         onSubmit={this.onSubmit}
         wrapperButton={wrapperButton}
-        initialValues={_.pick(this.props, ['company', 'githubLink', 'facebookLink', 'selectLanguage',
+        initialValues={_.pick(this.props, ['company', 'githubLink', 'facebookLink', 'language',
           'fax', 'phoneArray'])}
       />
     )
@@ -60,7 +57,7 @@ CreateUserContacts.propTypes = {
   companyForm: PropTypes.string,
   githubLinkForm: PropTypes.string,
   facebookLinkForm: PropTypes.string,
-  selectLanguageForm: PropTypes.oneOfType([
+  languageForm: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
   ]),
@@ -75,24 +72,24 @@ const mapStateToProps = state => {
   const companyForm = selector(state, 'company')
   const githubLinkForm = selector(state, 'githubLink')
   const facebookLinkForm = selector(state, 'facebookLink')
-  const selectLanguageForm = selector(state, 'selectLanguage')
+  const languageForm = selector(state, 'language')
   const faxForm = selector(state, 'fax')
   const phoneArrayForm = selector(state, 'phoneArray')
   const {
-    company, githubLink, facebookLink, selectLanguage, fax, phoneArray,
+    company, githubLink, facebookLink, language, fax, phoneArray,
   } = state.newUser
   return {
     company,
     githubLink,
     facebookLink,
-    selectLanguage,
+    language,
     fax,
     phoneArray,
 
     companyForm,
     githubLinkForm,
     facebookLinkForm,
-    selectLanguageForm,
+    languageForm,
     faxForm,
     phoneArrayForm,
   }

@@ -1,32 +1,31 @@
-$us: 'userRow';
-.#{$us}:nth-of-type(2n + 1) {
-  .#{$us}__fistTD, .#{$us}__td {
+.userRow:nth-of-type(2n + 1) {
+  .userRow__fistTD, .userRow__td {
     background: #E7F0FF;
   }
 }
 
-.#{$us}:nth-of-type(2n) {
-  .#{$us}__fistTD, .#{$us}__td {
+.userRow:nth-of-type(2n) {
+  .userRow__fistTD, .userRow__td {
     background: #fff;
   }
 }
 
-.#{$us} {
+.userRow {
   color: #475666;
   transition: all ease 0.3s;
 
-  .#{$us}__td {
+  .userRow__td {
     transition: all ease 0.4s;
     border-top: 2px solid transparent;
     border-bottom: 2px solid transparent;
 
-    .#{$us}__div {
+    .userRow__div {
       font-weight: 500;
       height: 93px;
       display: flex;
       align-items: center;
 
-      .#{$us}__lastUpdate {
+      .userRow__lastUpdate {
         min-width: 117px;
         max-width: 117px;
         font-weight: 500;
@@ -34,14 +33,14 @@ $us: 'userRow';
     }
   }
 
-  .#{$us}__td:last-child .#{$us}__div {
+  .userRow__td:last-child .userRow__div {
     transition: all ease 0.4s;
     border-bottom-right-radius: 0px;
     border-top-right-radius: 0px;
     border-right: 2px solid transparent;
   }
 
-  .#{$us}__fistTD {
+  .userRow__fistTD {
     min-width: 300px;
     border-top: 2px solid transparent;
     border-bottom: 2px solid transparent;
@@ -50,7 +49,7 @@ $us: 'userRow';
     border-top-left-radius: 0px;
     transition: all ease 0.4s;
 
-    .#{$us}__fistTDWrapper {
+    .userRow__fistTDWrapper {
       display: flex;
       height: 93px;
       width: 100%;
@@ -58,63 +57,63 @@ $us: 'userRow';
       font-weight: 500;
       align-items: center;
 
-      .#{$us}__img {
+      .userRow__img {
         border-radius: 50%;
         width: 40px;
         height: 40px;
         margin-right: 15px;
       }
 
-      .#{$us}__wrapperDiv {
+      .userRow__wrapperDiv {
         margin-top: 7px;
         display: flex;
         flex-direction: column;
 
-        .#{$us}__h4 {
+        .userRow__h4 {
           font-weight: 500;
         }
 
-        .#{$us}__span {
+        .userRow__span {
           font-size: 9px;
         }
       }
     }
   }
 
-  .#{$us}__buttonEdit, .#{$us}__buttonClose, .#{$us}__buttonDeleteUser {
+  .userRow__buttonEdit, .userRow__buttonClose, .userRow__buttonDeleteUser {
     width: 15px;
     height: 15px;
     background: transparent;
 
-    .#{$us}__closeIcon, .#{$us}__editIcon {
+    .userRow__closeIcon, .userRow__editIcon {
       width: 15px;
       height: 15px;
     }
   }
 
-  .#{$us}__buttonEdit {
-    .#{$us}__editIcon {
+  .userRow__buttonEdit {
+    .userRow__editIcon {
       .editIcon {
         fill: #B1BCC9;
       }
     }
   }
 
-  .#{$us}__buttonClose {
+  .userRow__buttonClose {
     margin-top: -2px;
 
-    .#{$us}__closeIcon {
+    .userRow__closeIcon {
       path {
         stroke: #B1BCC9;
       }
     }
   }
 
-  .#{$us}__buttonEdit {
+  .userRow__buttonEdit {
     margin-left: 8px;
   }
 
-  .#{$us}__buttonClose {
+  .userRow__buttonClose {
     margin-left: 22px;
   }
 }
@@ -125,12 +124,12 @@ $us: 'userRow';
   opacity: 0.5;
   transition: all ease 0.3s;
 
-  .#{$us}__buttonDeleteUser {
+  .userRow__buttonDeleteUser {
     top: 35px;
     right: -7px;
     position: absolute;
 
-    .#{$us}__deleteUserWrapper {
+    .userRow__deleteUserWrapper {
       display: flex;
       color: #ff4144;
       font-weight: 500;
@@ -152,20 +151,20 @@ $us: 'userRow';
   }
 }
 
-.#{$us}__move {
+.userRow__move {
   transition: none;
 
-  .#{$us}__fistTD, .#{$us}__td {
+  .userRow__fistTD, .userRow__td {
     background: #c2e1ff !important;
   }
 
-  .#{$us}__td {
+  .userRow__td {
     transition: all ease 0.4s;
     border-top: 2px solid #4E86E4;
     border-bottom: 2px solid #4E86E4;
   }
 
-  .#{$us}__fistTD {
+  .userRow__fistTD {
     transition: all ease 0.4s;
     border-top: 2px solid #4E86E4;
     border-bottom: 2px solid #4E86E4;
@@ -174,7 +173,7 @@ $us: 'userRow';
     border-top-left-radius: 7px;
   }
 
-  .#{$us}__td:last-child {
+  .userRow__td:last-child {
     transition: all ease 0.4s;
     border-bottom-right-radius: 7px;
     border-top-right-radius: 7px;
@@ -182,15 +181,15 @@ $us: 'userRow';
   }
 }
 
-.#{$us}__company {
+.userRow__company {
   min-width: 200px;
 }
 
-.#{$us}__contacts {
+.userRow__contacts {
   min-width: 260px;
 }
 
-.#{$us}__update {
+.userRow__update {
   min-width: 210px;
 }
 
