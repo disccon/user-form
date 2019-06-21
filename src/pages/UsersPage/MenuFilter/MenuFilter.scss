@@ -1,0 +1,193 @@
+.menuFilter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .menuFilter__addFilterWrapper {
+    width: 230px;
+    position: relative;
+    .menuFilter__addFilterButton, .menuFilter__saveFilter {
+      height: 35px;
+      background: transparent;
+      color: #d67865;
+    }
+
+    .menuFilter__saveFilter {
+      color: #d67865;
+      margin-left: 25px;
+
+      .menuFilter__saveFilterIcon {
+        margin-right: 10px;
+        margin-bottom: -4px;
+        fill: #d67865;
+      }
+    }
+  }
+
+  .menuFilter__addFilter, .menuFilter__saveFilter, .menuFilter__buttonFilter {
+    margin-top: 20px;
+    font-family: 'Open Sans';
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .menuFilter__filterBox {
+    position: relative;
+
+    .menuFilter__buttonFilter {
+      display: inline-flex;
+      opacity: 0;
+      transition: all ease .4s;
+      margin-right: 13px;
+      margin-left: 13px;
+      height: 35px;
+      position: relative;
+      padding: 9px;
+      align-items: center;
+      border-radius: 3px;
+      cursor: pointer;
+
+      .menuFilter__filterIcon {
+        width: 17px;
+        height: 17px;
+      }
+
+      .menuFilter__calendarIcon {
+        margin-top: -5px;
+        width: 15px;
+        height: 15px;
+      }
+
+      .menuFilter__titleButton {
+        cursor: pointer;
+        font-weight: 600;
+        margin-right: 25px;
+        margin-left: 15px;
+      }
+
+      .menuFilter__buttonDeleteFilter {
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: -2px;
+        background: transparent;
+        margin-left: auto;
+
+        .menuFilter__resetIcon {
+          transition: all ease .4s;
+          cursor: pointer;
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+
+    .menuFilter__buttonFilter:hover {
+      border: 1px solid #e8e8e8;
+      background-color: #e8e8e8;
+      color: #303030;
+      opacity: 1;
+      transition: all ease .4s;
+
+      .menuFilter__filterIcon {
+        fill: #303030;
+        transition: all ease .4s;
+      }
+
+      .menuFilter__buttonDeleteFilter {
+        color: #303030;
+        .menuFilter__iconDeleteFilter {
+          transition: all ease .4s;
+        }
+      }
+    }
+
+    .menuFilter__buttonFilterNoValue {
+      transition: all ease .4s;
+      opacity: 1;
+      border: 1px solid #faa200;
+      background-color: #fffceb;
+      color: #faa200;
+      transition: all ease .4s;
+      .menuFilter__filterIcon {
+        fill: #faa200;
+        transition: all ease .4s;
+      }
+
+      .menuFilter__buttonDeleteFilter {
+        color: #faa200;
+        transition: all ease .4s;
+        .menuFilter__iconDeleteFilter {
+          transition: all ease .4s;
+        }
+      }
+    }
+
+    .menuFilter__buttonFilterAdd{
+      border: 1px solid #e8e8e8;
+      background-color: #e8e8e8;
+      color: #303030;
+      opacity: 1;
+      transition: all ease .4s;
+
+      .menuFilter__filterIcon {
+        fill: #303030;
+        transition: all ease .4s;
+      }
+
+      .menuFilter__buttonDeleteFilter {
+        color: #303030;
+        .menuFilter__iconDeleteFilter {
+          transition: all ease .4s;
+        }
+      }
+    }
+
+    .menuFilter__buttonFilterOpen {
+      border: 1px solid #ff5e31 !important;
+      background-color: #fff5f0 !important;
+      color: #ff5e31 !important;
+      transition: all ease .4s !important;
+
+      .menuFilter__filterIcon {
+        fill: #ff5e31 !important;
+        transition: all ease .4s !important;
+      }
+
+      .menuFilter__buttonDeleteFilter {
+        color: #ff5e31 !important;
+        .menuFilter__iconDeleteFilter {
+          transition: all ease .4s !important;
+        }
+      }
+    }
+
+    .menuFilter__buttonFilterHide {
+      border: 1px solid #e8e8e8 !important;
+      background-color: #e8e8e8 !important;
+      color: #303030 !important;
+      opacity: 0 !important;
+      transition: all ease .4s !important;
+    }
+  }
+}
+
+.menuFilterPopup{
+  transition: all ease .4s;
+  top: 34px;
+  position: absolute;
+  z-index: 999;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 1px 12px rgba(0, 0, 0, 0.3);
+  visibility: hidden;
+  opacity: 0;
+  transition: all ease .4s;
+}
+
+.menuFilterPopupShow{
+  top: 56px;
+  visibility: visible;
+  opacity: 1;
+  transition: all ease .4s;
+}

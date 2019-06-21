@@ -1,0 +1,7 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" overflow="visible"
+     preserveAspectRatio="none" viewBox="0 -144 1010 1010" width="15" height="15">
+    <g transform="translate(1, 1)">
+        <path d="M792 144h216v864H0V144h216V0h72v144h432V0h72v144zm144 792V432H72v504h864zm0-576V216H72v144h864z"
+              fill="currentColor" vector-effect="non-scaling-stroke"/>
+    </g>
+</svg>

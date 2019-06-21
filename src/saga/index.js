@@ -12,6 +12,9 @@ import {
   fetchUsersSaga,
   deleteUserSaga,
   swapUsersSaga,
+  showButtonFilterSaga,
+  applyFilterUsersSaga,
+  saveFiltersUsersSaga,
 } from './usersSaga'
 
 import {
@@ -34,6 +37,9 @@ import {
   FETCH_USERS,
   DELETE_USER,
   SWAP_USERS,
+  SHOW_BUTTON_FILTER,
+  APPLY_FILTER_FILTER_USERS,
+  SAVE_FILTER_USERS,
 } from '../actions/actionUsers'
 
 import {
@@ -55,6 +61,9 @@ export default function* rootSaga() {
     takeLatest(FETCH_USERS, fetchUsersSaga),
     takeLatest(DELETE_USER, deleteUserSaga),
     throttle(1200, SWAP_USERS, swapUsersSaga),
+    takeLatest(SHOW_BUTTON_FILTER, showButtonFilterSaga),
+    takeLatest(APPLY_FILTER_FILTER_USERS, applyFilterUsersSaga),
+    takeLatest(SAVE_FILTER_USERS, saveFiltersUsersSaga),
 
     takeLatest(FETCH_EDIT_USER, fetchEditUserSaga),
     takeLatest(SAVE_CROPPER_AVATAR, saveCropperAvatarSaga),

@@ -1,0 +1,33 @@
+.allFilterButton {
+  .fieldsFilterPopupBox {
+    width: 240px;
+
+    .allFilterButton__ul {
+      width: 240px;
+
+      .allFilterButton__li {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 40px;
+        padding: 10px;
+        background-color: #ffffff;
+        background-repeat: no-repeat;
+        font-family: Open Sans;
+        font-size: 13px;
+        color: #303030;
+        line-height: 18px;
+      }
+      .allFilterButton__liActive{
+        color: #fff;
+        background-color: #ff5e31;
+      }
+      .allFilterButton__checkIcon{
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+

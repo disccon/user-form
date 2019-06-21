@@ -13,6 +13,18 @@ export const SWAP_USERS = 'SWAP_USERS'
 export const SWAP_USERS__SUCCESS = 'SWAP_USERS__SUCCESS'
 export const SWAP_USERS__FAILURE = 'SWAP_USERS__FAILURE'
 
+export const SHOW_BUTTON_FILTER = 'SHOW_BUTTON_FILTER'
+export const SHOW_BUTTON_FILTER__SUCCESS = 'SHOW_BUTTON_FILTER__SUCCESS'
+export const SHOW_BUTTON_FILTER__FAILURE = 'SHOW_BUTTON_FILTER__FAILURE'
+
+export const APPLY_FILTER_FILTER_USERS = 'APPLY_FILTER_FILTER_USERS'
+export const APPLY_FILTER_FILTER_USERS__SUCCESS = 'APPLY_FILTER_FILTER_USERS__SUCCESS'
+export const APPLY_FILTER_FILTER_USERS__FAILURE = 'APPLY_FILTER_FILTER_USERS__FAILURE'
+
+export const SAVE_FILTER_USERS = 'SAVE_FILTER_USERS'
+export const SAVE_FILTER_USERS__SUCCESS = 'SAVE_FILTER_USERS__SUCCESS'
+export const SAVE_FILTER_USERS__FAILURE = 'SAVE_FILTER_USERS__FAILURE'
+
 export const fetchUsers = (currentPage, per_page, searchQuery) => ({
   type: FETCH_USERS,
   payload: {
@@ -35,3 +47,22 @@ export const swapUsers = (oldIndex, newIndex) => (
       oldIndex, newIndex,
     },
   })
+
+export const showButtonFilter = nameFilter => (
+  {
+    type: SHOW_BUTTON_FILTER,
+    payload: {
+      nameFilter,
+    },
+  })
+
+export const applyFilterUsers = (eventName, nameFilter, valueInput, activeInput) => (
+  {
+    type: APPLY_FILTER_FILTER_USERS,
+    payload: {
+      eventName, nameFilter, valueInput, activeInput,
+    },
+  })
+
+export const saveFiltersUsers = () => (
+  { type: SAVE_FILTER_USERS })
