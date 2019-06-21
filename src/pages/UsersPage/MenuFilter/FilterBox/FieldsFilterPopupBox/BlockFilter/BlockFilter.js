@@ -6,9 +6,6 @@ import '../FieldsFilterPopupBox.scss'
 import InputLiFilterBox from '../InputLiFilterBox/InputLiFilterBox'
 import { applyFilterUsers } from '../../../../../../actions/actionUsers'
 
-const arrInputLi = [{ titleLabel: 'is' }, { titleLabel: 'start with' }, { titleLabel: 'ends with' },
-  { titleLabel: 'contains' }, { titleLabel: 'does not contains' }]
-
 class BlockFilter extends Component {
   state = {
     valueInput: '',
@@ -49,18 +46,47 @@ class BlockFilter extends Component {
     return (
       <Fragment>
         <ul className='fieldsFilterPopupBox__ul'>
-          {arrInputLi.map((input, index) => (
-            <InputLiFilterBox
-              key={index}
-              setActiveInput={this.setActiveInput(input.titleLabel)}
-              id={`input${nameFilter}${index}`}
-              nameInput={nameFilter}
-              titleLabel={input.titleLabel}
-              valueInput={valueInput}
-              checked={index === 0}
-              componentInput={componentInput}
-            />
-          ))}
+          <InputLiFilterBox
+            setActiveInput={this.setActiveInput('is')}
+            id={`input${nameFilter}1`}
+            nameInput={nameFilter}
+            titleLabel='is'
+            valueInput={valueInput}
+            checked
+            componentInput={componentInput}
+          />
+          <InputLiFilterBox
+            setActiveInput={this.setActiveInput('start with')}
+            id={`input${nameFilter}2`}
+            nameInput={nameFilter}
+            titleLabel='start with'
+            valueInput={valueInput}
+            componentInput={componentInput}
+          />
+          <InputLiFilterBox
+            setActiveInput={this.setActiveInput('ends with')}
+            id={`input${nameFilter}3`}
+            nameInput={nameFilter}
+            titleLabel='ends with'
+            valueInput={valueInput}
+            componentInput={componentInput}
+          />
+          <InputLiFilterBox
+            setActiveInput={this.setActiveInput('contains')}
+            id={`input${nameFilter}4`}
+            nameInput={nameFilter}
+            titleLabel='contains'
+            valueInput={valueInput}
+            componentInput={componentInput}
+          />
+          <InputLiFilterBox
+            setActiveInput={this.setActiveInput('not contains')}
+            id={`input${nameFilter}5`}
+            nameInput={nameFilter}
+            titleLabel='does not contains'
+            valueInput={valueInput}
+            componentInput={componentInput}
+          />
         </ul>
         <button
           className={cn('fieldsFilterPopupBox__done', { fieldsFilterPopupBox__doneDisabled: valueInput === '' })}

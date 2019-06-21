@@ -1,17 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
-import styles from './FieldTextareaCapabilities.scss'
-
-const cx = classNames.bind(styles)
+import cn from 'classnames'
+import './FieldTextareaCapabilities.scss'
+import Label from '../../Label/Label'
 
 const FieldTextareaCapabilities = ({
   label, input, meta: { touched, error }, idTextarea,
 }) => (
-  <div className={cx('fieldTextareaCapabilities')}>
-    <label htmlFor={idTextarea} >{label}</label>
+  <div className='fieldTextareaCapabilities'>
+    <Label htmlFor={idTextarea} >{label}</Label>
     <textarea
-      className={cx('fieldTextareaCapabilities__textarea',
+      className={cn('fieldTextareaCapabilities__textarea',
         { fieldTextareaCapabilities__textareaError: touched && error })}
       id={idTextarea}
       {...input}
@@ -23,7 +22,7 @@ const FieldTextareaCapabilities = ({
       name='text'
       maxLength='300'
     />
-    {touched && error && <p className={cx('fieldTextareaCapabilities__pError')}>{error}</p>}
+    {touched && error && <p className='fieldTextareaCapabilities__pError'>{error}</p>}
   </div>
 )
 

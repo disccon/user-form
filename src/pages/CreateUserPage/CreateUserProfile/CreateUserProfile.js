@@ -2,15 +2,12 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash/core'
 import { connect } from 'react-redux'
-import classNames from 'classnames'
 import { push } from 'connected-react-router'
 import { formValueSelector } from 'redux-form'
 import ProfileForm from '../../../components/UserFormBox/ProfileForm/ProfileForm'
-import styles from '../../../components/UserFormBox/UserFormBox.scss'
+import '../../../components/UserFormBox/UserFormBox.scss'
 import { saveNewUserData } from '../../../actions/actionNewUser'
 import { asyncValidateCreateProfile } from '../../../components/UserFormBox/validateForm/asyncValidateCreateProfile'
-
-const cx = classNames.bind(styles)
 
 class CreateUserProfile extends Component {
   onSubmit = values => {
@@ -40,10 +37,10 @@ class CreateUserProfile extends Component {
   render() {
     const wrapperButton = (
       <Fragment>
-        <button type='button' onClick={this.backProfile} className={cx('userFormBox__back')}>
+        <button type='button' onClick={this.backProfile} className='userFormBox__back'>
           Back
         </button>
-        <button type='submit' className={cx('userFormBox__forward')}>
+        <button type='submit' className='userFormBox__forward'>
           Forward
         </button>
       </Fragment>

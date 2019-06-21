@@ -1,10 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Select from 'react-select'
-import classNames from 'classnames'
-import styles from './FieldSelectCapabilities.scss'
-
-const cx = classNames.bind(styles)
+import './FieldSelectCapabilities.scss'
+import Label from '../../Label/Label'
 
 const options = [
   { value: 'HTML', label: 'HTML' },
@@ -107,8 +105,8 @@ const FieldSelectCapabilities = ({
     }),
   }
   return (
-    <label className={cx('selectCapabilities')}>
-      <span className={cx('selectCapabilities__label')}>{label}</span>
+    <Label className='selectCapabilities'>
+      <span className='selectCapabilities__label'>{label}</span>
       <Select
         {...input}
         onBlur={() => input.onBlur()}
@@ -119,8 +117,8 @@ const FieldSelectCapabilities = ({
         styles={colourStyles}
         className='basic-multi-select'
       />
-      {touched && error && <p className={cx('selectCapabilities__pError')}>{error}</p>}
-    </label>
+      {touched && error && <p className='selectCapabilities__pError'>{error}</p>}
+    </Label>
   )
 }
 

@@ -1,6 +1,3 @@
-$ac: 'accountDataWrapper';
-$us: 'userNamePage';
-
 .container {
   position: relative;
 
@@ -13,22 +10,22 @@ $us: 'userNamePage';
     color: #9BB0CB;
   }
 
-  .#{$us} {
+  .userNamePage {
     margin-top: 35px;
     display: flex;
     padding: 35px 58px;
     background: #fbfcff;
     min-height: 734px;
-    .#{$us}__wrapperImg{
+    .userNamePage__wrapperImg{
       margin-right: 91px;
       width: 200px;
-      .#{$us}__avatar {
+      .userNamePage__avatar {
         width: 200px;
         height: 200px;
         border: 3px solid #5E97F3;
         border-radius: 50%;
       }
-      .#{$us}__cropImage{
+      .userNamePage__cropImage{
         display: block;
         margin-top: 30px;
         margin-right: auto;
@@ -44,39 +41,39 @@ $us: 'userNamePage';
         color: #FFF;
       }
 
-      .#{$us}__cropImage:hover {
+      .userNamePage__cropImage:hover {
         transition: all ease 0.3s;
         background-color: #0069d9;
         border-color: #0062cc;
       }
     }
 
-    .#{$ac} {
+    .accountDataWrapper {
       display: flex;
       flex-direction: column;
       color: #475666;
       padding-top: 32px;
 
-      .#{$ac}__block {
+      .accountDataWrapper__block {
         margin-bottom: 24px;
         display: flex;
 
-        .#{$ac}__section {
+        .accountDataWrapper__section {
           width: 152px;
           display: flex;
 
-          .#{$ac}__h3 {
+          .accountDataWrapper__h3 {
             margin-right: 8px;
             font-weight: 500;
           }
 
-          .#{$ac}__buttonEdit {
+          .accountDataWrapper__buttonEdit {
             margin-top: 1px;
             width: 15px;
             height: 15px;
             background: transparent;
 
-            .#{$ac}__editIcon {
+            .accountDataWrapper__editIcon {
               margin-top: 1px;
               width: 15px;
               height: 15px;
@@ -88,38 +85,38 @@ $us: 'userNamePage';
           }
         }
 
-        .#{$ac}__sectionInfo {
-          .#{$ac}__wrapper {
+        .accountDataWrapper__sectionInfo {
+          .accountDataWrapper__wrapper {
             margin-bottom: 7px;
             display: flex;
 
-            .#{$ac}__h4 {
+            .accountDataWrapper__h4 {
               font-weight: 500;
               width: 170px;
             }
 
-            .#{$ac}__span {
+            .accountDataWrapper__span {
               margin-bottom: 9px;
               max-width: 230px;
               color: #657C9A;
             }
 
-            .#{$ac}__a {
+            .accountDataWrapper__a {
               text-decoration-line: underline;
               transition: all ease 0.4s;
             }
 
-            .#{$ac}__a:hover {
+            .accountDataWrapper__a:hover {
               text-decoration-line: none;
               transition: all ease 0.4s;
             }
           }
 
-          .#{$ac}__wrapperHobbies {
+          .accountDataWrapper__wrapperHobbies {
             display: flex;
             flex-direction: column;
 
-            .#{$ac}__span {
+            .accountDataWrapper__span {
               line-height: 20px;
             }
           }

@@ -1,18 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 import { Field, FieldArray, reduxForm } from 'redux-form'
-import styles from '../UserFormBox.scss'
+import '../UserFormBox.scss'
 import FieldSelectContacts from '../../fieldForm/FieldSelectContacts/FieldSelectContacts'
 import FieldInputNewUser from '../../fieldForm/FieldInputNewUser/FieldInputNewUser'
 import UserFormBox from '../UserFormBox'
 import FieldArrayPhone from '../../fieldForm/FieldArrayPhone/FieldArrayPhone'
 import { validateContacts } from '../validateForm/validateContacts'
 
-const cx = classNames.bind(styles)
 const Contacts = ({ handleSubmit, onSubmit, wrapperButton }) => (
   <UserFormBox handleSubmit={handleSubmit(onSubmit)}>
-    <div className={cx('userFormBox__sideLeft')}>
+    <div className='userFormBox__sideLeft'>
       <Field
         component={FieldInputNewUser}
         type='text'
@@ -24,7 +22,7 @@ const Contacts = ({ handleSubmit, onSubmit, wrapperButton }) => (
       <Field
         component={FieldInputNewUser}
         type='text'
-        span
+        visibleStar
         label='Github link'
         name='githubLink'
         idField='fieldGithubLink'
@@ -33,7 +31,7 @@ const Contacts = ({ handleSubmit, onSubmit, wrapperButton }) => (
       <Field
         component={FieldInputNewUser}
         type='text'
-        span
+        visibleStar
         label='Facebook link'
         name='facebookLink'
         placeholder='www.facebook.com/hdfk_142_23lelf/'
@@ -42,11 +40,11 @@ const Contacts = ({ handleSubmit, onSubmit, wrapperButton }) => (
       />
       <Field
         component={FieldSelectContacts}
-        name='selectLanguage'
+        name='language'
         label='Main language'
       />
     </div>
-    <div className={cx('userFormBox__sideRight')}>
+    <div className='userFormBox__sideRight'>
       <Field
         component={FieldInputNewUser}
         type='text'
@@ -60,8 +58,8 @@ const Contacts = ({ handleSubmit, onSubmit, wrapperButton }) => (
         component={FieldArrayPhone}
         name='phoneArray'
       />
-      <div className={cx('userFormBox__addPhone')} />
-      <div className={cx('userFormBox__wrapperButton')}>
+      <div className='userFormBox__addPhone' />
+      <div className='userFormBox__wrapperButton'>
         {wrapperButton}
       </div>
     </div>

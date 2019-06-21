@@ -1,13 +1,12 @@
-$pr: 'profile';
-.#{$pr}__birthDate {
+.profile__birthDate {
   position: relative;
 
-  .#{$pr}__birthDateWrapper {
+  .profile__birthDateWrapper {
     display: flex;
     width: 100%;
     margin-bottom: 4px;
 
-    .#{$pr}__birthDateSpan {
+    .profile__birthDateSpan {
       margin-left: auto;
       height: 9px;
     }
@@ -20,7 +19,7 @@ $pr: 'profile';
     color: #EB5757;
   }
 
-  .#{$pr}__datePicker {
+  .profile__datePicker {
     .react-date-picker__wrapper {
       padding-right: 5px;
       padding-left: 5px;
@@ -49,13 +48,13 @@ $pr: 'profile';
     }
   }
 
-  .#{$pr}__datePicker.profile__datePickerError {
+  .profile__datePicker.profile__datePickerError {
     .react-date-picker__wrapper {
       border: 1px solid #EB5757;
     }
   }
 
-  .#{$pr}__react-calendar {
+  .profile__react-calendar {
     width: 192px;
     border: none;
 

@@ -1,10 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 import Select from 'react-select'
-import styles from './FieldSelectContacts.scss'
-
-const cx = classNames.bind(styles)
+import './FieldSelectContacts.scss'
+import Label from '../../Label/Label'
 
 const options = [
   { value: 'en', label: 'English, EN' },
@@ -95,8 +93,8 @@ const FieldSelectContacts = ({
     }),
   }
   return (
-    <label className={cx('mainLanguage')}>
-      <span className={cx('mainLanguage__Label')}>{label}</span>
+    <Label className='mainLanguage'>
+      <span className='mainLanguage__Label'>{label}</span>
       <Select
         {...input}
         onBlur={() => input.onBlur()}
@@ -105,8 +103,8 @@ const FieldSelectContacts = ({
         options={options}
         styles={colourStyles}
       />
-      {touched && error && <p className={cx('mainLanguage__error')}>{error}</p>}
-    </label>
+      {touched && error && <p className='mainLanguage__error'>{error}</p>}
+    </Label>
   )
 }
 

@@ -1,15 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import { formValueSelector } from 'redux-form'
 import _ from 'lodash/core'
 import { forwardCapabilities, saveNewUserData } from '../../../actions/actionNewUser'
-import styles from '../../../components/UserFormBox/UserFormBox.scss'
+import '../../../components/UserFormBox/UserFormBox.scss'
 import CapabilitiesForm from '../../../components/UserFormBox/CapabilitiesForm/CapabilitiesForm'
-
-const cx = classNames.bind(styles)
 
 class CreateUserCapabilities extends Component {
   onSubmit = values => {
@@ -39,8 +36,8 @@ class CreateUserCapabilities extends Component {
   render() {
     const wrapperButton = (
       <Fragment>
-        <button type='button' onClick={this.backCapabilities} className={cx('userFormBox__back')}>Back</button>
-        <button type='submit' className={cx('userFormBox__forward')}>Forward</button>
+        <button type='button' onClick={this.backCapabilities} className='userFormBox__back'>Back</button>
+        <button type='submit' className='userFormBox__forward'>Forward</button>
       </Fragment>
     )
     return (

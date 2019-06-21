@@ -1,12 +1,11 @@
-$pl: 'pagination';
-.usersPage__#{$pl} {
+.usersPage__pagination {
   display: flex;
   font-size: 17px;
   margin-top: 25px;
   margin-right: auto;
   margin-left: auto;
 
-  .#{$pl}__tabs, .#{$pl}__arrows {
+  .pagination__tabs, .pagination__arrows {
     color: #c4d0ce;
     background: transparent;
     display: block;
@@ -15,16 +14,16 @@ $pl: 'pagination';
     font-size: 21px;
   }
 
-  .#{$pl}__tabs:hover, .#{$pl}__activeTabs:hover {
+  .pagination__tabs:hover, .pagination__activeTabs:hover {
     transition: color ease 0.3s;
     color: #4E86E4;
   }
 
-  .#{$pl}__activeTabs {
+  .pagination__activeTabs {
     color: #475666;
   }
 
-  .#{$pl}__points {
+  .pagination__points {
     width: 24px;
     background: transparent;
     display: block;

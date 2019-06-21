@@ -4,11 +4,15 @@ const filterUsersBlock = (user, nameFilter, valueInput, activeInput) => {
   if (activeInput === 'is') {
     return user[nameFilter].toLowerCase().includes(valueInput.toLowerCase())
       && valueInput.length === user[nameFilter].length
+  } if (activeInput === 'start with') {
+    return user[nameFilter].toLowerCase().startsWith(valueInput.toLowerCase())
+  } if (activeInput === 'ends with') {
+    return user[nameFilter].toLowerCase().endsWith(valueInput.toLowerCase())
+  } if (activeInput === 'contains') {
+    return user[nameFilter].toLowerCase().includes(valueInput.toLowerCase())
+  } if (activeInput === 'not contains') {
+    return !user[nameFilter].toLowerCase().includes(valueInput.toLowerCase())
   }
-  if (activeInput === 'start with') return user[nameFilter].toLowerCase().startsWith(valueInput.toLowerCase())
-  if (activeInput === 'ends with') return user[nameFilter].toLowerCase().endsWith(valueInput.toLowerCase())
-  if (activeInput === 'contains') return user[nameFilter].toLowerCase().includes(valueInput.toLowerCase())
-  if (activeInput === 'does not contains') return !user[nameFilter].toLowerCase().includes(valueInput.toLowerCase())
   return 'error'
 }
 
