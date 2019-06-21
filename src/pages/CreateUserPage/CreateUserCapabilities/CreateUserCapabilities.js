@@ -20,12 +20,12 @@ class CreateUserCapabilities extends Component {
 
   backCapabilities = () => {
     const {
-      saveNewUserData, selectSkillsForm, textareaFieldForm, checkboxArtForm, checkboxSportForm,
+      saveNewUserData, skillsForm, textareaFieldForm, checkboxArtForm, checkboxSportForm,
       checkboxJustWantForm, checkboxFemaleForm, checkboxGuitarForm, checkboxWtfForm, push,
     } = this.props
     push('/contacts')
     saveNewUserData({
-      selectSkills: selectSkillsForm,
+      skills: skillsForm,
       textareaField: textareaFieldForm,
       checkboxArt: checkboxArtForm,
       checkboxSport: checkboxSportForm,
@@ -47,7 +47,7 @@ class CreateUserCapabilities extends Component {
       <CapabilitiesForm
         onSubmit={this.onSubmit}
         wrapperButton={wrapperButton}
-        initialValues={_.pick(this.props, ['selectSkills', 'textareaField', 'checkboxArt', 'checkboxSport',
+        initialValues={_.pick(this.props, ['skills', 'textareaField', 'checkboxArt', 'checkboxSport',
           'checkboxJustWant', 'checkboxFemale', 'checkboxGuitar', 'checkboxWtf'])}
       />
     )
@@ -55,7 +55,7 @@ class CreateUserCapabilities extends Component {
 }
 
 CreateUserCapabilities.propTypes = {
-  selectSkillsForm: PropTypes.oneOfType([
+  skillsForm: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
   ]),
@@ -91,7 +91,7 @@ CreateUserCapabilities.propTypes = {
 
 const mapStateToProps = state => {
   const selector = formValueSelector('CapabilitiesForm')
-  const selectSkillsForm = selector(state, 'selectSkills')
+  const skillsForm = selector(state, 'skills')
   const textareaFieldForm = selector(state, 'textareaField')
   const checkboxArtForm = selector(state, 'checkboxArt')
   const checkboxSportForm = selector(state, 'checkboxSport')
@@ -100,11 +100,11 @@ const mapStateToProps = state => {
   const checkboxGuitarForm = selector(state, 'checkboxGuitar')
   const checkboxWtfForm = selector(state, 'checkboxWtf')
   const {
-    selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
+    skills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
     checkboxGuitar, checkboxWtf,
   } = state.newUser
   return {
-    selectSkills,
+    skills,
     textareaField,
     checkboxArt,
     checkboxSport,
@@ -112,7 +112,7 @@ const mapStateToProps = state => {
     checkboxFemale,
     checkboxGuitar,
     checkboxWtf,
-    selectSkillsForm,
+    skillsForm,
     textareaFieldForm,
     checkboxArtForm,
     checkboxSportForm,

@@ -6,12 +6,15 @@ import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 import { push } from 'connected-react-router'
 import styles from './UsersPage.scss'
 import NoHaveUserRow from './NoHaveUserRow/NoHaveUserRow'
-import { fetchUsers, deleteUser, swapUsers } from '../../actions/actionUsers'
+import {
+  fetchUsers, deleteUser, swapUsers, applyFilterUsers,
+} from '../../actions/actionUsers'
 import UserRow from './UserRow/UserRow'
 import { Pagination } from './Pagination/Pagination'
 import { validateUsersUrl } from '../../helpers/validateUsersUrl'
 import preloaderIcon from '../../img/icon/preloader.gif'
 import { getQueryString } from '../../helpers/valueQuery'
+import MenuFilter from './MenuFilter/MenuFilter'
 
 const cx = classNames.bind(styles)
 
@@ -46,23 +49,21 @@ class UsersPage extends Component {
 
   componentDidMount() {
     const {
-      fetchUsers, search, push, searchQuery,
+      applyFilterUsers, search, push,
     } = this.props
     if (validateUsersUrl(search)) {
       push('/not-found')
     } else {
-      const queryString = getQueryString(search)
-      fetchUsers(queryString.currentPage, queryString.per_page, searchQuery)
+      applyFilterUsers('fetchUsers')
     }
   }
 
   componentDidUpdate(prevProps) {
     const {
-      fetchUsers, search, searchQuery, filteredUsers, pagesCount,
+      applyFilterUsers, filteredUsers, pagesCount,
     } = this.props
-    const queryString = getQueryString(search)
     if (filteredUsers.length < prevProps.filteredUsers.length && pagesCount > 1) {
-      fetchUsers(queryString.currentPage, queryString.per_page, searchQuery)
+      applyFilterUsers('fetchUsers')
     }
   }
 
@@ -120,6 +121,7 @@ class UsersPage extends Component {
           onChange={this.searchUsers}
           value={searchQuery}
         />
+        <MenuFilter />
         <table className={cx('usersPageTable container')}>
           <thead className={cx('usersPage__thead')}>
             <tr className={cx('usersPage__tr')}>
@@ -140,7 +142,7 @@ class UsersPage extends Component {
           />
         </table>
         {filteredUsers.length === 0 && !isLoading && <NoHaveUserRow />}
-        {pagesCount > 1 && (
+        {((currentPage > 1 && pagesCount > 0) || (currentPage === 1 && pagesCount > 1)) && (
           <Pagination
             pagesCount={pagesCount}
             currentPage={currentPage}
@@ -164,6 +166,7 @@ UsersPage.propTypes = {
   fetchUsers: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
   swapUsers: PropTypes.func.isRequired,
+  applyFilterUsers: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => {
@@ -185,6 +188,6 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    fetchUsers, push, deleteUser, swapUsers,
+    fetchUsers, push, deleteUser, swapUsers, applyFilterUsers,
   },
 )(UsersPage)

@@ -16,7 +16,7 @@ const Capabilities = ({ handleSubmit, onSubmit, wrapperButton }) => (
     <div className={cx('userFormBox__sideLeft')}>
       <Field
         component={FieldSelectCapabilities}
-        name='selectSkills'
+        name='skills'
         label='Skills'
       />
       <Field

@@ -1,0 +1,7 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" overflow="visible"
+     preserveAspectRatio="none" viewBox="0 0 1010 1010" width="17" height="17">
+    <g transform="translate(1, 1)">
+        <path d="M860 148q148 148 148 356 0 222-168 375-142 129-336 129-208 0-356-148T0 504t148-356T504 0t356 148zM386 664l37 21v115l-176 51q112 85 256.5 85T759 853l-180-53V685l37-21q53-31 83.5-83.5t30.5-107-16.5-94.5-51-74.5-74-51T501 237t-87.5 16.5T340 305q-68 67-68 161 0 62 30.5 114.5T386 664zm436 131q114-123 114-296T809 199 504 72 199 199 72 498.5 184 794l166-48v-19q-70-40-110.5-110T199 466q0-124 89-213t213-89 213 89 89 213q0 82-40.5 151.5T652 727v19z"
+              fill="currentColor" vector-effect="non-scaling-stroke" />
+    </g>
+</svg>

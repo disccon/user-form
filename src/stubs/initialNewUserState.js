@@ -24,7 +24,7 @@ export const initialNewUserState = {
   fax: '',
   phoneArray: [{}],
 
-  selectSkills: '',
+  skills: '',
   textareaField: '',
   checkboxArt: '',
   checkboxSport: '',
