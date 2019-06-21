@@ -1,9 +1,6 @@
 import React from 'react'
-import classNames from 'classnames'
-import styles from './NotFound.scss'
-
-const cx = classNames.bind(styles)
+import './NotFound.scss'
 
 export const NotFound = () => (
-  <h1 className={cx('notFound')}>NodFound 404!</h1>
+  <h1 className='notFound'>NodFound 404!</h1>
 )

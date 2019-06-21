@@ -1,12 +1,9 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 import { Field } from 'redux-form'
-import styles from './FieldArrayPhone.scss'
+import './FieldArrayPhone.scss'
 import FieldPhone from './FieldPhone'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
-
-const cx = classNames.bind(styles)
 
 const FieldArrayPhone = ({ fields }) => {
   const deleteFieldPhone = index => () => {
@@ -36,11 +33,11 @@ const FieldArrayPhone = ({ fields }) => {
       {fields.length !== 3 && (
         <button
           type='button'
-          className={cx('arrayPhone__addPhoneField')}
+          className='arrayPhone__addPhoneField'
           onClick={addFieldPhone}
         >
-          <AddIcon className={cx('arrayPhone__addIcon')} />
-          <span className={cx('arrayPhone__span')}>add phone number</span>
+          <AddIcon className='arrayPhone__addIcon' />
+          <span className='arrayPhone__span'>add phone number</span>
         </button>
       )}
     </Fragment>

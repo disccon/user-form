@@ -1,12 +1,11 @@
-$ra: 'radioProfile';
-.#{$ra} {
-  .#{$ra}__span {
+.radioProfile {
+  .radioProfile__span {
     font-weight: 500;
     color: #000;
     margin-left: 26px;
     position: relative;
   }
-  .#{$ra}__span:before {
+  .radioProfile__span:before {
     content: '';
     position: absolute;
     top: 0px;
@@ -17,12 +16,12 @@ $ra: 'radioProfile';
     border: 1px solid #C1CFE0;
     border-radius: 50%;
   }
-  .#{$ra}__input:checked + span:before {
+  .radioProfile__input:checked + span:before {
     background: #4E86E4;
     border: 3px solid #C1CFE0;
   }
 }
-.#{$ra}__pError {
+.radioProfile__pError {
   position: absolute;
   top: 24px;
   margin-top: 3px;
@@ -30,6 +29,6 @@ $ra: 'radioProfile';
   font-size: 9px;
   color: #EB5757;
 }
-.#{$ra}:nth-child(2) {
+.radioProfile:nth-child(2) {
   margin-left: 43px;
 }

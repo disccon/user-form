@@ -1,10 +1,8 @@
 import React from 'react'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
-import styles from './Pagination.scss'
-
-const cx = classNames.bind(styles)
+import cn from 'classnames'
+import './Pagination.scss'
 
 export const Pagination = ({
   pagesCount, currentPage, limit, changePage,
@@ -13,11 +11,11 @@ export const Pagination = ({
   const indentPage = (pagesCount - currentPage) >= indentLimit ? indentLimit
     : limit - 1 - (pagesCount - currentPage)
   return (
-    <div className={cx('usersPage__pagination')}>
+    <div className='usersPage__pagination'>
       <button
         disabled={currentPage === 1}
         type='button'
-        className={cx('pagination__arrows', { pagination__activeTabs: currentPage !== 1 })}
+        className={cn('pagination__arrows', { pagination__activeTabs: currentPage !== 1 })}
         onClick={changePage(currentPage - 1)}
       >
         {'<'}
@@ -25,7 +23,7 @@ export const Pagination = ({
       {currentPage > indentLimit + 1 && pagesCount > limit && (
       <button
         type='button'
-        className={cx('pagination__points')}
+        className='pagination__points'
         onClick={changePage(1)}
       >
         ...
@@ -38,7 +36,7 @@ export const Pagination = ({
             disabled={currentPage === nowPage}
             key={nowPage}
             type='button'
-            className={cx('pagination__tabs', { pagination__activeTabs: currentPage === nowPage })}
+            className={cn('pagination__tabs', { pagination__activeTabs: currentPage === nowPage })}
             onClick={changePage(nowPage)}
           >
             {nowPage}
@@ -49,7 +47,7 @@ export const Pagination = ({
       <button
         disabled={currentPage === pagesCount}
         type='button'
-        className={cx('pagination__points')}
+        className='pagination__points'
         onClick={changePage(pagesCount)}
       >
         ...
@@ -58,7 +56,7 @@ export const Pagination = ({
       <button
         disabled={currentPage === pagesCount}
         type='button'
-        className={cx('pagination__arrows', { pagination__activeTabs: currentPage !== pagesCount })}
+        className={cn('pagination__arrows', { pagination__activeTabs: currentPage !== pagesCount })}
         onClick={changePage(currentPage + 1)}
       >
         {'>'}

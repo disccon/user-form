@@ -1,37 +1,35 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import classNames from 'classnames'
+import cn from 'classnames'
 import { Redirect, Route, Switch } from 'react-router'
 import { Link } from 'react-router-dom'
-import styles from './EditUserPage.scss'
+import './EditUserPage.scss'
 import EditUserAccount from './EditUserAccount/EditUserAccount'
 import EditUserProfile from './EditUserProfile/EditUserProfile'
 import EditUserContacts from './EditUserContacts/EditUserContacts'
 import EditUserCapabilities from './EditUserCapabilities/EditUserCapabilities'
 
-const cx = classNames.bind(styles)
-
 const EditUserPage = ({ pathname, id }) => (
-  <div className={cx('container')}>
-    <Link className={cx('linkBackPage')} to={`/user/${id}`}>{'<  User Profile'}</Link>
-    <h2 className={cx('headline')}>Editing</h2>
-    <div className={cx('editPage')}>
-      <div className={cx('editPage__tabs')}>
-        <div className={cx('editPage__tab', {
+  <div className='container'>
+    <Link className='linkBackPage' to={`/user/${id}`}>{'<  User Profile'}</Link>
+    <h2 className='headline'>Editing</h2>
+    <div className='editPage'>
+      <div className='editPage__tabs'>
+        <div className={cn('editPage__tab', {
           activeTab: pathname.charAt(pathname.length - 1) >= 0,
         })}
         >
-          <Link to={`/edit-user/${id}`} className={cx('editPage__link')}>1. Account</Link>
+          <Link to={`/edit-user/${id}`} className='editPage__link'>1. Account</Link>
         </div>
-        <div className={cx('editPage__tab', { activeTab: pathname.includes('/profile') })}>
-          <Link to={`/edit-user/${id}/profile`} className={cx('editPage__link')}>2. Profile</Link>
+        <div className={cn('editPage__tab', { activeTab: pathname.includes('/profile') })}>
+          <Link to={`/edit-user/${id}/profile`} className='editPage__link'>2. Profile</Link>
         </div>
-        <div className={cx('editPage__tab', { activeTab: pathname.includes('/contacts') })}>
-          <Link to={`/edit-user/${id}/contacts`} className={cx('editPage__link')}>3. Contacts</Link>
+        <div className={cn('editPage__tab', { activeTab: pathname.includes('/contacts') })}>
+          <Link to={`/edit-user/${id}/contacts`} className='editPage__link'>3. Contacts</Link>
         </div>
-        <div className={cx('editPage__tab', { activeTab: pathname.includes('/capabilities') })}>
-          <Link to={`/edit-user/${id}/capabilities`} className={cx('editPage__link')}>4. Capabilities</Link>
+        <div className={cn('editPage__tab', { activeTab: pathname.includes('/capabilities') })}>
+          <Link to={`/edit-user/${id}/capabilities`} className='editPage__link'>4. Capabilities</Link>
         </div>
       </div>
       <Switch>

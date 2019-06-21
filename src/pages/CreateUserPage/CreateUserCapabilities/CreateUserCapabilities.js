@@ -1,15 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import { formValueSelector } from 'redux-form'
 import _ from 'lodash/core'
 import { forwardCapabilities, saveNewUserData } from '../../../actions/actionNewUser'
-import styles from '../../../components/UserFormBox/UserFormBox.scss'
+import '../../../components/UserFormBox/UserFormBox.scss'
 import CapabilitiesForm from '../../../components/UserFormBox/CapabilitiesForm/CapabilitiesForm'
-
-const cx = classNames.bind(styles)
 
 class CreateUserCapabilities extends Component {
   onSubmit = values => {
@@ -20,12 +17,12 @@ class CreateUserCapabilities extends Component {
 
   backCapabilities = () => {
     const {
-      saveNewUserData, selectSkillsForm, textareaFieldForm, checkboxArtForm, checkboxSportForm,
+      saveNewUserData, skillsForm, textareaFieldForm, checkboxArtForm, checkboxSportForm,
       checkboxJustWantForm, checkboxFemaleForm, checkboxGuitarForm, checkboxWtfForm, push,
     } = this.props
     push('/contacts')
     saveNewUserData({
-      selectSkills: selectSkillsForm,
+      skills: skillsForm,
       textareaField: textareaFieldForm,
       checkboxArt: checkboxArtForm,
       checkboxSport: checkboxSportForm,
@@ -39,15 +36,15 @@ class CreateUserCapabilities extends Component {
   render() {
     const wrapperButton = (
       <Fragment>
-        <button type='button' onClick={this.backCapabilities} className={cx('userFormBox__back')}>Back</button>
-        <button type='submit' className={cx('userFormBox__forward')}>Forward</button>
+        <button type='button' onClick={this.backCapabilities} className='userFormBox__back'>Back</button>
+        <button type='submit' className='userFormBox__forward'>Forward</button>
       </Fragment>
     )
     return (
       <CapabilitiesForm
         onSubmit={this.onSubmit}
         wrapperButton={wrapperButton}
-        initialValues={_.pick(this.props, ['selectSkills', 'textareaField', 'checkboxArt', 'checkboxSport',
+        initialValues={_.pick(this.props, ['skills', 'textareaField', 'checkboxArt', 'checkboxSport',
           'checkboxJustWant', 'checkboxFemale', 'checkboxGuitar', 'checkboxWtf'])}
       />
     )
@@ -55,7 +52,7 @@ class CreateUserCapabilities extends Component {
 }
 
 CreateUserCapabilities.propTypes = {
-  selectSkillsForm: PropTypes.oneOfType([
+  skillsForm: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
   ]),
@@ -91,7 +88,7 @@ CreateUserCapabilities.propTypes = {
 
 const mapStateToProps = state => {
   const selector = formValueSelector('CapabilitiesForm')
-  const selectSkillsForm = selector(state, 'selectSkills')
+  const skillsForm = selector(state, 'skills')
   const textareaFieldForm = selector(state, 'textareaField')
   const checkboxArtForm = selector(state, 'checkboxArt')
   const checkboxSportForm = selector(state, 'checkboxSport')
@@ -100,11 +97,11 @@ const mapStateToProps = state => {
   const checkboxGuitarForm = selector(state, 'checkboxGuitar')
   const checkboxWtfForm = selector(state, 'checkboxWtf')
   const {
-    selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
+    skills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
     checkboxGuitar, checkboxWtf,
   } = state.newUser
   return {
-    selectSkills,
+    skills,
     textareaField,
     checkboxArt,
     checkboxSport,
@@ -112,7 +109,7 @@ const mapStateToProps = state => {
     checkboxFemale,
     checkboxGuitar,
     checkboxWtf,
-    selectSkillsForm,
+    skillsForm,
     textareaFieldForm,
     checkboxArtForm,
     checkboxSportForm,

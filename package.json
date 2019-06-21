@@ -21,6 +21,7 @@
     "react": "^16.8.5",
     "react-cropper": "^1.2.0",
     "react-date-picker": "^7.5.0",
+    "react-day-picker": "^7.3.0",
     "react-dom": "^16.8.5",
     "react-input-mask": "^2.0.4",
     "react-lodash": "^0.1.2",

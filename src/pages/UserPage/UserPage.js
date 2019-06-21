@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import classNames from 'classnames'
 import { Link } from 'react-router-dom'
-import styles from './UserPage.scss'
+import './UserPage.scss'
 import { ReactComponent as EditIcon } from '../../img/icon/edit.svg'
 import { fetchEditUser, saveCropperAvatar } from '../../actions/actionEditUser'
 import CropperModal from '../../components/CropperModalWindow/CropperModal'
-
-const cx = classNames.bind(styles)
 
 class UserPage extends Component {
   state = {
@@ -31,142 +28,142 @@ class UserPage extends Component {
     const { id, editUser, saveCropperAvatar } = this.props
     const {
       userName, userAvatarIMG, firstName, lastName, birthDate, email, address, company, fax,
-      facebookLink, phoneArray, selectSkills, checkboxArt, checkboxSport, checkboxJustWant,
+      facebookLink, phoneArray, skills, checkboxArt, checkboxSport, checkboxJustWant,
       checkboxFemale, checkboxGuitar, checkboxWtf, userAvatarIMGCropper,
     } = editUser
     return (
-      <div className={cx('container')}>
-        <Link className={cx('linkBackPage')} to='/users'>{'<  Users List'}</Link>
-        <h2 className={cx('headline')}>User Name</h2>
+      <div className='container'>
+        <Link className='linkBackPage' to='/users'>{'<  Users List'}</Link>
+        <h2 className='headline'>User Name</h2>
         {birthDate && (
-          <div className={cx('userNamePage container')}>
-            <div className={cx('userNamePage__wrapperImg')}>
-              <img src={userAvatarIMGCropper} className={cx('userNamePage__avatar')} alt='userSRCAvatarIMG' />
+          <div className='userNamePage container'>
+            <div className='userNamePage__wrapperImg'>
+              <img src={userAvatarIMGCropper} className='userNamePage__avatar' alt='userSRCAvatarIMG' />
               <button
                 type='button'
-                className={cx('userNamePage__cropImage')}
+                className='userNamePage__cropImage'
                 onClick={this.setCropperSrc(true)}
               >
                 Crop Avatar
               </button>
             </div>
-            <div className={cx('accountDataWrapper')}>
-              <div className={cx('accountDataWrapper__block')}>
-                <div className={cx('accountDataWrapper__section')}>
-                  <h3 className={cx('accountDataWrapper__h3')}>Account</h3>
+            <div className='accountDataWrapper'>
+              <div className='accountDataWrapper__block'>
+                <div className='accountDataWrapper__section'>
+                  <h3 className='accountDataWrapper__h3'>Account</h3>
                   <Link to={`/edit-user/${id}`}>
-                    <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
-                      <EditIcon className={cx('accountDataWrapper__editIcon')} />
+                    <button type='button' className='accountDataWrapper__buttonEdit'>
+                      <EditIcon className='accountDataWrapper__editIcon' />
                     </button>
                   </Link>
                 </div>
-                <div className={cx('accountDataWrapper__sectionInfo')}>
-                  <div className={cx('accountDataWrapper__wrapper')}>
-                    <h4 className={cx('accountDataWrapper__h4')}>User name:</h4>
-                    <span className={cx('accountDataWrapper__span')}>{userName}</span>
+                <div className='accountDataWrapper__sectionInfo'>
+                  <div className='accountDataWrapper__wrapper'>
+                    <h4 className='accountDataWrapper__h4'>User name:</h4>
+                    <span className='accountDataWrapper__span'>{userName}</span>
                   </div>
-                  <div className={cx('accountDataWrapper__wrapper')}>
-                    <h4 className={cx('accountDataWrapper__h4')}>Password</h4>
-                    <span className={cx('accountDataWrapper__span')}>*******</span>
+                  <div className='accountDataWrapper__wrapper'>
+                    <h4 className='accountDataWrapper__h4'>Password</h4>
+                    <span className='accountDataWrapper__span'>*******</span>
                   </div>
                 </div>
               </div>
-              <div className={cx('accountDataWrapper__block')}>
-                <div className={cx('accountDataWrapper__section')}>
-                  <h3 className={cx('accountDataWrapper__h3')}>Personal</h3>
+              <div className='accountDataWrapper__block'>
+                <div className='accountDataWrapper__section'>
+                  <h3 className='accountDataWrapper__h3'>Personal</h3>
                   <Link to={`/edit-user/${id}/profile`}>
-                    <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
-                      <EditIcon className={cx('accountDataWrapper__editIcon')} />
+                    <button type='button' className='accountDataWrapper__buttonEdit'>
+                      <EditIcon className='accountDataWrapper__editIcon' />
                     </button>
                   </Link>
                 </div>
-                <div className={cx('accountDataWrapper__sectionInfo')}>
-                  <div className={cx('accountDataWrapper__wrapper')}>
-                    <h4 className={cx('accountDataWrapper__h4')}>First name:</h4>
-                    <span className={cx('accountDataWrapper__span')}>{firstName}</span>
+                <div className='accountDataWrapper__sectionInfo'>
+                  <div className='accountDataWrapper__wrapper'>
+                    <h4 className='accountDataWrapper__h4'>First name:</h4>
+                    <span className='accountDataWrapper__span'>{firstName}</span>
                   </div>
-                  <div className={cx('accountDataWrapper__wrapper')}>
-                    <h4 className={cx('accountDataWrapper__h4')}>Last name:</h4>
-                    <span className={cx('accountDataWrapper__span')}>{lastName}</span>
+                  <div className='accountDataWrapper__wrapper'>
+                    <h4 className='accountDataWrapper__h4'>Last name:</h4>
+                    <span className='accountDataWrapper__span'>{lastName}</span>
                   </div>
-                  <div className={cx('accountDataWrapper__wrapper')}>
-                    <h4 className={cx('accountDataWrapper__h4')}>Birth date:</h4>
-                    <span className={cx('accountDataWrapper__span')}>{birthDate.toLocaleDateString()}</span>
+                  <div className='accountDataWrapper__wrapper'>
+                    <h4 className='accountDataWrapper__h4'>Birth date:</h4>
+                    <span className='accountDataWrapper__span'>{birthDate.toLocaleDateString()}</span>
                   </div>
-                  <div className={cx('accountDataWrapper__wrapper')}>
-                    <h4 className={cx('accountDataWrapper__h4')}>Email:</h4>
-                    <span className={cx('accountDataWrapper__span')}>{email}</span>
+                  <div className='accountDataWrapper__wrapper'>
+                    <h4 className='accountDataWrapper__h4'>Email:</h4>
+                    <span className='accountDataWrapper__span'>{email}</span>
                   </div>
-                  <div className={cx('accountDataWrapper__wrapper')}>
-                    <h4 className={cx('accountDataWrapper__h4')}>Adress:</h4>
-                    <span className={cx('accountDataWrapper__span')}>{address}</span>
+                  <div className='accountDataWrapper__wrapper'>
+                    <h4 className='accountDataWrapper__h4'>Address:</h4>
+                    <span className='accountDataWrapper__span'>{address}</span>
                   </div>
                 </div>
               </div>
-              <div className={cx('accountDataWrapper__block')}>
-                <div className={cx('accountDataWrapper__section')}>
-                  <h3 className={cx('accountDataWrapper__h3')}>Contacts</h3>
+              <div className='accountDataWrapper__block'>
+                <div className='accountDataWrapper__section'>
+                  <h3 className='accountDataWrapper__h3'>Contacts</h3>
                   <Link to={`/edit-user/${id}/contacts`}>
-                    <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
-                      <EditIcon className={cx('accountDataWrapper__editIcon')} />
+                    <button type='button' className='accountDataWrapper__buttonEdit'>
+                      <EditIcon className='accountDataWrapper__editIcon' />
                     </button>
                   </Link>
                 </div>
-                <div className={cx('accountDataWrapper__sectionInfo')}>
-                  <div className={cx('accountDataWrapper__wrapper')}>
-                    <h4 className={cx('accountDataWrapper__h4')}>Company:</h4>
-                    <span className={cx('accountDataWrapper__span')}>{company}</span>
+                <div className='accountDataWrapper__sectionInfo'>
+                  <div className='accountDataWrapper__wrapper'>
+                    <h4 className='accountDataWrapper__h4'>Company:</h4>
+                    <span className='accountDataWrapper__span'>{company}</span>
                   </div>
-                  <div className={cx('accountDataWrapper__wrapper')}>
-                    <h4 className={cx('accountDataWrapper__h4')}>Fax:</h4>
-                    <span className={cx('accountDataWrapper__span')}>{fax}</span>
+                  <div className='accountDataWrapper__wrapper'>
+                    <h4 className='accountDataWrapper__h4'>Fax:</h4>
+                    <span className='accountDataWrapper__span'>{fax}</span>
                   </div>
-                  <div className={cx('accountDataWrapper__wrapper')}>
-                    <h4 className={cx('accountDataWrapper__h4')}>Facebook Link:</h4>
+                  <div className='accountDataWrapper__wrapper'>
+                    <h4 className='accountDataWrapper__h4'>Facebook Link:</h4>
                     <a
-                      className={cx('accountDataWrapper__span accountDataWrapper__a')}
+                      className='accountDataWrapper__span accountDataWrapper__a'
                       href={`https://${facebookLink}`}
                     >
                       {facebookLink}
                     </a>
                   </div>
                   {phoneArray.map((phone, index) => (
-                    <div key={index} className={cx('accountDataWrapper__wrapper')}>
-                      <h4 className={cx('accountDataWrapper__h4')}>
+                    <div key={index} className='accountDataWrapper__wrapper'>
+                      <h4 className='accountDataWrapper__h4'>
                         {`Phone #${index + 1}:`}
                       </h4>
-                      <span className={cx('accountDataWrapper__span')}>{phoneArray[index].phone}</span>
+                      <span className='accountDataWrapper__span'>{phoneArray[index].phone}</span>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className={cx('accountDataWrapper__block')}>
-                <div className={cx('accountDataWrapper__section')}>
-                  <h3 className={cx('accountDataWrapper__h3')}>Capabilities</h3>
+              <div className='accountDataWrapper__block'>
+                <div className='accountDataWrapper__section'>
+                  <h3 className='accountDataWrapper__h3'>Capabilities</h3>
                   <Link to={`/edit-user/${id}/capabilities`}>
-                    <button type='button' className={cx('accountDataWrapper__buttonEdit')}>
-                      <EditIcon className={cx('accountDataWrapper__editIcon')} />
+                    <button type='button' className='accountDataWrapper__buttonEdit'>
+                      <EditIcon className='accountDataWrapper__editIcon' />
                     </button>
                   </Link>
                 </div>
-                <div className={cx('accountDataWrapper__sectionInfo')}>
-                  <div className={cx('accountDataWrapper__wrapper')}>
-                    <h4 className={cx('accountDataWrapper__h4')}>Skills:</h4>
-                    <span className={cx('accountDataWrapper__span')}>
-                      {selectSkills.map(user => (
+                <div className='accountDataWrapper__sectionInfo'>
+                  <div className='accountDataWrapper__wrapper'>
+                    <h4 className='accountDataWrapper__h4'>Skills:</h4>
+                    <span className='accountDataWrapper__span'>
+                      {skills.map(user => (
                         `${user.value},  `
                       ))}
                     </span>
                   </div>
-                  <div className={cx('accountDataWrapper__wrapper')}>
-                    <h4 className={cx('accountDataWrapper__h4')}>Hobbies:</h4>
-                    <div className={cx('accountDataWrapper__wrapperHobbies')}>
-                      {checkboxArt && <span className={cx('accountDataWrapper__span')}>{checkboxArt}</span>}
-                      {checkboxSport && <span className={cx('accountDataWrapper__span')}>{checkboxSport}</span>}
-                      {checkboxJustWant && <span className={cx('accountDataWrapper__span')}>{checkboxJustWant}</span>}
-                      {checkboxFemale && <span className={cx('accountDataWrapper__span')}>{checkboxFemale}</span>}
-                      {checkboxGuitar && <span className={cx('accountDataWrapper__span')}>{checkboxGuitar}</span>}
-                      {checkboxWtf && <span className={cx('accountDataWrapper__span')}>{checkboxWtf}</span>}
+                  <div className='accountDataWrapper__wrapper'>
+                    <h4 className='accountDataWrapper__h4'>Hobbies:</h4>
+                    <div className='accountDataWrapper__wrapperHobbies'>
+                      {checkboxArt && <span className='accountDataWrapper__span'>{checkboxArt}</span>}
+                      {checkboxSport && <span className='accountDataWrapper__span'>{checkboxSport}</span>}
+                      {checkboxJustWant && <span className='accountDataWrapper__span'>{checkboxJustWant}</span>}
+                      {checkboxFemale && <span className='accountDataWrapper__span'>{checkboxFemale}</span>}
+                      {checkboxGuitar && <span className='accountDataWrapper__span'>{checkboxGuitar}</span>}
+                      {checkboxWtf && <span className='accountDataWrapper__span'>{checkboxWtf}</span>}
                     </div>
                   </div>
                 </div>

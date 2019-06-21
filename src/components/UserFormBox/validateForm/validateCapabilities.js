@@ -1,10 +1,10 @@
 export const validateCapabilities = values => {
   const errors = {}
 
-  if (!values.selectSkills) {
-    errors.selectSkills = 'Missing Skills'
-  } else if (values.selectSkills.length <= 2) {
-    errors.selectSkills = 'select at least 3 option'
+  if (!values.skills) {
+    errors.skills = 'Missing Skills'
+  } else if (values.skills.length <= 2) {
+    errors.skills = 'select at least 3 option'
   }
   if (!values.textareaField) {
     errors.textareaField = 'Missing Additional Information'

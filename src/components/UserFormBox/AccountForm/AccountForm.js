@@ -1,16 +1,13 @@
 import React, { Fragment, Component } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 import { Field, reduxForm } from 'redux-form'
-import styles from '../UserFormBox.scss'
+import '../UserFormBox.scss'
 import { ReactComponent as UserAvatarIcon } from '../../../img/icon/UserAvatar.svg'
 import { ReactComponent as AddIcon } from '../../../img/icon/add.svg'
 import FieldInputAccount from '../../fieldForm/FieldInputAccount/FieldInputAccount'
 import UserFormBox from '../UserFormBox'
 import CropperModal from '../../CropperModalWindow/CropperModal'
 import { validateAccount } from '../validateForm/validateAccount'
-
-const cx = classNames.bind(styles)
 
 class Account extends Component {
   state = {
@@ -73,34 +70,34 @@ class Account extends Component {
     const { typePasswordFirstInput, typePasswordSecondInput, avatarIMGError } = this.state
 
     const userAvatar = userAvatarIMGCropper
-      ? <img className={cx('userAvatarWrapper__userAvatarIMG')} src={userAvatarIMGCropper} alt='userAvatar' />
-      : <UserAvatarIcon className={cx('userAvatarWrapper__userAvatarSVG')} alt='userAvatar' />
+      ? <img className='userAvatarWrapper__userAvatarIMG' src={userAvatarIMGCropper} alt='userAvatar' />
+      : <UserAvatarIcon className='userAvatarWrapper__userAvatarSVG' alt='userAvatar' />
 
     const userAvatarError = avatarIMGError
-      ? <p className={cx('userAvatarWrapper__avatarError')}>{avatarIMGError}</p> : null
+      ? <p className='userAvatarWrapper__avatarError'>{avatarIMGError}</p> : null
 
     return (
       <Fragment>
         {question}
         <UserFormBox handleSubmit={handleSubmit(this.onSubmitForm)} classForm='userFormBoxAccount'>
-          <div className={cx('userAvatarWrapper')}>
+          <div className='userAvatarWrapper'>
             <label htmlFor='userAvatar'>
               {userAvatar}
               <input
                 id='userAvatar'
                 type='file'
-                className={cx('userAvatarWrapper__inputFile')}
+                className='userAvatarWrapper__inputFile'
                 accept='image/*,image/jpeg'
                 onChange={this.addImageUserAvatar}
               />
             </label>
-            <label htmlFor='userAvatarIMG' className={cx('userAvatarWrapper__labelSpan')}>
-              <AddIcon className={cx('userAvatarWrapper__AddICon')} alt='addAvatar' />
-              <span className={cx('userAvatarWrapper__addAvatarSpan')}>add avatar</span>
+            <label htmlFor='userAvatarIMG' className='userAvatarWrapper__labelSpan'>
+              <AddIcon className='userAvatarWrapper__AddICon' alt='addAvatar' />
+              <span className='userAvatarWrapper__addAvatarSpan'>add avatar</span>
               <input
                 id='userAvatarIMG'
                 type='file'
-                className={cx('userAvatarWrapper__inputFile')}
+                className='userAvatarWrapper__inputFile'
                 accept='image/*,image/jpeg'
                 onChange={this.addImageUserAvatar}
               />
@@ -108,7 +105,7 @@ class Account extends Component {
             {cropperButton}
             {userAvatarError}
           </div>
-          <div className={cx('register__userData')}>
+          <div className='register__userData'>
             <Field
               component={FieldInputAccount}
               type='text'
@@ -134,7 +131,7 @@ class Account extends Component {
               idInput='repeatPassword'
               changeTypePassword={this.changeTypePassword('typePasswordSecondInput')}
             />
-            <button className={cx('accountComponent__buttonSubmit')} type='submit'>{labelButton}</button>
+            <button className='accountComponent__buttonSubmit' type='submit'>{labelButton}</button>
           </div>
           {cropperSrc && (
             <CropperModal

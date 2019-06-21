@@ -2,13 +2,10 @@ import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import _ from 'lodash/core'
 import React, { Component, Fragment } from 'react'
-import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { fetchEditUser, saveEditUserData } from '../../../actions/actionEditUser'
 import CapabilitiesForm from '../../../components/UserFormBox/CapabilitiesForm/CapabilitiesForm'
-import styles from '../../../components/UserFormBox/UserFormBox.scss'
-
-const cx = classNames.bind(styles)
+import '../../../components/UserFormBox/UserFormBox.scss'
 
 class EditUserCapabilities extends Component {
   componentDidMount() {
@@ -27,15 +24,15 @@ class EditUserCapabilities extends Component {
   render() {
     const wrapperButton = (
       <Fragment>
-        <button type='button' onClick={this.backCapabilities} className={cx('userFormBox__back')}>Back</button>
-        <button type='submit' className={cx('userFormBox__forward')}>Forward</button>
+        <button type='button' onClick={this.backCapabilities} className='userFormBox__back'>Back</button>
+        <button type='submit' className='userFormBox__forward'>Forward</button>
       </Fragment>
     )
     return (
       <CapabilitiesForm
         onSubmit={this.onSubmit}
         wrapperButton={wrapperButton}
-        initialValues={_.pick(this.props, ['selectSkills', 'textareaField', 'checkboxArt', 'checkboxSport',
+        initialValues={_.pick(this.props, ['skills', 'textareaField', 'checkboxArt', 'checkboxSport',
           'checkboxJustWant', 'checkboxFemale', 'checkboxGuitar', 'checkboxWtf'])}
       />
     )
@@ -55,11 +52,11 @@ EditUserCapabilities.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   const id = Number(ownProps.match.params.id)
   const {
-    selectSkills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
+    skills, textareaField, checkboxArt, checkboxSport, checkboxJustWant, checkboxFemale,
     checkboxGuitar, checkboxWtf,
   } = state.editUserReducer.editUser
   return {
-    selectSkills,
+    skills,
     textareaField,
     checkboxArt,
     checkboxSport,

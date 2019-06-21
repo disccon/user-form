@@ -1,0 +1,290 @@
+.fieldsFilterPopupBox {
+  width: 320px;
+  top: 34px;
+  position: absolute;
+  right: 13px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0px 1px 12px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  z-index: 999;
+  background: #fff;
+  transition: all ease .4s;
+  visibility: hidden;
+  opacity: 0;
+  transition: all ease .4s;
+
+  .fieldsFilterPopupBox__wrapper {
+    .fieldsFilterPopupBox__h4 {
+      color: #303030;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Open Sans';
+    }
+
+    .blockDataFilter__fistUl {
+      padding-top: 10px;
+      padding-bottom: 14px;
+    }
+
+    .blockDataFilter__secondUl {
+      padding-top: 10px;
+    }
+
+    .blockDataFilter__wrapperInput {
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      height: 0px;
+      transition: all ease .4s;
+
+      .blockDataFilter__daysInput {
+        width: 110px;
+        transition: all ease .4s;
+      }
+
+      .blockDataFilter__daysSpan {
+        margin-left: 11px;
+        font-family: Open Sans;
+        font-size: 9px;
+        color: #303030;
+        line-height: 25px;
+        transition: all ease .4s;
+      }
+    }
+
+    .blockFilter__radioInput:checked ~ .blockDataFilter__wrapperInput {
+      height: 30px;
+      opacity: 1;
+      transition: all ease .4s;
+      .blockDataFilter__daysInput {
+        opacity: 1;
+        height: 30px;
+        padding: 10px;
+        transition: all ease .4s;
+      }
+      .blockDataFilter__daysSpan {
+        font-size: 14px;
+        transition: all ease .4s;
+      }
+    }
+  }
+
+  .blockFilter__wrapperFilterSelect{
+    height: 0;
+    opacity: 0;
+    transition: all ease .4s;
+  }
+
+  .blockFilter__radioInput:checked ~ .blockFilter__wrapperFilterSelect {
+    height: 38px;
+    opacity: 1;
+    transition: all ease .4s;
+  }
+
+  .blockDataFilter__daysInput, .blockFilter__searchFilter{
+    margin-left: 30px;;
+    display: block;
+    opacity: 0;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    font-weight: 600;
+    transition: all ease .4s;
+    height: 0px;
+    padding: 0px;
+  }
+
+  .fieldsFilterPopupBox__ul, .fieldsFilterPopupBox__wrapper {
+    padding: 11px 22px 24px;
+
+    .blockFilter__li {
+      margin-top: 5px;
+      margin-bottom: 4px;
+      line-height: 20px;
+
+      .blockFilter__searchFilter {
+        width: 210px;
+      }
+
+      .blockFilter__label {
+        transition: all .3s ease;
+        display: inline;
+        color: #bababa;
+        padding-left: 30px;
+        position: relative;
+        font-family: 'Open Sans';
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .blockFilter__label:before {
+        opacity: 0;
+        z-index: 99;
+        transform: scale(0);
+        width: 12px;
+        height: 12px;
+        opacity: 0;
+        top: 5px;
+        left: 3px;
+        transition: all .2s ease;
+      }
+
+      .blockFilter__label:after {
+        top: 2px;
+        left: 0px;
+        width: 18px;
+        height: 18px;
+        border: 1px solid #C1CFE0;
+        transition: all .3s ease;
+      }
+
+      .blockFilter__label:before, .blockFilter__label:after {
+        content: '';
+        position: absolute;
+        background: #FFFFFF;
+        border-radius: 50%;
+      }
+
+      .blockFilter__radioInput:checked + .blockFilter__label {
+        color: #303030;
+        transition: all .3s ease;
+      }
+
+      .blockFilter__radioInput:checked + .blockFilter__label:before {
+        opacity: 1;
+        background: #fc5f3c;
+        transform: scale(1);
+        transition: all .3s ease;
+      }
+
+      .blockFilter__radioInput:checked + .blockFilter__label:after {
+        opacity: 1;
+        border: 1px solid #fc5f3c;
+        transition: all .3s ease;
+      }
+
+      .blockFilter__radioInput:checked ~ .blockFilter__searchFilter {
+        opacity: 1;
+        height: 30px;
+        padding: 10px;
+        transition: all ease .4s;
+      }
+    }
+  }
+
+  .blockFilter__searchFilter::placeholder {
+    color: #737373;
+  }
+
+  .fieldsFilterPopupBox__done {
+    width: 100%;
+    height: 40px;
+    padding-bottom: 2px;
+    background: transparent;
+    border-top: 1px solid #e8e8e8;
+    color: #ff5e31;
+    font-family: 'Open Sans';
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 30px;
+  }
+
+  .fieldsFilterPopupBox__done {
+    width: 100%;
+    height: 40px;
+    padding-bottom: 2px;
+    background: transparent;
+    border-top: 1px solid #e8e8e8;
+    color: #ff5e31;
+    font-family: 'Open Sans';
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 30px;
+  }
+  .fieldsFilterPopupBox__doneDisabled{
+    color: #777d76;
+  }
+}
+
+.blockFilter__radioInput:checked ~ .dayPickerBox {
+  display: block;
+  opacity: 1;
+  height: auto;
+  transition: all ease .4s;
+  .DayPicker-wrapper{
+    opacity: 1;
+    height: auto;
+    transition: all ease .4s;
+    .DayPicker-Caption{
+      height: auto;
+      transition: all ease .4s;
+    }
+  }
+}
+
+.dayPickerBox {
+  margin-top: 8px;
+  margin-left: 30px;
+  width: 235px;
+  min-height: 225px;
+  border: 1px solid #dddddd;
+  font-family: 'Open Sans';
+  font-size: 12px;
+  color: #303030;
+  font-weight: 600;
+  border-radius: 5px;
+  height: 0px;
+  opacity: 0;
+  display: contents;
+  transition: all ease .4s;
+
+  .DayPicker-wrapper {
+    padding-bottom: 0;
+    display: none;
+
+    .DayPicker-Month {
+      width: 97%;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+    .DayPicker-Caption {
+      margin-left: 69px;
+
+      div {
+        font-weight: 600;
+      }
+    }
+
+    .DayPicker-Day {
+      font-weight: 600;
+    }
+
+    .DayPicker-Day--selected {
+      background-color: #ff5e31 !important;
+    }
+
+    .DayPicker-NavButton--prev {
+      margin-right: 15.5em;
+    }
+  }
+}
+
+.blockFilter__radioInput:checked ~ .dayPickerBox {
+  display: block;
+  opacity: 1;
+  height: auto;
+  transition: all ease .4s;
+
+  .DayPicker-wrapper {
+    display: block;
+  }
+}
+
+.fieldsFilterPopupBoxShow {
+  top: 56px;
+  visibility: visible;
+  opacity: 1;
+  transition: all ease .4s;
+}

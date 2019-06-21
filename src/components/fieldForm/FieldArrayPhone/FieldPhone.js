@@ -1,32 +1,31 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
+import cn from 'classnames'
 import InputMask from 'react-input-mask'
-import styles from './FieldArrayPhone.scss'
-
-const cx = classNames.bind(styles)
+import './FieldArrayPhone.scss'
+import Label from '../../Label/Label'
 
 const FieldPhone = ({
   input, meta: { touched, error }, label, type, isVisibilityDeleteField, placeholder, idField, deleteFieldPhone,
 }) => (
-  <div className={cx('arrayPhone__fieldPhone')}>
+  <div className='arrayPhone__fieldPhone'>
     {isVisibilityDeleteField && (
     <button
       type='button'
       onClick={deleteFieldPhone}
-      className={cx('arrayPhone__buttonDeleteField')}
+      className='arrayPhone__buttonDeleteField'
     />
     )}
-    <label htmlFor={idField} className={cx('arrayPhone__labelPhone')}>{label}</label>
+    <Label htmlFor={idField} className='arrayPhone__labelPhone'>{label}</Label>
     <InputMask
       {...input}
-      className={cx('arrayPhone__inputMask', { arrayPhone__inputMaskError: touched && error })}
+      className={cn('arrayPhone__inputMask', { arrayPhone__inputMaskError: touched && error })}
       type={type}
       mask='+7 (999) 999-99-99'
       placeholder={placeholder}
       id={idField}
     />
-    {touched && error && <p className={cx('arrayPhone__pError')}>{error}</p>}
+    {touched && error && <p className='arrayPhone__pError'>{error}</p>}
   </div>
 )
 

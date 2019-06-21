@@ -1,34 +1,31 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
-import styles from './FieldCheckboxCapabilities.scss'
-
-const cx = classNames.bind(styles)
+import './FieldCheckboxCapabilities.scss'
+import Label from '../../Label/Label'
 
 const FieldCheckboxCapabilities = ({
-  type, input, meta: { touched, error }, span, idCheckbox,
+  type, input, meta: { touched, error }, label, idCheckbox,
 }) => {
-  const changeValue = input.value ? '' : span
+  const changeValue = input.value ? '' : label
   return (
-    <label htmlFor={idCheckbox} className={cx('checkboxCapabilities__label')}>
+    <Label htmlFor={idCheckbox} className='checkboxCapabilities__label'>
       <input
         id={idCheckbox}
-        className={cx('checkboxCapabilities__input')}
+        className='checkboxCapabilities__input'
         {...input}
         type={type}
         onBlur={() => input.onBlur()}
         onChange={() => input.onChange(changeValue)}
       />
-      <span className={cx('checkboxCapabilities__span')}>{span}</span>
-      {touched && error && <p className={cx('checkboxCapabilities__pError')}>{error}</p>}
-    </label>
+      <span className='checkboxCapabilities__span'>{label}</span>
+      {touched && error && <p className='checkboxCapabilities__pError'>{error}</p>}
+    </Label>
   )
 }
 
 FieldCheckboxCapabilities.propTypes = {
   idCheckbox: PropTypes.string,
   label: PropTypes.string,
-  span: PropTypes.string,
   input: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
   meta: PropTypes.object.isRequired,

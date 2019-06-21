@@ -20,11 +20,11 @@ export const initialNewUserState = {
   company: '',
   githubLink: '',
   facebookLink: '',
-  selectLanguage: '',
+  language: '',
   fax: '',
   phoneArray: [{}],
 
-  selectSkills: '',
+  skills: '',
   textareaField: '',
   checkboxArt: '',
   checkboxSport: '',

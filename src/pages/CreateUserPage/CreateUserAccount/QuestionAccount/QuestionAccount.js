@@ -1,29 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 import { ReactComponent as CloseIcon } from '../../../../img/icon/close.svg'
-import styles from './QuestionAccount.scss'
-
-const cx = classNames.bind(styles)
+import './QuestionAccount.scss'
 
 const QuestionAccount = ({ continueUser }) => (
-  <div className={cx('accountComponentQuestion')}>
-    <span className={cx('accountComponentQuestion__span')}>
+  <div className='accountComponentQuestion'>
+    <span className='accountComponentQuestion__span'>
             You have an unsaved user data. Do you want to complete it?
     </span>
     <button
       type='button'
-      className={cx('accountComponentQuestion__continue')}
+      className='accountComponentQuestion__continue'
       onClick={continueUser(true)}
     >
       Continue
     </button>
     <button
       type='button'
-      className={cx('accountComponentQuestion__close')}
+      className='accountComponentQuestion__close'
       onClick={continueUser(false)}
     >
-      <CloseIcon className={cx('accountComponentQuestion__closeIcon')} alt='closeIcon' />
+      <CloseIcon className='accountComponentQuestion__closeIcon' alt='closeIcon' />
     </button>
   </div>
 )

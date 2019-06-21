@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash/core'
-import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import AccountForm from '../../../components/UserFormBox/AccountForm/AccountForm'
 import { changeAvatarAccountEdit, fetchEditUser, saveEditUserData } from '../../../actions/actionEditUser'
-import styles from '../../../components/UserFormBox/UserFormBox.scss'
+import '../../../components/UserFormBox/UserFormBox.scss'
 import { asyncValidateEditAccount } from '../../../components/UserFormBox/validateForm/asyncValidateEditAccount'
-
-const cx = classNames.bind(styles)
 
 class EditUserAccount extends Component {
   state = {
@@ -50,7 +47,7 @@ class EditUserAccount extends Component {
     const { userAvatarIMGCropper, changeAvatarAccountEdit, id } = this.props
     const { cropperSrc } = this.state
     const cropperButton = (
-      <button className={cx('userAvatarWrapper__buttonCrop')} type='button' onClick={this.cropperAvatar}>
+      <button className='userAvatarWrapper__buttonCrop' type='button' onClick={this.cropperAvatar}>
         Crop Avatar
       </button>
     )
